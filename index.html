@@ -112,48 +112,6 @@
         }
 
         /* ====================================================================== */
-        /* LOADING SCREEN                                                         */
-        /* ====================================================================== */
-        #loader {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            background: var(--bg-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
-        }
-        #loader.loaded { opacity: 0; visibility: hidden; pointer-events: none; }
-
-        .loader-content {
-            text-align: center;
-        }
-        .loader-logo {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 6px;
-            background: linear-gradient(45deg, #fff, var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 30px;
-        }
-        .loader-pulse {
-            width: 40px;
-            height: 40px;
-            margin: 0 auto;
-            border: 2px solid var(--accent-cyan);
-            border-radius: 50%;
-            animation: loaderPulse 1.2s ease-in-out infinite;
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3), inset 0 0 20px rgba(0, 243, 255, 0.1);
-        }
-        @keyframes loaderPulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.3); opacity: 0.5; }
-        }
-
-        /* ====================================================================== */
         /* AMBIENT PARTICLES (CSS-only)                                           */
         /* ====================================================================== */
         .particles {
@@ -863,14 +821,6 @@
 </head>
 <body>
 
-    <!-- Loading Screen -->
-    <div id="loader">
-        <div class="loader-content">
-            <div class="loader-logo">RKRK.IO</div>
-            <div class="loader-pulse"></div>
-        </div>
-    </div>
-
     <!-- Cursor Glow -->
     <div class="cursor-glow" id="cursorGlow"></div>
     <div class="cursor-dot" id="cursorDot"></div>
@@ -969,7 +919,7 @@
             </div>
             <p id="nano-desc2" style="font-size:1rem; max-width:100%;">The learning equivalent of a 4AM coding breakthrough — compact, elegant, and permanently wired into your architecture.</p>
             <div class="nano-bilingual" id="nano-cn">
-                不是课太多，是你的课太"重"。Nano Banana 将知识切分为 90 秒级别的"认知颗粒"——像香蕉一样，一口一个，营养全吸收。不多不少，刚刚好。
+                不是课太多，是你的课太“重”。Nano Banana 将知识切分为 90 秒级别的“认知颗粒”——像香蕉一样，一口一个，营养全吸收。不多不少，刚刚好。
             </div>
         </div>
     </section>
@@ -1084,14 +1034,7 @@
     <!-- SCRIPTS                                                             -->
     <!-- ================================================================== -->
     <script>
-    /* ================================================================== */
-    /* LOADER — auto-hides immediately after DOM is ready                 */
-    /* ================================================================== */
-    var _loaderEl = document.getElementById('loader');
-    if (_loaderEl) {
-        // Hide immediately after this script block runs (DOM is loaded)
-        _loaderEl.classList.add('loaded');
-    }
+    // (loading screen removed)
 
     /* ================================================================== */
     /* CURSOR GLOW                                                         */
@@ -1272,7 +1215,7 @@
             techList: "<li><strong>CLASS NOTES GEM</strong> — Granular utterance tracking & real-time friction mapping.</li><li><strong>FEEDBACK ENGINE</strong> — Strategic evaluation rooted in the 3 Golden Rules & 7 Keys.</li><li><strong>RUA DICTIONARY</strong> — Dynamic input routing for perfectly tailored cognitive nodes.</li>",
             nanoDesc: "Most lessons are bloated. Students drown in content they'll never recall. Kee flips the paradigm: <strong>Nano Bananas</strong> — bite-sized learning units engineered for maximum cognitive absorption. Each one is a self-contained burst of insight. Consumable in 90 seconds. Retained for years.",
             nanoDesc2: "The learning equivalent of a 4AM coding breakthrough — compact, elegant, and permanently wired into your architecture.",
-            nanoCN: "不是课太多，是你的课太"重"。Nano Banana 将知识切分为 90 秒级别的"认知颗粒"——像香蕉一样，一口一个，营养全吸收。不多不少，刚刚好。",
+            nanoCN: "不是课太多，是你的课太“重”。Nano Banana 将知识切分为 90 秒级别的“认知颗粒”——像香蕉一样，一口一个，营养全吸收。不多不少，刚刚好。",
             aboutSub: "The Architect",
             aboutTitle: "MEET<br><span class='accent-text'>KEE</span>",
             aboutHook: "I don't teach English.<br>I dismantle it and rebuild it as architecture.",
@@ -1307,7 +1250,7 @@
             techList: "<li><strong>课堂笔记 GEM</strong> — 追踪极细颗粒度话语，实时绘制阻力热力图。</li><li><strong>反馈引擎</strong> — 根植 3 大金律与 7 大法则的战略级评估。</li><li><strong>RUA 词典</strong> — 动态输入路由，生成量身定制的认知节点。</li>",
             nanoDesc: "大多数课程臃肿不堪。学生被信息淹没，却记不住任何东西。Kee 反转范式：<strong>Nano Bananas</strong>——为最大化认知吸收而设计的微型学习单元。独立、高密度、一口一个。90 秒消化，永久留存。",
             nanoDesc2: "就像凌晨 4 点的代码突破——紧凑、优雅、永久嵌入你的认知架构。",
-            nanoCN: "不是课太多，是你的课太"重"。Nano Banana 将知识切分为 90 秒级别的"认知颗粒"——像香蕉一样，一口一个，营养全吸收。不多不少，刚刚好。",
+            nanoCN: "不是课太多，是你的课太“重”。Nano Banana 将知识切分为 90 秒级别的“认知颗粒”——像香蕉一样，一口一个，营养全吸收。不多不少，刚刚好。",
             aboutSub: "架构师",
             aboutTitle: "关于<br><span class='accent-text'>KEE</span>",
             aboutHook: "我不教英语。<br>我把语言拆解，再建构成建筑。",
