@@ -4,65 +4,258 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>rkrk.io | Kee's Language Lab — AI-Native Education Design</title>
-    <meta name="description" content="Kee Li architects language mastery through AI cognitive architecture. Home of the DynamOS system — RECOGNIZE, UNDERSTAND, APPLY. TEDx 2026 speaker.">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;800;900&display=swap');
+    <meta name="description" content="Kee Li dismantles language and rebuilds it as architecture. IELTS L9.0/R8.5/S8.5. TEDx 2026 speaker. Home of the DynamOS system.">
 
+    <!-- Open Graph -->
+    <meta property="og:title" content="rkrk.io | Kee's Language Lab">
+    <meta property="og:description" content="I don't teach English. I dismantle it and rebuild it as architecture. IELTS L9.0. TEDx 2026.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rkrk.io">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=1200">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="rkrk.io | Kee's Language Lab">
+    <meta name="twitter:description" content="I don't teach English. I dismantle it and rebuild it as architecture. IELTS L9.0. TEDx 2026.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=1200">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Person",
+                "name": "Kee Li",
+                "url": "https://rkrk.io",
+                "jobTitle": "AI-Native Education Architect",
+                "description": "IELTS L9.0/R8.5/S8.5. Former EF Expert Teacher & Trainer of Trainers. TEDx 2026 speaker.",
+                "knowsLanguage": ["en", "zh"],
+                "alumniOf": {"@type": "Organization", "name": "EF Education First"}
+            },
+            {
+                "@type": "WebSite",
+                "name": "rkrk.io",
+                "url": "https://rkrk.io",
+                "description": "Kee's Language Lab — AI-Native Education Design & the DynamOS System",
+                "inLanguage": ["en", "zh"]
+            }
+        ]
+    }
+    </script>
+
+    <!-- Preconnect for Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>⚡</text></svg>">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;700;800;900&family=Space+Mono:wght@400;700&display=swap');
+
+        /* ====================================================================== */
+        /* DESIGN TOKENS                                                         */
+        /* ====================================================================== */
         :root {
             --accent-cyan: #00f3ff;
             --accent-pink: #ff0055;
             --accent-purple: #8a2be2;
+            --accent-gold: #ffd700;
             --bg-dark: #030305;
-            --glass-bg: rgba(10, 10, 15, 0.4);
+            --glass-bg: rgba(10, 10, 16, 0.5);
+            --glass-bg-heavy: rgba(10, 10, 16, 0.75);
             --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border-bright: rgba(255, 255, 255, 0.18);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            /* Default to Inter, use Syncopate for headings */
-            font-family: 'Inter', -apple-system, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-dark);
             color: #fff;
             overflow-x: hidden;
-            scroll-behavior: smooth;
+            font-family: 'Inter', -apple-system, sans-serif;
+            cursor: none;
         }
 
-        /* -------------------------------------------------------------------------- */
-        /* SCROLL BACKGROUNDS                             */
-        /* -------------------------------------------------------------------------- */
+        /* ====================================================================== */
+        /* CURSOR GLOW                                                            */
+        /* ====================================================================== */
+        .cursor-glow {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 243, 255, 0.08) 0%, rgba(138, 43, 226, 0.04) 40%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+            will-change: left, top;
+        }
+
+        .cursor-dot {
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            width: 6px;
+            height: 6px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px var(--accent-cyan), 0 0 30px rgba(0, 243, 255, 0.5);
+            will-change: left, top;
+        }
+
+        /* ====================================================================== */
+        /* LOADING SCREEN                                                         */
+        /* ====================================================================== */
+        #loader {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: var(--bg-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #loader.loaded { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        .loader-content {
+            text-align: center;
+        }
+        .loader-logo {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            background: linear-gradient(45deg, #fff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+        }
+        .loader-pulse {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto;
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50%;
+            animation: loaderPulse 1.2s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3), inset 0 0 20px rgba(0, 243, 255, 0.1);
+        }
+        @keyframes loaderPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.5; }
+        }
+
+        /* ====================================================================== */
+        /* AMBIENT PARTICLES (CSS-only)                                           */
+        /* ====================================================================== */
+        .particles {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: floatUp linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+        }
+        .particle.circle { border: 1px solid rgba(0, 243, 255, 0.2); background: rgba(0, 243, 255, 0.03); }
+        .particle.diamond {
+            background: rgba(255, 0, 85, 0.06);
+            border: 1px solid rgba(255, 0, 85, 0.2);
+            border-radius: 2px;
+        }
+        .particle.dot { background: rgba(138, 43, 226, 0.3); }
+
+        /* Ambient gradient orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: -2;
+            animation: orbDrift 20s ease-in-out infinite;
+        }
+        .orb-1 {
+            width: 600px; height: 600px;
+            background: rgba(0, 243, 255, 0.04);
+            top: -200px; left: -200px;
+            animation-delay: 0s;
+        }
+        .orb-2 {
+            width: 500px; height: 500px;
+            background: rgba(138, 43, 226, 0.04);
+            bottom: -200px; right: -200px;
+            animation-delay: -7s;
+        }
+        .orb-3 {
+            width: 400px; height: 400px;
+            background: rgba(255, 0, 85, 0.03);
+            top: 50%; left: 60%;
+            animation-delay: -14s;
+        }
+        @keyframes orbDrift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(60px, -40px) scale(1.15); }
+            66% { transform: translate(-30px, 50px) scale(0.9); }
+        }
+
+        /* ====================================================================== */
+        /* SCROLL BACKGROUNDS                                                     */
+        /* ====================================================================== */
         .bg-container {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: -2;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            z-index: -3;
             background-size: cover;
             background-position: center;
             transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), background-image 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: brightness(0.35) contrast(1.2);
+            filter: brightness(0.35) contrast(1.15);
+        }
+        .bg-vignette {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+            background: radial-gradient(ellipse at center, transparent 50%, rgba(3,3,5,0.7) 100%);
         }
 
-        /* -------------------------------------------------------------------------- */
-        /* STICKY BANNER                               */
-        /* -------------------------------------------------------------------------- */
-        .sticky-banner {
+        /* ====================================================================== */
+        /* NAVIGATION                                                             */
+        /* ====================================================================== */
+        .sticky-nav {
             position: fixed;
-            top: 0;
-            width: 100%;
+            top: 0; width: 100%;
             padding: 20px 50px;
-            background: linear-gradient(to bottom, rgba(3, 3, 5, 0.9), transparent);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(to bottom, rgba(3, 3, 5, 0.95), rgba(3, 3, 5, 0.7) 80%, transparent);
+            backdrop-filter: blur(20px);
             z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.4s ease;
+        }
+        .sticky-nav.scrolled {
+            background: rgba(3, 3, 5, 0.95);
+            backdrop-filter: blur(30px);
+            padding: 14px 50px;
+            border-bottom-color: rgba(255,255,255,0.1);
         }
 
         .logo {
@@ -73,37 +266,31 @@
             background: linear-gradient(45deg, #fff, var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: rgba(255,255,255,0.6);
             text-decoration: none;
-            margin-left: 25px;
-            font-size: 0.75rem;
+        }
+
+        .nav-right { display: flex; align-items: center; gap: 24px; }
+
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a {
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            font-size: 0.72rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 2px;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             position: relative;
+            padding: 4px 0;
         }
-
         .nav-links a::after {
             content: '';
             position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--accent-cyan);
-            transition: width 0.4s ease;
+            width: 0; height: 1px;
+            bottom: 0; left: 0;
+            background: var(--accent-cyan);
+            transition: width 0.3s ease;
         }
-
         .nav-links a:hover { color: #fff; }
         .nav-links a:hover::after { width: 100%; }
 
@@ -117,54 +304,157 @@
             font-family: 'Syncopate', sans-serif;
             font-weight: 700;
             font-size: 0.7rem;
-            transition: all 0.3s;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
         }
-
         .lang-switch:hover {
             background: var(--accent-cyan);
             color: #000;
             box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
         }
 
-        /* -------------------------------------------------------------------------- */
-        /* SECTIONS & LIQUID GLASS CONTAINERS                       */
-        /* -------------------------------------------------------------------------- */
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+            background: none;
+            border: none;
+        }
+        .hamburger span {
+            width: 24px; height: 2px;
+            background: #fff;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 3, 5, 0.97);
+            backdrop-filter: blur(30px);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .mobile-menu.active { opacity: 1; pointer-events: all; }
+        .mobile-menu a {
+            color: rgba(255,255,255,0.7);
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.5rem;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 4px;
+            transition: color 0.3s;
+        }
+        .mobile-menu a:hover { color: var(--accent-cyan); }
+
+        /* ====================================================================== */
+        /* TEDx FLOATING BADGE                                                    */
+        /* ====================================================================== */
+        .tedx-badge {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 998;
+            background: rgba(10, 10, 16, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 0, 85, 0.3);
+            border-radius: 16px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+        }
+        .tedx-badge:hover {
+            border-color: var(--accent-pink);
+            box-shadow: 0 4px 40px rgba(255, 0, 85, 0.2);
+            transform: translateY(-3px);
+        }
+        .tedx-badge-icon {
+            font-size: 1.8rem;
+        }
+        .tedx-badge-text {
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--accent-pink);
+            text-transform: uppercase;
+            line-height: 1.5;
+        }
+        .tedx-badge-text span {
+            display: block;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+        }
+        #tedx-countdown {
+            font-family: 'Space Mono', monospace;
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* ====================================================================== */
+        /* SECTIONS                                                               */
+        /* ====================================================================== */
         section {
             min-height: 100vh;
             display: flex;
             align-items: center;
             padding: 120px 10%;
             position: relative;
-            perspective: 1000px;
         }
 
-        /* Irregular, dynamic liquid glass shape */
+        /* ====================================================================== */
+        /* LIQUID GLASS CARDS                                                     */
+        /* ====================================================================== */
         .liquid-glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
             border: 1px solid var(--glass-border);
             padding: 80px;
             max-width: 900px;
             position: relative;
-            /* Cyberpunk / Advanced Advertising wow-factor: Irregular borders */
-            border-radius: 40px 0px 40px 0px; 
-            box-shadow: 
+            border-radius: 40px 0px 40px 0px;
+            box-shadow:
                 -10px 10px 40px rgba(0,0,0,0.5),
                 inset 0 0 20px rgba(255,255,255,0.02);
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(40px);
         }
-        
+        .liquid-glass-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
         .liquid-glass-card:hover {
-            transform: translateY(-5px) rotateX(2deg) rotateY(-2deg);
+            transform: translateY(-5px);
+        }
+        .liquid-glass-card.visible:hover {
+            transform: translateY(-5px);
         }
 
-        /* Neon Accent lines */
         .liquid-glass-card::before, .liquid-glass-card::after {
             content: "";
             position: absolute;
             background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-pink));
         }
-        
         .liquid-glass-card::before {
             top: -1px; left: -1px; width: 3px; height: 50%;
         }
@@ -172,12 +462,12 @@
             bottom: -1px; right: -1px; width: 50%; height: 3px;
         }
 
-        /* -------------------------------------------------------------------------- */
-        /* TYPOGRAPHY (WOW FACTOR)                            */
-        /* -------------------------------------------------------------------------- */
+        /* ====================================================================== */
+        /* TYPOGRAPHY                                                             */
+        /* ====================================================================== */
         h3.kicker {
             font-family: 'Syncopate', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--accent-cyan);
             margin-bottom: 20px;
             letter-spacing: 5px;
@@ -186,12 +476,10 @@
             align-items: center;
             gap: 15px;
         }
-        
         h3.kicker::before {
             content: "";
             display: block;
-            width: 30px;
-            height: 2px;
+            width: 30px; height: 2px;
             background: var(--accent-cyan);
         }
 
@@ -202,26 +490,19 @@
             text-transform: uppercase;
             margin-bottom: 30px;
         }
-
-        h1 {
-            font-size: 5.5rem;
-            letter-spacing: -2px;
+        h1 { font-size: 5.5rem; letter-spacing: -2px;
             background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.3) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
-        /* Outline text effect for emphasis */
         .outline-text {
             color: transparent;
             -webkit-text-stroke: 1px rgba(255,255,255,0.5);
-            background: none;
+            background: none !important;
+            -webkit-background-clip: border-box !important;
+            -webkit-text-fill-color: transparent;
         }
-
-        h2 {
-            font-size: 4rem;
-            letter-spacing: -1px;
-        }
+        h2 { font-size: 4rem; letter-spacing: -1px; }
 
         p {
             font-size: 1.3rem;
@@ -231,52 +512,184 @@
             color: rgba(255, 255, 255, 0.85);
             max-width: 85%;
         }
-
-        .accent-text { 
-            color: #fff; 
-            font-weight: 900; 
+        .accent-text {
+            color: #fff;
+            font-weight: 900;
             position: relative;
             display: inline-block;
         }
-        
         .accent-text::after {
             content: '';
             position: absolute;
-            width: 100%;
-            height: 30%;
-            bottom: 10%;
-            left: 0;
+            width: 100%; height: 30%;
+            bottom: 10%; left: 0;
             background: var(--accent-pink);
             z-index: -1;
             opacity: 0.6;
             transform: skewX(-15deg);
         }
 
-        /* -------------------------------------------------------------------------- */
-        /* LISTS (ELEGANT)                               */
-        /* -------------------------------------------------------------------------- */
-        ul { list-style: none; margin-top: 30px; }
-        ul li { 
-            margin-bottom: 20px; 
-            font-size: 1.1rem; 
+        /* ====================================================================== */
+        /* ABOUT SECTION — STAT CARDS                                             */
+        /* ====================================================================== */
+        .stat-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 35px 0;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 28px 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        .stat-card:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(0,243,255,0.05);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+        .stat-num {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .stat-label {
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* ====================================================================== */
+        /* TIMELINE (CSS-only)                                                    */
+        /* ====================================================================== */
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+            padding-left: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-pink), var(--accent-purple));
+            border-radius: 1px;
+        }
+        .timeline-node {
+            position: relative;
+            margin-bottom: 28px;
+            padding-left: 24px;
+        }
+        .timeline-node::before {
+            content: '';
+            position: absolute;
+            left: -35px; top: 6px;
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: var(--bg-dark);
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 0 12px rgba(0,243,255,0.4);
+            transition: all 0.3s;
+        }
+        .timeline-node:hover::before {
+            background: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0,243,255,0.7);
+            transform: scale(1.3);
+        }
+        .timeline-year {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+        .timeline-event {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.5;
+        }
+        .timeline-event strong { color: #fff; font-weight: 800; }
+
+        /* ====================================================================== */
+        /* NANO BANANA SECTION                                                    */
+        /* ====================================================================== */
+        .nano-motto {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+        }
+        .nano-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 30px 0;
+        }
+        .nano-pill {
+            padding: 10px 20px;
+            border: 1px solid var(--glass-border-bright);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.8);
+            background: rgba(255,255,255,0.03);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        .nano-pill:hover {
+            border-color: var(--accent-gold);
+            background: rgba(255,215,0,0.08);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(255,215,0,0.15);
+        }
+        .nano-bilingual {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid var(--glass-border);
+            font-size: 1rem;
             font-weight: 300;
-            padding-left: 30px; 
-            position: relative; 
+            color: rgba(255,255,255,0.55);
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        /* ====================================================================== */
+        /* LISTS                                                                  */
+        /* ====================================================================== */
+        ul { list-style: none; margin-top: 30px; }
+        ul li {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-weight: 300;
+            padding-left: 30px;
+            position: relative;
             border-bottom: 1px solid rgba(255,255,255,0.05);
             padding-bottom: 15px;
         }
-        ul li::before { 
-            content: ""; 
-            position: absolute; 
-            left: 0; 
-            top: 8px;
-            width: 10px;
-            height: 10px;
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 0; top: 8px;
+            width: 10px; height: 10px;
             background: var(--accent-cyan);
             border-radius: 50%;
             box-shadow: 0 0 10px var(--accent-cyan);
         }
-        
         ul li strong {
             font-weight: 900;
             color: #fff;
@@ -285,9 +698,9 @@
             font-size: 0.9rem;
         }
 
-        /* -------------------------------------------------------------------------- */
-        /* FORM & CTA (MARKETING TIER)                        */
-        /* -------------------------------------------------------------------------- */
+        /* ====================================================================== */
+        /* WAITLIST FORM                                                          */
+        /* ====================================================================== */
         .input-group {
             display: flex;
             margin-top: 50px;
@@ -298,9 +711,13 @@
             padding: 5px;
             overflow: hidden;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+            transition: border-color 0.3s;
         }
-
-        input {
+        .input-group:focus-within {
+            border-color: var(--accent-cyan);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 0 20px rgba(0,243,255,0.1);
+        }
+        .input-group input {
             background: transparent;
             border: none;
             padding: 25px 30px;
@@ -310,9 +727,20 @@
             outline: none;
             font-family: 'Inter', sans-serif;
             font-weight: 300;
+            cursor: none;
         }
-        
-        input::placeholder { color: rgba(255,255,255,0.3); }
+        .input-group input::placeholder { color: rgba(255,255,255,0.3); }
+        .input-group input:focus { cursor: none; }
+
+        .social-proof {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            margin-top: 8px;
+            text-align: center;
+        }
 
         .btn-join {
             background: #fff;
@@ -327,50 +755,176 @@
             border: none;
             border-radius: 40px;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            white-space: nowrap;
         }
-
-        .btn-join:hover { 
-            background: var(--accent-cyan); 
+        .btn-join:hover {
+            background: var(--accent-cyan);
             transform: scale(1.05);
             box-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
         }
 
+        /* Success state */
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeUpIn 0.6s ease;
+        }
+        .form-success.active { display: block; }
+        .form-success-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: successPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .form-success-msg {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--accent-cyan);
+        }
+        .form-success-sub {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 10px;
+        }
+        @keyframes fadeUpIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes successPop {
+            0% { transform: scale(0); }
+            60% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* ====================================================================== */
+        /* RESPONSIVE                                                             */
+        /* ====================================================================== */
         @media (max-width: 1024px) {
             h1 { font-size: 4rem; }
             h2 { font-size: 3rem; }
-            .liquid-glass-card { padding: 50px; max-width: 100%; border-radius: 20px 0 20px 0;}
-            p { max-width: 100%; }
+            .liquid-glass-card { padding: 50px; max-width: 100%; border-radius: 24px 0 24px 0; }
+            p { max-width: 100%; font-size: 1.1rem; }
+            .stat-cards { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+            .stat-num { font-size: 2rem; }
+            .tedx-badge { bottom: 20px; right: 20px; padding: 12px 16px; }
+            .tedx-badge-text { font-size: 0.65rem; }
+            .sticky-nav { padding: 16px 30px; }
+            .input-group input { padding: 20px 24px; font-size: 1rem; }
+            .btn-join { padding: 0 30px; }
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
-            h2 { font-size: 2rem; }
-            .sticky-banner { padding: 15px 20px; }
+            h1 { font-size: 2.8rem; letter-spacing: 0; }
+            h2 { font-size: 2.2rem; letter-spacing: 0; }
+            h3.kicker { font-size: 0.7rem; letter-spacing: 3px; }
+            .sticky-nav { padding: 14px 20px; }
+            .sticky-nav.scrolled { padding: 10px 20px; }
             .nav-links { display: none; }
-            .input-group { flex-direction: column; border-radius: 20px; background: transparent; box-shadow: none; border: none;}
-            input { border: 1px solid var(--glass-border); border-radius: 10px; margin-bottom: 10px; background: rgba(0,0,0,0.6); padding: 15px;}
-            .btn-join { padding: 20px; border-radius: 10px;}
+            .hamburger { display: flex; }
+            .liquid-glass-card { padding: 35px 24px; border-radius: 20px 0 20px 0; }
             section { padding: 100px 5%; }
+            p { font-size: 1rem; }
+            .stat-cards { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .stat-card { padding: 18px 10px; border-radius: 14px; }
+            .stat-num { font-size: 1.6rem; }
+            .stat-label { font-size: 0.55rem; letter-spacing: 2px; }
+            .timeline { padding-left: 20px; }
+            .timeline-node { padding-left: 16px; margin-bottom: 20px; }
+            .timeline-node::before { left: -28px; width: 10px; height: 10px; }
+            .timeline-event { font-size: 0.85rem; }
+            .input-group { flex-direction: column; border-radius: 20px; background: transparent; box-shadow: none; border: none; }
+            .input-group input { border: 1px solid var(--glass-border); border-radius: 14px; margin-bottom: 10px; background: rgba(0,0,0,0.6); padding: 18px 20px; }
+            .btn-join { padding: 20px; border-radius: 14px; width: 100%; }
+            .nano-pills { gap: 8px; }
+            .nano-pill { padding: 8px 14px; font-size: 0.78rem; }
+            .tedx-badge { bottom: 16px; right: 12px; padding: 10px 14px; border-radius: 12px; gap: 8px; }
+            .tedx-badge-icon { font-size: 1.4rem; }
+            .tedx-badge-text { font-size: 0.6rem; }
+            #tedx-countdown { font-size: 0.7rem; }
+            .cursor-glow, .cursor-dot { display: none; }
+            body { cursor: auto; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            .liquid-glass-card { padding: 28px 18px; }
+            section { padding: 80px 4%; }
+            .stat-cards { grid-template-columns: 1fr; gap: 10px; }
+            .stat-card { display: flex; align-items: center; justify-content: space-between; text-align: left; padding: 16px 20px; }
+            .stat-num { font-size: 1.8rem; margin-bottom: 0; }
+            .stat-label { font-size: 0.6rem; }
+            .tedx-badge { bottom: 10px; right: 10px; left: 10px; justify-content: center; border-radius: 10px; padding: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-container" id="bg"></div>
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">RKRK.IO</div>
+            <div class="loader-pulse"></div>
+        </div>
+    </div>
 
-    <nav class="sticky-banner">
-        <div class="logo">RKRK.IO</div>
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Ambient Particles -->
+    <div class="particles" id="particles" aria-hidden="true"></div>
+
+    <!-- Ambient Orbs -->
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="orb orb-3" aria-hidden="true"></div>
+
+    <!-- Background Container -->
+    <div class="bg-container" id="bg"></div>
+    <div class="bg-vignette" aria-hidden="true"></div>
+
+    <!-- Navigation -->
+    <nav class="sticky-nav" id="navbar">
+        <a href="#hero" class="logo">RKRK.IO</a>
         <div class="nav-right">
-            <div class="nav-links">
+            <div class="nav-links" id="navLinks">
                 <a href="#hero" id="nav-home">Home</a>
                 <a href="#rua" id="nav-dynamos">DynamOS</a>
+                <a href="#nano" id="nav-nano">Nano 🍌</a>
                 <a href="#tech" id="nav-tech">Tech</a>
                 <a href="#about" id="nav-about">About Kee</a>
             </div>
-            <button class="lang-switch" onclick="toggleLang()" id="langBtn">CN</button>
+            <button class="lang-switch" id="langBtn" aria-label="Toggle language">CN</button>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#hero" class="mobile-link" data-i18n="navHome">Home</a>
+        <a href="#rua" class="mobile-link" data-i18n="navDynamos">DynamOS</a>
+        <a href="#nano" class="mobile-link" data-i18n="navNano">Nano 🍌</a>
+        <a href="#tech" class="mobile-link" data-i18n="navTech">Tech</a>
+        <a href="#about" class="mobile-link" data-i18n="navAbout">About Kee</a>
+    </div>
+
+    <!-- TEDx Floating Badge -->
+    <a href="https://rkrk.io" class="tedx-badge" id="tedxBadge" aria-label="TEDx 2026 countdown">
+        <span class="tedx-badge-icon">🎤</span>
+        <div class="tedx-badge-text">
+            TEDx 2026<span>The Cocoon & The Catalyst</span>
+        </div>
+        <div id="tedx-countdown">--</div>
+    </a>
+
+    <!-- ================================================================== -->
+    <!-- SECTION 1: HERO                                                    -->
+    <!-- ================================================================== -->
     <section id="hero" data-bg="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=2000">
         <div class="liquid-glass-card">
             <h3 class="kicker" id="hero-sub">The Paradigm Shift</h3>
@@ -379,6 +933,9 @@
         </div>
     </section>
 
+    <!-- ================================================================== -->
+    <!-- SECTION 2: DYNAMOS                                                 -->
+    <!-- ================================================================== -->
     <section id="rua" data-bg="https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&q=80&w=2000">
         <div class="liquid-glass-card">
             <h3 class="kicker" id="rua-sub">Escape the Cocoon</h3>
@@ -392,8 +949,35 @@
         </div>
     </section>
 
+    <!-- ================================================================== -->
+    <!-- SECTION 3: NANO BANANA 🍌                                          -->
+    <!-- ================================================================== -->
+    <section id="nano" data-bg="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=2000">
+        <div class="liquid-glass-card" style="border-radius: 0 0 40px 40px;">
+            <h3 class="kicker">🍌 Philosophy</h3>
+            <h2>THE<br><span class="accent-text">NANO</span><br>BANANA</h2>
+            <p class="nano-motto">Small. Potent. Unforgettable.</p>
+            <p id="nano-desc">Most lessons are bloated. Students drown in content they'll never recall. Kee flips the paradigm: <strong>Nano Bananas</strong> — bite-sized learning units engineered for maximum cognitive absorption. Each one is a self-contained burst of insight. Consumable in 90 seconds. Retained for years.</p>
+            <div class="nano-pills">
+                <span class="nano-pill">⚡ 90-Second Units</span>
+                <span class="nano-pill">🧠 Spaced Repetition</span>
+                <span class="nano-pill">🎯 Laser-Focused</span>
+                <span class="nano-pill">🔄 Adaptive Recall</span>
+                <span class="nano-pill">💎 High-Density Insight</span>
+                <span class="nano-pill">🌊 Seamless Integration</span>
+            </div>
+            <p id="nano-desc2" style="font-size:1rem; max-width:100%;">The learning equivalent of a 4AM coding breakthrough — compact, elegant, and permanently wired into your architecture.</p>
+            <div class="nano-bilingual" id="nano-cn">
+                不是课太多，是你的课太"重"。Nano Banana 将知识切分为 90 秒级别的"认知颗粒"——像香蕉一样，一口一个，营养全吸收。不多不少，刚刚好。
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- SECTION 4: TECH / AI NATIVE GEMS                                   -->
+    <!-- ================================================================== -->
     <section id="tech" data-bg="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=2000">
-        <div class="liquid-glass-card">
+        <div class="liquid-glass-card" style="border-radius: 0 40px 0 40px;">
             <h3 class="kicker" id="tech-sub">The Arsenal</h3>
             <h2 id="tech-title">AI<br><span class="outline-text">NATIVE</span><br>GEMS</h2>
             <p id="tech-desc">Built autonomously via OpenClaw. Tools that deliver strategy, not just data.</p>
@@ -405,125 +989,407 @@
         </div>
     </section>
 
+    <!-- ================================================================== -->
+    <!-- SECTION 5: ABOUT KEE — THE CENTERPIECE                             -->
+    <!-- ================================================================== -->
     <section id="about" data-bg="https://images.unsplash.com/photo-1544654803-b69140b285a1?auto=format&fit=crop&q=80&w=2000">
-        <div class="liquid-glass-card">
+        <div class="liquid-glass-card" style="max-width:960px; border-radius: 20px 0 20px 0;">
             <h3 class="kicker" id="about-sub">The Architect</h3>
             <h2 id="about-title">MEET<br><span class="accent-text">KEE</span></h2>
-            <div id="about-content">
-                <p>I don't just teach English; I architect mastery. My high-stakes communication journey began in 2012 as the <strong>interpreter for the Backstreet Boys</strong> during their Chengdu tour—translating energy, intent, and cross-cultural nuances in real-time.</p>
-                <p>I mastered the traditional system at EF, ascending to <strong>Expert Teacher</strong> (the highest attainable rank) and serving as a <strong>Product Specialist and Trainer of Trainers</strong> for the entire West China region.</p>
-                <p>With a certified <strong>IELTS score of L9.0 / R8.5 / S8.5</strong>, I realized true proficiency isn't about memorizing data—it's cognitive architecture. On May 1st, 2026, I take the TEDx stage to reveal how we bridge human empathy with AI computation.</p>
+
+            <!-- Opening hook -->
+            <p id="about-hook" style="font-size:1.5rem; font-weight:500; color:#fff; max-width:100%; line-height:1.5;">
+                I don't teach English.<br>I dismantle it and rebuild it as architecture.
+            </p>
+
+            <!-- Stat Cards -->
+            <div class="stat-cards">
+                <div class="stat-card">
+                    <span class="stat-num">L9.0</span>
+                    <span class="stat-label">IELTS Listening</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-num">R8.5</span>
+                    <span class="stat-label">IELTS Reading</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-num">S8.5</span>
+                    <span class="stat-label">IELTS Speaking</span>
+                </div>
             </div>
+
+            <!-- Narrative body -->
+            <div id="about-content">
+                <p>Here's the thing about language teaching: most people treat it like a warehouse. Fill the shelves with vocabulary, grammar rules, idioms. Stack higher. Hope something sticks.</p>
+                <p>I treat it like <strong>architecture</strong>. Every student is a site. Every lesson is a blueprint. And every cognitive node we build together is load-bearing — designed to hold weight under real-world pressure.</p>
+                <p>I learned this the hard way. In 2012, I was the <strong>interpreter for the Backstreet Boys</strong> during their Chengdu tour. That's not a classroom gig. That's 20,000 people, live microphones, zero margin for error. You don't translate words — you translate <em>energy</em>. You become the bridge between two entire emotional worlds, in real time. That's where I learned that language isn't about correctness. It's about <strong>resonance</strong>.</p>
+                <p>After that, I went deep into the system. EF. Expert Teacher — the highest rank you can hit. Then <strong>Product Specialist and Trainer of Trainers</strong> for all of West China. I trained the trainers. I watched hundreds of teachers teach thousands of students. And I saw the same thing, over and over: content without architecture. Information without integration.</p>
+                <p>So I built something different.</p>
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline">
+                <div class="timeline-node">
+                    <div class="timeline-year">2012</div>
+                    <div class="timeline-event"><strong>Backstreet Boys Tour Interpreter</strong> — Chengdu. Live translation for 20K+ audiences. Where language became <em>resonance</em>, not rules.</div>
+                </div>
+                <div class="timeline-node">
+                    <div class="timeline-year">2013–2020</div>
+                    <div class="timeline-event"><strong>EF Expert Teacher</strong> — Highest rank. <strong>Trainer of Trainers</strong> — West China. Built the playbook others taught from.</div>
+                </div>
+                <div class="timeline-node">
+                    <div class="timeline-year">2026.05.01</div>
+                    <div class="timeline-event"><strong>TEDx Speaker</strong> — <em>The Cocoon & The Catalyst.</em> Bridging human empathy with AI computation on the global stage.</div>
+                </div>
+                <div class="timeline-node">
+                    <div class="timeline-year">Now</div>
+                    <div class="timeline-event"><strong>DynamOS</strong> — The cognitive operating system for AI-native education. Built during 4AM coding sessions, tested in real classrooms, powered by a Golden Retriever's moral support.</div>
+                </div>
+            </div>
+
+            <!-- Personal touch -->
+            <p id="about-personal" style="font-size:1rem; color:rgba(255,255,255,0.5); font-style:italic; max-width:100%; margin-top:20px; border-top:1px solid var(--glass-border); padding-top:20px;">
+                Night-owl creator. 4AM is when the architecture crystallizes. Golden Retriever at my feet. Coffee on the desk. Building the future of learning, one Nano Banana at a time. 🍌🦄
+            </p>
         </div>
     </section>
 
+    <!-- ================================================================== -->
+    <!-- SECTION 6: WAITLIST / CTA                                          -->
+    <!-- ================================================================== -->
     <section id="waitlist" data-bg="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=2000">
         <div class="liquid-glass-card" style="border-radius: 0 40px 0 40px;">
             <h3 class="kicker" id="join-sub">Initiate Sequence</h3>
             <h2 id="join-title">REWIRE<br><span class="outline-text">YOUR</span><br>TEACHING</h2>
             <p id="join-desc" style="margin-top:20px;">Exclusive 1-on-1 strategic consulting for forward-thinking educators. Book a diagnostic deep dive to build your AI-powered lab.</p>
-            
-            <div class="input-group">
-                <input type="text" id="userInput" placeholder="Email / Phone / WeChat" required>
-                <button class="btn-join" id="btnText" onclick="alert('Access Granted. We will map your coordinates shortly. 🦄')">RESERVE SLOT</button>
+
+            <div id="formContainer">
+                <div class="input-group" id="inputGroup">
+                    <input type="text" id="userInput" placeholder="Email / Phone / WeChat" required autocomplete="email">
+                    <button class="btn-join" id="btnText" onclick="submitForm()">RESERVE SLOT</button>
+                </div>
+                <div class="social-proof" id="socialProof">Join 200+ educators already rewired</div>
+            </div>
+
+            <div class="form-success" id="formSuccess">
+                <div class="form-success-icon">🦄</div>
+                <div class="form-success-msg" id="successMsg">ACCESS GRANTED</div>
+                <div class="form-success-sub" id="successSub">We'll map your coordinates shortly. Check your inbox.</div>
             </div>
         </div>
     </section>
 
+    <!-- ================================================================== -->
+    <!-- SCRIPTS                                                             -->
+    <!-- ================================================================== -->
     <script>
-        const sections = document.querySelectorAll('section');
-        const bgContainer = document.getElementById('bg');
-        let currentLang = 'en';
+    /* ================================================================== */
+    /* LOADER                                                              */
+    /* ================================================================== */
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('loader').classList.add('loaded');
+        }, 800);
+    });
 
-        // Extremely concise & high-impact wording
-        const content = {
-            en: {
-                navHome: "Home", navDynamos: "DynamOS", navTech: "Tech", navAbout: "About Kee", langBtn: "CN",
-                heroSub: "The Paradigm Shift", heroTitle: "LEARNING<br><span class='outline-text'>IS NOW</span><br>DESIGN",
-                heroDesc: "The era of the 'content provider' is dead. Step down from the podium. Embrace the AI exoskeleton and architect bespoke cognitive maps.",
-                ruaSub: "Escape the Cocoon", ruaTitle: "THE<br><span class='accent-text'>DYNAMOS</span><br>SYSTEM",
-                ruaDesc: "A cognitive framework engineered to shatter passive consumption.",
-                ruaList: "<li><strong>RECOGNIZE</strong> — Define absolute boundaries & prompt logic.</li><li><strong>UNDERSTAND</strong> — Modulate AI empathy & contextual synthesis.</li><li><strong>APPLY</strong> — Feed real-world friction back into the loop.</li>",
-                techSub: "The Arsenal", techTitle: "AI<br><span class='outline-text'>NATIVE</span><br>GEMS",
-                techDesc: "Built autonomously via OpenClaw. Tools that deliver strategy, not just data.",
-                techList: "<li><strong>CLASS NOTES GEM</strong> — Granular utterance tracking & real-time friction mapping.</li><li><strong>FEEDBACK ENGINE</strong> — Strategic evaluation rooted in the 3 Golden Rules & 7 Keys.</li><li><strong>RUA DICTIONARY</strong> — Dynamic input routing for perfectly tailored cognitive nodes.</li>",
-                aboutSub: "The Architect", aboutTitle: "MEET<br><span class='accent-text'>KEE</span>",
-                aboutContent: `<p>I don't just teach English; I architect mastery. My high-stakes communication journey began in 2012 as the <strong>interpreter for the Backstreet Boys</strong> during their Chengdu tour—translating energy, intent, and cross-cultural nuances in real-time.</p>
-                               <p>I mastered the traditional system at EF, ascending to <strong>Expert Teacher</strong> (the highest attainable rank) and serving as a <strong>Product Specialist and Trainer of Trainers</strong> for the entire West China region.</p>
-                               <p>With a certified <strong>IELTS score of L9.0 / R8.5 / S8.5</strong>, I realized true proficiency isn't about memorizing data—it's cognitive architecture. On May 1st, 2026, I take the TEDx stage to reveal how we bridge human empathy with AI computation.</p>`,
-                joinSub: "Initiate Sequence", joinTitle: "REWIRE<br><span class='outline-text'>YOUR</span><br>TEACHING",
-                joinDesc: "Exclusive 1-on-1 strategic consulting for forward-thinking educators. Book a diagnostic deep dive to build your AI-powered lab.",
-                userInput: "Email / Phone / WeChat", btnText: "RESERVE SLOT"
-            },
-            zh: {
-                navHome: "序章", navDynamos: "内核", navTech: "武器库", navAbout: "架构师", langBtn: "EN",
-                heroSub: "范式转移", heroTitle: "教育<br><span class='outline-text'>即是</span><br>设计",
-                heroDesc: "“知识搬运工”的时代已终结。走下讲台，穿上 AI 认知外骨骼，设计极致的个性化心智地图。",
-                ruaSub: "打破茧房", ruaTitle: "<span class='accent-text'>DYNAMOS</span><br>系统",
-                ruaDesc: "专为击碎“被动摄取”而生的认知架构。",
-                ruaList: "<li><strong>RECOGNIZE (识别)</strong> — 划定绝对边界与底层逻辑。</li><li><strong>UNDERSTAND (理解)</strong> — 调制 AI 的共情与高维语境。</li><li><strong>APPLY (应用)</strong> — 捕捉真实世界的摩擦力，闭环进化。</li>",
-                techSub: "AI 武器库", techTitle: "原生<br><span class='outline-text'>智能</span><br>组件",
-                techDesc: "基于 OpenClaw 自主构建。提供战略，而非冰冷的数据。",
-                techList: "<li><strong>课堂笔记 GEM</strong> — 追踪极细颗粒度话语，实时绘制阻力热力图。</li><li><strong>反馈引擎</strong> — 根植 3 大金律与 7 大法则的战略级评估。</li><li><strong>RUA 词典</strong> — 动态输入路由，生成量身定制的认知节点。</li>",
-                aboutSub: "架构师", aboutTitle: "关于<br><span class='accent-text'>KEE</span>",
-                aboutContent: `<p>我不教英语，我架构精通。高频沟通生涯始于 2012 年，担任 <strong>Backstreet Boys 巡演随行翻译</strong>——实时转译能量、意图与跨文化潜台词。</p>
-                               <p>在 EF 体系登顶，获封<strong>“专家级教师”（最高职级）</strong>，并统筹华西区<strong>产品专家与内训导师</strong>工作。</p>
-                               <p>手握<strong>雅思 L9.0 / R8.5 / S8.5</strong> 的硬核成绩，我确信：精通并非死记硬背，而是心智的架构。2026 年 5 月 1 日，我将登顶 TEDx，揭秘人类共情与 AI 算力的终极融合。</p>`,
-                joinSub: "启动程序", joinTitle: "重构<br><span class='outline-text'>你的</span><br>教学",
-                joinDesc: "仅为先锋教育者开放 1 对 1 战略咨询。预约深度诊断，搭建你的专属 AI 实验室。",
-                userInput: "输入邮箱 / 手机号 / 微信", btnText: "锁定席位"
+    /* ================================================================== */
+    /* CURSOR GLOW                                                         */
+    /* ================================================================== */
+    const cursorGlow = document.getElementById('cursorGlow');
+    const cursorDot = document.getElementById('cursorDot');
+    let mouseX = -100, mouseY = -100;
+    let currentX = -100, currentY = -100;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function updateCursor() {
+        currentX += (mouseX - currentX) * 0.15;
+        currentY += (mouseY - currentY) * 0.15;
+        cursorGlow.style.left = currentX + 'px';
+        cursorGlow.style.top = currentY + 'px';
+        cursorDot.style.left = mouseX + 'px';
+        cursorDot.style.top = mouseY + 'px';
+        requestAnimationFrame(updateCursor);
+    }
+    updateCursor();
+
+    /* ================================================================== */
+    /* AMBIENT PARTICLES                                                   */
+    /* ================================================================== */
+    (function createParticles() {
+        const container = document.getElementById('particles');
+        const shapes = ['circle', 'diamond', 'dot'];
+        for (let i = 0; i < 30; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle ' + shapes[i % 3];
+            p.style.left = Math.random() * 100 + '%';
+            p.style.width = p.style.height = (Math.random() * 6 + 2) + 'px';
+            p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+            p.style.animationDelay = (Math.random() * 15) + 's';
+            container.appendChild(p);
+        }
+    })();
+
+    /* ================================================================== */
+    /* SCROLL BACKGROUND SWITCHER                                          */
+    /* ================================================================== */
+    const sections = document.querySelectorAll('section');
+    const bgContainer = document.getElementById('bg');
+
+    const bgObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bgUrl = entry.target.getAttribute('data-bg');
+                bgContainer.style.backgroundImage = `url('${bgUrl}')`;
             }
-        };
+        });
+    }, { threshold: 0.5 });
 
-        function toggleLang() {
-            currentLang = currentLang === 'en' ? 'zh' : 'en';
-            updateUI();
+    sections.forEach(section => bgObserver.observe(section));
+
+    /* ================================================================== */
+    /* SCROLL-TRIGGERED CARD ANIMATIONS                                    */
+    /* ================================================================== */
+    const cards = document.querySelectorAll('.liquid-glass-card');
+
+    const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+    cards.forEach(card => cardObserver.observe(card));
+
+    /* ================================================================== */
+    /* NAV SCROLL STATE                                                    */
+    /* ================================================================== */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    /* ================================================================== */
+    /* MOBILE MENU                                                         */
+    /* ================================================================== */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+
+    /* ================================================================== */
+    /* WAITLIST FORM                                                       */
+    /* ================================================================== */
+    const placeholderTexts = [
+        "Email / Phone / WeChat",
+        "your@email.com...",
+        "Let's rewire your teaching...",
+        "Ready to escape the cocoon?"
+    ];
+    let placeholderIdx = 0;
+    const userInput = document.getElementById('userInput');
+
+    if (userInput && !userInput.matches(':focus')) {
+        setInterval(() => {
+            if (!userInput.matches(':focus') && !userInput.value) {
+                placeholderIdx = (placeholderIdx + 1) % placeholderTexts.length;
+                userInput.placeholder = placeholderTexts[placeholderIdx];
+            }
+        }, 3000);
+    }
+
+    function submitForm() {
+        const input = document.getElementById('userInput');
+        if (!input.value.trim()) {
+            input.style.borderColor = '#ff0055';
+            input.placeholder = 'Please enter your contact info first';
+            setTimeout(() => {
+                input.style.borderColor = '';
+                input.placeholder = placeholderTexts[placeholderIdx];
+            }, 2000);
+            return;
         }
+        document.getElementById('formContainer').style.display = 'none';
+        document.getElementById('formSuccess').classList.add('active');
+    }
 
-        function updateUI() {
-            const l = content[currentLang];
-            document.getElementById('nav-home').innerText = l.navHome;
-            document.getElementById('nav-dynamos').innerText = l.navDynamos;
-            document.getElementById('nav-tech').innerText = l.navTech;
-            document.getElementById('nav-about').innerText = l.navAbout;
-            document.getElementById('langBtn').innerText = l.langBtn;
-            
-            document.getElementById('hero-sub').innerText = l.heroSub;
-            document.getElementById('hero-title').innerHTML = l.heroTitle;
-            document.getElementById('hero-desc').innerText = l.heroDesc;
-            
-            document.getElementById('rua-sub').innerText = l.ruaSub;
-            document.getElementById('rua-title').innerHTML = l.ruaTitle;
-            document.getElementById('rua-desc').innerText = l.ruaDesc;
-            document.getElementById('rua-list').innerHTML = l.ruaList;
-            
-            document.getElementById('tech-sub').innerText = l.techSub;
-            document.getElementById('tech-title').innerHTML = l.techTitle;
-            document.getElementById('tech-desc').innerText = l.techDesc;
-            document.getElementById('tech-list').innerHTML = l.techList;
-            
-            document.getElementById('about-sub').innerText = l.aboutSub;
-            document.getElementById('about-title').innerHTML = l.aboutTitle;
-            document.getElementById('about-content').innerHTML = l.aboutContent;
-            
-            document.getElementById('join-sub').innerText = l.joinSub;
-            document.getElementById('join-title').innerHTML = l.joinTitle;
-            document.getElementById('join-desc').innerText = l.joinDesc;
-            document.getElementById('userInput').placeholder = l.userInput;
-            document.getElementById('btnText').innerText = l.btnText;
+    /* ================================================================== */
+    /* TEDx COUNTDOWN                                                      */
+    /* ================================================================== */
+    function updateTEDxCountdown() {
+        const target = new Date('2026-05-01T00:00:00+08:00');
+        const now = new Date();
+        const diff = target - now;
+        const el = document.getElementById('tedx-countdown');
+        if (diff <= 0) {
+            el.textContent = 'LIVE';
+            return;
         }
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        el.textContent = `${days}d ${hours}h`;
+    }
+    updateTEDxCountdown();
+    setInterval(updateTEDxCountdown, 60000);
 
-        const observerOptions = { threshold: 0.5 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const bgUrl = entry.target.getAttribute('data-bg');
-                    bgContainer.style.backgroundImage = `url('${bgUrl}')`;
-                }
-            });
-        }, observerOptions);
+    /* ================================================================== */
+    /* BILINGUAL TOGGLE                                                    */
+    /* ================================================================== */
+    let currentLang = 'en';
 
-        sections.forEach(section => observer.observe(section));
+    const content = {
+        en: {
+            navHome: "Home", navDynamos: "DynamOS", navNano: "Nano 🍌", navTech: "Tech", navAbout: "About Kee",
+            langBtn: "CN",
+            heroSub: "The Paradigm Shift",
+            heroTitle: "LEARNING<br><span class='outline-text'>IS NOW</span><br>DESIGN",
+            heroDesc: "The era of the \"content provider\" is dead. Step down from the podium. Embrace the AI exoskeleton and architect bespoke cognitive maps.",
+            ruaSub: "Escape the Cocoon",
+            ruaTitle: "THE<br><span class='accent-text'>DYNAMOS</span><br>SYSTEM",
+            ruaDesc: "A cognitive framework engineered to shatter passive consumption.",
+            ruaList: "<li><strong>RECOGNIZE</strong> — Define absolute boundaries & prompt logic.</li><li><strong>UNDERSTAND</strong> — Modulate AI empathy & contextual synthesis.</li><li><strong>APPLY</strong> — Feed real-world friction back into the loop.</li>",
+            techSub: "The Arsenal",
+            techTitle: "AI<br><span class='outline-text'>NATIVE</span><br>GEMS",
+            techDesc: "Built autonomously via OpenClaw. Tools that deliver strategy, not just data.",
+            techList: "<li><strong>CLASS NOTES GEM</strong> — Granular utterance tracking & real-time friction mapping.</li><li><strong>FEEDBACK ENGINE</strong> — Strategic evaluation rooted in the 3 Golden Rules & 7 Keys.</li><li><strong>RUA DICTIONARY</strong> — Dynamic input routing for perfectly tailored cognitive nodes.</li>",
+            nanoDesc: "Most lessons are bloated. Students drown in content they'll never recall. Kee flips the paradigm: <strong>Nano Bananas</strong> — bite-sized learning units engineered for maximum cognitive absorption. Each one is a self-contained burst of insight. Consumable in 90 seconds. Retained for years.",
+            nanoDesc2: "The learning equivalent of a 4AM coding breakthrough — compact, elegant, and permanently wired into your architecture.",
+            nanoCN: "不是课太多，是你的课太"重"。Nano Banana 将知识切分为 90 秒级别的"认知颗粒"——像香蕉一样，一口一个，营养全吸收。不多不少，刚刚好。",
+            aboutSub: "The Architect",
+            aboutTitle: "MEET<br><span class='accent-text'>KEE</span>",
+            aboutHook: "I don't teach English.<br>I dismantle it and rebuild it as architecture.",
+            aboutContent: `<p>Here's the thing about language teaching: most people treat it like a warehouse. Fill the shelves with vocabulary, grammar rules, idioms. Stack higher. Hope something sticks.</p>
+                <p>I treat it like <strong>architecture</strong>. Every student is a site. Every lesson is a blueprint. And every cognitive node we build together is load-bearing — designed to hold weight under real-world pressure.</p>
+                <p>I learned this the hard way. In 2012, I was the <strong>interpreter for the Backstreet Boys</strong> during their Chengdu tour. That's not a classroom gig. That's 20,000 people, live microphones, zero margin for error. You don't translate words — you translate <em>energy</em>. You become the bridge between two entire emotional worlds, in real time. That's where I learned that language isn't about correctness. It's about <strong>resonance</strong>.</p>
+                <p>After that, I went deep into the system. EF. Expert Teacher — the highest rank you can hit. Then <strong>Product Specialist and Trainer of Trainers</strong> for all of West China. I trained the trainers. I watched hundreds of teachers teach thousands of students. And I saw the same thing, over and over: content without architecture. Information without integration.</p>
+                <p>So I built something different.</p>`,
+            aboutPersonal: "Night-owl creator. 4AM is when the architecture crystallizes. Golden Retriever at my feet. Coffee on the desk. Building the future of learning, one Nano Banana at a time. 🍌🦄",
+            joinSub: "Initiate Sequence",
+            joinTitle: "REWIRE<br><span class='outline-text'>YOUR</span><br>TEACHING",
+            joinDesc: "Exclusive 1-on-1 strategic consulting for forward-thinking educators. Book a diagnostic deep dive to build your AI-powered lab.",
+            userPlaceholder: placeholderTexts[0],
+            btnText: "RESERVE SLOT",
+            socialProof: "Join 200+ educators already rewired",
+            successMsg: "ACCESS GRANTED",
+            successSub: "We'll map your coordinates shortly. Check your inbox."
+        },
+        zh: {
+            navHome: "序章", navDynamos: "内核", navNano: "Nano 🍌", navTech: "武器库", navAbout: "架构师",
+            langBtn: "EN",
+            heroSub: "范式转移",
+            heroTitle: "教育<br><span class='outline-text'>即是</span><br>设计",
+            heroDesc: "「知识搬运工」的时代已终结。走下讲台，穿上 AI 认知外骨骼，设计极致的个性化心智地图。",
+            ruaSub: "打破茧房",
+            ruaTitle: "<span class='accent-text'>DYNAMOS</span><br>系统",
+            ruaDesc: "专为击碎「被动摄取」而生的认知架构。",
+            ruaList: "<li><strong>RECOGNIZE (识别)</strong> — 划定绝对边界与底层逻辑。</li><li><strong>UNDERSTAND (理解)</strong> — 调制 AI 的共情与高维语境。</li><li><strong>APPLY (应用)</strong> — 捕捉真实世界的摩擦力，闭环进化。</li>",
+            techSub: "AI 武器库",
+            techTitle: "原生<br><span class='outline-text'>智能</span><br>组件",
+            techDesc: "基于 OpenClaw 自主构建。提供战略，而非冰冷的数据。",
+            techList: "<li><strong>课堂笔记 GEM</strong> — 追踪极细颗粒度话语，实时绘制阻力热力图。</li><li><strong>反馈引擎</strong> — 根植 3 大金律与 7 大法则的战略级评估。</li><li><strong>RUA 词典</strong> — 动态输入路由，生成量身定制的认知节点。</li>",
+            nanoDesc: "大多数课程臃肿不堪。学生被信息淹没，却记不住任何东西。Kee 反转范式：<strong>Nano Bananas</strong>——为最大化认知吸收而设计的微型学习单元。独立、高密度、一口一个。90 秒消化，永久留存。",
+            nanoDesc2: "就像凌晨 4 点的代码突破——紧凑、优雅、永久嵌入你的认知架构。",
+            nanoCN: "不是课太多，是你的课太"重"。Nano Banana 将知识切分为 90 秒级别的"认知颗粒"——像香蕉一样，一口一个，营养全吸收。不多不少，刚刚好。",
+            aboutSub: "架构师",
+            aboutTitle: "关于<br><span class='accent-text'>KEE</span>",
+            aboutHook: "我不教英语。<br>我把语言拆解，再建构成建筑。",
+            aboutContent: `<p>问题在这里：大多数人把语言教学当成仓库——往架子上堆词汇、语法、习语，堆得越高越好，然后祈祷学生能记住点什么。</p>
+                <p>我把它当成<strong>建筑</strong>。每个学生是一片地基。每堂课是一张蓝图。我们共同搭建的每一个认知节点，都必须承重——在真实世界的压力下屹立不倒。</p>
+                <p>这是我在 2012 年学到的。那年，我是<strong>Backstreet Boys 成都巡演的随行翻译</strong>。不是课堂练习，是两万人、现场麦克风、零容错的实战。翻译的不是词，是<em>能量</em>。你要成为两个情感世界之间的桥梁，实时切换。从那一刻起，我明白了：语言的本质不是正确，是<strong>共振</strong>。</p>
+                <p>之后我深入体制。EF。<strong>专家级教师</strong>——最高职级。然后成为华西区<strong>产品专家和内训导师</strong>。我培训培训师。我看过成百上千的老师教过成千上万的学生。一遍又一遍，我看到同样的问题：只有内容，没有架构。只有信息，没有融合。</p>
+                <p>所以我造了点不一样的东西。</p>`,
+            aboutPersonal: "深夜造物者。凌晨 4 点，是架构凝结的时刻。脚下趴着金毛。桌上放咖啡。一个 Nano Banana 一个脚印，建造教育的未来。🍌🦄",
+            joinSub: "启动程序",
+            joinTitle: "重构<br><span class='outline-text'>你的</span><br>教学",
+            joinDesc: "仅为先锋教育者开放 1 对 1 战略咨询。预约深度诊断，搭建你的专属 AI 实验室。",
+            userPlaceholder: "输入邮箱 / 手机号 / 微信",
+            btnText: "锁定席位",
+            socialProof: "已有 200+ 教育者重装上线",
+            successMsg: "接入成功",
+            successSub: "我们将尽快与你取得联系。查收邮箱确认。"
+        }
+    };
+
+    function toggleLang() {
+        currentLang = currentLang === 'en' ? 'zh' : 'en';
+        updateUI();
+    }
+
+    function updateUI() {
+        const l = content[currentLang];
+        document.getElementById('nav-home').innerText = l.navHome;
+        document.getElementById('nav-dynamos').innerText = l.navDynamos;
+        document.getElementById('nav-nano').innerText = l.navNano;
+        document.getElementById('nav-tech').innerText = l.navTech;
+        document.getElementById('nav-about').innerText = l.navAbout;
+        document.getElementById('langBtn').innerText = l.langBtn;
+
+        // Update mobile menu links
+        document.querySelectorAll('.mobile-link').forEach((link, i) => {
+            const keys = ['navHome', 'navDynamos', 'navNano', 'navTech', 'navAbout'];
+            if (keys[i]) link.innerText = l[keys[i]];
+        });
+
+        document.getElementById('hero-sub').innerText = l.heroSub;
+        document.getElementById('hero-title').innerHTML = l.heroTitle;
+        document.getElementById('hero-desc').innerText = l.heroDesc;
+
+        document.getElementById('rua-sub').innerText = l.ruaSub;
+        document.getElementById('rua-title').innerHTML = l.ruaTitle;
+        document.getElementById('rua-desc').innerText = l.ruaDesc;
+        document.getElementById('rua-list').innerHTML = l.ruaList;
+
+        document.getElementById('nano-desc').innerHTML = l.nanoDesc;
+        document.getElementById('nano-desc2').innerText = l.nanoDesc2;
+        document.getElementById('nano-cn').innerText = l.nanoCN;
+
+        document.getElementById('tech-sub').innerText = l.techSub;
+        document.getElementById('tech-title').innerHTML = l.techTitle;
+        document.getElementById('tech-desc').innerText = l.techDesc;
+        document.getElementById('tech-list').innerHTML = l.techList;
+
+        document.getElementById('about-sub').innerText = l.aboutSub;
+        document.getElementById('about-title').innerHTML = l.aboutTitle;
+        document.getElementById('about-hook').innerHTML = l.aboutHook;
+        document.getElementById('about-content').innerHTML = l.aboutContent;
+        document.getElementById('about-personal').innerHTML = l.aboutPersonal;
+
+        document.getElementById('join-sub').innerText = l.joinSub;
+        document.getElementById('join-title').innerHTML = l.joinTitle;
+        document.getElementById('join-desc').innerText = l.joinDesc;
+        document.getElementById('userInput').placeholder = l.userPlaceholder;
+        document.getElementById('btnText').innerText = l.btnText;
+        document.getElementById('socialProof').innerText = l.socialProof;
+        document.getElementById('successMsg').innerText = l.successMsg;
+        document.getElementById('successSub').innerText = l.successSub;
+    }
+
+    document.getElementById('langBtn').addEventListener('click', toggleLang);
+
+    /* ================================================================== */
+    /* INIT — reveal first card immediately                               */
+    /* ================================================================== */
+    setTimeout(() => {
+        const firstCard = document.querySelector('#hero .liquid-glass-card');
+        if (firstCard) firstCard.classList.add('visible');
+    }, 1200);
     </script>
 </body>
 </html>
