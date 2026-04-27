@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rkrk.io | 🦄 Kee's Language Lab</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;800;900&display=swap');
+
+        :root {
+            --accent-cyan: #00f3ff;
+            --accent-pink: #ff0055;
+            --accent-purple: #8a2be2;
+            --bg-dark: #030305;
+            --glass-bg: rgba(10, 10, 15, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* Default to Inter, use Syncopate for headings */
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* SCROLL BACKGROUNDS                             */
+        /* -------------------------------------------------------------------------- */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -2;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), background-image 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(0.35) contrast(1.2);
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* STICKY BANNER                               */
+        /* -------------------------------------------------------------------------- */
+        .sticky-banner {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: linear-gradient(to bottom, rgba(3, 3, 5, 0.9), transparent);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            background: linear-gradient(45deg, #fff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-cyan);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover { color: #fff; }
+        .nav-links a:hover::after { width: 100%; }
+
+        .lang-switch {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 8px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 0.7rem;
+            transition: all 0.3s;
+        }
+
+        .lang-switch:hover {
+            background: var(--accent-cyan);
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* SECTIONS & LIQUID GLASS CONTAINERS                       */
+        /* -------------------------------------------------------------------------- */
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 10%;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        /* Irregular, dynamic liquid glass shape */
+        .liquid-glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(150%);
+            border: 1px solid var(--glass-border);
+            padding: 80px;
+            max-width: 900px;
+            position: relative;
+            /* Cyberpunk / Advanced Advertising wow-factor: Irregular borders */
+            border-radius: 40px 0px 40px 0px; 
+            box-shadow: 
+                -10px 10px 40px rgba(0,0,0,0.5),
+                inset 0 0 20px rgba(255,255,255,0.02);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .liquid-glass-card:hover {
+            transform: translateY(-5px) rotateX(2deg) rotateY(-2deg);
+        }
+
+        /* Neon Accent lines */
+        .liquid-glass-card::before, .liquid-glass-card::after {
+            content: "";
+            position: absolute;
+            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-pink));
+        }
+        
+        .liquid-glass-card::before {
+            top: -1px; left: -1px; width: 3px; height: 50%;
+        }
+        .liquid-glass-card::after {
+            bottom: -1px; right: -1px; width: 50%; height: 3px;
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* TYPOGRAPHY (WOW FACTOR)                            */
+        /* -------------------------------------------------------------------------- */
+        h3.kicker {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        h3.kicker::before {
+            content: "";
+            display: block;
+            width: 30px;
+            height: 2px;
+            background: var(--accent-cyan);
+        }
+
+        h1, h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            line-height: 1.1;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 5.5rem;
+            letter-spacing: -2px;
+            background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.3) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Outline text effect for emphasis */
+        .outline-text {
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.5);
+            background: none;
+        }
+
+        h2 {
+            font-size: 4rem;
+            letter-spacing: -1px;
+        }
+
+        p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 85%;
+        }
+
+        .accent-text { 
+            color: #fff; 
+            font-weight: 900; 
+            position: relative;
+            display: inline-block;
+        }
+        
+        .accent-text::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 30%;
+            bottom: 10%;
+            left: 0;
+            background: var(--accent-pink);
+            z-index: -1;
+            opacity: 0.6;
+            transform: skewX(-15deg);
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* LISTS (ELEGANT)                               */
+        /* -------------------------------------------------------------------------- */
+        ul { list-style: none; margin-top: 30px; }
+        ul li { 
+            margin-bottom: 20px; 
+            font-size: 1.1rem; 
+            font-weight: 300;
+            padding-left: 30px; 
+            position: relative; 
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 15px;
+        }
+        ul li::before { 
+            content: ""; 
+            position: absolute; 
+            left: 0; 
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+        
+        ul li strong {
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 1px;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* FORM & CTA (MARKETING TIER)                        */
+        /* -------------------------------------------------------------------------- */
+        .input-group {
+            display: flex;
+            margin-top: 50px;
+            position: relative;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 5px;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        input {
+            background: transparent;
+            border: none;
+            padding: 25px 30px;
+            color: #fff;
+            font-size: 1.1rem;
+            flex: 1;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+        }
+        
+        input::placeholder { color: rgba(255,255,255,0.3); }
+
+        .btn-join {
+            background: #fff;
+            color: #000;
+            padding: 0 40px;
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 900;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border: none;
+            border-radius: 40px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-join:hover { 
+            background: var(--accent-cyan); 
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
+        }
+
+        @media (max-width: 1024px) {
+            h1 { font-size: 4rem; }
+            h2 { font-size: 3rem; }
+            .liquid-glass-card { padding: 50px; max-width: 100%; border-radius: 20px 0 20px 0;}
+            p { max-width: 100%; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2rem; }
+            .sticky-banner { padding: 15px 20px; }
+            .nav-links { display: none; }
+            .input-group { flex-direction: column; border-radius: 20px; background: transparent; box-shadow: none; border: none;}
+            input { border: 1px solid var(--glass-border); border-radius: 10px; margin-bottom: 10px; background: rgba(0,0,0,0.6); padding: 15px;}
+            .btn-join { padding: 20px; border-radius: 10px;}
+            section { padding: 100px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-container" id="bg"></div>
+
+    <nav class="sticky-banner">
+        <div class="logo">RKRK.IO</div>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#hero" id="nav-home">Home</a>
+                <a href="#rua" id="nav-dynamos">DynamOS</a>
+                <a href="#tech" id="nav-tech">Tech</a>
+                <a href="#about" id="nav-about">About Kee</a>
+            </div>
+            <button class="lang-switch" onclick="toggleLang()" id="langBtn">CN</button>
+        </div>
+    </nav>
+
+    <section id="hero" data-bg="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=2000">
+        <div class="liquid-glass-card">
+            <h3 class="kicker" id="hero-sub">The Paradigm Shift</h3>
+            <h1 id="hero-title">LEARNING<br><span class="outline-text">IS NOW</span><br>DESIGN</h1>
+            <p id="hero-desc">The era of the "content provider" is dead. Step down from the podium. Embrace the AI exoskeleton and architect bespoke cognitive maps.</p>
+        </div>
+    </section>
+
+    <section id="rua" data-bg="https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&q=80&w=2000">
+        <div class="liquid-glass-card">
+            <h3 class="kicker" id="rua-sub">Escape the Cocoon</h3>
+            <h2 id="rua-title">THE<br><span class="accent-text">DYNAMOS</span><br>SYSTEM</h2>
+            <p id="rua-desc">A cognitive framework engineered to shatter passive consumption.</p>
+            <ul id="rua-list">
+                <li><strong>RECOGNIZE</strong> — Define absolute boundaries & prompt logic.</li>
+                <li><strong>UNDERSTAND</strong> — Modulate AI empathy & contextual synthesis.</li>
+                <li><strong>APPLY</strong> — Feed real-world friction back into the loop.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="tech" data-bg="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=2000">
+        <div class="liquid-glass-card">
+            <h3 class="kicker" id="tech-sub">The Arsenal</h3>
+            <h2 id="tech-title">AI<br><span class="outline-text">NATIVE</span><br>GEMS</h2>
+            <p id="tech-desc">Built autonomously via OpenClaw. Tools that deliver strategy, not just data.</p>
+            <ul id="tech-list">
+                <li><strong>CLASS NOTES GEM</strong> — Granular utterance tracking & real-time friction mapping.</li>
+                <li><strong>FEEDBACK ENGINE</strong> — Strategic evaluation rooted in the 3 Golden Rules & 7 Keys.</li>
+                <li><strong>RUA DICTIONARY</strong> — Dynamic input routing for perfectly tailored cognitive nodes.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="about" data-bg="https://images.unsplash.com/photo-1544654803-b69140b285a1?auto=format&fit=crop&q=80&w=2000">
+        <div class="liquid-glass-card">
+            <h3 class="kicker" id="about-sub">The Architect</h3>
+            <h2 id="about-title">MEET<br><span class="accent-text">KEE</span></h2>
+            <div id="about-content">
+                <p>I don't just teach English; I architect mastery. My high-stakes communication journey began in 2012 as the <strong>interpreter for the Backstreet Boys</strong> during their Chengdu tour—translating energy, intent, and cross-cultural nuances in real-time.</p>
+                <p>I mastered the traditional system at EF, ascending to <strong>Expert Teacher</strong> (the highest attainable rank) and serving as a <strong>Product Specialist and Trainer of Trainers</strong> for the entire West China region.</p>
+                <p>With a certified <strong>IELTS score of L9.0 / R8.5 / S8.5</strong>, I realized true proficiency isn't about memorizing data—it's cognitive architecture. On May 1st, 2026, I take the TEDx stage to reveal how we bridge human empathy with AI computation.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="waitlist" data-bg="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=2000">
+        <div class="liquid-glass-card" style="border-radius: 0 40px 0 40px;">
+            <h3 class="kicker" id="join-sub">Initiate Sequence</h3>
+            <h2 id="join-title">REWIRE<br><span class="outline-text">YOUR</span><br>TEACHING</h2>
+            <p id="join-desc" style="margin-top:20px;">Exclusive 1-on-1 strategic consulting for forward-thinking educators. Book a diagnostic deep dive to build your AI-powered lab.</p>
+            
+            <div class="input-group">
+                <input type="text" id="userInput" placeholder="Email / Phone / WeChat" required>
+                <button class="btn-join" id="btnText" onclick="alert('Access Granted. We will map your coordinates shortly. 🦄')">RESERVE SLOT</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const sections = document.querySelectorAll('section');
+        const bgContainer = document.getElementById('bg');
+        let currentLang = 'en';
+
+        // Extremely concise & high-impact wording
+        const content = {
+            en: {
+                navHome: "Home", navDynamos: "DynamOS", navTech: "Tech", navAbout: "About Kee", langBtn: "CN",
+                heroSub: "The Paradigm Shift", heroTitle: "LEARNING<br><span class='outline-text'>IS NOW</span><br>DESIGN",
+                heroDesc: "The era of the 'content provider' is dead. Step down from the podium. Embrace the AI exoskeleton and architect bespoke cognitive maps.",
+                ruaSub: "Escape the Cocoon", ruaTitle: "THE<br><span class='accent-text'>DYNAMOS</span><br>SYSTEM",
+                ruaDesc: "A cognitive framework engineered to shatter passive consumption.",
+                ruaList: "<li><strong>RECOGNIZE</strong> — Define absolute boundaries & prompt logic.</li><li><strong>UNDERSTAND</strong> — Modulate AI empathy & contextual synthesis.</li><li><strong>APPLY</strong> — Feed real-world friction back into the loop.</li>",
+                techSub: "The Arsenal", techTitle: "AI<br><span class='outline-text'>NATIVE</span><br>GEMS",
+                techDesc: "Built autonomously via OpenClaw. Tools that deliver strategy, not just data.",
+                techList: "<li><strong>CLASS NOTES GEM</strong> — Granular utterance tracking & real-time friction mapping.</li><li><strong>FEEDBACK ENGINE</strong> — Strategic evaluation rooted in the 3 Golden Rules & 7 Keys.</li><li><strong>RUA DICTIONARY</strong> — Dynamic input routing for perfectly tailored cognitive nodes.</li>",
+                aboutSub: "The Architect", aboutTitle: "MEET<br><span class='accent-text'>KEE</span>",
+                aboutContent: `<p>I don't just teach English; I architect mastery. My high-stakes communication journey began in 2012 as the <strong>interpreter for the Backstreet Boys</strong> during their Chengdu tour—translating energy, intent, and cross-cultural nuances in real-time.</p>
+                               <p>I mastered the traditional system at EF, ascending to <strong>Expert Teacher</strong> (the highest attainable rank) and serving as a <strong>Product Specialist and Trainer of Trainers</strong> for the entire West China region.</p>
+                               <p>With a certified <strong>IELTS score of L9.0 / R8.5 / S8.5</strong>, I realized true proficiency isn't about memorizing data—it's cognitive architecture. On May 1st, 2026, I take the TEDx stage to reveal how we bridge human empathy with AI computation.</p>`,
+                joinSub: "Initiate Sequence", joinTitle: "REWIRE<br><span class='outline-text'>YOUR</span><br>TEACHING",
+                joinDesc: "Exclusive 1-on-1 strategic consulting for forward-thinking educators. Book a diagnostic deep dive to build your AI-powered lab.",
+                userInput: "Email / Phone / WeChat", btnText: "RESERVE SLOT"
+            },
+            zh: {
+                navHome: "序章", navDynamos: "内核", navTech: "武器库", navAbout: "架构师", langBtn: "EN",
+                heroSub: "范式转移", heroTitle: "教育<br><span class='outline-text'>即是</span><br>设计",
+                heroDesc: "“知识搬运工”的时代已终结。走下讲台，穿上 AI 认知外骨骼，设计极致的个性化心智地图。",
+                ruaSub: "打破茧房", ruaTitle: "<span class='accent-text'>DYNAMOS</span><br>系统",
+                ruaDesc: "专为击碎“被动摄取”而生的认知架构。",
+                ruaList: "<li><strong>RECOGNIZE (识别)</strong> — 划定绝对边界与底层逻辑。</li><li><strong>UNDERSTAND (理解)</strong> — 调制 AI 的共情与高维语境。</li><li><strong>APPLY (应用)</strong> — 捕捉真实世界的摩擦力，闭环进化。</li>",
+                techSub: "AI 武器库", techTitle: "原生<br><span class='outline-text'>智能</span><br>组件",
+                techDesc: "基于 OpenClaw 自主构建。提供战略，而非冰冷的数据。",
+                techList: "<li><strong>课堂笔记 GEM</strong> — 追踪极细颗粒度话语，实时绘制阻力热力图。</li><li><strong>反馈引擎</strong> — 根植 3 大金律与 7 大法则的战略级评估。</li><li><strong>RUA 词典</strong> — 动态输入路由，生成量身定制的认知节点。</li>",
+                aboutSub: "架构师", aboutTitle: "关于<br><span class='accent-text'>KEE</span>",
+                aboutContent: `<p>我不教英语，我架构精通。高频沟通生涯始于 2012 年，担任 <strong>Backstreet Boys 巡演随行翻译</strong>——实时转译能量、意图与跨文化潜台词。</p>
+                               <p>在 EF 体系登顶，获封<strong>“专家级教师”（最高职级）</strong>，并统筹华西区<strong>产品专家与内训导师</strong>工作。</p>
+                               <p>手握<strong>雅思 L9.0 / R8.5 / S8.5</strong> 的硬核成绩，我确信：精通并非死记硬背，而是心智的架构。2026 年 5 月 1 日，我将登顶 TEDx，揭秘人类共情与 AI 算力的终极融合。</p>`,
+                joinSub: "启动程序", joinTitle: "重构<br><span class='outline-text'>你的</span><br>教学",
+                joinDesc: "仅为先锋教育者开放 1 对 1 战略咨询。预约深度诊断，搭建你的专属 AI 实验室。",
+                userInput: "输入邮箱 / 手机号 / 微信", btnText: "锁定席位"
+            }
+        };
+
+        function toggleLang() {
+            currentLang = currentLang === 'en' ? 'zh' : 'en';
+            updateUI();
+        }
+
+        function updateUI() {
+            const l = content[currentLang];
+            document.getElementById('nav-home').innerText = l.navHome;
+            document.getElementById('nav-dynamos').innerText = l.navDynamos;
+            document.getElementById('nav-tech').innerText = l.navTech;
+            document.getElementById('nav-about').innerText = l.navAbout;
+            document.getElementById('langBtn').innerText = l.langBtn;
+            
+            document.getElementById('hero-sub').innerText = l.heroSub;
+            document.getElementById('hero-title').innerHTML = l.heroTitle;
+            document.getElementById('hero-desc').innerText = l.heroDesc;
+            
+            document.getElementById('rua-sub').innerText = l.ruaSub;
+            document.getElementById('rua-title').innerHTML = l.ruaTitle;
+            document.getElementById('rua-desc').innerText = l.ruaDesc;
+            document.getElementById('rua-list').innerHTML = l.ruaList;
+            
+            document.getElementById('tech-sub').innerText = l.techSub;
+            document.getElementById('tech-title').innerHTML = l.techTitle;
+            document.getElementById('tech-desc').innerText = l.techDesc;
+            document.getElementById('tech-list').innerHTML = l.techList;
+            
+            document.getElementById('about-sub').innerText = l.aboutSub;
+            document.getElementById('about-title').innerHTML = l.aboutTitle;
+            document.getElementById('about-content').innerHTML = l.aboutContent;
+            
+            document.getElementById('join-sub').innerText = l.joinSub;
+            document.getElementById('join-title').innerHTML = l.joinTitle;
+            document.getElementById('join-desc').innerText = l.joinDesc;
+            document.getElementById('userInput').placeholder = l.userInput;
+            document.getElementById('btnText').innerText = l.btnText;
+        }
+
+        const observerOptions = { threshold: 0.5 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bgUrl = entry.target.getAttribute('data-bg');
+                    bgContainer.style.backgroundImage = `url('${bgUrl}')`;
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
