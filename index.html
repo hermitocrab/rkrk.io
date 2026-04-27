@@ -1086,11 +1086,28 @@
     /* ================================================================== */
     /* LOADER                                                              */
     /* ================================================================== */
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            document.getElementById('loader').classList.add('loaded');
-        }, 800);
-    });
+    (function() {
+        var loader = document.getElementById('loader');
+        // Fallback: hide loader after 3 seconds no matter what
+        var forceHide = setTimeout(function() {
+            if (loader) loader.classList.add('loaded');
+        }, 3000);
+        // Normal path: hide after DOM + fonts load
+        window.addEventListener('load', function() {
+            clearTimeout(forceHide);
+            setTimeout(function() {
+                if (loader) loader.classList.add('loaded');
+            }, 400);
+        });
+        // Additional safety: hide on DOMContentLoaded if load takes too long
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                if (loader && !loader.classList.contains('loaded')) {
+                    loader.classList.add('loaded');
+                }
+            }, 2500);
+        });
+    })();
 
     /* ================================================================== */
     /* CURSOR GLOW                                                         */
