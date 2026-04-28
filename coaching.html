@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Five Golden Rules of Coaching That Actually Work — Kee's Language Lab</title>
+    <meta name="description" content="Inspired by Huthwaite International's behavioural research — reimagined in a friendly, refined voice. Five principles that actually move the needle in coaching.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" media="print" onload="this.media='all';this.onload=null">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"></noscript>
+
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(255,255,255,0.04);
+            --bg-card-hover: rgba(255,255,255,0.07);
+            --text-primary: #e8e8ed;
+            --text-secondary: #8888a0;
+            --accent-cyan: #00f3ff;
+            --accent-pink: #ff2d8e;
+            --accent-purple: #a855f7;
+            --accent-gold: #f59e0b;
+            --border-glow: rgba(0, 243, 255, 0.15);
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* --- Background ambient orbs --- */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background:
+                radial-gradient(ellipse 600px 400px at 15% 20%, rgba(168,85,247,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 500px 350px at 85% 30%, rgba(0,243,255,0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 400px 400px at 50% 80%, rgba(255,45,142,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .bg-vignette {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%);
+            pointer-events: none;
+        }
+
+        /* --- Navigation --- */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(10,10,15,0.6);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .top-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+        .top-nav a:hover { color: var(--accent-cyan); }
+
+        .top-nav .nav-brand {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            color: var(--text-primary);
+        }
+        .top-nav .nav-brand:hover { color: var(--accent-cyan); }
+
+        /* --- Hero --- */
+        .hero {
+            padding: 140px 24px 60px;
+            max-width: 780px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .hero h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: clamp(1.6rem, 4vw, 2.6rem);
+            line-height: 1.3;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 .accent { color: var(--accent-cyan); }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .hero-meta {
+            margin-top: 24px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+        }
+
+        /* --- Article body --- */
+        .article {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        .article p {
+            margin-bottom: 1.5em;
+            color: var(--text-primary);
+            font-weight: 300;
+            line-height: 1.9;
+        }
+
+        .article p strong {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .article .intro {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            border-left: 2px solid var(--accent-cyan);
+            padding-left: 20px;
+            margin-bottom: 3em;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        /* --- Rule cards --- */
+        .rule-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            padding: 40px 36px;
+            margin-bottom: 36px;
+            backdrop-filter: blur(12px);
+            transition: border-color 0.3s, background 0.3s, transform 0.2s;
+        }
+
+        .rule-card:hover {
+            border-color: rgba(0, 243, 255, 0.3);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .rule-number {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            color: var(--accent-cyan);
+            margin-bottom: 8px;
+            opacity: 0.6;
+        }
+
+        .rule-card h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .rule-card h2 .highlight {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .rule-card p {
+            margin-bottom: 0;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.9;
+        }
+
+        .rule-card p + p {
+            margin-top: 1.2em;
+        }
+
+        /* --- Pull quote --- */
+        .pull-quote {
+            background: linear-gradient(135deg, rgba(168,85,247,0.06), rgba(0,243,255,0.04));
+            border: 1px solid rgba(168,85,247,0.15);
+            border-radius: var(--radius-md);
+            padding: 32px 28px;
+            margin: 2.5em 0;
+            text-align: center;
+        }
+
+        .pull-quote p {
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            line-height: 1.7;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .pull-quote .attribution {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            margin-top: 12px;
+            font-style: normal;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* --- Summary section --- */
+        .summary-card {
+            background: linear-gradient(135deg, rgba(0,243,255,0.04), rgba(168,85,247,0.04));
+            border: 1px solid rgba(0,243,255,0.15);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            margin: 2.5em 0;
+        }
+
+        .summary-card h3 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            color: var(--accent-cyan);
+            margin-bottom: 16px;
+        }
+
+        .summary-card p {
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* --- Footer / Back link --- */
+        .article-footer {
+            margin-top: 3em;
+            padding-top: 2em;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            text-align: center;
+        }
+
+        .article-footer a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+        .article-footer a:hover { opacity: 0.7; }
+
+        .article-footer .footnote {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- Scroll animation --- */
+        .rule-card, .pull-quote, .summary-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s, background 0.3s;
+        }
+        .rule-card.visible, .pull-quote.visible, .summary-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .hero { padding: 120px 20px 40px; }
+            .rule-card { padding: 28px 22px; }
+            .top-nav { padding: 12px 20px; }
+            .pull-quote { padding: 24px 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.3rem; }
+            .rule-card h2 { font-size: 1rem; }
+            .article { padding: 0 16px 60px; }
+            .rule-card { padding: 22px 18px; }
+            .top-nav .nav-brand { font-size: 0.75rem; letter-spacing: 2px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-vignette"></div>
+
+<!-- Navigation -->
+<nav class="top-nav">
+    <a href="/" class="nav-brand">rkrk.io</a>
+    <a href="/">← Back to Lab</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-tag">⏺ Coaching · Research</div>
+    <h1>Five Golden Rules of<br><span class="accent">Coaching That Actually Work</span></h1>
+    <p class="hero-sub">
+        Inspired by Huthwaite International's behavioural research — reimagined in a voice
+        that believes coaching should feel human, not corporate.
+    </p>
+    <p class="hero-meta">— Kee · 28 Apr 2026 —</p>
+</section>
+
+<!-- Article -->
+<article class="article">
+
+    <div class="intro">
+        Most coaching advice is noise. Here's what actually moves the needle — five principles
+        distilled from rigorous behavioural science, served without the jargon.
+    </div>
+
+    <!-- Rule 1 -->
+    <div class="rule-card">
+        <div class="rule-number">· 01 ·</div>
+        <h2>Show Up <span class="highlight">Fully</span></h2>
+        <p>
+            We live in a world that rewards distraction. Phones buzzing. Tabs open.
+            One eye on the clock, the other on the coachee.
+        </p>
+        <p>
+            But here's the quiet truth: the quality of your attention <em>is</em> the currency of trust.
+            When you walk into a coaching conversation, walk all the way in. Switch off the noise.
+            Put the phone face-down. Let the other person <em>feel</em> — not just know — that
+            they have your full presence.
+        </p>
+        <p>
+            That single act of showing up completely changes the geometry of the room.
+        </p>
+    </div>
+
+    <!-- Rule 2 -->
+    <div class="rule-card">
+        <div class="rule-number">· 02 ·</div>
+        <h2>Ask Before You <span class="highlight">Tell</span></h2>
+        <p>
+            There's a natural instinct to solve. Someone brings you a problem, and your brain
+            instantly races toward answers. Resist it. Breathe. Ask another question.
+        </p>
+        <p>
+            The most effective coaches operate in <em>pull</em> mode — drawing insight out
+            rather than pushing information in. Questions, not declarations. Curiosity, not certainty.
+        </p>
+        <p>
+            The exception? When you genuinely have knowledge they don't — relevant, credible,
+            and offered as a lens, not a lecture. But even then, lead with a question first.
+            You might be surprised what they already know.
+        </p>
+    </div>
+
+    <div class="pull-quote">
+        <p>"The deeper you understand someone, the more likely you are to help them shift."</p>
+        <div class="attribution">— Dr Janet Curran, Huthwaite International</div>
+    </div>
+
+    <!-- Rule 3 -->
+    <div class="rule-card">
+        <div class="rule-number">· 03 ·</div>
+        <h2>Seek to Understand,<br><span class="highlight">Not Judge</span></h2>
+        <p>
+            Nothing kills a coaching conversation faster than the scent of judgment.
+            Even well-intentioned feedback — "You didn't do that well" — closes doors.
+        </p>
+        <p>
+            Instead, get curious. Ask <em>why</em> — not the cross-examining kind, but the
+            wondering kind. The kind that says "I genuinely want to understand your world."
+        </p>
+        <p>
+            There's a beautiful vulnerability in staying with the not-knowing. Curiosity is
+            perhaps the most underrated superpower a coach can carry. Use it generously.
+        </p>
+    </div>
+
+    <!-- Rule 4 -->
+    <div class="rule-card">
+        <div class="rule-number">· 04 ·</div>
+        <h2>Really <span class="highlight">Listen</span></h2>
+        <p>
+            There's no point asking brilliant questions if you're already formulating the next one
+            while the other person is still speaking.
+        </p>
+        <p>
+            Listening in coaching isn't passive — it's active, almost athletic. You listen for the
+            <em>ooh</em> moments: the one phrase that reveals everything. You listen to the first
+            hundred words, because that's often where the real story lives, before the filter
+            kicks in.
+        </p>
+        <p>
+            Listen to the whole person — not just their words, but their rhythm, their pauses,
+            what they almost say. The signal is always there if you're quiet enough to hear it.
+        </p>
+    </div>
+
+    <!-- Rule 5 -->
+    <div class="rule-card">
+        <div class="rule-number">· 05 ·</div>
+        <h2>Move to <span class="highlight">Action</span></h2>
+        <p>
+            Awareness without action is just navel-gazing.
+        </p>
+        <p>
+            The most effective coaching sessions don't end with warm feelings — they end with
+            next steps. And crucially, research shows the best outcomes come when the coachee
+            generates their own ideas. The coach's job isn't to prescribe. It's to create the
+            space where the other person discovers what they need to do — and owns it.
+        </p>
+        <p>
+            In the end, coaching isn't about being wise. It's about helping someone else
+            <em>find</em> their own wisdom.
+        </p>
+    </div>
+
+    <!-- Summary -->
+    <div class="summary-card">
+        <h3>⬡ In Practice</h3>
+        <p>
+            Effective coaching, stripped to its essence: focus on the other person, build trust
+            through attention, seek to understand rather than evaluate, listen past the surface,
+            and let them arrive at their own next step. The best coaches don't have all the answers.
+            They just know how to draw yours out.
+        </p>
+    </div>
+
+    <div class="pull-quote">
+        <p>"The most effective coaching sessions contain more proposals for action — and the majority of those proposals come from the coachee."</p>
+        <div class="attribution">— Huthwaite International Research, 2017</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="article-footer">
+        <a href="/">← Back to rkrk.io</a>
+        <span class="footnote">
+            Based on Huthwaite International's research into coaching effectiveness.
+            Original article: <em>The Five Golden Rules of Effective Coaching</em> by Dr Janet Curran.
+        </span>
+    </div>
+
+</article>
+
+<script>
+    // Scroll-trigger animations
+    (function() {
+        var els = document.querySelectorAll('.rule-card, .pull-quote, .summary-card');
+        function check() {
+            var h = window.innerHeight - 60;
+            for (var i = 0; i < els.length; i++) {
+                var rect = els[i].getBoundingClientRect();
+                if (rect.top < h && !els[i].classList.contains('visible')) {
+                    els[i].classList.add('visible');
+                }
+            }
+        }
+        window.addEventListener('scroll', check, { passive: true });
+        window.addEventListener('resize', check, { passive: true });
+        check();
+    })();
+</script>
+
+</body>
+</html>
