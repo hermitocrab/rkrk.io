@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Notice — rkrk.io</title>
+    <meta name="description" content="Privacy notice for rkrk.io newsletter subscriptions.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+
+    <style>
+        :root { --bg: #0a0a0f; --text: #e8e8ed; --muted: #8888a0; --cyan: #00f3ff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.8;
+            font-size: 0.95rem;
+            padding: 40px 24px 80px;
+            -webkit-font-smoothing: antialiased;
+        }
+        body::before {
+            content: '';
+            position: fixed; inset: 0;
+            background: radial-gradient(ellipse 600px 400px at 20% 10%, rgba(0,243,255,0.05) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        .container { max-width: 680px; margin: 0 auto; }
+        h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.5px; }
+        .subtitle { color: var(--muted); font-size: 0.85rem; margin-bottom: 40px; }
+        h2 { font-size: 1.1rem; font-weight: 600; margin: 28px 0 10px; color: var(--cyan); }
+        p { margin-bottom: 1em; color: rgba(255,255,255,0.78); font-weight: 300; }
+        ul { margin: 0 0 1.2em 20px; color: rgba(255,255,255,0.78); font-weight: 300; }
+        li { margin-bottom: 6px; }
+        strong { color: #fff; font-weight: 500; }
+        a { color: var(--cyan); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .back { display: inline-block; margin-top: 40px; font-size: 0.85rem; color: var(--muted); }
+        .back:hover { color: var(--cyan); }
+        hr { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 40px 0; }
+        @media (max-width: 480px) { body { padding: 24px 16px 60px; } h1 { font-size: 1.4rem; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Privacy Notice</h1>
+    <p class="subtitle">Last updated: April 28, 2026</p>
+
+    <p>This is a simple notice about how your data is handled when you subscribe to the rkrk.io newsletter. I believe in transparency — no fine print tricks.</p>
+
+    <h2>What I collect</h2>
+    <ul>
+        <li><strong>Email address</strong> — so I can send you the newsletter.</li>
+        <li><strong>Consent status</strong> — a record that you agreed to receive emails.</li>
+        <li><strong>Timestamp</strong> — when you subscribed.</li>
+    </ul>
+
+    <h2>How I use it</h2>
+    <p>Only to send you the rkrk.io newsletter — language learning insights, teaching philosophy updates, and related content from Kee. Nothing else. No selling. No sharing.</p>
+
+    <h2>Where it's stored</h2>
+    <p>Securely on Supabase (a GDPR-compliant cloud database service based in the US). Your data is encrypted at rest and in transit.</p>
+
+    <h2>Your rights</h2>
+    <ul>
+        <li><strong>Unsubscribe anytime</strong> — every email has an unsubscribe link.</li>
+        <li><strong>Request deletion</strong> — reply to any email asking me to delete your data.</li>
+        <li><strong>Access your data</strong> — ask me what I have, and I'll tell you.</li>
+    </ul>
+
+    <h2>Cookies</h2>
+    <p>This site does not use tracking cookies or analytics. The only "cookie-like" thing is Supabase's session handling if you log into any future account features (which is opt-in).</p>
+
+    <h2>Data security</h2>
+    <p>The website is served over HTTPS (Vercel). Your data is stored in Supabase with row-level security — only I can access the subscriber list. The subscription form uses Supabase's anonymous key with strict insert-only permissions, so no one can read or modify data through the website.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about your data? Reply to any newsletter email, or reach out via the contact info on <a href="/">rkrk.io</a>.</p>
+
+    <hr>
+    <p style="font-size:0.8rem; color:var(--muted);">This notice is a good-faith effort at transparency. I'm a solo educator running a small site, not a legal department. If you have specific compliance concerns, let's talk.</p>
+
+    <a href="/" class="back">← Back to rkrk.io</a>
+</div>
+</body>
+</html>

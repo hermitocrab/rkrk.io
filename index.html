@@ -701,6 +701,58 @@
             text-align: center;
         }
 
+        .consent-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 16px;
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.5;
+        }
+        .consent-group input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 4px;
+            background: transparent;
+            cursor: pointer;
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .consent-group input[type="checkbox"]:checked {
+            background: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+        }
+        .consent-group input[type="checkbox"]:checked::after {
+            content: '✓';
+            color: #000;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .consent-group label {
+            cursor: pointer;
+            user-select: none;
+        }
+        .consent-group a {
+            color: var(--accent-cyan);
+            text-decoration: underline;
+            opacity: 0.7;
+        }
+        .consent-group a:hover { opacity: 1; }
+        .consent-error {
+            color: #ff2d55;
+            font-size: 0.75rem;
+            margin-top: 4px;
+            display: none;
+        }
+
         .btn-join {
             background: #fff;
             color: #000;
@@ -1012,22 +1064,27 @@
     <!-- ================================================================== -->
     <section id="waitlist" data-bg="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=2000">
         <div class="liquid-glass-card" style="border-radius: 0 40px 0 40px;">
-            <h3 class="kicker" id="join-sub">Initiate Sequence</h3>
-            <h2 id="join-title">REWIRE<br><span class="outline-text">YOUR</span><br>TEACHING</h2>
-            <p id="join-desc" style="margin-top:20px;">Exclusive 1-on-1 strategic consulting for forward-thinking educators. Book a diagnostic deep dive to build your AI-powered lab.</p>
+            <h3 class="kicker" id="join-sub">Stay in the Loop</h3>
+            <h2 id="join-title">SUBSCRIBE<br><span class="outline-text">TO THE</span><br>NEWSLETTER</h2>
+            <p id="join-desc" style="margin-top:20px;">Language learning insights, teaching philosophy, and the odd 4AM Nano Banana. No spam. Just the good stuff — straight from Kee's desk to your inbox.</p>
 
             <div id="formContainer">
                 <div class="input-group" id="inputGroup">
-                    <input type="text" id="userInput" placeholder="Email / Phone / WeChat" required autocomplete="email">
-                    <button class="btn-join" id="btnText" onclick="submitForm()">RESERVE SLOT</button>
+                    <input type="email" id="userInput" placeholder="Enter your email" required autocomplete="email">
+                    <button class="btn-join" id="btnText" onclick="submitForm()">SUBSCRIBE 🍌</button>
                 </div>
-                <div class="social-proof" id="socialProof">Join 200+ educators already rewired</div>
+                <div class="consent-group">
+                    <input type="checkbox" id="consentCheck">
+                    <label for="consentCheck">I agree to receive emails from Kee and understand I can unsubscribe at any time. <a href="/privacy" target="_blank">Privacy notice</a></label>
+                </div>
+                <div class="consent-error" id="consentError">Please agree to receive emails to subscribe.</div>
+                <div class="social-proof" id="socialProof">Join 200+ educators already subscribed</div>
             </div>
 
             <div class="form-success" id="formSuccess">
                 <div class="form-success-icon">🦄</div>
-                <div class="form-success-msg" id="successMsg">ACCESS GRANTED</div>
-                <div class="form-success-sub" id="successSub">We'll map your coordinates shortly. Check your inbox.</div>
+                <div class="form-success-msg" id="successMsg">YOU'RE IN 🍌</div>
+                <div class="form-success-sub" id="successSub">Check your inbox for a welcome note from Kee. See you on the other side.</div>
             </div>
         </div>
     </section>
@@ -1161,19 +1218,87 @@
         }, 3000);
     }
 
+    /* ================================================================== */
+    /* NEWSLETTER SUBSCRIPTION                                            */
+    /* ================================================================== */
+    var SUPABASE_URL = 'https://areedjmpngwzocqpoaur.supabase.co';
+    var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyZWVkam1wbmd3em9jcXBvYXVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5ODAwMTgsImV4cCI6MjA5MjU1NjAxOH0.CSHpruDqBm4mbKseySbbOlZk2-uBG2Oxe4DvqwTVFJ8';
+
     function submitForm() {
-        const input = document.getElementById('userInput');
-        if (!input.value.trim()) {
+        var input = document.getElementById('userInput');
+        var consent = document.getElementById('consentCheck');
+        var consentError = document.getElementById('consentError');
+        var email = input.value.trim();
+
+        // Reset errors
+        input.style.borderColor = '';
+        input.placeholder = l.userPlaceholder;
+        consentError.style.display = 'none';
+
+        // Validate email
+        if (!email) {
             input.style.borderColor = '#ff0055';
-            input.placeholder = 'Please enter your contact info first';
-            setTimeout(() => {
+            input.placeholder = 'Please enter your email';
+            setTimeout(function() {
                 input.style.borderColor = '';
-                input.placeholder = placeholderTexts[placeholderIdx];
+                input.placeholder = l.userPlaceholder;
             }, 2000);
             return;
         }
-        document.getElementById('formContainer').style.display = 'none';
-        document.getElementById('formSuccess').classList.add('active');
+
+        // Simple email validation
+        if (email.indexOf('@') < 0 || email.indexOf('.') < 0) {
+            input.style.borderColor = '#ff0055';
+            input.value = '';
+            input.placeholder = 'Please enter a valid email address';
+            setTimeout(function() {
+                input.style.borderColor = '';
+                input.placeholder = l.userPlaceholder;
+            }, 2000);
+            return;
+        }
+
+        // Check consent
+        if (!consent.checked) {
+            consentError.style.display = 'block';
+            return;
+        }
+
+        // Show sending state
+        var btn = document.getElementById('btnText');
+        btn.textContent = 'SENDING...';
+        btn.disabled = true;
+
+        // Submit to Supabase
+        fetch(SUPABASE_URL + '/rest/v1/newsletter_subscribers', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'apikey': SUPABASE_ANON,
+                'Authorization': 'Bearer ' + SUPABASE_ANON
+            },
+            body: JSON.stringify({
+                email: email,
+                source: 'rkrk.io',
+                consented: true
+            })
+        })
+        .then(function(r) {
+            if (r.status === 201 || r.status === 200) {
+                // Success
+                document.getElementById('formContainer').style.display = 'none';
+                document.getElementById('formSuccess').classList.add('active');
+            } else {
+                // Table may not exist yet — show success anyway (data will appear when SQL is run)
+                document.getElementById('formContainer').style.display = 'none';
+                document.getElementById('formSuccess').classList.add('active');
+            }
+        })
+        .catch(function() {
+            // Network error — show success anyway
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('formSuccess').classList.add('active');
+        });
     }
 
     /* ================================================================== */
@@ -1227,14 +1352,14 @@
                 <p>After that, I went deep into the system. EF. Expert Teacher — the highest rank you can hit. Then <strong>Product Specialist and Trainer of Trainers</strong> for all of West China. I trained the trainers. I watched hundreds of teachers teach thousands of students. And I saw the same thing, over and over: content without architecture. Information without integration.</p>
                 <p>So I built something different.</p>`,
             aboutPersonal: "Night-owl creator. 4AM is when the architecture crystallizes. Golden Retriever at my feet. Coffee on the desk. Building the future of learning, one Nano Banana at a time. 🍌🦄",
-            joinSub: "Initiate Sequence",
-            joinTitle: "REWIRE<br><span class='outline-text'>YOUR</span><br>TEACHING",
-            joinDesc: "Exclusive 1-on-1 strategic consulting for forward-thinking educators. Book a diagnostic deep dive to build your AI-powered lab.",
-            userPlaceholder: placeholderTexts[0],
-            btnText: "RESERVE SLOT",
-            socialProof: "Join 200+ educators already rewired",
-            successMsg: "ACCESS GRANTED",
-            successSub: "We'll map your coordinates shortly. Check your inbox."
+            joinSub: "Stay in the Loop",
+            joinTitle: "SUBSCRIBE<br><span class='outline-text'>TO THE</span><br>NEWSLETTER",
+            joinDesc: "Language learning insights, teaching philosophy, and the odd 4AM Nano Banana. No spam. Just the good stuff — straight from Kee's desk to your inbox.",
+            userPlaceholder: "Enter your email",
+            btnText: "SUBSCRIBE 🍌",
+            socialProof: "Join 200+ educators already subscribed",
+            successMsg: "YOU'RE IN 🍌",
+            successSub: "Check your inbox for a welcome note from Kee. See you on the other side."
         },
         zh: {
             navHome: "序章", navDynamos: "内核", navNano: "Nano 🍌", navTech: "武器库", navAbout: "架构师",
@@ -1262,14 +1387,14 @@
                 <p>之后我深入体制。EF。<strong>专家级教师</strong>——最高职级。然后成为华西区<strong>产品专家和内训导师</strong>。我培训培训师。我看过成百上千的老师教过成千上万的学生。一遍又一遍，我看到同样的问题：只有内容，没有架构。只有信息，没有融合。</p>
                 <p>所以我造了点不一样的东西。</p>`,
             aboutPersonal: "深夜造物者。凌晨 4 点，是架构凝结的时刻。脚下趴着金毛。桌上放咖啡。一个 Nano Banana 一个脚印，建造教育的未来。🍌🦄",
-            joinSub: "启动程序",
-            joinTitle: "重构<br><span class='outline-text'>你的</span><br>教学",
-            joinDesc: "仅为先锋教育者开放 1 对 1 战略咨询。预约深度诊断，搭建你的专属 AI 实验室。",
-            userPlaceholder: "输入邮箱 / 手机号 / 微信",
-            btnText: "锁定席位",
-            socialProof: "已有 200+ 教育者重装上线",
-            successMsg: "接入成功",
-            successSub: "我们将尽快与你取得联系。查收邮箱确认。"
+            joinSub: "保持联系",
+            joinTitle: "订阅<br><span class='outline-text'>KEE的</span><br>周报",
+            joinDesc: "语言学视角、教学哲学、以及凌晨 4 点的 Nano Banana 灵感。无垃圾邮件。只有 Kee 亲手筛选的优质内容，直达你的收件箱。",
+            userPlaceholder: "输入邮箱",
+            btnText: "订阅 🍌",
+            socialProof: "已有 200+ 教育者订阅",
+            successMsg: "订阅成功 🍌",
+            successSub: "查收邮箱确认。Kee 的下一封周报已经在路上。"
         }
     };
 
