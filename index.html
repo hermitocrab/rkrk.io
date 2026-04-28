@@ -625,6 +625,10 @@
             color: rgba(255,255,255,0.55);
             font-style: italic;
             line-height: 1.8;
+            display: none;
+        }
+        .nano-bilingual.show {
+            display: block;
         }
 
         /* ====================================================================== */
@@ -1430,6 +1434,7 @@
         document.getElementById('nano-desc').innerHTML = l.nanoDesc;
         document.getElementById('nano-desc2').innerText = l.nanoDesc2;
         document.getElementById('nano-cn').innerText = l.nanoCN;
+        document.getElementById('nano-cn').classList.toggle('show', currentLang === 'zh');
 
         document.getElementById('tech-sub').innerText = l.techSub;
         document.getElementById('tech-title').innerHTML = l.techTitle;
