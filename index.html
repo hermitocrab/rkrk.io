@@ -1236,7 +1236,7 @@
 
         // Reset errors
         input.style.borderColor = '';
-        input.placeholder = l.userPlaceholder;
+        input.placeholder = content[currentLang].userPlaceholder;
         consentError.style.display = 'none';
 
         // Validate email
@@ -1245,7 +1245,7 @@
             input.placeholder = 'Please enter your email';
             setTimeout(function() {
                 input.style.borderColor = '';
-                input.placeholder = l.userPlaceholder;
+                input.placeholder = content[currentLang].userPlaceholder;
             }, 2000);
             return;
         }
@@ -1257,7 +1257,7 @@
             input.placeholder = 'Please enter a valid email address';
             setTimeout(function() {
                 input.style.borderColor = '';
-                input.placeholder = l.userPlaceholder;
+                input.placeholder = content[currentLang].userPlaceholder;
             }, 2000);
             return;
         }

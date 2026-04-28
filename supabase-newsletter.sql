@@ -27,13 +27,13 @@ CREATE POLICY "anyone_can_subscribe"
 CREATE POLICY "owner_can_select"
   ON public.newsletter_subscribers
   FOR SELECT
-  USING (auth.role() = 'service_role' OR auth.email() = 'sriskeeda@gmail.com');
+  USING (auth.role() = 'service_role' OR auth.email() = 'sirexplainzalot@gmail.com');
 
 -- Only you can update (e.g., unsubscribe)
 CREATE POLICY "owner_can_update"
   ON public.newsletter_subscribers
   FOR UPDATE
-  USING (auth.role() = 'service_role' OR auth.email() = 'sriskeeda@gmail.com');
+  USING (auth.role() = 'service_role' OR auth.email() = 'sirexplainzalot@gmail.com');
 
 -- ===============================================================
 -- After running this, go to your Supabase Dashboard:
