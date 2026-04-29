@@ -1,3 +1,7 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "routes": [
+    { "src": "/speech", "dest": "/speech.html" },
+    { "src": "/speech-clickcues", "dest": "/speech-clickcues.html" }
+  ]
 }
