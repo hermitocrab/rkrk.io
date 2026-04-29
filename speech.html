@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TEDx Speech Script — Kee | rkrk.io</title>
+<meta name="description" content="TEDx 2026 Speech Script: Bridge the Gap — Escaping the Information Cocoon with AI. Phase 1 Performance Script by Kee Lee.">
+
+<meta property="og:title" content="TEDx Speech Script — Kee | rkrk.io">
+<meta property="og:description" content="Bridge the Gap: Escaping the Information Cocoon with AI. TEDx 2026 Performance Script.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rkrk.io/speech">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;700;800;900&family=Space+Mono:wght@400;700&display=swap" media="print" onload="this.media='all';this.onload=null">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;700;800;900&family=Space+Mono:wght@400;700&display=swap"></noscript>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>⚡</text></svg>">
+
+<style>
+    :root {
+        --ted-red: #E62B1E;
+        --text-main: #e8e8ec;
+        --bg-dark: #030305;
+        --glass-bg: rgba(10, 10, 16, 0.75);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-border-bright: rgba(255, 255, 255, 0.14);
+        --accent-cyan: #00f3ff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+        background-color: var(--bg-dark);
+        color: var(--text-main);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        line-height: 1.9;
+        font-size: 18px;
+        overflow-x: hidden;
+    }
+
+    /* Animated BG */
+    .bg-container {
+        position: fixed;
+        inset: 0;
+        z-index: -3;
+        background:
+            radial-gradient(ellipse at 20% 0%, rgba(0, 243, 255, 0.04) 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 100%, rgba(138, 43, 226, 0.04) 0%, transparent 50%),
+            radial-gradient(ellipse at 50% 50%, rgba(255, 0, 85, 0.02) 0%, transparent 60%);
+    }
+    .bg-vignette {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        pointer-events: none;
+        background: radial-gradient(ellipse at center, transparent 40%, rgba(3,3,5,0.8) 100%);
+    }
+
+    /* Floating particles */
+    .particles {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        overflow: hidden;
+    }
+    .particle {
+        position: absolute;
+        border-radius: 50%;
+        animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+        10% { opacity: 0.4; }
+        90% { opacity: 0.2; }
+        100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+    }
+    .particle.circle { border: 1px solid rgba(0, 243, 255, 0.12); background: rgba(0, 243, 255, 0.02); }
+    .particle.dot { background: rgba(138, 43, 226, 0.2); }
+
+    /* Back link */
+    .back-link {
+        position: fixed;
+        top: 24px;
+        left: 24px;
+        z-index: 100;
+        font-family: 'Space Mono', monospace;
+        font-size: 0.8rem;
+        color: rgba(255,255,255,0.45);
+        text-decoration: none;
+        padding: 10px 18px;
+        border: 1px solid var(--glass-border);
+        border-radius: 40px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        transition: all 0.3s;
+        letter-spacing: 0.5px;
+    }
+    .back-link:hover {
+        color: var(--accent-cyan);
+        border-color: var(--accent-cyan);
+        text-shadow: 0 0 12px rgba(0, 243, 255, 0.4);
+        box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+    }
+    .back-arrow { margin-right: 6px; }
+
+    /* Document container */
+    .document-container {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 100px 80px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        margin-top: 60px;
+        margin-bottom: 80px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    h1 {
+        font-family: 'Syncopate', sans-serif;
+        color: var(--ted-red);
+        font-size: 1.8em;
+        text-align: center;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-weight: 700;
+    }
+
+    .subtitle {
+        font-family: 'Space Mono', monospace;
+        color: rgba(255,255,255,0.4);
+        font-size: 0.9em;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 60px;
+        letter-spacing: 1px;
+    }
+
+    .direction {
+        font-family: 'Space Mono', monospace;
+        font-weight: 700;
+        color: var(--ted-red);
+        font-size: 0.8em;
+        display: block;
+        margin-top: 30px;
+        margin-bottom: 14px;
+        letter-spacing: 0.3px;
+        background: rgba(230, 43, 30, 0.08);
+        padding: 10px 16px;
+        border-left: 3px solid var(--ted-red);
+        border-radius: 0 6px 6px 0;
+    }
+
+    .inline-direction {
+        font-family: 'Space Mono', monospace;
+        font-weight: 700;
+        color: var(--ted-red);
+        font-size: 0.85em;
+    }
+
+    p {
+        margin-bottom: 28px;
+        text-align: justify;
+        font-weight: 400;
+        color: #d0d0d8;
+        line-height: 2;
+    }
+
+    .page-marker {
+        font-family: 'Space Mono', monospace;
+        font-size: 0.75em;
+        color: rgba(255,255,255,0.2);
+        text-align: right;
+        border-top: 1px solid var(--glass-border);
+        margin-top: 60px;
+        margin-bottom: 60px;
+        padding-top: 18px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .phase-2 {
+        background: rgba(138, 43, 226, 0.04);
+        backdrop-filter: blur(10px);
+        padding: 40px;
+        border-radius: 12px;
+        border: 1px solid var(--glass-border-bright);
+        margin-top: 70px;
+    }
+
+    .phase-2 h3 {
+        font-family: 'Syncopate', sans-serif;
+        color: var(--ted-red);
+        margin-top: 0;
+        font-size: 1.1em;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-bottom: 1px solid var(--glass-border);
+        padding-bottom: 18px;
+        margin-bottom: 24px;
+    }
+
+    ul {
+        margin-bottom: 24px;
+        padding-left: 24px;
+    }
+
+    li {
+        margin-bottom: 18px;
+        color: #b0b0ba;
+    }
+
+    li strong {
+        color: #e0e0e8;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .document-container { padding: 40px 24px; margin: 20px 12px; margin-top: 80px; }
+        body { font-size: 16px; }
+        h1 { font-size: 1.2em; letter-spacing: 1px; }
+        .back-link { top: 16px; left: 16px; font-size: 0.7rem; }
+    }
+</style>
+</head>
+<body>
+
+<div class="bg-container"></div>
+<div class="bg-vignette"></div>
+
+<!-- Decorative Particles -->
+<div class="particles" id="particles"></div>
+<script>
+(function(){
+    const container = document.getElementById('particles');
+    const shapes = ['circle','circle','circle','dot'];
+    for (let i=0; i<20; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle ' + shapes[i % shapes.length];
+        const size = 3 + Math.random() * 8;
+        p.style.cssText = `
+            left:${Math.random()*100}%;
+            width:${size}px; height:${size}px;
+            animation-duration:${12+Math.random()*20}s;
+            animation-delay:${Math.random()*15}s;
+        `;
+        container.appendChild(p);
+    }
+})();
+</script>
+
+<!-- Back link to rkrk.io -->
+<a href="/" class="back-link"><span class="back-arrow">&#8592;</span> rkrk.io</a>
+
+<div class="document-container">
+    <h1>TEDx Speech Script</h1>
+    <p class="subtitle">Kee &bull; Phase 1: The Performance Script</p>
+
+    <span class="direction">[WALK TO THE CENTER OF THE RED DOT. PLANT YOUR FEET. LOOK AT THE AUDIENCE FOR 3 FULL SECONDS BEFORE SPEAKING.]</span>
+
+    <span class="direction">[PAUSE: 3S]</span>
+
+    <span class="direction">[TONE: CONFIDENT, ENGAGING]</span>
+    <p>I am Kee. Before I became a teacher, I worked as an interpreter, serving high-profile clients including the Backstreet Boys. I was also an event planner, hosting hundreds of parties for English learners across Chengdu. Over the years, I worked my way up to becoming an expert English teacher as well as an EdTech solopreneur&mdash;which is really just a fancy word for a one-man company&mdash;behind Kee's Language Lab.</p>
+
+    <p>I've spent years mastering the mechanics of language, but not too long ago, I found myself standing in a crowded language training classroom right here in Chengdu.</p>
+
+    <span class="direction">[PAUSE: BEAT]</span>
+
+    <span class="direction">[TONE: CONVERSATIONAL, GROUNDED]</span>
+    <p>The air conditioner was humming, the fluorescent lights were buzzing&mdash;casting this dull, sterile glow over everything&mdash;and I was... exhausted. I was looking out at a sea of students who were desperately trying to memorize vocabulary lists and grammar rules just to pass standardized tests. They were stressed. I was burned out. We were all trapped in what I call the "Information Cocoon."</p>
+
+    <div class="page-marker">Page 1</div>
+
+    <span class="direction">[GESTURE: SMALL, CONTAINED HAND MOVEMENT]</span>
+    <p>In this cocoon, the dynamic is simple, but deeply flawed: The student is the passive consumer, and the teacher&mdash;me&mdash;is the ultimate bottleneck of knowledge. My job was to stand at the front of the room, memorize the textbook and the lesson aim, and pour that data into their heads.</p>
+
+    <span class="direction">[TONE: ANALYTICAL, SLIGHTLY LOUDER]</span>
+    <p>In the past, the information gap was incredibly difficult to fill, which is why that system worked for centuries. But today? We are drowning in data, and yet, we are starving for actual understanding.</p>
+
+    <span class="direction">[PAUSE: 2S] [GESTURE: STEP FORWARD, OPEN POSTURE]</span>
+
+    <p>And then, the paradigm shifted. Artificial Intelligence arrived. Tools like Gemini hit the mainstream, and suddenly, the entire education industry panicked. School managers were terrified of cheating. Teachers were terrified of obsolescence.</p>
+
+    <span class="direction">[TONE: VULNERABLE]</span>
+    <p>And honestly? For a brief moment, I was terrified too. Here was a machine that could generate essays, solve complex equations, and translate languages in milliseconds. It was a faster, smarter, infinitely patient "content provider." If an AI could do all of that... what was my purpose? Why was I standing at the front of the room?</p>
+
+    <span class="direction">[PAUSE: 3S]</span>
+
+    <div class="page-marker">Page 2</div>
+
+    <span class="direction">[SMILE WARMLY]</span>
+
+    <span class="direction">[TONE: INSPIRING, ENERGIZED]</span>
+
+    <p>But that fear quickly turned into an epiphany. A visceral, life-changing realization. My eureka moment.</p>
+
+    <p>I don't need to be the content provider anymore. In fact, trying to compete with AI as a data-delivery system is a losing game. That realization wasn't the end of my career. It was the moment I finally broke out of the box. I stopped being a "Teacher," and I became a "Learning Architect."</p>
+
+    <span class="direction">[CLICK SLIDE: THE WORDS "TEACHER" VS "LEARNING ARCHITECT" APPEAR]</span>
+
+    <span class="direction">[TONE: ASSERTIVE, CLEAR]</span>
+    <p>If AI is the infinite content engine, then the human role must evolve. We must step down from the podium and step into the role of the Strategist, the Architect, and the Coach.</p>
+
+    <p>This realization gave me the courage to leave the traditional institutional system entirely and build my own AI-powered courseware. But I quickly realized that simply giving people AI tools wasn't enough. You can hand someone a supercomputer, but if they don't know how to ask the right questions, it's just a very expensive paperweight. The truth is, prompt engineering is much more important than the AI itself.</p>
+
+    <div class="page-marker">Page 3</div>
+
+    <span class="direction">[PAUSE: BEAT] [TONE: AUTHORITATIVE]</span>
+    <p>We had to fundamentally change how we learn. Learning is no longer about acquiring data; learning is simply mastering the art of learning how to learn.</p>
+
+    <p>To bridge this gap, I developed a learning operating system for the AI era. I call it DynamOS. And unlike operating systems that depend on visual effects, this one churns out magic based on a core concept I call the R.U.A. Method.</p>
+
+    <span class="direction">[CLICK SLIDE: LARGE LETTERS R. U. A. APPEAR ON SCREEN]</span>
+
+    <p>It stands for Recognize, Understand, and Apply.</p>
+
+    <span class="direction">[GESTURE: COUNT ON FINGERS] [TONE: INSTRUCTIONAL BUT DYNAMIC]</span>
+    <p>First, Recognize. In the past, learning meant staring at a textbook chapter. Today, Recognizing means identifying the core boundaries of your learning target so you can prompt the AI correctly. It's the art of asking the right questions. For example, when learning a new word, you don't just ask for a definition. You ask the AI to recognize the Meaning, Form, and Pronunciation&mdash;the MFP&mdash;and identify the main gap between you and your learning target.</p>
+
+    <p>Second, Understand. This is where you synthesize. AI is not perfect. It hallucinates when given ambiguous prompts. So understanding is not just memorizing intrinsic meanings; it's grasping contextual application. AI can explain Quantum Physics to you like a 5-year-old, or like a PhD</p>
+
+    <div class="page-marker">Page 4</div>
+
+    <p>student. It can adjust its intonation&mdash;offering a suggestion, a banter, or even a threat, grasping the exact connotation of human compassion. Understanding is adjusting that dial until the concept clicks in your specific human brain.</p>
+
+    <p>Third, Apply. You execute the knowledge in the real world. You find the friction. Because we all know practice makes perfect. Where did you fail? Where did the AI hallucinate? The AI should be able to analyze your learning gap based on your current granularity and generate a proper practice task. You take that friction, and you feed it right back into the "Recognize" phase to start the cycle again.</p>
+
+    <span class="direction">[PAUSE: 2S] [GESTURE: PACE SLIGHTLY TO THE SIDE OF THE STAGE]</span>
+
+    <span class="direction">[TONE: URGENT, GROUNDED]</span>
+
+    <p>The R.U.A. method isn't a study hack. It's a survival skill. It should be ingrained into our cognitive operating system.</p>
+
+    <p>When I first started my solopreneur business, I wasn't a coder. I wasn't a marketing guru. But using R.U.A., I partnered with AI to build out my courseware step-by-step. I didn't ask the AI to "do it for me." I asked it to coach me. I asked it to recognize my task, understand the market, and then coach me to build the tools I've been implementing across my classrooms.</p>
+
+    <div class="page-marker">Page 5</div>
+
+    <span class="direction">[PAUSE: BEAT]</span>
+
+    <p>But I know there are university students and educators in this room right now who are deeply anxious. Administrators, you might be thinking, "If students use AI to do their work, the integrity of education is gone." Students, you might be feeling guilty for using these tools, hiding them in the background.</p>
+
+    <span class="direction">[TONE: CHALLENGING, PROVOCATIVE]</span>
+    <p>But why? When books first appeared, did people try to hide them because they helped carry knowledge outside of the brain?</p>
+
+    <p>We need to stop treating AI like a cheating device, and start treating it like a cognitive exoskeleton. When a student uses AI to bypass the "Apply" phase&mdash;just copying and pasting an essay&mdash;that is the cocoon. That is passive consumption. But when a student uses the R.U.A. method to debate an AI, to challenge its logic, to generate five different perspectives on a historical event before writing their own synthesis... that is bridging the gap. That is active creation.</p>
+
+    <span class="direction">[STOP PACING. RETURN TO CENTER STAGE. PLANT YOUR FEET. LET A MOMENT OF SILENCE HANG IN THE ROOM.]</span>
+
+    <span class="direction">[PAUSE: 3S]</span>
+
+    <div class="page-marker">Page 6</div>
+
+    <span class="direction">[TONE: INTIMATE, POWERFUL]</span>
+    <p>I am a Learning Architect. And as a Learning Architect, my job is to design experiences that prove this dynamic works. In fact, I designed one for you today.</p>
+
+    <span class="direction">[CLICK SLIDE: A SCREENSHOT OF OUR ACTUAL AI CONVERSATION/ PROMPT ENGINEERING PROCESS APPEARS ON THE MASSIVE SCREEN BEHIND YOU.]</span>
+
+    <p>Everything you have experienced for the last 12 minutes&mdash;the structure of this speech, the narrative arc, the pacing, even the core outline I submitted to the TEDx organizers&mdash;was not created by me sitting alone in a dark room staring at a blank document.</p>
+
+    <p>It was co-architected with an AI assistant.</p>
+
+    <span class="direction">[LET THE AUDIENCE REACT. SMILE WARMLY.]</span>
+
+    <span class="direction">[PAUSE: 4S]</span>
+
+    <p>I fed the AI the raw, vulnerable materials of my life: my burnout in Chengdu, my transition to a solopreneur, the mechanics of the R.U.A method. I acted as the human strategist, giving it the strict parameters of the TEDx format. The AI acted as the computational engine, helping me structure the data.</p>
+
+    <p>In fact, the whole structure of using R.U.A. can be condensed into a single prompt, an agent, or a built-in logic behind any window to look at</p>
+
+    <div class="page-marker">Page 7</div>
+
+    <p>the world. I recognized the target. We understood the context. And today, on this stage, I am applying it.</p>
+
+    <p>This is the proof. The synergy of human vulnerability and strategic direction, combined with AI's massive computational power, creates a far superior outcome than either of us working in isolation.</p>
+
+    <span class="direction">[GESTURE: STEP FORWARD, OPEN HANDS TO THE AUDIENCE]</span>
+
+    <span class="direction">[TONE: HIGHLY INSPIRING, URGENT CALL TO ACTION]</span>
+
+    <p>We are standing at the edge of the greatest educational revolution in human history. But technology alone will not save us from the information cocoon. Only a shift in our identity will do that.</p>
+
+    <p>To the students in the room: Stop being passive consumers. Stop letting the system spoon-feed you data that you will forget the day after the exam. Step outside the box. Use these tools to challenge your own mind. Become the architect of your own education.</p>
+
+    <p>To the educators: Please, step down from the podium. Relinquish the heavy, exhausting burden of being the content provider. Your students don't need you to be a textbook anymore. They need you to be a human. They need your empathy, your mentorship, and your coaching to help them navigate a world that is changing faster than ever before.</p>
+
+    <span class="direction">[PAUSE: 2S] [TONE: QUIET, ABSOLUTE CERTAINTY]</span>
+
+    <div class="page-marker">Page 8</div>
+
+    <p>Learning is, and always will be, simply learning how to learn.</p>
+
+    <p>Let AI handle the data. Let us handle the humanity.</p>
+
+    <p>Thank you.</p>
+
+    <span class="direction">[HOLD YOUR POSITION FOR A SOLID 3 SECONDS. SOAK IN THE APPLAUSE. WALK OFF.]</span>
+
+    <div class="page-marker">Page 9</div>
+
+    <div class="phase-2">
+        <h3>Phase 2: Changelog &amp; Intent Summary</h3>
+        <ul>
+            <li><strong>Inferred Intent:</strong> The core message is an empowering call to action for both students and educators to transcend the "Information Cocoon" of passive data consumption. By adopting the R.U.A. Method (Recognize, Understand, Apply), you are urging the audience to use AI not as a crutch or cheating device, but as a "cognitive exoskeleton" that frees humans to focus on strategy, empathy, and active creation.</li>
+            <li><strong>Pacing Alignment:</strong> The revised text sits at approximately 1,100 words. At an average, highly deliberate TED speaking rate of 130 words per minute (incorporating the extensive pauses and stage movements mapped out in the tags), this will naturally clock in around 8.5 to 10 minutes. To reach your exact target duration of 12 minutes without artificially dragging your words, you have room to smoothly ad-lib or insert one brief (60-90 second) personal anecdote during the "Apply" section.</li>
+            <li><strong>Surgical Changelog:</strong>
+                <ul>
+                    <li><strong>New Introduction:</strong> Brought your identity right to the forefront, clearly stating you are an expert language educator, former interpreter for the Backstreet Boys, event planner, and the EdTech solopreneur behind Kee's Language Lab. This creates an immediate "pop" of authority before dropping into the vulnerability of the classroom story.</li>
+                    <li><strong>Bracket Formatting:</strong> Formatted all <code>TONE</code>, <code>PAUSE</code>, and <code>GESTURE</code> cues directly into strict <code>[]</code> brackets, visually separated with TED Red highlighting for quick recognition during rehearsal.</li>
+                    <li><strong>Untouched Core Text:</strong> As requested, the remainder of the speech remains 100% identical to the previous draft.</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="page-marker">Page 10</div>
+    </div>
+</div>
+
+</body>
+</html>
