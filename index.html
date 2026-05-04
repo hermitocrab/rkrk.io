@@ -320,53 +320,7 @@
         }
         .mobile-menu a:hover { color: var(--accent-cyan); }
 
-        /* ====================================================================== */
-        /* TEDx FLOATING BADGE                                                    */
-        /* ====================================================================== */
-        .tedx-badge {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 998;
-            background: rgba(10, 10, 16, 0.85);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 0, 85, 0.3);
-            border-radius: 16px;
-            padding: 14px 20px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
-        }
-        .tedx-badge:hover {
-            border-color: var(--accent-pink);
-            box-shadow: 0 4px 40px rgba(255, 0, 85, 0.2);
-            transform: translateY(-3px);
-        }
-        .tedx-badge-icon {
-            font-size: 1.8rem;
-        }
-        .tedx-badge-text {
-            font-size: 0.7rem;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            color: var(--accent-pink);
-            text-transform: uppercase;
-            line-height: 1.5;
-        }
-        .tedx-badge-text span {
-            display: block;
-            color: rgba(255,255,255,0.6);
-            font-size: 0.65rem;
-            letter-spacing: 1px;
-        }
-        #tedx-countdown {
-            font-family: 'Space Mono', monospace;
-            color: #fff;
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
+
 
         /* ====================================================================== */
         /* SECTIONS                                                               */
@@ -823,8 +777,7 @@
             p { max-width: 100%; font-size: 1.1rem; }
             .stat-cards { grid-template-columns: repeat(3, 1fr); gap: 12px; }
             .stat-num { font-size: 2rem; }
-            .tedx-badge { bottom: 20px; right: 20px; padding: 12px 16px; }
-            .tedx-badge-text { font-size: 0.65rem; }
+
             .sticky-nav { padding: 16px 30px; }
             .input-group input { padding: 20px 24px; font-size: 1rem; }
             .btn-join { padding: 0 30px; }
@@ -854,10 +807,7 @@
             .btn-join { padding: 20px; border-radius: 14px; width: 100%; }
             .nano-pills { gap: 8px; }
             .nano-pill { padding: 8px 14px; font-size: 0.78rem; }
-            .tedx-badge { bottom: 16px; right: 12px; padding: 10px 14px; border-radius: 12px; gap: 8px; }
-            .tedx-badge-icon { font-size: 1.4rem; }
-            .tedx-badge-text { font-size: 0.6rem; }
-            #tedx-countdown { font-size: 0.7rem; }
+
             .cursor-glow, .cursor-dot { display: none; }
             body { cursor: auto; }
         }
@@ -871,7 +821,7 @@
             .stat-card { display: flex; align-items: center; justify-content: space-between; text-align: left; padding: 16px 20px; }
             .stat-num { font-size: 1.8rem; margin-bottom: 0; }
             .stat-label { font-size: 0.6rem; }
-            .tedx-badge { bottom: 10px; right: 10px; left: 10px; justify-content: center; border-radius: 10px; padding: 10px; }
+
         }
     </style>
 </head>
@@ -922,14 +872,7 @@
         <a href="/coaching" class="mobile-link" target="_blank">Newsletter ✏️</a>
     </div>
 
-    <!-- TEDx Floating Badge -->
-    <a href="https://mp.weixin.qq.com/s/GuQODuOPp-X6ZBMlrw8ioA" class="tedx-badge" id="tedxBadge" aria-label="TEDx 2026 countdown" target="_blank">
-        <span class="tedx-badge-icon">🎤</span>
-        <div class="tedx-badge-text">
-            TEDx 2026<span>The Cocoon & The Catalyst</span>
-        </div>
-        <div id="tedx-countdown">--</div>
-    </a>
+
 
     <!-- ================================================================== -->
     <!-- SECTION 1: HERO                                                    -->
@@ -1305,24 +1248,7 @@
         });
     }
 
-    /* ================================================================== */
-    /* TEDx COUNTDOWN                                                      */
-    /* ================================================================== */
-    function updateTEDxCountdown() {
-        const target = new Date('2026-05-01T00:00:00+08:00');
-        const now = new Date();
-        const diff = target - now;
-        const el = document.getElementById('tedx-countdown');
-        if (diff <= 0) {
-            el.textContent = 'LIVE';
-            return;
-        }
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        el.textContent = `${days}d ${hours}h`;
-    }
-    updateTEDxCountdown();
-    setInterval(updateTEDxCountdown, 60000);
+
 
     /* ================================================================== */
     /* BILINGUAL TOGGLE                                                    */
