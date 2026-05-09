@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DynamOS — The Roblox for Education</title>
+<meta name="description" content="DynamOS: The platform where every teacher becomes an ed-tech creator. Built on RUA. Powered by AI. Fueled by teachers.">
+<meta property="og:title" content="DynamOS — The Roblox for Education">
+<meta property="og:description" content="Where teachers build, share, and monetize AI-powered learning apps. No code required.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rkrk.io/dynamos">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>🧠</text></svg>">
+<style>
+:root {
+    --accent: #ff6b35;
+    --accent-glow: #ff8c42;
+    --gold: #ffd700;
+    --gold-dim: #b4942e;
+    --bg: #04060a;
+    --bg-card: #0a0d16;
+    --bg-glass: rgba(14, 16, 26, 0.7);
+    --border: rgba(255,107,53,0.15);
+    --border-bright: rgba(255,107,53,0.3);
+    --text: #e8e6e3;
+    --text-dim: #8b8a8f;
+    --text-muted: #5c5b60;
+    --r-recognize: #3b82f6;
+    --r-understand: #8b5cf6;
+    --r-apply: #f59e0b;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Ambient background */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background:
+        radial-gradient(ellipse at 20% 20%, rgba(255,107,53,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 60%, rgba(255,215,0,0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(139,92,246,0.03) 0%, transparent 50%);
+    pointer-events: none; z-index: 0;
+}
+
+/* ── Navigation ── */
+nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(4,6,10,0.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+}
+.nav-inner {
+    max-width: 1280px; margin: 0 auto; padding: 0 32px;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.nav-brand {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, var(--accent), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-decoration: none;
+}
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+    color: var(--text-dim); text-decoration: none;
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.02em;
+    transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-cta {
+    background: linear-gradient(135deg, var(--accent), #e55d2b);
+    color: #fff; border: none; padding: 8px 20px; border-radius: 8px;
+    font-size: 0.82rem; font-weight: 600; cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    text-decoration: none;
+}
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(255,107,53,0.3); }
+
+/* ── Hero ── */
+.hero {
+    position: relative; z-index: 1;
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 120px 32px 80px;
+}
+.hero-inner { max-width: 1280px; margin: 0 auto; width: 100%; }
+.hero-eyebrow {
+    font-family: 'Space Mono', monospace; font-size: 0.8rem;
+    color: var(--accent); letter-spacing: 0.2em; margin-bottom: 24px;
+    text-transform: uppercase;
+}
+.hero h1 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    font-weight: 700; line-height: 1.05;
+    letter-spacing: -0.01em; margin-bottom: 32px;
+}
+.gradient-text {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 50%, var(--accent-glow) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-size: 200% auto; animation: gradientShift 4s ease infinite;
+}
+@keyframes gradientShift { 0%,100% { background-position: 0% center; } 50% { background-position: 200% center; } }
+
+.hero-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--text-dim); max-width: 680px;
+    font-weight: 400; line-height: 1.7; margin-bottom: 48px;
+}
+.hero-stats { display: flex; gap: 60px; margin-bottom: 56px; }
+.stat-num {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 2.8rem; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.stat-label { font-size: 0.82rem; color: var(--text-dim); margin-top: 4px; }
+
+/* ── Section Common ── */
+section { position: relative; z-index: 1; padding: 120px 32px; }
+.section-inner { max-width: 1280px; margin: 0 auto; }
+.section-tag {
+    font-family: 'Space Mono', monospace; font-size: 0.75rem;
+    color: var(--accent); letter-spacing: 0.15em; margin-bottom: 16px;
+    text-transform: uppercase;
+}
+.section-title {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700;
+    line-height: 1.15; margin-bottom: 24px;
+    letter-spacing: -0.02em;
+}
+.section-desc {
+    font-size: 1.1rem; color: var(--text-dim); max-width: 700px;
+    line-height: 1.7; margin-bottom: 60px;
+}
+
+/* ── Vision: Roblox Parallel ── */
+.robox-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
+}
+.robox-col { padding: 48px 40px; }
+.robox-col:first-child { background: var(--bg-card); border-right: 1px solid var(--border); }
+.robox-col:last-child { background: rgba(255,107,53,0.03); }
+.robox-header {
+    font-family: 'Space Mono', monospace; font-size: 0.75rem;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--border);
+}
+.robox-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.robox-row:last-child { border-bottom: none; }
+.robox-label { font-size: 0.9rem; font-weight: 500; color: var(--text); }
+.robox-val { font-size: 0.85rem; color: var(--text-dim); font-weight: 400; }
+.robox-col:last-child .robox-val { color: var(--accent-glow); }
+
+/* ── Platform Architecture ── */
+.arch-stack {
+    display: flex; flex-direction: column; gap: 12px; max-width: 800px;
+}
+.arch-layer {
+    background: var(--bg-glass); border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px 28px;
+    display: flex; align-items: center; gap: 24px;
+    transition: border-color 0.3s;
+}
+.arch-layer:hover { border-color: var(--border-bright); }
+.arch-layer-num {
+    font-family: 'Space Mono', monospace; font-size: 0.7rem;
+    color: var(--accent); min-width: 28px;
+}
+.arch-layer-icon { font-size: 1.5rem; min-width: 40px; }
+.arch-layer-info h3 { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+.arch-layer-info p { font-size: 0.82rem; color: var(--text-dim); }
+.arch-layer-badge {
+    margin-left: auto; font-size: 0.7rem; font-weight: 600;
+    padding: 4px 12px; border-radius: 20px;
+    background: rgba(255,107,53,0.1); color: var(--accent);
+    white-space: nowrap;
+}
+
+/* ── RUA Engine ── */
+.rua-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 40px; }
+.rua-card {
+    background: var(--bg-glass); border: 1px solid var(--border);
+    border-radius: 20px; padding: 40px 32px;
+    transition: transform 0.2s, border-color 0.2s;
+    position: relative; overflow: hidden;
+}
+.rua-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.rua-card:nth-child(1)::before { background: var(--r-recognize); }
+.rua-card:nth-child(2)::before { background: var(--r-understand); }
+.rua-card:nth-child(3)::before { background: var(--r-apply); }
+.rua-card:hover { transform: translateY(-4px); border-color: var(--border-bright); }
+.rua-card-letter {
+    font-family: 'Syncopate', sans-serif; font-size: 4rem; font-weight: 700;
+    line-height: 1; margin-bottom: 16px; opacity: 0.15;
+}
+.rua-card h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 8px; }
+.rua-card .rua-subtitle { font-size: 0.8rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+.rua-card p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.6; }
+
+/* ── Marketplace / Business Model ── */
+.revenue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 40px; }
+.rev-card {
+    background: var(--bg-glass); border: 1px solid var(--border);
+    border-radius: 20px; padding: 36px 32px; text-align: center;
+}
+.rev-card h4 { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; font-weight: 600; }
+.rev-price {
+    font-family: 'Syncopate', sans-serif; font-size: 2.5rem; font-weight: 700;
+    color: var(--accent); margin-bottom: 8px;
+}
+.rev-price span { font-size: 1rem; font-weight: 500; color: var(--text-dim); }
+.rev-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+
+/* ── Projections ── */
+.proj-table {
+    width: 100%; border-collapse: collapse; margin-top: 40px;
+    font-size: 0.9rem;
+}
+.proj-table th {
+    text-align: left; padding: 16px 20px;
+    font-family: 'Space Mono', monospace; font-size: 0.7rem;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--text-muted); border-bottom: 1px solid var(--border);
+}
+.proj-table td {
+    padding: 18px 20px; border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.proj-table .highlight {
+    font-weight: 700; color: var(--accent);
+    font-family: 'Space Mono', monospace;
+}
+.proj-table tr:last-child td {
+    border-top: 2px solid var(--border-bright);
+    font-weight: 700; font-size: 1rem; color: var(--gold);
+}
+
+/* ── Go-to-Market ── */
+.gtm-flow {
+    display: flex; align-items: center; gap: 16px;
+    padding: 48px 0; overflow-x: auto;
+}
+.gtm-step {
+    flex: 0 0 280px; background: var(--bg-glass); border: 1px solid var(--border);
+    border-radius: 16px; padding: 32px 28px; position: relative;
+}
+.gtm-step-num {
+    font-family: 'Syncopate', sans-serif; font-size: 3rem; font-weight: 700;
+    opacity: 0.08; position: absolute; top: 16px; right: 20px;
+}
+.gtm-step h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+.gtm-step p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; }
+.gtm-arrow {
+    font-size: 1.5rem; color: var(--accent); flex-shrink: 0;
+    font-family: 'Space Mono', monospace;
+}
+
+/* ── Roadmap ── */
+.roadmap { position: relative; padding-left: 40px; }
+.roadmap::before {
+    content: ''; position: absolute; left: 10px; top: 0; bottom: 0;
+    width: 2px; background: var(--border);
+}
+.roadmap-phase { position: relative; margin-bottom: 48px; }
+.roadmap-dot {
+    position: absolute; left: -35px; top: 6px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 16px rgba(255,107,53,0.4);
+}
+.roadmap-phase-label {
+    font-family: 'Space Mono', monospace; font-size: 0.7rem;
+    color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 8px;
+}
+.roadmap-phase h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; }
+.roadmap-phase .budget { font-size: 0.85rem; color: var(--gold-dim); margin-bottom: 12px; }
+.roadmap-items { list-style: none; }
+.roadmap-items li {
+    font-size: 0.88rem; color: var(--text-dim); padding: 4px 0;
+    padding-left: 20px; position: relative;
+}
+.roadmap-items li::before {
+    content: ''; position: absolute; left: 0; top: 11px;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--border-bright);
+}
+
+/* ── Flywheel ── */
+.flywheel {
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; flex-wrap: wrap; padding: 60px 0;
+}
+.flywheel-node {
+    padding: 16px 28px; border-radius: 12px; font-size: 0.85rem;
+    font-weight: 600; border: 1px solid var(--border);
+    background: var(--bg-glass);
+}
+.flywheel-arrow { color: var(--accent); font-size: 1.2rem; }
+.flywheel-node.highlight {
+    background: rgba(255,107,53,0.1); border-color: var(--border-bright);
+    color: var(--accent);
+}
+
+/* ── CTA ── */
+.cta-section {
+    text-align: center; padding: 160px 32px 120px;
+    background: radial-gradient(ellipse at center, rgba(255,107,53,0.08) 0%, transparent 60%);
+}
+.cta-section h2 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+    margin-bottom: 24px;
+}
+.cta-section p { font-size: 1.1rem; color: var(--text-dim); max-width: 600px; margin: 0 auto 40px; }
+.cta-btn {
+    display: inline-block; background: linear-gradient(135deg, var(--accent), #e55d2b);
+    color: #fff; padding: 18px 48px; border-radius: 14px;
+    font-size: 1rem; font-weight: 700; text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,107,53,0.35); }
+
+/* ── Footer ── */
+footer {
+    padding: 60px 32px; text-align: center;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem; color: var(--text-muted);
+}
+footer a { color: var(--text-dim); text-decoration: none; }
+footer a:hover { color: var(--accent); }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .robox-grid { grid-template-columns: 1fr; }
+    .rua-cards { grid-template-columns: 1fr; }
+    .revenue-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; gap: 32px; }
+    .proj-table { font-size: 0.75rem; }
+    .proj-table th, .proj-table td { padding: 10px 12px; }
+    nav { padding: 12px 0; }
+    .nav-inner { padding: 0 20px; }
+    .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="https://rkrk.io" class="nav-brand">DynamOS</a>
+        <ul class="nav-links">
+            <li><a href="#vision">Vision</a></li>
+            <li><a href="#architecture">Platform</a></li>
+            <li><a href="#rua">RUA Engine</a></li>
+            <li><a href="#business">Business</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+        </ul>
+        <a href="#cta" class="nav-cta">Join Us</a>
+    </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-eyebrow">Business Plan · May 2026</div>
+        <h1>The<br><span class="gradient-text">Roblox</span><br>for Education</h1>
+        <p class="hero-subtitle">
+            DynamOS is the platform where the world's 85 million teachers become ed-tech creators — building, sharing, and monetizing AI-powered learning apps without writing a single line of code.
+        </p>
+        <div class="hero-stats">
+            <div><div class="stat-num">85M+</div><div class="stat-label">Educators globally</div></div>
+            <div><div class="stat-num">$30B</div><div class="stat-label">AI Ed-Tech Market by 2030</div></div>
+            <div><div class="stat-num">$12M</div><div class="stat-label">Projected ARR Year 3</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ VISION ═══════════════ -->
+<section id="vision">
+    <div class="section-inner">
+        <div class="section-tag">01 · Vision</div>
+        <h2 class="section-title">Roblox Studio Meets<br>Teachers Pay Teachers</h2>
+        <p class="section-desc">
+            Roblox proved that when you give creators powerful but simple tools and a marketplace, 
+            they build entire economies. Education is the last frontier. DynamOS brings the same 
+            creator-first model to learning — with AI as the engine and RUA as the pedagogy.
+        </p>
+
+        <div class="robox-grid">
+            <div class="robox-col">
+                <div class="robox-header" style="color:var(--text-dim);">Roblox</div>
+                <div class="robox-row"><span class="robox-label">Roblox Studio</span><span class="robox-val">Game Builder</span></div>
+                <div class="robox-row"><span class="robox-label">Lua Scripting</span><span class="robox-val">Programming Language</span></div>
+                <div class="robox-row"><span class="robox-label">Millions of Games</span><span class="robox-val">User-Generated Content</span></div>
+                <div class="robox-row"><span class="robox-label">Avatars & Identity</span><span class="robox-val">Social Layer</span></div>
+                <div class="robox-row"><span class="robox-label">Robux Economy</span><span class="robox-val">Virtual Currency</span></div>
+                <div class="robox-row"><span class="robox-label">Social Play</span><span class="robox-val">Network Effects</span></div>
+            </div>
+            <div class="robox-col">
+                <div class="robox-header" style="color:var(--accent);">DynamOS</div>
+                <div class="robox-row"><span class="robox-label">DynamOS Studio</span><span class="robox-val">Prompt + App Builder</span></div>
+                <div class="robox-row"><span class="robox-label">RUA Framework</span><span class="robox-val">Prompt Engineering System</span></div>
+                <div class="robox-row"><span class="robox-label">Millions of Apps</span><span class="robox-val">Teacher-Built Learning Tools</span></div>
+                <div class="robox-row"><span class="robox-label">Teacher Profiles</span><span class="robox-val">Reputation & Certifications</span></div>
+                <div class="robox-row"><span class="robox-label">DynamOS Credits</span><span class="robox-val">70/30 Revenue Split</span></div>
+                <div class="robox-row"><span class="robox-label">Collaborative Classrooms</span><span class="robox-val">Network Effects</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ ARCHITECTURE ═══════════════ -->
+<section id="architecture" style="background:rgba(255,255,255,0.008);">
+    <div class="section-inner">
+        <div class="section-tag">02 · Platform</div>
+        <h2 class="section-title">The DynamOS Stack</h2>
+        <p class="section-desc">
+            Five integrated layers — from AI infrastructure to a thriving marketplace. 
+            Each layer feeds the next, creating compounding defensibility.
+        </p>
+
+        <div class="arch-stack">
+            <div class="arch-layer">
+                <span class="arch-layer-num">05</span>
+                <span class="arch-layer-icon">🏪</span>
+                <div class="arch-layer-info">
+                    <h3>Marketplace</h3>
+                    <p>Discover, rate, remix, and monetize. Community-driven quality signals.</p>
+                </div>
+                <span class="arch-layer-badge">Revenue Engine</span>
+            </div>
+            <div class="arch-layer">
+                <span class="arch-layer-num">04</span>
+                <span class="arch-layer-icon">🛠️</span>
+                <div class="arch-layer-info">
+                    <h3>App Builder — No-Code</h3>
+                    <p>Quiz, Flashcard, AI Tutor, Games, Virtual Labs, Speaking Coach, Writing Coach. One-click deploy.</p>
+                </div>
+                <span class="arch-layer-badge">Creator Layer</span>
+            </div>
+            <div class="arch-layer">
+                <span class="arch-layer-num">03</span>
+                <span class="arch-layer-icon">✍️</span>
+                <div class="arch-layer-info">
+                    <h3>Prompt Studio</h3>
+                    <p>Visual block-based prompt builder. Templates, sandbox, version control, RUA structuring.</p>
+                </div>
+                <span class="arch-layer-badge">Creation Layer</span>
+            </div>
+            <div class="arch-layer">
+                <span class="arch-layer-num">02</span>
+                <span class="arch-layer-icon">🧠</span>
+                <div class="arch-layer-info">
+                    <h3>RUA Pedagogical Engine</h3>
+                    <p>Recognize (BEEF) → Understand (3C) → Apply (GAP). Every interaction is scaffolded.</p>
+                </div>
+                <span class="arch-layer-badge">The Moat</span>
+            </div>
+            <div class="arch-layer">
+                <span class="arch-layer-num">01</span>
+                <span class="arch-layer-icon">🔌</span>
+                <div class="arch-layer-info">
+                    <h3>AI Provider Layer · API-Agnostic</h3>
+                    <p>OpenAI, Anthropic, DeepSeek, Gemini, Grok, Local Models. Swap anytime.</p>
+                </div>
+                <span class="arch-layer-badge">Infrastructure</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ RUA ENGINE ═══════════════ -->
+<section id="rua">
+    <div class="section-inner">
+        <div class="section-tag">03 · The Moat</div>
+        <h2 class="section-title">RUA: The Pedagogical OS</h2>
+        <p class="section-desc">
+            Anyone can wrap ChatGPT in a quiz maker. Nobody else has RUA — a framework that 
+            makes AI actually work for learning, not just chat with a subject filter. 
+            It's embedded in every prompt, every app, every interaction.
+        </p>
+
+        <div class="rua-cards">
+            <div class="rua-card">
+                <div class="rua-card-letter">R</div>
+                <h3>Recognize</h3>
+                <div class="rua-subtitle">Decompose the Target</div>
+                <p>
+                    <strong>BEEF Framework:</strong> Background, Evidence (CHOP), 
+                    Explanation (SOOI), Feedback. Break any learning goal into 
+                    bite-sized, actionable chunks.
+                </p>
+            </div>
+            <div class="rua-card">
+                <div class="rua-card-letter">U</div>
+                <h3>Understand</h3>
+                <div class="rua-subtitle">Deep Comprehension</div>
+                <p>
+                    <strong>3C Method:</strong> Collocation, Contexts, Connotation. 
+                    Go beyond surface definitions to true understanding — 
+                    what pairs with what, when it applies, what it implies.
+                </p>
+            </div>
+            <div class="rua-card">
+                <div class="rua-card-letter">A</div>
+                <h3>Apply</h3>
+                <div class="rua-subtitle">Deliberate Practice</div>
+                <p>
+                    <strong>GAP System:</strong> Gauge the gap, Analyze root causes, 
+                    Practice with feedback loops. Not just "do more exercises" — 
+                    targeted drilling with AI-powered diagnostics.
+                </p>
+            </div>
+        </div>
+
+        <div style="margin-top: 60px; padding: 40px; background: var(--bg-glass); border: 1px solid var(--border); border-radius: 20px;">
+            <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 16px;">Why RUA Is the Moat</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Without RUA</div>
+                    <div style="font-size: 0.88rem; color: var(--text-dim); line-height: 1.8;">
+                        Quiz → "Generate 10 questions about photosynthesis"<br>
+                        AI Tutor → "Answer student questions about math"<br>
+                        Analytics → "Student got 70% correct"<br>
+                        Prompts → Raw text, no pedagogical structure
+                    </div>
+                </div>
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">With RUA</div>
+                    <div style="font-size: 0.88rem; color: var(--text); line-height: 1.8;">
+                        Quiz → Decomposed into R, U, A question types automatically<br>
+                        AI Tutor → Diagnoses which RUA stage student is stuck at<br>
+                        Analytics → "Strong on Recognize, weak on Apply — GAP analysis"<br>
+                        Prompts → BEEF decomposition, 3C context, GAP feedback
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ BUSINESS MODEL ═══════════════ -->
+<section id="business" style="background:rgba(255,255,255,0.008);">
+    <div class="section-inner">
+        <div class="section-tag">04 · Business Model</div>
+        <h2 class="section-title">Revenue Architecture</h2>
+        <p class="section-desc">
+            Five revenue streams with compounding network effects. Freemium flywheel 
+            that converts creators into evangelists and students into subscribers.
+        </p>
+
+        <div class="revenue-grid">
+            <div class="rev-card">
+                <h4>Teacher Pro</h4>
+                <div class="rev-price">$15<span>/mo</span></div>
+                <div class="rev-desc">Full Studio access, unlimited apps, analytics, priority support. One marketplace sale covers a year of Pro.</div>
+            </div>
+            <div class="rev-card">
+                <h4>Student Plus</h4>
+                <div class="rev-price">$5<span>/mo</span></div>
+                <div class="rev-desc">AI companion, unlimited practice, RUA journal, achievement tracking, offline mode.</div>
+            </div>
+            <div class="rev-card">
+                <h4>School License</h4>
+                <div class="rev-price">$2K–20K<span>/yr</span></div>
+                <div class="rev-desc">SSO, admin dashboard, LMS integration, bulk accounts. Custom pricing for districts.</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; overflow-x: auto;">
+            <table class="proj-table">
+                <thead>
+                    <tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Creator-Teachers</td><td>5,000</td><td>50,000</td><td>200,000</td></tr>
+                    <tr><td>Students</td><td>50,000</td><td>500,000</td><td>2,000,000</td></tr>
+                    <tr><td>Schools</td><td>20</td><td>200</td><td>800</td></tr>
+                    <tr style="border-top: 1px solid var(--border);">
+                        <td>Teacher Pro</td><td class="highlight">$180K</td><td class="highlight">$2.0M</td><td class="highlight">$3.6M</td></tr>
+                    <tr><td>Student Plus</td><td>$60K</td><td>$900K</td><td>$2.4M</td></tr>
+                    <tr><td>School Licenses</td><td>$100K</td><td>$1.5M</td><td>$3.0M</td></tr>
+                    <tr><td>Marketplace (30%)</td><td>$50K</td><td>$600K</td><td>$1.8M</td></tr>
+                    <tr><td>Enterprise</td><td>$50K</td><td>$500K</td><td>$1.2M</td></tr>
+                    <tr><td>Total Revenue</td><td>$440K</td><td>$5.5M</td><td>$12.0M</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top: 40px; padding: 32px; background: var(--bg-glass); border: 1px solid var(--border); border-radius: 16px;">
+            <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 12px;">Unit Economics (at scale)</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <div><span style="color:var(--text-dim); font-size:0.82rem;">Teacher CAC</span><br><strong style="font-size:1.3rem;">$25</strong></div>
+                <div><span style="color:var(--text-dim); font-size:0.82rem;">Teacher LTV</span><br><strong style="font-size:1.3rem; color:var(--gold);">$540</strong></div>
+                <div><span style="color:var(--text-dim); font-size:0.82rem;">LTV:CAC</span><br><strong style="font-size:1.3rem; color:var(--accent);">21:1</strong></div>
+                <div><span style="color:var(--text-dim); font-size:0.82rem;">Gross Margin</span><br><strong style="font-size:1.3rem;">85%</strong></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ GO-TO-MARKET ═══════════════ -->
+<section>
+    <div class="section-inner">
+        <div class="section-tag">05 · Go-to-Market</div>
+        <h2 class="section-title">The Creator Flywheel</h2>
+        <p class="section-desc">
+            Teachers don't need to be sold — they need to see. When one teacher builds 
+            an app that their students love, ten more teachers sign up. That's the flywheel.
+        </p>
+
+        <div class="flywheel">
+            <div class="flywheel-node highlight">Creator Signs Up (Free)</div>
+            <div class="flywheel-arrow">→</div>
+            <div class="flywheel-node">Builds First App in Prompt Studio</div>
+            <div class="flywheel-arrow">→</div>
+            <div class="flywheel-node">Assigns to Students</div>
+            <div class="flywheel-arrow">→</div>
+            <div class="flywheel-node">Students Love It → Share</div>
+            <div class="flywheel-arrow">→</div>
+            <div class="flywheel-node">Other Teachers Join</div>
+            <div class="flywheel-arrow">→</div>
+            <div class="flywheel-node">Creator Earns Money</div>
+            <div class="flywheel-arrow">⟳</div>
+        </div>
+
+        <div class="gtm-flow" style="margin-top: 20px;">
+            <div class="gtm-step">
+                <div class="gtm-step-num">01</div>
+                <h4>Seed the Creators</h4>
+                <p>500 founding teachers. Manual outreach. Free Pro for life. "Founding Creator" badge. Target: ed-tech influencers, RUA workshop alumni.</p>
+                <div style="margin-top: 12px; font-size: 0.7rem; color: var(--accent);">Months 1–6</div>
+            </div>
+            <div class="gtm-arrow">→</div>
+            <div class="gtm-step">
+                <div class="gtm-step-num">02</div>
+                <h4>Organic Flywheel</h4>
+                <p>Teacher creates → students use → other teachers see → join. Ambassador program. ISTE, BETT, SXSW EDU conferences.</p>
+                <div style="margin-top: 12px; font-size: 0.7rem; color: var(--accent);">Months 7–18</div>
+            </div>
+            <div class="gtm-arrow">→</div>
+            <div class="gtm-step">
+                <div class="gtm-step-num">03</div>
+                <h4>Institutional Sales</h4>
+                <p>50 school pilots → 500 by Y3. District partnerships. Publishing deals (Pearson, McGraw-Hill). International localization.</p>
+                <div style="margin-top: 12px; font-size: 0.7rem; color: var(--accent);">Months 19–36</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ ROADMAP ═══════════════ -->
+<section id="roadmap" style="background:rgba(255,255,255,0.008);">
+    <div class="section-inner">
+        <div class="section-tag">06 · Roadmap</div>
+        <h2 class="section-title">From MVP to Ecosystem</h2>
+
+        <div class="roadmap">
+            <div class="roadmap-phase">
+                <div class="roadmap-dot"></div>
+                <div class="roadmap-phase-label">Phase 1</div>
+                <h3>MVP · Ship the Studio</h3>
+                <div class="budget">Budget: $500K · Months 1–6</div>
+                <ul class="roadmap-items">
+                    <li>Prompt Studio with RUA template engine</li>
+                    <li>4 app types: Quiz, Flashcard, AI Tutor, Interactive Story</li>
+                    <li>Basic Classroom OS (roster, assign, track)</li>
+                    <li>Marketplace (free apps initially)</li>
+                    <li>AI provider integration (OpenAI, Anthropic, DeepSeek)</li>
+                </ul>
+            </div>
+            <div class="roadmap-phase">
+                <div class="roadmap-dot"></div>
+                <div class="roadmap-phase-label">Phase 2</div>
+                <h3>v1.0 · Public Launch</h3>
+                <div class="budget">Budget: $500K · Months 7–12</div>
+                <ul class="roadmap-items">
+                    <li>Monetization: Pro ($15/mo) + Paid Marketplace</li>
+                    <li>+4 app types: Game, Virtual Lab, Speaking, Writing Coach</li>
+                    <li>Student mobile app (PWA)</li>
+                    <li>Google Classroom + Clever integration</li>
+                    <li>RUA analytics dashboard</li>
+                </ul>
+            </div>
+            <div class="roadmap-phase">
+                <div class="roadmap-dot"></div>
+                <div class="roadmap-phase-label">Phase 3</div>
+                <h3>v2.0 · Platform Scale</h3>
+                <div class="budget">Budget: $2M · Year 2</div>
+                <ul class="roadmap-items">
+                    <li>Enterprise/school tier with SSO</li>
+                    <li>White-label for publishers</li>
+                    <li>Offline mode, multi-language (中文, Español, العربية)</li>
+                    <li>AI model marketplace (teachers pick their AI backend)</li>
+                    <li>DynamOS Certified Creator program</li>
+                </ul>
+            </div>
+            <div class="roadmap-phase">
+                <div class="roadmap-dot"></div>
+                <div class="roadmap-phase-label">Phase 4</div>
+                <h3>v3.0 · The Ecosystem</h3>
+                <div class="budget">Budget: $5M · Year 3</div>
+                <ul class="roadmap-items">
+                    <li>DynamOS SDK — developers build custom app types</li>
+                    <li>Student portfolio + credential system</li>
+                    <li>Live classroom mode (real-time collaborative learning)</li>
+                    <li>API integrations with every major LMS</li>
+                    <li>DynamOS Research Lab — efficacy studies</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ WHY NOW ═══════════════ -->
+<section>
+    <div class="section-inner">
+        <div class="section-tag">07 · Timing</div>
+        <h2 class="section-title">Why Now?</h2>
+        <p class="section-desc">Four trends converging into one unavoidable opportunity.</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px;">
+            <div style="background: var(--bg-glass); border: 1px solid var(--border); border-radius: 16px; padding: 36px 28px;">
+                <div style="font-size: 2rem; margin-bottom: 16px;">🤖</div>
+                <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">AI Is Ready</h3>
+                <p style="font-size: 0.88rem; color: var(--text-dim);">GPT-4 class models power genuinely useful educational interactions. Costs plummeting weekly. Multimodal is here.</p>
+            </div>
+            <div style="background: var(--bg-glass); border: 1px solid var(--border); border-radius: 16px; padding: 36px 28px;">
+                <div style="font-size: 2rem; margin-bottom: 16px;">👩‍🏫</div>
+                <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Teachers Are Experimenting</h3>
+                <p style="font-size: 0.88rem; color: var(--text-dim);">Every teacher has tried ChatGPT. They want structure, sharing, and tools built for their workflow — not raw chat.</p>
+            </div>
+            <div style="background: var(--bg-glass); border: 1px solid var(--border); border-radius: 16px; padding: 36px 28px;">
+                <div style="font-size: 2rem; margin-bottom: 16px;">💰</div>
+                <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Creator Economy Is Proven</h3>
+                <p style="font-size: 0.88rem; color: var(--text-dim);">Roblox, Substack, Gumroad, Canva — "build once, monetize forever" works. It hasn't reached education yet.</p>
+            </div>
+            <div style="background: var(--bg-glass); border: 1px solid var(--border); border-radius: 16px; padding: 36px 28px; border-color: var(--border-bright);">
+                <div style="font-size: 2rem; margin-bottom: 16px;">🧠</div>
+                <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">RUA Is the Missing Piece</h3>
+                <p style="font-size: 0.88rem; color: var(--text-dim);">The world has AI tools. Nobody has a pedagogical framework that makes AI work specifically for learning. RUA fills that gap.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section class="cta-section" id="cta">
+    <div class="section-inner">
+        <h2>Every Teacher<br><span class="gradient-text">a Creator.</span></h2>
+        <p>DynamOS is seeking a technical co-founder and $1.5M pre-seed to build the MVP, onboard the first 500 founding creators, and validate the marketplace.</p>
+        <a href="mailto:hermitclaw@outlook.com?subject=DynamOS" class="cta-btn">Join the Mission →</a>
+    </div>
+</section>
+
+<footer>
+    <p>DynamOS · Built on <a href="https://rkrk.io">RUA</a> · Powered by AI · Fueled by Teachers</p>
+    <p style="margin-top: 8px;">© 2026 Kee Lee / rkrk.io · <a href="https://rkrk.io">Home</a> · <a href="dynamos/phonics.html">First DynApp →</a></p>
+</footer>
+
+</body>
+</html>

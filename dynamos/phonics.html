@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Connected Speech Pro — DynamOS</title>
+<meta name="description" content="18 interactive flip cards for mastering English connected speech. Built on the DynamOS platform.">
+<meta property="og:title" content="Connected Speech Pro — First DynamOS App">
+<meta property="og:description" content="Master 18 connected speech techniques with interactive flip cards, song lyrics, and phonetic breakdowns.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════ DYNAMOS APP FRAME ═══════════════ */
+:root {
+    --dyn-accent: #ff6b35;
+    --dyn-gold: #ffd700;
+    --dyn-bg: #04060a;
+    --dyn-card-bg: #ffffff;
+    --dyn-text: #1d1d1f;
+    --dyn-text-dim: #86868b;
+    --dyn-border: rgba(255,107,53,0.2);
+    --r-recognize: #3b82f6;
+    --r-understand: #8b5cf6;
+    --r-apply: #f59e0b;
+    --am-color: #fa243c;
+    --card-radius: 24px;
+    --shadow-float: 0 18px 40px rgba(0,0,0,0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+
+body {
+    font-family: 'Outfit', 'Inter', sans-serif;
+    background: #f4f4f7;
+    color: var(--dyn-text);
+    padding-bottom: 60px;
+    line-height: 1.5;
+}
+
+/* ── DynamOS App Bar ── */
+.dyn-bar {
+    background: var(--dyn-bg);
+    color: #fff;
+    padding: 14px 24px;
+    display: flex; align-items: center; gap: 16px;
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 1px solid var(--dyn-border);
+    backdrop-filter: blur(20px);
+}
+.dyn-logo {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, var(--dyn-accent), var(--dyn-gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-decoration: none; white-space: nowrap;
+}
+.dyn-bar-sep { width: 1px; height: 24px; background: rgba(255,255,255,0.15); }
+.dyn-app-title {
+    font-size: 0.9rem; font-weight: 600; flex: 1;
+}
+.dyn-rua-badges { display: flex; gap: 6px; }
+.dyn-rua-badge {
+    font-family: 'Space Mono', monospace; font-size: 0.65rem;
+    font-weight: 700; padding: 4px 10px; border-radius: 6px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+}
+.dyn-rua-badge.r { background: rgba(59,130,246,0.2); color: var(--r-recognize); }
+.dyn-rua-badge.u { background: rgba(139,92,246,0.2); color: var(--r-understand); }
+.dyn-rua-badge.a { background: rgba(245,158,11,0.2); color: var(--r-apply); }
+.dyn-creator {
+    font-size: 0.75rem; color: rgba(255,255,255,0.5);
+    display: flex; align-items: center; gap: 6px;
+}
+
+/* ── Main Container ── */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+/* ── App Header ── */
+.app-header {
+    text-align: center; margin-bottom: 60px; padding-top: 20px;
+}
+.app-header h1 {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+    margin-bottom: 8px;
+    background: linear-gradient(180deg, #111 0%, #333 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.app-meta {
+    font-size: 0.85rem; color: var(--dyn-text-dim);
+    display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 12px;
+}
+.app-meta span {
+    display: flex; align-items: center; gap: 6px;
+}
+.app-meta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--dyn-text-dim); }
+
+/* ── RUA Stage Banner ── */
+.rua-banner {
+    display: flex; gap: 0; max-width: 800px; margin: 0 auto 80px;
+    border-radius: 16px; overflow: hidden; border: 1px solid #e5e5ea;
+}
+.rua-banner-step {
+    flex: 1; padding: 20px 24px; text-align: center;
+    position: relative;
+}
+.rua-banner-step:not(:last-child)::after {
+    content: '→'; position: absolute; right: -8px; top: 50%;
+    transform: translateY(-50%); font-size: 1rem; color: #ccc; z-index: 1;
+}
+.rua-banner-step:nth-child(1) { background: rgba(59,130,246,0.06); }
+.rua-banner-step:nth-child(2) { background: rgba(139,92,246,0.06); }
+.rua-banner-step:nth-child(3) { background: rgba(245,158,11,0.06); }
+.rua-banner-letter {
+    font-family: 'Syncopate', sans-serif; font-size: 1.6rem; font-weight: 700;
+    margin-bottom: 2px;
+}
+.rua-banner-step:nth-child(1) .rua-banner-letter { color: var(--r-recognize); }
+.rua-banner-step:nth-child(2) .rua-banner-letter { color: var(--r-understand); }
+.rua-banner-step:nth-child(3) .rua-banner-letter { color: var(--r-apply); }
+.rua-banner-label {
+    font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--dyn-text-dim);
+}
+
+/* ── Section Styling ── */
+.section-header {
+    display: flex; align-items: center; gap: 20px;
+    margin: 80px 0 40px; padding-left: 10px; position: relative;
+}
+.sec-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 5rem; color: rgba(0,0,0,0.05);
+    line-height: 0.8; font-weight: 700;
+}
+.sec-info h2 { font-size: 2rem; font-weight: 800; line-height: 1; color: #111; }
+.sec-info span {
+    font-size: 0.85rem; font-weight: 600;
+    text-transform: uppercase; color: var(--dyn-text-dim);
+    letter-spacing: 1.5px;
+}
+/* RUA stage tag on section */
+.rua-stage-tag {
+    display: inline-block; margin-top: 6px;
+    font-family: 'Space Mono', monospace; font-size: 0.65rem;
+    font-weight: 700; padding: 4px 10px; border-radius: 6px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+}
+.rua-stage-tag.r { background: rgba(59,130,246,0.12); color: var(--r-recognize); }
+.rua-stage-tag.u { background: rgba(139,92,246,0.12); color: var(--r-understand); }
+.rua-stage-tag.a { background: rgba(245,158,11,0.12); color: var(--r-apply); }
+
+/* ── Grid ── */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 40px;
+}
+
+/* ── Card Engine ── */
+.card-wrapper {
+    perspective: 1500px; height: 600px; cursor: pointer;
+}
+.card-inner {
+    position: relative; width: 100%; height: 100%;
+    transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-style: preserve-3d;
+}
+.card-wrapper.flipped .card-inner { transform: rotateY(180deg); }
+.card-face {
+    position: absolute; width: 100%; height: 100%;
+    backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow-float);
+    padding: 36px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.8);
+}
+.card-face.front { z-index: 2; transform: rotateY(0deg); background: #ffffff; }
+.skill-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; }
+.s-title { font-size: 1.8rem; font-weight: 800; line-height: 1; margin-bottom: 8px; color: #1d1d1f; }
+.s-term {
+    font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+    color: #6e6e73; background: #f5f5f7; padding: 6px 12px; border-radius: 8px;
+    display: inline-block;
+}
+.s-id { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: #f0f0f0; }
+.rule-pill {
+    background: #fbfbfd; border-left: 5px solid #007aff;
+    padding: 20px; border-radius: 0 16px 16px 0;
+    font-size: 1.05rem; font-weight: 600; color: #111; margin-bottom: 30px;
+}
+.ex-list { flex-grow: 1; }
+.ex-row {
+    font-size: 1.25rem; font-weight: 600; margin-bottom: 14px;
+    display: flex; align-items: flex-start; gap: 12px; color: #333; line-height: 1.3;
+}
+.ex-row::before { content: "•"; color: #d2d2d7; font-size: 1.5rem; line-height: 1; }
+.tap-hint {
+    margin-top: auto; text-align: center; font-size: 0.8rem;
+    font-weight: 800; color: #d2d2d7;
+    text-transform: uppercase; letter-spacing: 1px;
+}
+
+/* ── Back Face ── */
+.card-face.back { transform: rotateY(180deg); z-index: 1; }
+.glass-panel {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+    border-radius: 20px; padding: 24px;
+    height: 100%; display: flex; flex-direction: column;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+.sound-lab {
+    text-align: center; margin-bottom: 24px;
+    padding-bottom: 20px; border-bottom: 1px dashed rgba(0,0,0,0.1);
+    min-height: 80px; display: flex; flex-direction: column; justify-content: center;
+}
+.lab-head {
+    font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #999;
+    margin-bottom: 12px; letter-spacing: 1px; cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.1); display: inline-block;
+    padding: 4px 12px; border-radius: 20px;
+    align-self: center; transition: all 0.3s;
+}
+.lab-head:hover { background: var(--dyn-accent); color: white; border-color: var(--dyn-accent); }
+.phonetic {
+    font-size: 1.5rem; font-weight: 800; color: #111;
+    display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
+    opacity: 0; transform: translateY(10px);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    pointer-events: none;
+}
+.phonetic.revealed { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.arrow { color: #ccc; }
+.res {
+    color: #fff; padding: 4px 12px; border-radius: 8px;
+    background-size: 200% auto; animation: shine 3s linear infinite;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+.lyrics-box { text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+.lyric-text { font-size: 1.3rem; line-height: 1.4; font-style: italic; color: #333; margin-bottom: 10px; }
+.hl, .hl-gold {
+    background: #e0e0e0; color: transparent; padding: 0 8px; border-radius: 6px;
+    cursor: pointer; transition: all 0.4s ease;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05); user-select: none;
+}
+.hl:hover, .hl-gold:hover { transform: scale(1.05); background: #d0d0d0; }
+.hl.revealed { background: #e0f2fe; color: #0284c7; cursor: default; transform: scale(1); box-shadow: none; }
+.hl-gold.revealed {
+    background: linear-gradient(90deg, #b48811, #ffd700, #b48811);
+    background-size: 200% auto;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    font-weight: 900; animation: shine 3s linear infinite;
+    cursor: default; transform: scale(1);
+}
+@keyframes shine { to { background-position: 200% center; } }
+.artist { font-size: 0.9rem; font-weight: 700; color: #777; margin-top: 10px; }
+.play-btn {
+    background: var(--am-color); color: white; text-decoration: none;
+    padding: 18px; border-radius: 18px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    transition: transform 0.2s; margin-top: auto;
+    box-shadow: 0 8px 20px rgba(250, 36, 60, 0.25);
+}
+.play-btn:active { transform: scale(0.98); }
+.play-btn svg { width: 22px; height: 22px; fill: white; }
+
+/* ── Section Rule Colors ── */
+.sec-power .rule-pill { border-left-color: #ff9500; }
+.sec-mix .rule-pill { border-left-color: #af52de; }
+.sec-speed .rule-pill { border-left-color: #34c759; }
+
+/* ── DynamOS Footer ── */
+.dyn-footer {
+    margin-top: 100px; padding: 40px 0;
+    text-align: center; border-top: 1px solid #e5e5ea;
+}
+.dyn-footer-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: linear-gradient(135deg, var(--dyn-accent), #e55d2b);
+    color: #fff; padding: 16px 36px; border-radius: 14px;
+    font-weight: 700; font-size: 1rem; text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+    margin-bottom: 24px;
+}
+.dyn-footer-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,107,53,0.35); }
+.dyn-footer-text {
+    font-size: 0.8rem; color: var(--dyn-text-dim);
+}
+.dyn-footer-text a { color: var(--dyn-accent); text-decoration: none; font-weight: 600; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .card-wrapper { height: 520px; }
+    .dyn-bar { flex-wrap: wrap; gap: 8px; padding: 10px 16px; }
+    .dyn-rua-badges { order: 1; width: 100%; justify-content: flex-start; }
+    .rua-banner { flex-direction: column; }
+    .rua-banner-step:not(:last-child)::after { content: '↓'; right: 50%; top: auto; bottom: -4px; transform: translateX(50%); }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ DYNAMOS APP BAR ═══════════════ -->
+<div class="dyn-bar">
+    <a href="/dynamos" class="dyn-logo">DynamOS</a>
+    <div class="dyn-bar-sep"></div>
+    <div class="dyn-app-title">Connected Speech Pro</div>
+    <div class="dyn-rua-badges">
+        <span class="dyn-rua-badge r">R</span>
+        <span class="dyn-rua-badge u">U</span>
+        <span class="dyn-rua-badge a">A</span>
+    </div>
+    <div class="dyn-bar-sep"></div>
+    <div class="dyn-creator">👤 Kee Lee · SrKeeda</div>
+</div>
+
+<div class="container">
+
+    <!-- ── App Header ── -->
+    <div class="app-header">
+        <h1>Connected Speech Pro</h1>
+        <div class="app-meta">
+            <span>📚 18 Cards</span><span class="dot"></span>
+            <span>🎵 18 Songs</span><span class="dot"></span>
+            <span>🎓 IELTS Speaking</span><span class="dot"></span>
+            <span>📱 DynApp #001</span>
+        </div>
+    </div>
+
+    <!-- ── RUA Stage Banner ── -->
+    <div class="rua-banner">
+        <div class="rua-banner-step">
+            <div class="rua-banner-letter">R</div>
+            <div class="rua-banner-label">Recognize</div>
+            <div style="font-size:0.7rem;color:var(--dyn-text-dim);margin-top:4px;">Hear the patterns</div>
+        </div>
+        <div class="rua-banner-step">
+            <div class="rua-banner-letter">U</div>
+            <div class="rua-banner-label">Understand</div>
+            <div style="font-size:0.7rem;color:var(--dyn-text-dim);margin-top:4px;">Know the rules</div>
+        </div>
+        <div class="rua-banner-step">
+            <div class="rua-banner-letter">A</div>
+            <div class="rua-banner-label">Apply</div>
+            <div style="font-size:0.7rem;color:var(--dyn-text-dim);margin-top:4px;">Speak it naturally</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SECTION 01: THE FLOW ═══════════════ -->
+    <div class="section-header">
+        <span class="sec-num">01</span>
+        <div class="sec-info">
+            <h2>The Flow</h2>
+            <span>Linking & Catenation</span>
+            <div class="rua-stage-tag r">R · Recognize</div>
+        </div>
+    </div>
+
+    <div class="grid">
+        <!-- Card 01: C+V Linking -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">C+V Linking</div><div class="s-term">Catenation</div></div>
+                        <div class="s-id">01</div>
+                    </div>
+                    <div class="rule-pill">Consonant ending moves to the next Vowel.</div>
+                    <div class="ex-list">
+                        <div class="ex-row">Please take a look at it.</div>
+                        <div class="ex-row">Not at all, thank you.</div>
+                        <div class="ex-row">Time is up, pencils down.</div>
+                    </div>
+                    <div class="tap-hint">Tap for Golden Hour</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #FF7E5F, #FEB47B);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Tap to Reveal Rule 👁️</div>
+                            <div class="phonetic">Beam in <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #F2994A, #F2C94C, #F2994A);">Bea-min</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"My radiant <span class="hl-gold" onclick="revealLyric(this, event)">beam in</span> the night"</div>
+                            <div class="artist">Golden Hour • JVKE</div>
+                        </div>
+                        <a href="#" onclick="openMusic('Golden Hour JVKE', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 02: Intrusion /w/ -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">Intrusion /w/</div><div class="s-term">Vowel Intrusion</div></div>
+                        <div class="s-id">02</div>
+                    </div>
+                    <div class="rule-pill">Words ending in /u:/ or /o/ add a /w/ sound.</div>
+                    <div class="ex-list">
+                        <div class="ex-row">I can do it myself.</div>
+                        <div class="ex-row">Go on with your work.</div>
+                        <div class="ex-row">How often do you swim?</div>
+                    </div>
+                    <div class="tap-hint">Tap for Vibes</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Tap to Reveal Rule 👁️</div>
+                            <div class="phonetic">You and <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #8E2DE2, #4A00E0, #8E2DE2);">You-(w)and</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"<span class="hl" onclick="revealLyric(this, event)">You and</span> I (stargazing)"</div>
+                            <div class="artist">Stargazing • Myles Smith</div>
+                        </div>
+                        <a href="#" onclick="openMusic('Stargazing Myles Smith', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 03: Intrusion /j/ -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">Intrusion /j/</div><div class="s-term">Vowel Intrusion</div></div>
+                        <div class="s-id">03</div>
+                    </div>
+                    <div class="rule-pill">Words ending in /i:/ or /eɪ/ add a /j/ (y) sound.</div>
+                    <div class="ex-list">
+                        <div class="ex-row">I am afraid of that.</div>
+                        <div class="ex-row">Hurry up or we'll be late.</div>
+                        <div class="ex-row">Come to see us off.</div>
+                    </div>
+                    <div class="tap-hint">Tap for Lyrics</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #89f7fe, #66a6ff);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Tap to Reveal Rule 👁️</div>
+                            <div class="phonetic">Stay awhile <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #2193b0, #6dd5ed, #2193b0);">Stay-(y)awhile</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"I'd <span class="hl" onclick="revealLyric(this, event)">stay awhile</span>, stay awhile"</div>
+                            <div class="artist">I Like Me Better • Lauv</div>
+                        </div>
+                        <a href="#" onclick="openMusic('I Like Me Better Lauv', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 04: Linking R -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">Linking R</div><div class="s-term">Rhoticity</div></div>
+                        <div class="s-id">04</div>
+                    </div>
+                    <div class="rule-pill">Silent 'R' is pronounced before a vowel.</div>
+                    <div class="ex-list">
+                        <div class="ex-row">It is very far away.</div>
+                        <div class="ex-row">There is no time left.</div>
+                        <div class="ex-row">I will love you forever.</div>
+                    </div>
+                    <div class="tap-hint">Tap for Lyrics</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #00c6ff, #0072ff);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Tap to Reveal Rule 👁️</div>
+                            <div class="phonetic">Bar is <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #24C6DC, #514A9D, #24C6DC);">Ba-riz</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"The <span class="hl" onclick="revealLyric(this, event)">bar is</span> where I go"</div>
+                            <div class="artist">Shape of You • Ed Sheeran</div>
+                        </div>
+                        <a href="#" onclick="openMusic('Shape of You Ed Sheeran', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SECTION 02: POWER CONTROL ═══════════════ -->
+    <div class="section-header">
+        <span class="sec-num">02</span>
+        <div class="sec-info">
+            <h2>Power Control</h2>
+            <span>Stops & Plosion</span>
+            <div class="rua-stage-tag u">U · Understand</div>
+        </div>
+    </div>
+
+    <div class="grid sec-power">
+        <!-- Card 05: Held Stops -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">Held Stops</div><div class="s-term">No Release</div></div>
+                        <div class="s-id">05</div>
+                    </div>
+                    <div class="rule-pill">Stop+Stop. Hold the first, release the second.</div>
+                    <div class="ex-list">
+                        <div class="ex-row">That is a big cake.</div>
+                        <div class="ex-row">Sit behind me please.</div>
+                        <div class="ex-row">Take care of yourself.</div>
+                    </div>
+                    <div class="tap-hint">Tap for Vibes</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #00c6ff, #0072ff);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Tap to Reveal Rule 👁️</div>
+                            <div class="phonetic">Roommate back <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #24C6DC, #514A9D, #24C6DC);">Roomma(t)-back</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"From your <span class="hl" onclick="revealLyric(this, event)">roommate back</span> in Boulder"</div>
+                            <div class="artist">Shape of You • Ed Sheeran</div>
+                        </div>
+                        <a href="#" onclick="openMusic('Shape of You Ed Sheeran', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 06: Friction Merge -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">Friction Merge</div><div class="s-term">Incomplete</div></div>
+                        <div class="s-id">06</div>
+                    </div>
+                    <div class="rule-pill">Stop + Fricative. Stop merges softly.</div>
+                    <div class="ex-list">
+                        <div class="ex-row">I don't think so.</div>
+                        <div class="ex-row">You did a good job.</div>
+                        <div class="ex-row">That joke was funny.</div>
+                    </div>
+                    <div class="tap-hint">Tap for Lyrics</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #56ab2f, #a8e063);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Tap to Reveal Rule 👁️</div>
+                            <div class="phonetic">Light switch <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #DCE35B, #45B649, #DCE35B); color: #333;">Ligh[t]-switch</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"Turn me on like a <span class="hl" onclick="revealLyric(this, event)">light switch</span>"</div>
+                            <div class="artist">Light Switch • Charlie Puth</div>
+                        </div>
+                        <a href="#" onclick="openMusic('Light Switch Charlie Puth', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 07: Nose Pop -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">Nose Pop</div><div class="s-term">Nasal Plosion</div></div>
+                        <div class="s-id">07</div>
+                    </div>
+                    <div class="rule-pill">Stop + N. Explode air via nose.</div>
+                    <div class="ex-list">
+                        <div class="ex-row">Say good night to him.</div>
+                        <div class="ex-row">Good morning everyone.</div>
+                        <div class="ex-row">Let me help you.</div>
+                    </div>
+                    <div class="tap-hint">Tap for Lyrics</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #000428, #004e92);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Tap to Reveal Rule 👁️</div>
+                            <div class="phonetic">Midnight <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #2C5364, #203A43, #2C5364);">Mid-night</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"He was sunshine, I was <span class="hl" onclick="revealLyric(this, event)">midnight</span> rain"</div>
+                            <div class="artist">Midnight Rain • Taylor Swift</div>
+                        </div>
+                        <a href="#" onclick="openMusic('Midnight Rain Taylor Swift', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 08: Throat Catch -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">Throat Catch</div><div class="s-term">Glottal Stop</div></div>
+                        <div class="s-id">08</div>
+                    </div>
+                    <div class="rule-pill">Swallow the 'T' in your throat.</div>
+                    <div class="ex-list">
+                        <div class="ex-row">Just a little bit.</div>
+                        <div class="ex-row">Where have you been lately?</div>
+                        <div class="ex-row">He was badly hurt.</div>
+                    </div>
+                    <div class="tap-hint">Tap for Lyrics</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #141E30, #243B55);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Phonetic Shift 👁️</div>
+                            <div class="phonetic">Let it <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #bdc3c7, #2c3e50, #bdc3c7);">Le' it</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"<span class="hl" onclick="revealLyric(this, event)">Let it</span> burn"</div>
+                            <div class="artist">Set Fire to the Rain • Adele</div>
+                        </div>
+                        <a href="#" onclick="openMusic('Set Fire to the Rain Adele', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SECTION 03: THE MIX ═══════════════ -->
+    <div class="section-header">
+        <span class="sec-num">03</span>
+        <div class="sec-info">
+            <h2>The Mix</h2>
+            <span>Assimilation</span>
+            <div class="rua-stage-tag a">A · Apply</div>
+        </div>
+    </div>
+
+    <div class="grid sec-mix">
+        <!-- Card 09: Yod (T) -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">Yod (T)</div><div class="s-term">Coalescence</div></div>
+                        <div class="s-id">09</div>
+                    </div>
+                    <div class="rule-pill">T + Y = CH (/tʃ/)</div>
+                    <div class="ex-list">
+                        <div class="ex-row">Nice to meet you.</div>
+                        <div class="ex-row">Why don't you go?</div>
+                        <div class="ex-row">Would you like some?</div>
+                    </div>
+                    <div class="tap-hint">Tap for K-Pop</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #ec008c, #fc6767);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Phonetic Shift 👁️</div>
+                            <div class="phonetic">Don't you <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #ef473a, #cb2d3e, #ef473a);">Don-chu</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"<span class="hl" onclick="revealLyric(this, event)">Don't you</span> want me like I want you"</div>
+                            <div class="artist">APT. • ROSÉ & Bruno Mars</div>
+                        </div>
+                        <a href="#" onclick="openMusic('APT ROSE Bruno Mars', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 10: Yod (S/Z) -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">Yod (S/Z)</div><div class="s-term">Coalescence</div></div>
+                        <div class="s-id">10</div>
+                    </div>
+                    <div class="rule-pill">S+Y=SH | Z+Y=ZH</div>
+                    <div class="ex-list">
+                        <div class="ex-row">God bless you.</div>
+                        <div class="ex-row">I miss you every day.</div>
+                        <div class="ex-row">How is your family?</div>
+                    </div>
+                    <div class="tap-hint">Tap for Lyrics</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #e6dee9, #b794f6);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Tap to Reveal Rule 👁️</div>
+                            <div class="phonetic">Kiss you <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #d4fc79, #96e6a1, #d4fc79); color:#444;">Ki-shu</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"I wanna <span class="hl" onclick="revealLyric(this, event)">kiss you</span>, don't wanna miss you"</div>
+                            <div class="artist">Boyfriend • Ariana Grande</div>
+                        </div>
+                        <a href="#" onclick="openMusic('Boyfriend Ariana Grande Social House', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 11: Energy Drain -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">Energy Drain</div><div class="s-term">Devoicing</div></div>
+                        <div class="s-id">11</div>
+                    </div>
+                    <div class="rule-pill">Strong P/T/K drains energy from V/Z/D.</div>
+                    <div class="ex-list">
+                        <div class="ex-row">Read the newspaper.</div>
+                        <div class="ex-row">I have to go now.</div>
+                        <div class="ex-row">I used to live there.</div>
+                    </div>
+                    <div class="tap-hint">Tap for Lyrics</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #D31027, #EA384D);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Tap to Reveal Rule 👁️</div>
+                            <div class="phonetic">Used to <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #2193b0, #6dd5ed, #2193b0);">Use-to</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"We <span class="hl" onclick="revealLyric(this, event)">used to</span> play pretend"</div>
+                            <div class="artist">Stressed Out • Twenty One Pilots</div>
+                        </div>
+                        <a href="#" onclick="openMusic('Stressed Out Twenty One Pilots', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 12: Consonant Blend -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">Consonant Blend</div><div class="s-term">Simplification</div></div>
+                        <div class="s-id">12</div>
+                    </div>
+                    <div class="rule-pill">Similar sounds blend together (e.g. /z/+/ð/).</div>
+                    <div class="ex-list">
+                        <div class="ex-row">It was a big game.</div>
+                        <div class="ex-row">Wait at the bus stop.</div>
+                        <div class="ex-row">Is this yours?</div>
+                    </div>
+                    <div class="tap-hint">Tap for Lyrics</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #434343, #000000);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Tap to Reveal Rule 👁️</div>
+                            <div class="phonetic">Things that <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #bdc3c7, #2c3e50, #bdc3c7);">Things-(th)at</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"Don't take these beautiful <span class="hl" onclick="revealLyric(this, event)">things that</span> I've got"</div>
+                            <div class="artist">Beautiful Things • Benson Boone</div>
+                        </div>
+                        <a href="#" onclick="openMusic('Beautiful Things Benson Boone', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SECTION 04: SPEED MODE ═══════════════ -->
+    <div class="section-header">
+        <span class="sec-num">04</span>
+        <div class="sec-info">
+            <h2>Speed Mode</h2>
+            <span>Reductions</span>
+            <div class="rua-stage-tag a">A · Apply</div>
+        </div>
+    </div>
+
+    <div class="grid sec-speed">
+        <!-- Card 13: Cluster Crusher -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">Cluster Crusher</div><div class="s-term">Elision</div></div>
+                        <div class="s-id">13</div>
+                    </div>
+                    <div class="rule-pill">Drop middle /t/ or /d/ in clusters.</div>
+                    <div class="ex-list">
+                        <div class="ex-row">It was last night.</div>
+                        <div class="ex-row">He is a strict father.</div>
+                        <div class="ex-row">I have no facts.</div>
+                    </div>
+                    <div class="tap-hint">Tap for Lyrics</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #141E30, #243B55);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Phonetic Shift 👁️</div>
+                            <div class="phonetic">Last things <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #F37335, #FDC830, #F37335);">Las-things</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"First things first... <span class="hl" onclick="revealLyric(this, event)">last things</span> last"</div>
+                            <div class="artist">Believer • Imagine Dragons</div>
+                        </div>
+                        <a href="#" onclick="openMusic('Believer Imagine Dragons', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 14: Killer N -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">Killer N</div><div class="s-term">NT Reduction</div></div>
+                        <div class="s-id">14</div>
+                    </div>
+                    <div class="rule-pill">/t/ vanishes after /n/ (AmE).</div>
+                    <div class="ex-list">
+                        <div class="ex-row">Surfing the Internet.</div>
+                        <div class="ex-row">She is twenty years old.</div>
+                        <div class="ex-row">An international student.</div>
+                    </div>
+                    <div class="tap-hint">Tap for Lyrics</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #b92b27, #1565C0);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Tap to Reveal Rule 👁️</div>
+                            <div class="phonetic">Twenty-two <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #ff9966, #ff5e62, #ff9966);">Twunny-two</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"I don't know about you, but I'm feeling <span class="hl" onclick="revealLyric(this, event)">22</span>"</div>
+                            <div class="artist">22 • Taylor Swift</div>
+                        </div>
+                        <a href="#" onclick="openMusic('22 Taylor Swift', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 15: Grammar Glue -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">Grammar Glue</div><div class="s-term">Contractions</div></div>
+                        <div class="s-id">15</div>
+                    </div>
+                    <div class="rule-pill">Wanna, Gonna, Gotta.</div>
+                    <div class="ex-list">
+                        <div class="ex-row">I wanna go home.</div>
+                        <div class="ex-row">I'm gonna study abroad.</div>
+                        <div class="ex-row">I gotta see you.</div>
+                    </div>
+                    <div class="tap-hint">Tap for Lyrics</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Phonetic Shift 👁️</div>
+                            <div class="phonetic">I'm going to <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #f77062, #fe5196, #f77062);">I'm gonna</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"I'm <span class="hl" onclick="revealLyric(this, event)">gonna</span> keep it simple"</div>
+                            <div class="artist">Nonsense • Sabrina Carpenter</div>
+                        </div>
+                        <a href="#" onclick="openMusic('Nonsense Sabrina Carpenter', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 16: Ghost Pronouns -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">Ghost Pronouns</div><div class="s-term">H-Dropping</div></div>
+                        <div class="s-id">16</div>
+                    </div>
+                    <div class="rule-pill">Drop 'h' in he/him/her.</div>
+                    <div class="ex-list">
+                        <div class="ex-row">Give him a call.</div>
+                        <div class="ex-row">Please call her now.</div>
+                        <div class="ex-row">Did you tell him?</div>
+                    </div>
+                    <div class="tap-hint">Tap for Lyrics</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #FDC830, #F37335);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Phonetic Shift 👁️</div>
+                            <div class="phonetic">Found her <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #1f4037, #99f2c8, #1f4037);">Found-er</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"Until I <span class="hl" onclick="revealLyric(this, event)">found her</span>"</div>
+                            <div class="artist">Until I Found You • Stephen Sanchez</div>
+                        </div>
+                        <a href="#" onclick="openMusic('Until I Found You Stephen Sanchez', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 17: The Lazy Sound -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">The Lazy Sound</div><div class="s-term">Schwa /ə/</div></div>
+                        <div class="s-id">17</div>
+                    </div>
+                    <div class="rule-pill">Function words (at, to, for) reduce to "uh".</div>
+                    <div class="ex-list">
+                        <div class="ex-row">You and me.</div>
+                        <div class="ex-row">Half an hour.</div>
+                        <div class="ex-row">Rock n roll.</div>
+                    </div>
+                    <div class="tap-hint">Tap for Lyrics</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #FDC830, #F37335);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Phonetic Shift 👁️</div>
+                            <div class="phonetic">Used to <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #fce38a, #f38181, #fce38a);">Used-tə</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"I used <span class="hl" onclick="revealLyric(this, event)">to</span> float, now I just fall down"</div>
+                            <div class="artist">What Was I Made For? • Billie Eilish</div>
+                        </div>
+                        <a href="#" onclick="openMusic('What Was I Made For Billie Eilish', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 18: Flapping -->
+        <div class="card-wrapper" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-face front">
+                    <div class="skill-header">
+                        <div><div class="s-title">Flapping</div><div class="s-term">T-Voicing</div></div>
+                        <div class="s-id">18</div>
+                    </div>
+                    <div class="rule-pill">T between vowels = Fast D.</div>
+                    <div class="ex-list">
+                        <div class="ex-row">Drink some water.</div>
+                        <div class="ex-row">New York City.</div>
+                        <div class="ex-row">Sooner the better.</div>
+                    </div>
+                    <div class="tap-hint">Tap for Lyrics</div>
+                </div>
+                <div class="card-face back" style="background: linear-gradient(135deg, #84fab0, #8fd3f4);">
+                    <div class="glass-panel">
+                        <div class="sound-lab">
+                            <div class="lab-head" onclick="revealPhonetic(this, event)">Phonetic Shift 👁️</div>
+                            <div class="phonetic">City <span class="arrow">→</span> <span class="res" style="background-image: linear-gradient(90deg, #7F7FD5, #86A8E7, #91EAE4);">Ci-dy</span></div>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyric-text">"Shining through the <span class="hl" onclick="revealLyric(this, event)">city</span> with a little funk and soul"</div>
+                            <div class="artist">Dynamite • BTS</div>
+                        </div>
+                        <a href="#" onclick="openMusic('Dynamite BTS', event)" class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Search on Music
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ DYNAMOS FOOTER ═══════════════ -->
+    <div class="dyn-footer">
+        <a href="#" class="dyn-footer-cta" onclick="alert('Remix coming soon! Clone this app with one tap and customize it for your students. 🧬'); return false;">
+            🧬 Remix This App
+        </a>
+        <p class="dyn-footer-text">
+            <strong>DynApp #001</strong> · Connected Speech Pro · Created by <a href="https://rkrk.io">Kee Lee / SrKeeda</a><br>
+            Powered by <a href="/dynamos">DynamOS</a> · Built on RUA · First DynApp deployed May 2026
+        </p>
+    </div>
+</div>
+
+<script>
+function flipCard(cardWrapper) {
+    cardWrapper.classList.toggle('flipped');
+    if (!cardWrapper.classList.contains('flipped')) {
+        setTimeout(() => { resetCard(cardWrapper); }, 700);
+    }
+}
+function revealLyric(element, event) {
+    event.stopPropagation();
+    element.classList.add('revealed');
+}
+function revealPhonetic(headerElement, event) {
+    event.stopPropagation();
+    const phoneticBox = headerElement.parentElement.querySelector('.phonetic');
+    if (phoneticBox) phoneticBox.classList.add('revealed');
+}
+function resetCard(cardWrapper) {
+    cardWrapper.querySelectorAll('.revealed').forEach(item => item.classList.remove('revealed'));
+}
+function openMusic(term, event) {
+    event.stopPropagation();
+    event.preventDefault();
+    window.location.href = `music://music.apple.com/search?term=${encodeURIComponent(term)}`;
+}
+</script>
+</body>
+</html>
