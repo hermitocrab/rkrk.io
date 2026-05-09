@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>DynaDict — RUA-Powered AI Dictionary</title>
+<meta name="description" content="DynaDict: A 4-in-1 AI language tool. Dictionary, Translator, Grammar Doctor, IELTS Coach. Built on the RUA framework.">
+<meta property="og:title" content="DynaDict — RUA-Powered AI Dictionary">
+<meta property="og:description" content="Every word lookup follows Recognize → Understand → Apply. Hobby-threaded, cross-linguistic, prompt-native.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --dyn-accent: #ff6b35;
+    --dyn-accent2: #ff8c42;
+    --dyn-gold: #ffd700;
+    --dyn-bg: #04060a;
+    --dyn-card-bg: #ffffff;
+    --dyn-text: #1d1d1f;
+    --dyn-text-dim: #86868b;
+    --dyn-border: rgba(255,107,53,0.2);
+    --r-recognize: #3b82f6;
+    --r-understand: #8b5cf6;
+    --r-apply: #f59e0b;
+    --bg-page: #f4f4f7;
+    --shadow-card: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+body {
+    font-family: 'Outfit', 'Inter', sans-serif;
+    background: var(--bg-page);
+    color: var(--dyn-text);
+    line-height: 1.5;
+    padding-bottom: 60px;
+}
+
+/* ═══════════════ DYNAMOS APP BAR ═══════════════ */
+.dyn-bar {
+    background: var(--dyn-bg);
+    color: #fff; padding: 14px 24px;
+    display: flex; align-items: center; gap: 16px;
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 1px solid var(--dyn-border);
+}
+.dyn-logo {
+    font-family: 'Syncopate', sans-serif; font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, var(--dyn-accent), var(--dyn-gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-decoration: none; white-space: nowrap;
+}
+.dyn-bar-sep { width: 1px; height: 24px; background: rgba(255,255,255,0.15); }
+.dyn-app-title { font-size: 0.9rem; font-weight: 600; flex: 1; }
+.dyn-rua-badges { display: flex; gap: 6px; }
+.dyn-rua-badge {
+    font-family: 'Space Mono', monospace; font-size: 0.65rem;
+    font-weight: 700; padding: 4px 10px; border-radius: 6px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+}
+.dyn-rua-badge.r { background: rgba(59,130,246,0.2); color: var(--r-recognize); }
+.dyn-rua-badge.u { background: rgba(139,92,246,0.2); color: var(--r-understand); }
+.dyn-rua-badge.a { background: rgba(245,158,11,0.2); color: var(--r-apply); }
+.dyn-creator { font-size: 0.75rem; color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 6px; }
+
+/* ═══════════════ MAIN ═══════════════ */
+.container { max-width: 960px; margin: 0 auto; padding: 40px 24px; }
+
+/* ── App Header ── */
+.app-header { text-align: center; margin-bottom: 40px; padding-top: 20px; }
+.app-header h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 800;
+    letter-spacing: -0.04em; line-height: 1; margin-bottom: 8px;
+    background: linear-gradient(135deg, #111 0%, #333 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.app-header .tagline {
+    font-size: 1rem; color: var(--dyn-text-dim);
+    margin-top: 8px; font-weight: 500;
+}
+.app-meta {
+    font-size: 0.85rem; color: var(--dyn-text-dim);
+    display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 12px;
+}
+.app-meta .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--dyn-text-dim); }
+
+/* ── Module Selector ── */
+.module-tabs {
+    display: flex; gap: 8px; justify-content: center;
+    margin-bottom: 40px; flex-wrap: wrap;
+}
+.module-tab {
+    padding: 12px 24px; border-radius: 12px; border: 1px solid #e5e5ea;
+    font-size: 0.88rem; font-weight: 600; cursor: pointer;
+    transition: all 0.2s; display: flex; align-items: center; gap: 8px;
+    background: #fff; color: var(--dyn-text-dim);
+}
+.module-tab:hover { border-color: #ccc; color: var(--dyn-text); }
+.module-tab.active {
+    background: linear-gradient(135deg, var(--dyn-accent), #e55d2b);
+    color: #fff; border-color: transparent;
+    box-shadow: 0 4px 16px rgba(255,107,53,0.25);
+}
+.module-tab .tab-icon { font-size: 1.2rem; }
+.tab-desc {
+    font-size: 0.7rem; opacity: 0.7; font-weight: 400;
+}
+
+/* ── Input Panel ── */
+.input-panel {
+    background: #fff; border-radius: 20px; padding: 32px;
+    box-shadow: var(--shadow-card); margin-bottom: 32px;
+    border: 1px solid #e5e5ea;
+}
+.input-row {
+    display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end;
+}
+.input-group { flex: 1; min-width: 180px; }
+.input-group label {
+    display: block; font-size: 0.75rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--dyn-text-dim); margin-bottom: 8px;
+}
+.input-group input, .input-group select {
+    width: 100%; padding: 14px 18px; border-radius: 12px;
+    border: 1px solid #e5e5ea; font-size: 1rem;
+    font-family: 'Outfit', 'Inter', sans-serif;
+    transition: border-color 0.2s; background: #fafafa;
+}
+.input-group input:focus, .input-group select:focus {
+    outline: none; border-color: var(--dyn-accent);
+    background: #fff; box-shadow: 0 0 0 3px rgba(255,107,53,0.1);
+}
+.generate-btn {
+    padding: 14px 36px; border-radius: 14px;
+    background: linear-gradient(135deg, var(--dyn-accent), #e55d2b);
+    color: #fff; border: none; font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+    font-family: 'Outfit', 'Inter', sans-serif;
+    white-space: nowrap;
+}
+.generate-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,107,53,0.35); }
+.generate-btn:active { transform: scale(0.98); }
+.generate-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ── RUA BANNER ── */
+.rua-banner {
+    display: flex; gap: 0; max-width: 700px; margin: 0 auto 32px;
+    border-radius: 16px; overflow: hidden; border: 1px solid #e5e5ea;
+}
+.rua-step {
+    flex: 1; padding: 16px 18px; text-align: center;
+    position: relative;
+}
+.rua-step:not(:last-child)::after {
+    content: '→'; position: absolute; right: -8px; top: 50%;
+    transform: translateY(-50%); font-size: 0.9rem; color: #ccc; z-index: 1;
+}
+.rua-step:nth-child(1) { background: rgba(59,130,246,0.06); }
+.rua-step:nth-child(2) { background: rgba(139,92,246,0.06); }
+.rua-step:nth-child(3) { background: rgba(245,158,11,0.06); }
+.rua-step-letter {
+    font-family: 'Syncopate', sans-serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 2px;
+}
+.rua-step:nth-child(1) .rua-step-letter { color: var(--r-recognize); }
+.rua-step:nth-child(2) .rua-step-letter { color: var(--r-understand); }
+.rua-step:nth-child(3) .rua-step-letter { color: var(--r-apply); }
+.rua-step-label {
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--dyn-text-dim);
+}
+
+/* ── Output ── */
+.output-section { display: none; }
+.output-section.visible { display: block; }
+
+/* Prompt Output */
+.prompt-output {
+    background: #1a1a2e; color: #e0e0e0; border-radius: 16px;
+    padding: 28px; margin-bottom: 32px; position: relative;
+    font-family: 'Space Mono', monospace; font-size: 0.8rem;
+    line-height: 1.7; white-space: pre-wrap; word-break: break-word;
+    max-height: 400px; overflow-y: auto;
+    border: 1px solid #2a2a4a;
+}
+.prompt-label {
+    font-family: 'Space Mono', monospace; font-size: 0.65rem;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--dyn-accent); margin-bottom: 12px;
+}
+.copy-btn {
+    position: absolute; top: 16px; right: 16px;
+    background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);
+    padding: 8px 16px; border-radius: 8px; font-size: 0.75rem;
+    font-weight: 600; cursor: pointer; transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+.copy-btn:hover { background: rgba(255,255,255,0.2); }
+.copy-btn.copied { background: #34c759; border-color: #34c759; }
+
+/* ── Demo Section ── */
+.demo-section { margin-top: 40px; }
+.demo-header {
+    font-family: 'Space Mono', monospace; font-size: 0.7rem;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--dyn-text-dim); margin-bottom: 20px;
+}
+.demo-words { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.demo-chip {
+    padding: 8px 16px; border-radius: 20px;
+    border: 1px solid #e5e5ea; font-size: 0.85rem;
+    font-weight: 500; cursor: pointer; transition: all 0.2s;
+    background: #fff; display: flex; align-items: center; gap: 6px;
+}
+.demo-chip:hover { border-color: var(--dyn-accent); color: var(--dyn-accent); }
+.demo-chip.active {
+    background: linear-gradient(135deg, var(--dyn-accent), #e55d2b);
+    color: #fff; border-color: transparent;
+}
+.demo-chip .chip-module {
+    font-size: 0.65rem; opacity: 0.7;
+    padding: 2px 8px; border-radius: 10px; background: rgba(0,0,0,0.1);
+}
+.demo-chip.active .chip-module { background: rgba(255,255,255,0.2); }
+
+/* ── Demo Output Cards ── */
+.rua-card {
+    background: #fff; border-radius: 20px; padding: 0;
+    box-shadow: var(--shadow-card); margin-bottom: 20px;
+    border: 1px solid #e5e5ea; overflow: hidden;
+}
+.rua-card-header {
+    padding: 20px 28px; display: flex; align-items: center; gap: 16px;
+    border-bottom: 1px solid #f0f0f5;
+}
+.rua-card-header.r { border-left: 4px solid var(--r-recognize); }
+.rua-card-header.u { border-left: 4px solid var(--r-understand); }
+.rua-card-header.a { border-left: 4px solid var(--r-apply); }
+.rua-card-stage {
+    font-family: 'Syncopate', sans-serif; font-size: 2rem; font-weight: 700;
+    opacity: 0.15; min-width: 40px;
+}
+.rua-card-header.r .rua-card-stage { color: var(--r-recognize); }
+.rua-card-header.u .rua-card-stage { color: var(--r-understand); }
+.rua-card-header.a .rua-card-stage { color: var(--r-apply); }
+.rua-card-title { font-size: 1rem; font-weight: 800; }
+.rua-card-subtitle { font-size: 0.75rem; color: var(--dyn-text-dim); font-weight: 500; }
+.rua-card-body { padding: 24px 28px; }
+.rua-card-body p { margin-bottom: 12px; font-size: 0.9rem; line-height: 1.7; }
+.rua-card-body p:last-child { margin-bottom: 0; }
+.highlight { 
+    background: linear-gradient(135deg, rgba(255,107,53,0.12), rgba(255,215,0,0.12));
+    padding: 2px 6px; border-radius: 4px; font-weight: 600;
+}
+.tag {
+    display: inline-block; padding: 3px 10px; border-radius: 6px;
+    font-size: 0.72rem; font-weight: 600; margin-right: 6px; margin-bottom: 6px;
+}
+.tag.colloc { background: rgba(59,130,246,0.1); color: var(--r-recognize); }
+.tag.context { background: rgba(139,92,246,0.1); color: var(--r-understand); }
+.tag.gap { background: rgba(245,158,11,0.1); color: var(--r-apply); }
+
+.hobby-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: linear-gradient(135deg, rgba(255,107,53,0.15), rgba(255,140,66,0.15));
+    color: var(--dyn-accent); padding: 4px 12px; border-radius: 20px;
+    font-size: 0.75rem; font-weight: 600;
+}
+.phrase-table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 0.85rem; }
+.phrase-table th {
+    text-align: left; padding: 8px 12px; background: #fafafa;
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--dyn-text-dim); border-bottom: 1px solid #e5e5ea;
+}
+.phrase-table td { padding: 10px 12px; border-bottom: 1px solid #f0f0f5; }
+.phrase-table td:first-child { font-weight: 600; }
+
+/* ── Footer ── */
+.dyn-footer {
+    margin-top: 80px; padding: 40px 0;
+    text-align: center; border-top: 1px solid #e5e5ea;
+}
+.dyn-footer-text { font-size: 0.8rem; color: var(--dyn-text-dim); }
+.dyn-footer-text a { color: var(--dyn-accent); text-decoration: none; font-weight: 600; }
+
+/* ── Empty State ── */
+.empty-state {
+    text-align: center; padding: 60px 20px; color: var(--dyn-text-dim);
+}
+.empty-state .emoji { font-size: 4rem; margin-bottom: 16px; }
+.empty-state h3 { font-size: 1.2rem; font-weight: 700; color: var(--dyn-text); margin-bottom: 8px; }
+.empty-state p { font-size: 0.9rem; max-width: 400px; margin: 0 auto; }
+
+@media (max-width: 768px) {
+    .input-row { flex-direction: column; }
+    .generate-btn { width: 100%; }
+    .module-tab { flex: 1; justify-content: center; font-size: 0.8rem; padding: 10px 14px; }
+    .dyn-bar { flex-wrap: wrap; gap: 8px; padding: 10px 16px; }
+    .dyn-rua-badges { order: 1; width: 100%; }
+    .rua-banner { flex-direction: column; }
+    .rua-step:not(:last-child)::after { content: '↓'; right: 50%; top: auto; bottom: -4px; transform: translateX(50%); }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ DYNAMOS APP BAR ═══════════════ -->
+<div class="dyn-bar">
+    <a href="/dynamos" class="dyn-logo">DynamOS</a>
+    <div class="dyn-bar-sep"></div>
+    <div class="dyn-app-title">DynaDict</div>
+    <div class="dyn-rua-badges">
+        <span class="dyn-rua-badge r">R</span>
+        <span class="dyn-rua-badge u">U</span>
+        <span class="dyn-rua-badge a">A</span>
+    </div>
+    <div class="dyn-bar-sep"></div>
+    <div class="dyn-creator">👤 Kee Lee / SrKeeda</div>
+</div>
+
+<div class="container">
+
+    <!-- ── App Header ── -->
+    <div class="app-header">
+        <h1>DynaDict</h1>
+        <div class="tagline">RUA-Powered AI Dictionary · 4 Tools in 1</div>
+        <div class="app-meta">
+            <span>📖 Dictionary</span><span class="dot"></span>
+            <span>🌐 Translator</span><span class="dot"></span>
+            <span>🔬 Grammar Dr</span><span class="dot"></span>
+            <span>🎓 IELTS Coach</span><span class="dot"></span>
+            <span>📱 DynApp #002</span>
+        </div>
+    </div>
+
+    <!-- ── RUA Banner ── -->
+    <div class="rua-banner">
+        <div class="rua-step">
+            <div class="rua-step-letter">R</div>
+            <div class="rua-step-label">Recognize</div>
+            <div style="font-size:0.65rem;color:var(--dyn-text-dim);margin-top:2px;">MFP + Core Metaphor</div>
+        </div>
+        <div class="rua-step">
+            <div class="rua-step-letter">U</div>
+            <div class="rua-step-label">Understand</div>
+            <div style="font-size:0.65rem;color:var(--dyn-text-dim);margin-top:2px;">3C + Hobby Threading</div>
+        </div>
+        <div class="rua-step">
+            <div class="rua-step-letter">A</div>
+            <div class="rua-step-label">Apply</div>
+            <div style="font-size:0.65rem;color:var(--dyn-text-dim);margin-top:2px;">Cross-Lingual + GAP</div>
+        </div>
+    </div>
+
+    <!-- ── Module Selector ── -->
+    <div class="module-tabs" id="moduleTabs">
+        <div class="module-tab active" data-module="dictionary">
+            <span class="tab-icon">📖</span> Dictionary<div class="tab-desc">Word lookups</div>
+        </div>
+        <div class="module-tab" data-module="translator">
+            <span class="tab-icon">🌐</span> Translator<div class="tab-desc">CN↔EN</div>
+        </div>
+        <div class="module-tab" data-module="grammar">
+            <span class="tab-icon">🔬</span> Grammar Dr<div class="tab-desc">Error fix</div>
+        </div>
+        <div class="module-tab" data-module="ielts">
+            <span class="tab-icon">🎓</span> IELTS Coach<div class="tab-desc">Exam prep</div>
+        </div>
+    </div>
+
+    <!-- ── Input Panel ── -->
+    <div class="input-panel">
+        <div class="input-row">
+            <div class="input-group">
+                <label id="inputLabel">Word or Phrase</label>
+                <input type="text" id="wordInput" placeholder="e.g. serendipity">
+            </div>
+            <div class="input-group" style="max-width:200px;">
+                <label>🎯 Your Hobby</label>
+                <input type="text" id="hobbyInput" placeholder="e.g. basketball" value="basketball">
+            </div>
+            <div class="input-group" style="max-width:140px;">
+                <label>🌏 Your L1</label>
+                <select id="l1Select">
+                    <option value="Chinese">中文</option>
+                    <option value="Korean">한국어</option>
+                    <option value="Japanese">日本語</option>
+                    <option value="Spanish">Español</option>
+                    <option value="Arabic">العربية</option>
+                </select>
+            </div>
+            <button class="generate-btn" id="generateBtn" onclick="generatePrompt()">⚡ Generate Prompt</button>
+        </div>
+    </div>
+
+    <!-- ── Prompt Output ── -->
+    <div class="output-section" id="promptSection">
+        <div class="prompt-label">📋 Copy-paste this into any AI chat (ChatGPT, DeepSeek, Claude…)</div>
+        <div class="prompt-output" id="promptOutput"></div>
+    </div>
+
+    <!-- ── Demo Section ── -->
+    <div class="demo-section">
+        <div class="demo-header">🔍 Try these demo words to see the DynaDict RUA structure in action</div>
+        <div class="demo-words" id="demoWords">
+            <div class="demo-chip active" data-demo="serendipity">
+                serendipity <span class="chip-module">dict</span>
+            </div>
+            <div class="demo-chip" data-demo="overwhelm">
+                overwhelm <span class="chip-module">dict</span>
+            </div>
+            <div class="demo-chip" data-demo="mitigate">
+                mitigate <span class="chip-module">ielts</span>
+            </div>
+            <div class="demo-chip" data-demo="however">
+                however <span class="chip-module">grammar</span>
+            </div>
+            <div class="demo-chip" data-demo="in-a-nutshell">
+                in a nutshell <span class="chip-module">trans</span>
+            </div>
+            <div class="demo-chip" data-demo="phenomenon">
+                phenomenon <span class="chip-module">dict</span>
+            </div>
+            <div class="demo-chip" data-demo="sustainable">
+                sustainable <span class="chip-module">ielts</span>
+            </div>
+        </div>
+        <div id="demoOutput"></div>
+    </div>
+
+    <!-- ── Footer ── -->
+    <div class="dyn-footer">
+        <p class="dyn-footer-text">
+            <strong>DynApp #002</strong> · DynaDict · Created by <a href="https://rkrk.io">Kee Lee / SrKeeda</a><br>
+            Powered by <a href="/dynamos">DynamOS</a> · RUA Framework · Prompt-Native · Hobby-Threaded · Cross-Linguistic
+        </p>
+    </div>
+</div>
+
+<script>
+// ═══════════════ MODULE SELECTOR ═══════════════
+const moduleTabs = document.querySelectorAll('.module-tab');
+const inputLabel = document.getElementById('inputLabel');
+const wordInput = document.getElementById('wordInput');
+let currentModule = 'dictionary';
+
+const moduleConfig = {
+    dictionary: { label: 'Word or Phrase', placeholder: 'e.g. serendipity', icon: '📖' },
+    translator: { label: 'Chinese Text to Translate', placeholder: 'e.g. 这件事让我很纠结', icon: '🌐' },
+    grammar: { label: 'Sentence with Error', placeholder: 'e.g. He go to school yesterday', icon: '🔬' },
+    ielts: { label: 'IELTS Topic or Task', placeholder: 'e.g. advantages of remote work', icon: '🎓' }
+};
+
+moduleTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        moduleTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentModule = tab.dataset.module;
+        const cfg = moduleConfig[currentModule];
+        inputLabel.textContent = cfg.label;
+        wordInput.placeholder = cfg.placeholder;
+        document.getElementById('promptSection').classList.remove('visible');
+    });
+});
+
+// ═══════════════ PROMPT GENERATION ═══════════════
+function generatePrompt() {
+    const word = wordInput.value.trim();
+    const hobby = document.getElementById('hobbyInput').value.trim() || 'your interests';
+    const l1 = document.getElementById('l1Select').value;
+    
+    if (!word) {
+        wordInput.focus();
+        wordInput.style.borderColor = 'var(--dyn-accent)';
+        setTimeout(() => wordInput.style.borderColor = '', 1500);
+        return;
+    }
+    
+    const section = document.getElementById('promptSection');
+    const output = document.getElementById('promptOutput');
+    
+    const prompts = {
+        dictionary: buildDictionaryPrompt(word, hobby, l1),
+        translator: buildTranslatorPrompt(word, hobby, l1),
+        grammar: buildGrammarPrompt(word, hobby, l1),
+        ielts: buildIELTSPrompt(word, hobby, l1)
+    };
+    
+    output.innerHTML = escapeHtml(prompts[currentModule]);
+    section.classList.add('visible');
+    section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    
+    // Reset copy button
+    const copyBtn = output.parentElement.querySelector('.copy-btn');
+    if (copyBtn) copyBtn.className = 'copy-btn';
+}
+
+function escapeHtml(text) {
+    return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function buildDictionaryPrompt(word, hobby, l1) {
+    return `You are DynaDict Dictionary, powered by the RUA cognitive framework. You help ${l1} speakers master English vocabulary through structured, memorable, hobby-threaded explanations.
+
+📥 INPUT: "${word}"
+🎯 Hobby threading: ${hobby}
+🌏 L1: ${l1}
+
+Please follow this RUA structure:
+
+═══════════════════════════════════
+🅁 RECOGNIZE — MFP + Core Metaphor
+═══════════════════════════════════
+
+• MEANING: Clear definition in plain English. Then a one-line ${l1} translation.
+• FORM: Word family (noun/verb/adj/adv forms), syllable breakdown, stress pattern.
+• PRONUNCIATION: IPA + a rhyme or sound-alike clue for ${l1} speakers.
+• CORE METAPHOR: What physical image or action does this word feel like? Make it vivid.
+
+═══════════════════════════════════
+🅄 UNDERSTAND — 3C with Hobby Threading
+═══════════════════════════════════
+
+• COLLOCATION: 4-5 words that naturally pair with "${word}" (adj+n, v+n, adv+adj, etc.)
+• CONTEXTS (ALL tied to "${hobby}"):
+  — Casual context: Example using "${hobby}"
+  — Academic context: Example in research/study
+  — Professional context: Example in workplace
+• CONNOTATION: Is this word positive/negative/neutral? Formal/informal? What vibe does it carry? Contrast with a near-synonym.
+
+═══════════════════════════════════
+🅰 APPLY — Cross-Linguistic Mapping + GAP
+═══════════════════════════════════
+
+• CROSS-LINGUISTIC: Why ${l1} speakers commonly misuse "${word}". What's the L1 interference pattern?
+• GAUGE: Self-check question — "Do you use this word only in writing? Can you use it naturally in speech?"
+• PRACTICE: 3 fill-in-the-blank or sentence-completion exercises (${hobby}-themed where possible).
+• PRO TIP: One memorable trick to never forget this word.`;
+}
+
+function buildTranslatorPrompt(text, hobby, l1) {
+    return `You are DynaDict Translator, powered by the RUA cognitive framework. You translate between ${l1} and English with full pedagogical scaffolding.
+
+📥 INPUT: "${text}"
+🎯 Context: ${hobby}
+🌏 Source: ${l1} → Target: English
+
+═══════════════════════════════════
+🅁 RECOGNIZE — Decompose the Source
+═══════════════════════════════════
+
+• Literal meaning of each component word/phrase.
+• Cultural subtext: What's implied that a non-${l1} speaker would miss?
+• Register: Is this casual, formal, literary, slang, business?
+
+═══════════════════════════════════
+🅄 UNDERSTAND — 3C Translation Strategy
+═══════════════════════════════════
+
+• COLLOCATION: What English collocations capture this meaning best?
+• CONTEXTS: Provide translations for 3 contexts (casual, formal, ${hobby}-related)
+• CONNOTATION: Does the translation preserve the emotional weight? If not, what's lost?
+
+═══════════════════════════════════
+🅰 APPLY — Cross-Linguistic + Practice
+═══════════════════════════════════
+
+• CROSS-LINGUISTIC: What's the structural difference between the ${l1} original and the English translation? (word order, implied subjects, tense, etc.)
+• GAUGE: What would a literal/Google Translate version say — and why is it wrong?
+• PRACTICE: Back-translate the English version. Does it capture the original meaning?
+• PRO TIP: What pattern from this translation can you reuse for similar ${l1}→EN translations?`;
+}
+
+function buildGrammarPrompt(sentence, hobby, l1) {
+    return `You are DynaDict Grammar Doctor, powered by the RUA cognitive framework. You diagnose and fix English grammar errors with ${l1}-speaker-aware explanations.
+
+📥 INPUT: "${sentence}"
+🎯 Context: ${hobby}
+🌏 L1: ${l1}
+
+═══════════════════════════════════
+🅁 RECOGNIZE — Diagnose the Error
+═══════════════════════════════════
+
+• What's wrong? Pinpoint the exact error (tense, article, preposition, word order, etc.)
+• Why did this happen? Trace to the L1 (${l1}) logic that caused it.
+• Severity: Does this error cause misunderstanding or just sound unnatural?
+
+═══════════════════════════════════
+🅄 UNDERSTAND — The Rule (3C)
+═══════════════════════════════════
+
+• COLLOCATION: What grammar rule applies here?
+• CONTEXTS: Show the correct pattern in 3 ${hobby}-themed sentences.
+• CONNOTATION: How does the error version "feel" to a native speaker? (confusing? childish? acceptable-in-speech?)
+
+═══════════════════════════════════
+🅰 APPLY — Fix + Practice
+═══════════════════════════════════
+
+• CORRECTED version.
+• CROSS-LINGUISTIC: Map the ${l1} grammar structure → English structure. Where's the gap?
+• GAUGE: Have you made this error before? Recognize the pattern.
+• PRACTICE: 3 similar sentences for you to correct (with answers hidden below).
+• PRO TIP: One mental shortcut to avoid this error forever.`;
+}
+
+function buildIELTSPrompt(topic, hobby, l1) {
+    return `You are DynaDict IELTS Coach, powered by the RUA cognitive framework. You turn any IELTS topic into structured, band-score-boosting vocabulary and strategy.
+
+📥 INPUT: "${topic}"
+🎯 Student hobby: ${hobby}
+🌏 L1: ${l1}
+🎯 Target band: 6.5–7.0+
+
+═══════════════════════════════════
+🅁 RECOGNIZE — Topic Decomposition (BEEF)
+═══════════════════════════════════
+
+• BACKGROUND: What IELTS tasks commonly feature this topic? (Speaking P2/P3, Writing Task 2, etc.)
+• EVIDENCE (CHOP): Key vocabulary, common question angles, examiner expectations.
+• EXPLANATION: Why ${l1} speakers find this topic challenging — cultural distance? vocab gap? structure?
+• FEEDBACK: Typical band-score killers on this topic.
+
+═══════════════════════════════════
+🅄 UNDERSTAND — Key Language (3C)
+═══════════════════════════════════
+
+• COLLOCATION: 8-10 topic-specific collocations (with ${hobby}-linked examples where relevant).
+• CONTEXTS: How to use these in Speaking P1, P2 (story arc), P3 (opinion), and Writing T2 (essay).
+• CONNOTATION: Which words sound Band 7+? Which ones sound Band 5 (overused, vague)?
+
+═══════════════════════════════════
+🅰 APPLY — GAP Practice
+═══════════════════════════════════
+
+• GAUGE: Self-assessment — can you talk about this topic for 2 minutes without stopping?
+• CROSS-LINGUISTIC: Common ${l1}→EN translation traps on this topic.
+• PRACTICE: 1 Speaking P2 cue card + 2 P3 follow-up questions with model answers.
+• PRO TIP: One "wow phrase" that will impress the examiner on this topic.`;
+}
+
+// ═══════════════ COPY BUTTON ═══════════════
+document.addEventListener('DOMContentLoaded', () => {
+    const promptSection = document.getElementById('promptSection');
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'copy-btn';
+    copyBtn.textContent = '📋 Copy';
+    copyBtn.onclick = function() {
+        const text = document.getElementById('promptOutput').textContent;
+        navigator.clipboard.writeText(text).then(() => {
+            copyBtn.textContent = '✓ Copied!';
+            copyBtn.classList.add('copied');
+            setTimeout(() => {
+                copyBtn.textContent = '📋 Copy';
+                copyBtn.classList.remove('copied');
+            }, 2000);
+        });
+    };
+    promptSection.appendChild(copyBtn);
+});
+
+// ═══════════════ DEMO DATA ═══════════════
+const demoData = {
+    'serendipity': {
+        module: 'dict',
+        r: { title: 'MFP + Core Metaphor', body: `<p><strong>Meaning:</strong> The accidental discovery of something wonderful when you weren't looking for it. 中文：意外发现的美好，无心插柳柳成荫。</p>
+<p><strong>Form:</strong> Noun. <em>ser·en·dip·i·ty</em> (5 syllables). Adj: <em>serendipitous</em>. Stress on <strong>-dip-</strong>.</p>
+<p><strong>Pronunciation:</strong> /ˌser.ənˈdɪp.ə.ti/ — sounds like "Sarah dipped in tea" 🫖</p>
+<p><strong>Core Metaphor:</strong> Walking through a forest looking for mushrooms and finding a hidden waterfall instead. You weren't searching for it, but it changed your day.</p>` },
+        u: { title: '3C with Hobby Threading 🏀', body: `<p><strong>Collocation:</strong> <span class="tag colloc">sheer serendipity</span> <span class="tag colloc">moment of serendipity</span> <span class="tag colloc">pure serendipity</span> <span class="tag colloc">by serendipity</span></p>
+<p><strong>Contexts (basketball-threaded 🏀):</strong></p>
+<p>— <em>Casual:</em> "I showed up at the wrong court, but by <span class="highlight">sheer serendipity</span>, they needed one more player for a 3v3."</p>
+<p>— <em>Academic:</em> "Penicillin's discovery was a <span class="highlight">moment of serendipity</span> — Fleming wasn't looking for antibiotics."</p>
+<p><strong>Connotation:</strong> Warm, magical, positive. Different from "luck" — luck is random; serendipity implies <em>you were doing something meaningful</em> when the good thing found you. Think of it as "earned luck."</p>` },
+        a: { title: 'Cross-Lingual + GAP', body: `<p><strong>Cross-Linguistic (中文):</strong> Chinese speakers often confuse "serendipity" with 缘分 (yuánfèn), but they're different. 缘分 is fate/destiny between people. Serendipity is about <em>discoveries</em> — things, ideas, places. You wouldn't say "I met my girlfriend through serendipity" (use "fate" or "chance").</p>
+<p><strong>Gauge:</strong> Do you only use this word as a noun? Try the adjective: "That was a <em>serendipitous</em> find!"</p>
+<p><strong>Practice:</strong></p>
+<p>1. The scientists made a ______ discovery while testing a completely different hypothesis.<br>2. It was pure ______ that I found this book — I wasn't even looking for it.<br><em>(Answers: 1. serendipitous, 2. serendipity)</em></p>
+<p><strong>Pro Tip:</strong> Remember "Sarah dipped in tea" (pronunciation) + "finding treasure while mushroom hunting" (meaning). The word itself was <em>coined from a Persian fairy tale</em> — The Three Princes of Serendip — who kept making discoveries by accident. That's meta-serendipity! ✨</p>` }
+    },
+    'overwhelm': {
+        module: 'dict',
+        r: { title: 'MFP + Core Metaphor', body: `<p><strong>Meaning:</strong> To be completely covered or overcome by emotion, work, or force. 中文：被压垮，淹没（情感/工作/压力）。</p>
+<p><strong>Form:</strong> Verb. <em>o·ver·whelm</em> (3 syllables). Noun: <em>overwhelm</em>. Adj: <em>overwhelming</em>. Past: <em>overwhelmed</em>.</p>
+<p><strong>Pronunciation:</strong> /ˌoʊ.vərˈwelm/ — "over" + "whelm" (rhymes with helm).</p>
+<p><strong>Core Metaphor:</strong> A wave crashing over a surfer — sometimes it's a rush of joy, sometimes it's too much and you go under. Same word, different direction.</p>` },
+        u: { title: '3C with Hobby Threading 🏀', body: `<p><strong>Collocation:</strong> <span class="tag colloc">overwhelmed by</span> <span class="tag colloc">overwhelming majority</span> <span class="tag colloc">completely overwhelmed</span> <span class="tag colloc">sense of overwhelm</span></p>
+<p><strong>Contexts (basketball 🏀):</strong></p>
+<p>— <em>Casual:</em> "First time playing point guard, I was <span class="highlight">overwhelmed by</span> how fast everyone was moving."</p>
+<p>— <em>Positive use:</em> "The crowd's energy was <span class="highlight">overwhelming</span> — I've never felt anything like it."</p>
+<p><strong>Connotation:</strong> Can be negative (stress) OR positive (joy/gratitude). Context is everything. "I'm overwhelmed" without context = probably stressed. "I'm overwhelmed with gratitude" = very happy.</p>` },
+        a: { title: 'Cross-Lingual + GAP', body: `<p><strong>Cross-Linguistic (中文):</strong> Chinese speakers often translate 压倒 as "overwhelm" when "overpower" or "defeat" would be better. "The team overwhelmed their opponents" → ✅ "The team <em>dominated</em> their opponents" is stronger. Also: don't use "overwhelm" for physical space ("the room was overwhelmed with people") — use "packed" or "crowded."</p>
+<p><strong>Gauge:</strong> Do you only use it in negative contexts? Try positive: "I'm overwhelmed by your support" = "I'm deeply touched."</p>
+<p><strong>Practice:</strong><br>1. After the finals, she was ______ with joy and relief.<br>2. The amount of homework this week is completely ______.<br><em>(Answers: 1. overwhelmed, 2. overwhelming)</em></p>` }
+    },
+    'mitigate': {
+        module: 'ielts',
+        r: { title: 'IELTS Topic: Risk & Solution', body: `<p><strong>Meaning:</strong> To make something less severe, harmful, or painful. 中文：减轻，缓解（问题的严重性）。</p>
+<p><strong>Form:</strong> Verb (transitive). <em>mit·i·gate</em> (3 syllables). Noun: <em>mitigation</em>. Stress on <strong>mit-</strong>.</p>
+<p><strong>IELTS relevance:</strong> Writing Task 2 (problem/solution essays) and Speaking P3 (discussing solutions). Band 7+ vocabulary.</p>
+<p><strong>Core Metaphor:</strong> Putting a damper on a fire — you don't put it out completely, but you make it less dangerous.</p>` },
+        u: { title: '3C — Academic & Essay Usage', body: `<p><strong>Collocation:</strong> <span class="tag colloc">mitigate the effects</span> <span class="tag colloc">mitigate risks</span> <span class="tag colloc">mitigate climate change</span> <span class="tag colloc">mitigation strategies</span></p>
+<p><strong>Contexts:</strong></p>
+<p>— <em>Academic:</em> "Governments must implement policies to <span class="highlight">mitigate the effects</span> of urban pollution."</p>
+<p>— <em>🏀:</em> "Teams use zone defense to <span class="highlight">mitigate</span> the impact of a dominant center."</p>
+<p><strong>Connotation:</strong> Formal, strategic, proactive. Always implies a problem exists — you mitigate <em>bad</em> things, not good things.</p>` },
+        a: { title: 'GAP — Apply to IELTS', body: `<p><strong>Cross-Linguistic (中文):</strong> Don't confuse with "solve" (解决) or "eliminate" (消除). Mitigation is <em>reduction</em>, not elimination. A common error: "The government should mitigate the problem of traffic" — incomplete. WHAT about traffic? → "mitigate the <em>negative effects</em> of traffic congestion."</p>
+<p><strong>Speaking P3 Practice:</strong> "What can individuals do to mitigate environmental damage?" <br>→ Model: "Individuals can mitigate their carbon footprint through small daily choices — using public transport, reducing meat consumption, and minimizing plastic waste. While one person's efforts alone can't solve climate change, collective individual action significantly mitigates the broader impact."</p>
+<p><strong>Pro Tip:</strong> "Mitigate" = Band 7+. If you use "mitigate" + a specific collocation (e.g., "mitigate the adverse effects") in Writing Task 2, you've signaled Lexical Resource immediately.</p>` }
+    },
+    'however': {
+        module: 'grammar',
+        r: { title: 'Grammar Diagnosis', body: `<p><strong>Error Pattern:</strong> Chinese speakers often use "however" as a conjunction (like 但是/然而), connecting two clauses with a comma.</p>
+<p><strong>❌ Wrong:</strong> "I studied hard, however I failed the exam."<br><strong>✅ Right:</strong> "I studied hard. <strong>However,</strong> I failed the exam."<br>or<br><strong>✅ Right:</strong> "I studied hard; however, I failed the exam."</p>
+<p><strong>L1 Interference (中文):</strong> In Chinese, 然而/但是 can freely connect clauses. English treats "however" as a conjunctive <em>adverb</em> — it starts a new sentence or follows a semicolon.</p>` },
+        u: { title: 'The Rule + 3C', body: `<p><strong>Rule:</strong> "However" = new sentence (or semicolon) + comma after. "But" = conjunction, no new sentence.</p>
+<p><strong>Context comparison:</strong><br>— <em>🏀 Casual:</em> "We were down 20 points. <span class="highlight">However,</span> we never gave up."<br>— <em>Academic:</em> "The data appears conclusive; <span class="highlight">however,</span> several variables were not controlled for."</p>
+<p><strong>Connotation:</strong> "However" is slightly more formal than "but." In IELTS Writing, using both correctly shows grammatical range.</p>` },
+        a: { title: 'Fix + Practice', body: `<p><strong>Quick self-check:</strong> If you can replace "however" with "but" in your sentence and the grammar stays correct, you're using "however" wrong.</p>
+<p><strong>Practice — fix these:</strong></p>
+<p>1. The weather was terrible, however we went anyway.<br>→ <em>The weather was terrible. However, we went anyway.</em></p>
+<p>2. She's very talented, however she lacks confidence.<br>→ <em>She's very talented; however, she lacks confidence.</em></p>
+<p><strong>Pro Tip:</strong> Think of "however" as a <em>paragraph-level</em> word, not a <em>sentence-level</em> word. It pivots ideas, not clauses.</p>` }
+    },
+    'in-a-nutshell': {
+        module: 'trans',
+        r: { title: 'Decompose the Source', body: `<p><strong>Phrase:</strong> "In a nutshell"<br><strong>中文对应:</strong> 简而言之 / 总而言之 / 概括地说</p>
+<p><strong>Literal meaning:</strong> "Inside a nutshell" — something so compact it fits in a tiny shell.</p>
+<p><strong>Register:</strong> Neutral-informal. OK in IELTS Speaking, too casual for formal Writing Task 2 (use "In summary" or "To summarize" instead).</p>
+<p><strong>Cultural note:</strong> The idiom dates back to ancient Rome — Pliny the Elder claimed he saw a copy of Homer's <em>Iliad</em> so small it fit in a walnut shell. From there: "something condensed to its essence."</p>` },
+        u: { title: '3C Translation Strategy', body: `<p><strong>Collocation:</strong> Almost always at the <em>start</em> of a sentence, followed by a comma.</p>
+<p><strong>Context-specific translations:</strong></p>
+<p>— <em>🏀 Casual:</em> "So <span class="highlight">in a nutshell</span>, we lost because of turnovers."<br>= 简单说，我们输在失误上。</p>
+<p>— <em>Formal:</em> "In summary, the findings support the hypothesis." (use this in essays)<br>= 综上所述，研究结果支持该假设。</p>
+<p><strong>⚠️ Not to confuse with:</strong> "In conclusion" (used at the VERY end) vs. "In a nutshell" (can be used mid-conversation to summarize a point before moving on).</p>` },
+        a: { title: 'Cross-Lingual + Practice', body: `<p><strong>Cross-Linguistic:</strong> Chinese speakers may default to "In a word" (总而言之) but this sounds stiff and archaic in modern English. "In a nutshell" is warmer, more conversational.</p>
+<p><strong>Practice — choose the right phrase:</strong></p>
+<p>1. (Casual chat) "_____, the movie was terrible." → In a nutshell ✅ / In conclusion ❌<br>2. (Essay ending) "_____, remote work offers more benefits than drawbacks." → To summarize ✅ / In a nutshell ❌</p>
+<p><strong>Pro Tip:</strong> You can also use the body-language gesture when saying it — make a small "cup" with your hands. It helps students remember the spatial metaphor: condensing something big into something small.</p>` }
+    },
+    'phenomenon': {
+        module: 'dict',
+        r: { title: 'MFP + Core Metaphor', body: `<p><strong>Meaning:</strong> An observable fact or event that is remarkable, unusual, or scientifically interesting. 中文：现象。</p>
+<p><strong>Form:</strong> Noun. Singular: <em>phe·nom·e·non</em> (4 syllables). Plural: <em>phe·nom·e·na</em> (NOT "phenomenons" ❌). Adj: <em>phenomenal</em>. Stress on <strong>-nom-</strong>.</p>
+<p><strong>Pronunciation:</strong> /fəˈnɒm.ɪ.nən/ — "fuh-NOM-ih-nun". The "ph" = /f/. Common mistake: Chinese speakers say "penomenon" (missing the /f/).</p>
+<p><strong>Core Metaphor:</strong> A double rainbow 🌈 — you see it, you point at it, you want to understand it. A phenomenon is something that <em>demands attention and explanation</em>.</p>` },
+        u: { title: '3C with Hobby Threading 🏀', body: `<p><strong>Collocation:</strong> <span class="tag colloc">natural phenomenon</span> <span class="tag colloc">social phenomenon</span> <span class="tag colloc">cultural phenomenon</span> <span class="tag colloc">relatively recent phenomenon</span> <span class="tag colloc">global phenomenon</span></p>
+<p><strong>Contexts:</strong></p>
+<p>— <em>🏀:</em> "Steph Curry's three-point shooting isn't just a skill — it's a <span class="highlight">phenomenon</span> that changed how basketball is played."</p>
+<p>— <em>Academic:</em> "The study examines the <span class="highlight">phenomenon</span> of code-switching among bilingual children."</p>
+<p><strong>Connotation:</strong> Neutral but carries weight. Saying something is a "phenomenon" elevates it from "thing that happens" to "thing worth studying or marveling at."</p>` },
+        a: { title: 'Cross-Lingual + GAP', body: `<p><strong>Cross-Linguistic (中文):</strong> 现象 (xiànxiàng) is the direct translation, but it's used much more casually in Chinese. Chinese speakers overuse "phenomenon" in English for ordinary situations. "Traffic jams are a common phenomenon" → technically correct, but native speakers would just say "Traffic jams are common." Reserve "phenomenon" for things genuinely remarkable or under study.</p>
+<p><strong>⚠️ Plural trap:</strong> Almost every Chinese speaker says "phenomenons" at least once. It's "PHENOMENA." No exceptions.</p>
+<p><strong>Practice:</strong><br>1. The aurora borealis is a spectacular natural ______.<br>2. These social ______ require further research. (plural!)<br><em>(Answers: 1. phenomenon, 2. phenomena)</em></p>
+<p><strong>Pro Tip:</strong> "Phenomenon" has phenomenal word power. Use it once in IELTS Speaking P3 and you'll sound like Band 7+. Just nail the pronunciation — "fuh-NOM-ih-nun" — and DON'T say "phenomenons." 😂</p>` }
+    },
+    'sustainable': {
+        module: 'ielts',
+        r: { title: 'IELTS Topic: Environment & Development', body: `<p><strong>Meaning:</strong> Able to continue over time without depleting resources or causing damage. 中文：可持续的。</p>
+<p><strong>Form:</strong> Adjective. Noun: <em>sustainability</em>. Verb: <em>sustain</em>. Stress on <strong>-tain-</strong>.</p>
+<p><strong>IELTS relevance:</strong> Appears in 60%+ of Writing Task 2 topics (environment, economy, urban planning, education, business). Essential Band 7+ vocabulary.</p>
+<p><strong>Core Metaphor:</strong> A bicycle vs. a car — one runs on human energy and lasts decades, the other burns finite fuel. Sustainable = the bicycle model.</p>` },
+        u: { title: '3C — Topic Vocabulary', body: `<p><strong>Collocation:</strong> <span class="tag colloc">sustainable development</span> <span class="tag colloc">sustainable growth</span> <span class="tag colloc">sustainable future</span> <span class="tag colloc">sustainable practices</span> <span class="tag colloc">environmentally sustainable</span> <span class="tag colloc">economically sustainable</span></p>
+<p><strong>Contexts:</strong></p>
+<p>— <em>Environment:</em> "Renewable energy is key to a <span class="highlight">sustainable future</span>."</p>
+<p>— <em>Economics:</em> "The current rate of GDP growth may not be <span class="highlight">sustainable</span>."</p>
+<p>— <em>🏀 Personal:</em> "Playing 40 minutes a night at 35? That training schedule isn't <span class="highlight">sustainable</span> — he'll burn out."</p>
+<p><strong>Connotation:</strong> Overwhelmingly positive. But can be critical: "unsustainable" = a polite way to say "this will fail."</p>` },
+        a: { title: 'GAP — Apply to IELTS', body: `<p><strong>Cross-Linguistic (中文):</strong> 可持续 (kě chíxù) is a direct translation — one of the rare cases where it maps cleanly. The trap: overusing it as a buzzword without specifics. "We need sustainable development" is vague. "We need development that sustains natural resources for future generations" is specific and Band 7+.</p>
+<p><strong>Speaking P2 Practice:</strong> "Describe something you do that's environmentally friendly." → Use "sustainable" to frame your answer. Avoid repeating it — layer in synonyms: eco-friendly, green, low-impact, renewable.</p>
+<p><strong>Writing Task 2 Template:</strong> "While economic growth is essential, it must be balanced with <span class="highlight">sustainable practices</span> to ensure long-term prosperity. Unsustainable development may yield short-term gains but ultimately undermines the very resources on which growth depends."</p>
+<p><strong>Pro Tip:</strong> Pair "sustainable" with a <em>specific domain</em> (environmental / economic / social / personal) to show lexical precision. Generic "sustainable" = Band 6. "Environmentally sustainable" = Band 7+. "Ecologically sustainable economic model" = Band 8+</p>` }
+    }
+};
+
+// ═══════════════ DEMO CHIPS ═══════════════
+const demoChips = document.querySelectorAll('.demo-chip');
+const demoOutput = document.getElementById('demoOutput');
+
+// render default demo (serendipity)
+renderDemo('serendipity');
+
+demoChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+        demoChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        renderDemo(chip.dataset.demo);
+    });
+});
+
+function renderDemo(key) {
+    const data = demoData[key];
+    if (!data) return;
+    
+    let html = '';
+    ['r', 'u', 'a'].forEach(stage => {
+        const s = data[stage];
+        const stageLabel = stage === 'r' ? 'RECOGNIZE' : stage === 'u' ? 'UNDERSTAND' : 'APPLY';
+        html += `
+        <div class="rua-card">
+            <div class="rua-card-header ${stage}">
+                <div class="rua-card-stage">${stage.toUpperCase()}</div>
+                <div>
+                    <div class="rua-card-title">${stageLabel}</div>
+                    <div class="rua-card-subtitle">${s.title}</div>
+                </div>
+            </div>
+            <div class="rua-card-body">${s.body}</div>
+        </div>`;
+    });
+    
+    demoOutput.innerHTML = html;
+}
+
+// ═══════════════ ENTER KEY ═══════════════
+document.getElementById('wordInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') generatePrompt();
+});
+</script>
+</body>
+</html>
