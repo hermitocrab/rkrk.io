@@ -1,306 +1,307 @@
-     1|<!DOCTYPE html>
-     2|<html lang="en">
-     3|<head>
-     4|<meta charset="UTF-8">
-     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
-     6|<title>Kee Lee — AI-Native Education Architect</title>
-     7|<meta name="description" content="Kee Lee — I dismantle language and rebuild it as architecture. IELTS 9.0/8.5/8.5. TEDx 2026.">
-     8|<meta property="og:title" content="Kee Lee — AI-Native Education Architect">
-     9|<meta property="og:description" content="I don't teach English. I dismantle it and rebuild it as architecture.">
-    10|<meta property="og:type" content="website"><meta property="og:url" content="https://rkrk.io">
-    11|<link rel="preconnect" href="https://fonts.googleapis.com">
-    12|<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    13|<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>⚡</text></svg>">
-    14|<style>
-    15|/* ═══════════════════════════════════════════
-    16|   VERSION: Editorial v2.3 — No BP + Flip Fix
-    17|   Font: Inter (TEDx-approved Helvetica alt)
-    18|   ═══════════════════════════════════════════ */
-    19|:root {
-    20|    --bg: #fafafa;
-    21|    --white: #fff;
-    22|    --black: #1a1a1a;
-    23|    --red: #e62b1e;
-    24|    --gray-100: #f5f5f5;
-    25|    --gray-200: #e0e0e0;
-    26|    --gray-400: #999;
-    27|    --gray-600: #666;
-    28|    --max: 1100px;
-    29|}
-    30|* { margin:0; padding:0; box-sizing:border-box; }
-    31|body { font-family:'Inter',-apple-system,'Helvetica Neue',sans-serif; font-size:16px; font-weight:300; line-height:1.7; color:var(--black); background:var(--bg); -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:100%; overflow-x:hidden; }
-    32|h1,h2,h3 { font-weight:700; letter-spacing:-0.02em; line-height:1.12; }
-    33|h1 { font-size:clamp(2.2rem,5vw,3.2rem); }
-    34|h2 { font-size:clamp(1.4rem,2.5vw,1.8rem); margin-bottom:16px; }
-    35|h3 { font-size:1rem; font-weight:600; }
-    36|strong { font-weight:600; }
-    37|.container { max-width:var(--max); margin:0 auto; padding:0 32px; }
-    38|section { padding:80px 0; border-bottom:1px solid var(--gray-200); }
-    39|section:last-of-type { border-bottom:none; }
-    40|.section-label { font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--red); margin-bottom:8px; }
-    41|.red-bar { width:28px; height:2px; background:var(--red); margin-bottom:20px; }
-    42|.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-    43|.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-    44|.card { background:var(--white); border:1px solid var(--gray-200); padding:28px; transition:all 0.2s; }
-    45|.card:hover { border-color:var(--red); }
-    46|a.card { text-decoration:none; color:inherit; display:block; }
-    47|
-    48|/* NAV */
-    49|nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(250,250,250,0.97); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--gray-200); padding:16px 0; }
-    50|nav .container { display:flex; align-items:center; justify-content:space-between; }
-    51|.logo { font-size:1.1rem; font-weight:800; color:var(--black); text-decoration:none; letter-spacing:-0.03em; }
-    52|.logo span { color:var(--red); }
-    53|nav .nav-right { display:flex; align-items:center; gap:18px; }
-    54|nav .links { display:flex; gap:22px; align-items:center; }
-    55|nav .links a { font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--gray-600); text-decoration:none; }
-    56|nav .links a:hover { color:var(--red); }
-    57|.btn-contact-nav { padding:8px 18px; font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; background:var(--red); color:#fff; border:none; border-radius:4px; cursor:pointer; text-decoration:none; white-space:nowrap; transition:background 0.2s; }
-    58|.btn-contact-nav:hover { background:#c62828; }
-    59|.btn-quick { padding:7px 14px; font-size:0.63rem; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; border:1px solid var(--gray-200); border-radius:6px; color:var(--gray-600); text-decoration:none; transition:all 0.2s; white-space:nowrap; }
-    60|.btn-quick:hover { border-color:var(--red); color:var(--red); }
-    61|
-    62|/* HERO */
-    63|#hero { padding:160px 0 60px; }
-    64|#hero h1 { margin-bottom:16px; }
-    65|#hero h1 em { font-style:normal; color:var(--red); }
-    66|.hero-sub { font-weight:300; color:var(--gray-600); font-size:1.05rem; max-width:520px; margin-bottom:28px; line-height:1.6; }
-    67|.hero-stats { display:flex; gap:28px; flex-wrap:wrap; align-items:center; }
-    68|.hs { text-align:center; }
-    69|.hs .num { font-size:2.2rem; font-weight:800; color:var(--red); line-height:1; letter-spacing:-0.03em; }
-    70|.hs .label { font-size:0.58rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--gray-400); margin-top:4px; }
-    71|
-    72|/* TEDX CHIP */
-    73|.tedx-chip { display:inline-flex; align-items:center; gap:12px; background:var(--white); border:1px solid var(--gray-200); border-radius:12px; padding:12px 16px; text-decoration:none; transition:all 0.2s; max-width:420px; }
-    74|.tedx-chip:hover { border-color:var(--red); box-shadow:0 2px 12px rgba(230,43,30,0.06); }
-    75|.tedx-chip-img { width:64px; height:44px; border-radius:4px; overflow:hidden; flex-shrink:0; }
-    76|.tedx-chip-img img { width:100%; height:100%; object-fit:cover; }
-    77|.tedx-chip-info { display:flex; flex-direction:column; gap:4px; }
-    78|.tedx-chip-badge { display:inline-block; background:var(--red); color:#fff; font-size:8px; font-weight:700; padding:2px 8px; border-radius:999px; letter-spacing:0.06em; text-transform:uppercase; width:fit-content; }
-    79|.tedx-chip-title { font-size:0.85rem; font-weight:600; color:var(--black); line-height:1.25; }
-    80|.tedx-chip-desc { font-size:0.72rem; color:var(--gray-600); font-weight:400; }
-    81|
-    82|/* RUA FLIP */
-    83|.flip-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:24px; }
-    84|.flip-card { perspective:1000px; height:270px; }
-    85|.flip-inner { position:relative; width:100%; height:100%; transition:transform 0.45s cubic-bezier(0.4,0,0.2,1); transform-style:preserve-3d; }
-    86|.flip-card:hover .flip-inner { transform:rotateY(180deg); }
-    87|.flip-front, .flip-back { position:absolute; inset:0; backface-visibility:hidden; background:var(--white); border:1px solid var(--gray-200); padding:28px; display:flex; flex-direction:column; }
-    88|.flip-back { transform:rotateY(180deg); overflow-y:auto; justify-content:flex-start; }
-    89|.flip-letter { font-size:4rem; font-weight:800; color:var(--red); opacity:0.06; line-height:1; }
-    90|.flip-front h3 { font-size:1.15rem; font-weight:700; margin-top:-14px; }
-    91|.flip-front .flip-hint { font-size:0.65rem; color:var(--gray-400); margin-top:auto; }
-    92|.flip-back h4 { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--red); margin-bottom:12px; }
-    93|        .flip-btn {
-            margin-top:auto; padding:8px 14px;
-            font-size:0.6rem; font-weight:700;
-            text-transform:uppercase; letter-spacing:0.06em;
-            color:var(--red);
-            border:1px solid rgba(230,43,30,0.25);
-            border-radius:20px;
-            background:rgba(230,43,30,0.05);
-            display:inline-block; align-self:flex-start;
-            cursor:pointer; transition:all 0.2s;
-        }
-        .flip-btn:hover { background:var(--red); color:#fff; border-color:var(--red); }
-        .flip-back .flip-btn {
-            color:var(--red); border-color:rgba(230,43,30,0.25);
-        }
-        .flip-back li { font-size:0.78rem; color:var(--gray-600); font-weight:400; line-height:1.7; padding:6px 0; border-bottom:1px solid var(--gray-200); list-style:none; }
-    94|.flip-back li:last-child { border:none; }
-    95|
-    96|/* TIMELINE */
-    97|.tl-item { display:flex; gap:24px; padding:24px 0; border-bottom:1px solid var(--gray-200); }
-    98|.tl-item:last-child { border:none; }
-    99|.tl-year { min-width:90px; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--red); padding-top:4px; }
-   100|.tl-content h4 { font-size:0.95rem; font-weight:700; margin-bottom:4px; }
-   101|.tl-content p { font-size:0.85rem; color:var(--gray-600); font-weight:400; }
-   102|
-   103|/* CONTACT */
-   104|.contact-row { display:flex; gap:36px; margin-top:20px; flex-wrap:wrap; justify-content:center; }
-   105|.ci .cl { font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--red); }
-   106|.ci .cv { font-size:0.9rem; color:var(--black); margin-top:4px; font-weight:500; }
-   107|.ci .cv a { color:var(--black); text-decoration:none; }
-   108|.ci .cv a:hover { color:var(--red); }
-   109|
-   110|/* AI BOT */
-   111|.bot-fab { position:fixed; bottom:28px; right:28px; z-index:200; }
-   112|.bot-btn { width:48px; height:48px; border-radius:50%; background:var(--white); border:1px solid var(--gray-200); color:var(--black); font-size:1.2rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; box-shadow:0 2px 12px rgba(0,0,0,0.05); }
-   113|.bot-btn:hover { border-color:var(--red); }
-   114|.bot-panel { display:none; position:fixed; bottom:88px; right:28px; z-index:200; width:360px; max-height:500px; background:rgba(255,255,255,0.98); border:1px solid var(--gray-200); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-radius:12px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.08); flex-direction:column; }
-   115|.bot-panel.open { display:flex; }
-   116|.bot-header { padding:14px 18px; border-bottom:1px solid var(--gray-200); display:flex; align-items:center; justify-content:space-between; }
-   117|.bot-header span { font-size:0.85rem; font-weight:600; }
-   118|.bot-close { background:none; border:none; color:var(--gray-400); font-size:1.2rem; cursor:pointer; }
-   119|.bot-msgs { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:10px; max-height:320px; }
-   120|.bot-msg { max-width:85%; padding:10px 14px; border-radius:10px; font-size:0.82rem; line-height:1.55; font-weight:400; }
-   121|.bot-msg.assistant { background:var(--gray-100); align-self:flex-start; }
-   122|.bot-msg.user { background:var(--red); color:#fff; align-self:flex-end; }
-   123|.bot-input-row { padding:12px 14px; border-top:1px solid var(--gray-200); display:flex; gap:8px; }
-   124|.bot-input { flex:1; padding:10px 14px; background:var(--gray-100); border:1px solid var(--gray-200); border-radius:8px; color:var(--black); font-size:0.82rem; font-family:inherit; font-weight:400; outline:none; }
-   125|.bot-input:focus { border-color:var(--red); }
-   126|.bot-send { padding:10px 16px; background:var(--red); color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:600; font-size:0.8rem; }
-   127|
-   128|footer { padding:32px 0; text-align:center; font-size:0.72rem; font-weight:400; color:var(--gray-400); border-top:1px solid var(--gray-200); }
-   129|
-   130|@media(max-width:768px) {
-   131|    .grid-2,.grid-3,.flip-grid { grid-template-columns:1fr; }
-   132|    section { padding:48px 0; }
-   133|    .container { padding:0 20px; }
-   134|    nav .links, nav .btn-quick { display:none; }
-   135|    #hero { padding:130px 0 40px; }
-   136|    .hero-stats { gap:16px; }
-   137|    .bot-panel { width:calc(100vw - 40px); right:20px; }
-   138|}
-   139|</style>
-   140|</head>
-   141|<body>
-   142|
-   143|<nav>
-   144|    <div class="container">
-   145|        <a href="#" class="logo">rkrk<span>.io</span></a>
-   146|        <div class="nav-right">
-   147|            <a href="/dynamos" class="btn-quick">DynamOS</a>
-   148|            <a href="https://dynasaurus.rkrk.io" class="btn-quick">DynaSaurus</a>
-   149|            <a href="https://ielts.rkrk.io" class="btn-quick">IELTS</a>
-   150|            <div class="links">
-   151|                <a href="#lab">The Lab</a>
-   152|                <a href="#rua">RUA</a>
-   153|                <a href="#story">Story</a>
-   154|            </div>
-   155|            <a href="#contact" class="btn-contact-nav">Contact Kee</a>
-   156|        </div>
-   157|    </div>
-   158|</nav>
-   159|
-   160|<section id="hero">
-   161|    <div class="container">
-   162|        <div class="section-label">AI-Native Education Architect · Chengdu</div>
-   163|        <h1>I dismantle language<br>and rebuild it as <em>architecture.</em></h1>
-   164|        <p class="hero-sub">Every student is a site. Every lesson is a blueprint. Every cognitive node is load-bearing — designed to hold weight under real-world pressure.</p>
-   165|        <div class="hero-stats">
-   166|            <div class="hs"><div class="num">9.0</div><div class="label">Listening</div></div>
-   167|            <div class="hs"><div class="num">8.5</div><div class="label">Reading</div></div>
-   168|            <div class="hs"><div class="num">8.5</div><div class="label">Speaking</div></div>
-   169|            <div class="hs"><div class="num">15y</div><div class="label">Classroom</div></div>
-   170|            <a href="/tedx-speech" class="tedx-chip">
-   171|                <div class="tedx-chip-img"><img src="/tedx-hero.jpg" alt="TEDx"></div>
-   172|                <div class="tedx-chip-info">
-   173|                    <span class="tedx-chip-badge">TEDxWangjiangSt 2026</span>
-   174|                    <div class="tedx-chip-title">Bridge the Gap</div>
-   175|                    <div class="tedx-chip-desc">Learning Is Now Design — full speech script →</div>
-   176|                </div>
-   177|            </a>
-   178|        </div>
-   179|    </div>
-   180|</section>
-   181|
-   182|<section id="lab">
-   183|    <div class="container">
-   184|        <div class="section-label">The Lab</div>
-   185|        <div class="red-bar"></div>
-   186|        <h2>Built at 4AM. Shipped before sunrise.</h2>
-   187|        <div class="grid-2" style="margin-top:24px">
-   188|            <a href="/dynamos" class="card"><div style="font-size:1.5rem;margin-bottom:10px">🦕</div><h3>DynamOS</h3><p style="font-size:0.85rem;color:var(--gray-600);font-weight:400">The Roblox for Education. Teachers build, share, and monetize AI-powered learning tools. Zero code.</p></a>
-   189|            <a href="https://dynasaurus.rkrk.io" class="card"><div style="font-size:1.5rem;margin-bottom:10px">🧠</div><h3>DynaSaurus</h3><p style="font-size:0.85rem;color:var(--gray-600);font-weight:400">AI language tutor. 4 modules. Chunk-based. 17 languages. RUA-powered.</p></a>
-   190|            <a href="https://ielts.rkrk.io" class="card"><div style="font-size:1.5rem;margin-bottom:10px">🦄</div><h3>IELTS with Kee</h3><p style="font-size:0.85rem;color:var(--gray-600);font-weight:400">170+ cue cards. 3D flip cards. Timed drills. Full P1/P2/P3 speaking toolkit.</p></a>
-   191|            
-   192|        </div>
-   193|    </div>
-   194|</section>
-   195|
-   196|<section id="rua" style="background:var(--white)">
-   197|    <div class="container">
-   198|        <div class="section-label">The Framework</div>
-   199|        <div class="red-bar"></div>
-   200|        <h2>RUA — Recognise · Understand · Apply</h2>
-   201|        <p style="color:var(--gray-600);font-weight:400;max-width:520px;margin-bottom:4px">A meta-cognitive operating system for learning in the AI era. Hover each card to see the method behind it.</p>
-   202|        <div class="flip-grid">
-   203|            <div class="flip-card"><div class="flip-inner">
-   204|                <div class="flip-front"><div class="flip-letter">R</div><h3>Recognise</h3><p style="font-size:0.82rem;color:var(--gray-600);font-weight:400">Decompose the learning target into bite-sized chunks.</p><div class="flip-btn">Flip for BEEF →</div></div>
-   205|                <div class="flip-back"><h4>🍖 BEEF — Goal Decomposition</h4><ul><li><strong>B</strong>ackground — when, where, who</li><li><strong>E</strong>vidence · CHOP — Caught eye? Highlight? Optimised? Purpose?</li><li><strong>E</strong>xplanation · SOOI — Subjective, Objective, Outlying, Intrinsic</li><li><strong>F</strong>eedback — record the emotion as a signal</li></ul></div>
-   206|            </div></div>
-   207|            <div class="flip-card"><div class="flip-inner">
-   208|                <div class="flip-front"><div class="flip-letter">U</div><h3>Understand</h3><p style="font-size:0.82rem;color:var(--gray-600);font-weight:400">Deep comprehension before application.</p><div class="flip-btn">Flip for 3C →</div></div>
-   209|                <div class="flip-back"><h4>🧩 3C — Deep Comprehension</h4><ul><li><strong>C</strong>ollocation — what does this naturally pair with?</li><li><strong>C</strong>ontexts — in what situations does this appear?</li><li><strong>C</strong>onnotation — what's the unspoken meaning?</li></ul></div>
-   210|            </div></div>
-   211|            <div class="flip-card"><div class="flip-inner">
-   212|                <div class="flip-front"><div class="flip-letter">A</div><h3>Apply</h3><p style="font-size:0.82rem;color:var(--gray-600);font-weight:400">Systematic practice with feedback loops.</p><div class="flip-btn">Flip for GAP →</div></div>
-   213|                <div class="flip-back"><h4>🎯 GAP — Deliberate Practice</h4><ul><li><strong>G</strong>auge — where exactly is the gap?</li><li><strong>A</strong>nalyse — trace back to a Recognise chunk</li><li><strong>P</strong>ractice — drill, fail, correct, repeat</li></ul></div>
-   214|            </div></div>
-   215|        </div>
-   216|    </div>
-   217|</section>
-   218|
-   219|<section id="story">
-   220|    <div class="container">
-   221|        <div class="section-label">The Architect</div>
-   222|        <div class="red-bar"></div>
-   223|        <h2>From live stage to classroom to code</h2>
-   224|        <div style="margin-top:20px">
-   225|            <div class="tl-item"><div class="tl-year">2012</div><div class="tl-content"><h4>Backstreet Boys Tour Interpreter</h4><p>20,000 people. Live mic. Zero margin. Where I learned language is resonance, not rules.</p></div></div>
-   226|            <div class="tl-item"><div class="tl-year">2013–20</div><div class="tl-content"><h4>EF Expert Teacher · Trainer of Trainers</h4><p>Highest rank. Built the playbook for West China. Watched the same pattern everywhere: content without architecture.</p></div></div>
-   227|            <div class="tl-item"><div class="tl-year">2021–25</div><div class="tl-content"><h4>Independent Architect</h4><p>Built RUA. Developed MFP/CCC/GAP taxonomy. 200+ students. 7 institutions.</p></div></div>
-   228|            <div class="tl-item"><div class="tl-year">2026</div><div class="tl-content"><h4>DynamOS</h4><p>Building the cognitive OS for AI-native education. Deployed DynaSaurus. Building at 4AM.</p></div></div>
-   229|        </div>
-   230|    </div>
-   231|</section>
-   232|
-   233|<section id="contact" style="text-align:center">
-   234|    <div class="container">
-   235|        <div class="section-label">Get in Touch</div>
-   236|        <div class="red-bar" style="margin:0 auto 20px"></div>
-   237|        <h2>Work with Kee</h2>
-   238|        <p style="color:var(--gray-600);font-weight:400;max-width:420px;margin:0 auto">Book a demo. Ask about IELTS coaching. Discuss AI-native education. Kee replies personally.</p>
-   239|        <div class="contact-row">
-   240|            <div class="ci"><div class="cl">WeChat</div><div class="cv">keedahooman</div></div>
-   241|            <div class="ci"><div class="cl">WhatsApp</div><div class="cv"><a href="https://wa.me/447440622158">+44 7440 622158</a></div></div>
-   242|        </div>
-   243|    </div>
-   244|</section>
-   245|
-   246|<footer>
-   247|    <div class="container">Kee Lee · AI-Native Education Architect · Chengdu · rkrk.io · © 2026</div>
-   248|</footer>
-   249|
-   250|<div class="bot-fab"><button class="bot-btn" onclick="toggleBot()">🦄</button></div>
-   251|<div class="bot-panel" id="botPanel">
-   252|    <div class="bot-header"><span>Kee's AI Assistant</span><button class="bot-close" onclick="toggleBot()">×</button></div>
-   253|    <div class="bot-msgs" id="botMsgs"><div class="bot-msg assistant">Hey! 👋 I'm Kee's assistant. Ask about IELTS coaching, DynamOS, DynaSaurus, or booking a demo class.</div></div>
-   254|    <div class="bot-input-row">
-   255|        <input class="bot-input" id="botInput" placeholder="Ask anything..." onkeydown="if(event.key==='Enter')sendBot()">
-   256|        <button class="bot-send" onclick="sendBot()">Send</button>
-   257|    </div>
-   258|</div>
-   259|
-   260|<script>
-   261|var botOpen=false,botLoading=false;
-   262|function toggleBot(){botOpen=!botOpen;document.getElementById('botPanel').classList.toggle('open',botOpen);if(botOpen)document.getElementById('botInput').focus();}
-   263|async function sendBot(){
-   264|    if(botLoading)return;
-   265|    var inp=document.getElementById('botInput'),msg=inp.value.trim();
-   266|    if(!msg)return;inp.value='';botLoading=true;
-   267|    var msgs=document.getElementById('botMsgs');
-   268|    msgs.innerHTML+='<div class="bot-msg user">'+esc(msg)+'</div>';
-   269|    msgs.innerHTML+='<div class="bot-msg assistant">Thinking…</div>';
-   270|    msgs.scrollTop=msgs.scrollHeight;
-   271|    try{
-   272|        var res=await fetch('https://dynasaurus.rkrk.io/api/kee-bot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,lang:navigator.language||'en'})});
-   273|        var data=await res.json();
-   274|        msgs.lastChild.textContent=data.reply||'Sorry, try again.';
-   275|    }catch(e){msgs.lastChild.textContent='Connection lost. WhatsApp: +44 7440 622158';}
-   276|    msgs.scrollTop=msgs.scrollHeight;botLoading=false;
-   277|}
-   278|function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
-   279|</script>
-   280|
-   281|
-   282|<script>
-   283|document.querySelectorAll('.flip-card').forEach(card => {
-   284|    card.addEventListener('click', function() {
-   285|        this.classList.toggle('flipped');
-   286|    });
-   287|});
-   288|</script>
-   289|
-   290|</body>
-   291|</html>
+     1|     1|<!DOCTYPE html>
+     2|     2|<html lang="en">
+     3|     3|<head>
+     4|     4|<meta charset="UTF-8">
+     5|     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6|     6|<title>Kee Lee — AI-Native Education Architect</title>
+     7|     7|<meta name="description" content="Kee Lee — I dismantle language and rebuild it as architecture. IELTS 9.0/8.5/8.5. TEDx 2026.">
+     8|     8|<meta property="og:title" content="Kee Lee — AI-Native Education Architect">
+     9|     9|<meta property="og:description" content="I don't teach English. I dismantle it and rebuild it as architecture.">
+    10|    10|<meta property="og:type" content="website"><meta property="og:url" content="https://rkrk.io">
+    11|    11|<link rel="preconnect" href="https://fonts.googleapis.com">
+    12|    12|<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    13|    13|<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>⚡</text></svg>">
+    14|    14|<style>
+    15|    15|/* ═══════════════════════════════════════════
+    16|    16|   VERSION: Editorial v2.3 — No BP + Flip Fix
+    17|    17|   Font: Inter (TEDx-approved Helvetica alt)
+    18|    18|   ═══════════════════════════════════════════ */
+    19|    19|:root {
+    20|    20|    --bg: #fafafa;
+    21|    21|    --white: #fff;
+    22|    22|    --black: #1a1a1a;
+    23|    23|    --red: #e62b1e;
+    24|    24|    --gray-100: #f5f5f5;
+    25|    25|    --gray-200: #e0e0e0;
+    26|    26|    --gray-400: #999;
+    27|    27|    --gray-600: #666;
+    28|    28|    --max: 1100px;
+    29|    29|}
+    30|    30|* { margin:0; padding:0; box-sizing:border-box; }
+    31|    31|body { font-family:'Inter',-apple-system,'Helvetica Neue',sans-serif; font-size:16px; font-weight:300; line-height:1.7; color:var(--black); background:var(--bg); -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:100%; overflow-x:hidden; }
+    32|    32|h1,h2,h3 { font-weight:700; letter-spacing:-0.02em; line-height:1.12; }
+    33|    33|h1 { font-size:clamp(2.2rem,5vw,3.2rem); }
+    34|    34|h2 { font-size:clamp(1.4rem,2.5vw,1.8rem); margin-bottom:16px; }
+    35|    35|h3 { font-size:1rem; font-weight:600; }
+    36|    36|strong { font-weight:600; }
+    37|    37|.container { max-width:var(--max); margin:0 auto; padding:0 32px; }
+    38|    38|section { padding:80px 0; border-bottom:1px solid var(--gray-200); }
+    39|    39|section:last-of-type { border-bottom:none; }
+    40|    40|.section-label { font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--red); margin-bottom:8px; }
+    41|    41|.red-bar { width:28px; height:2px; background:var(--red); margin-bottom:20px; }
+    42|    42|.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    43|    43|.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+    44|    44|.card { background:var(--white); border:1px solid var(--gray-200); padding:28px; transition:all 0.2s; }
+    45|    45|.card:hover { border-color:var(--red); }
+    46|    46|a.card { text-decoration:none; color:inherit; display:block; }
+    47|    47|
+    48|    48|/* NAV */
+    49|    49|nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(250,250,250,0.97); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--gray-200); padding:16px 0; }
+    50|    50|nav .container { display:flex; align-items:center; justify-content:space-between; }
+    51|    51|.logo { font-size:1.1rem; font-weight:800; color:var(--black); text-decoration:none; letter-spacing:-0.03em; }
+    52|    52|.logo span { color:var(--red); }
+    53|    53|nav .nav-right { display:flex; align-items:center; gap:18px; }
+    54|    54|nav .links { display:flex; gap:22px; align-items:center; }
+    55|    55|nav .links a { font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--gray-600); text-decoration:none; }
+    56|    56|nav .links a:hover { color:var(--red); }
+    57|    57|.btn-contact-nav { padding:8px 18px; font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; background:var(--red); color:#fff; border:none; border-radius:4px; cursor:pointer; text-decoration:none; white-space:nowrap; transition:background 0.2s; }
+    58|    58|.btn-contact-nav:hover { background:#c62828; }
+    59|    59|.btn-quick { padding:7px 14px; font-size:0.63rem; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; border:1px solid var(--gray-200); border-radius:6px; color:var(--gray-600); text-decoration:none; transition:all 0.2s; white-space:nowrap; }
+    60|    60|.btn-quick:hover { border-color:var(--red); color:var(--red); }
+    61|    61|
+    62|    62|/* HERO */
+    63|    63|#hero { padding:160px 0 60px; }
+    64|    64|#hero h1 { margin-bottom:16px; }
+    65|    65|#hero h1 em { font-style:normal; color:var(--red); }
+    66|    66|.hero-sub { font-weight:300; color:var(--gray-600); font-size:1.05rem; max-width:520px; margin-bottom:28px; line-height:1.6; }
+    67|    67|.hero-stats { display:flex; gap:28px; flex-wrap:wrap; align-items:center; }
+    68|    68|.hs { text-align:center; }
+    69|    69|.hs .num { font-size:2.2rem; font-weight:800; color:var(--red); line-height:1; letter-spacing:-0.03em; }
+    70|    70|.hs .label { font-size:0.58rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--gray-400); margin-top:4px; }
+    71|    71|
+    72|    72|/* TEDX CHIP */
+    73|    73|.tedx-chip { display:inline-flex; align-items:center; gap:12px; background:var(--white); border:1px solid var(--gray-200); border-radius:12px; padding:12px 16px; text-decoration:none; transition:all 0.2s; max-width:420px; }
+    74|    74|.tedx-chip:hover { border-color:var(--red); box-shadow:0 2px 12px rgba(230,43,30,0.06); }
+    75|    75|.tedx-chip-img { width:64px; height:44px; border-radius:4px; overflow:hidden; flex-shrink:0; }
+    76|    76|.tedx-chip-img img { width:100%; height:100%; object-fit:cover; }
+    77|    77|.tedx-chip-info { display:flex; flex-direction:column; gap:4px; }
+    78|    78|.tedx-chip-badge { display:inline-block; background:var(--red); color:#fff; font-size:8px; font-weight:700; padding:2px 8px; border-radius:999px; letter-spacing:0.06em; text-transform:uppercase; width:fit-content; }
+    79|    79|.tedx-chip-title { font-size:0.85rem; font-weight:600; color:var(--black); line-height:1.25; }
+    80|    80|.tedx-chip-desc { font-size:0.72rem; color:var(--gray-600); font-weight:400; }
+    81|    81|
+    82|    82|/* RUA FLIP */
+    83|    83|.flip-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:24px; }
+    84|    84|.flip-card { perspective:1000px; height:270px; }
+    85|    85|.flip-inner { position:relative; width:100%; height:100%; transition:transform 0.45s cubic-bezier(0.4,0,0.2,1); transform-style:preserve-3d; }
+    86|    86|.flip-card:hover .flip-inner { transform:rotateY(180deg); }
+    87|    87|.flip-front, .flip-back {
+            text-align:center; align-items:center; position:absolute; inset:0; backface-visibility:hidden; background:var(--white); border:1px solid var(--gray-200); padding:28px; display:flex; flex-direction:column; }
+    88|    88|.flip-back { transform:rotateY(180deg); overflow-y:auto; justify-content:flex-start; }
+    89|    89|.flip-letter { font-size:4rem; font-weight:800; color:var(--red); opacity:0.06; line-height:1; }
+    90|    90|.flip-front h3 { font-size:1.15rem; font-weight:700; margin-top:-14px; }
+    91|    91|.flip-front .flip-hint { font-size:0.65rem; color:var(--gray-400); margin-top:auto; }
+    92|    92|.flip-back h4 { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--red); margin-bottom:12px; }
+    93|    93|        .flip-btn {
+    94|            margin-top:auto; padding:8px 14px;
+    95|            font-size:0.6rem; font-weight:700;
+    96|            text-transform:uppercase; letter-spacing:0.06em;
+    97|            color:var(--red);
+    98|            border:1px solid rgba(230,43,30,0.25);
+    99|            border-radius:20px;
+   100|            background:rgba(230,43,30,0.05);
+   101|            display:inline-block; align-self:center;
+   102|            cursor:pointer; transition:all 0.2s;
+   103|        }
+   104|        .flip-btn:hover { background:var(--red); color:#fff; border-color:var(--red); }
+   105|        .flip-back .flip-btn {
+   106|            color:var(--red); border-color:rgba(230,43,30,0.25);
+   107|        }
+   108|        .flip-back li { font-size:0.78rem; color:var(--gray-600); font-weight:400; line-height:1.7; padding:6px 0; border-bottom:1px solid var(--gray-200); list-style:none; }
+   109|    94|.flip-back li:last-child { border:none; }
+   110|    95|
+   111|    96|/* TIMELINE */
+   112|    97|.tl-item { display:flex; gap:24px; padding:24px 0; border-bottom:1px solid var(--gray-200); }
+   113|    98|.tl-item:last-child { border:none; }
+   114|    99|.tl-year { min-width:90px; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--red); padding-top:4px; }
+   115|   100|.tl-content h4 { font-size:0.95rem; font-weight:700; margin-bottom:4px; }
+   116|   101|.tl-content p { font-size:0.85rem; color:var(--gray-600); font-weight:400; }
+   117|   102|
+   118|   103|/* CONTACT */
+   119|   104|.contact-row { display:flex; gap:36px; margin-top:20px; flex-wrap:wrap; justify-content:center; }
+   120|   105|.ci .cl { font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--red); }
+   121|   106|.ci .cv { font-size:0.9rem; color:var(--black); margin-top:4px; font-weight:500; }
+   122|   107|.ci .cv a { color:var(--black); text-decoration:none; }
+   123|   108|.ci .cv a:hover { color:var(--red); }
+   124|   109|
+   125|   110|/* AI BOT */
+   126|   111|.bot-fab { position:fixed; bottom:28px; right:28px; z-index:200; }
+   127|   112|.bot-btn { width:48px; height:48px; border-radius:50%; background:var(--white); border:1px solid var(--gray-200); color:var(--black); font-size:1.2rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; box-shadow:0 2px 12px rgba(0,0,0,0.05); }
+   128|   113|.bot-btn:hover { border-color:var(--red); }
+   129|   114|.bot-panel { display:none; position:fixed; bottom:88px; right:28px; z-index:200; width:360px; max-height:500px; background:rgba(255,255,255,0.98); border:1px solid var(--gray-200); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-radius:12px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.08); flex-direction:column; }
+   130|   115|.bot-panel.open { display:flex; }
+   131|   116|.bot-header { padding:14px 18px; border-bottom:1px solid var(--gray-200); display:flex; align-items:center; justify-content:space-between; }
+   132|   117|.bot-header span { font-size:0.85rem; font-weight:600; }
+   133|   118|.bot-close { background:none; border:none; color:var(--gray-400); font-size:1.2rem; cursor:pointer; }
+   134|   119|.bot-msgs { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:10px; max-height:320px; }
+   135|   120|.bot-msg { max-width:85%; padding:10px 14px; border-radius:10px; font-size:0.82rem; line-height:1.55; font-weight:400; }
+   136|   121|.bot-msg.assistant { background:var(--gray-100); align-self:center; }
+   137|   122|.bot-msg.user { background:var(--red); color:#fff; align-self:flex-end; }
+   138|   123|.bot-input-row { padding:12px 14px; border-top:1px solid var(--gray-200); display:flex; gap:8px; }
+   139|   124|.bot-input { flex:1; padding:10px 14px; background:var(--gray-100); border:1px solid var(--gray-200); border-radius:8px; color:var(--black); font-size:0.82rem; font-family:inherit; font-weight:400; outline:none; }
+   140|   125|.bot-input:focus { border-color:var(--red); }
+   141|   126|.bot-send { padding:10px 16px; background:var(--red); color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:600; font-size:0.8rem; }
+   142|   127|
+   143|   128|footer { padding:32px 0; text-align:center; font-size:0.72rem; font-weight:400; color:var(--gray-400); border-top:1px solid var(--gray-200); }
+   144|   129|
+   145|   130|@media(max-width:768px) {
+   146|   131|    .grid-2,.grid-3,.flip-grid { grid-template-columns:1fr; }
+   147|   132|    section { padding:48px 0; }
+   148|   133|    .container { padding:0 20px; }
+   149|   134|    nav .links, nav .btn-quick { display:none; }
+   150|   135|    #hero { padding:130px 0 40px; }
+   151|   136|    .hero-stats { gap:16px; }
+   152|   137|    .bot-panel { width:calc(100vw - 40px); right:20px; }
+   153|   138|}
+   154|   139|</style>
+   155|   140|</head>
+   156|   141|<body>
+   157|   142|
+   158|   143|<nav>
+   159|   144|    <div class="container">
+   160|   145|        <a href="#" class="logo">rkrk<span>.io</span></a>
+   161|   146|        <div class="nav-right">
+   162|   147|            <a href="/dynamos" class="btn-quick">DynamOS</a>
+   163|   148|            <a href="https://dynasaurus.rkrk.io" class="btn-quick">DynaSaurus</a>
+   164|   149|            <a href="https://ielts.rkrk.io" class="btn-quick">IELTS</a>
+   165|   150|            <div class="links">
+   166|   151|                <a href="#lab">The Lab</a>
+   167|   152|                <a href="#rua">RUA</a>
+   168|   153|                <a href="#story">Story</a>
+   169|   154|            </div>
+   170|   155|            <a href="#contact" class="btn-contact-nav">Contact Kee</a>
+   171|   156|        </div>
+   172|   157|    </div>
+   173|   158|</nav>
+   174|   159|
+   175|   160|<section id="hero">
+   176|   161|    <div class="container">
+   177|   162|        <div class="section-label">AI-Native Education Architect · Chengdu</div>
+   178|   163|        <h1>I dismantle language<br>and rebuild it as <em>architecture.</em></h1>
+   179|   164|        <p class="hero-sub">Every student is a site. Every lesson is a blueprint. Every cognitive node is load-bearing — designed to hold weight under real-world pressure.</p>
+   180|   165|        <div class="hero-stats">
+   181|   166|            <div class="hs"><div class="num">9.0</div><div class="label">Listening</div></div>
+   182|   167|            <div class="hs"><div class="num">8.5</div><div class="label">Reading</div></div>
+   183|   168|            <div class="hs"><div class="num">8.5</div><div class="label">Speaking</div></div>
+   184|   169|            <div class="hs"><div class="num">15y</div><div class="label">Classroom</div></div>
+   185|   170|            <a href="/tedx-speech" class="tedx-chip">
+   186|   171|                <div class="tedx-chip-img"><img src="/tedx-hero.jpg" alt="TEDx"></div>
+   187|   172|                <div class="tedx-chip-info">
+   188|   173|                    <span class="tedx-chip-badge">TEDxWangjiangSt 2026</span>
+   189|   174|                    <div class="tedx-chip-title">Bridge the Gap</div>
+   190|   175|                    <div class="tedx-chip-desc">Learning Is Now Design — full speech script →</div>
+   191|   176|                </div>
+   192|   177|            </a>
+   193|   178|        </div>
+   194|   179|    </div>
+   195|   180|</section>
+   196|   181|
+   197|   182|<section id="lab">
+   198|   183|    <div class="container">
+   199|   184|        <div class="section-label">The Lab</div>
+   200|   185|        <div class="red-bar"></div>
+   201|   186|        <h2>Built at 4AM. Shipped before sunrise.</h2>
+   202|   187|        <div class="grid-2" style="margin-top:24px">
+   203|   188|            <a href="/dynamos" class="card"><div style="font-size:1.5rem;margin-bottom:10px">🦕</div><h3>DynamOS</h3><p style="font-size:0.85rem;color:var(--gray-600);font-weight:400">The Roblox for Education. Teachers build, share, and monetize AI-powered learning tools. Zero code.</p></a>
+   204|   189|            <a href="https://dynasaurus.rkrk.io" class="card"><div style="font-size:1.5rem;margin-bottom:10px">🧠</div><h3>DynaSaurus</h3><p style="font-size:0.85rem;color:var(--gray-600);font-weight:400">AI language tutor. 4 modules. Chunk-based. 17 languages. RUA-powered.</p></a>
+   205|   190|            <a href="https://ielts.rkrk.io" class="card"><div style="font-size:1.5rem;margin-bottom:10px">🦄</div><h3>IELTS with Kee</h3><p style="font-size:0.85rem;color:var(--gray-600);font-weight:400">170+ cue cards. 3D flip cards. Timed drills. Full P1/P2/P3 speaking toolkit.</p></a>
+   206|   191|            
+   207|   192|        </div>
+   208|   193|    </div>
+   209|   194|</section>
+   210|   195|
+   211|   196|<section id="rua" style="background:var(--white)">
+   212|   197|    <div class="container">
+   213|   198|        <div class="section-label">The Framework</div>
+   214|   199|        <div class="red-bar"></div>
+   215|   200|        <h2>RUA — Recognise · Understand · Apply</h2>
+   216|   201|        <p style="color:var(--gray-600);font-weight:400;max-width:520px;margin-bottom:4px">A meta-cognitive operating system for learning in the AI era. Hover each card to see the method behind it.</p>
+   217|   202|        <div class="flip-grid">
+   218|   203|            <div class="flip-card"><div class="flip-inner">
+   219|   204|                <div class="flip-front"><div class="flip-letter">R</div><h3>Recognise</h3><p style="font-size:0.82rem;color:var(--gray-600);font-weight:400">Decompose the learning target into bite-sized chunks.</p><div class="flip-btn">Flip for BEEF →</div></div>
+   220|   205|                <div class="flip-back"><h4>🍖 BEEF — Goal Decomposition</h4><ul><li><strong>B</strong>ackground — when, where, who</li><li><strong>E</strong>vidence · CHOP — Caught eye? Highlight? Optimised? Purpose?</li><li><strong>E</strong>xplanation · SOOI — Subjective, Objective, Outlying, Intrinsic</li><li><strong>F</strong>eedback — record the emotion as a signal</li></ul></div>
+   221|   206|            </div></div>
+   222|   207|            <div class="flip-card"><div class="flip-inner">
+   223|   208|                <div class="flip-front"><div class="flip-letter">U</div><h3>Understand</h3><p style="font-size:0.82rem;color:var(--gray-600);font-weight:400">Deep comprehension before application.</p><div class="flip-btn">Flip for 3C →</div></div>
+   224|   209|                <div class="flip-back"><h4>🧩 3C — Deep Comprehension</h4><ul><li><strong>C</strong>ollocation — what does this naturally pair with?</li><li><strong>C</strong>ontexts — in what situations does this appear?</li><li><strong>C</strong>onnotation — what's the unspoken meaning?</li></ul></div>
+   225|   210|            </div></div>
+   226|   211|            <div class="flip-card"><div class="flip-inner">
+   227|   212|                <div class="flip-front"><div class="flip-letter">A</div><h3>Apply</h3><p style="font-size:0.82rem;color:var(--gray-600);font-weight:400">Systematic practice with feedback loops.</p><div class="flip-btn">Flip for GAP →</div></div>
+   228|   213|                <div class="flip-back"><h4>🎯 GAP — Deliberate Practice</h4><ul><li><strong>G</strong>auge — where exactly is the gap?</li><li><strong>A</strong>nalyse — trace back to a Recognise chunk</li><li><strong>P</strong>ractice — drill, fail, correct, repeat</li></ul></div>
+   229|   214|            </div></div>
+   230|   215|        </div>
+   231|   216|    </div>
+   232|   217|</section>
+   233|   218|
+   234|   219|<section id="story">
+   235|   220|    <div class="container">
+   236|   221|        <div class="section-label">The Architect</div>
+   237|   222|        <div class="red-bar"></div>
+   238|   223|        <h2>From live stage to classroom to code</h2>
+   239|   224|        <div style="margin-top:20px">
+   240|   225|            <div class="tl-item"><div class="tl-year">2012</div><div class="tl-content"><h4>Backstreet Boys Tour Interpreter</h4><p>20,000 people. Live mic. Zero margin. Where I learned language is resonance, not rules.</p></div></div>
+   241|   226|            <div class="tl-item"><div class="tl-year">2013–20</div><div class="tl-content"><h4>EF Expert Teacher · Trainer of Trainers</h4><p>Highest rank. Built the playbook for West China. Watched the same pattern everywhere: content without architecture.</p></div></div>
+   242|   227|            <div class="tl-item"><div class="tl-year">2021–25</div><div class="tl-content"><h4>Independent Architect</h4><p>Built RUA. Developed MFP/CCC/GAP taxonomy. 200+ students. 7 institutions.</p></div></div>
+   243|   228|            <div class="tl-item"><div class="tl-year">2026</div><div class="tl-content"><h4>DynamOS</h4><p>Building the cognitive OS for AI-native education. Deployed DynaSaurus. Building at 4AM.</p></div></div>
+   244|   229|        </div>
+   245|   230|    </div>
+   246|   231|</section>
+   247|   232|
+   248|   233|<section id="contact" style="text-align:center">
+   249|   234|    <div class="container">
+   250|   235|        <div class="section-label">Get in Touch</div>
+   251|   236|        <div class="red-bar" style="margin:0 auto 20px"></div>
+   252|   237|        <h2>Work with Kee</h2>
+   253|   238|        <p style="color:var(--gray-600);font-weight:400;max-width:420px;margin:0 auto">Book a demo. Ask about IELTS coaching. Discuss AI-native education. Kee replies personally.</p>
+   254|   239|        <div class="contact-row">
+   255|   240|            <div class="ci"><div class="cl">WeChat</div><div class="cv">keedahooman</div></div>
+   256|   241|            <div class="ci"><div class="cl">WhatsApp</div><div class="cv"><a href="https://wa.me/447440622158">+44 7440 622158</a></div></div>
+   257|   242|        </div>
+   258|   243|    </div>
+   259|   244|</section>
+   260|   245|
+   261|   246|<footer>
+   262|   247|    <div class="container">Kee Lee · AI-Native Education Architect · Chengdu · rkrk.io · © 2026</div>
+   263|   248|</footer>
+   264|   249|
+   265|   250|<div class="bot-fab"><button class="bot-btn" onclick="toggleBot()">🦄</button></div>
+   266|   251|<div class="bot-panel" id="botPanel">
+   267|   252|    <div class="bot-header"><span>Kee's AI Assistant</span><button class="bot-close" onclick="toggleBot()">×</button></div>
+   268|   253|    <div class="bot-msgs" id="botMsgs"><div class="bot-msg assistant">Hey! 👋 I'm Kee's assistant. Ask about IELTS coaching, DynamOS, DynaSaurus, or booking a demo class.</div></div>
+   269|   254|    <div class="bot-input-row">
+   270|   255|        <input class="bot-input" id="botInput" placeholder="Ask anything..." onkeydown="if(event.key==='Enter')sendBot()">
+   271|   256|        <button class="bot-send" onclick="sendBot()">Send</button>
+   272|   257|    </div>
+   273|   258|</div>
+   274|   259|
+   275|   260|<script>
+   276|   261|var botOpen=false,botLoading=false;
+   277|   262|function toggleBot(){botOpen=!botOpen;document.getElementById('botPanel').classList.toggle('open',botOpen);if(botOpen)document.getElementById('botInput').focus();}
+   278|   263|async function sendBot(){
+   279|   264|    if(botLoading)return;
+   280|   265|    var inp=document.getElementById('botInput'),msg=inp.value.trim();
+   281|   266|    if(!msg)return;inp.value='';botLoading=true;
+   282|   267|    var msgs=document.getElementById('botMsgs');
+   283|   268|    msgs.innerHTML+='<div class="bot-msg user">'+esc(msg)+'</div>';
+   284|   269|    msgs.innerHTML+='<div class="bot-msg assistant">Thinking…</div>';
+   285|   270|    msgs.scrollTop=msgs.scrollHeight;
+   286|   271|    try{
+   287|   272|        var res=await fetch('https://dynasaurus.rkrk.io/api/kee-bot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,lang:navigator.language||'en'})});
+   288|   273|        var data=await res.json();
+   289|   274|        msgs.lastChild.textContent=data.reply||'Sorry, try again.';
+   290|   275|    }catch(e){msgs.lastChild.textContent='Connection lost. WhatsApp: +44 7440 622158';}
+   291|   276|    msgs.scrollTop=msgs.scrollHeight;botLoading=false;
+   292|   277|}
+   293|   278|function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+   294|   279|</script>
+   295|   280|
+   296|   281|
+   297|   282|<script>
+   298|   283|document.querySelectorAll('.flip-card').forEach(card => {
+   299|   284|    card.addEventListener('click', function() {
+   300|   285|        this.classList.toggle('flipped');
+   301|   286|    });
+   302|   287|});
+   303|   288|</script>
+   304|   289|
+   305|   290|</body>
+   306|   291|</html>
