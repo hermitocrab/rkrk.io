@@ -48,7 +48,7 @@
         nav .container { display:flex; align-items:center; justify-content:space-between; }
         .logo { font-size:1.05rem; font-weight:800; color:var(--ink); text-decoration:none; letter-spacing:-0.03em; }
         .logo span { color:var(--warm); }
-        .nav-right { display:flex; align-items:center; gap:20px; }
+        .nav-right { display:flex; align-items:center; gap:18px; }
         nav .links { display:flex; gap:24px; }
         nav .links a {
             font-size:0.7rem; font-weight:600;
@@ -58,28 +58,28 @@
         }
         nav .links a:hover { color:var(--warm); }
 
-        /* QUICK ACCESS — top right */
-        .quick-access { display:flex; gap:8px; align-items:center; }
+        /* QUICK ACCESS — top right chips */
+        .quick-access { display:flex; gap:6px; align-items:center; }
         .qa-chip {
-            display:inline-flex; align-items:center; gap:5px;
-            font-size:0.62rem; font-weight:700;
-            text-transform:uppercase; letter-spacing:0.06em;
+            display:inline-flex; align-items:center; gap:4px;
+            font-size:0.6rem; font-weight:700;
+            text-transform:uppercase; letter-spacing:0.05em;
             color:var(--warm); text-decoration:none;
-            padding:5px 10px;
-            border:1px solid rgba(193,65,12,0.25);
+            padding:4px 10px;
+            border:1px solid rgba(193,65,12,0.22);
             border-radius:20px;
-            background:rgba(193,65,12,0.06);
+            background:rgba(193,65,12,0.05);
             backdrop-filter:blur(8px);
             -webkit-backdrop-filter:blur(8px);
             transition:all 0.2s;
         }
         .qa-chip:hover { background:var(--warm); color:#fff; border-color:var(--warm); }
 
-        /* AI BOT BUTTON — fixed floating */
+        /* AI BOT — floating, matching site design */
         .ai-bot {
             position:fixed; bottom:28px; right:28px; z-index:200;
             display:flex; align-items:center; gap:10px;
-            background:rgba(255,255,255,0.9);
+            background:rgba(255,255,255,0.88);
             backdrop-filter:blur(16px) saturate(1.4);
             -webkit-backdrop-filter:blur(16px) saturate(1.4);
             border:1px solid rgba(193,65,12,0.2);
@@ -134,7 +134,7 @@
             text-transform:uppercase; letter-spacing:0.1em;
             color:var(--gray-400); margin-top:6px;
         }
-        /* SPEECH CHIP */
+        /* SPEECH CHIP — replaces TEDx stat */
         .speech-chip {
             display:inline-flex; align-items:center; gap:10px;
             background:rgba(255,255,255,0.85);
@@ -183,15 +183,10 @@
             -webkit-backdrop-filter:blur(12px);
             border:1px solid rgba(0,0,0,0.06);
             padding:32px 28px;
-            border-radius:2px;
-            transition:border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            transition:border-color 0.2s, transform 0.2s;
             cursor:default;
         }
-        .proj-card:hover {
-            border-color:rgba(193,65,12,0.3);
-            box-shadow:0 8px 32px rgba(0,0,0,0.06);
-            transform:translateY(-2px);
-        }
+        .proj-card:hover { border-color:var(--warm); transform:translateY(-2px); }
         .proj-card .proj-icon { font-size:1.6rem; margin-bottom:12px; }
         .proj-card h3 { font-weight:700; font-size:0.95rem; margin-bottom:8px; letter-spacing:-0.01em; }
         .proj-card p { font-size:0.82rem; color:var(--gray-500); line-height:1.6; margin-bottom:14px; }
@@ -220,9 +215,8 @@
             border:1px solid rgba(0,0,0,0.06);
             padding:32px 24px;
             display:flex; flex-direction:column;
-            border-radius:2px;
-            transition:border-color 0.2s;
             cursor:pointer;
+            transition:border-color 0.2s;
         }
         .flip-front:hover, .flip-back:hover { border-color:rgba(193,65,12,0.3); }
         .flip-back { transform:rotateY(180deg); }
@@ -280,7 +274,6 @@
         .contact-slab {
             background:var(--ink); color:#fff;
             padding:56px 48px; margin-top:16px;
-            border-radius:2px;
         }
         .contact-slab .sec-label { color:var(--warm-light); }
         .contact-slab h2 { color:#fff; }
@@ -315,7 +308,7 @@
         @media(max-width:768px) {
             nav .links { display:none; }
             .quick-access { gap:4px; }
-            .qa-chip { font-size:0.55rem; padding:4px 8px; }
+            .qa-chip { font-size:0.52rem; padding:3px 7px; }
             .projects,.rua-grid,.contact-grid { grid-template-columns:1fr; }
             section { padding:56px 0; }
             #hero { padding:120px 0 48px; }
@@ -342,7 +335,7 @@
                 <a href="/dynamos/bp" class="qa-chip">📄 BP</a>
             </div>
             <div class="links">
-                <a href="#arsenal">Arsenal</a>
+                <a href="#work">The Works</a>
                 <a href="#rua">RUA</a>
                 <a href="#story">Story</a>
                 <a href="#contact">Contact</a>
@@ -368,10 +361,10 @@
     </div>
 </section>
 
-<section id="arsenal" class="alt">
+<section id="work" class="alt">
     <div class="container">
-        <div class="sec-label">Arsenal</div>
-        <div class="sec-title">Ship. Ship. Ship.</div>
+        <div class="sec-label">The Works</div>
+        <div class="sec-title">Platforms & Tools</div>
         <p class="sec-desc">Every product is a teaching philosophy made tactile. Built with two autonomous AI agents — one for engineering, one for creative.</p>
         <div class="projects">
             <div class="proj-card">
@@ -414,7 +407,7 @@
                         <div class="rua-letter">R</div>
                         <h3>Recognise</h3>
                         <p>Decompose the learning target. Systematic diagnosis before any teaching begins.</p>
-                        <div class="flip-hint">Tap to see BEEF/CHOP/SOOI →</div>
+                        <div class="flip-hint">Tap to see toolkit →</div>
                     </div>
                     <div class="flip-back">
                         <h3>Recognise · Toolkit</h3>
