@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DynamOS — The Roblox for Education 🦕</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a14;
+      --surface: #12122a;
+      --surface2: #1a1a35;
+      --border: #252545;
+      --text: #e8e8f5;
+      --text2: #9090b0;
+      --accent: #7c3aed;
+      --accent2: #a78bfa;
+      --green: #4ade80;
+      --amber: #fbbf24;
+      --pink: #f472b6;
+      --red: #f87171;
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg); color: var(--text);
+      overflow-x: hidden;
+    }
+    h1, h2, h3, .mono { font-family: 'Space Grotesk', sans-serif; }
+
+    /* ─── LAYOUT ─── */
+    .app { display: flex; min-height: 100vh; }
+    .sidebar {
+      width: 260px; background: var(--surface); border-right: 1px solid var(--border);
+      padding: 24px 16px; display: flex; flex-direction: column; gap: 24px;
+      flex-shrink: 0; position: sticky; top: 0; height: 100vh; overflow-y: auto;
+    }
+    .main { flex: 1; padding: 32px; overflow-y: auto; }
+
+    /* ─── SIDEBAR ─── */
+    .logo-row { display: flex; align-items: center; gap: 10px; }
+    .logo-icon { font-size: 1.8rem; }
+    .logo-text { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; }
+    .logo-text span { color: var(--accent2); }
+    .nav-group { display: flex; flex-direction: column; gap: 4px; }
+    .nav-label {
+      font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--text2); padding: 8px 12px 4px;
+    }
+    .nav-item {
+      padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s;
+      font-size: 0.85rem; display: flex; align-items: center; gap: 10px; color: var(--text2);
+      text-decoration: none;
+    }
+    .nav-item:hover { background: var(--surface2); color: var(--text); }
+    .nav-item.active { background: rgba(124,58,237,0.15); color: var(--accent2); font-weight: 600; }
+    .nav-icon { font-size: 1.1rem; width: 24px; text-align: center; }
+
+    /* ─── DYN-APP CARDS ─── */
+    .section-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text2); margin-bottom: 16px; }
+    .app-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+    .app-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 24px; transition: all 0.2s; cursor: pointer; text-decoration: none; color: inherit; display: block;
+    }
+    .app-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(124,58,237,0.15); }
+    .app-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .app-card-icon {
+      width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    .app-card-icon.purple { background: rgba(124,58,237,0.15); }
+    .app-card-icon.green { background: rgba(74,222,128,0.15); }
+    .app-card-icon.amber { background: rgba(251,191,36,0.15); }
+    .app-card-icon.pink { background: rgba(244,114,182,0.15); }
+    .app-card h3 { font-size: 1rem; font-weight: 600; }
+    .app-card p { font-size: 0.82rem; color: var(--text2); line-height: 1.6; }
+    .app-card-tags { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+    .app-tag {
+      font-size: 0.65rem; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+      background: var(--surface2); color: var(--text2); text-transform: uppercase; letter-spacing: 0.04em;
+    }
+
+    /* ─── BUILDER ─── */
+    .builder-box {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 28px; margin-bottom: 24px;
+    }
+    .builder-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent2); margin-bottom: 12px; }
+    .builder-row { display: flex; gap: 12px; }
+    .builder-input {
+      flex: 1; padding: 14px 18px; font-size: 1rem; font-family: inherit;
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+      color: var(--text); outline: none; transition: border-color 0.2s;
+    }
+    .builder-input:focus { border-color: var(--accent); }
+    .builder-input::placeholder { color: var(--text2); opacity: 0.5; }
+    .btn-build {
+      padding: 14px 28px; font-size: 0.9rem; font-weight: 700; font-family: 'Space Grotesk', sans-serif;
+      background: var(--accent); color: #fff; border: none; border-radius: 10px;
+      cursor: pointer; transition: all 0.2s; white-space: nowrap;
+      letter-spacing: -0.01em;
+    }
+    .btn-build:hover { background: #8b5cf6; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(124,58,237,0.3); }
+    .prompt-chips { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+    .chip {
+      font-size: 0.75rem; padding: 6px 14px; border-radius: 999px;
+      background: var(--surface2); border: 1px solid var(--border); color: var(--text2);
+      cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .chip:hover { border-color: var(--accent); color: var(--accent2); }
+
+    /* ─── PREVIEW ─── */
+    .preview-area { display: none; }
+    .preview-card {
+      background: var(--surface); border: 1px solid var(--accent); border-radius: var(--radius-lg);
+      padding: 28px; margin-bottom: 20px;
+    }
+    .preview-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .preview-title { font-size: 1.2rem; font-weight: 700; }
+    .btn-export-preview {
+      padding: 8px 20px; font-size: 0.75rem; font-weight: 700; border-radius: 8px;
+      background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+      cursor: pointer; transition: all 0.2s; font-family: inherit;
+    }
+    .btn-export-preview:hover { border-color: var(--accent); }
+
+    /* ─── WHITEBOARD EMBED ─── */
+    .whiteboard-frame {
+      width: 100%; height: 400px; border: 1px solid var(--border); border-radius: var(--radius);
+      background: #fff; margin: 16px 0;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .app { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; position: static; flex-shrink: 0; padding: 16px; }
+      .main { padding: 16px; }
+      .app-grid { grid-template-columns: 1fr; }
+      .builder-row { flex-direction: column; }
+      .btn-build { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app">
+  <!-- ═══════ SIDEBAR ═══════ -->
+  <aside class="sidebar">
+    <div class="logo-row">
+      <span class="logo-icon">🦕</span>
+      <span class="logo-text">Dynam<span>OS</span></span>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">Create</div>
+      <a class="nav-item active" href="#"><span class="nav-icon">✨</span> Builder</a>
+      <a class="nav-item" href="#"><span class="nav-icon">📋</span> My Apps</a>
+      <a class="nav-item" href="#"><span class="nav-icon">🎨</span> Templates</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">Discover</div>
+      <a class="nav-item" href="#"><span class="nav-icon">🏪</span> Marketplace</a>
+      <a class="nav-item" href="#"><span class="nav-icon">👥</span> Community</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">Learn</div>
+      <a class="nav-item" href="/dynamos/intro"><span class="nav-icon">📖</span> What is DynamOS?</a>
+      <a class="nav-item" href="/dynamos/bp"><span class="nav-icon">📄</span> Business Plan</a>
+    </div>
+  </aside>
+
+  <!-- ═══════ MAIN ═══════ -->
+  <main class="main">
+    <!-- BUILDER -->
+    <div class="builder-box">
+      <div class="builder-label">✨ What do you want to teach today?</div>
+      <div class="builder-row">
+        <input class="builder-input" id="intentInput" placeholder="e.g. I want to teach IELTS Speaking Part 2 — describing a person, with interactive cue cards and pronunciation drills" value="Create an interactive IELTS Speaking Part 2 lesson about describing a memorable person. Include cue card prompts, sentence frames, a pronunciation drill, and a 2-minute timer.">
+        <button class="btn-build" onclick="showPreview()">🚀 Generate App</button>
+      </div>
+      <div class="prompt-chips">
+        <span class="chip" onclick="setIntent('Create a phonics lesson teaching the /θ/ and /ð/ sounds with interactive mouth position diagrams and minimal pair exercises')">🔤 Phonics Lesson</span>
+        <span class="chip" onclick="setIntent('Build a vocabulary builder for academic IELTS — collocations, example sentences, and a quiz game with 20 target words')">📚 Vocab Builder</span>
+        <span class="chip" onclick="setIntent('Make a grammar exercise for conditionals — type 1, 2, and 3 — with gap-fill exercises and instant feedback')">📝 Grammar Drills</span>
+        <span class="chip" onclick="setIntent('Create a whiteboard-based brainstorming tool for IELTS Writing Task 2 — essay structure, thesis builder, and paragraph planner')">🎨 Essay Planner</span>
+      </div>
+    </div>
+
+    <!-- PREVIEW -->
+    <div class="preview-area" id="previewArea">
+      <div class="preview-card">
+        <div class="preview-header">
+          <span class="preview-title">🎯 Your App Preview</span>
+          <button class="btn-export-preview" onclick="window.print()">📋 Export</button>
+        </div>
+        <p style="color:var(--text2);font-size:0.85rem;margin-bottom:20px" id="previewDesc"></p>
+        
+        <div id="cueCards" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px"></div>
+        <div id="sentenceFrames" style="margin-bottom:20px"></div>
+        
+        <div style="background:var(--surface2);border-radius:var(--radius);padding:20px;margin-bottom:16px">
+          <h4 style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text2);margin-bottom:12px">🎤 Pronunciation Drill</h4>
+          <div id="pronDrill" style="font-size:1.5rem;font-family:'Space Grotesk',sans-serif;margin-bottom:12px;color:var(--amber)"></div>
+          <p style="font-size:0.82rem;color:var(--text2)" id="pronNote"></p>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;color:var(--green)" id="timerDisplay">2:00</div>
+          <p style="font-size:0.78rem;color:var(--text2)">⏱ 2-minute speaking timer</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DYN-APPS MARKETPLACE -->
+    <div class="section-title" style="margin-top:40px">🧩 Example DynApps (Built on DynamOS)</div>
+    <div class="app-grid">
+      <!-- DynaSaurus -->
+      <a href="https://dynasaurus.rkrk.io" target="_blank" class="app-card">
+        <div class="app-card-header">
+          <div class="app-card-icon purple">🦕</div>
+          <div>
+            <h3>DynaSaurus</h3>
+            <p style="font-size:0.7rem;color:var(--text2)">AI Language Tutor</p>
+          </div>
+        </div>
+        <p>4 modules: Dictionary, Smart Translator, Grammar Doctor, IELTS Coach. RUA-powered chunk-based learning.</p>
+        <div class="app-card-tags">
+          <span class="app-tag">AI</span><span class="app-tag">Dictionary</span><span class="app-tag">IELTS</span>
+        </div>
+      </a>
+
+      <!-- IELTS with Kee -->
+      <a href="https://ielts.rkrk.io" target="_blank" class="app-card">
+        <div class="app-card-header">
+          <div class="app-card-icon green">🦄</div>
+          <div>
+            <h3>IELTS with Kee</h3>
+            <p style="font-size:0.7rem;color:var(--text2)">Speaking Toolkit</p>
+          </div>
+        </div>
+        <p>170+ cue cards, 3D flip cards, sentence frames, AI case studies, timed drills, and full P1/P2/P3 practice.</p>
+        <div class="app-card-tags">
+          <span class="app-tag">Speaking</span><span class="app-tag">P2</span><span class="app-tag">Cue Cards</span>
+        </div>
+      </a>
+
+      <!-- Whiteboard -->
+      <a href="https://ielts.rkrk.io/whiteboard.html" target="_blank" class="app-card">
+        <div class="app-card-header">
+          <div class="app-card-icon amber">🎨</div>
+          <div>
+            <h3>Interactive Whiteboard</h3>
+            <p style="font-size:0.7rem;color:var(--text2)">Collaborative Canvas</p>
+          </div>
+        </div>
+        <p>Draw, annotate, brainstorm. Real-time collaborative teaching canvas with shape and text tools.</p>
+        <div class="app-card-tags">
+          <span class="app-tag">Collaboration</span><span class="app-tag">Canvas</span><span class="app-tag">Tools</span>
+        </div>
+      </a>
+
+      <!-- Phonics -->
+      <a href="https://rkrk.io/dynamos/phonics.html" target="_blank" class="app-card">
+        <div class="app-card-header">
+          <div class="app-card-icon pink">🔤</div>
+          <div>
+            <h3>Phonics Lab</h3>
+            <p style="font-size:0.7rem;color:var(--text2)">Pronunciation Toolkit</p>
+          </div>
+        </div>
+        <p>Interactive mouth position diagrams, minimal pairs, connected speech exercises, and phoneme charts.</p>
+        <div class="app-card-tags">
+          <span class="app-tag">Phonics</span><span class="app-tag">Pronunciation</span><span class="app-tag">IPA</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- FOOTER -->
+    <p style="text-align:center;margin-top:48px;font-size:0.75rem;color:var(--text2)">
+      🦕 DynamOS — The Roblox for Education · Built by <strong>Kee Lee</strong>
+      &nbsp;|&nbsp; <a href="/dynamos/intro" style="color:var(--accent2)">About</a>
+      &nbsp;|&nbsp; <a href="/dynamos/bp" style="color:var(--accent2)">Business Plan</a>
+    </p>
+  </main>
+</div>
+
+<script>
+function setIntent(text) {
+  document.getElementById('intentInput').value = text;
+  showPreview();
+}
+
+function showPreview() {
+  var intent = document.getElementById('intentInput').value.trim();
+  if (!intent) return;
+  var area = document.getElementById('previewArea');
+  area.style.display = 'block';
+
+  var lower = intent.toLowerCase();
+  var isPerson = lower.includes('person') || lower.includes('people') || lower.includes('memorable');
+  var isPhonics = lower.includes('phonics') || lower.includes('pronunciation') || lower.includes('θ') || lower.includes('ð');
+  var isVocab = lower.includes('vocabulary') || lower.includes('collocation') || lower.includes('words');
+  var isGrammar = lower.includes('grammar') || lower.includes('conditional');
+  var isEssay = lower.includes('essay') || lower.includes('writing') || lower.includes('brainstorm');
+
+  if (isPerson) {
+    buildPersonLesson();
+  } else if (isPhonics) {
+    buildPhonicsLesson();
+  } else if (isVocab) {
+    buildVocabLesson();
+  } else if (isGrammar) {
+    buildGrammarLesson();
+  } else if (isEssay) {
+    buildEssayLesson();
+  } else {
+    buildGenericLesson();
+  }
+  area.scrollIntoView({ behavior: 'smooth' });
+}
+
+function buildPersonLesson() {
+  document.getElementById('previewDesc').textContent = 'IELTS Speaking Part 2 — Describing a Memorable Person · AI-generated interactive lesson';
+  document.getElementById('cueCards').innerHTML = `
+    <div style="flex:1;min-width:140px;background:var(--surface2);border-radius:var(--radius);padding:16px">
+      <h5 style="font-size:0.7rem;color:var(--amber);margin-bottom:8px">🎯 Cue Card 1</h5>
+      <p style="font-size:0.82rem;line-height:1.6">Describe a person who has had a <strong>significant influence</strong> on your life.</p>
+      <p style="font-size:0.7rem;color:var(--text2);margin-top:8px">You should say: who this person is · how you know them · what they did · and explain why they influenced you</p>
+    </div>
+    <div style="flex:1;min-width:140px;background:var(--surface2);border-radius:var(--radius);padding:16px">
+      <h5 style="font-size:0.7rem;color:var(--amber);margin-bottom:8px">🎯 Cue Card 2</h5>
+      <p style="font-size:0.82rem;line-height:1.6">Describe a <strong>famous person</strong> you would like to meet.</p>
+      <p style="font-size:0.7rem;color:var(--text2);margin-top:8px">You should say: who they are · what they're known for · why you admire them · and what you would ask them</p>
+    </div>
+    <div style="flex:1;min-width:140px;background:var(--surface2);border-radius:var(--radius);padding:16px">
+      <h5 style="font-size:0.7rem;color:var(--amber);margin-bottom:8px">🎯 Cue Card 3</h5>
+      <p style="font-size:0.82rem;line-height:1.6">Describe a <strong>teacher or mentor</strong> who changed your perspective.</p>
+      <p style="font-size:0.7rem;color:var(--text2);margin-top:8px">You should say: who they taught · what subject · how they taught differently · and the impact on you</p>
+    </div>
+  `;
+  document.getElementById('sentenceFrames').innerHTML = `
+    <h4 style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text2);margin-bottom:12px">📝 Sentence Frames</h4>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span style="background:var(--surface2);padding:8px 14px;border-radius:8px;font-size:0.8rem">The person I'd like to talk about is <strong style="color:var(--accent2)">_____</strong> who...</span>
+      <span style="background:var(--surface2);padding:8px 14px;border-radius:8px;font-size:0.8rem">I first met <strong style="color:var(--accent2)">_____</strong> when...</span>
+      <span style="background:var(--surface2);padding:8px 14px;border-radius:8px;font-size:0.8rem">What makes <strong style="color:var(--accent2)">_____</strong> so memorable is...</span>
+      <span style="background:var(--surface2);padding:8px 14px;border-radius:8px;font-size:0.8rem">Looking back, I realize that <strong style="color:var(--accent2)">_____</strong> taught me...</span>
+      <span style="background:var(--surface2);padding:8px 14px;border-radius:8px;font-size:0.8rem">One specific example that comes to mind is when <strong style="color:var(--accent2)">_____</strong></span>
+    </div>
+  `;
+  document.getElementById('pronDrill').textContent = 'in-flu-ence · sig-ni-fi-cant · mem-or-a-ble · per-spec-tive';
+  document.getElementById('pronNote').textContent = 'Focus on word stress. The bold syllables get the emphasis. Practice saying each word 3x before using it in your answer.';
+}
+
+function buildPhonicsLesson() {
+  document.getElementById('previewDesc').textContent = 'Phonics — /θ/ and /ð/ Sounds · AI-generated interactive lesson';
+  document.getElementById('cueCards').innerHTML = `
+    <div style="flex:1;background:var(--surface2);border-radius:var(--radius);padding:16px">
+      <h5 style="font-size:0.7rem;color:var(--pink);margin-bottom:8px">👄 /θ/ (voiceless)</h5>
+      <p style="font-size:0.82rem">Tongue between teeth. Blow air. <em>Think, three, through, bath, earth.</em></p>
+    </div>
+    <div style="flex:1;background:var(--surface2);border-radius:var(--radius);padding:16px">
+      <h5 style="font-size:0.7rem;color:var(--pink);margin-bottom:8px">👄 /ð/ (voiced)</h5>
+      <p style="font-size:0.82rem">Same position. Add voice. <em>This, that, these, those, mother, father.</em></p>
+    </div>
+  `;
+  document.getElementById('sentenceFrames').innerHTML = `
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <div style="background:var(--surface2);padding:12px 16px;border-radius:8px"><strong>/θ/</strong> vs <strong>/ð/</strong></div>
+      <div style="background:var(--surface2);padding:12px 16px;border-radius:8px">thigh ↔ thy</div>
+      <div style="background:var(--surface2);padding:12px 16px;border-radius:8px">ether ↔ either</div>
+      <div style="background:var(--surface2);padding:12px 16px;border-radius:8px">thistle ↔ this'll</div>
+      <div style="background:var(--surface2);padding:12px 16px;border-radius:8px">teeth ↔ teethe</div>
+    </div>
+  `;
+  document.getElementById('pronDrill').textContent = 'θ θ θ · ð ð ð · θ-ð-θ-ð';
+  document.getElementById('pronNote').textContent = 'Alternate between voiceless /θ/ and voiced /ð/. Place a finger on your throat — you should feel vibration only on /ð/.';
+}
+
+function buildVocabLesson() {
+  document.getElementById('previewDesc').textContent = 'Academic IELTS Vocabulary Builder · AI-generated with 20 target collocations';
+  document.getElementById('cueCards').innerHTML = `
+    <div style="flex:1;background:var(--surface2);border-radius:var(--radius);padding:16px">
+      <span style="font-size:0.65rem;color:var(--green);background:rgba(74,222,128,0.1);padding:2px 8px;border-radius:4px">Collocation</span>
+      <h5 style="font-size:0.9rem;margin-top:8px">pose a threat</h5>
+      <p style="font-size:0.78rem;color:var(--text2);margin-top:4px">Climate change <strong>poses a threat</strong> to coastal communities worldwide.</p>
+    </div>
+    <div style="flex:1;background:var(--surface2);border-radius:var(--radius);padding:16px">
+      <span style="font-size:0.65rem;color:var(--green);background:rgba(74,222,128,0.1);padding:2px 8px;border-radius:4px">Collocation</span>
+      <h5 style="font-size:0.9rem;margin-top:8px">play a pivotal role</h5>
+      <p style="font-size:0.78rem;color:var(--text2);margin-top:4px">Education <strong>plays a pivotal role</strong> in reducing inequality.</p>
+    </div>
+    <div style="flex:1;background:var(--surface2);border-radius:var(--radius);padding:16px">
+      <span style="font-size:0.65rem;color:var(--green);background:rgba(74,222,128,0.1);padding:2px 8px;border-radius:4px">Collocation</span>
+      <h5 style="font-size:0.9rem;margin-top:8px">mitigate the effects</h5>
+      <p style="font-size:0.78rem;color:var(--text2);margin-top:4px">Governments must take action to <strong>mitigate the effects</strong> of inflation.</p>
+    </div>
+  `;
+  document.getElementById('sentenceFrames').innerHTML = '';
+  document.getElementById('pronDrill').textContent = 'Quiz Mode: Ready';
+  document.getElementById('pronNote').textContent = '20 target collocations · Fill-in-the-blank quiz · Instant AI feedback on accuracy and register';
+}
+
+function buildGrammarLesson() {
+  document.getElementById('previewDesc').textContent = 'Grammar — Conditionals Type 1, 2, and 3 · AI-generated exercises';
+  document.getElementById('cueCards').innerHTML = `
+    <div style="flex:1;background:var(--surface2);border-radius:var(--radius);padding:16px">
+      <h5 style="font-size:0.7rem;color:var(--green);margin-bottom:8px">Type 1 — Real Future</h5>
+      <p style="font-size:0.82rem;line-height:1.6">If it <strong>rains</strong> tomorrow, I <strong>will stay</strong> home.</p>
+      <p style="font-size:0.7rem;color:var(--text2);margin-top:4px">If + present → will + base</p>
+    </div>
+    <div style="flex:1;background:var(--surface2);border-radius:var(--radius);padding:16px">
+      <h5 style="font-size:0.7rem;color:var(--amber);margin-bottom:8px">Type 2 — Unreal Present</h5>
+      <p style="font-size:0.82rem;line-height:1.6">If I <strong>had</strong> a million dollars, I <strong>would travel</strong> the world.</p>
+      <p style="font-size:0.7rem;color:var(--text2);margin-top:4px">If + past → would + base</p>
+    </div>
+    <div style="flex:1;background:var(--surface2);border-radius:var(--radius);padding:16px">
+      <h5 style="font-size:0.7rem;color:var(--pink);margin-bottom:8px">Type 3 — Unreal Past</h5>
+      <p style="font-size:0.82rem;line-height:1.6">If I <strong>had studied</strong> harder, I <strong>would have passed</strong>.</p>
+      <p style="font-size:0.7rem;color:var(--text2);margin-top:4px">If + past perfect → would have + past participle</p>
+    </div>
+  `;
+  document.getElementById('sentenceFrames').innerHTML = '';
+  document.getElementById('pronDrill').textContent = 'Gap-Fill Exercise';
+  document.getElementById('pronNote').textContent = '10 sentences with instant feedback. AI explains WHY each answer is correct — guided discovery, not rule-dumping.';
+}
+
+function buildEssayLesson() {
+  document.getElementById('previewDesc').textContent = 'IELTS Writing Task 2 — Essay Planner · AI-generated brainstorming tool';
+  document.getElementById('cueCards').innerHTML = `
+    <div style="background:var(--surface2);border-radius:var(--radius);padding:20px;width:100%">
+      <h5 style="font-size:0.8rem;margin-bottom:12px">📋 Essay Structure Builder</h5>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;gap:8px"><span style="color:var(--accent2);font-weight:700">1.</span><strong>Introduction</strong> — Paraphrase + thesis statement</div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="color:var(--accent2);font-weight:700">2.</span><strong>Body 1</strong> — Main argument + example + explanation</div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="color:var(--accent2);font-weight:700">3.</span><strong>Body 2</strong> — Counter-argument or second point</div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="color:var(--accent2);font-weight:700">4.</span><strong>Conclusion</strong> — Summarize + restate position</div>
+      </div>
+    </div>
+  `;
+  document.getElementById('sentenceFrames').innerHTML = '';
+  document.getElementById('pronDrill').textContent = 'Whiteboard-Ready';
+  document.getElementById('pronNote').textContent = 'Drag, resize, connect ideas on the canvas. Export as structured outline or full essay draft.';
+}
+
+function buildGenericLesson() {
+  document.getElementById('previewDesc').textContent = 'Custom AI-Generated Lesson · DynamOS Builder v1';
+  document.getElementById('cueCards').innerHTML = `
+    <div style="background:var(--surface2);border-radius:var(--radius);padding:20px;width:100%;text-align:center">
+      <p style="font-size:1.2rem;margin-bottom:8px">🦕</p>
+      <p style="color:var(--text2)">Your app is being generated...</p>
+      <p style="font-size:0.78rem;color:var(--accent2);margin-top:8px">DynamOS would create interactive components, exercises, and evaluation rubrics based on your intent.</p>
+    </div>
+  `;
+  document.getElementById('sentenceFrames').innerHTML = '';
+  document.getElementById('pronDrill').textContent = 'Coming Soon';
+  document.getElementById('pronNote').textContent = 'Full AI generation pipeline in development. The Push Engine demo at /dynamos/intro shows the concept in action.';
+}
+</script>
+
+</body>
+</html>

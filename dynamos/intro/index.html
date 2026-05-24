@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is DynamOS? — The Roblox for Education 🦕</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a14; --surface: #12122a; --border: #252545;
+      --text: #e8e8f5; --text2: #9090b0;
+      --accent: #7c3aed; --accent2: #a78bfa; --green: #4ade80;
+      --amber: #fbbf24; --pink: #f472b6;
+      --radius: 16px; --radius-lg: 24px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.7; overflow-x: hidden;
+    }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 80px 0; }
+
+    /* NAV */
+    nav {
+      position: fixed; top:0; left:0;right:0; z-index:100;
+      background: rgba(10,10,20,0.95); border-bottom:1px solid var(--border);
+      padding:16px 0; -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+    }
+    nav .container { display:flex; align-items:center; justify-content:space-between; }
+    .logo { display:flex; align-items:center; gap:8px; text-decoration:none; color:var(--text); }
+    .logo-icon { font-size:1.5rem; }
+    .logo-text { font-family:'Space Grotesk',sans-serif; font-size:1.1rem; font-weight:700; }
+    .logo-text span { color:var(--accent2); }
+    nav .links { display:flex; gap:20px; }
+    nav .links a { color:var(--text2); text-decoration:none; font-size:0.8rem; font-weight:600; }
+    nav .links a:hover { color:var(--accent2); }
+
+    /* HERO */
+    #hero { padding-top:160px; padding-bottom:100px; text-align:center; position:relative; }
+    #hero::before {
+      content:''; position:absolute; top:0; left:50%; transform:translateX(-50%);
+      width:500px; height:500px;
+      background:radial-gradient(circle,rgba(124,58,237,0.12) 0%,transparent 70%);
+      pointer-events:none;
+    }
+    .hero-badge {
+      display:inline-block; font-size:0.75rem; font-weight:700; padding:6px 16px;
+      border-radius:999px; background:rgba(124,58,237,0.15); color:var(--accent2);
+      letter-spacing:0.04em; margin-bottom:24px;
+    }
+    h1 { font-size:clamp(2.2rem,5vw,4rem); line-height:1.1; margin-bottom:20px; }
+    h1 span { background:linear-gradient(135deg,var(--accent2),var(--pink)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .hero-sub { font-size:1.15rem; color:var(--text2); max-width:650px; margin:0 auto 40px; }
+    .hero-cta { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .btn-primary {
+      padding:14px 32px; font-size:0.95rem; font-weight:700; font-family:'Space Grotesk',sans-serif;
+      background:var(--accent); color:#fff; border:none; border-radius:12px; cursor:pointer;
+      text-decoration:none; transition:all 0.2s;
+    }
+    .btn-primary:hover { background:#8b5cf6; transform:translateY(-1px); }
+    .btn-outline {
+      padding:14px 32px; font-size:0.95rem; font-weight:700; font-family:'Space Grotesk',sans-serif;
+      border:1px solid var(--border); border-radius:12px; color:var(--text); cursor:pointer;
+      text-decoration:none; transition:all 0.2s;
+    }
+    .btn-outline:hover { border-color:var(--accent); }
+
+    /* SECTION */
+    .section-label { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent2); margin-bottom:16px; }
+    .section-title { font-size:clamp(1.5rem,3vw,2.2rem); font-weight:700; margin-bottom:12px; }
+    .section-sub { color:var(--text2); font-size:1rem; max-width:600px; margin-bottom:40px; }
+
+    /* GRID */
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+    .grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+    .card {
+      background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+      padding:28px;
+    }
+    .card h3 { font-size:1rem; font-weight:600; margin-bottom:8px; }
+    .card p { font-size:0.85rem; color:var(--text2); line-height:1.65; }
+    .card-icon { font-size:1.8rem; margin-bottom:16px; }
+
+    /* TIMELINE */
+    .timeline { margin-top:32px; }
+    .timeline-item { display:flex; gap:24px; padding:20px 0; border-bottom:1px solid var(--border); }
+    .timeline-phase { color:var(--accent2); font-weight:700; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; min-width:120px; }
+    .timeline-content h4 { font-size:0.95rem; margin-bottom:4px; }
+    .timeline-content p { font-size:0.82rem; color:var(--text2); }
+
+    /* QUOTE */
+    blockquote {
+      border-left:4px solid var(--accent); padding:20px 28px; margin:32px 0;
+      background:var(--surface); border-radius:0 var(--radius) var(--radius) 0;
+    }
+    blockquote p { font-style:italic; color:var(--text2); }
+
+    /* METRIC */
+    .metric-row { display:flex; gap:48px; margin:32px 0; }
+    .metric-num { font-family:'Space Grotesk',sans-serif; font-size:3rem; font-weight:700; color:var(--accent2); line-height:1; }
+    .metric-label { font-size:0.75rem; color:var(--text2); font-weight:600; text-transform:uppercase; letter-spacing:0.06em; }
+
+    /* RUA */
+    .rua-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:28px; }
+    .rua-card .rua-letter { font-family:'Space Grotesk',sans-serif; font-size:3rem; font-weight:700; color:var(--accent); opacity:0.2; }
+    .rua-card h3 { margin-top:-20px; }
+
+    /* CTA */
+    #cta { text-align:center; padding:100px 0; background:radial-gradient(ellipse at center,rgba(124,58,237,0.08) 0%,transparent 60%); }
+
+    /* FOOTER */
+    footer { padding:32px 0; text-align:center; border-top:1px solid var(--border); font-size:0.8rem; color:var(--text2); }
+
+    @media(max-width:768px) {
+      .grid-2,.grid-3,.grid-4 { grid-template-columns:1fr; }
+      .metric-row { flex-direction:column; gap:24px; }
+      .timeline-phase { min-width:90px; }
+      nav .links { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="/dynamos" class="logo"><span class="logo-icon">🦕</span><span class="logo-text">Dynam<span>OS</span></span></a>
+    <div class="links">
+      <a href="#what">What</a><a href="#rua">RUA</a><a href="#apps">DynApps</a><a href="#roadmap">Roadmap</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-badge">🦕 The Roblox for Education</div>
+    <h1>Every Teacher<br><span>Becomes a Creator.</span></h1>
+    <p class="hero-sub">
+      DynamOS is the platform where teachers build, share, and monetize AI-powered learning tools — with zero code. Describe what you want to teach. The system generates the app.<br>Built on <strong>RUA</strong>. Powered by <strong>AI</strong>. Fueled by <strong>teachers</strong>.
+    </p>
+    <div class="hero-cta">
+      <a href="/dynamos" class="btn-primary">🚀 Try the Builder</a>
+      <a href="/dynamos/bp" class="btn-outline">📄 Business Plan</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ WHAT ═══════ -->
+<section id="what">
+  <div class="container">
+    <div class="section-label">The Problem</div>
+    <h2 class="section-title">Teachers Have Ideas.<br>They Don't Have Engineers.</h2>
+    <p class="section-sub">
+      Every teacher dreams of interactive tools for their classroom. But building them requires coding skills most teachers don't have. DynamOS bridges this gap — teachers describe what they need in natural language, and the AI generates the tool.
+    </p>
+
+    <div class="grid-3" style="margin-top:40px">
+      <div class="card">
+        <div class="card-icon">🗣️</div>
+        <h3>Speak Your Idea</h3>
+        <p>Type what you want to teach. "I need a phonics lesson with mouth diagrams and minimal pairs." That's it.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">✨</div>
+        <h3>AI Generates the App</h3>
+        <p>Exercises, interactive components, evaluation rubrics — generated from your intent. MFP/CCC/GAP-aware.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📤</div>
+        <h3>Share & Monetize</h3>
+        <p>Publish to the DynApp marketplace. Other teachers discover, use, and pay for your creations.</p>
+      </div>
+    </div>
+
+    <blockquote>
+      <p>"Agencies sell the outcome. We build the capability. Roblox showed that user-generated content scales. DynamOS applies that lesson to education."</p>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ═══════ RUA ═══════ -->
+<section id="rua" style="background:var(--surface)">
+  <div class="container">
+    <div class="section-label">The Framework</div>
+    <h2 class="section-title">RUA — The Engine Under the Hood</h2>
+    <p class="section-sub">
+      Every DynApp runs on RUA — Kee Lee's meta-cognitive learning framework. <em>Recognize. Understand. Apply.</em>
+    </p>
+
+    <div class="grid-3" style="margin-top:32px">
+      <div class="rua-card">
+        <div class="rua-letter">R</div>
+        <h3>Recognize</h3>
+        <p style="color:var(--text2);font-size:0.85rem">Decompose the learning target. BEEF: Background → Evidence (CHOP) → Explanation (SOOI) → Feedback.</p>
+      </div>
+      <div class="rua-card">
+        <div class="rua-letter">U</div>
+        <h3>Understand</h3>
+        <p style="color:var(--text2);font-size:0.85rem">Deep comprehension. 3C: Collocation → Contexts → Connotation. Know what it pairs with, where it lives, what it implies.</p>
+      </div>
+      <div class="rua-card">
+        <div class="rua-letter">A</div>
+        <h3>Apply</h3>
+        <p style="color:var(--text2);font-size:0.85rem">Deliberate practice. GAP: Gauge the gap → Analyze the cause → Practice, fail, correct, repeat.</p>
+      </div>
+    </div>
+
+    <div class="metric-row" style="margin-top:40px;justify-content:center">
+      <div><div class="metric-num">MFP</div><div class="metric-label">Evaluation (Meaning·Form·Pronunciation)</div></div>
+      <div><div class="metric-num">CCC</div><div class="metric-label">Task Design</div></div>
+      <div><div class="metric-num">GAP</div><div class="metric-label">Push Engine Fuel</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ DYNAPPS ═══════ -->
+<section id="apps">
+  <div class="container">
+    <div class="section-label">DynApps</div>
+    <h2 class="section-title">Examples Built on DynamOS</h2>
+    <p class="section-sub">Every DynApp is a teacher's idea turned into an interactive tool. These are the first ones — built by Kee Lee. The marketplace opens to all teachers at launch.</p>
+
+    <div class="grid-2" style="margin-top:32px">
+      <div class="card">
+        <div class="card-icon">🦕</div>
+        <h3>DynaSaurus — AI Language Tutor</h3>
+        <p>Dictionary · Smart Translator (17 languages) · Grammar Doctor · IELTS Coach. Chunk-based. RUA-powered. Calibrated to Kee's teaching standards.</p>
+        <a href="https://dynasaurus.rkrk.io" style="color:var(--accent2);font-size:0.82rem;font-weight:600;margin-top:12px;display:inline-block">🔗 dynasaurus.rkrk.io →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">🦄</div>
+        <h3>IELTS with Kee — Speaking Toolkit</h3>
+        <p>170+ cue cards · 3D flip cards · sentence frames · Eileen AI case studies · 1-min/2-min timers · screenshot export · localStorage progress tracking.</p>
+        <a href="https://ielts.rkrk.io" style="color:var(--accent2);font-size:0.82rem;font-weight:600;margin-top:12px;display:inline-block">🔗 ielts.rkrk.io →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎨</div>
+        <h3>Interactive Whiteboard</h3>
+        <p>Draw, annotate, brainstorm. Real-time collaborative canvas for online and in-person teaching. Shape tools, text, freehand.</p>
+        <a href="https://ielts.rkrk.io/whiteboard.html" style="color:var(--accent2);font-size:0.82rem;font-weight:600;margin-top:12px;display:inline-block">🔗 Open Whiteboard →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔤</div>
+        <h3>Phonics Lab</h3>
+        <p>Interactive mouth diagrams · minimal pairs · connected speech exercises · IPA and phoneme charts. Built for pronunciation-first teaching.</p>
+        <a href="/dynamos/phonics.html" style="color:var(--accent2);font-size:0.82rem;font-weight:600;margin-top:12px;display:inline-block">🔗 Launch Phonics Lab →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ROADMAP ═══════ -->
+<section id="roadmap" style="background:var(--surface)">
+  <div class="container">
+    <div class="section-label">Platform Roadmap</div>
+    <h2 class="section-title">From Demo to Operating System</h2>
+    <p class="section-sub">Every phase validates before the next commits. Gates at every stage.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-phase">Now · Week 1</div>
+        <div class="timeline-content"><h4>Push Engine Demo</h4><p>Single-page builder. Prove the AI can generate useful teaching tools from natural language intent. ⏸️ Validation gate with real teachers.</p></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-phase">Weeks 2–4</div>
+        <div class="timeline-content"><h4>Vertical Slice — UK Study Abroad</h4><p>One complete learner path. Intention → Diagnosis → Missions → Tasks → Teacher Session → Passport. Real students. Real feedback.</p></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-phase">Month 2–3</div>
+        <div class="timeline-content"><h4>DynaSaurus Migration</h4><p>Swap chatbot memory for competence graph. Add persistent learner profiles. MFP/CCC/GAP evaluation engine. Keep the UI — replace the core.</p></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-phase">Month 4–6</div>
+        <div class="timeline-content"><h4>Teacher SaaS + Marketplace</h4><p>Tiered pricing. DynApp marketplace opens. SrKeeda's network of 40+ instructors onboarded. AI matchmaking v1.</p></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-phase">Month 7–12</div>
+        <div class="timeline-content"><h4>Full DynamOS</h4><p>Multi-intention types. Push/Pull engine live. Cross-domain competence tracking. Competence Passport as portable credential.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ TEAM ═══════ -->
+<section>
+  <div class="container">
+    <div class="section-label">Built By</div>
+    <h2 class="section-title">Kee Lee</h2>
+    <p style="color:var(--text2);max-width:600px;margin-bottom:32px">
+      AI-Native Education Architect. IELTS L9.0/R8.5/S8.5. Former EF Expert Teacher and Trainer of Trainers for West China. TEDx 2026 Speaker. Built all of this from 15 years in the classroom across 7 institutions and 200+ students. AI-augmented by two autonomous agents for engineering and creative work.
+    </p>
+    <div class="grid-3">
+      <div class="card"><div class="card-icon">🏫</div><h3>7+</h3><p style="color:var(--text2);font-size:0.82rem">Institutions taught across Chengdu</p></div>
+      <div class="card"><div class="card-icon">👥</div><h3>200+</h3><p style="color:var(--text2);font-size:0.82rem">Students coached directly</p></div>
+      <div class="card"><div class="card-icon">🎤</div><h3>TEDx 2026</h3><p style="color:var(--text2);font-size:0.82rem">"Bridge the Gap" — Learning Is Now Design</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CTA ═══════ -->
+<section id="cta">
+  <div class="container">
+    <h2 style="font-size:2rem;margin-bottom:12px">Ready to Build?</h2>
+    <p style="color:var(--text2);margin-bottom:32px">Try the DynamOS Builder. Describe what you want to teach. Watch it generate.</p>
+    <a href="/dynamos" class="btn-primary" style="font-size:1.1rem;padding:16px 40px">🚀 Launch Builder →</a>
+    <p style="margin-top:24px;font-size:0.8rem;color:var(--text2)">
+      📧 WeChat: keedahooman &nbsp;|&nbsp; WhatsApp: +44 7440 622158
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    DynamOS — Navigate Your Future · The Roblox for Education · © 2026 Kee Lee · Chengdu, China
+  </div>
+</footer>
+
+</body>
+</html>

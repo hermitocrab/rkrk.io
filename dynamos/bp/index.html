@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DynamOS — Navigate Your Future</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fafafa;
+      --white: #fff;
+      --black: #1a1a1a;
+      --red: #e31e24;
+      --red-dark: #b71c1c;
+      --gray-100: #f5f5f5;
+      --gray-200: #e5e5e5;
+      --gray-400: #999;
+      --gray-600: #666;
+      --max: 1200px;
+      --gap: 24px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',-apple-system,'Helvetica Neue',sans-serif; font-size:15px; line-height:1.7; color:var(--black); background:var(--bg); -webkit-font-smoothing:antialiased; overflow-x:hidden; -webkit-text-size-adjust:100%; }
+    h1,h2,h3,.display { font-family:'Inter',-apple-system,'Helvetica Neue',sans-serif; font-weight:800; letter-spacing:-0.03em; line-height:1.15; }
+    h1 { font-size:clamp(2.2rem,5vw,3.5rem); }
+    h2 { font-size:clamp(1.5rem,3vw,2rem); }
+    h3 { font-size:1rem; font-weight:700; }
+    .container { max-width:var(--max); margin:0 auto; padding:0 48px; }
+    section { padding:80px 0; border-bottom:1px solid var(--gray-200); }
+    section:last-of-type { border-bottom:none; }
+    .section-label { font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--red); margin-bottom:16px; }
+    .red-bar { width:40px; height:3px; background:var(--red); margin-bottom:24px; }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); }
+    .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); }
+    .grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--gap); }
+    .card { background:var(--white); border:1px solid var(--gray-200); padding:28px; }
+    .card h3 { margin-bottom:8px; }
+    .card p { font-size:0.85rem; color:var(--gray-600); line-height:1.65; }
+    blockquote { border-left:3px solid var(--red); padding:16px 24px; margin:24px 0; background:var(--white); }
+    blockquote p { font-style:italic; color:var(--gray-600); font-size:0.95rem; }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(250,250,250,0.98); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); border-bottom:1px solid var(--gray-200); padding:16px 0; }
+    nav .container { display:flex; align-items:center; justify-content:space-between; }
+    nav .logo { font-size:1rem; font-weight:800; letter-spacing:-0.02em; color:var(--black); text-decoration:none; }
+    nav .logo span { color:var(--red); }
+    nav .nav-links { display:flex; gap:20px; }
+    nav .nav-links a { color:var(--gray-600); text-decoration:none; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; }
+    nav .nav-links a:hover { color:var(--red); }
+    .hamburger { display:none; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--black); padding:4px 8px; }
+    .btn-export { padding:10px 18px; font-size:0.72rem; font-weight:700; letter-spacing:0.05em; background:var(--red); color:#fff; border:none; cursor:pointer; text-transform:uppercase; }
+    .btn-export:hover { background:var(--red-dark); }
+
+    /* HERO — dark full-bleed */
+    #hero { padding:140px 0 80px; background:var(--black); color:#fff; border-bottom:none; }
+    #hero .section-label { color:var(--red); }
+    #hero .subtitle { font-size:1.1rem; color:#999; max-width:550px; }
+    .hero-meta { display:flex; gap:32px; margin-top:32px; flex-wrap:wrap; }
+    .hero-meta .ml { font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:#777; }
+    .hero-meta .mv { font-size:0.85rem; font-weight:600; color:#c0c0c0; }
+
+    /* METRIC */
+    .big-stat { font-family:'Inter',sans-serif; font-size:4rem; font-weight:900; letter-spacing:-0.04em; color:var(--red); line-height:1; }
+    .stat-label { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--gray-600); margin-top:6px; }
+    .stat-row { display:flex; gap:48px; margin:32px 0; flex-wrap:wrap; }
+
+    /* QUADRANT */
+    .quadrant { display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--gray-200); border:2px solid var(--gray-200); margin-top:24px; }
+    .quad-cell { background:var(--white); padding:24px; }
+    .quad-cell.highlight { border:2px solid var(--red); background:#fff5f5; }
+    .quad-cell .ql { font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--gray-400); margin-bottom:4px; }
+    .quad-cell h4 { font-size:0.88rem; font-weight:700; margin-bottom:4px; }
+    .quad-cell p { font-size:0.78rem; color:var(--gray-600); }
+    .quad-cell.highlight h4 { color:var(--red); }
+
+    /* TIMELINE */
+    .tl-item { display:flex; gap:20px; padding:20px 0; border-bottom:1px solid var(--gray-200); }
+    .tl-item:last-child { border:none; }
+    .tl-marker { min-width:100px; }
+    .tl-dot { display:inline-block; width:10px; height:10px; background:var(--gray-200); border-radius:50%; }
+    .tl-dot.active { background:var(--red); box-shadow:0 0 0 4px rgba(227,30,36,0.15); }
+    .tl-phase { font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--red); margin-bottom:2px; }
+    .tl-date { font-size:0.7rem; color:var(--gray-400); }
+    .tl-content h4 { font-size:0.9rem; font-weight:700; margin-bottom:2px; }
+    .tl-content p { font-size:0.8rem; color:var(--gray-600); }
+
+    /* MODEL TIERS */
+    .tier { border:1px solid var(--gray-200); padding:24px; background:var(--white); text-align:center; }
+    .tier.featured { border-color:var(--red); background:#fff5f5; }
+    .tier .tier-name { font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; }
+    .tier .tier-price { font-size:2rem; font-weight:900; color:var(--red); margin:8px 0; font-family:'Inter',sans-serif; }
+    .tier .tier-desc { font-size:0.78rem; color:var(--gray-600); }
+
+    /* CONTACT BOX */
+    .contact-box { background:var(--black); color:#fff; padding:40px; }
+    .contact-box h3 { color:#fff; }
+    .contact-box p { color:var(--gray-400); font-size:0.85rem; }
+    .contact-row { display:flex; gap:32px; margin-top:20px; flex-wrap:wrap; }
+    .ci .cl { font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--red); }
+    .ci .cv { font-size:0.9rem; color:#fff; margin-top:2px; font-weight:500; }
+
+    /* PRINT */
+    @media print {
+      @page { margin:15mm; size:A4; }
+      nav { position:static; }
+      .no-print { display:none!important; }
+      section { padding:32px 0; page-break-inside:avoid; }
+      body { font-size:11px; }
+      h1 { font-size:1.8rem; }
+      h2 { font-size:1.2rem; }
+      .container { max-width:100%; padding:0 16px; }
+      #hero { padding-top:40px; padding-bottom:40px; background:var(--black)!important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      .contact-box { background:var(--black)!important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    }
+
+    @media(max-width:1024px){ .grid-4{grid-template-columns:1fr 1fr;} }
+    @media(max-width:768px){
+      .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
+      .container{padding:0 24px;}
+      nav .nav-links{display:none;}
+      .hamburger{display:block;}
+      .hero-meta{flex-direction:column;gap:16px;}
+      .stat-row{flex-direction:column;gap:20px;}
+      .contact-row{flex-direction:column;gap:16px;}
+      .contact-box{padding:28px 20px;}
+      .quadrant{grid-template-columns:1fr;}
+      .tl-marker{min-width:80px;}
+      section{padding:48px 0;}
+      body{font-size:14px;}
+    }
+    .nav-links.mobile-open{display:flex!important;flex-direction:column;position:absolute;top:56px;left:0;right:0;background:var(--bg);padding:20px 24px;border-bottom:1px solid var(--gray-200);gap:16px;box-shadow:0 10px 30px rgba(0,0,0,0.08);z-index:101;}
+  </style>
+</head>
+<body>
+
+<nav class="no-print">
+  <div class="container">
+    <a href="#" class="logo">Dynam<span>OS</span></a>
+    <div class="nav-links">
+      <a href="#problem">Problem</a><a href="#market">Market</a><a href="#product">Product</a><a href="#moats">Moats</a><a href="#model">Model</a><a href="#roadmap">Roadmap</a><a href="#ask">Ask</a>
+    </div>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')" aria-label="Menu">☰</button>
+    <button class="btn-export" onclick="window.print()">↓ PDF</button>
+  </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section id="hero">
+  <div class="container">
+    <div class="section-label">Business Plan · 2026</div>
+    <h1>DynamOS<br>Navigate Your Future.</h1>
+    <p class="subtitle">An AI-native Competence Operating System that bridges the gap between learners and teachers — building active, autonomous learners who navigate real-world systems in a target language and culture.</p>
+    <div class="hero-meta">
+      <div><div class="ml">Founder</div><div class="mv">Kee Lee · Chengdu</div></div>
+      <div><div class="ml">Stage</div><div class="mv">Pre-seed · MVP Q3 2026</div></div>
+      <div><div class="ml">Market</div><div class="mv">AI-Native Education</div></div>
+      <div><div class="ml">Contact</div><div class="mv">keedahooman · +44 7440 622158</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PROBLEM ═══════ -->
+<section id="problem">
+  <div class="container">
+    <div class="section-label">The Problem</div>
+    <div class="red-bar"></div>
+    <h2>The Gap Between Learning and Living</h2>
+    <div class="grid-2" style="margin-top:24px">
+      <div>
+        <p style="color:var(--gray-600)">200 million Chinese learners study English. Most pass exams but cannot operate independently in an English-speaking environment. They can score IELTS 6.5 but cannot register with a GP, write a university application email, or participate in a seminar discussion.</p>
+        <p style="color:var(--gray-600);margin-top:12px">Agencies fill the gap — but they handle logistics, not capability. They process documents. They don't build learners. <strong>They sell placement. Not preparation.</strong></p>
+      </div>
+      <div class="stat-row" style="margin:0;justify-content:center;align-items:center">
+        <div style="text-align:center"><div class="big-stat">200M+</div><div class="stat-label">Chinese English Learners</div></div>
+        <div style="text-align:center"><div class="big-stat">¥300B</div><div class="stat-label">China EdTech Market</div></div>
+      </div>
+    </div>
+    <blockquote><p>"Agencies sell the outcome. We build the capability. We don't place you. We prepare you."</p></blockquote>
+  </div>
+</section>
+
+<!-- ═══════ MARKET ═══════ -->
+<section id="market">
+  <div class="container">
+    <div class="section-label">Market Analysis</div>
+    <div class="red-bar"></div>
+    <h2>A Quadrant No One Occupies</h2>
+    <div class="quadrant">
+      <div class="quad-cell"><div class="ql">Content-First</div><h4>Duolingo, VIPKid, Coursera</h4><p>Gamified flashcards. Video lessons. High volume. Zero cultural scaffolding. Students learn words. They don't learn to live.</p></div>
+      <div class="quad-cell"><div class="ql">AI Tutors</div><h4>Khanmigo, Speak, ELSA</h4><p>Well-funded AI. No human loop. Amnesiac sessions. Generic feedback indistinguishable from ChatGPT.</p></div>
+      <div class="quad-cell"><div class="ql">Agency Legacy</div><h4>New Oriental, IDP, British Council</h4><p>30–50% teacher commission. Handle visas, not capability. Zero AI. Zero learner autonomy. Selling placement since 1993.</p></div>
+      <div class="quad-cell highlight"><div class="ql">AI-Native + Human-in-Loop</div><h4>DynamOS — EMPTY QUADRANT</h4><p>No competitor combines adaptive AI with calibrated teacher matching, cultural scaffolding, persistent competence tracking, and real-world taskification.</p></div>
+    </div>
+    <h3 style="margin-top:32px">Why Now: 4–8 Month Window</h3>
+    <p style="color:var(--gray-600);max-width:600px">DeepSeek's breakthrough in January 2026 triggered a state-backed AI education mandate across China. Chinese competitors will flood the market — but they will optimize for GAOKAO exam prep, not cross-cultural navigation. Our IELTS → UK study abroad wedge is structurally unservable. The window to establish our quadrant is closing. <strong>Every month of delay compounds the first-mover disadvantage.</strong></p>
+  </div>
+</section>
+
+<!-- ═══════ PRODUCT ═══════ -->
+<section id="product">
+  <div class="container">
+    <div class="section-label">Product</div>
+    <div class="red-bar"></div>
+    <h2>A Competence Operating System</h2>
+    <div class="grid-3" style="margin-top:24px">
+      <div class="card"><h3>🧠 DynaSaurus</h3><p><strong>AI Tutor.</strong> MFP/CCC/GAP-aware evaluation calibrated to Kee Lee's pedagogy. Persistent memory across sessions. 4 live modules. Deployed at dynasaurus.rkrk.io.</p></div>
+      <div class="card"><h3>🧭 DynaTasks</h3><p><strong>Life Navigation.</strong> Every real-world process becomes a lesson. UCAS walkthrough. GP registration. Visa docs. Seminar participation. Learn English AND learn to live in English.</p></div>
+      <div class="card"><h3>🤝 DynaMatch</h3><p><strong>Teacher Discovery.</strong> AI-powered matching. Graduated quality tiers with outcome-based verification. When AI isn't enough, the right human guide steps in.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ DEMO ═══════ -->
+<section style="background:var(--white)">
+  <div class="container">
+    <div class="section-label">Live Demo</div>
+    <div class="red-bar"></div>
+    <h2>See the Push Engine</h2>
+    <div class="card" style="margin-top:20px">
+      <p style="font-family:monospace;font-size:0.78rem;color:var(--gray-600);margin-bottom:12px">> "I want to study Computer Science at University of Manchester"</p>
+      <div class="grid-2" style="gap:16px">
+        <div style="border-left:3px solid var(--red);padding-left:16px"><h4 style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--gray-400)">Gap Diagnosis</h4><p style="font-size:0.8rem;margin-top:4px">IELTS 5.5 → 7.0. Article errors M3/F3. Academic hedging gaps. UK university culture blindspots.</p></div>
+        <div style="border-left:3px solid var(--red);padding-left:16px"><h4 style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--gray-400)">Push Engine</h4><p style="font-size:0.8rem;margin-top:4px">3 gaps surfaced: UK application culture · Technical CS English · Seminar participation norms</p></div>
+        <div><h4 style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--gray-400)">Missions</h4><p style="font-size:0.8rem;margin-top:4px">Article Precision Drill · Academic Hedging Workshop · Spontaneous Fluency Builder · Technical Lexicon: CS Core</p></div>
+        <div><h4 style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--gray-400)">Life Task + Match</h4><p style="font-size:0.8rem;margin-top:4px">UCAS Personal Statement Workshop · Matched: Kee Lee</p></div>
+      </div>
+      <p style="margin-top:16px;font-size:0.7rem;color:var(--red);font-weight:700">↑ Live at rkrk.io/dynamos</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ MOATS ═══════ -->
+<section id="moats">
+  <div class="container">
+    <div class="section-label">Defensible Moats</div>
+    <div class="red-bar"></div>
+    <h2>Three Things Only DynamOS Can Do</h2>
+    <div class="grid-3" style="margin-top:24px">
+      <div class="card"><div style="font-size:3rem;font-weight:900;color:var(--gray-200);line-height:1">01</div><h3>Push/Pull Engine</h3><p style="font-size:0.82rem;color:var(--gray-600)">Learner says what they want. System surfaces what they don't know they need. MFP/CCC/GAP-encoded pedagogy no competitor can replicate.</p><p style="font-size:0.7rem;color:var(--gray-400);margin-top:8px"><em>Defense: Requires calibrated teacher intuition encoded into AI — no competitor has SrKeeda's 15 years of classroom data.</em></p></div>
+      <div class="card"><div style="font-size:3rem;font-weight:900;color:var(--gray-200);line-height:1">02</div><h3>Cultural Scaffolding</h3><p style="font-size:0.82rem;color:var(--gray-600)">We teach learners to LIVE in English. Chinese competitors optimize for GAOKAO. We optimize for navigating real-world systems overseas.</p><p style="font-size:0.7rem;color:var(--gray-400);margin-top:8px"><em>Defense: State-backed AI companies structurally cannot build cross-cultural navigation — too niche for GAOKAO pipeline.</em></p></div>
+      <div class="card"><div style="font-size:3rem;font-weight:900;color:var(--gray-200);line-height:1">03</div><h3>Competence Passport</h3><p style="font-size:0.82rem;color:var(--gray-600)">Portable verified skill identity that grows richer over time. Anti-churn lock-in no agency can replicate.</p><p style="font-size:0.7rem;color:var(--gray-400);margin-top:8px"><em>Defense: Learners cannot rebuild years of progress data on WeChat or ChatGPT — platform stickiness compounds.</em></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ MODEL ═══════ -->
+<section id="model" style="background:var(--white)">
+  <div class="container">
+    <div class="section-label">Business Model</div>
+    <div class="red-bar"></div>
+    <h2>Teacher SaaS — Tiered, Outcome-Based</h2>
+    <div class="grid-2" style="margin-top:24px">
+      <div>
+        <div class="grid-3" style="gap:12px">
+          <div class="tier"><div class="tier-name">Free</div><div class="tier-price">¥0</div><div class="tier-desc">1 module<br>5 leads</div></div>
+          <div class="tier"><div class="tier-name">Verified</div><div class="tier-price">¥199</div><div class="tier-desc">Unlimited modules<br>5+ sessions · ≥4.0★</div></div>
+          <div class="tier featured"><div class="tier-name">Master</div><div class="tier-price">¥499</div><div class="tier-desc">Unlimited<br>20+ sessions · outcomes verified</div></div>
+        </div>
+        <p style="font-size:0.72rem;color:var(--gray-400);margin-top:12px">* Teachers currently pay agencies 30–50% commission per student. DynamOS charges flat monthly SaaS.</p>
+      </div>
+      <div>
+        <h3>Year 1 Projection</h3>
+        <div style="margin-top:12px">
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-200)"><span>Teachers</span><span style="font-weight:700">50</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-200)"><span>Avg revenue/teacher</span><span style="font-weight:700">¥299/mo</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-200)"><span>MRR</span><span style="font-weight:700">¥14,950</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-200)"><span>ARR</span><span style="font-weight:700;color:var(--red)">¥179,400</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0"><span>Learners (free)</span><span style="font-weight:700">500+</span></div>
+        </div>
+        <p style="font-size:0.7rem;color:var(--gray-400);margin-top:8px">* Teacher supply: Kee Lee's network of 40+ instructors across 7 Chengdu institutions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ROADMAP ═══════ -->
+<section id="roadmap">
+  <div class="container">
+    <div class="section-label">Roadmap</div>
+    <div class="red-bar"></div>
+    <h2>6 Months to Full Competence OS</h2>
+    <div style="margin-top:24px">
+      <div class="tl-item"><div class="tl-marker"><div class="tl-dot active"></div><div class="tl-phase">Now</div><div class="tl-date">Week 1</div></div><div class="tl-content"><h4>Push Engine Demo</h4><p>Single-page builder. Prove AI generates useful teaching tools from natural language. ⏸️ Gate: real teacher validation.</p></div></div>
+      <div class="tl-item"><div class="tl-marker"><div class="tl-dot"></div><div class="tl-phase">Next</div><div class="tl-date">Weeks 2–4</div></div><div class="tl-content"><h4>Vertical Slice — UK Study Abroad</h4><p>One complete learner path. Intention → Diagnosis → Missions → Tasks → Teacher → Passport. 3 real students.</p></div></div>
+      <div class="tl-item"><div class="tl-marker"><div class="tl-dot"></div><div class="tl-phase">Q3</div><div class="tl-date">Month 2–3</div></div><div class="tl-content"><h4>DynaSaurus Migration</h4><p>Swap chatbot memory for competence graph. Persistent learner profiles. MFP evaluation engine live.</p></div></div>
+      <div class="tl-item"><div class="tl-marker"><div class="tl-dot"></div><div class="tl-phase">Q4</div><div class="tl-date">Month 4–6</div></div><div class="tl-content"><h4>Teacher SaaS + Marketplace</h4><p>Tiered pricing live. DynApp marketplace opens. 40+ instructor network onboarded.</p></div></div>
+      <div class="tl-item"><div class="tl-marker"><div class="tl-dot"></div><div class="tl-phase">2027</div><div class="tl-date">Month 7–12</div></div><div class="tl-content"><h4>Full DynamOS</h4><p>Multi-intention types. Push/Pull engine live. Cross-domain tracking. Competence Passport.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ TEAM ═══════ -->
+<section style="background:var(--white)">
+  <div class="container">
+    <div class="section-label">Founder</div>
+    <div class="red-bar"></div>
+    <h2>Built by a Teacher Who Saw the Gap</h2>
+    <div class="grid-2" style="margin-top:24px">
+      <div class="card"><h3>Kee Lee</h3><p style="color:var(--red);font-weight:600;margin-bottom:8px">AI-Native Education Architect</p><p style="font-size:0.85rem;color:var(--gray-600)">IELTS L9.0/R8.5/S8.5. Former EF Expert Teacher and Trainer of Trainers for West China. TEDx 2026 speaker. 15 years across 7 institutions and 200+ students. AI-augmented by two autonomous agents for engineering and creative work.</p></div>
+      <div class="card"><h3>Existing Assets</h3>
+        <div style="margin-top:8px"><p style="font-size:0.8rem;padding:6px 0;border-bottom:1px solid var(--gray-200)"><strong>DynaSaurus</strong> — AI tutor live at dynasaurus.rkrk.io · 4 modules</p><p style="font-size:0.8rem;padding:6px 0;border-bottom:1px solid var(--gray-200)"><strong>IELTS with Kee</strong> — 170+ cue cards, interactive tools at ielts.rkrk.io</p><p style="font-size:0.8rem;padding:6px 0;border-bottom:1px solid var(--gray-200)"><strong>RUA Framework</strong> — Proprietary meta-cognitive pedagogy (MFP/CCC/GAP)</p><p style="font-size:0.8rem;padding:6px 0"><strong>Teacher Network</strong> — 40+ instructors across 7 Chengdu institutions</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ASK ═══════ -->
+<section id="ask">
+  <div class="container">
+    <div class="section-label">The Ask</div>
+    <div class="red-bar"></div>
+    <h2>What We're Looking For</h2>
+    <div class="grid-3" style="margin-top:24px">
+      <div class="card"><h3>💰 Pre-Seed</h3><p style="font-size:0.85rem;color:var(--gray-600);margin-top:6px">¥500K–1M for 6-month build: DynaSaurus migration, Teacher SaaS platform, MFP/CCC/GAP encoding.</p></div>
+      <div class="card"><h3>🎓 Partners</h3><p style="font-size:0.85rem;color:var(--gray-600);margin-top:6px">Universities and language schools seeking AI-native student pipelines. Pilot programs for UK/AUS cohorts.</p></div>
+      <div class="card"><h3>👥 Advisors</h3><p style="font-size:0.85rem;color:var(--gray-600);margin-top:6px">EdTech operators. Chinese learner → global university pipeline expertise. AI safety advisors.</p></div>
+    </div>
+    <div class="grid-3" style="margin-top:24px">
+      <div class="card" style="text-align:center"><div class="big-stat" style="font-size:2.5rem">¥300B</div><div class="stat-label">TAM — China EdTech</div></div>
+      <div class="card" style="text-align:center"><div class="big-stat" style="font-size:2.5rem">¥45B</div><div class="stat-label">SAM — Test Prep + Study Abroad</div></div>
+      <div class="card" style="text-align:center"><div class="big-stat" style="font-size:2.5rem">¥2.2B</div><div class="stat-label">SOM — IELTS + UK Study Abroad (5%)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CONTACT ═══════ -->
+<section>
+  <div class="container">
+    <div class="contact-box">
+      <div class="section-label" style="color:var(--red)">Contact</div>
+      <h3>Let's Build the Future of Learning</h3>
+      <p>DynamOS is ready to move from prototype to platform.</p>
+      <div class="contact-row">
+        <div class="ci"><div class="cl">WeChat</div><div class="cv">keedahooman</div></div>
+        <div class="ci"><div class="cl">WhatsApp</div><div class="cv">+44 7440 622158</div></div>
+        <div class="ci"><div class="cl">Platform</div><div class="cv">rkrk.io/dynamos</div></div>
+        <div class="ci"><div class="cl">Demo</div><div class="cv">rkrk.io/dynamos</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="padding:24px 0;text-align:center;font-size:0.7rem;color:var(--gray-400);border-top:1px solid var(--gray-200)">
+  <div class="container">DynamOS · Navigate Your Future · © 2026 Kee Lee · Chengdu, China</div>
+</footer>
+
+</body>
+</html>
