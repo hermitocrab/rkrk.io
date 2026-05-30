@@ -73,6 +73,27 @@ nav .links a:hover { color:var(--red); }
 #hero { padding:180px 0 100px; position:relative; overflow:hidden; }
 #hero .container { position:relative; }
 #hero::after { content:''; position:absolute; top:-200px; right:-200px; width:700px; height:700px; background:radial-gradient(circle, rgba(159,68,211,0.03) 0%, rgba(255,36,66,0.02) 40%, transparent 70%); pointer-events:none; }
+#hero::before {
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(135deg, rgba(159,68,211,0.04) 0%, transparent 30%, rgba(230,43,30,0.03) 60%, transparent 100%);
+  background-size: 200% 200%;
+  animation: heroGradient 8s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes heroGradient {
+  0%,100% { background-position:0% 0%; }
+  50% { background-position:100% 100%; }
+}
+/* Staggered reveal */
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal-d1 { transition-delay:0.05s; }
+.reveal-d2 { transition-delay:0.12s; }
+.reveal-d3 { transition-delay:0.19s; }
+.reveal-d4 { transition-delay:0.26s; }
+.reveal-d5 { transition-delay:0.33s; }
+/* Counting stat */
+.hs .num.counting { transition:color 0.3s; }
 .hero-greeting { font-size:2rem; font-weight:200; color:var(--gray-600); letter-spacing:-0.02em; line-height:1; margin-bottom:4px; }
 .hero-name { font-size:clamp(3.5rem,8vw,6.5rem); font-weight:900; letter-spacing:-0.05em; line-height:0.95; margin-bottom:16px; color:var(--black); }
 .hero-name em { font-style:normal; color:var(--red); }
@@ -214,16 +235,16 @@ footer { padding:32px 0; text-align:center; font-size:0.72rem; font-weight:400; 
 
 <section id="hero">
     <div class="container">
-        <div class="hero-greeting" data-lang-en="Hi! 👋" data-lang-zh="嗨！👋" data-lang-jp="こんにちは！👋" data-lang-fr="Salut ! 👋">Hi! 👋</div>
-        <div class="hero-name">I'm <em>R</em>ic<em>k</em>y</div>
-        <div class="hero-meta">
+        <div class="hero-greeting reveal reveal-d1" data-lang-en="Hi! 👋" data-lang-zh="嗨！👋" data-lang-jp="こんにちは！👋" data-lang-fr="Salut ! 👋">Hi! 👋</div>
+        <div class="hero-name reveal reveal-d2">I'm <em>R</em>ic<em>k</em>y</div>
+        <div class="hero-meta reveal reveal-d3">
             <span data-lang-en="AI-Native Education Architect" data-lang-zh="教了十年英语，同时搭建了一个教育系统" data-lang-jp="教育とAIをつなぐ" data-lang-fr="Prof, codeur, rêveur">AI-Native Education Architect</span>
             <span> · </span>Chengdu<span> · </span>TEDx 2026
         </div>
-        <p class="hero-tagline">
-            <span data-lang-en="I&apos;ve taught English for 9 years. I build AI tools for classrooms. At home, a golden retriever who thinks he runs the place, and a cat who actually does. Just call me Kee." data-lang-zh="教了九年英语，也为课堂搭了些AI工具。家里有只把自己当人的金毛，和一只真正说了算的猫。叫我Kee就行。" data-lang-jp="英語を教えて9年。教室で使えるAIツールも作っています。家には、自分がボスだと思ってるゴールデンレトリバーと、本当のボスの猫がいます。Keeと呼んでください。" data-lang-fr="J&apos;enseigne l&apos;anglais depuis 9 ans. Je crée aussi des outils IA pour la classe. À la maison, un golden retriever qui se prend pour le patron, et un chat qui l&apos;est vraiment. Appelez-moi Kee.">I&apos;ve taught English for 9 years. I build AI tools for classrooms. At home, a golden retriever who thinks he runs the place, and a cat who actually does. Just call me Kee.</span>
+        <p class="hero-tagline reveal reveal-d4">
+            <span data-lang-en="I&apos;ve taught English for 9 years. I build AI tools for classrooms. There&apos;s a golden retriever at home who thinks he runs the place — and a cat who actually does. Call me Kee." data-lang-zh="教了九年英语，也为课堂搭了些AI工具。家里有只把自己当人的金毛，和一只真正说了算的猫。叫我Kee就行。" data-lang-jp="英語を教えて9年。教室で使えるAIツールも作っています。家には、自分がボスだと思ってるゴールデンレトリバーと、本当のボスの猫がいます。Keeと呼んでください。" data-lang-fr="J&apos;enseigne l&apos;anglais depuis 9 ans. Je crée aussi des outils IA pour la classe. À la maison, un golden retriever qui se prend pour le patron, et un chat qui l&apos;est vraiment. Appelez-moi Kee.">I&apos;ve taught English for 9 years. I build AI tools for classrooms. There&apos;s a golden retriever at home who thinks he runs the place — and a cat who actually does. Call me Kee.</span>
         </p>
-        <div class="hero-stats">
+        <div class="hero-stats reveal reveal-d5">
             <div class="hs"><div class="num">9.0</div><div class="label" data-lang-en="IELTS Listening" data-lang-zh="雅思听力" data-lang-jp="IELTS リスニング" data-lang-fr="IELTS Listening">IELTS Listening</div></div>
             <div class="hs"><div class="num">8.5</div><div class="label" data-lang-en="IELTS Reading" data-lang-zh="雅思阅读" data-lang-jp="IELTS リーディング" data-lang-fr="IELTS Reading">IELTS Reading</div></div>
             <div class="hs"><div class="num">8.5</div><div class="label" data-lang-en="IELTS Speaking" data-lang-zh="雅思口语" data-lang-jp="IELTS スピーキング" data-lang-fr="IELTS Speaking">IELTS Speaking</div></div>
@@ -403,6 +424,43 @@ async function sendBot(){
 function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 function copyWechat(){navigator.clipboard.writeText('keedahooman').then(function(){window.location.href='weixin://';});}
 document.querySelectorAll('.flip-card').forEach(function(c){c.addEventListener('click',function(){this.classList.toggle('flipped');});});
+
+// ═══ Staggered Reveal on Load ═══
+document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible');});
+
+// ═══ Stat Counter Animation ═══
+(function(){
+  var fired=false;
+  var stats=document.querySelector('.hero-stats');
+  function animateNums(){
+    if(fired||!stats)return;
+    var nums=stats.querySelectorAll('.num');
+    nums.forEach(function(n){
+      var txt=n.textContent.trim();
+      var isYear=txt.indexOf('y')>-1;
+      var target=parseFloat(txt);
+      if(isNaN(target))return;
+      var suffix=isYear?'y':(txt.indexOf('.')>-1?'.0':'');
+      var duration=1200;
+      var start=performance.now();
+      function frame(now){
+        var p=Math.min((now-start)/duration,1);
+        var eased=1-Math.pow(1-p,3);
+        var val=isYear?Math.round(target*eased):(Math.round(target*eased*10)/10);
+        n.textContent=val+(isYear?'y':(Number.isInteger(val)?'.0':''));
+        if(p<1)requestAnimationFrame(frame);
+        else n.textContent=txt;
+      }
+      requestAnimationFrame(frame);
+    });
+    fired=true;
+  }
+  var obs=new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting){animateNums();obs.disconnect();}
+  },{threshold:0.3});
+  if(stats)obs.observe(stats);
+  setTimeout(animateNums,600);
+})();
 </script>
 
 </body>
