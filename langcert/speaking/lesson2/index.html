@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 2: Real-World Survival 校园生存 — LangCert Speaking</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a1a;--pink:#ff2d95;--cyan:#00d4ff;--green:#39ff14;--purple:#b347ea;--amber:#ffb627;--text:#e8e8f0;--text-dim:#7a7a90;--glass:rgba(255,255,255,0.06);--glass-strong:rgba(255,255,255,0.10);--radius:14px;--radius-lg:22px;--radius-sm:6px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter','Noto Sans SC',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;background-image:radial-gradient(ellipse at 80% 20%,rgba(0,212,255,0.08) 0%,transparent 55%),radial-gradient(ellipse at 20% 70%,rgba(179,71,234,0.06) 0%,transparent 50%),radial-gradient(ellipse at 50% 40%,rgba(255,182,39,0.04) 0%,transparent 50%)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+.zh{font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif}
+.zh-hidden .zh-inline,.zh-hidden .zh-block,.zh-hidden .zh-b2{display:none}
+.zh-inline{color:var(--amber);font-size:0.9em;margin-left:4px}
+.zh-block{color:var(--amber);font-size:13px;line-height:1.7;margin-top:8px;padding:8px 12px;background:rgba(255,182,39,0.06);border-left:3px solid var(--amber);border-radius:0 8px 8px 0}
+.zh-b2{font-size:11px;color:var(--amber);vertical-align:super;margin-left:2px;font-weight:400;cursor:help}
+.dm{color:var(--cyan);font-weight:600;border-bottom:1.5px dashed rgba(0,212,255,0.4);padding-bottom:1px;transition:all 0.2s}
+.dm:hover{border-bottom-color:var(--cyan)}
+.dm-legend{font-size:11px;color:var(--text-dim);margin-top:8px;padding:8px 12px;background:rgba(0,212,255,0.04);border-radius:8px;border:1px solid rgba(0,212,255,0.1)}.dm-legend .dm-ex{color:var(--cyan);font-weight:600;border-bottom:1.5px dashed rgba(0,212,255,0.4)}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(10,10,26,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.nav-logo{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-weight:700;font-size:18px;background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-back{font-size:13px;color:var(--text-dim);text-decoration:none}.nav-back:hover{color:var(--cyan)}
+.nav-links{display:flex;gap:8px;align-items:center}.nav-link{font-size:12px;color:var(--text-dim);text-decoration:none;padding:4px 10px;border:1px solid rgba(255,255,255,0.08);border-radius:14px;transition:all 0.2s}.nav-link:hover{border-color:var(--amber);color:var(--amber)}
+.zh-toggle{padding:6px 12px;border-radius:14px;border:1px solid var(--amber);background:rgba(255,182,39,0.1);color:var(--amber);font-size:12px;cursor:pointer;transition:all 0.2s;font-family:'Inter','Noto Sans SC',sans-serif;font-weight:600}.zh-toggle.off{background:transparent;border-color:rgba(255,255,255,0.1);color:var(--text-dim)}
+.container{max-width:860px;margin:0 auto;padding:32px 24px 80px}
+.section-title{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-size:clamp(28px,5vw,42px);font-weight:700;line-height:1.15;margin-bottom:8px}
+.section-subtitle{color:var(--text-dim);font-size:16px;margin-bottom:32px;line-height:1.5}.highlight{color:var(--cyan)}.highlight-amber{color:var(--amber)}.highlight-pink{color:var(--pink)}
+.scene-card{background:var(--glass);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-lg);padding:28px 24px;margin-bottom:20px;position:relative;overflow:hidden;transition:border-color 0.3s,box-shadow 0.3s}.scene-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--purple));opacity:0;transition:opacity 0.3s}.scene-card.active{border-color:rgba(0,212,255,0.4);box-shadow:0 0 30px rgba(0,212,255,0.08)}.scene-card.active::before{opacity:1}.scene-icon{font-size:36px;margin-bottom:12px}.scene-card h3{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-size:20px;font-weight:600;margin-bottom:8px}.scene-card p{color:var(--text-dim);font-size:14px;line-height:1.6}
+.scenario-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0}.scenario-btn{background:var(--glass);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:18px 12px;text-align:center;cursor:pointer;transition:all 0.3s;font-size:13px}.scenario-btn .emoji{font-size:30px;display:block;margin-bottom:6px}.scenario-btn .label{font-weight:600;font-size:12px}.scenario-btn .sdesc{font-size:10px;color:var(--text-dim)}.scenario-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,212,255,0.12)}.scenario-btn.s-lib{border-left:3px solid var(--cyan)}.scenario-btn.s-acc{border-left:3px solid var(--amber)}.scenario-btn.s-reg{border-left:3px solid var(--purple)}.scenario-btn.s-health{border-left:3px solid var(--green)}
+.formula-box{background:var(--glass-strong);border:1px solid rgba(179,71,234,0.3);border-radius:var(--radius);padding:20px 24px;margin:20px 0}.formula-title{font-size:13px;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}.formula-steps{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.formula-step{background:rgba(179,71,234,0.15);color:var(--text);padding:8px 16px;border-radius:20px;font-size:14px;font-weight:500}.formula-arrow{color:var(--purple);font-size:20px}
+.video-wrapper{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--radius);margin:16px 0;border:1px solid rgba(255,255,255,0.08)}.video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:var(--radius)}
+.dos-dont{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}.dos-dont>div{padding:16px;border-radius:var(--radius);font-size:13px;line-height:1.7}.dos-dont .do-box{background:rgba(57,255,20,0.04);border:1px solid rgba(57,255,20,0.15)}.dos-dont .dont-box{background:rgba(255,45,149,0.04);border:1px solid rgba(255,45,149,0.15)}.dos-dont h5{font-size:14px;margin-bottom:8px}.dos-dont .do-box h5{color:var(--green)}.dos-dont .dont-box h5{color:var(--pink)}.dos-dont li{margin-bottom:4px;color:var(--text-dim)}
+.timing-card{background:var(--glass);border:1px solid rgba(0,212,255,0.15);border-radius:var(--radius);padding:16px 20px;margin:16px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap}.timing-card .t-icon{font-size:28px}.timing-card .t-detail{flex:1;min-width:200px}.timing-card .t-label{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px}.timing-card .t-value{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-size:20px;font-weight:700;color:var(--cyan);margin:2px 0}.timing-card .t-note{font-size:12px;color:var(--text-dim)}
+.hedge-card{background:var(--glass);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius);padding:16px;margin-bottom:10px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all 0.25s}.hedge-card:hover{border-color:rgba(255,182,39,0.3)}.hedge-card.studied{background:rgba(57,255,20,0.06);border-color:rgba(57,255,20,0.3)}.hedge-card .direct{color:var(--pink);font-size:13px;text-decoration:line-through;text-decoration-color:rgba(255,45,149,0.4);min-width:150px}.hedge-card .arrow-icon{color:var(--amber);font-size:18px}.hedge-card .hedged{color:var(--green);font-size:13px;font-weight:500}.hedge-card .cat{font-size:11px;color:var(--text-dim);padding:2px 6px;background:rgba(255,255,255,0.04);border-radius:8px}.hedge-card .studied-badge{display:none;font-size:11px;color:var(--green);margin-left:auto}.hedge-card.studied .studied-badge{display:inline}
+.rp-container{margin:20px 0}.rp-dialog-area{min-height:140px;max-height:400px;overflow-y:auto}.rp-message{padding:12px 16px;border-radius:12px;margin-bottom:10px;max-width:85%;animation:slideUp 0.3s ease;font-size:14px;line-height:1.5}.rp-message.npc{background:var(--glass-strong);margin-right:auto;border-bottom-left-radius:4px}.rp-message.user-choice{background:rgba(0,212,255,0.08);margin-left:auto;border-bottom-right-radius:4px;text-align:right;border:1px solid rgba(0,212,255,0.15)}.rp-choices{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.rp-choice-btn{background:var(--glass);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:10px 18px;font-size:13px;cursor:pointer;transition:all 0.2s;color:var(--text);font-family:'Inter','Noto Sans SC',sans-serif}.rp-choice-btn:hover,.rp-choice-btn:focus-visible{background:var(--glass-strong);border-color:var(--cyan);color:var(--cyan);outline:none}.rp-feedback{background:rgba(57,255,20,0.06);border:1px solid rgba(57,255,20,0.2);border-radius:12px;padding:12px 16px;margin-top:10px;font-size:13px}.rp-scene-select{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}.rp-scene-tab{padding:6px 14px;border-radius:16px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:var(--text-dim);font-size:12px;cursor:pointer;transition:all 0.2s;font-family:'Inter','Noto Sans SC',sans-serif}.rp-scene-tab:hover{border-color:var(--cyan);color:var(--cyan)}.rp-scene-tab.active{background:rgba(0,212,255,0.12);border-color:var(--cyan);color:var(--cyan);font-weight:600}
+.emergency-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}.emergency-card{background:var(--glass);border:1px solid rgba(255,182,39,0.15);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all 0.3s}.emergency-card:hover,.emergency-card:focus-visible{border-color:var(--amber);box-shadow:0 0 20px rgba(255,182,39,0.1);outline:none}.emergency-card .phrase{font-size:15px;font-weight:600;color:var(--amber);margin-bottom:4px}.emergency-card .use{font-size:12px;color:var(--text-dim)}
+.tip-card{background:var(--glass);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius);padding:20px;margin-bottom:14px;cursor:pointer;transition:all 0.3s}.tip-card:hover,.tip-card:focus-visible{border-color:rgba(0,212,255,0.3);outline:none}.tip-card-header{display:flex;align-items:center;gap:12px}.tip-card-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;background:rgba(0,212,255,0.15);flex-shrink:0}.tip-card h4{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-size:16px;font-weight:600}.tip-card-tag{font-size:11px;padding:2px 8px;border-radius:12px;background:rgba(255,182,39,0.12);color:var(--amber);margin-left:auto}.tip-card-body{max-height:0;overflow:hidden;transition:max-height 0.4s}.tip-card.expanded .tip-card-body{max-height:900px}.tip-card-body-inner{padding-top:14px;color:var(--text-dim);font-size:14px;line-height:1.7}.tip-card-body-inner strong{color:var(--text)}
+.rubric-mini{background:var(--glass);border:1px solid rgba(179,71,234,0.2);border-radius:var(--radius);padding:14px 18px;margin:12px 0;font-size:12px}.rubric-mini h5{font-size:12px;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}.rubric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.rubric-item{text-align:center;padding:6px;border-radius:8px;background:rgba(255,255,255,0.03)}.rubric-item .r-icon{font-size:18px;display:block;margin-bottom:2px}.rubric-item .r-label{font-size:10px;color:var(--text-dim)}
+.procedure-list{font-size:13px;color:var(--text-dim);line-height:1.8}.procedure-list strong{color:var(--text)}.procedure-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}.procedure-item{background:var(--glass);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius);padding:16px}.procedure-item .p-icon{font-size:24px;margin-bottom:6px}.procedure-item .p-label{font-size:11px;color:var(--amber);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}.procedure-item .p-value{font-size:14px;font-weight:600;color:var(--text)}
+.steps{display:flex;gap:0;margin-bottom:24px;overflow-x:auto}.step{flex:1;min-width:50px;text-align:center;padding:10px 4px;font-size:11px;color:var(--text-dim);border-bottom:2px solid rgba(255,255,255,0.06);transition:all 0.3s;cursor:pointer;white-space:nowrap}.step:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}.step.done{color:var(--green);border-color:var(--green)}.step.active{color:var(--cyan);border-color:var(--cyan);font-weight:600}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center}.modal-overlay.show{display:flex}.modal{background:var(--bg);border:1px solid rgba(0,212,255,0.3);border-radius:var(--radius-lg);padding:32px;max-width:420px;width:90%;text-align:center;box-shadow:0 0 60px rgba(0,212,255,0.15);animation:slideUp 0.3s ease}.modal h3{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-size:22px;margin-bottom:8px}.modal p{color:var(--text-dim);font-size:14px;line-height:1.5;margin-bottom:20px}
+.btn{font-family:'Inter','Noto Sans SC',sans-serif;font-size:14px;font-weight:600;padding:10px 22px;border-radius:var(--radius-sm);border:none;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px}.btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}.btn-primary{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;box-shadow:0 4px 20px rgba(0,212,255,0.25)}.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(0,212,255,0.35)}.btn-secondary{background:var(--glass);color:var(--text);border:1px solid rgba(255,255,255,0.12)}.btn-secondary:hover{background:var(--glass-strong);border-color:rgba(255,255,255,0.2)}.btn-sm{padding:6px 14px;font-size:12px}.btn:disabled{opacity:0.4;pointer-events:none}.btn-reset{background:rgba(255,45,149,0.1);color:var(--pink);border:1px solid rgba(255,45,149,0.2)}.btn-reset:hover{background:rgba(255,45,149,0.18)}
+.checklist{text-align:left;max-width:440px;margin:0 auto}.checklist-item{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:13px;color:var(--text-dim);cursor:pointer}.checklist-item input[type=checkbox]{accent-color:var(--cyan);width:16px;height:16px;cursor:pointer}.checklist-item.checked{color:var(--green)}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}.fade-in{animation:slideUp 0.4s ease forwards}@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+@media(max-width:600px){.container{padding:20px 16px 60px}.section-title{font-size:24px}.formula-steps{flex-direction:column;align-items:flex-start}.scenario-grid{grid-template-columns:1fr 1fr}.rp-message{max-width:95%}.rubric-grid{grid-template-columns:repeat(2,1fr)}.dos-dont{grid-template-columns:1fr}.procedure-grid{grid-template-columns:1fr}.nav{padding:10px 12px}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="lesson1.html" class="nav-back">← L1</a>
+  <span class="nav-logo">🎭 L2: Campus Survival 校园生存</span>
+  <div class="nav-links">
+    <button class="zh-toggle" id="zhToggle" onclick="toggleZH()">中文 ON</button>
+    <a href="question-bank.html" class="nav-link">📋 Q-Bank</a>
+  </div>
+  <span style="font-size:12px;color:var(--text-dim)" id="saveIndicator"></span>
+</nav>
+
+<div class="container">
+<div class="steps" id="stepsNav">
+  <div class="step active" data-step="0" tabindex="0">🎬 场景</div>
+  <div class="step" data-step="1" tabindex="0">🛡️ 缓冲</div>
+  <div class="step" data-step="2" tabindex="0">🧪 软化</div>
+  <div class="step" data-step="3" tabindex="0">🎮 模拟</div>
+  <div class="step" data-step="4" tabindex="0">🆘 急救</div>
+  <div class="step" data-step="5" tabindex="0">📊 回顾</div>
+</div>
+<div id="stepContent"></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05)">
+  <button class="btn btn-secondary btn-sm" id="btnPrev" disabled>← 上一步</button>
+  <span style="font-size:12px;color:var(--text-dim)" id="stepIndicator">Step 1/6</span>
+  <button class="btn btn-primary btn-sm" id="btnNext">下一步 →</button>
+</div>
+</div>
+
+<div class="modal-overlay" id="completionModal"><div class="modal"><div class="modal-icon">🎓</div><h3>Lesson 2 Complete! 完成!</h3><p>You've mastered campus survival. 你已掌握校园生存英语。<br>Polite complaints and all 4 roleplay scenarios. 准备进入Lesson 3!</p><button class="btn btn-primary" onclick="closeModal()">Continue 继续 →</button></div></div>
+
+<script>
+const LS_KEY='langcert_l2_progress';
+let currentStep=parseInt(localStorage.getItem(LS_KEY)||'0');
+const totalSteps=6;
+function saveProgress(){localStorage.setItem(LS_KEY,currentStep);document.getElementById('saveIndicator').textContent='💾 Saved';setTimeout(()=>document.getElementById('saveIndicator').textContent='',1500)}
+function closeModal(){document.getElementById('completionModal').classList.remove('show')}
+let zhVisible=true;
+function toggleZH(){zhVisible=!zhVisible;document.body.classList.toggle('zh-hidden',!zhVisible);const btn=document.getElementById('zhToggle');btn.textContent=zhVisible?'中文 ON':'中文 OFF';btn.classList.toggle('off',!zhVisible)}
+
+const stepContent={
+0:`<div class="fade-in"><h1 class="section-title">Welcome to <span class="highlight">Campus Life</span>. <span class="zh-inline">欢迎来到校园生活。</span></h1>
+<p class="section-subtitle">LangCert Part 2 throws you into real situations. Can you handle them politely — in English? <span class="zh-inline">第二部分把你扔进真实场景。你能用英语礼貌应对吗？</span></p>
+
+<div class="scene-card active"><div class="scene-icon">🎬</div><h3>📹 Full B2 Speaking Test 完整B2口语考试</h3><p>See Part 2 in action. The examiner describes a scenario — you respond in character, <span class="dm">not</span> as yourself. <span class="zh-inline">看Part 2如何运作——考官描述场景，你以角色身份回应，不是你本人。</span></p>
+<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/JNEg6tB2nX0" title="B2 Speaking Full Test" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+<p style="font-size:11px;color:var(--text-dim);margin-top:4px">Part 2 (role play) starts around 3:30 <span class="zh-inline">Part 2大约在3分30秒开始</span></p></div>
+
+<div class="scene-card"><div class="scene-icon">🎭</div><h3>Part 2: Situational Role Play 情景角色扮演</h3>
+<p><strong>Duration 时长 (B2):</strong> 2–3 min | <strong>(C1):</strong> 3–4 min</p>
+<p><strong>Format 形式:</strong> Examiner reads a short scenario. You interact with them in character. They play the other person (librarian, housing officer, etc). <span class="zh-inline">考官朗读场景描述，你以角色身份互动。考官扮演对方（图书管理员、住宿处老师等）。</span></p>
+<p style="margin-top:12px;color:var(--pink);font-weight:600">🇨🇳 中国学生最大陷阱：太直接。"给我换个房间。" 在英语里，直接 = 攻击性。你必须用礼貌层包裹请求。<strong>缓冲（Buffer）+ 软化（Hedging）= Part 2的基础。</strong></p></div>
+
+<div class="rubric-mini"><h5>🎯 Part 2 Grading Criteria 评分标准 (各25%)</h5><div class="rubric-grid"><div class="rubric-item"><span class="r-icon">✅</span><span class="r-label">Task Fulfillment 任务完成</span></div><div class="rubric-item"><span class="r-icon">📝</span><span class="r-label">Grammar & Vocab 语法词汇</span></div><div class="rubric-item"><span class="r-icon">🗣</span><span class="r-label">Pronunciation 发音</span></div><div class="rubric-item"><span class="r-icon">💬</span><span class="r-label">Fluency 流利互动</span></div></div></div>
+
+<div class="timing-card"><div class="t-icon">⏱</div><div class="t-detail"><div class="t-label">Part 2 Timing 时间分配</div><div class="t-value">2–3 min (B2) / 3–4 min (C1)</div><div class="t-note">Scenario spoken by examiner (~30s). NO written prompt. <strong>YOU start the conversation.</strong> 4–6 exchanges.<span class="zh-inline">考官口述场景（约30秒）。没有书面提示。<strong>你主动开始对话。</strong>4-6轮对话。</span></div></div></div>
+
+<div class="tip-card" onclick="this.classList.toggle('expanded')" tabindex="0"><div class="tip-card-header"><div class="tip-card-icon">⚠️</div><h4>Part 2 Dos and Don'ts 注意事项</h4><span class="tip-card-tag">必读</span></div><div class="tip-card-body"><div class="tip-card-body-inner"><div class="dos-dont">
+<div class="do-box"><h5>✅ DO 应该做</h5><ul><li><span class="dm">Start with</span> a greeting or buffer <span class="zh-inline">每次用问候/缓冲开头</span></li><li>Use <span class="dm">soft</span> words: maybe, perhaps, a bit, I was wondering <span class="zh-inline">用软化词</span></li><li>Offer a solution — <span class="dm">not just</span> the problem <span class="zh-inline">提出解决方案，不要只说问题</span></li><li>Stay in character — <span class="dm">pretend</span> you ARE the student in that situation <span class="zh-inline">保持角色</span></li><li>Listen to the examiner's reply and <span class="dm">respond naturally</span> <span class="zh-inline">听考官回应，自然接话</span></li><li><span class="dm">End with</span> thanks <span class="zh-inline">以感谢结束</span></li></ul></div>
+<div class="dont-box"><h5>❌ DON'T 不应该</h5><ul><li><span class="dm">Jump straight</span> to the problem — buffer first <span class="zh-inline">别直接说问题——先缓冲</span></li><li>Give orders: 'Do this', 'Fix that' <span class="zh-inline">别用命令式</span></li><li><span class="dm">Just complain</span> without offering a way forward <span class="zh-inline">别只抱怨不给方案</span></li><li>Break character or give up <span class="zh-inline">别跳出角色或放弃</span></li><li>Give one-word or one-line answers <span class="zh-inline">别给单词或单句回答</span></li><li>Use aggressive words: always, never, you should <span class="zh-inline">别用攻击性词</span></li></ul></div></div></div></div></div>
+
+<div class="tip-card" onclick="this.classList.toggle('expanded')" tabindex="0"><div class="tip-card-header"><div class="tip-card-icon">🔍</div><h4>Exam Procedure 考试流程 — Part 2</h4><span class="tip-card-tag">考场细节</span></div><div class="tip-card-body"><div class="tip-card-body-inner">
+<div class="zh-block"><strong>Part 2流程：</strong>考官口述场景（约20-30秒，只听一次）→ <strong>你主动开口</strong>（考官不替你开始——这考查主动性）→ 4-6轮角色对话（你一句考官一句）→ 考官示意结束。考场设置同Part 1：~1.5米面对面，摄像头对着你，无笔记无书面题目。关键：<strong>你是角色，不是你自己。</strong></div>
+<p class="procedure-list"><strong>How it works:</strong> Examiner reads a scenario (~20–30 seconds). <span class="dm">For example</span>: "You're in the university library. It's exam week and there's a group being very noisy. I am the librarian. You start." <span class="zh-inline">考官朗读场景。例如："你在大学图书馆。考试周，有一群人大声喧哗。我是图书管理员。你开始。"</span></p>
+<div class="procedure-grid"><div class="procedure-item"><div class="p-icon">🗣️</div><div class="p-label">Scenario 场景</div><div class="p-value">Spoken only 仅口述</div></div><div class="procedure-item"><div class="p-icon">🎭</div><div class="p-label">Who Starts? 谁开始？</div><div class="p-value">YOU initiate 你主动</div></div><div class="procedure-item"><div class="p-icon">🔄</div><div class="p-label">Exchanges 对话轮数</div><div class="p-value">4–6 turns 轮</div></div><div class="procedure-item"><div class="p-icon">📝</div><div class="p-label">Notes? 笔记？</div><div class="p-value">Nothing 禁止</div></div></div></div></div></div>
+
+<div class="scenario-grid"><div class="scenario-btn s-lib"><span class="emoji">📚</span><span class="label">Library 图书馆</span><span class="sdesc">Noise 噪音投诉</span></div><div class="scenario-btn s-acc"><span class="emoji">🏠</span><span class="label">Accommodation 住宿</span><span class="sdesc">Heater 暖气坏了</span></div><div class="scenario-btn s-reg"><span class="emoji">📝</span><span class="label">Registration 注册</span><span class="sdesc">Error 系统错误</span></div><div class="scenario-btn s-health"><span class="emoji">🏥</span><span class="label">Health 健康中心</span><span class="sdesc">Appointment 预约</span></div></div>
+<p style="font-size:12px;color:var(--text-dim)">Practice ALL four in the simulator. 在模拟器中练习全部四个场景。<span class="dm">First</span>, let's learn the framework. 先学框架。</p></div>`,
+
+1:`<div class="fade-in"><h2 class="section-title">The <span class="highlight-amber">Buffer Formula</span> <span class="zh-inline">缓冲公式</span></h2>
+<p class="section-subtitle"><span class="dm">Before</span> you say anything negative — buffer first. This is the single most important Part 2 skill.<span class="zh-inline">说任何负面内容之前——先缓冲。Part 2最重要的技巧，没有之一。</span></p>
+<div class="dm-legend">💡 <strong>Legend 图例：</strong> <span class="dm-ex">underlined cyan</span> = <strong>discourse marker 语篇标记</strong> — words that structure your speech and make you sound polite and natural.</div>
+<div class="formula-box" style="border-color:rgba(255,182,39,0.3);margin-top:16px"><div class="formula-title" style="color:var(--amber)">🛡️ 3-Step Polite Complaint 三步礼貌表达</div><div class="zh-block"><strong>核心思路：</strong>永远不要一上来就说问题。三步走：先用一句温暖的缓冲开场（让人感觉你是来合作而不是来吵架的），然后清晰地陈述问题（就事论事），最后主动提出你希望的解决方案（展现主动性——这是Task Fulfillment的评分点）。</div>
+<div class="formula-steps"><span class="formula-step" style="background:rgba(255,182,39,0.15)">1. Buffer 缓冲<span class="zh-inline"> 温暖开场</span></span><span class="formula-arrow">→</span><span class="formula-step" style="background:rgba(255,182,39,0.15)">2. Issue 问题<span class="zh-inline"> 清晰陈述</span></span><span class="formula-arrow">→</span><span class="formula-step" style="background:rgba(0,212,255,0.15);color:var(--cyan)">3. Solution 方案<span class="zh-inline"> 提出解决</span></span></div></div>
+<div style="background:var(--glass);border:1px solid rgba(57,255,20,0.15);border-radius:var(--radius);padding:20px;margin:16px 0"><p style="color:var(--green);font-weight:600;margin-bottom:8px">✅ POLITE Version 礼貌版 — Library Complaint 图书馆投诉</p><p style="font-size:14px;line-height:1.7;color:var(--text-dim)"><span style="color:var(--amber)">Buffer:</span> "<span class="dm">Hi there</span>, sorry to bother you."<br><span style="color:var(--amber)">Issue:</span> "<span class="dm">It's just that</span> I'm finding it <span class="dm">a bit</span> hard to concentrate with the noise."<br><span style="color:var(--cyan)">Solution:</span> "I was wondering<span class="zh-b2" title="B2表达：礼貌请求句式 I was wondering if...">📖</span> if you might know of a quieter area?"</p></div>
+<div style="background:rgba(255,45,149,0.04);border:1px solid rgba(255,45,149,0.15);border-radius:var(--radius);padding:20px;margin:16px 0"><p style="color:var(--pink);font-weight:600;margin-bottom:8px">❌ DIRECT Version 直接版 — What NOT to say 别说这个</p><p style="font-size:14px;line-height:1.7;color:var(--text-dim)">"It's too noisy here. Can you be quiet?"<br><span style="color:var(--pink)">No buffer = sounds aggressive. No solution offered. This will seriously hurt your score. 没有缓冲=攻击性。没有方案。严重扣分。</span></p></div>
+<div class="tip-card" onclick="this.classList.toggle('expanded')" tabindex="0"><div class="tip-card-header"><div class="tip-card-icon">📋</div><h4>Buffer Phrase Bank 缓冲句库 <span class="zh-inline">挑3个背熟</span></h4><span class="tip-card-tag">背3个</span></div><div class="tip-card-body"><div class="tip-card-body-inner"><strong>Openers 开场 (B1 friendly):</strong><br>• <span class="dm">Hi there</span>, sorry to bother you...<br>• <span class="dm">Excuse me</span>, I was hoping you could help...<br>• <span class="dm">Hello</span>, I've got a quick question...<br><br><strong>Closings 收尾 (提出方案):</strong><br>• Would it be <span class="dm">possible</span> to...?<br>• Is there <span class="dm">any chance</span> that...?<br>• I'd <span class="dm">really</span> appreciate it if...<br><br><span class="zh-block"><strong>B1同学练习建议：</strong>先从最简单的开始——"Hi there, sorry to bother you" + "Is there any chance that...?"。这两句加起来只需要10个单词，但能让你听起来礼貌10倍。先把这两句练到不用想就能说出来。</span></div></div></div>
+</div>`,
+
+2:`<div class="fade-in"><h2 class="section-title">The <span class="highlight">Hedging Lab</span> <span class="zh-inline">软化实验室</span></h2>
+<p class="section-subtitle">Hedging = adding small words that make you sound polite instead of rude. This is THE difference between B1 and C1.<span class="zh-inline">软化 = 添加小词让语气从生硬变礼貌。这就是B1和C1的核心区别。</span></p>
+<div class="formula-box" style="border-color:rgba(0,212,255,0.3)"><div class="formula-title" style="color:var(--cyan)">🧪 Direct → Hedged <span class="zh-inline">直接→软化</span> — Tap to mark as studied <span class="zh-inline">点击标记已学</span></div></div>
+<div class="hedge-card" onclick="this.classList.toggle('studied')"><span class="direct">"I want to change rooms."</span><span class="arrow-icon">→</span><span class="hedged">"I <span class="dm">was wondering</span> if I could <span class="dm">possibly</span> change rooms."</span><span class="cat">soft words</span><span class="studied-badge">✓ 已学</span></div>
+<div class="hedge-card" onclick="this.classList.toggle('studied')"><span class="direct">"This is wrong."</span><span class="arrow-icon">→</span><span class="hedged">"I'm <span class="dm">not entirely sure</span> this is right — could you <span class="dm">maybe</span> check?"</span><span class="cat">being unsure</span><span class="studied-badge">✓ 已学</span></div>
+<div class="hedge-card" onclick="this.classList.toggle('studied')"><span class="direct">"I need this now."</span><span class="arrow-icon">→</span><span class="hedged">"I'd <span class="dm">really appreciate</span> it if this could be sorted <span class="dm">quite</span> soon."</span><span class="cat">appreciation</span><span class="studied-badge">✓ 已学</span></div>
+<div class="hedge-card" onclick="this.classList.toggle('studied')"><span class="direct">"You didn't tell me."</span><span class="arrow-icon">→</span><span class="hedged">"I <span class="dm">don't think</span> I was told — <span class="dm">maybe</span> I missed it?"</span><span class="cat">blame yourself</span><span class="studied-badge">✓ 已学</span></div>
+<div class="hedge-card" onclick="this.classList.toggle('studied')"><span class="direct">"That's too expensive."</span><span class="arrow-icon">→</span><span class="hedged">"That's <span class="dm">a little bit</span> more than I expected — are there <span class="dm">maybe</span> other options?"</span><span class="cat">downtoner</span><span class="studied-badge">✓ 已学</span></div>
+<p style="font-size:11px;color:var(--text-dim);margin-top:8px">Tap each card to mark as studied ✓. Tap again to unmark. <span class="zh-inline">点击标记已学，再点取消标记。</span></p>
+<div class="tip-card" onclick="this.classList.toggle('expanded')" tabindex="0" style="margin-top:16px"><div class="tip-card-header"><div class="tip-card-icon">🧰</div><h4>6 Hedging Techniques 六大软化技巧 <span class="zh-inline">B1同学先练前3个</span></h4><span class="tip-card-tag">工具箱</span></div><div class="tip-card-body"><div class="tip-card-body-inner"><strong>1. Soft words 软化词 (EASIEST — start here):</strong> maybe, perhaps, a little, a bit, quite, just<br><strong>2. "I" statements instead of "you" statements:</strong> "I was wondering..." not "You should..."<br><strong>3. Make it a question, not an order:</strong> "Could you...?" not "Do this."<br><br><strong>Advanced (try after mastering 1-3):</strong><br><strong>4. Modal verbs 情态动词:</strong> could, might, would<span class="zh-b2" title="B2表达：情态动词让语气更礼貌">📖</span><br><strong>5. Passive voice 被动:</strong> "It could be sorted" not "You need to sort it"<span class="zh-b2" title="B2语法：被动语态软化责备">📖</span><br><strong>6. Blame yourself 自我归因:</strong> "I might have misunderstood" not "You're wrong"<span class="zh-b2" title="B2策略：自我归因比指责对方高级得多">📖</span><br><br><strong>B1黄金法则：</strong>Part 2每句话至少用一个软化词（maybe, a bit, just）。先练这一个习惯，效果立竿见影。</div></div></div>
+</div>`,
+
+3:`<div class="fade-in"><h2 class="section-title"><span class="highlight-pink">Role Play Simulator</span> <span class="zh-inline">角色扮演模拟器</span></h2>
+<p class="section-subtitle">Practice ALL 4 campus scenarios. Choose a response — see your politeness score instantly.<span class="zh-inline">练习全部4个校园场景。选择回应——即时看到礼貌度评分。</span></p>
+<div class="rubric-mini"><h5>🎯 You're Being Assessed On 评估维度</h5><div class="rubric-grid"><div class="rubric-item"><span class="r-icon">🛡️</span><span class="r-label">Buffer 缓冲</span></div><div class="rubric-item"><span class="r-icon">🧪</span><span class="r-label">Hedging 软化</span></div><div class="rubric-item"><span class="r-icon">💡</span><span class="r-label">Solution 方案</span></div><div class="rubric-item"><span class="r-icon">🎭</span><span class="r-label">Flow 自然度</span></div></div></div>
+<div class="rp-scene-select" id="rpSceneTabs"></div>
+<div class="rp-container"><div class="rp-dialog-area" id="rpDialog"></div><div class="rp-choices" id="rpChoices"></div><div id="rpFeedbackArea"></div></div>
+<div style="display:flex;gap:10px;align-items:center;margin-top:16px"><button class="btn btn-reset btn-sm" onclick="resetRoleplay()">🔄 Reset 重置</button><span style="font-size:12px;color:var(--text-dim)">Score 分数: <span id="rpScoreDisplay" style="color:var(--cyan);font-weight:600">0</span>/5</span></div>
+<p style="font-size:11px;color:var(--text-dim);margin-top:16px"><strong>How to practice 练习方法：</strong> For each scene, try the <span class="dm">5/5 answer first</span> — read it aloud. Then reset and try to say something similar in your own words. <span class="zh-inline">每个场景先选5分答案——大声读出来。然后重置，试着用自己的话说出类似的内容。</span></p></div>`,
+
+4:`<div class="fade-in"><h2 class="section-title">🆘 <span class="highlight-amber">Emergency Kit 急救包</span></h2>
+<p class="section-subtitle">Brain freeze? These phrases save you. <span class="dm">Every second</span> of silence costs fluency points — but using a recovery phrase actually IMPROVES your score.<span class="zh-inline">脑子空白？这些话救你。每秒沉默都扣流利分——但使用恢复语反而<strong>加分</strong>。</span></p>
+<div class="zh-block"><strong>为什么急救语能加分：</strong>考官想看到你能应对困难。当你不懂或卡住时，能用英语自然地说"我需要一点时间"或"可以重复一下吗"——这恰恰证明了你具备真实的沟通能力。一个假装听懂然后答非所问的学生，分数远低于一个大方请求重复的学生。</div>
+<div class="emergency-grid">
+<div class="emergency-card" tabindex="0"><div class="phrase">"That's <span class="dm">interesting</span> — let me think for a moment."</div><div class="use">Buy 3 seconds <span class="zh-inline">争取3秒思考时间</span></div></div>
+<div class="emergency-card" tabindex="0"><div class="phrase">"I'm <span class="dm">not totally</span> sure, <span class="dm">but</span> I would say..."</div><div class="use">When unsure <span class="zh-inline">不确定答案时</span></div></div>
+<div class="emergency-card" tabindex="0"><div class="phrase">"<span class="dm">What I mean is</span>..."</div><div class="use">Rephrase yourself <span class="zh-inline">重新表达自己</span></div></div>
+<div class="emergency-card" tabindex="0"><div class="phrase">"<span class="dm">How can I put this</span>..."</div><div class="use">Searching for a word <span class="zh-inline">找词时</span></div></div>
+<div class="emergency-card" tabindex="0"><div class="phrase">"<span class="dm">Sorry</span>, could you say that again?"</div><div class="use">Didn't understand — this is fine! <span class="zh-inline">没听懂——完全OK!</span></div></div>
+<div class="emergency-card" tabindex="0"><div class="phrase">"<span class="dm">Let me give you an example</span>..."</div><div class="use">Stuck? Pivot to an example <span class="zh-inline">卡住？转向举例</span></div></div>
+</div></div>`,
+
+5:`<div class="fade-in"><h2 class="section-title">Lesson 2 <span class="highlight">Complete! 完成!</span></h2>
+<div class="scene-card active" style="text-align:center"><div class="scene-icon">🎓</div><h3>Skills Unlocked 已解锁技能</h3>
+<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:16px 0"><span class="formula-step" style="background:rgba(255,182,39,0.15)">🛡️ Buffer 缓冲</span><span class="formula-step" style="background:rgba(0,212,255,0.15);color:var(--cyan)">🧪 Hedging 软化</span><span class="formula-step" style="background:rgba(179,71,234,0.15)">🎭 Role Play 角色</span><span class="formula-step" style="background:rgba(57,255,20,0.12);color:var(--green)">🆘 Emergency 急救</span></div></div>
+
+<div class="video-wrapper" style="margin:20px 0"><iframe src="https://www.youtube.com/embed/wLaHOFEQUXU" title="C2 Speaking Tips" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+<p style="font-size:11px;color:var(--text-dim);text-align:center;margin-bottom:20px">📹 Extra 额外: How to Pass LangCert Speaking — advanced tips 高分技巧</p>
+
+<div class="tip-card" onclick="this.classList.toggle('expanded')" tabindex="0"><div class="tip-card-header"><div class="tip-card-icon">🏛️</div><h4>Complete Part 2 Procedure 完整考试流程</h4><span class="tip-card-tag">考前必读</span></div><div class="tip-card-body"><div class="tip-card-body-inner">
+<p class="procedure-list"><strong>1. Transition 过渡。</strong> "Now we're going to do a role play. I will describe a situation. You speak to me and I respond. Ready?" <span class="zh-inline">考官说明接下来做角色扮演，确认你准备好了。</span></p>
+<p class="procedure-list" style="margin-top:8px"><strong>2. Scenario 场景。</strong> Examiner reads aloud (~20–30s). Listen for: <strong>the place, the problem, who they are playing.</strong> <span class="zh-inline">考官口述场景。注意听：地点、问题、考官扮演谁。</span></p>
+<p class="procedure-list" style="margin-top:8px"><strong>3. YOU start 你开头。</strong> Examiner <span class="dm">won't</span> begin for you. Speak first — greet them in character. <span class="zh-inline">考官不会替你开头。你必须先说——以角色身份问候对方。</span></p>
+<p class="procedure-list" style="margin-top:8px"><strong>4. Dialogue 对话。</strong> 4–6 exchanges. Stay in character. <span class="dm">If</span> you get stuck, use the Emergency Kit. <span class="zh-inline">4-6轮对话。保持角色。卡住了就用急救包。</span></p>
+<p class="procedure-list" style="margin-top:8px"><strong>5. Ending 结束。</strong> Examiner says "Thank you, that's the end." <span class="dm">Don't</span> stop yourself abruptly. <span class="zh-inline">考官说结束——不要自己突然停。</span></p>
+<p style="margin-top:12px;font-size:12px;color:var(--amber)"><strong>💡 关键：</strong>考官扮演的是对方角色。对方是图书管理员→礼貌清晰。对方是欠钱的朋友→随意但坚定。<strong>匹配语气 = 高分。</strong></p></div></div></div>
+
+<div style="margin:20px 0"><div class="rubric-mini"><h5>📋 Final Self-Check 最终自查</h5>
+<div class="checklist"><label class="checklist-item">✓ Open with "Hi there, sorry to bother you" <span class="zh-inline">用缓冲开场</span></label><label class="checklist-item">✓ Use "a bit / maybe / just" in every answer <span class="zh-inline">每句话用软化词</span></label><label class="checklist-item">✓ All 4 scenes practiced — try the 5/5 answer aloud <span class="zh-inline">4个场景都练过</span></label><label class="checklist-item">✓ 3 emergency phrases ready <span class="zh-inline">背熟3句急救语</span></label><label class="checklist-item">✓ Know: spoken scenario, YOU start, 4–6 exchanges <span class="zh-inline">知道流程</span></label></div></div></div>
+
+<div style="text-align:center;margin-top:20px"><a href="question-bank.html" class="btn btn-primary" style="text-decoration:none">📋 Practice Question Bank 题库练习</a></div></div>`
+};
+
+const roleplayScenes={
+library:{title:'📚 图书馆',desc:'Noisy group during exam week. 考试周有人大声喧哗。',color:'var(--cyan)',steps:[
+{npc:"📚 Librarian 管理员",msg:"Hello! How can I help you today?",choices:[
+{text:'"Hi — it\'s too noisy. Tell them to be quiet."',score:1,fb:'❌ No buffer. 没有缓冲。Score 1/5 <span class="zh-inline">一上来就说问题=攻击性</span>'},
+{text:'"Hi there, sorry to bother you. I was wondering if you could help — the group near the window is being a bit loud and I\'m finding it hard to concentrate."',score:5,fb:'✅ Perfect: buffer + softening + clear issue. 缓冲+软化+清晰。Score 5/5'},
+{text:'"Um, I need a quiet place. Is there one?"',score:3,fb:'⚠️ Gets the job done but no buffer, no softening. 能用但没缓冲没软化。Score 3/5'}]},
+{npc:"📚 Librarian 管理员",msg:"Oh, I'm sorry about that. Would you like me to speak to them, or move to the silent study zone upstairs?",choices:[
+{text:'"Upstairs is fine. Thanks."',score:2,fb:'❌ Too short — acknowledge their help more. 太短了。Score 2/5'},
+{text:'"That\'s really kind of you to offer both. I think the silent zone would be perfect — I\'ve got a big exam tomorrow. Thanks so much for your help."',score:5,fb:'✅ Gratitude + reason + warmth. 感谢+理由+温暖。Score 5/5'},
+{text:'"Yeah, go talk to them. They\'re really annoying."',score:1,fb:'❌ Aggressive and rude. 攻击性+粗鲁。Score 1/5'}]}
+]},
+accommodation:{title:'🏠 住宿',desc:'Radiator broken in winter. 冬天暖气坏了。',color:'var(--amber)',steps:[
+{npc:"🔧 Maintenance 维修部",msg:"Maintenance, how can I help?",choices:[
+{text:'"My room is freezing. Fix it now."',score:1,fb:'❌ No greeting, no buffer. 没问候没缓冲。Score 1/5'},
+{text:'"Hi, I\'m calling from Room 42 — really sorry to bother you but my radiator hasn\'t been working since yesterday and it\'s getting quite cold in here."',score:5,fb:'✅ Greeting + self-ID + buffer + clear description. 完整。Score 5/5'},
+{text:'"The heater is broken. When can you come?"',score:3,fb:'⚠️ States the problem but no warmth. 说了问题但没温度。Score 3/5'}]},
+{npc:"🔧 Maintenance 维修部",msg:"We're quite busy today — I can send someone tomorrow morning. Will that be okay?",choices:[
+{text:'"No, I need it today. It\'s too cold."',score:2,fb:'❌ Demanding without acknowledging their situation. 命令式。Score 2/5'},
+{text:'"I completely understand you\'re busy — tomorrow morning would be great, thank you. Is there anything I can do in the meantime to keep warm?"',score:5,fb:'✅ Empathy + acceptance + proactive. 共情+接受+主动。Score 5/5'},
+{text:'"Tomorrow? Fine, whatever."',score:2,fb:'❌ Passive-aggressive. 被动攻击。Score 2/5'}]}
+]},
+registration:{title:'📝 注册',desc:'Portal error when registering. 注册系统报错。',color:'var(--purple)',steps:[
+{npc:"📋 Admin Office 行政办公室",msg:"Student services, how can I help you today?",choices:[
+{text:'"Your system is broken. I can\'t register."',score:1,fb:'❌ Blaming language. 指责语气。Score 1/5'},
+{text:'"Hi there, I hope you can help me. I\'ve been trying to register for my modules but the portal keeps showing an error — I\'m not sure if it\'s something I\'m doing wrong."',score:5,fb:'✅ Buffer + self-blame + clear issue. 缓冲+自我归因。Score 5/5'},
+{text:'"I need help with registration."',score:3,fb:'⚠️ Clear but very minimal. 清楚但太少。Score 3/5'}]},
+{npc:"📋 Admin Office 行政办公室",msg:"Oh, the portal does that sometimes. Which course codes were you trying to add?",choices:[
+{text:'"I don\'t remember. Just fix it."',score:1,fb:'❌ Unhelpful. 不合作。Score 1/5'},
+{text:'"Thank you so much — let me check. It was ENG201 and HIS105. I really appreciate you looking into this."',score:5,fb:'✅ Gratitude + cooperation. 感谢+合作。Score 5/5'},
+{text:'"ENG201 and HIS105. Thanks."',score:3,fb:'⚠️ Functional but could show more engagement. 能用但可以更投入。Score 3/5'}]}
+]},
+health:{title:'🏥 健康中心',desc:'Feeling unwell — book an appointment. 不舒服要预约。',color:'var(--green)',steps:[
+{npc:"🏥 Health Reception 健康中心前台",msg:"Campus Health Centre, how can I help?",choices:[
+{text:'"I\'m sick. I need a doctor."',score:2,fb:'❌ No greeting, no detail. 没问候没细节。Score 2/5'},
+{text:'"Hi, I was hoping to book an appointment — I\'ve been feeling a bit under the weather<span class="zh-b2" title="B2习语：feeling unwell 的礼貌说法">📖</span> for a couple of days and I think I should get checked out."',score:5,fb:'✅ Buffer + softening + clear request. 缓冲+软化+清晰。Score 5/5'},
+{text:'"Can I see a doctor please?"',score:3,fb:'⚠️ Polite but very short — could add more detail. 礼貌但太短。Score 3/5'}]},
+{npc:"🏥 Health Reception 健康中心前台",msg:"We have a slot at 3pm today or 10am tomorrow. Which works better for you?",choices:[
+{text:'"Tomorrow is too late. Give me today."',score:1,fb:'❌ Demanding tone. 命令式。Score 1/5'},
+{text:'"3pm today would be perfect, thank you so much. Is there anything I should bring with me?"',score:5,fb:'✅ Appreciation + decision + proactive. 感谢+决定+主动。Score 5/5'},
+{text:'"3pm is fine."',score:2,fb:'❌ Abrupt — no gratitude. 粗鲁——没感谢。Score 2/5'}]}
+]}
+};
+
+let rpState={scene:'library',step:0,score:0,choices:0,done:false};
+const rpSaved={library:{score:0,choices:0},accommodation:{score:0,choices:0},registration:{score:0,choices:0},health:{score:0,choices:0}};
+function saveAllProgress(){saveProgress();localStorage.setItem('langcert_l2_rp',JSON.stringify(rpSaved))}
+
+function renderStep(n){
+  currentStep=n;saveProgress();
+  document.getElementById('stepContent').innerHTML=stepContent[n]||'';
+  document.getElementById('stepIndicator').textContent='Step '+(n+1)+'/'+totalSteps;
+  document.querySelectorAll('#stepsNav .step').forEach((el,i)=>{el.classList.remove('active','done');if(i<n)el.classList.add('done');if(i===n)el.classList.add('active')});
+  document.getElementById('btnPrev').disabled=n===0;
+  const nb=document.getElementById('btnNext');
+  if(n===totalSteps-1){nb.textContent='Finish 🎉';nb.onclick=()=>{document.getElementById('completionModal').classList.add('show')}}
+  else{nb.textContent='下一步 →';nb.onclick=()=>renderStep(n+1)}
+  if(n===3)renderRoleplay();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.getElementById('btnPrev').onclick=()=>renderStep(currentStep-1);
+document.getElementById('btnNext').onclick=()=>renderStep(currentStep+1);
+document.querySelectorAll('#stepsNav .step').forEach(el=>{el.addEventListener('click',function(){renderStep(parseInt(this.dataset.step))})});
+
+function switchScene(name){rpState.scene=name;rpState.step=0;rpState.done=false;rpState.score=rpSaved[name].score;rpState.choices=rpSaved[name].choices;renderRoleplay()}
+function renderRoleplay(){
+  const s=roleplayScenes[rpState.scene];
+  document.getElementById('rpSceneTabs').innerHTML=Object.keys(roleplayScenes).map(k=>{const doneMark=rpSaved[k].choices>=2?' ✅':'';return '<button class="rp-scene-tab'+(rpState.scene===k?' active':'')+'" onclick="switchScene(\''+k+'\')">'+roleplayScenes[k].title+doneMark+'</button>'}).join('');
+  const data=s.steps[rpState.step];
+  document.getElementById('rpDialog').innerHTML='<div class="rp-message npc"><strong>'+data.npc+':</strong> '+data.msg+'</div>';
+  document.getElementById('rpChoices').innerHTML=data.choices.map((c,i)=>'<button class="rp-choice-btn" onclick="makeChoice('+i+')">'+c.text+'</button>').join('');
+  document.getElementById('rpFeedbackArea').innerHTML='';
+  if(rpState.done){document.getElementById('rpChoices').innerHTML='';const avg=rpState.choices>0?Math.round(rpState.score/rpState.choices*5):0;document.getElementById('rpFeedbackArea').innerHTML='<div style="text-align:center;margin-top:16px"><div style="width:80px;height:80px;border-radius:50%;border:3px solid var(--cyan);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-family:\'Space Grotesk\',sans-serif;font-size:28px;font-weight:700;color:var(--cyan)">'+avg+'</div><p style="font-size:13px;color:var(--text-dim)">Estimated Score 预估分 /5</p></div>'}
+  document.getElementById('rpScoreDisplay').textContent=rpState.choices>0?Math.round(rpState.score/rpState.choices*5):'0';
+}
+function makeChoice(idx){
+  const s=roleplayScenes[rpState.scene];const choice=s.steps[rpState.step].choices[idx];
+  document.getElementById('rpDialog').innerHTML+='<div class="rp-message user-choice">'+choice.text+'</div>';
+  rpState.score+=choice.score;rpState.choices++;rpSaved[rpState.scene]={score:rpState.score,choices:rpState.choices};
+  document.getElementById('rpFeedbackArea').innerHTML='<div class="rp-feedback">'+choice.fb+'</div>';
+  document.getElementById('rpScoreDisplay').textContent=Math.round(rpState.score/rpState.choices*5);
+  rpState.step++;if(rpState.step>=s.steps.length){rpState.done=true;saveAllProgress();setTimeout(()=>renderRoleplay(),1500)}else{setTimeout(()=>renderRoleplay(),2000)}
+}
+function resetRoleplay(){rpState.step=0;rpState.score=0;rpState.choices=0;rpState.done=false;rpSaved[rpState.scene]={score:0,choices:0};document.getElementById('rpScoreDisplay').textContent='0';saveAllProgress();renderRoleplay()}
+
+const savedRP=localStorage.getItem('langcert_l2_rp');if(savedRP){try{Object.assign(rpSaved,JSON.parse(savedRP))}catch(e){}}
+renderStep(currentStep);
+document.addEventListener('keydown',(e)=>{if(e.key==='ArrowRight'&&currentStep<totalSteps-1&&!e.target.closest('input,textarea'))renderStep(currentStep+1);if(e.key==='ArrowLeft'&&currentStep>0&&!e.target.closest('input,textarea'))renderStep(currentStep-1)});
+</script>
+</body>
+</html>

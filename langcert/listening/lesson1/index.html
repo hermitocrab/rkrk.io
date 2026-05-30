@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L1 Listening: Gist & Intent 主旨与意图 — LangCert Listening</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a1a;--pink:#ff2d95;--cyan:#00d4ff;--green:#39ff14;--purple:#b347ea;--amber:#ffb627;--text:#e8e8f0;--text-dim:#7a7a90;--glass:rgba(255,255,255,0.06);--glass-strong:rgba(255,255,255,0.10);--radius:14px;--radius-lg:22px;--radius-sm:6px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter','Noto Sans SC',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;background-image:radial-gradient(ellipse at 30% 30%,rgba(57,255,20,0.05) 0%,transparent 55%),radial-gradient(ellipse at 70% 50%,rgba(179,71,234,0.05) 0%,transparent 50%),radial-gradient(ellipse at 50% 80%,rgba(0,212,255,0.03) 0%,transparent 50%)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+.zh{font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif}
+.zh-hidden .zh-inline,.zh-hidden .zh-block,.zh-hidden .zh-b2{display:none}
+.zh-inline{color:var(--amber);font-size:0.9em;margin-left:4px}
+.zh-block{color:var(--amber);font-size:13px;line-height:1.7;margin-top:8px;padding:8px 12px;background:rgba(255,182,39,0.06);border-left:3px solid var(--amber);border-radius:0 8px 8px 0}
+.zh-b2{font-size:11px;color:var(--amber);vertical-align:super;margin-left:2px;font-weight:400;cursor:help}
+.dm{color:var(--cyan);font-weight:600;border-bottom:1.5px dashed rgba(0,212,255,0.4);padding-bottom:1px}
+.pr{color:var(--amber);font-weight:600;border-bottom:1.5px dashed rgba(255,182,39,0.5);padding-bottom:1px}
+.legend-box{font-size:11px;color:var(--text-dim);margin:8px 0;padding:8px 12px;background:rgba(0,212,255,0.03);border-radius:8px;border:1px solid rgba(255,255,255,0.06);display:flex;gap:16px;flex-wrap:wrap}
+.legend-box span{display:inline-flex;align-items:center;gap:4px}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(10,10,26,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.nav-logo{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-weight:700;font-size:18px;background:linear-gradient(135deg,var(--green),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:8px;align-items:center}.nav-link{font-size:12px;color:var(--text-dim);text-decoration:none;padding:4px 10px;border:1px solid rgba(255,255,255,0.08);border-radius:14px;transition:all 0.2s}.nav-link:hover{border-color:var(--green);color:var(--green)}
+.zh-toggle{padding:6px 12px;border-radius:14px;border:1px solid var(--amber);background:rgba(255,182,39,0.1);color:var(--amber);font-size:12px;cursor:pointer;transition:all 0.2s;font-family:'Inter','Noto Sans SC',sans-serif;font-weight:600}.zh-toggle.off{background:transparent;border-color:rgba(255,255,255,0.1);color:var(--text-dim)}
+.container{max-width:860px;margin:0 auto;padding:32px 24px 80px}
+.section-title{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-size:clamp(28px,5vw,42px);font-weight:700;line-height:1.15;margin-bottom:8px}.section-subtitle{color:var(--text-dim);font-size:16px;margin-bottom:32px;line-height:1.5}.highlight{color:var(--green)}.highlight-purple{color:var(--purple)}
+.scene-card{background:var(--glass);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-lg);padding:28px 24px;margin-bottom:20px;transition:border-color 0.3s,box-shadow 0.3s}.scene-card.active{border-color:rgba(57,255,20,0.4);box-shadow:0 0 30px rgba(57,255,20,0.06)}.scene-icon{font-size:36px;margin-bottom:12px}.scene-card h3{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-size:20px;font-weight:600;margin-bottom:8px}.scene-card p{color:var(--text-dim);font-size:14px;line-height:1.6}
+.tip-card{background:var(--glass);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius);padding:20px;margin-bottom:14px;cursor:pointer;transition:all 0.3s}.tip-card:hover,.tip-card:focus-visible{border-color:rgba(57,255,20,0.3);outline:none}.tip-card-header{display:flex;align-items:center;gap:12px}.tip-card-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;background:rgba(57,255,20,0.12);flex-shrink:0}.tip-card h4{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-size:16px;font-weight:600}.tip-card-tag{font-size:11px;padding:2px 8px;border-radius:12px;background:rgba(179,71,234,0.12);color:var(--purple);margin-left:auto}.tip-card-body{max-height:0;overflow:hidden;transition:max-height 0.4s}.tip-card.expanded .tip-card-body{max-height:900px}.tip-card-body-inner{padding-top:14px;color:var(--text-dim);font-size:14px;line-height:1.7}.tip-card-body-inner strong{color:var(--text)}
+.formula-box{background:var(--glass-strong);border:1px solid rgba(179,71,234,0.3);border-radius:var(--radius);padding:20px 24px;margin:20px 0}.formula-title{font-size:13px;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}.formula-steps{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.formula-step{background:rgba(179,71,234,0.15);color:var(--text);padding:8px 16px;border-radius:20px;font-size:14px;font-weight:500}.formula-arrow{color:var(--purple);font-size:20px}
+.video-wrapper{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--radius);margin:16px 0;border:1px solid rgba(255,255,255,0.08)}.video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:var(--radius)}
+
+.audio-player{background:var(--glass);border:1px solid rgba(57,255,20,0.15);border-radius:var(--radius);padding:20px;margin:16px 0}
+.audio-controls{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.audio-btn{width:44px;height:44px;border-radius:50%;border:2px solid var(--green);background:rgba(57,255,20,0.1);color:var(--green);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s}.audio-btn:hover{background:rgba(57,255,20,0.2);box-shadow:0 0 16px rgba(57,255,20,0.15)}.audio-btn.playing{border-color:var(--purple);color:var(--purple);background:rgba(179,71,234,0.1)}
+.audio-progress{flex:1;min-width:120px;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden}.audio-progress-fill{height:100%;background:var(--green);border-radius:2px;transition:width 0.1s linear;width:0%}
+.audio-time{font-size:12px;color:var(--text-dim);min-width:70px;text-align:right}
+.audio-speed{font-size:11px;padding:4px 10px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:var(--text-dim);cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.2s}.audio-speed:hover{border-color:var(--green);color:var(--green)}.audio-speed.active{border-color:var(--green);color:var(--green);background:rgba(57,255,20,0.08)}
+
+.script-panel{background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:16px;margin-top:12px;font-size:14px;line-height:1.8;color:var(--text-dim);max-height:300px;overflow-y:auto;display:none}.script-panel.show{display:block}
+.script-toggle{font-size:12px;padding:6px 14px;border-radius:14px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:var(--text-dim);cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.2s}.script-toggle:hover,.script-toggle.active{border-color:var(--amber);color:var(--amber);background:rgba(255,182,39,0.06)}
+
+.q-stem{font-size:15px;font-weight:600;color:var(--text);margin:16px 0 8px;line-height:1.5}
+.q-options{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.q-option{padding:10px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:var(--glass);color:var(--text-dim);font-size:13px;cursor:pointer;transition:all 0.2s;font-family:'Inter','Noto Sans SC',sans-serif;text-align:left}.q-option:hover{border-color:var(--green);color:var(--text)}.q-option.selected{border-color:var(--green);background:rgba(57,255,20,0.08);color:var(--text)}.q-option.correct{border-color:var(--green);background:rgba(57,255,20,0.12);color:var(--green)}.q-option.wrong{border-color:var(--pink);background:rgba(255,45,149,0.06);color:var(--pink)}
+.q-feedback{font-size:13px;padding:10px 14px;border-radius:8px;margin-top:8px;display:none}.q-feedback.show{display:block}.q-feedback.correct{background:rgba(57,255,20,0.06);border:1px solid rgba(57,255,20,0.2);color:var(--green)}.q-feedback.wrong{background:rgba(255,45,149,0.06);border:1px solid rgba(255,45,149,0.15);color:var(--pink)}
+
+.timing-card{background:var(--glass);border:1px solid rgba(0,212,255,0.15);border-radius:var(--radius);padding:16px 20px;margin:16px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap}.timing-card .t-icon{font-size:28px}.timing-card .t-detail{flex:1}.timing-card .t-label{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px}.timing-card .t-value{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-size:20px;font-weight:700;color:var(--green);margin:2px 0}.timing-card .t-note{font-size:12px;color:var(--text-dim)}
+.steps{display:flex;gap:0;margin-bottom:24px;overflow-x:auto}.step{flex:1;min-width:50px;text-align:center;padding:10px 4px;font-size:11px;color:var(--text-dim);border-bottom:2px solid rgba(255,255,255,0.06);transition:all 0.3s;cursor:pointer;white-space:nowrap}.step:focus-visible{outline:2px solid var(--green);outline-offset:-2px}.step.done{color:var(--green);border-color:var(--green)}.step.active{color:var(--green);border-color:var(--green);font-weight:600}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center}.modal-overlay.show{display:flex}.modal{background:var(--bg);border:1px solid rgba(57,255,20,0.3);border-radius:var(--radius-lg);padding:32px;max-width:420px;width:90%;text-align:center;box-shadow:0 0 60px rgba(57,255,20,0.1);animation:slideUp 0.3s ease}.modal h3{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-size:22px;margin-bottom:8px}.modal p{color:var(--text-dim);font-size:14px;line-height:1.5;margin-bottom:20px}
+.btn{font-family:'Inter','Noto Sans SC',sans-serif;font-size:14px;font-weight:600;padding:10px 22px;border-radius:var(--radius-sm);border:none;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px}.btn:focus-visible{outline:2px solid var(--green);outline-offset:2px}.btn-primary{background:linear-gradient(135deg,var(--green),var(--purple));color:#111;box-shadow:0 4px 20px rgba(57,255,20,0.2)}.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(57,255,20,0.3)}.btn-secondary{background:var(--glass);color:var(--text);border:1px solid rgba(255,255,255,0.12)}.btn-sm{padding:6px 14px;font-size:12px}.btn:disabled{opacity:0.4;pointer-events:none}
+.checklist{text-align:left;max-width:440px;margin:0 auto}.checklist-item{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:13px;color:var(--text-dim)}.checklist-item input[type=checkbox]{accent-color:var(--green);width:16px;height:16px;cursor:pointer}
+.rubric-mini{background:var(--glass);border:1px solid rgba(179,71,234,0.2);border-radius:var(--radius);padding:14px 18px;margin:12px 0;font-size:12px}.rubric-mini h5{font-size:12px;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}.rubric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.rubric-item{text-align:center;padding:6px;border-radius:8px;background:rgba(255,255,255,0.03)}.rubric-item .r-icon{font-size:18px;display:block;margin-bottom:2px}.rubric-item .r-label{font-size:10px;color:var(--text-dim)}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}.fade-in{animation:slideUp 0.4s ease forwards}
+@media(max-width:600px){.container{padding:20px 16px 60px}.section-title{font-size:24px}.formula-steps{flex-direction:column;align-items:flex-start}.nav{padding:10px 12px}.rubric-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-logo">🎧 L1: Gist & Intent 主旨与意图</span>
+  <div class="nav-links">
+    <button class="zh-toggle" id="zhToggle" onclick="toggleZH()">中文 ON</button>
+    <a href="../langcert-speaking-courseware/lesson1.html" class="nav-link">🎤 Speaking</a>
+  </div>
+  <span style="font-size:12px;color:var(--text-dim)" id="saveIndicator"></span>
+</nav>
+
+<div class="container">
+<div class="steps" id="stepsNav">
+  <div class="step active" data-step="0" tabindex="0">🎬 场景</div>
+  <div class="step" data-step="1" tabindex="0">📋 格式</div>
+  <div class="step" data-step="2" tabindex="0">🔑 关键词</div>
+  <div class="step" data-step="3" tabindex="0">🔄 改写</div>
+  <div class="step" data-step="4" tabindex="0">🎯 意图</div>
+  <div class="step" data-step="5" tabindex="0">📊 回顾</div>
+</div>
+<div id="stepContent"></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05)">
+  <button class="btn btn-secondary btn-sm" id="btnPrev" disabled>← 上一步</button>
+  <span style="font-size:12px;color:var(--text-dim)" id="stepIndicator">Step 1/6</span>
+  <button class="btn btn-primary btn-sm" id="btnNext">下一步 →</button>
+</div>
+</div>
+
+<div class="modal-overlay" id="completionModal"><div class="modal"><div class="modal-icon">🎧</div><h3>L1 Complete! 完成!</h3><p>You can now identify gist, key words, and speaker intent in short statements. 你已掌握短陈述中的主旨、关键词和说话人意图。<br>On to Part 2: Conversations. 进入Part 2。</p><button class="btn btn-primary" onclick="closeModal()">Continue 继续 →</button></div></div>
+
+<script>
+const LS_KEY='langcert_l1_listen_progress';
+let currentStep=parseInt(localStorage.getItem(LS_KEY)||'0');
+const totalSteps=6;
+function saveProgress(){localStorage.setItem(LS_KEY,currentStep);document.getElementById('saveIndicator').textContent='💾 Saved';setTimeout(()=>document.getElementById('saveIndicator').textContent='',1500)}
+function closeModal(){document.getElementById('completionModal').classList.remove('show')}
+let zhVisible=true;
+function toggleZH(){zhVisible=!zhVisible;document.body.classList.toggle('zh-hidden',!zhVisible);document.getElementById('zhToggle').textContent=zhVisible?'中文 ON':'中文 OFF';document.getElementById('zhToggle').classList.toggle('off',!zhVisible)}
+
+// ── Simple TTS audio player ──
+let currentUtterance=null,isPlaying=false,audioInterval=null,audioStartTime=0,audioDuration=0;
+function speakText(text,rate){stopAudio();const u=new SpeechSynthesisUtterance(text);u.rate=rate||1;u.lang='en-GB';audioDuration=text.split(' ').length*0.35/ (rate||1);currentUtterance=u;isPlaying=true;audioStartTime=Date.now();updatePlayBtn(true);speechSynthesis.speak(u);audioInterval=setInterval(updateAudioProgress,100);u.onend=()=>{stopAudio()}}
+function stopAudio(){if(currentUtterance){speechSynthesis.cancel();currentUtterance=null}isPlaying=false;if(audioInterval)clearInterval(audioInterval);updatePlayBtn(false);updateProgressBar(0)}
+function updatePlayBtn(playing){document.querySelectorAll('.audio-btn.play-btn').forEach(b=>{b.textContent=playing?'⏸':'▶';b.classList.toggle('playing',playing)})}
+function updateAudioProgress(){if(!isPlaying)return;const elapsed=(Date.now()-audioStartTime)/1000;const pct=Math.min(100,Math.round(elapsed/audioDuration*100));updateProgressBar(pct)}
+function updateProgressBar(pct){document.querySelectorAll('.audio-progress-fill').forEach(b=>b.style.width=pct+'%')}
+function setSpeed(rate,btnEl){document.querySelectorAll('.audio-speed').forEach(b=>b.classList.remove('active'));btnEl.classList.add('active');if(isPlaying&&currentUtterance){const txt=currentUtterance.text;stopAudio();speakText(txt,rate)}}
+
+// ── Script toggle ──
+function toggleScript(id){const el=document.getElementById(id);el.classList.toggle('show');const btn=el.previousElementSibling?.querySelector?.('.script-toggle');if(btn)btn.classList.toggle('active',el.classList.contains('show'))}
+
+// ── Q check ──
+function checkAnswer(qid,choice,correct){const opts=document.querySelectorAll('#'+qid+' .q-option');opts.forEach(o=>o.classList.remove('selected','correct','wrong'));opts[choice].classList.add('selected');const fb=document.getElementById(qid+'-fb');fb.classList.add('show');if(choice===correct){opts[choice].classList.add('correct');fb.className='q-feedback show correct';fb.innerHTML='✅ Correct! <span class="zh-inline">正确!</span>'}else{opts[choice].classList.add('wrong');opts[correct].classList.add('correct');fb.className='q-feedback show wrong';fb.innerHTML='❌ Not quite. The correct answer is highlighted in green. <span class="zh-inline">不对。绿色高亮的是正确答案。</span>'}}
+
+const stepContent={
+0:`<div class="fade-in"><h1 class="section-title">Welcome to <span class="highlight">Listening</span>. <span class="zh-inline">欢迎来到听力课。</span></h1>
+<p class="section-subtitle">LangCert Listening Part 1 tests your ability to catch the <span class="dm">main idea</span> of short statements — fast. You hear it <span class="dm">once</span>. You choose the best reply. <span class="zh-inline">第一部分考查你快速抓住短陈述主旨的能力。只听一遍，选最佳回应。</span></p>
+
+<div class="scene-card active"><div class="scene-icon">🎬</div><h3>📹 LangCert Listening: How to Prepare</h3><p>Watch the official guide — understand the exam structure before we dive in. <span class="zh-inline">看官方指南——先了解考试结构再深入练习。</span></p>
+<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/AB0PIIp7AA8" title="LangCert Listening Prep" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div></div>
+
+<div class="scene-card"><div class="scene-icon">🎧</div><h3>Part 1: Short Statements 短陈述 — What to Expect 考试概况</h3>
+<p><strong>Duration 时长:</strong> ~5-7 minutes 分钟</p><p><strong>Format 形式:</strong> You hear a short statement or question. You choose the <span class="dm">best reply</span> from 3 options (A, B, or C). <span class="zh-inline">听到一个短陈述或问题，从3个选项中选最佳回应。</span></p>
+<p><strong>Number of questions 题量:</strong> 6-8 questions 题</p><p><strong>You hear each statement:</strong> <span class="pr">ONCE only</span> <span class="zh-inline">每段只放一遍</span></p>
+<p style="margin-top:12px;color:var(--pink);font-weight:600">🇨🇳 中国学生最大陷阱：试图听懂每一个单词。Part 1考的是<strong>主旨</strong>，不是逐字翻译。你只需要抓住——谁在说话？什么场景？想表达什么？三个问题就够了。</p></div>
+
+
+<div class="audio-player" style="border-color:rgba(124,58,237,0.25);margin-bottom:24px">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+<span style="font-size:24px">🎧</span>
+<span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px">Natural B1 Conversations</span>
+<span style="font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(124,58,237,0.12);color:#b347ea">🤖 Gemini TTS</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">
+<div>
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:4px">🕐 Daily Routines</div>
+<audio controls preload="metadata" style="width:100%;height:40px"><source src="/langcert/listening/audio/daily_routine.mp3" type="audio/mpeg"></audio>
+</div>
+<div>
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:4px">🍜 Ordering Food</div>
+<audio controls preload="metadata" style="width:100%;height:40px"><source src="/langcert/listening/audio/ordering_food.mp3" type="audio/mpeg"></audio>
+</div>
+<div>
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:4px">🗺️ Giving Directions</div>
+<audio controls preload="metadata" style="width:100%;height:40px"><source src="/langcert/listening/audio/giving_directions.mp3" type="audio/mpeg"></audio>
+</div>
+</div>
+</div>
+
+<div class="legend-box"><span><span class="dm">cyan underline</span> = discourse marker 语篇标记</span><span><span class="pr">amber underline</span> = paraphrase 同义改写</span><span>🎧 = click to hear audio 点击听音频</span></div>
+
+<div class="rubric-mini"><h5>🎯 Part 1 Tests These Skills 考查能力</h5><div class="rubric-grid"><div class="rubric-item"><span class="r-icon">🎯</span><span class="r-label">Gist 主旨</span></div><div class="rubric-item"><span class="r-icon">🔑</span><span class="r-label">Key Words 关键词</span></div><div class="rubric-item"><span class="r-icon">🔄</span><span class="r-label">Paraphrase 改写</span></div><div class="rubric-item"><span class="r-icon">💭</span><span class="r-label">Intent 意图</span></div></div></div></div>`,
+
+1:`<div class="fade-in"><h2 class="section-title">Part 1 <span class="highlight-purple">Format Breakdown</span> <span class="zh-inline">题型拆解</span></h2>
+<p class="section-subtitle">Understanding the question types before you practice. <span class="zh-inline">先理解题型再练习。</span></p>
+<div class="formula-box"><div class="formula-title">📋 Part 1 — Three Question Types 三种题型</div><div class="formula-steps"><span class="formula-step" style="background:rgba(57,255,20,0.12)">Type 1: Best Reply 最佳回应</span><span class="formula-arrow" style="color:var(--green)">•</span><span class="formula-step" style="background:rgba(179,71,234,0.12)">Type 2: True Statement 正确陈述</span><span class="formula-arrow" style="color:var(--green)">•</span><span class="formula-step" style="background:rgba(0,212,255,0.1);color:var(--cyan)">Type 3: Speaker Intention 说话意图</span></div></div>
+<div class="timing-card"><div class="t-icon">⏱</div><div class="t-detail"><div class="t-label">Real Exam Timing 真实考试时间</div><div class="t-value">~40 seconds per question 每题</div><div class="t-note">You hear the statement (~10-15s) → 5s pause to read options → choose answer → next question. <span class="zh-inline">听到陈述(~10-15秒) → 5秒看选项 → 选答案 → 下一题。</span></div></div></div>
+<div class="tip-card" onclick="this.classList.toggle('expanded')" tabindex="0"><div class="tip-card-header"><div class="tip-card-icon">💡</div><h4>Type 1: Best Reply — Example 最佳回应范例</h4><span class="tip-card-tag">最常考</span></div><div class="tip-card-body"><div class="tip-card-body-inner"><strong>You hear:</strong> "I'm <span class="dm">really</span> sorry but the meeting has been pushed back to 3pm."<br><br><strong>Options:</strong><br>A) "No problem, thanks for letting me know." ✓<br>B) "I don't think the meeting will be very long."<br>C) "The meeting room is on the third floor."<br><br><strong>Key:</strong> The speaker is <span class="pr">apologising and informing</span>. The best reply acknowledges the information politely. Options B and C miss the point entirely. <span class="zh-inline">说话人在道歉并告知时间变更。A承认并感谢——B和C完全偏离。</span></div></div></div>
+</div>`,
+
+2:`<div class="fade-in"><h2 class="section-title"><span class="highlight">Key Word Spotting</span> <span class="zh-inline">关键词捕捉</span></h2>
+<p class="section-subtitle">You don't need every word — just the <span class="dm">signal words</span> that tell you what's happening. <span class="zh-inline">不需要每个词——只要抓住告诉你发生了什么的<strong>信号词</strong>。</span></p>
+
+<div class="audio-player"><div class="audio-controls"><button class="audio-btn play-btn" onclick="if(!isPlaying)speakText('I was wondering if you could possibly help me move these boxes to the storage room?',1)">▶</button><div class="audio-progress"><div class="audio-progress-fill"></div></div><span class="audio-time">~8s</span><button class="audio-speed" onclick="setSpeed(0.75,this)">0.75x</button><button class="audio-speed active" onclick="setSpeed(1,this)">1x</button><button class="audio-speed" onclick="setSpeed(1.25,this)">1.25x</button><button class="script-toggle" onclick="toggleScript('script1')">📝 Script 原文</button></div><div class="script-panel" id="script1">"I <span class="dm">was wondering</span> if you could <span class="dm">possibly</span> help me move these boxes to the storage room?"<br><span class="zh-block"><strong>信号词分析：</strong>"was wondering" + "possibly" = 礼貌请求。听到这两个词就知道说话人在<strong>求助</strong>，不是抱怨、不是告知。关键词：help, move, boxes, storage room。</span></div></div>
+
+<div class="q-stem">What is the speaker doing?</div><div class="q-options" id="q1"><div class="q-option" onclick="checkAnswer('q1',0,2)">A) Complaining about heavy boxes</div><div class="q-option" onclick="checkAnswer('q1',1,2)">B) Explaining where the storage room is</div><div class="q-option" onclick="checkAnswer('q1',2,2)">C) Asking for help with a task</div></div><div class="q-feedback" id="q1-fb"></div>
+
+<div class="audio-player" style="margin-top:20px"><div class="audio-controls"><button class="audio-btn play-btn" onclick="if(!isPlaying)speakText('The canteen will be closed for the next three days due to kitchen renovations. I just wanted to give everyone a heads up.',1)">▶</button><div class="audio-progress"><div class="audio-progress-fill"></div></div><span class="audio-time">~10s</span><button class="audio-speed" onclick="setSpeed(0.75,this)">0.75x</button><button class="audio-speed active" onclick="setSpeed(1,this)">1x</button><button class="audio-speed" onclick="setSpeed(1.25,this)">1.25x</button><button class="script-toggle" onclick="toggleScript('script2')">📝 Script</button></div><div class="script-panel" id="script2">"The canteen <span class="pr">will be closed</span> for the next three days <span class="pr">due to</span> kitchen renovations. I <span class="dm">just</span> wanted to give everyone a <span class="pr">heads up</span>."<br><span class="zh-block"><strong>改写分析：</strong>"will be closed"= 不开放, "due to" = 因为, "heads up" = 提前通知。整句话的目的：<strong>通知</strong>大家餐厅关闭。</span></div></div>
+
+<div class="q-stem">What is the purpose of this announcement?</div><div class="q-options" id="q2"><div class="q-option" onclick="checkAnswer('q2',0,0)">A) To inform people about a closure</div><div class="q-option" onclick="checkAnswer('q2',1,0)">B) To complain about the kitchen staff</div><div class="q-option" onclick="checkAnswer('q2',2,0)">C) To ask for renovation volunteers</div></div><div class="q-feedback" id="q2-fb"></div>
+
+<div class="tip-card" onclick="this.classList.toggle('expanded')" tabindex="0" style="margin-top:20px"><div class="tip-card-header"><div class="tip-card-icon">🔑</div><h4>Signal Words Cheat Sheet 信号词速查表</h4><span class="tip-card-tag">背下来</span></div><div class="tip-card-body"><div class="tip-card-body-inner"><strong>Request 请求:</strong> <span class="dm">could you</span>... / <span class="dm">would you mind</span>... / <span class="dm">I was wondering if</span>...<br><strong>Apology 道歉:</strong> <span class="dm">I'm sorry</span>... / <span class="dm">I'm afraid</span>... / <span class="dm">unfortunately</span>...<br><strong>Suggestion 建议:</strong> <span class="dm">why don't we</span>... / <span class="dm">how about</span>... / <span class="dm">maybe we could</span>...<br><strong>Information 告知:</strong> <span class="dm">just to let you know</span>... / <span class="dm">I wanted to mention</span>... / <span class="dm">fyi</span>...<br><strong>Opinion 观点:</strong> <span class="dm">personally</span>... / <span class="dm">I reckon</span>... / <span class="dm">the way I see it</span>...<br><span class="zh-block"><strong>B1练习建议：</strong>先练前3类（请求/道歉/建议）。听到开头3个词就要判断类型——不用听完整个句子。</span></div></div></div>
+</div>`,
+
+3:`<div class="fade-in"><h2 class="section-title"><span class="highlight-purple">Paraphrase Recognition</span> <span class="zh-inline">同义改写识别</span></h2>
+<p class="section-subtitle">The exam <span class="dm">never</span> uses the same words in the options as in the audio. You must recognise when two things mean the same. <span class="zh-inline">考试中选项永远不会用和音频一样的词——你必须识别同义表达。</span></p>
+
+<div class="formula-box"><div class="formula-title">🔄 Common Paraphrase Patterns 常见改写模式</div><div class="formula-steps"><span class="formula-step" style="background:rgba(255,182,39,0.12)">Audio 原文</span><span class="formula-arrow">→</span><span class="formula-step" style="background:rgba(57,255,20,0.12)">Option 选项</span></div></div>
+
+<div class="audio-player"><div class="audio-controls"><button class="audio-btn play-btn" onclick="if(!isPlaying)speakText('I'm afraid we have run out of the chicken sandwiches. Would you like to try the tuna instead?',1)">▶</button><div class="audio-progress"><div class="audio-progress-fill"></div></div><span class="audio-time">~9s</span><button class="audio-speed" onclick="setSpeed(0.75,this)">0.75x</button><button class="audio-speed active" onclick="setSpeed(1,this)">1x</button><button class="script-toggle" onclick="toggleScript('script3')">📝 Script</button></div><div class="script-panel" id="script3">"I'm afraid we <span class="pr">have run out of</span> the chicken sandwiches. Would you like to try the tuna <span class="pr">instead</span>?"<br><span class="zh-block"><strong>改写匹配：</strong>"have run out of" = no more / sold out。选项可能写 "The chicken sandwiches <strong>are no longer available</strong>"——完全不同的词，但意思相同。</span></div></div>
+
+<div class="q-stem">What does the speaker say about the chicken sandwiches?</div><div class="q-options" id="q3"><div class="q-option" onclick="checkAnswer('q3',0,1)">A) They are more expensive than the tuna</div><div class="q-option" onclick="checkAnswer('q3',1,1)">B) They are no longer available</div><div class="q-option" onclick="checkAnswer('q3',2,1)">C) They will be ready in a few minutes</div></div><div class="q-feedback" id="q3-fb"></div>
+
+<div class="audio-player" style="margin-top:20px"><div class="audio-controls"><button class="audio-btn play-btn" onclick="if(!isPlaying)speakText('Would it be alright if I handed in the assignment on Monday instead? I have been feeling a bit under the weather.',1)">▶</button><div class="audio-progress"><div class="audio-progress-fill"></div></div><span class="audio-time">~10s</span><button class="audio-speed" onclick="setSpeed(0.75,this)">0.75x</button><button class="audio-speed active" onclick="setSpeed(1,this)">1x</button><button class="script-toggle" onclick="toggleScript('script4')">📝 Script</button></div><div class="script-panel" id="script4">"Would it be alright if I <span class="pr">handed in</span> the assignment on Monday <span class="pr">instead</span>? I have been feeling <span class="pr">a bit under the weather</span>."<br><span class="zh-block"><strong>改写匹配：</strong>"handed in" = submitted, "instead" = rather than the original deadline, "a bit under the weather" = slightly unwell。选项可能写 "The speaker <strong>wants to submit</strong> the work later because they <strong>feel ill</strong>"——四个短语全部改写。</span></div></div>
+
+<div class="q-stem">What is the speaker's request?</div><div class="q-options" id="q4"><div class="q-option" onclick="checkAnswer('q4',0,0)">A) To submit the assignment later due to illness</div><div class="q-option" onclick="checkAnswer('q4',1,0)">B) To change the assignment topic</div><div class="q-option" onclick="checkAnswer('q4',2,0)">C) To check the weather forecast</div></div><div class="q-feedback" id="q4-fb"></div>
+</div>`,
+
+4:`<div class="fade-in"><h2 class="section-title"><span class="highlight">Speaker Intent</span> <span class="zh-inline">说话人意图</span></h2>
+<p class="section-subtitle">The hardest Part 1 questions: <span class="dm">why</span> is the speaker saying this? What's the <span class="pr">real purpose</span>? <span class="zh-inline">最难的Part 1题：说话人<strong>为什么</strong>说这个？真正的目的？</span></p>
+
+<div class="audio-player"><div class="audio-controls"><button class="audio-btn play-btn" onclick="if(!isPlaying)speakText('You know, the library is actually much quieter on the top floor. Just saying.',1)">▶</button><div class="audio-progress"><div class="audio-progress-fill"></div></div><span class="audio-time">~7s</span><button class="audio-speed" onclick="setSpeed(0.75,this)">0.75x</button><button class="audio-speed active" onclick="setSpeed(1,this)">1x</button><button class="script-toggle" onclick="toggleScript('script5')">📝 Script</button></div><div class="script-panel" id="script5">"You know, the library is <span class="dm">actually</span> much quieter on the top floor. <span class="dm">Just saying</span>."<br><span class="zh-block"><strong>意图分析：</strong>"Just saying" = 我只是随便说说——但其实是<strong>委婉建议</strong>。说话人没有直接说"你应该去顶楼"，但暗示了。这是Part 1的高阶考点。</span></div></div>
+
+<div class="q-stem">What is the speaker's intention?</div><div class="q-options" id="q5"><div class="q-option" onclick="checkAnswer('q5',0,2)">A) To complain about the noise level</div><div class="q-option" onclick="checkAnswer('q5',1,2)">B) To describe the library layout</div><div class="q-option" onclick="checkAnswer('q5',2,2)">C) To suggest moving to a quieter area</div></div><div class="q-feedback" id="q5-fb"></div>
+
+<div class="tip-card" onclick="this.classList.toggle('expanded')" tabindex="0" style="margin-top:20px"><div class="tip-card-header"><div class="tip-card-icon">🧠</div><h4>The "Real Meaning" Decoder 真实含义解码器</h4><span class="tip-card-tag">进阶</span></div><div class="tip-card-body"><div class="tip-card-body-inner"><strong>When they say 当听到:</strong><br>• "Just saying" / "No pressure" → <span class="pr">They ARE suggesting something</span> 其实在建议<br>• "I'm not sure if you've noticed..." → <span class="pr">They want you to notice something</span> 想让你注意到<br>• "It would be nice if..." → <span class="pr">They want it to happen</span> 希望发生<br>• "I don't want to bother you but..." → <span class="pr">They ARE about to bother you</span> 就要麻烦你了<br>• "To be honest..." → <span class="pr">They're about to say something direct</span> 要说直接的话<br><br><span class="zh-block"><strong>B1核心技巧：</strong>听到"暗示性"开头（Just saying / No pressure / To be honest）——立刻警觉。这不是闲聊，这是在用委婉方式表达真实意图。选项里最"直接"的往往是陷阱。</span></div></div></div>
+</div>`,
+
+5:`<div class="fade-in"><h2 class="section-title">L1 <span class="highlight-purple">Complete! 完成!</span></h2>
+<div class="scene-card active" style="text-align:center"><div class="scene-icon">🎧</div><h3>Skills Unlocked 已解锁技能</h3><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:16px 0"><span class="formula-step" style="background:rgba(57,255,20,0.12)">🔑 Key Word Spotting 关键词</span><span class="formula-step" style="background:rgba(255,182,39,0.12)">🔄 Paraphrase 改写</span><span class="formula-step" style="background:rgba(179,71,234,0.12)">🎯 Intent 意图识别</span><span class="formula-step" style="background:rgba(0,212,255,0.1);color:var(--cyan)">⏱ Speed 速度适应</span></div></div>
+
+<div class="video-wrapper" style="margin:20px 0"><iframe src="https://www.youtube.com/embed/cHrJke7YRKs" title="B2 Listening Test" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+<p style="font-size:11px;color:var(--text-dim);text-align:center;margin-bottom:20px">📹 Extra: Full B2 Listening Test with Answers — practice at home</p>
+
+<div class="tip-card" onclick="this.classList.toggle('expanded')" tabindex="0"><div class="tip-card-header"><div class="tip-card-icon">🏛️</div><h4>Part 1 Exam Day: What Actually Happens 考场实操</h4><span class="tip-card-tag">考前必读</span></div><div class="tip-card-body"><div class="tip-card-body-inner"><p class="procedure-list"><strong>1.</strong> You put on headphones. The audio plays <span class="pr">automatically</span> — no pause button, no rewind. <span class="zh-inline">戴上耳机。音频自动播放——没有暂停、没有回放。</span></p><p class="procedure-list" style="margin-top:8px"><strong>2.</strong> Each statement plays <span class="pr">once</span>. You have ~5 seconds after each to read 3 options and choose. <span class="zh-inline">每段只放一遍。之后约5秒看3个选项并选择。</span></p><p class="procedure-list" style="margin-top:8px"><strong>3.</strong> 6-8 questions in Part 1. Then a short pause before Part 2 begins. <span class="zh-inline">Part 1共6-8题。然后短暂停顿进入Part 2。</span></p><p style="margin-top:12px;font-size:12px;color:var(--amber)"><strong>💡 关键：</strong>你不能控制音频。如果某一题没听清——<strong>立刻猜一个然后忘掉</strong>。纠结一题会连累下一题。</p></div></div></div>
+
+<div style="margin:20px 0"><div class="rubric-mini"><h5>📋 Final Self-Check 最终自查</h5><div class="checklist"><label class="checklist-item"><input type="checkbox"> I can identify key words in short statements</label><label class="checklist-item"><input type="checkbox"> I can recognise paraphrases in options</label><label class="checklist-item"><input type="checkbox"> I can tell the speaker's intention (request vs complaint vs suggestion)</label><label class="checklist-item"><input type="checkbox"> I know the 3 Part 1 question types</label><label class="checklist-item"><input type="checkbox"> I understand: audio plays ONCE, no pause, no rewind</label></div></div></div>
+<p style="text-align:center;color:var(--text-dim);font-size:14px;margin-top:20px">L2: Conversations — tracking discourse markers, speaker attitude, and detail in real dialogue. <span class="zh-inline">下一课：对话——追踪语篇标记、说话人态度和细节。</span></p></div>`
+};
+
+function renderStep(n){
+  currentStep=n;saveProgress();stopAudio();
+  document.getElementById('stepContent').innerHTML=stepContent[n]||'';
+  document.getElementById('stepIndicator').textContent='Step '+(n+1)+'/'+totalSteps;
+  document.querySelectorAll('#stepsNav .step').forEach((el,i)=>{el.classList.remove('active','done');if(i<n)el.classList.add('done');if(i===n)el.classList.add('active')});
+  document.getElementById('btnPrev').disabled=n===0;
+  const nb=document.getElementById('btnNext');
+  if(n===totalSteps-1){nb.textContent='Finish 🎉';nb.onclick=()=>{document.getElementById('completionModal').classList.add('show')}}
+  else{nb.textContent='下一步 →';nb.onclick=()=>renderStep(n+1)}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.getElementById('btnPrev').onclick=()=>renderStep(currentStep-1);
+document.getElementById('btnNext').onclick=()=>renderStep(currentStep+1);
+document.querySelectorAll('#stepsNav .step').forEach(el=>{el.addEventListener('click',function(){renderStep(parseInt(this.dataset.step))})});
+document.addEventListener('keydown',(e)=>{if(e.key==='ArrowRight'&&currentStep<totalSteps-1&&!e.target.closest('input,textarea'))renderStep(currentStep+1);if(e.key==='ArrowLeft'&&currentStep>0&&!e.target.closest('input,textarea'))renderStep(currentStep-1)});
+renderStep(currentStep);
+</script>
+</body>
+</html>

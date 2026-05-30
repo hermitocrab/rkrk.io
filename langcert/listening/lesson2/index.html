@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L2 Listening: Conversations 对话细节 — LangCert Listening</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a1a;--pink:#ff2d95;--cyan:#00d4ff;--green:#39ff14;--purple:#b347ea;--amber:#ffb627;--text:#e8e8f0;--text-dim:#7a7a90;--glass:rgba(255,255,255,0.06);--glass-strong:rgba(255,255,255,0.10);--radius:14px;--radius-lg:22px;--radius-sm:6px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter','Noto Sans SC',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;background-image:radial-gradient(ellipse at 30% 30%,rgba(57,255,20,0.05) 0%,transparent 55%),radial-gradient(ellipse at 70% 50%,rgba(179,71,234,0.05) 0%,transparent 50%)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+.zh{font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif}
+.zh-hidden .zh-inline,.zh-hidden .zh-block,.zh-hidden .zh-b2{display:none}
+.zh-inline{color:var(--amber);font-size:0.9em;margin-left:4px}
+.zh-block{color:var(--amber);font-size:13px;line-height:1.7;margin-top:8px;padding:8px 12px;background:rgba(255,182,39,0.06);border-left:3px solid var(--amber);border-radius:0 8px 8px 0}
+.zh-b2{font-size:11px;color:var(--amber);vertical-align:super;margin-left:2px;font-weight:400;cursor:help}
+.dm{color:var(--cyan);font-weight:600;border-bottom:1.5px dashed rgba(0,212,255,0.4);padding-bottom:1px}
+.pr{color:var(--amber);font-weight:600;border-bottom:1.5px dashed rgba(255,182,39,0.5);padding-bottom:1px}
+.sp{color:var(--green);font-weight:600}
+.att{color:var(--purple);font-weight:600;font-style:italic}
+.legend-box{font-size:11px;color:var(--text-dim);margin:8px 0;padding:8px 12px;background:rgba(0,212,255,0.03);border-radius:8px;border:1px solid rgba(255,255,255,0.06);display:flex;gap:16px;flex-wrap:wrap}.legend-box span{display:inline-flex;align-items:center;gap:4px}
+.nav{position:sticky;top:0;z-index:100;background:rgba(10,10,26,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.nav-logo{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-weight:700;font-size:18px;background:linear-gradient(135deg,var(--purple),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:8px;align-items:center}.nav-link{font-size:12px;color:var(--text-dim);text-decoration:none;padding:4px 10px;border:1px solid rgba(255,255,255,0.08);border-radius:14px;transition:all 0.2s}.nav-link:hover{border-color:var(--purple);color:var(--purple)}
+.zh-toggle{padding:6px 12px;border-radius:14px;border:1px solid var(--amber);background:rgba(255,182,39,0.1);color:var(--amber);font-size:12px;cursor:pointer;transition:all 0.2s;font-family:'Inter','Noto Sans SC',sans-serif;font-weight:600}.zh-toggle.off{background:transparent;border-color:rgba(255,255,255,0.1);color:var(--text-dim)}
+.container{max-width:860px;margin:0 auto;padding:32px 24px 80px}
+.section-title{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-size:clamp(28px,5vw,42px);font-weight:700;line-height:1.15;margin-bottom:8px}.section-subtitle{color:var(--text-dim);font-size:16px;margin-bottom:32px;line-height:1.5}.highlight{color:var(--purple)}.highlight-green{color:var(--green)}
+.scene-card{background:var(--glass);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-lg);padding:28px 24px;margin-bottom:20px;transition:border-color 0.3s}.scene-card.active{border-color:rgba(179,71,234,0.4);box-shadow:0 0 30px rgba(179,71,234,0.06)}.scene-icon{font-size:36px;margin-bottom:12px}.scene-card h3{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-size:20px;font-weight:600;margin-bottom:8px}.scene-card p{color:var(--text-dim);font-size:14px;line-height:1.6}
+.tip-card{background:var(--glass);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius);padding:20px;margin-bottom:14px;cursor:pointer;transition:all 0.3s}.tip-card:hover,.tip-card:focus-visible{border-color:rgba(179,71,234,0.3);outline:none}.tip-card-header{display:flex;align-items:center;gap:12px}.tip-card-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;background:rgba(179,71,234,0.12);flex-shrink:0}.tip-card h4{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-size:16px;font-weight:600}.tip-card-tag{font-size:11px;padding:2px 8px;border-radius:12px;background:rgba(57,255,20,0.1);color:var(--green);margin-left:auto}.tip-card-body{max-height:0;overflow:hidden;transition:max-height 0.4s}.tip-card.expanded .tip-card-body{max-height:900px}.tip-card-body-inner{padding-top:14px;color:var(--text-dim);font-size:14px;line-height:1.7}.tip-card-body-inner strong{color:var(--text)}
+.formula-box{background:var(--glass-strong);border:1px solid rgba(179,71,234,0.3);border-radius:var(--radius);padding:20px 24px;margin:20px 0}.formula-title{font-size:13px;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}.formula-steps{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.formula-step{background:rgba(179,71,234,0.15);color:var(--text);padding:8px 16px;border-radius:20px;font-size:14px;font-weight:500}.formula-arrow{color:var(--purple);font-size:20px}
+.video-wrapper{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--radius);margin:16px 0;border:1px solid rgba(255,255,255,0.08)}.video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:var(--radius)}
+.audio-player{background:var(--glass);border:1px solid rgba(179,71,234,0.15);border-radius:var(--radius);padding:20px;margin:16px 0}.audio-controls{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}.audio-btn{width:44px;height:44px;border-radius:50%;border:2px solid var(--purple);background:rgba(179,71,234,0.1);color:var(--purple);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s}.audio-btn:hover{background:rgba(179,71,234,0.2);box-shadow:0 0 16px rgba(179,71,234,0.15)}.audio-btn.playing{border-color:var(--green);color:var(--green);background:rgba(57,255,20,0.1)}.audio-progress{flex:1;min-width:120px;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden}.audio-progress-fill{height:100%;background:var(--purple);border-radius:2px;transition:width 0.1s linear;width:0%}.audio-time{font-size:12px;color:var(--text-dim);min-width:70px;text-align:right}.audio-speed{font-size:11px;padding:4px 10px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:var(--text-dim);cursor:pointer;font-family:'Inter',sans-serif}.audio-speed:hover,.audio-speed.active{border-color:var(--purple);color:var(--purple)}.audio-speed.active{background:rgba(179,71,234,0.08)}
+.script-panel{background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:16px;margin-top:12px;font-size:14px;line-height:1.9;color:var(--text-dim);max-height:300px;overflow-y:auto;display:none}.script-panel.show{display:block}
+.script-toggle{font-size:12px;padding:6px 14px;border-radius:14px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:var(--text-dim);cursor:pointer;font-family:'Inter',sans-serif}.script-toggle:hover,.script-toggle.active{border-color:var(--amber);color:var(--amber);background:rgba(255,182,39,0.06)}
+.q-stem{font-size:15px;font-weight:600;color:var(--text);margin:16px 0 8px;line-height:1.5}.q-options{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}.q-option{padding:10px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:var(--glass);color:var(--text-dim);font-size:13px;cursor:pointer;transition:all 0.2s;font-family:'Inter','Noto Sans SC',sans-serif;text-align:left}.q-option:hover{border-color:var(--purple);color:var(--text)}.q-option.selected{border-color:var(--purple);background:rgba(179,71,234,0.08);color:var(--text)}.q-option.correct{border-color:var(--green);background:rgba(57,255,20,0.12);color:var(--green)}.q-option.wrong{border-color:var(--pink);background:rgba(255,45,149,0.06);color:var(--pink)}.q-feedback{font-size:13px;padding:10px 14px;border-radius:8px;margin-top:8px;display:none}.q-feedback.show{display:block}.q-feedback.correct{background:rgba(57,255,20,0.06);border:1px solid rgba(57,255,20,0.2);color:var(--green)}.q-feedback.wrong{background:rgba(255,45,149,0.06);border:1px solid rgba(255,45,149,0.15);color:var(--pink)}
+.timing-card{background:var(--glass);border:1px solid rgba(0,212,255,0.15);border-radius:var(--radius);padding:16px 20px;margin:16px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap}.timing-card .t-icon{font-size:28px}.timing-card .t-detail{flex:1}.timing-card .t-label{font-size:11px;color:var(--text-dim);text-transform:uppercase}.timing-card .t-value{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-size:20px;font-weight:700;color:var(--purple);margin:2px 0}.timing-card .t-note{font-size:12px;color:var(--text-dim)}
+.steps{display:flex;gap:0;margin-bottom:24px;overflow-x:auto}.step{flex:1;min-width:50px;text-align:center;padding:10px 4px;font-size:11px;color:var(--text-dim);border-bottom:2px solid rgba(255,255,255,0.06);transition:all 0.3s;cursor:pointer;white-space:nowrap}.step:focus-visible{outline:2px solid var(--purple);outline-offset:-2px}.step.done{color:var(--green);border-color:var(--green)}.step.active{color:var(--purple);border-color:var(--purple);font-weight:600}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center}.modal-overlay.show{display:flex}.modal{background:var(--bg);border:1px solid rgba(179,71,234,0.3);border-radius:var(--radius-lg);padding:32px;max-width:420px;width:90%;text-align:center;box-shadow:0 0 60px rgba(179,71,234,0.1)}.modal h3{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-size:22px}.modal p{color:var(--text-dim);font-size:14px;line-height:1.5;margin-bottom:20px}
+.btn{font-family:'Inter','Noto Sans SC',sans-serif;font-size:14px;font-weight:600;padding:10px 22px;border-radius:var(--radius-sm);border:none;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px}.btn:focus-visible{outline:2px solid var(--purple);outline-offset:2px}.btn-primary{background:linear-gradient(135deg,var(--purple),var(--green));color:#fff;box-shadow:0 4px 20px rgba(179,71,234,0.2)}.btn-primary:hover{transform:translateY(-1px)}.btn-secondary{background:var(--glass);color:var(--text);border:1px solid rgba(255,255,255,0.12)}.btn-sm{padding:6px 14px;font-size:12px}.btn:disabled{opacity:0.4;pointer-events:none}
+.checklist{text-align:left;max-width:440px;margin:0 auto}.checklist-item{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:13px;color:var(--text-dim)}.checklist-item input[type=checkbox]{accent-color:var(--purple);width:16px;height:16px;cursor:pointer}
+.rubric-mini{background:var(--glass);border:1px solid rgba(179,71,234,0.2);border-radius:var(--radius);padding:14px 18px;margin:12px 0;font-size:12px}.rubric-mini h5{font-size:12px;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}.rubric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.rubric-item{text-align:center;padding:6px;border-radius:8px;background:rgba(255,255,255,0.03)}.rubric-item .r-icon{font-size:18px;display:block;margin-bottom:2px}.rubric-item .r-label{font-size:10px;color:var(--text-dim)}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}.fade-in{animation:slideUp 0.4s ease forwards}
+@media(max-width:600px){.container{padding:20px 16px 60px}.section-title{font-size:24px}.formula-steps{flex-direction:column}.nav{padding:10px 12px}.rubric-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="lesson1.html" class="nav-link" style="margin-right:8px">← L1</a>
+  <span class="nav-logo">🎧 L2: Conversations 对话细节</span>
+  <div class="nav-links">
+    <button class="zh-toggle" id="zhToggle" onclick="toggleZH()">中文 ON</button>
+    <a href="../langcert-speaking-courseware/lesson1.html" class="nav-link">🎤 Speaking</a>
+  </div>
+  <span style="font-size:12px;color:var(--text-dim)" id="saveIndicator"></span>
+</nav>
+
+<div class="container">
+<div class="steps" id="stepsNav">
+  <div class="step active" data-step="0" tabindex="0">🎬 场景</div>
+  <div class="step" data-step="1" tabindex="0">📋 格式</div>
+  <div class="step" data-step="2" tabindex="0">💬 标记</div>
+  <div class="step" data-step="3" tabindex="0">😊 态度</div>
+  <div class="step" data-step="4" tabindex="0">🔍 细节</div>
+  <div class="step" data-step="5" tabindex="0">📊 回顾</div>
+</div>
+<div id="stepContent"></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05)">
+  <button class="btn btn-secondary btn-sm" id="btnPrev" disabled>← 上一步</button>
+  <span style="font-size:12px;color:var(--text-dim)" id="stepIndicator">Step 1/6</span>
+  <button class="btn btn-primary btn-sm" id="btnNext">下一步 →</button>
+</div>
+</div>
+
+<div class="modal-overlay" id="completionModal"><div class="modal"><div class="modal-icon">🎧</div><h3>L2 Complete! 完成!</h3><p>You can now track discourse markers, speaker attitude, and detail in conversations. 你已掌握对话中的语篇标记、态度和细节。<br>On to Part 3: Longer Talks. 进入Part 3。</p><button class="btn btn-primary" onclick="closeModal()">Continue 继续 →</button></div></div>
+
+<script>
+const LS_KEY='langcert_l2_listen_progress';
+let currentStep=parseInt(localStorage.getItem(LS_KEY)||'0');
+const totalSteps=6;
+function saveProgress(){localStorage.setItem(LS_KEY,currentStep);document.getElementById('saveIndicator').textContent='💾 Saved';setTimeout(()=>document.getElementById('saveIndicator').textContent='',1500)}
+function closeModal(){document.getElementById('completionModal').classList.remove('show')}
+let zhVisible=true;
+function toggleZH(){zhVisible=!zhVisible;document.body.classList.toggle('zh-hidden',!zhVisible);document.getElementById('zhToggle').textContent=zhVisible?'中文 ON':'中文 OFF';document.getElementById('zhToggle').classList.toggle('off',!zhVisible)}
+
+let currentUtterance=null,isPlaying=false,audioInterval=null,audioStartTime=0,audioDuration=0;
+function speakText(text,rate){stopAudio();const u=new SpeechSynthesisUtterance(text);u.rate=rate||1;u.lang='en-GB';audioDuration=text.split(' ').length*0.35/ (rate||1);currentUtterance=u;isPlaying=true;audioStartTime=Date.now();updatePlayBtn(true);speechSynthesis.speak(u);audioInterval=setInterval(updateAudioProgress,100);u.onend=()=>{stopAudio()}}
+function stopAudio(){if(currentUtterance){speechSynthesis.cancel();currentUtterance=null}isPlaying=false;if(audioInterval)clearInterval(audioInterval);updatePlayBtn(false);updateProgressBar(0)}
+function updatePlayBtn(playing){document.querySelectorAll('.audio-btn.play-btn').forEach(b=>{b.textContent=playing?'⏸':'▶';b.classList.toggle('playing',playing)})}
+function updateAudioProgress(){if(!isPlaying)return;const pct=Math.min(100,Math.round((Date.now()-audioStartTime)/1000/audioDuration*100));updateProgressBar(pct)}
+function updateProgressBar(pct){document.querySelectorAll('.audio-progress-fill').forEach(b=>b.style.width=pct+'%')}
+function setSpeed(rate,btnEl){document.querySelectorAll('.audio-speed').forEach(b=>b.classList.remove('active'));btnEl.classList.add('active');if(isPlaying&&currentUtterance){const t=currentUtterance.text;stopAudio();speakText(t,rate)}}
+function toggleScript(id){const el=document.getElementById(id);el.classList.toggle('show');const panel=el.closest('.audio-player');if(panel){const btn=panel.querySelector('.script-toggle');if(btn)btn.classList.toggle('active',el.classList.contains('show'))}}
+function checkAnswer(qid,choice,correct){const opts=document.querySelectorAll('#'+qid+' .q-option');opts.forEach(o=>o.classList.remove('selected','correct','wrong'));opts[choice].classList.add('selected');const fb=document.getElementById(qid+'-fb');fb.classList.add('show');if(choice===correct){opts[choice].classList.add('correct');fb.className='q-feedback show correct';fb.innerHTML='✅ Correct! <span class="zh-inline">正确!</span>'}else{opts[choice].classList.add('wrong');opts[correct].classList.add('correct');fb.className='q-feedback show wrong';fb.innerHTML='❌ Not quite. Green = correct answer. <span class="zh-inline">绿色=正确答案。</span>'}}
+
+const stepContent={
+0:`<div class="fade-in"><h1 class="section-title">Now it's a <span class="highlight">conversation</span>. <span class="zh-inline">现在是对话了。</span></h1>
+<p class="section-subtitle">LangCert Listening Part 2 tests real dialogue — two speakers, multiple turns. You need to track who feels what, who's agreeing, and what's <span class="dm">actually</span> being said between the lines. <span class="zh-inline">第二部分考真实对话——两个说话人，多轮互动。你需要追踪谁什么态度、谁在赞同、以及言外之意。</span></p>
+
+<div class="scene-card active"><div class="scene-icon">🎬</div><h3>📹 B2 Listening Test — See Part 2 in Action</h3><p>Watch a full test. Notice how Part 2 has <span class="dm">longer</span> exchanges than Part 1 — you need to follow the conversation thread. <span class="zh-inline">看完整考试——注意Part 2比Part 1对话更长，需要追踪对话线索。</span></p>
+<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/cHrJke7YRKs" title="B2 Listening Test" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div></div>
+
+<div class="scene-card"><div class="scene-icon">💬</div><h3>Part 2: Conversations 对话 — What to Expect</h3>
+<p><strong>Duration 时长:</strong> ~8-10 minutes</p><p><strong>Format 形式:</strong> Two speakers having a conversation. 2-3 questions per conversation. <span class="zh-inline">两个说话人对话。每段对话2-3题。</span></p>
+<p><strong>Conversations 对话数:</strong> 2-3 conversations, each ~45-90 seconds</p><p><strong>You hear each:</strong> <span class="pr">ONCE only</span> — same as Part 1</p>
+<p style="margin-top:12px;color:var(--pink);font-weight:600">🇨🇳 中国学生最大陷阱：只关注"事实信息"（谁说了什么），忽略<strong>态度和关系</strong>。Part 2一定会考speaker attitude — 说话人是赞同还是反对？开心还是失望？正式还是随意？</p></div>
+
+
+<div class="audio-player" style="border-color:rgba(124,58,237,0.25);margin-bottom:24px">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+<span style="font-size:24px">🎧</span>
+<span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px">Natural B1/B2 Conversations</span>
+<span style="font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(124,58,237,0.12);color:#b347ea">🤖 Gemini TTS</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">
+<div>
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:4px">📅 Weekend Plans</div>
+<audio controls preload="metadata" style="width:100%;height:40px"><source src="/langcert/listening/audio/weekend_plans.mp3" type="audio/mpeg"></audio>
+</div>
+<div>
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:4px">💼 Job Interview</div>
+<audio controls preload="metadata" style="width:100%;height:40px"><source src="/langcert/listening/audio/job_interview.mp3" type="audio/mpeg"></audio>
+</div>
+</div>
+</div>
+
+<div class="legend-box"><span><span class="dm">cyan</span> = discourse marker 语篇标记</span><span><span class="pr">amber</span> = paraphrase 改写</span><span><span class="att">purple italic</span> = speaker attitude 态度</span><span><span class="sp">green</span> = speaker relationship 关系</span></div>
+
+<div class="rubric-mini"><h5>🎯 Part 2 Tests These 考查</h5><div class="rubric-grid"><div class="rubric-item"><span class="r-icon">💬</span><span class="r-label">Discourse Markers 标记</span></div><div class="rubric-item"><span class="r-icon">😊</span><span class="r-label">Attitude 态度</span></div><div class="rubric-item"><span class="r-icon">👥</span><span class="r-label">Relationship 关系</span></div><div class="rubric-item"><span class="r-icon">🔍</span><span class="r-label">Detail 细节</span></div></div></div></div>`,
+
+1:`<div class="fade-in"><h2 class="section-title">Part 2 <span class="highlight-green">Format & Strategy</span> <span class="zh-inline">题型与策略</span></h2>
+<p class="section-subtitle">Understanding how Part 2 questions are structured before you listen. <span class="zh-inline">先理解题型结构再听。</span></p>
+<div class="formula-box"><div class="formula-title">💬 Part 2 — Two Main Question Categories 两大题型</div><div class="formula-steps"><span class="formula-step" style="background:rgba(179,71,234,0.12)">Category 1: Gist & Attitude 主旨态度</span><span class="formula-arrow" style="color:var(--green)">•</span><span class="formula-step" style="background:rgba(57,255,20,0.1);color:var(--text)">Category 2: Detail & Inference 细节推断</span></div></div>
+<div class="timing-card"><div class="t-icon">⏱</div><div class="t-detail"><div class="t-label">Part 2 Timing</div><div class="t-value">~45-90s per conversation</div><div class="t-note">Conversation plays once → 10s to read questions → answer 2-3 questions → next conversation. <span class="zh-inline">对话放一遍 → 10秒看题 → 回答2-3题 → 下一段。</span></div></div></div>
+<div class="tip-card" onclick="this.classList.toggle('expanded')" tabindex="0"><div class="tip-card-header"><div class="tip-card-icon">🎯</div><h4>The First-Second-Listen Strategy 首遍定位策略</h4><span class="tip-card-tag">核心技巧</span></div><div class="tip-card-body"><div class="tip-card-body-inner"><strong>Since you hear it once, you need a system:</strong><br><br><strong>First 10 seconds:</strong> Identify the <span class="sp">relationship</span> (friends? student-teacher? customer-staff?) and the <span class="att">general mood</span> (friendly? tense? formal?).<br><strong>Middle:</strong> Track the main <span class="dm">turning point</span> — where does the conversation shift? Look for: "but", "actually", "the thing is", "to be honest".<br><strong>Last 10 seconds:</strong> Outcome — what was decided? What's the <span class="att">final feeling</span>?<br><br><span class="zh-block"><strong>B1版本：</strong>前10秒判断关系+情绪 → 中间追踪转折点 → 最后10秒抓结果。这个方法只需要听懂30%的单词就能定位关键信息。</span></div></div></div>
+</div>`,
+
+2:`<div class="fade-in"><h2 class="section-title"><span class="highlight">Discourse Markers</span> in Dialogue <span class="zh-inline">对话中的语篇标记</span></h2>
+<p class="section-subtitle">In conversations, <span class="dm">discourse markers</span> tell you where the conversation is going — agreement, disagreement, hesitation, topic change. <span class="zh-inline">对话中的语篇标记告诉你对话走向——同意、反对、犹豫、话题转换。</span></p>
+
+<div class="audio-player"><div class="audio-controls"><button class="audio-btn play-btn" onclick="if(!isPlaying)speakText('Speaker A: So what did you think of the presentation? Speaker B: Well, to be honest, I thought it was a bit too long. But the data part was really strong.',1)">▶</button><div class="audio-progress"><div class="audio-progress-fill"></div></div><span class="audio-time">~14s</span><button class="audio-speed" onclick="setSpeed(0.75,this)">0.75x</button><button class="audio-speed active" onclick="setSpeed(1,this)">1x</button><button class="script-toggle" onclick="toggleScript('s1')">📝 Script</button></div><div class="script-panel" id="s1"><span class="sp">Speaker A (colleague):</span> "So what did you think of the presentation?"<br><span class="sp">Speaker B (colleague):</span> "<span class="dm">Well</span>, <span class="dm">to be honest</span>, I thought it was <span class="dm">a bit</span> too long. <span class="dm">But</span> the data part was really strong."<br><span class="zh-block"><strong>标记分析：</strong>"Well" + "to be honest" = 准备说批评了。"a bit" = 软化批评。"But" = 转折→也有好的部分。"really strong" = 积极评价。结论：<strong>总体积极但有保留</strong>。</span></div></div>
+
+<div class="q-stem">What is Speaker B's overall opinion of the presentation?</div><div class="q-options" id="q6"><div class="q-option" onclick="checkAnswer('q6',0,2)">A) It was very poor and a waste of time</div><div class="q-option" onclick="checkAnswer('q6',1,2)">B) It was perfect in every way</div><div class="q-option" onclick="checkAnswer('q6',2,2)">C) It was mostly good but a bit too long</div></div><div class="q-feedback" id="q6-fb"></div>
+
+<div class="audio-player" style="margin-top:20px"><div class="audio-controls"><button class="audio-btn play-btn" onclick="if(!isPlaying)speakText('Speaker A: Are you free to help me move the equipment tomorrow? Speaker B: I would love to, but the thing is, I have got a deadline at 3pm. Actually, what about Friday instead?',1)">▶</button><div class="audio-progress"><div class="audio-progress-fill"></div></div><span class="audio-time">~16s</span><button class="audio-speed" onclick="setSpeed(0.75,this)">0.75x</button><button class="audio-speed active" onclick="setSpeed(1,this)">1x</button><button class="script-toggle" onclick="toggleScript('s2')">📝 Script</button></div><div class="script-panel" id="s2"><span class="sp">Speaker A (friend):</span> "Are you free to help me move the equipment tomorrow?"<br><span class="sp">Speaker B (friend):</span> "I <span class="dm">would love to</span>, <span class="dm">but the thing is</span>, I've got a deadline at 3pm. <span class="dm">Actually</span>, what about Friday <span class="dm">instead</span>?"<br><span class="zh-block"><strong>标记分析：</strong>"I would love to" = 愿意但→ "but" + "the thing is" = 有障碍。"Actually" = 转折→提出替代方案。"instead" = 改写→不是明天，是周五。结论：<strong>愿意帮忙但明天不行，提议周五</strong>。</span></div></div>
+
+<div class="q-stem">What does Speaker B suggest?</div><div class="q-options" id="q7"><div class="q-option" onclick="checkAnswer('q7',0,1)">A) Helping tomorrow after 3pm</div><div class="q-option" onclick="checkAnswer('q7',1,1)">B) Helping on Friday instead of tomorrow</div><div class="q-option" onclick="checkAnswer('q7',2,1)">C) Asking someone else to help</div></div><div class="q-feedback" id="q7-fb"></div>
+
+<div class="tip-card" onclick="this.classList.toggle('expanded')" tabindex="0" style="margin-top:20px"><div class="tip-card-header"><div class="tip-card-icon">💬</div><h4>Conversation Signal Words 对话信号词</h4><span class="tip-card-tag">必背</span></div><div class="tip-card-body"><div class="tip-card-body-inner"><strong>Agreement 同意:</strong> <span class="dm">absolutely</span>, <span class="dm">exactly</span>, <span class="dm">I couldn't agree more</span>, <span class="dm">for sure</span><br><strong>Polite disagreement 委婉反对:</strong> <span class="dm">I see what you mean, but</span>..., <span class="dm">that's a fair point, however</span>..., <span class="dm">I'm not totally convinced</span><br><strong>Topic change 话题转换:</strong> <span class="dm">speaking of which</span>, <span class="dm">by the way</span>, <span class="dm">that reminds me</span>, <span class="dm">anyway</span><br><strong>Hesitation 犹豫:</strong> <span class="dm">well</span>..., <span class="dm">um</span>..., <span class="dm">the thing is</span>..., <span class="dm">how can I put this</span>...<br><strong>Conclusion 总结:</strong> <span class="dm">so basically</span>, <span class="dm">at the end of the day</span>, <span class="dm">to sum up</span><br><span class="zh-block"><strong>B1技巧：</strong>不要试图听懂每个词。追着信号词走——听到"but"立刻警觉（后面是重点），听到"actually"注意转折，听到"absolutely"确认同意。信号词是对话路标。</span></div></div></div>
+</div>`,
+
+3:`<div class="fade-in"><h2 class="section-title"><span class="highlight-green">Speaker Attitude</span> & Relationship <span class="zh-inline">态度与关系</span></h2>
+<p class="section-subtitle">The exam <span class="dm">always</span> asks about how speakers feel — and it's <span class="dm">never</span> said directly. <span class="zh-inline">考试一定会问说话人什么态度——而且永远不会直接说。</span></p>
+
+<div class="audio-player"><div class="audio-controls"><button class="audio-btn play-btn" onclick="if(!isPlaying)speakText('A: Hi, I was told to come to this office to pick up my student card? B: Right, let me just check — Li Wei, is it? A: Yes, that is me. B: Here you go. And do not forget, you need to renew it every semester. A: Oh, I did not know that. Thanks for telling me. B: No problem.',1)">▶</button><div class="audio-progress"><div class="audio-progress-fill"></div></div><span class="audio-time">~22s</span><button class="audio-speed" onclick="setSpeed(0.75,this)">0.75x</button><button class="audio-speed active" onclick="setSpeed(1,this)">1x</button><button class="script-toggle" onclick="toggleScript('s3')">📝 Script</button></div><div class="script-panel" id="s3"><span class="sp">A (student):</span> "Hi, I was told to come to this office to pick up my student card?"<br><span class="sp">B (staff):</span> "<span class="dm">Right</span>, let me just check — Li Wei, <span class="dm">is it</span>?"<br><span class="sp">A:</span> "Yes, that's me."<br><span class="sp">B:</span> "Here you go. <span class="dm">And</span> don't forget, you need to renew it every semester."<br><span class="sp">A:</span> "<span class="att">Oh</span>, I didn't know that. <span class="att">Thanks</span> for telling me."<br><span class="sp">B:</span> "No problem."<br><span class="zh-block"><strong>态度+关系分析：</strong>关系 = <span class="sp">student-staff</span>（staff checks name, uses instructional tone）。态度 = <span class="att">helpful and polite</span>（B is efficient but friendly, A is slightly surprised then grateful）。关键标记："Right"=确认听到，"is it?"=核查，"don't forget"=提醒（不是批评），"Oh"=意外，"Thanks"=感激。</span></div></div>
+
+<div class="q-stem">What is the relationship between the speakers?</div><div class="q-options" id="q8"><div class="q-option" onclick="checkAnswer('q8',0,0)">A) University staff and a student</div><div class="q-option" onclick="checkAnswer('q8',1,0)">B) Two students who are friends</div><div class="q-option" onclick="checkAnswer('q8',2,0)">C) A teacher and a parent</div></div><div class="q-feedback" id="q8-fb"></div>
+
+<div class="q-stem" style="margin-top:16px">How does Speaker A feel at the end?</div><div class="q-options" id="q9"><div class="q-option" onclick="checkAnswer('q9',0,1)">A) Annoyed about the renewal rule</div><div class="q-option" onclick="checkAnswer('q9',1,1)">B) Surprised and grateful for the information</div><div class="q-option" onclick="checkAnswer('q9',2,1)">C) Confused about where to go</div></div><div class="q-feedback" id="q9-fb"></div>
+</div>`,
+
+4:`<div class="fade-in"><h2 class="section-title"><span class="highlight">Detail Extraction</span> <span class="zh-inline">细节提取</span></h2>
+<p class="section-subtitle">Part 2 will ask for <span class="pr">specific details</span> — but they will be paraphrased in the options. <span class="zh-inline">Part 2会考具体细节——但选项会改写。</span></p>
+
+<div class="audio-player"><div class="audio-controls"><button class="audio-btn play-btn" onclick="if(!isPlaying)speakText('A: Have you decided which modules to take next term? B: Not completely. I am definitely doing the data analysis one with Professor Chen. And probably the marketing module. But I might drop creative writing. A: Oh really? I thought you loved that. B: I do, it is just that the timetable clashes with my part-time job. So I will have to choose.',1)">▶</button><div class="audio-progress"><div class="audio-progress-fill"></div></div><span class="audio-time">~28s</span><button class="audio-speed" onclick="setSpeed(0.75,this)">0.75x</button><button class="audio-speed active" onclick="setSpeed(1,this)">1x</button><button class="script-toggle" onclick="toggleScript('s4')">📝 Script</button></div><div class="script-panel" id="s4"><span class="sp">A:</span> "Have you decided which modules to take next term?"<br><span class="sp">B:</span> "<span class="dm">Not completely</span>. I'm <span class="dm">definitely</span> doing the data analysis one with Professor Chen. <span class="dm">And probably</span> the marketing module. <span class="dm">But</span> I <span class="pr">might drop</span> creative writing."<br><span class="sp">A:</span> "<span class="att">Oh really?</span> I thought you loved that."<br><span class="sp">B:</span> "I <span class="dm">do</span>, <span class="dm">it's just that</span> the <span class="pr">timetable clashes</span> with my part-time job. <span class="dm">So</span> I'll have to choose."<br><span class="zh-block"><strong>细节提取：</strong>确定选的：data analysis（陈教授）+ marketing。可能要退的：creative writing。原因：<span class="pr">时间冲突</span>（timetable clashes = <strong>两门课时间重叠</strong>，选项可能写成"two classes are at the same time"）。</span></div></div>
+
+<div class="q-stem">Why might Speaker B drop creative writing?</div><div class="q-options" id="q10"><div class="q-option" onclick="checkAnswer('q10',0,0)">A) It clashes with another class or commitment</div><div class="q-option" onclick="checkAnswer('q10',1,0)">B) Speaker B no longer enjoys the subject</div><div class="q-option" onclick="checkAnswer('q10',2,0)">C) Professor Chen recommended against it</div></div><div class="q-feedback" id="q10-fb"></div>
+
+<div class="q-stem" style="margin-top:16px">Which modules is Speaker B certain about taking?</div><div class="q-options" id="q11"><div class="q-option" onclick="checkAnswer('q11',0,1)">A) Marketing and creative writing</div><div class="q-option" onclick="checkAnswer('q11',1,1)">B) Data analysis and probably marketing</div><div class="q-option" onclick="checkAnswer('q11',2,1)">C) Only data analysis</div></div><div class="q-feedback" id="q11-fb"></div>
+
+<div class="tip-card" onclick="this.classList.toggle('expanded')" tabindex="0" style="margin-top:20px"><div class="tip-card-header"><div class="tip-card-icon">🔍</div><h4>Detail Questions: The Paraphrase Trap 细节题的改写陷阱</h4><span class="tip-card-tag">避坑</span></div><div class="tip-card-body"><div class="tip-card-body-inner"><strong>Common paraphrase patterns in Part 2 details:</strong><br><br>Audio says: <span class="pr">"might drop"</span> → Option says: <span class="pr">"is considering removing"</span><br>Audio says: <span class="pr">"timetable clashes"</span> → Option says: <span class="pr">"two classes at the same time"</span><br>Audio says: <span class="pr">"not completely"</span> → Option says: <span class="pr">"hasn't decided everything yet"</span><br>Audio says: <span class="pr">"probably"</span> → Option says: <span class="pr">"is likely to"</span><br><br><span class="zh-block"><strong>B1技巧：</strong>听到"不确定"的表达（might, probably, not sure, not completely, thinking about）→ 答案不会是绝对的（definitely, certainly, for sure）。Part 2永远选最<strong>模糊</strong>的那个。</span></div></div></div>
+</div>`,
+
+5:`<div class="fade-in"><h2 class="section-title">L2 <span class="highlight">Complete! 完成!</span></h2>
+<div class="scene-card active" style="text-align:center"><div class="scene-icon">🎧</div><h3>Skills Unlocked 已解锁技能</h3><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:16px 0"><span class="formula-step" style="background:rgba(0,212,255,0.1)">💬 Discourse Markers 标记</span><span class="formula-step" style="background:rgba(179,71,234,0.12)">😊 Attitude 态度</span><span class="formula-step" style="background:rgba(57,255,20,0.1);color:var(--text)">👥 Relationship 关系</span><span class="formula-step" style="background:rgba(255,182,39,0.1)">🔍 Detail 细节</span></div></div>
+
+<div class="tip-card" onclick="this.classList.toggle('expanded')" tabindex="0"><div class="tip-card-header"><div class="tip-card-icon">🏛️</div><h4>Part 2 Exam Day: What Happens 考场实操</h4><span class="tip-card-tag">考前必读</span></div><div class="tip-card-body"><div class="tip-card-body-inner"><p class="procedure-list"><strong>1.</strong> After Part 1 ends, a <span class="pr">short pause</span> (~5 seconds). Then Part 2 begins automatically. <span class="zh-inline">Part 1结束后短暂停顿(~5秒)，Part 2自动开始。</span></p><p class="procedure-list" style="margin-top:8px"><strong>2.</strong> First conversation plays <span class="pr">once</span>. You then see 2-3 questions with 3 options each. <span class="zh-inline">第一段对话放一遍。然后看到2-3题，每题3个选项。</span></p><p class="procedure-list" style="margin-top:8px"><strong>3.</strong> You have ~20 seconds to answer all questions for that conversation before the next one starts. <span class="zh-inline">约20秒回答该段对话的所有问题，然后下一段开始。</span></p><p class="procedure-list" style="margin-top:8px"><strong>4.</strong> 2-3 conversations total. Then Part 3 begins. <span class="zh-inline">共2-3段对话。然后进入Part 3。</span></p><p style="margin-top:12px;font-size:12px;color:var(--amber)"><strong>💡 关键策略：</strong>听对话时不要看选项——先纯听。对话结束后再看题。你已经用"首-中-尾定位法"记住了关键信息——答题时只需要匹配改写。</p></div></div></div>
+
+<div style="margin:20px 0"><div class="rubric-mini"><h5>📋 Final Self-Check</h5><div class="checklist"><label class="checklist-item"><input type="checkbox"> I can track discourse markers (but, actually, well, to be honest) in conversations</label><label class="checklist-item"><input type="checkbox"> I can identify speaker attitude from tone and word choice</label><label class="checklist-item"><input type="checkbox"> I can recognise speaker relationships (friends, staff-student, etc.)</label><label class="checklist-item"><input type="checkbox"> I can extract specific details despite paraphrase in options</label><label class="checklist-item"><input type="checkbox"> I use First-Middle-Last strategy: relationship → turning point → outcome</label></div></div></div>
+<p style="text-align:center;color:var(--text-dim);font-size:14px;margin-top:20px">L3: Longer Talks — academic monologues, note-taking strategies, and main idea vs supporting detail. <span class="zh-inline">L3：长段独白——学术独白、笔记策略和主旨vs细节。</span></p></div>`
+};
+
+function renderStep(n){
+  currentStep=n;saveProgress();stopAudio();
+  document.getElementById('stepContent').innerHTML=stepContent[n]||'';
+  document.getElementById('stepIndicator').textContent='Step '+(n+1)+'/'+totalSteps;
+  document.querySelectorAll('#stepsNav .step').forEach((el,i)=>{el.classList.remove('active','done');if(i<n)el.classList.add('done');if(i===n)el.classList.add('active')});
+  document.getElementById('btnPrev').disabled=n===0;
+  if(n===totalSteps-1){document.getElementById('btnNext').textContent='Finish 🎉';document.getElementById('btnNext').onclick=()=>{document.getElementById('completionModal').classList.add('show')}}
+  else{document.getElementById('btnNext').textContent='下一步 →';document.getElementById('btnNext').onclick=()=>renderStep(n+1)}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.getElementById('btnPrev').onclick=()=>renderStep(currentStep-1);
+document.getElementById('btnNext').onclick=()=>renderStep(currentStep+1);
+document.querySelectorAll('#stepsNav .step').forEach(el=>{el.addEventListener('click',function(){renderStep(parseInt(this.dataset.step))})});
+document.addEventListener('keydown',(e)=>{if(e.key==='ArrowRight'&&currentStep<totalSteps-1&&!e.target.closest('input,textarea'))renderStep(currentStep+1);if(e.key==='ArrowLeft'&&currentStep>0&&!e.target.closest('input,textarea'))renderStep(currentStep-1)});
+renderStep(currentStep);
+</script>
+</body>
+</html>

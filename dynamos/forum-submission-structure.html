@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamOS Forum Submission</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --page-bg: #f8f9fa;
+            --doc-bg: #ffffff;
+            --text-main: #212529;
+            --text-light: #495057;
+            --navy: #0a1628;
+            --accent: #7c3aed;
+            --border-color: #dee2e6;
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--page-bg);
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            counter-reset: page;
+        }
+
+        main {
+            display: block;
+            margin: 2rem auto;
+            width: 210mm; /* A4 width */
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        section {
+            background-color: var(--doc-bg);
+            padding: 25.4mm; /* 1-inch margins */
+            min-height: calc(297mm - 50.8mm); /* A4 height minus margins */
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            page-break-before: always;
+        }
+
+        section:first-of-type {
+            page-break-before: auto;
+        }
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .cover-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 297mm;
+            border-bottom: none;
+        }
+
+        .cover-page h1 {
+            font-size: 3rem;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+        }
+
+        .cover-page h2 {
+            font-family: var(--font-sans);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+        }
+
+        .cover-page p {
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        .page-footer {
+            position: absolute;
+            bottom: 15mm;
+            left: 25.4mm;
+            right: 25.4mm;
+            text-align: right;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .page-footer::after {
+            counter-increment: page;
+            content: counter(page);
+        }
+        .cover-page .page-footer {
+            display: none;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            color: var(--navy);
+            font-weight: 700;
+        }
+        
+        h1 { font-size: 2.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; }
+        h2 { font-size: 1.75rem; margin-bottom: 1rem; margin-top: 2rem; }
+        h3 { font-size: 1.4rem; margin-bottom: 0.8rem; margin-top: 1.5rem; color: #343a40; }
+        h4 { font-size: 1.1rem; margin-bottom: 0.5rem; margin-top: 1rem; color: var(--accent); }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .toc {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .toc li {
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+        .toc a {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+        .toc .toc-sub {
+            padding-left: 2rem;
+            margin-top: 0.5rem;
+        }
+        .toc .toc-sub li {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .toc .toc-sub a {
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            page-break-inside: avoid;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+        th {
+            background-color: var(--page-bg);
+            font-weight: 700;
+        }
+        
+        blockquote {
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            border-left: 4px solid var(--accent);
+            background-color: #f1f3f5;
+            font-style: italic;
+        }
+        
+        pre {
+            background-color: #f1f3f5;
+            padding: 1rem;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            page-break-inside: avoid;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .accent-text {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+            }
+            main {
+                box-shadow: none;
+                margin: 0;
+                width: auto;
+            }
+            section {
+                padding: 0;
+                border: none;
+                min-height: 0;
+                box-shadow: none;
+                page-break-before: always;
+            }
+            .cover-page {
+                height: 100vh;
+            }
+            .page-footer {
+                position: fixed;
+                bottom: 1cm;
+                left: 2cm;
+                right: 2cm;
+            }
+            @page {
+                margin: 2cm;
+            }
+            h1, h2, h3, h4 {
+                color: black !important;
+            }
+            a {
+                color: black !important;
+                text-decoration: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <!-- This is a placeholder structure. The content will be populated in the next step. -->
+        <section class="cover-page" id="cover">
+            <h1>DynamOS: The Operating System for AI-Native Education</h1>
+            <h2>A Platform for Creator-Educators</h2>
+            <p><strong>Author:</strong> Kee Lee</p>
+            <p><strong>Date:</strong> May 2026</p>
+        </section>
+
+        <section id="toc">
+            <h1>Table of Contents</h1>
+            <ul class="toc">
+                <li><a href="#summary">1. Executive Summary</a></li>
+                <li><a href="#problem">2. The Problem</a></li>
+                <li><a href="#vision">3. The Vision</a></li>
+                <li><a href="#product-architecture">4. Product Architecture</a></li>
+                <li><a href="#pedagogy">5. Pedagogical Foundation</a></li>
+                <li><a href="#tech-architecture">6. Technical Architecture</a></li>
+                <li><a href="#market">7. Market Analysis</a></li>
+                <li><a href="#business-model">8. Business Model</a></li>
+                <li><a href="#g-t-m">9. Go-to-Market Strategy</a></li>
+                <li><a href="#moat">10. Competitive Moat</a></li>
+                <li><a href="#roadmap">11. Roadmap</a></li>
+                <li><a href="#team">12. Team</a></li>
+                <li><a href="#appendix">13. Appendix</a></li>
+            </ul>
+            <div class="page-footer"></div>
+        </section>
+
+        <section id="summary">
+            <h1>1. Executive Summary</h1>
+            <!-- Content will be populated here -->
+            <div class="page-footer"></div>
+        </section>
+
+        <section id="problem">
+            <h1>2. The Problem</h1>
+            <!-- Content will be populated here -->
+            <div class="page-footer"></div>
+        </section>
+
+        <section id="vision">
+            <h1>3. The Vision</h1>
+            <!-- Content will be populated here -->
+            <div class="page-footer"></div>
+        </section>
+
+        <section id="product-architecture">
+            <h1>4. Product Architecture</h1>
+            <!-- Content will be populated here -->
+            <div class="page-footer"></div>
+        </section>
+
+        <section id="pedagogy">
+            <h1>5. Pedagogical Foundation</h1>
+            <!-- Content will be populated here -->
+            <div class="page-footer"></div>
+        </section>
+
+        <section id="tech-architecture">
+            <h1>6. Technical Architecture</h1>
+            <!-- Content will be populated here -->
+            <div class="page-footer"></div>
+        </section>
+
+        <section id="market">
+            <h1>7. Market Analysis</h1>
+            <!-- Content will be populated here -->
+            <div class="page-footer"></div>
+        </section>
+        
+        <section id="business-model">
+            <h1>8. Business Model</h1>
+            <!-- Content will be populated here -->
+            <div class="page-footer"></div>
+        </section>
+
+        <section id="g-t-m">
+            <h1>9. Go-to-Market Strategy</h1>
+            <!-- Content will be populated here -->
+            <div class="page-footer"></div>
+        </section>
+
+        <section id="moat">
+            <h1>10. Competitive Moat</h1>
+            <!-- Content will be populated here -->
+            <div class="page-footer"></div>
+        </section>
+
+        <section id="roadmap">
+            <h1>11. Roadmap</h1>
+            <!-- Content will be populated here -->
+            <div class="page-footer"></div>
+        </section>
+        
+        <section id="team">
+            <h1>12. Team</h1>
+            <!-- Content will be populated here -->
+            <div class="page-footer"></div>
+        </section>
+
+        <section id="appendix">
+            <h1>13. Appendix</h1>
+            <!-- Content will be populated here -->
+            <div class="page-footer"></div>
+        </section>
+    </main>
+</body>
+</html>

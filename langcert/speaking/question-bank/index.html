@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LangCert Speaking — Complete Question Bank</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a1a; --pink: #ff2d95; --cyan: #00d4ff; --green: #39ff14; --purple: #b347ea; --amber: #ffb627;
+  --text: #e8e8f0; --text-dim: #7a7a90; --glass: rgba(255,255,255,0.06);
+  --glass-strong: rgba(255,255,255,0.10); --radius: 14px; --radius-lg: 22px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden;
+  background-image:radial-gradient(ellipse at 30% 30%,rgba(255,45,149,0.06) 0%,transparent 55%),
+  radial-gradient(ellipse at 70% 50%,rgba(0,212,255,0.05) 0%,transparent 50%),
+  radial-gradient(ellipse at 50% 80%,rgba(179,71,234,0.04) 0%,transparent 50%); }
+
+/* Nav */
+.nav { position:sticky;top:0;z-index:100;background:rgba(10,10,26,0.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.06);padding:12px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap; }
+.nav-logo { font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;
+  background:linear-gradient(135deg,var(--pink),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent; }
+.nav-links { display:flex;gap:8px;flex-wrap:wrap; }
+.nav-link { font-size:12px;color:var(--text-dim);text-decoration:none;padding:6px 12px;border-radius:16px;
+  border:1px solid rgba(255,255,255,0.06);transition:all 0.2s;white-space:nowrap; }
+.nav-link:hover { border-color:var(--cyan);color:var(--cyan); }
+.nav-link.active { border-color:var(--cyan);color:var(--cyan);background:rgba(0,212,255,0.08); }
+.nav-actions { display:flex;gap:8px; }
+
+/* Container */
+.container { max-width:960px;margin:0 auto;padding:32px 24px 80px; }
+.header { text-align:center;margin-bottom:40px; }
+.header h1 { font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,6vw,48px);font-weight:700;line-height:1.15;margin-bottom:8px; }
+.header h1 .grad { background:linear-gradient(135deg,var(--pink),var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent; }
+.header p { color:var(--text-dim);font-size:16px;max-width:600px;margin:0 auto;line-height:1.5; }
+.stats-row { display:flex;gap:16px;justify-content:center;margin-top:20px;flex-wrap:wrap; }
+.stat { background:var(--glass);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius);
+  padding:14px 24px;text-align:center;min-width:100px; }
+.stat .num { font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:var(--cyan); }
+.stat .lbl { font-size:11px;color:var(--text-dim);margin-top:2px; }
+
+/* Controls */
+.controls { display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap;align-items:center; }
+.filter-btn { padding:8px 18px;border-radius:20px;border:1px solid rgba(255,255,255,0.1);
+  background:transparent;color:var(--text-dim);font-size:13px;cursor:pointer;transition:all 0.2s;
+  font-family:'Inter',sans-serif;white-space:nowrap; }
+.filter-btn:hover { border-color:var(--cyan);color:var(--cyan); }
+.filter-btn.active { background:rgba(0,212,255,0.12);border-color:var(--cyan);color:var(--cyan);font-weight:600; }
+.search-box { flex:1;min-width:180px;position:relative; }
+.search-box input { width:100%;padding:8px 14px 8px 34px;border-radius:20px;
+  background:var(--glass);border:1px solid rgba(255,255,255,0.1);color:var(--text);font-size:13px;
+  font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s; }
+.search-box input:focus { border-color:var(--cyan); }
+.search-box .search-icon { position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none; }
+
+/* Part Section */
+.part-section { margin-bottom:32px; }
+.part-header { display:flex;align-items:center;gap:12px;margin-bottom:16px;
+  padding:16px 20px;background:var(--glass);border:1px solid rgba(255,255,255,0.06);
+  border-radius:var(--radius);cursor:pointer;transition:all 0.3s; }
+.part-header:hover { border-color:rgba(0,212,255,0.3); }
+.part-header.collapsed .part-arrow { transform:rotate(-90deg); }
+.part-num { width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;flex-shrink:0; }
+.part-num.p1 { background:rgba(255,45,149,0.18);color:var(--pink); }
+.part-num.p2 { background:rgba(0,212,255,0.18);color:var(--cyan); }
+.part-num.p3 { background:rgba(179,71,234,0.18);color:var(--purple); }
+.part-num.p4 { background:rgba(255,182,39,0.18);color:var(--amber); }
+.part-info { flex:1; }
+.part-info h2 { font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;margin-bottom:2px; }
+.part-info .meta { font-size:12px;color:var(--text-dim); }
+.part-count { font-size:12px;color:var(--text-dim);padding:4px 10px;background:rgba(255,255,255,0.04);border-radius:10px; }
+.part-arrow { transition:transform 0.3s;font-size:16px;color:var(--text-dim); }
+.part-body { transition:max-height 0.4s ease;overflow:hidden; }
+.part-body.collapsed { max-height:0; }
+.part-body.expanded { max-height:9999px; }
+
+/* Topic Group */
+.topic-group { margin-bottom:16px; }
+.topic-title { font-size:13px;font-weight:600;color:var(--cyan);padding:8px 0;margin-bottom:6px;
+  display:flex;align-items:center;gap:6px; }
+.topic-icon { font-size:16px; }
+.topic-count { font-size:11px;color:var(--text-dim);font-weight:400; }
+
+/* Question Card */
+.q-card { background:var(--glass);border:1px solid rgba(255,255,255,0.05);
+  border-radius:10px;padding:12px 16px;margin-bottom:6px;font-size:14px;line-height:1.5;
+  display:flex;align-items:flex-start;gap:10px;transition:all 0.2s; }
+.q-card:hover { border-color:rgba(255,255,255,0.12); }
+.q-num { color:var(--text-dim);font-size:11px;min-width:20px;flex-shrink:0;padding-top:1px; }
+.q-text { color:var(--text); }
+.q-tag { font-size:10px;padding:2px 8px;border-radius:10px;margin-left:8px;white-space:nowrap;flex-shrink:0; }
+.q-tag.b2 { background:rgba(0,212,255,0.1);color:var(--cyan); }
+.q-tag.c1 { background:rgba(179,71,234,0.1);color:var(--purple); }
+.q-tag.both { background:rgba(57,255,20,0.08);color:var(--green); }
+
+/* Download Section */
+.dl-section { text-align:center;margin:40px 0;padding:28px;background:var(--glass);
+  border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-lg); }
+.dl-section h3 { font-family:'Space Grotesk',sans-serif;font-size:20px;margin-bottom:8px; }
+.dl-section p { color:var(--text-dim);font-size:13px;margin-bottom:16px; }
+.dl-buttons { display:flex;gap:10px;justify-content:center;flex-wrap:wrap; }
+.btn { font-family:'Inter',sans-serif;font-size:14px;font-weight:600;padding:10px 22px;
+  border-radius:8px;border:none;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px; }
+.btn-primary { background:linear-gradient(135deg,var(--pink),#d42a80);color:#fff;box-shadow:0 4px 20px rgba(255,45,149,0.3); }
+.btn-primary:hover { transform:translateY(-1px);box-shadow:0 6px 26px rgba(255,45,149,0.4); }
+.btn-cyan { background:rgba(0,212,255,0.15);color:var(--cyan);border:1px solid rgba(0,212,255,0.25); }
+.btn-cyan:hover { background:rgba(0,212,255,0.22); }
+.btn-amber { background:rgba(255,182,39,0.12);color:var(--amber);border:1px solid rgba(255,182,39,0.2); }
+.btn-amber:hover { background:rgba(255,182,39,0.18); }
+
+/* Print Styles */
+@media print {
+  body { background:#fff;color:#000; }
+  .nav,.controls,.dl-section,.part-header { display:none; }
+  .container { max-width:100%;padding:20px; }
+  .part-body.collapsed { max-height:9999px!important; }
+  .part-arrow { display:none; }
+  .q-card { background:#f8f8f8;border:1px solid #ddd;color:#111;page-break-inside:avoid; }
+  .part-num { background:#eee;color:#333; }
+  .q-tag { background:#e0e0e0;color:#555; }
+  .header h1 .grad { color:#333;-webkit-text-fill-color:#333; }
+}
+
+/* Mobile */
+@media (max-width:600px) {
+  .container { padding:16px 12px 60px; }
+  .header h1 { font-size:26px; }
+  .controls { gap:6px; }
+  .filter-btn { padding:6px 12px;font-size:11px; }
+  .stats-row { gap:8px; }
+  .stat { padding:10px 16px; }
+  .stat .num { font-size:22px; }
+  .nav { padding:8px 12px; }
+}
+
+@keyframes slideUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+.fade-in { animation:slideUp 0.35s ease forwards; }
+.hidden { display:none!important; }
+.highlight-match { background:rgba(255,182,39,0.2);border-radius:3px;padding:0 2px; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-logo">📋 Question Bank</span>
+  <div class="nav-links">
+    <a href="lesson1.html" class="nav-link">L1: Interview</a>
+    <a href="lesson2.html" class="nav-link">L2: Campus</a>
+    <a href="question-bank.html" class="nav-link active">Question Bank</a>
+  </div>
+  <div class="nav-actions">
+    <button class="btn btn-cyan" style="font-size:11px;padding:6px 12px" onclick="window.print()">🖨 Print PDF</button>
+    <button class="btn btn-amber" style="font-size:11px;padding:6px 12px" onclick="downloadTXT()">⬇ TXT</button>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="header">
+    <h1>LangCert Speaking <span class="grad">Question Bank</span></h1>
+    <p>170+ real exam-style questions organised by Part, topic, and level. Filter, search, print, or download — your complete practice companion for B2 and C1.</p>
+    <div class="stats-row">
+      <div class="stat"><div class="num" id="totalCount">170</div><div class="lbl">Total Questions</div></div>
+      <div class="stat"><div class="num">4</div><div class="lbl">Exam Parts</div></div>
+      <div class="stat"><div class="num">28</div><div class="lbl">Topic Groups</div></div>
+      <div class="stat"><div class="num">B2+C1</div><div class="lbl">Levels Covered</div></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="filter-btn active" data-filter="all">📋 All Parts</button>
+    <button class="filter-btn" data-filter="part1">🎤 Part 1</button>
+    <button class="filter-btn" data-filter="part2">🎭 Part 2</button>
+    <button class="filter-btn" data-filter="part3">🎙 Part 3</button>
+    <button class="filter-btn" data-filter="part4">💬 Part 4</button>
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search questions... (e.g. environment, travel, family)">
+    </div>
+  </div>
+
+  <div id="questionContainer"></div>
+
+  <div class="dl-section">
+    <h3>📥 Download the Full Question Bank</h3>
+    <p>Print to PDF for offline study, or download as a plain text file for your notes app.</p>
+    <div class="dl-buttons">
+      <button class="btn btn-primary" onclick="window.print()">🖨 Print / Save as PDF</button>
+      <button class="btn btn-amber" onclick="downloadTXT()">📄 Download .TXT File</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Question Database ──
+const questionBank = {
+  part1: {
+    title: 'Part 1 — Interview',
+    subtitle: 'Personal questions about you, your life, and your opinions',
+    duration: '2–3 min (B2) / 3–4 min (C1)',
+    accent: 'p1',
+    topics: {
+      'Personal Info': { icon:'👤', questions:[
+        {q:"Can you tell me your full name?", level:'B2'},
+        {q:"Where are you from?", level:'B2'},
+        {q:"What do you like most about your hometown?", level:'B2'},
+        {q:"How long have you been studying English?", level:'B2'},
+        {q:"What do you do? (Studies or work?)", level:'B2'},
+        {q:"Can you describe yourself in three words?", level:'C1'},
+        {q:"What's one thing about you that surprises people?", level:'C1'},
+      ]},
+      'Studies & Work': { icon:'🎓', questions:[
+        {q:"What do you enjoy most about your studies/work?", level:'B2'},
+        {q:"What subjects did you enjoy most at school?", level:'B2'},
+        {q:"Would you like to change your job or course in the future? Why?", level:'B2'},
+        {q:"What's the most challenging part of your studies?", level:'B2'},
+        {q:"How important do you think formal education is these days?", level:'C1'},
+        {q:"If you could study anything in the world, what would it be?", level:'C1'},
+        {q:"Do you think your education has prepared you well for your career?", level:'C1'},
+      ]},
+      'Hobbies & Free Time': { icon:'🎮', questions:[
+        {q:"What do you enjoy doing in your free time?", level:'B2'},
+        {q:"Do you prefer spending time alone or with friends? Why?", level:'B2'},
+        {q:"What kind of music do you like?", level:'B2'},
+        {q:"Do you play any sports? Which ones?", level:'B2'},
+        {q:"How often do you read books? What kind?", level:'B2'},
+        {q:"Is there a hobby you'd like to take up in the future?", level:'C1'},
+        {q:"Do you think people have less free time now than in the past?", level:'C1'},
+      ]},
+      'Daily Life & Routines': { icon:'🌅', questions:[
+        {q:"Can you describe a typical day in your life?", level:'B2'},
+        {q:"What time do you usually get up?", level:'B2'},
+        {q:"How do you usually travel to work or school?", level:'B2'},
+        {q:"What do you usually do at weekends?", level:'B2'},
+        {q:"Has your daily routine changed much in the last few years?", level:'C1'},
+        {q:"Do you think routines are important for a productive life?", level:'C1'},
+      ]},
+      'Food & Eating': { icon:'🍜', questions:[
+        {q:"What's your favourite type of food?", level:'B2'},
+        {q:"Do you enjoy cooking? Why or why not?", level:'B2'},
+        {q:"How often do you eat out at restaurants?", level:'B2'},
+        {q:"Is there any food you really don't like?", level:'B2'},
+        {q:"How have eating habits changed in your country?", level:'C1'},
+        {q:"Do you think traditional cuisine is being lost to fast food?", level:'C1'},
+      ]},
+      'Travel & Holidays': { icon:'✈️', questions:[
+        {q:"Have you travelled much? Where have you been?", level:'B2'},
+        {q:"Where would you most like to visit in the future?", level:'B2'},
+        {q:"Do you prefer beach holidays or city breaks?", level:'B2'},
+        {q:"What's the best holiday you've ever had?", level:'B2'},
+        {q:"How do you think travel will change in the next 20 years?", level:'C1'},
+        {q:"Is tourism always good for a country?", level:'C1'},
+      ]},
+      'Technology': { icon:'📱', questions:[
+        {q:"How often do you use the internet?", level:'B2'},
+        {q:"What's your favourite gadget or device?", level:'B2'},
+        {q:"Do you use social media? Which platforms?", level:'B2'},
+        {q:"Has technology made your life easier or more complicated?", level:'C1'},
+        {q:"Do you think we rely too much on smartphones?", level:'C1'},
+      ]},
+      'Future Plans': { icon:'🔮', questions:[
+        {q:"Where do you see yourself in five years?", level:'B2'},
+        {q:"Do you plan to live abroad at some point?", level:'B2'},
+        {q:"What are your main career goals?", level:'B2'},
+        {q:"Is there anything about your life you'd like to change?", level:'C1'},
+        {q:"How important is it to have a life plan?", level:'C1'},
+      ]},
+      'Family & Friends': { icon:'👨‍👩‍👧', questions:[
+        {q:"Can you describe your family?", level:'B2'},
+        {q:"How do you usually spend time with your friends?", level:'B2'},
+        {q:"Who are you closest to in your family?", level:'B2'},
+        {q:"Do you have a large circle of friends?", level:'B2'},
+        {q:"Have family structures changed much in your country?", level:'C1'},
+        {q:"What qualities do you value most in a friend?", level:'C1'},
+      ]}
+    }
+  },
+  part2: {
+    title: 'Part 2 — Situational Role Play',
+    subtitle: 'Real-life scenarios requiring polite interaction and problem-solving',
+    duration: '2–3 min (B2) / 3–4 min (C1)',
+    accent: 'p2',
+    topics: {
+      'Accommodation': { icon:'🏠', questions:[
+        {q:"You've just moved into university halls and the room isn't as described. Speak to the accommodation officer.", level:'B2'},
+        {q:"Your heating is broken in the middle of winter. Call maintenance to report it.", level:'B2'},
+        {q:"Your neighbour plays loud music every night until 2am. Talk to them about it.", level:'B2'},
+        {q:"You need to extend your accommodation contract by two weeks. Speak to the housing office.", level:'B2'},
+        {q:"The shower in your flat isn't working and it's been three days with no repair. You need to escalate the issue.", level:'C1'},
+        {q:"You've found mould in your rented room. Discuss this with your landlord, referencing health concerns.", level:'C1'},
+      ]},
+      'Health & Medical': { icon:'🏥', questions:[
+        {q:"You're feeling unwell and need to see a doctor. Call the campus health centre to book an appointment.", level:'B2'},
+        {q:"You've lost your student ID card. Report it to campus security and ask about a replacement.", level:'B2'},
+        {q:"The food in the canteen has made you feel ill. Speak to the catering manager about it.", level:'B2'},
+        {q:"You've been feeling stressed and want to access counselling services. Enquire at student support.", level:'C1'},
+      ]},
+      'Education': { icon:'📚', questions:[
+        {q:"You missed an important lecture. Ask a classmate if you can borrow their notes.", level:'B2'},
+        {q:"You need an extension on an assignment deadline. Talk to your professor to request one.", level:'B2'},
+        {q:"You want to change one of your course modules. Speak to your academic advisor.", level:'B2'},
+        {q:"The library fine on your account is incorrect. Talk to the librarian to dispute it.", level:'B2'},
+        {q:"You believe a grade you received is unfair. Request a review from your tutor, presenting your evidence calmly.", level:'C1'},
+      ]},
+      'Services & Shopping': { icon:'🛒', questions:[
+        {q:"You bought a laptop that doesn't work properly. Return it to the shop and explain the issue.", level:'B2'},
+        {q:"Your bank card has been swallowed by an ATM. Call the bank to report it.", level:'B2'},
+        {q:"You need to set up a new mobile phone contract. Talk to the shop assistant about the best options.", level:'B2'},
+        {q:"A package you ordered online hasn't arrived after two weeks. Call customer service.", level:'B2'},
+        {q:"Your internet provider has been overcharging you for three months. Call to dispute the charges and negotiate a refund.", level:'C1'},
+      ]},
+      'Travel & Transport': { icon:'🚆', questions:[
+        {q:"Your flight has been cancelled at the last minute. Talk to the airline desk to find a solution.", level:'B2'},
+        {q:"You've lost your luggage at the airport. Report it and describe your bag.", level:'B2'},
+        {q:"You're trying to find a specific building on campus. Ask someone for directions.", level:'B2'},
+        {q:"Your train ticket shows the wrong date. Talk to the ticket office to get it changed.", level:'B2'},
+      ]},
+      'Work & Employment': { icon:'💼', questions:[
+        {q:"You've seen a part-time job advertised in a local café. Go in and enquire about it.", level:'B2'},
+        {q:"You can't work your scheduled shift this weekend. Call your manager to explain.", level:'B2'},
+        {q:"You want to apply for a summer internship. Visit the careers office to ask about opportunities.", level:'B2'},
+        {q:"You feel you're being given too much work compared to colleagues. Raise this professionally with your supervisor.", level:'C1'},
+      ]},
+      'Social & Community': { icon:'🤝', questions:[
+        {q:"You want to join a university club or society. Go to the student union to find out more.", level:'B2'},
+        {q:"A friend borrowed money and hasn't paid you back. Talk to them about it.", level:'B2'},
+        {q:"You'd like to book a table at a café for a friend's surprise party. Call and make the arrangement.", level:'B2'},
+      ]}
+    }
+  },
+  part3: {
+    title: 'Part 3 — Long Turn (Individual Extended Turn)',
+    subtitle: 'A 2-minute prepared talk on an abstract topic with follow-up questions',
+    duration: '1–2 min prep + 2 min talk (B2) / 2 min prep + 2–3 min talk (C1)',
+    accent: 'p3',
+    topics: {
+      'Environment & Nature': { icon:'🌍', questions:[
+        {q:"What can individuals do to protect the environment in their daily lives?", level:'B2'},
+        {q:"Should governments do more to tackle climate change? Give your view.", level:'B2'},
+        {q:"Compare the environmental impact of living in a city versus the countryside.", level:'B2'},
+        {q:"Describe a natural place you have visited. What made it special?", level:'B2'},
+        {q:"What role should renewable energy play in our future? Discuss its potential and limitations.", level:'C1'},
+        {q:"Is economic growth compatible with environmental protection? Discuss the tensions.", level:'C1'},
+      ]},
+      'Education & Learning': { icon:'📖', questions:[
+        {q:"What makes a good teacher? Describe the qualities that matter most.", level:'B2'},
+        {q:"Should university education be free for everyone? Discuss the pros and cons.", level:'B2'},
+        {q:"What are the main advantages and disadvantages of online learning?", level:'B2'},
+        {q:"How important are exams in education? Are they the best way to assess students?", level:'B2'},
+        {q:"To what extent should education focus on practical skills versus academic knowledge?", level:'C1'},
+        {q:"How has the purpose of education changed over the last 50 years?", level:'C1'},
+      ]},
+      'Technology & Society': { icon:'🤖', questions:[
+        {q:"How has social media changed the way we communicate with each other?", level:'B2'},
+        {q:"Is technology making us more or less social? Give examples.", level:'B2'},
+        {q:"What impact do you think artificial intelligence will have on employment?", level:'B2'},
+        {q:"Should children's screen time be limited by parents? Why or why not?", level:'B2'},
+        {q:"Are we too dependent on technology? Discuss the risks and benefits of our digital society.", level:'C1'},
+        {q:"What ethical challenges does the rise of AI present for future generations?", level:'C1'},
+      ]},
+      'Health & Lifestyle': { icon:'💪', questions:[
+        {q:"What makes a healthy lifestyle in your opinion?", level:'B2'},
+        {q:"How important is mental health compared to physical health?", level:'B2'},
+        {q:"Should fast food and sugary drinks be more strictly regulated by governments?", level:'B2'},
+        {q:"Compare traditional medicine with modern medicine. Which do you trust more?", level:'B2'},
+        {q:"To what extent are individuals responsible for their own health versus society's responsibility?", level:'C1'},
+        {q:"How has the perception of work-life balance shifted across generations?", level:'C1'},
+      ]},
+      'Society & Culture': { icon:'🏛️', questions:[
+        {q:"What are the main benefits of learning foreign languages?", level:'B2'},
+        {q:"How important is it to preserve traditional culture in your country?", level:'B2'},
+        {q:"Should countries accept more immigrants? Discuss the advantages and challenges.", level:'B2'},
+        {q:"What role does the media play in shaping public opinion?", level:'B2'},
+        {q:"Has globalisation done more harm than good for local cultures? Discuss.", level:'C1'},
+        {q:"How can societies balance tradition with progress?", level:'C1'},
+      ]},
+      'Travel & Tourism': { icon:'🗺️', questions:[
+        {q:"What are the advantages and disadvantages of mass tourism?", level:'B2'},
+        {q:"Is it better to travel alone or with other people? Compare the two.", level:'B2'},
+        {q:"Should tourists be required to learn about local customs before visiting a country?", level:'B2'},
+        {q:"How can countries balance tourism revenue with protecting their heritage?", level:'C1'},
+      ]},
+      'Work & Career': { icon:'💻', questions:[
+        {q:"What's more important — job satisfaction or a high salary? Give your view.", level:'B2'},
+        {q:"Do you think robots and automation will replace many human jobs? Which ones?", level:'B2'},
+        {q:"How important is work-life balance? Is it realistic in today's world?", level:'B2'},
+        {q:"How has the concept of 'a career' changed compared to your parents' generation?", level:'C1'},
+        {q:"Should there be a universal basic income if automation eliminates jobs? Discuss.", level:'C1'},
+      ]},
+      'Crime & Law': { icon:'⚖️', questions:[
+        {q:"What measures do you think are most effective for reducing crime?", level:'B2'},
+        {q:"Should the age of criminal responsibility be lowered or raised? Why?", level:'B2'},
+        {q:"How effective is prison as a punishment? Does it truly rehabilitate?", level:'C1'},
+        {q:"Do harsher punishments deter crime? Discuss the evidence and alternatives.", level:'C1'},
+      ]}
+    }
+  },
+  part4: {
+    title: 'Part 4 — Topic Discussion',
+    subtitle: 'Extended discussion building on Part 3 themes — expressing and justifying abstract opinions',
+    duration: '3–4 min (B2) / 4–5 min (C1)',
+    accent: 'p4',
+    topics: {
+      'Abstract Discussion': { icon:'💭', questions:[
+        {q:"Building on what we discussed... how do you think cities will change in the next 50 years?", level:'B2'},
+        {q:"Do you think people are fundamentally happier now than they were 100 years ago?", level:'B2'},
+        {q:"What role should governments play in shaping people's behaviour?", level:'B2'},
+        {q:"How do you think the relationship between employers and employees will evolve?", level:'B2'},
+        {q:"To what extent do you agree that 'money can't buy happiness'?", level:'C1'},
+        {q:"Is it ethical for companies to collect and sell personal data?", level:'C1'},
+        {q:"Should there be limits on free speech? Where do you draw the line?", level:'C1'},
+        {q:"How do you think the concept of national identity will change in an increasingly globalised world?", level:'C1'},
+        {q:"What responsibility do wealthy nations have towards developing countries?", level:'C1'},
+        {q:"Do you believe humanity is fundamentally progressing or regressing? Justify your position.", level:'C1'},
+      ]},
+      'Values & Ethics': { icon:'🧭', questions:[
+        {q:"What values do you think are most important to pass on to the next generation?", level:'B2'},
+        {q:"Is it ever acceptable to break the law for a good cause?", level:'B2'},
+        {q:"Should wealthy people be expected to donate a significant portion of their income to charity?", level:'C1'},
+        {q:"How do you define success? Has your definition changed over time?", level:'C1'},
+      ]},
+      'Future & Change': { icon:'🔭', questions:[
+        {q:"What is the most significant change you expect to see in the world during your lifetime?", level:'B2'},
+        {q:"If you could solve one global problem, what would it be and why?", level:'B2'},
+        {q:"How do you think human relationships will change as technology advances?", level:'C1'},
+        {q:"What would a truly sustainable society look like? Is it achievable?", level:'C1'},
+      ]}
+    }
+  }
+};
+
+// ── Render ──
+let activeFilter = 'all';
+let searchQuery = '';
+
+function renderAll() {
+  const container = document.getElementById('questionContainer');
+  let html = '';
+  let totalVisible = 0;
+
+  for (const [partKey, partData] of Object.entries(questionBank)) {
+    const partNum = partKey.replace('part','');
+    if (activeFilter !== 'all' && activeFilter !== partKey) continue;
+
+    let partQuestions = [];
+    let topicHTML = '';
+
+    for (const [topicName, topicData] of Object.entries(partData.topics)) {
+      let topicQuestions = [];
+      for (let i=0; i<topicData.questions.length; i++) {
+        const q = topicData.questions[i];
+        if (searchQuery && !q.q.toLowerCase().includes(searchQuery.toLowerCase())) continue;
+        const tagClass = q.level === 'B2' ? 'b2' : q.level === 'C1' ? 'c1' : 'both';
+        const qText = searchQuery
+          ? q.q.replace(new RegExp('('+searchQuery.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'), '<span class="highlight-match">$1</span>')
+          : q.q;
+        topicQuestions.push({html:`<div class="q-card fade-in"><span class="q-num">${i+1}.</span><span class="q-text">${qText}<span class="q-tag ${tagClass}">${q.level}</span></span></div>`, q:q.q});
+        partQuestions.push(q.q);
+      }
+      if (topicQuestions.length > 0) {
+        topicHTML += `<div class="topic-group">
+          <div class="topic-title"><span class="topic-icon">${topicData.icon}</span>${topicName}<span class="topic-count">(${topicQuestions.length} questions)</span></div>
+          ${topicQuestions.map(t=>t.html).join('')}
+        </div>`;
+      }
+    }
+
+    if (partQuestions.length > 0) {
+      totalVisible += partQuestions.length;
+      html += `<div class="part-section" data-part="${partKey}">
+        <div class="part-header" onclick="togglePart(this)">
+          <div class="part-num ${partData.accent}">${partNum}</div>
+          <div class="part-info">
+            <h2>${partData.title}</h2>
+            <div class="meta">${partData.subtitle} · ${partData.duration}</div>
+          </div>
+          <span class="part-count">${partQuestions.length} Qs</span>
+          <span class="part-arrow">▼</span>
+        </div>
+        <div class="part-body expanded">${topicHTML}</div>
+      </div>`;
+    }
+  }
+
+  container.innerHTML = html || '<div style="text-align:center;padding:40px;color:var(--text-dim)">No questions match your search. Try different keywords! 🔍</div>';
+  document.getElementById('totalCount').textContent = totalVisible;
+}
+
+function togglePart(header) {
+  const body = header.nextElementSibling;
+  const isCollapsed = body.classList.contains('collapsed');
+  body.classList.toggle('collapsed');
+  body.classList.toggle('expanded');
+  header.classList.toggle('collapsed', isCollapsed);
+}
+
+// ── Download TXT ──
+function downloadTXT() {
+  let txt = 'LANGCERT SPEAKING — COMPLETE QUESTION BANK\n';
+  txt += '='.repeat(60)+'\n\n';
+  for (const [partKey, partData] of Object.entries(questionBank)) {
+    txt += `\n${partData.title}\n${'-'.repeat(40)}\n`;
+    txt += `${partData.subtitle} · ${partData.duration}\n\n`;
+    for (const [topicName, topicData] of Object.entries(partData.topics)) {
+      txt += `  ${topicData.icon} ${topicName}\n`;
+      topicData.questions.forEach((q,i) => {
+        txt += `    ${i+1}. [${q.level}] ${q.q}\n`;
+      });
+      txt += '\n';
+    }
+  }
+  txt += '\nGenerated by LangCert Speaking Courseware\n';
+  txt += 'B2 = Communicator Level | C1 = Expert Level\n';
+
+  const blob = new Blob([txt], {type:'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'langcert-speaking-question-bank.txt';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+// ── Filter ──
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    activeFilter = this.dataset.filter;
+    renderAll();
+  });
+});
+
+// ── Search ──
+let searchTimeout;
+document.getElementById('searchInput').addEventListener('input', function() {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    searchQuery = this.value.trim();
+    renderAll();
+  }, 250);
+});
+
+// ── Keyboard ──
+document.getElementById('searchInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { this.value = ''; searchQuery = ''; renderAll(); this.blur(); }
+});
+
+// ── Init ──
+renderAll();
+
+// ── Set current year ──
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

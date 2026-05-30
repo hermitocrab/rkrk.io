@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kee's English — 1-on-1 Online English Lessons · Powered by DynaSaurus 🦕</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #3E86BF; --blue-dark: #2B6A9E; --blue-light: #E8F4FD;
+  --orange: #ED712A; --green: #22C55E;
+  --bg: #FFFFFF; --bg-light: #F8FAFC; --bg-blue: #F0F7FC;
+  --text: #1E293B; --text-dim: #64748B; --text-light: #94A3B8;
+  --border: #E2E8F0; --shadow: 0 4px 24px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 48px rgba(0,0,0,0.08);
+  --radius: 16px; --radius-sm: 10px;
+  --max-width: 1140px;
+  --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',-apple-system,sans-serif; color:var(--text); background:var(--bg); line-height:1.6; overflow-x:hidden; }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:rgba(255,255,255,0.95); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border); padding:14px 0;
+}
+nav .inner { max-width:var(--max-width); margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; }
+.nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); font-weight:800; font-size:1.2rem; }
+.nav-brand span { color:var(--blue); }
+.nav-cta { padding:10px 24px; border-radius:999px; background:var(--orange); color:#fff; font-weight:700; font-size:0.9rem; text-decoration:none; transition:var(--transition); }
+.nav-cta:hover { background:#d45d1e; transform:translateY(-1px); }
+
+/* HERO */
+.hero {
+  position:relative; min-height:90vh; display:flex; align-items:center;
+  background:linear-gradient(135deg, #0F172A 0%, #1E3A5F 50%, #0F172A 100%);
+  overflow:hidden; padding-top:72px;
+}
+.hero::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at 30% 50%, rgba(62,134,191,0.15) 0%, transparent 60%),
+             radial-gradient(ellipse at 70% 30%, rgba(237,113,42,0.1) 0%, transparent 50%);
+}
+.hero .inner { max-width:var(--max-width); margin:0 auto; padding:80px 24px; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; position:relative; z-index:1; }
+.hero-badge { display:inline-block; padding:6px 16px; border-radius:999px; background:rgba(255,255,255,0.1); color:#94CAF0; font-size:0.8rem; font-weight:600; margin-bottom:20px; letter-spacing:0.02em; }
+.hero h1 { font-size:clamp(2.2rem,5vw,3.5rem); font-weight:900; color:#fff; line-height:1.15; margin-bottom:16px; letter-spacing:-0.02em; }
+.hero h1 em { font-family:'Playfair Display',serif; font-style:italic; color:var(--orange); }
+.hero p { font-size:1.1rem; color:rgba(255,255,255,0.7); margin-bottom:32px; max-width:480px; }
+.hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
+.btn-primary { padding:16px 36px; border-radius:999px; background:var(--orange); color:#fff; font-weight:700; font-size:1rem; text-decoration:none; transition:var(--transition); border:none; cursor:pointer; }
+.btn-primary:hover { background:#d45d1e; transform:translateY(-2px); box-shadow:0 8px 30px rgba(237,113,42,0.3); }
+.btn-outline { padding:16px 36px; border-radius:999px; background:transparent; color:#fff; font-weight:700; font-size:1rem; text-decoration:none; border:2px solid rgba(255,255,255,0.3); transition:var(--transition); }
+.btn-outline:hover { border-color:#fff; background:rgba(255,255,255,0.05); }
+.hero-visual { position:relative; }
+.hero-phone {
+  width:280px; margin:0 auto; background:#1a1a2e; border-radius:32px; padding:16px;
+  border:2px solid rgba(255,255,255,0.1); box-shadow:0 24px 80px rgba(0,0,0,0.4);
+}
+.hero-phone-screen { background:#0d1117; border-radius:20px; padding:20px; text-align:center; min-height:400px; display:flex; flex-direction:column; justify-content:center; }
+.hero-phone-screen .emoji { font-size:3rem; margin-bottom:12px; }
+.hero-phone-screen .title { font-size:0.9rem; font-weight:700; color:#fff; margin-bottom:4px; }
+.hero-phone-screen .sub { font-size:0.7rem; color:var(--blue); margin-bottom:16px; }
+.hero-phone-screen .word { font-size:1.5rem; font-weight:800; color:#fff; margin-bottom:8px; }
+.hero-phone-screen .ipa { font-size:0.75rem; color:var(--text-dim); margin-bottom:12px; }
+.hero-phone-screen .def { font-size:0.8rem; color:rgba(255,255,255,0.7); line-height:1.5; }
+.hero-float {
+  position:absolute; background:#fff; border-radius:12px; padding:12px 18px;
+  box-shadow:var(--shadow-lg); font-size:0.8rem; font-weight:600;
+}
+.hero-float.f1 { top:20px; right:-20px; color:var(--green); }
+.hero-float.f2 { bottom:60px; left:-30px; color:var(--blue); }
+
+/* STATS BAR */
+.stats { background:#fff; border-bottom:1px solid var(--border); }
+.stats .inner { max-width:var(--max-width); margin:0 auto; padding:32px 24px; display:grid; grid-template-columns:repeat(4,1fr); gap:24px; text-align:center; }
+.stat-num { font-size:2rem; font-weight:900; color:var(--blue); margin-bottom:4px; }
+.stat-label { font-size:0.85rem; color:var(--text-dim); }
+
+/* SECTIONS */
+section { padding:80px 0; }
+.section-inner { max-width:var(--max-width); margin:0 auto; padding:0 24px; }
+.section-tag { display:inline-block; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--blue); margin-bottom:12px; }
+.section-title { font-size:clamp(1.8rem,3vw,2.5rem); font-weight:800; margin-bottom:12px; letter-spacing:-0.02em; }
+.section-sub { font-size:1.05rem; color:var(--text-dim); margin-bottom:40px; max-width:600px; }
+
+/* FEATURES */
+#features { background:var(--bg-blue); }
+.features-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:24px; }
+.feature-card { background:#fff; border-radius:var(--radius); padding:28px; transition:var(--transition); border:1px solid var(--border); }
+.feature-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
+.feature-icon { font-size:2rem; margin-bottom:12px; }
+.feature-card h3 { font-size:1.1rem; font-weight:700; margin-bottom:8px; }
+.feature-card p { font-size:0.9rem; color:var(--text-dim); line-height:1.6; }
+
+/* CATEGORIES */
+.cat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+.cat-card {
+  background:var(--bg-light); border:1px solid var(--border); border-radius:var(--radius);
+  padding:24px; transition:var(--transition); cursor:pointer; text-decoration:none; color:inherit;
+  display:flex; align-items:center; gap:16px;
+}
+.cat-card:hover { border-color:var(--blue); transform:translateY(-2px); box-shadow:var(--shadow); }
+.cat-icon { font-size:1.8rem; flex-shrink:0; }
+.cat-info h4 { font-size:0.95rem; font-weight:700; margin-bottom:2px; }
+.cat-info p { font-size:0.8rem; color:var(--text-dim); }
+
+/* DAILY NEWS */
+#daily { background:linear-gradient(135deg,#0F172A,#1E3A5F); color:#fff; }
+#daily .section-tag { color:#94CAF0; }
+#daily .section-sub { color:rgba(255,255,255,0.7); }
+.news-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+.news-card { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius); padding:24px; transition:var(--transition); }
+.news-card:hover { background:rgba(255,255,255,0.1); transform:translateY(-2px); }
+.news-date { font-size:0.7rem; color:var(--blue); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px; }
+.news-card h4 { font-size:1rem; font-weight:700; margin-bottom:8px; }
+.news-card p { font-size:0.85rem; color:rgba(255,255,255,0.6); }
+.news-level { display:inline-block; margin-top:10px; padding:3px 10px; border-radius:4px; font-size:0.7rem; font-weight:600; }
+.news-level.beginner { background:rgba(34,197,94,0.15); color:var(--green); }
+.news-level.intermediate { background:rgba(237,113,42,0.15); color:var(--orange); }
+.news-level.advanced { background:rgba(62,134,191,0.15); color:var(--blue); }
+
+/* AI PRACTICE */
+#ai { background:var(--bg-light); }
+.ai-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+.ai-visual { position:relative; }
+.ai-card {
+  background:#fff; border-radius:var(--radius); padding:32px; border:1px solid var(--border);
+  box-shadow:var(--shadow);
+}
+.ai-card-header { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+.ai-avatar { width:48px; height:48px; border-radius:50%; background:var(--blue); display:flex; align-items:center; justify-content:center; font-size:1.5rem; }
+.ai-scenario { padding:12px; background:var(--bg-blue); border-radius:var(--radius-sm); margin-bottom:8px; font-size:0.9rem; }
+.ai-scenario strong { color:var(--blue); }
+.ai-scenarios { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:16px; }
+.ai-scenario-chip { padding:8px 14px; border-radius:999px; background:#fff; border:1px solid var(--border); font-size:0.8rem; cursor:pointer; transition:var(--transition); }
+.ai-scenario-chip:hover { border-color:var(--blue); background:var(--bg-blue); }
+
+/* TUTORS */
+.tutor-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; }
+.tutor-card { background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:20px; text-align:center; transition:var(--transition); }
+.tutor-card:hover { transform:translateY(-3px); box-shadow:var(--shadow); }
+.tutor-avatar { width:72px; height:72px; border-radius:50%; margin:0 auto 12px; background:var(--bg-blue); display:flex; align-items:center; justify-content:center; font-size:2rem; }
+.tutor-name { font-weight:700; font-size:0.95rem; margin-bottom:2px; }
+.tutor-flag { font-size:0.8rem; color:var(--text-dim); margin-bottom:8px; }
+.tutor-stars { color:var(--orange); font-size:0.85rem; }
+
+/* PRICING */
+#pricing { background:var(--bg-blue); }
+.pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; }
+.pricing-card {
+  background:#fff; border:1px solid var(--border); border-radius:var(--radius);
+  padding:36px 28px; text-align:center; transition:var(--transition); position:relative;
+}
+.pricing-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
+.pricing-card.featured { border-color:var(--blue); border-width:2px; }
+.pricing-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); padding:4px 16px; border-radius:999px; background:var(--blue); color:#fff; font-size:0.7rem; font-weight:700; }
+.pricing-name { font-size:0.85rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--text-dim); margin-bottom:8px; }
+.pricing-price { font-size:2.5rem; font-weight:900; margin-bottom:4px; }
+.pricing-price span { font-size:1rem; font-weight:400; color:var(--text-dim); }
+.pricing-desc { font-size:0.8rem; color:var(--text-dim); margin-bottom:20px; }
+.pricing-features { list-style:none; text-align:left; margin-bottom:24px; }
+.pricing-features li { padding:6px 0; font-size:0.85rem; color:var(--text-dim); }
+.pricing-features li::before { content:'✓ '; color:var(--green); font-weight:700; margin-right:4px; }
+.btn-pricing { display:block; padding:14px; border-radius:999px; font-weight:700; font-size:0.9rem; text-decoration:none; transition:var(--transition); }
+.btn-pricing.primary { background:var(--blue); color:#fff; }
+.btn-pricing.primary:hover { background:var(--blue-dark); }
+.btn-pricing.outline { border:2px solid var(--blue); color:var(--blue); }
+.btn-pricing.outline:hover { background:var(--blue); color:#fff; }
+.btn-pricing.orange { background:var(--orange); color:#fff; }
+.btn-pricing.orange:hover { background:#d45d1e; }
+
+/* TESTIMONIALS */
+.testimonial-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px; }
+.testimonial-card { background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:28px; }
+.testimonial-text { font-size:0.95rem; line-height:1.7; margin-bottom:16px; font-style:italic; color:var(--text); }
+.testimonial-author { display:flex; align-items:center; gap:12px; }
+.testimonial-avatar { width:40px; height:40px; border-radius:50%; background:var(--bg-blue); display:flex; align-items:center; justify-content:center; font-size:1.2rem; }
+.testimonial-name { font-weight:700; font-size:0.9rem; }
+.testimonial-role { font-size:0.75rem; color:var(--text-dim); }
+
+/* TRUST BAR */
+.trust-bar { background:#fff; border-top:1px solid var(--border); padding:40px 0; text-align:center; }
+.trust-bar p { color:var(--text-dim); font-size:0.9rem; margin-bottom:16px; }
+.trust-logos { display:flex; justify-content:center; gap:32px; flex-wrap:wrap; }
+.trust-logo { padding:8px 20px; background:var(--bg-light); border-radius:8px; font-weight:700; color:var(--text-dim); font-size:0.85rem; }
+
+/* FOOTER */
+footer { background:#0F172A; color:rgba(255,255,255,0.6); padding:60px 0 32px; }
+footer .inner { max-width:var(--max-width); margin:0 auto; padding:0 24px; }
+.footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; margin-bottom:40px; }
+.footer-brand { font-size:1.3rem; font-weight:800; color:#fff; margin-bottom:12px; }
+.footer-brand span { color:var(--blue); }
+.footer-col h5 { font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; color:#fff; margin-bottom:16px; }
+.footer-col a { display:block; color:rgba(255,255,255,0.5); text-decoration:none; font-size:0.85rem; padding:4px 0; transition:var(--transition); }
+.footer-col a:hover { color:#fff; }
+.footer-bottom { border-top:1px solid rgba(255,255,255,0.1); padding-top:24px; text-align:center; font-size:0.8rem; }
+
+/* RESPONSIVE */
+@media (max-width:768px) {
+  .hero .inner { grid-template-columns:1fr; text-align:center; }
+  .hero p { margin:0 auto 24px; }
+  .hero-btns { justify-content:center; }
+  .hero-visual { display:none; }
+  .stats .inner { grid-template-columns:repeat(2,1fr); }
+  .ai-grid { grid-template-columns:1fr; }
+  .footer-grid { grid-template-columns:1fr 1fr; gap:24px; }
+}
+@media (max-width:480px) {
+  .stats .inner { grid-template-columns:1fr 1fr; gap:16px; }
+  .footer-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="#" class="nav-brand">Kee's <span>English</span> 🦕</a>
+    <a href="#" class="nav-cta">Start Free Trial</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="inner">
+    <div>
+      <div class="hero-badge">🦕 Powered by DynaSaurus AI</div>
+      <h1>Start your <em>1-on-1</em><br>25-Minute Lessons today!</h1>
+      <p>Personalised English tutoring with Kee Lee. 15+ years experience. IELTS L9.0. RUA-powered learning. Your words, your world.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn-primary">Start Learning Free →</a>
+        <a href="#" class="btn-outline">Explore Materials</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-phone">
+        <div class="hero-phone-screen">
+          <div class="emoji">🦕</div>
+          <div class="title">DynaSaurus</div>
+          <div class="sub">Your Dynamic Thesaurus</div>
+          <div class="word">serendipity</div>
+          <div class="ipa">/ˌser.ənˈdɪp.ə.ti/</div>
+          <div class="def">The happy accident of finding something wonderful you weren't looking for.<br><br>🅁 Core Metaphor: "Like stumbling into your favourite café while lost."</div>
+        </div>
+      </div>
+      <div class="hero-float f1">✦ RUA-Powered</div>
+      <div class="hero-float f2">✦ 11 Languages</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="inner">
+    <div><div class="stat-num">15+</div><div class="stat-label">Years Teaching</div></div>
+    <div><div class="stat-num">200+</div><div class="stat-label">Students Coached</div></div>
+    <div><div class="stat-num">IELTS 9.0</div><div class="stat-label">Speaking Score</div></div>
+    <div><div class="stat-num">4</div><div class="stat-label">AI-Powered Modules</div></div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-inner">
+    <div class="section-tag">Why Kee's English</div>
+    <h2 class="section-title">Anytime, Anywhere.<br>Your English, Your World.</h2>
+    <p class="section-sub">Learn online via mobile or PC. No downloads needed — start instantly.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🦕</div>
+        <h3>DynaSaurus AI Tutor</h3>
+        <p>Dictionary · Translator · Grammar Doctor · IELTS Coach. Chunk-based. RUA-powered. Calibrated to Kee's 15-year teaching standard.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⏱️</div>
+        <h3>25-Minute Sessions</h3>
+        <p>Optimised attention span. Short enough to fit your day, long enough for real progress. Book anytime, cancel anytime.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h3>15,000+ Lesson Materials</h3>
+        <p>Free resources for IELTS, TOEFL, Cambridge, Business, Kids, and Conversation. Level- and topic-based. New content daily.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3>11 Languages Supported</h3>
+        <p>EN · ZH-CN · ZH-TW · KO · FR · JA · TH · ES · VI · ID · PT. Learn English through your native language. L1-graded support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section>
+  <div class="section-inner">
+    <div class="section-tag">Learning Categories</div>
+    <h2 class="section-title">Pick your path</h2>
+    <p class="section-sub">From conversation to exam prep — choose what you want to learn. No fixed curriculum.</p>
+    <div class="cat-grid">
+      <a href="#" class="cat-card"><div class="cat-icon">💬</div><div class="cat-info"><h4>Conversation Practice</h4><p>Real-world dialogue scenarios</p></div></a>
+      <a href="#" class="cat-card"><div class="cat-icon">📰</div><div class="cat-info"><h4>Daily News English</h4><p>Current affairs, updated daily</p></div></a>
+      <a href="#" class="cat-card"><div class="cat-icon">✈️</div><div class="cat-info"><h4>Travel English</h4><p>Navigate the world confidently</p></div></a>
+      <a href="#" class="cat-card"><div class="cat-icon">📝</div><div class="cat-info"><h4>IELTS & Exams</h4><p>Speaking · Writing · Listening · Reading</p></div></a>
+      <a href="#" class="cat-card"><div class="cat-icon">📖</div><div class="cat-info"><h4>Grammar & Vocabulary</h4><p>Build your foundation systematically</p></div></a>
+      <a href="#" class="cat-card"><div class="cat-icon">👶</div><div class="cat-info"><h4>Kids English</h4><p>Fun, engaging, age-appropriate</p></div></a>
+      <a href="#" class="cat-card"><div class="cat-icon">🎤</div><div class="cat-info"><h4>Pronunciation Lab</h4><p>Phonics, IPA, connected speech</p></div></a>
+      <a href="#" class="cat-card"><div class="cat-icon">🗣️</div><div class="cat-info"><h4>Speaking Accelerator</h4><p>Fluency, coherence, discourse markers</p></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- DAILY NEWS -->
+<section id="daily">
+  <div class="section-inner">
+    <div class="section-tag">Stay Updated</div>
+    <h2 class="section-title" style="color:#fff;">Daily News Lessons</h2>
+    <p class="section-sub">Fresh international news content every day. Practise English while staying informed.</p>
+    <div class="news-grid">
+      <div class="news-card">
+        <div class="news-date">May 27, 2026</div>
+        <h4>AI in Education: How China Is Leading the Classroom Revolution</h4>
+        <p>From Chengdu to Shanghai, AI-powered tools are transforming how students learn English.</p>
+        <span class="news-level intermediate">Intermediate</span>
+      </div>
+      <div class="news-card">
+        <div class="news-date">May 26, 2026</div>
+        <h4>Why Consumption Downgrading Is Changing How Families Learn</h4>
+        <p>More parents are choosing at-home tutoring over expensive language schools.</p>
+        <span class="news-level beginner">Beginner</span>
+      </div>
+      <div class="news-card">
+        <div class="news-date">May 25, 2026</div>
+        <h4>IELTS Speaking: The 4 Must-Know Part 1 Topics</h4>
+        <p>Hometown, Work/Study, Home, and Area — these appear in every single test.</p>
+        <span class="news-level advanced">Advanced</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI PRACTICE -->
+<section id="ai">
+  <div class="section-inner">
+    <div class="ai-grid">
+      <div class="ai-visual">
+        <div class="ai-card">
+          <div class="ai-card-header">
+            <div class="ai-avatar">🦕</div>
+            <div>
+              <strong>DynaSaurus AI</strong>
+              <div style="font-size:0.75rem;color:var(--text-dim);">Practice with real English role-play scenarios</div>
+            </div>
+          </div>
+          <div class="ai-scenario">
+            <strong>🧳 Scenario:</strong> You're checking into a hotel in London. The receptionist asks about your room preference. Respond naturally.
+          </div>
+          <div class="ai-scenario">
+            <strong>📊 Evaluation:</strong> MFP-scored. Meaning ✓ · Form ⚠ (article error) · Pronunciation ✓
+          </div>
+          <div style="margin-top:12px;font-size:0.85rem;color:var(--text-dim);">
+            Boost your confidence with AI before learning with Kee. Choose from 100+ scenarios.
+          </div>
+          <div class="ai-scenarios">
+            <div class="ai-scenario-chip">🏨 Hotel Check-in</div>
+            <div class="ai-scenario-chip">🍽️ Restaurant Order</div>
+            <div class="ai-scenario-chip">✈️ Airport Check-in</div>
+            <div class="ai-scenario-chip">🏥 Doctor Visit</div>
+            <div class="ai-scenario-chip">🎓 University Interview</div>
+            <div class="ai-scenario-chip">💼 Job Interview</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-tag">AI-Powered Practice</div>
+        <h2 class="section-title">Practise with DynaSaurus AI before your lesson</h2>
+        <p class="section-sub">100+ real-world role-play scenarios. Instant MFP feedback. Build confidence. Then bring your best self to your 1-on-1 session with Kee.</p>
+        <a href="https://dynasaurus.rkrk.io" class="btn-primary" style="display:inline-block;">Try DynaSaurus Free →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TUTORS -->
+<section style="background:var(--bg-light);">
+  <div class="section-inner">
+    <div class="section-tag">Your Teacher</div>
+    <h2 class="section-title">Learn with Kee Lee</h2>
+    <p class="section-sub">IELTS L9.0/R8.5/S8.5. Former EF Expert Teacher & Trainer of Trainers for West China. TEDx 2026 Speaker. 15 years across 7 institutions. 200+ students.</p>
+    <div class="tutor-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr));">
+      <div class="tutor-card">
+        <div class="tutor-avatar">🦄</div>
+        <div class="tutor-name">Kee Lee</div>
+        <div class="tutor-flag">🇨🇳 China · Chengdu</div>
+        <div class="tutor-stars">IELTS 9.0 ⭐⭐⭐⭐⭐</div>
+        <div style="font-size:0.8rem;color:var(--text-dim);margin-top:6px;">Speaking Specialist</div>
+      </div>
+      <div class="tutor-card">
+        <div class="tutor-avatar">🧠</div>
+        <div class="tutor-name">RUA Method</div>
+        <div class="tutor-flag">🦕 Proprietary Framework</div>
+        <div class="tutor-stars">Recognize · Understand · Apply</div>
+        <div style="font-size:0.8rem;color:var(--text-dim);margin-top:6px;">Meta-Cognitive Engine</div>
+      </div>
+      <div class="tutor-card">
+        <div class="tutor-avatar">🤖</div>
+        <div class="tutor-name">DynaSaurus AI</div>
+        <div class="tutor-flag">🦕 AI Tutor · 24/7</div>
+        <div class="tutor-stars">4 Modules · 11 Languages</div>
+        <div style="font-size:0.8rem;color:var(--text-dim);margin-top:6px;">Instant Feedback</div>
+      </div>
+      <div class="tutor-card">
+        <div class="tutor-avatar">🎤</div>
+        <div class="tutor-name">TEDx 2026</div>
+        <div class="tutor-flag">🏛️ "Bridge the Gap"</div>
+        <div class="tutor-stars">Learning Is Design</div>
+        <div style="font-size:0.8rem;color:var(--text-dim);margin-top:6px;">Keynote Speaker</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="section-tag">Pricing</div>
+    <h2 class="section-title">Simple, transparent pricing</h2>
+    <p class="section-sub">Start free. Upgrade when you're ready. All plans include DynaSaurus AI access.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-name">Free</div>
+        <div class="pricing-price">$0<span>/mo</span></div>
+        <div class="pricing-desc">Forever free</div>
+        <ul class="pricing-features">
+          <li>5 DynaSaurus lookups/day</li>
+          <li>All 4 AI modules</li>
+          <li>Basic definitions</li>
+          <li>One language pair</li>
+        </ul>
+        <a href="#" class="btn-pricing outline">Start Free</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-name">Basic</div>
+        <div class="pricing-price">$6<span>/mo</span></div>
+        <div class="pricing-desc">For regular learners</div>
+        <ul class="pricing-features">
+          <li>Unlimited lookups</li>
+          <li>All 4 modules</li>
+          <li>Full history</li>
+          <li>B1+ Thesaurus</li>
+          <li>1 group session/mo</li>
+        </ul>
+        <a href="#" class="btn-pricing primary">Get Basic</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-name">Premium</div>
+        <div class="pricing-price">$14<span>/mo</span></div>
+        <div class="pricing-desc">Serious learners</div>
+        <ul class="pricing-features">
+          <li>Everything in Basic</li>
+          <li>4 private sessions/mo</li>
+          <li>Voice definitions</li>
+          <li>Audio playback</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#" class="btn-pricing orange">Get Premium</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="section-inner">
+    <div class="section-tag">Testimonials</div>
+    <h2 class="section-title">What learners say</h2>
+    <p class="section-sub">From IELTS prep to daily conversation — real feedback from real students.</p>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-text">"I had been studying with other teachers, but Kee's RUA method really helped me break through. I went from 5.5 to 7.0 in Speaking in 3 months."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">👩</div>
+          <div><div class="testimonial-name">Allison</div><div class="testimonial-role">IELTS Student · Chengdu</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-text">"DynaSaurus changed how I learn vocabulary. Instead of memorising lists, I understand words through my own hobbies — basketball, gaming, music."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">👨</div>
+          <div><div class="testimonial-name">Jackson</div><div class="testimonial-role">Speaking Student · Chengdu</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-text">"I've been taking classes for a year because I love travelling. Having lessons regularly has been a great way to improve my conversation skills."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">👩‍💼</div>
+          <div><div class="testimonial-name">Doreen</div><div class="testimonial-role">Professional · IELTS Prep</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<div class="trust-bar">
+  <div class="section-inner">
+    <p>Trusted by learners worldwide</p>
+    <div class="trust-logos">
+      <div class="trust-logo">🏛️ TEDx 2026 Speaker</div>
+      <div class="trust-logo">🏫 EF Expert Teacher</div>
+      <div class="trust-logo">🦕 DynaSaurus AI</div>
+      <div class="trust-logo">🌍 200+ Students</div>
+      <div class="trust-logo">📚 15,000+ Materials</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Kee's <span>English</span> 🦕</div>
+        <p style="font-size:0.85rem;">We don't place you. We prepare you. Powered by DynaSaurus AI and the RUA learning framework.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Learn</h5>
+        <a href="#">Conversation</a><a href="#">Daily News</a><a href="#">IELTS Prep</a><a href="#">Grammar</a><a href="#">Kids English</a>
+      </div>
+      <div class="footer-col">
+        <h5>Tools</h5>
+        <a href="https://dynasaurus.rkrk.io">DynaSaurus AI</a><a href="https://ielts.rkrk.io">IELTS Toolkit</a><a href="https://ielts.rkrk.io/report">Research Report</a><a href="#">Materials</a>
+      </div>
+      <div class="footer-col">
+        <h5>About</h5>
+        <a href="#">Kee Lee</a><a href="#">RUA Method</a><a href="#">Blog</a><a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Kee Lee · Built with RUA energy 🦕 · Navigate Your Future
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

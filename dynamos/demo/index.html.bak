@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DynamOS — The Education OS | 教育操作系统</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   DYNAMOS — BENTO EDITORIAL REDESIGN
+   Taste Skill v2 compliant | VARIANCE 8 | MOTION 5 | DENSITY 3
+   Anti-slop: no AI-purple hero, no equal cards, no glassmorphism walls
+   ================================================================ */
+
+/* --- RESET & BASE --- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:#0a0a0f;
+  color:#e4e4e7;
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* --- TYPOGRAPHY --- */
+h1,h2,h3,h4,.headline{
+  font-family:'Space Grotesk','Noto Sans SC',sans-serif;
+  font-weight:600;
+  letter-spacing:-0.02em;
+}
+.en-text{font-family:'Space Grotesk','Inter',sans-serif}
+.zh-text{font-family:'Noto Sans SC',sans-serif}
+
+/* --- LANGUAGE TOGGLE --- */
+[data-lang-en],[data-lang-zh]{display:none}
+.block{display:block}
+body[data-lang="zh"] [data-lang-zh]{display:inline}
+body[data-lang="zh"] [data-lang-zh].block,[data-lang-zh].block{display:block}
+body[data-lang="zh"] [data-lang-en]{display:none}
+body[data-lang="en"] [data-lang-en]{display:inline}
+body[data-lang="en"] [data-lang-en].block,[data-lang-en].block{display:block}
+body[data-lang="en"] [data-lang-zh]{display:none}
+
+/* --- UTILITY --- */
+.highlight{color:#c4b5fd;font-weight:600}
+.accent-pink{color:#f472b6}
+.accent-purple{color:#a78bfa}
+.accent-teal{color:#2dd4bf}
+
+/* --- NAV --- */
+.toggle-bar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 28px;
+  background:rgba(10,10,15,0.88);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.logo{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.2rem;font-weight:700;
+  background:linear-gradient(135deg,#c4b5fd,#f472b6);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  letter-spacing:-0.03em;
+}
+.nav-links{display:flex;gap:20px;align-items:center}
+.nav-links a{
+  color:#71717a;text-decoration:none;
+  font-size:0.8rem;font-weight:500;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:#f4f4f5}
+.lang-btn{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  color:#a1a1aa;padding:6px 16px;border-radius:20px;
+  font-size:0.75rem;font-weight:600;cursor:pointer;
+  transition:all 0.25s;
+  font-family:'Inter','Noto Sans SC',sans-serif;
+}
+.lang-btn:hover{
+  background:rgba(255,255,255,0.12);
+  border-color:rgba(255,255,255,0.2);
+  color:#f4f4f5;
+}
+
+/* ================================================================
+   HERO — Editorial, typography-forward
+   No AI-purple gradient, no centered-over-dark-mesh
+   ================================================================ */
+.hero{
+  min-height:100dvh;display:flex;flex-direction:column;
+  justify-content:center;
+  padding:140px 28px 100px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,rgba(10,10,15,0) 0%,rgba(10,10,15,0.6) 100%),
+    repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.008) 2px,rgba(255,255,255,0.008) 4px);
+  pointer-events:none;
+}
+.hero-inner{max-width:800px;position:relative;z-index:1}
+.hero-badge{
+  display:inline-block;padding:6px 18px;
+  background:rgba(168,85,247,0.1);
+  border:1px solid rgba(168,85,247,0.2);
+  border-radius:24px;font-size:0.8rem;
+  font-weight:500;color:#c4b5fd;
+  margin-bottom:40px;letter-spacing:0.01em;
+}
+.hero h1{
+  font-size:clamp(2.8rem,7vw,5.5rem);
+  font-weight:700;line-height:1.05;
+  margin-bottom:28px;
+  color:#f4f4f5;
+  letter-spacing:-0.03em;
+}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(135deg,#c4b5fd 0%,#f472b6 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero-dek{
+  font-size:clamp(1.05rem,2vw,1.25rem);
+  color:#71717a;max-width:600px;
+  margin-bottom:52px;line-height:1.75;
+}
+.hero-dek strong{color:#a1a1aa;font-weight:600}
+.hero-cta{
+  display:flex;gap:14px;flex-wrap:wrap;
+}
+.btn-primary{
+  background:linear-gradient(135deg,#8b5cf6,#7c3aed);
+  color:#fff;padding:15px 34px;border-radius:12px;
+  font-weight:600;font-size:0.95rem;
+  text-decoration:none;border:none;cursor:pointer;
+  transition:all 0.3s;box-shadow:0 4px 24px rgba(124,58,237,0.25);
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 36px rgba(124,58,237,0.4);
+}
+.btn-ghost{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  color:#a1a1aa;padding:15px 34px;border-radius:12px;
+  font-weight:600;font-size:0.95rem;
+  text-decoration:none;cursor:pointer;
+  transition:all 0.3s;
+}
+.btn-ghost:hover{
+  background:rgba(255,255,255,0.08);
+  border-color:rgba(255,255,255,0.2);
+  color:#f4f4f5;
+}
+
+/* ================================================================
+   PAIN POINTS — Before/After mini cards
+   ================================================================ */
+.pain-section{
+  max-width:1100px;margin:0 auto;
+  padding:0 28px 100px;
+}
+.pain-section .section-eyebrow{
+  display:block;font-size:0.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.1em;
+  color:#8b5cf6;margin-bottom:20px;
+}
+.pain-section h2{
+  font-size:clamp(1.6rem,3.5vw,2.2rem);
+  font-weight:700;color:#f4f4f5;
+  margin-bottom:12px;
+}
+.pain-section .section-sub{
+  font-size:1rem;color:#71717a;
+  max-width:520px;margin-bottom:48px;
+}
+.pain-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+@media(max-width:900px){.pain-grid{grid-template-columns:1fr}}
+.pain-card{
+  background:#0e0e17;
+  border:1px solid rgba(255,255,255,0.04);
+  border-radius:18px;padding:28px 24px;
+  transition:all 0.3s;
+  position:relative;overflow:hidden;
+}
+.pain-card:hover{
+  border-color:rgba(255,255,255,0.1);
+  transform:translateY(-3px);
+}
+.pain-card .pain-before{
+  font-size:0.8rem;color:#ef4444;font-weight:600;
+  margin-bottom:8px;display:flex;align-items:center;gap:6px;
+}
+.pain-card .pain-arrow{
+  display:block;font-size:1.4rem;color:#52525b;
+  margin:12px 0;
+}
+.pain-card .pain-after{
+  font-size:0.9rem;color:#2dd4bf;font-weight:600;
+  display:flex;align-items:center;gap:6px;
+}
+.pain-card p{
+  font-size:0.85rem;color:#a1a1aa;
+  line-height:1.6;margin-top:8px;
+}
+
+/* ================================================================
+   SECTION HEADERS — Clean, editorial
+   ================================================================ */
+.section-header{
+  text-align:center;padding:0 28px 52px;
+  max-width:700px;margin:0 auto;
+}
+.section-spacer{height:80px}
+.section-header .eyebrow{
+  display:inline-block;padding:4px 16px;
+  background:rgba(168,85,247,0.08);
+  border:1px solid rgba(168,85,247,0.15);
+  border-radius:20px;font-size:0.72rem;
+  font-weight:600;color:#a78bfa;
+  text-transform:uppercase;letter-spacing:0.08em;
+  margin-bottom:18px;
+}
+.section-header h2{
+  font-size:clamp(1.7rem,4vw,2.6rem);
+  font-weight:700;margin-bottom:12px;
+  color:#f4f4f5;
+  letter-spacing:-0.02em;
+}
+.section-header p{
+  font-size:1rem;color:#71717a;
+  max-width:540px;margin:0 auto;line-height:1.7;
+}
+
+/* ================================================================
+   BENTO MODULE GRID — Asymmetric spans, VARIANCE 8
+   ================================================================ */
+.module-bento{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  padding:0 28px 100px;
+  max-width:1280px;
+  margin:0 auto;
+}
+@media(max-width:1024px){
+  .module-bento{grid-template-columns:repeat(2,1fr)}
+  .module-bento .bento-feature{grid-column:span 2}
+  .module-bento .bento-full{grid-column:span 2}
+}
+@media(max-width:640px){
+  .module-bento{grid-template-columns:1fr;padding:0 18px 70px}
+  .module-bento .bento-feature,
+  .module-bento .bento-full,
+  .module-bento .bento-tall{grid-column:span 1}
+}
+.bento-feature{grid-column:span 2}
+.bento-tall{grid-column:span 1;grid-row:span 1}
+.bento-full{grid-column:span 3}
+
+/* --- Module Card Base --- */
+.mod-card{
+  background:#0e0e17;
+  border:1px solid rgba(255,255,255,0.04);
+  border-radius:22px;overflow:hidden;
+  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+  display:flex;flex-direction:column;
+  position:relative;
+}
+.mod-card:hover{
+  border-color:rgba(255,255,255,0.1);
+  transform:translateY(-4px);
+  box-shadow:0 24px 64px rgba(0,0,0,0.5),
+             0 0 0 1px rgba(139,92,246,0.08);
+}
+
+/* --- Photo Area --- */
+.mod-card .photo-area{
+  width:100%;position:relative;overflow:hidden;
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.photo-area .photo-label{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.8rem;font-weight:600;
+  color:rgba(255,255,255,0.65);
+  text-align:center;padding:20px;
+  z-index:1;
+  line-height:1.5;
+}
+.photo-area .photo-icon{
+  font-size:2.8rem;margin-bottom:10px;display:block;
+}
+
+/* Aspect ratios vary by card for VARIANCE */
+.mod-card.teacher-card .photo-area{aspect-ratio:16/8}
+.mod-card.student-card .photo-area{aspect-ratio:3/4}
+.mod-card.parent-card .photo-area{aspect-ratio:4/3}
+.mod-card.tracker-card .photo-area{aspect-ratio:16/9}
+.mod-card.engine-card .photo-area{aspect-ratio:21/9}
+
+/* Photo gradient backgrounds */
+.photo-teacher{background:linear-gradient(160deg,#1e1b4b 0%,#312e81 25%,#4338ca 55%,#6366f1 100%)}
+.photo-student{background:linear-gradient(160deg,#1a1a2e 0%,#16213e 25%,#1a1a4e 55%,#533483 100%)}
+.photo-parent{background:linear-gradient(160deg,#0f2027 0%,#1b3a36 25%,#2c5364 60%,#1a936f 100%)}
+.photo-tracker{background:linear-gradient(160deg,#1b0a1e 0%,#371b3b 30%,#5c2d63 60%,#b83b5e 100%)}
+.photo-engine{background:linear-gradient(160deg,#0d0d1a 0%,#1a1a3e 30%,#2d1b69 60%,#6d28d9 100%)}
+
+/* --- Card Body --- */
+.mod-card .card-body{padding:26px;flex:1;display:flex;flex-direction:column}
+.mod-card .card-body h3{
+  font-size:1.3rem;font-weight:700;
+  margin-bottom:10px;color:#f4f4f5;
+  letter-spacing:-0.01em;
+}
+.mod-card .card-body .card-desc{
+  font-size:0.9rem;color:#a1a1aa;
+  line-height:1.7;margin-bottom:16px;flex:1;
+}
+.card-tags{
+  display:flex;flex-wrap:wrap;gap:7px;
+  margin-bottom:16px;
+}
+.tag{
+  display:inline-block;padding:4px 12px;
+  background:rgba(139,92,246,0.08);
+  border:1px solid rgba(139,92,246,0.12);
+  border-radius:14px;font-size:0.7rem;
+  font-weight:500;color:#a78bfa;
+  white-space:nowrap;
+}
+.tag-teal{
+  background:rgba(45,212,191,0.08);
+  border-color:rgba(45,212,191,0.12);
+  color:#2dd4bf;
+}
+.card-quote{
+  font-size:0.88rem;font-style:italic;
+  color:#818cf8;font-weight:500;
+  padding-top:14px;
+  border-top:1px solid rgba(255,255,255,0.04);
+  margin-top:auto;
+  line-height:1.6;
+}
+
+/* Scenario callout inside cards */
+.scenario-callout{
+  background:rgba(139,92,246,0.05);
+  border:1px solid rgba(139,92,246,0.08);
+  border-radius:12px;padding:14px 16px;
+  margin-top:12px;font-size:0.82rem;
+  color:#a78bfa;line-height:1.6;
+}
+.scenario-callout strong{color:#c4b5fd}
+
+/* ================================================================
+   STUDENT STORY — Full-width editorial pull-quote
+   ================================================================ */
+.story-section{
+  max-width:900px;margin:0 auto;
+  padding:0 28px 100px;
+}
+.story-card{
+  background:#0e0e17;
+  border:1px solid rgba(255,255,255,0.04);
+  border-radius:22px;padding:40px 36px;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:32px;align-items:center;
+  position:relative;overflow:hidden;
+}
+@media(max-width:700px){
+  .story-card{grid-template-columns:1fr;padding:28px 22px}
+}
+.story-card::before{
+  content:'"';position:absolute;
+  top:-30px;left:20px;
+  font-size:12rem;font-family:'Space Grotesk',serif;
+  color:rgba(139,92,246,0.06);line-height:1;
+  pointer-events:none;
+}
+.story-photo{
+  width:100%;aspect-ratio:1/1;
+  border-radius:16px;
+  background:linear-gradient(160deg,#1a1a2e 0%,#16213e 30%,#2d1b69 60%,#6366f1 100%);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+  overflow:hidden;
+}
+.story-photo .photo-label{
+  font-size:0.75rem;color:rgba(255,255,255,0.55);
+  text-align:center;padding:16px;
+  font-family:'Space Grotesk',sans-serif;
+}
+.story-text{position:relative;z-index:1}
+.story-text .story-name{
+  font-size:1.3rem;font-weight:700;color:#f4f4f5;
+  margin-bottom:8px;
+}
+.story-text .story-meta{
+  font-size:0.8rem;color:#8b5cf6;font-weight:600;
+  margin-bottom:18px;
+}
+.story-text .story-quote{
+  font-size:1.05rem;color:#a1a1aa;
+  line-height:1.75;margin-bottom:20px;
+  font-style:italic;
+}
+.story-text .story-result{
+  display:flex;gap:24px;flex-wrap:wrap;
+}
+.story-stat{
+  text-align:center;
+}
+.story-stat .stat-num{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:2rem;font-weight:700;
+  background:linear-gradient(135deg,#c4b5fd,#f472b6);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.story-stat .stat-label{
+  font-size:0.72rem;color:#71717a;margin-top:2px;
+}
+
+/* ================================================================
+   PEDAGOGY DEEP DIVE — Redesigned cards
+   ================================================================ */
+.pedagogy-section{
+  max-width:1100px;margin:0 auto;
+  padding:0 28px 100px;
+}
+.ped-card{
+  background:#0e0e17;
+  border:1px solid rgba(255,255,255,0.04);
+  border-radius:22px;padding:34px 30px;
+  margin-bottom:20px;
+  transition:all 0.35s;
+  position:relative;overflow:hidden;
+}
+.ped-card:hover{
+  border-color:rgba(255,255,255,0.1);
+  box-shadow:0 16px 48px rgba(0,0,0,0.4);
+}
+.ped-card::after{
+  content:'';position:absolute;top:0;right:0;
+  width:200px;height:200px;
+  background:radial-gradient(circle,rgba(139,92,246,0.04),transparent 70%);
+  pointer-events:none;
+}
+.ped-card h4{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.1rem;font-weight:700;
+  color:#c4b5fd;margin-bottom:20px;
+  display:flex;align-items:center;gap:8px;
+}
+.ped-card h4 .ped-emoji{font-size:1.3rem}
+.ped-row{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:18px;
+}
+@media(max-width:768px){
+  .ped-row{grid-template-columns:1fr}
+}
+.ped-col{
+  background:rgba(255,255,255,0.015);
+  border-radius:14px;padding:20px;
+  border:1px solid rgba(255,255,255,0.03);
+  transition:all 0.25s;
+}
+.ped-col:hover{
+  background:rgba(255,255,255,0.025);
+  border-color:rgba(255,255,255,0.06);
+}
+.ped-col .ped-label{
+  font-size:0.7rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.1em;
+  margin-bottom:10px;color:#a78bfa;
+}
+.ped-col p{
+  font-size:0.83rem;color:#a1a1aa;
+  line-height:1.7;
+}
+
+/* ================================================================
+   NUMBERS DASHBOARD — Clean stat cards
+   ================================================================ */
+.stats-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  max-width:1100px;margin:0 auto;
+  padding:0 28px 100px;
+}
+@media(max-width:900px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.stats-row{grid-template-columns:1fr}}
+.stat-card{
+  background:#0e0e17;
+  border:1px solid rgba(255,255,255,0.04);
+  border-radius:18px;padding:28px 22px;
+  text-align:center;
+  transition:all 0.3s;
+}
+.stat-card:hover{
+  border-color:rgba(255,255,255,0.1);
+  transform:translateY(-2px);
+}
+.stat-card .big-num{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:2.8rem;font-weight:700;
+  background:linear-gradient(135deg,#c4b5fd,#a78bfa);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  line-height:1.1;margin-bottom:6px;
+}
+.stat-card .big-num.pink{
+  background:linear-gradient(135deg,#f472b6,#fb7185);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.stat-card .big-num.teal{
+  background:linear-gradient(135deg,#2dd4bf,#14b8a6);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.stat-card .stat-desc{
+  font-size:0.83rem;color:#71717a;
+  line-height:1.5;
+}
+
+/* ================================================================
+   ARCHITECTURE — Clean 4-layer grid
+   ================================================================ */
+.arch-section{
+  max-width:1100px;margin:0 auto;
+  padding:0 28px 100px;
+}
+.arch-diagram{
+  background:#0e0e17;
+  border:1px solid rgba(255,255,255,0.04);
+  border-radius:22px;padding:36px;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+@media(max-width:768px){
+  .arch-diagram{grid-template-columns:1fr;padding:24px}
+}
+.arch-layer{
+  background:rgba(255,255,255,0.015);
+  border-radius:16px;padding:26px;
+  border:1px solid rgba(255,255,255,0.03);
+  transition:all 0.3s;
+}
+.arch-layer:hover{
+  background:rgba(255,255,255,0.025);
+  border-color:rgba(255,255,255,0.08);
+}
+.arch-layer h4{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.95rem;font-weight:700;
+  color:#a78bfa;margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+.arch-layer ul{
+  list-style:none;padding:0;
+}
+.arch-layer li{
+  font-size:0.83rem;color:#a1a1aa;
+  padding:6px 0;line-height:1.6;
+  display:flex;align-items:flex-start;gap:8px;
+}
+.arch-layer li::before{
+  content:'▸';color:#8b5cf6;font-size:0.6rem;
+  flex-shrink:0;margin-top:4px;
+}
+
+/* ================================================================
+   MOAT — Bento grid, varied shapes
+   ================================================================ */
+.moat-bento{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;max-width:1100px;margin:0 auto;
+  padding:0 28px 100px;
+}
+@media(max-width:900px){
+  .moat-bento{grid-template-columns:repeat(2,1fr)}
+  .moat-bento .moat-wide{grid-column:span 2}
+}
+@media(max-width:560px){
+  .moat-bento{grid-template-columns:1fr;padding:0 18px 70px}
+  .moat-bento .moat-wide{grid-column:span 1}
+}
+.moat-wide{grid-column:span 2}
+.moat-tall{grid-column:span 1;grid-row:span 1}
+
+.moat-card{
+  background:#0e0e17;
+  border:1px solid rgba(255,255,255,0.04);
+  border-radius:20px;padding:30px 26px;
+  transition:all 0.35s;
+  position:relative;
+}
+.moat-card:hover{
+  border-color:rgba(255,255,255,0.1);
+  transform:translateY(-3px);
+  box-shadow:0 16px 48px rgba(0,0,0,0.4);
+}
+.moat-icon{font-size:2.4rem;margin-bottom:18px;display:block}
+.moat-card h4{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.05rem;font-weight:700;
+  color:#f4f4f5;margin-bottom:10px;
+}
+.moat-card p{
+  font-size:0.85rem;color:#a1a1aa;
+  line-height:1.7;
+}
+
+/* ================================================================
+   PHASED ROLLOUT — Timeline
+   ================================================================ */
+.phases{
+  max-width:950px;margin:0 auto;
+  padding:0 28px 100px;
+}
+.phase-timeline{
+  display:flex;gap:18px;
+  position:relative;
+}
+@media(max-width:768px){
+  .phase-timeline{flex-direction:column}
+}
+.phase-timeline::before{
+  content:'';position:absolute;top:36px;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,rgba(139,92,246,0.3),rgba(244,114,182,0.3));
+  z-index:0;
+}
+@media(max-width:768px){
+  .phase-timeline::before{display:none}
+}
+.phase{
+  flex:1;background:#0e0e17;
+  border:1px solid rgba(255,255,255,0.04);
+  border-radius:20px;padding:30px 24px;
+  text-align:center;position:relative;z-index:1;
+  transition:all 0.35s;
+}
+.phase:hover{
+  border-color:rgba(255,255,255,0.1);
+  transform:translateY(-4px);
+  box-shadow:0 16px 48px rgba(0,0,0,0.4);
+}
+.phase-num{
+  width:52px;height:52px;border-radius:50%;
+  background:linear-gradient(135deg,#8b5cf6,#7c3aed);
+  color:#fff;font-weight:700;font-size:1.15rem;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 18px;
+  font-family:'Space Grotesk',sans-serif;
+}
+.phase .phase-sub{
+  font-size:0.7rem;color:#8b5cf6;
+  font-weight:600;margin-bottom:10px;
+  text-transform:uppercase;letter-spacing:0.06em;
+}
+.phase h4{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1rem;font-weight:700;
+  color:#f4f4f5;margin-bottom:10px;
+}
+.phase p{
+  font-size:0.83rem;color:#a1a1aa;
+  line-height:1.7;
+}
+
+/* ================================================================
+   TESTIMONIALS — Editorial pull quotes
+   ================================================================ */
+.testimonial-section{
+  max-width:900px;margin:0 auto;
+  padding:0 28px 100px;
+}
+.testimonial-card{
+  background:#0e0e17;
+  border:1px solid rgba(255,255,255,0.04);
+  border-radius:22px;padding:36px 32px;
+  margin-bottom:18px;
+  position:relative;
+  transition:all 0.3s;
+}
+.testimonial-card:hover{
+  border-color:rgba(255,255,255,0.1);
+}
+.testimonial-card .t-quote{
+  font-size:1.05rem;color:#d4d4d8;
+  line-height:1.8;margin-bottom:16px;
+  font-style:italic;
+}
+.testimonial-card .t-author{
+  font-size:0.88rem;color:#a78bfa;font-weight:600;
+}
+.testimonial-card .t-role{
+  font-size:0.78rem;color:#71717a;
+}
+
+/* ================================================================
+   CTA — Clean close
+   ================================================================ */
+.cta-section{
+  text-align:center;padding:0 28px 140px;
+  position:relative;overflow:hidden;
+}
+.cta-section h2{
+  font-size:clamp(1.8rem,4vw,2.6rem);
+  font-weight:700;color:#f4f4f5;
+  margin-bottom:18px;
+  letter-spacing:-0.02em;
+}
+.cta-section p{
+  font-size:1.05rem;color:#71717a;
+  max-width:560px;margin:0 auto 36px;
+  line-height:1.75;
+}
+.cta-buttons{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+}
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+.footer{
+  text-align:center;padding:44px 28px;
+  border-top:1px solid rgba(255,255,255,0.03);
+  font-size:0.78rem;color:#52525b;
+  line-height:1.7;
+}
+
+/* ================================================================
+   ANIMATIONS — Subtle entrance, MOTION 5
+   ================================================================ */
+.fade-up{
+  opacity:0;transform:translateY(24px);
+  transition:opacity 0.7s ease,transform 0.7s ease;
+}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* ================================================================
+   PRINT
+   ================================================================ */
+@media print{
+  body{background:#fff;color:#111;font-size:11px}
+  .mod-card,.ped-card,.moat-card,.phase,.arch-layer,.testimonial-card,
+  .stat-card,.story-card,.pain-card{background:#f8f8f8;border:1px solid #ddd;break-inside:avoid}
+  .toggle-bar{display:none}
+  .hero{min-height:auto;padding:40px 28px}
+  .hero h1{-webkit-text-fill-color:#111;background:none;color:#111}
+  .logo{-webkit-text-fill-color:#111;background:none;color:#111}
+  .btn-primary,.btn-ghost{border:1px solid #333;color:#111;background:#eee}
+  .module-bento,.moat-bento{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body data-lang="zh">
+
+<!-- ===== NAV ===== -->
+<nav class="toggle-bar">
+  <span class="logo">DynamOS</span>
+  <div class="nav-links">
+    <a href="#pain"><span data-lang-zh>痛点</span><span data-lang-en>Pain</span></a>
+    <a href="#modules"><span data-lang-zh>模块</span><span data-lang-en>Modules</span></a>
+    <a href="#pedagogy"><span data-lang-zh>教学法</span><span data-lang-en>Pedagogy</span></a>
+    <a href="#architecture"><span data-lang-zh>架构</span><span data-lang-en>Arch</span></a>
+    <a href="#moat"><span data-lang-zh>优势</span><span data-lang-en>Moat</span></a>
+    <a href="#rollout"><span data-lang-zh>落地</span><span data-lang-en>Rollout</span></a>
+    <button class="lang-btn" onclick="toggleLang()" aria-label="Switch language">
+      <span data-lang-zh>EN</span><span data-lang-en>中文</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge fade-up"><span data-lang-zh>🎓 面向教育机构的 AI 操作系统</span><span data-lang-en>🎓 AI Operating System for Schools</span></div>
+    <h1 class="fade-up">Dynam<em>OS</em></h1>
+    <p class="hero-dek fade-up">
+      <span data-lang-zh class="block">
+        不是另一个 AI 工具。<br>
+        而是教育机构的<strong>操作系统</strong><br>
+        从教师到学生，从课堂到家庭，从内容到数据<br>
+        端到端打通。
+      </span>
+      <span data-lang-en class="block">
+        Not another AI tool.<br>
+        The <strong>operating system</strong> for education<br>
+        from teachers to students, classroom to home<br>
+        content to data, end-to-end.
+      </span>
+    </p>
+    <div class="hero-cta fade-up">
+      <a href="#modules" class="btn-primary"><span data-lang-zh>探索 DynamOS</span><span data-lang-en>Explore DynamOS</span></a>
+      <a href="#cta" class="btn-ghost"><span data-lang-zh>预约演示</span><span data-lang-en>Book a Demo</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAIN POINTS — Before DynamOS ===== -->
+<section id="pain" class="pain-section">
+  <span class="section-eyebrow fade-up"><span data-lang-zh>你的机构是不是也这样</span><span data-lang-en>Does This Sound Familiar</span></span>
+  <h2 class="fade-up"><span data-lang-zh>在没有 DynamOS 之前</span><span data-lang-en>Life Before DynamOS</span></h2>
+  <p class="section-sub fade-up"><span data-lang-zh>这不是你的问题。是整个行业缺少一个真正的操作系统。</span><span data-lang-en>Not your fault. The industry lacked a real operating system.</span></p>
+
+  <div class="pain-grid">
+    <div class="pain-card fade-up">
+      <div class="pain-before">✕ <span data-lang-zh>老师每周花8小时备课、批改、写反馈</span><span data-lang-en>Teachers spend 8h/week prepping, grading, writing feedback</span></div>
+      <span class="pain-arrow">↓</span>
+      <div class="pain-after">✓ <span data-lang-zh>DynamOS 把重复劳动砍到2小时</span><span data-lang-en>DynamOS cuts repetitive work to 2 hours</span></div>
+      <p><span data-lang-zh>AI 协同仪表盘自动生成教案、分析学情、标记需要关注的学生。老师终于有时间做只有人能做的事：真正的教学。</span><span data-lang-en>AI co-teacher dashboard auto-generates lesson plans, analyzes performance, flags students who need attention. Teachers finally have time for what only humans can do: real teaching.</span></p>
+    </div>
+
+    <div class="pain-card fade-up">
+      <div class="pain-before">✕ <span data-lang-zh>家长交完钱不知道孩子学了什么</span><span data-lang-en>Parents pay but don't know what kids are learning</span></div>
+      <span class="pain-arrow">↓</span>
+      <div class="pain-after">✓ <span data-lang-zh>每周自动推送可视化学习报告</span><span data-lang-en>Weekly auto-push of visual learning reports</span></div>
+      <p><span data-lang-zh>不是"正确率82%"这种看不懂的数字。而是"你孩子的弱项是定语从句，本周已练习12次，下周强化计划如下"。家长从催作业变成参与学习。</span><span data-lang-en>Not "82% accuracy" gibberish. "Your child's weak spot: relative clauses. 12 practices this week. Reinforcement plan next." Parents become partners, not police.</span></p>
+    </div>
+
+    <div class="pain-card fade-up">
+      <div class="pain-before">✕ <span data-lang-zh>好老师走了，经验也跟着走了</span><span data-lang-en>Great teachers leave, and their expertise leaves with them</span></div>
+      <span class="pain-arrow">↓</span>
+      <div class="pain-after">✓ <span data-lang-zh>教学经验变成系统能力，可复制、可迭代</span><span data-lang-en>Teaching expertise becomes system capability: replicable, iterable</span></div>
+      <p><span data-lang-zh>DynamOS 把教研方法论变成引擎。新老师入职两周就能做出3年老师的教学决策。校长的教研资产不再随人员流动蒸发。</span><span data-lang-en>DynamOS turns pedagogy into an engine. New teachers make 3-year-veteran decisions within two weeks. Your pedagogical IP doesn't evaporate with turnover.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE CARDS — Bento Grid ===== -->
+<section id="modules">
+  <div class="section-header">
+    <span class="eyebrow fade-up"><span data-lang-zh>五大模块</span><span data-lang-en>Five Modules</span></span>
+    <h2 class="fade-up"><span data-lang-zh>DynamOS 核心模块</span><span data-lang-en>DynamOS Core Modules</span></h2>
+    <p class="fade-up"><span data-lang-zh>五个相互联动的子系统，覆盖教学全链路。不是五个独立工具 —— 是一个系统里的五个界面。</span><span data-lang-en>Five interconnected subsystems covering the full teaching chain. Not five separate tools — five views of one system.</span></p>
+  </div>
+
+  <div class="module-bento">
+
+    <!-- Card 1: Teacher AI — Featured wide -->
+    <!-- PHOTO CONCEPT: Teacher (female, mid-30s, Chinese) sitting at a wooden desk in a warmly lit classroom. iPad Pro on desk showing colorful analytics dashboard with student cards, skill bars, and a radar chart. Soft natural light from window. Shallow depth of field. Editorial style. -->
+    <article class="mod-card teacher-card bento-feature fade-up">
+      <div class="photo-area photo-teacher">
+        <span class="photo-label"><span class="photo-icon">👩‍🏫</span>Teacher AI Dashboard<br><small>Photo: teacher + iPad analytics, warm classroom light</small></span>
+      </div>
+      <div class="card-body">
+        <h3><span data-lang-zh>教师端 · Teacher AI</span><span data-lang-en>Teacher AI App</span></h3>
+        <p class="card-desc"><span data-lang-zh>AI 协同教学仪表盘：自动生成教案、学生学情分析、发音反馈、课堂数据可视化。</span><span data-lang-en>AI co-teacher dashboard: auto lesson plans, student analytics, pronunciation feedback, classroom data visualization.</span></p>
+        <div class="card-tags">
+          <span class="tag">TPACK</span>
+          <span class="tag"><span data-lang-zh>形成性评估</span><span data-lang-en>Formative Assessment</span></span>
+        </div>
+        <div class="scenario-callout">
+          <strong><span data-lang-zh>📅 周一早上 8:30</span><span data-lang-en>📅 Monday 8:30 AM</span></strong><br>
+          <span data-lang-zh>张老师打开 DynamOS。仪表盘已经标出：上周班里12个学生的定语从句还没完全掌握，建议今天花15分钟做针对性复习。教案已经生成好了 —— 不是从网上抄的，而是根据她班上学生的实际错误模式定制的。</span>
+          <span data-lang-en>Ms. Zhang opens DynamOS. Dashboard flags: 12 students haven't fully mastered relative clauses from last week. Suggested: 15-minute targeted review today. Lesson plan is ready — not copy-pasted from the web, but customized to her students' actual error patterns.</span>
+        </div>
+        <div class="card-quote"><span data-lang-zh>🎯 把备课时间砍掉70%。让每个老师成为超级教师。</span><span data-lang-en>🎯 Cut prep time 70%. Make every teacher a super-teacher.</span></div>
+      </div>
+    </article>
+
+    <!-- Card 2: Student AI — Vertical tall card -->
+    <!-- PHOTO CONCEPT: Chinese tween student (boy, age 12-14) in casual clothes, smiling at his phone held in both hands. Phone screen shows chat-style AI speaking coach UI with speech bubble "Great pronunciation! Try again with more stress on 'environment'." Bright but soft lighting, home study desk background with books and lamp. Candid, warm. -->
+    <article class="mod-card student-card bento-tall fade-up">
+      <div class="photo-area photo-student">
+        <span class="photo-label"><span class="photo-icon">🧑‍🎓</span>Student Learning Path<br><small>Photo: student smiling at phone, AI coach on screen</small></span>
+      </div>
+      <div class="card-body">
+        <h3><span data-lang-zh>学生端 · Student AI</span><span data-lang-en>Student AI App</span></h3>
+        <p class="card-desc"><span data-lang-zh>个性化学习路径、AI 口语教练、智能词典、间隔重复记忆系统。每个学生获得专属学习体验。</span><span data-lang-en>Personalized learning path, AI speaking coach, smart dictionary, spaced repetition. Every student gets a tailored experience.</span></p>
+        <div class="card-tags">
+          <span class="tag"><span data-lang-zh>最近发展区</span><span data-lang-en>ZPD</span></span>
+          <span class="tag">Krashen i+1</span>
+          <span class="tag"><span data-lang-zh>艾宾浩斯</span><span data-lang-en>Ebbinghaus</span></span>
+        </div>
+        <div class="card-quote"><span data-lang-zh>🎯 每个学生 24/7 拥有私人导师。</span><span data-lang-en>🎯 Every student gets a private tutor, 24/7.</span></div>
+      </div>
+    </article>
+
+    <!-- Card 3: TA/Parent — Standard -->
+    <!-- PHOTO CONCEPT: Mother and 10-year-old child sitting side by side at kitchen table, evening warm light. Mother's hand on child's shoulder, both looking at a smartphone showing a colorful progress report with skill bars and "Great job this week!" message. Real kitchen background, lived-in feel, not staged. -->
+    <article class="mod-card parent-card fade-up">
+      <div class="photo-area photo-parent">
+        <span class="photo-label"><span class="photo-icon">👨‍👩‍👧</span>TA &amp; Parent Hub<br><small>Photo: parent + child at kitchen table, progress on phone</small></span>
+      </div>
+      <div class="card-body">
+        <h3><span data-lang-zh>课辅端 · TA &amp; Parent</span><span data-lang-en>TA &amp; Parent Assistant</span></h3>
+        <p class="card-desc"><span data-lang-zh>作业监控、家长更新、课后练习、进度预警。打通家校沟通的最后一公里。</span><span data-lang-en>Homework monitoring, parent updates, after-class practice, progress alerts. Closing the home-school communication gap.</span></p>
+        <div class="card-tags">
+          <span class="tag"><span data-lang-zh>自主学习</span><span data-lang-en>SRL</span></span>
+          <span class="tag"><span data-lang-zh>家长参与</span><span data-lang-en>Epstein</span></span>
+        </div>
+        <div class="card-quote"><span data-lang-zh>🎯 打破家校信息墙。家长看到真实进步。</span><span data-lang-en>🎯 Close the home-school gap. Parents see real progress.</span></div>
+      </div>
+    </article>
+
+    <!-- Card 4: Progress Tracker — Wide -->
+    <!-- PHOTO CONCEPT: Close-up of two hands holding a tablet at 45° angle. Screen shows a glowing skill tree UI with interconnected nodes, some lit in purple (mastered), some in teal (in progress), some dimmed (locked). Progress ring at 78%. Clean white desk surface below, soft overhead light. Editorial product photography style. -->
+    <article class="mod-card tracker-card bento-feature fade-up">
+      <div class="photo-area photo-tracker">
+        <span class="photo-label"><span class="photo-icon">📊</span>Skill Tree Analytics<br><small>Photo: hands on tablet, skill tree UI glowing</small></span>
+      </div>
+      <div class="card-body">
+        <h3><span data-lang-zh>进度追踪器 · Progress Tracker</span><span data-lang-en>Progress Tracker</span></h3>
+        <p class="card-desc"><span data-lang-zh>技能树、里程碑徽章、薄弱点自动检测、雅思/托福/PTE 分数预测。不只是分数 —— 是人人都能看懂的能力地图。</span><span data-lang-en>Skill trees, milestone badges, weak-point detection, IELTS/TOEFL/PTE prediction. Not just scores — skill maps everyone understands.</span></p>
+        <div class="card-tags">
+          <span class="tag"><span data-lang-zh>掌握学习</span><span data-lang-en>Bloom</span></span>
+          <span class="tag"><span data-lang-zh>学习分析</span><span data-lang-en>Siemens</span></span>
+        </div>
+        <div class="scenario-callout">
+          <strong><span data-lang-zh>🔍 "假掌握"检测</span><span data-lang-en>🔍 "Fake Mastery" Detection</span></strong><br>
+          <span data-lang-zh>大部分机构：上完课 = 学会了。DynamOS 追踪40+维度行为数据 —— 答题速度、错误模式、犹豫时间、求助频率。当系统发现某个学生"看似答对了但实际是靠猜的"，自动标记并推送补救练习。杜绝基础空洞。</span>
+          <span data-lang-en>Most schools: class attended = learned. DynamOS tracks 40+ behavioral dimensions — answer speed, error patterns, hesitation time, help frequency. When the system detects a student "getting it right but actually guessing," it auto-flags and pushes remedial drills. No more foundation gaps.</span>
+        </div>
+        <div class="card-quote"><span data-lang-zh>🎯 不再是冰冷分数 —— 而是每个人都能理解的技能地图。</span><span data-lang-en>🎯 Not just scores — skill maps everyone understands.</span></div>
+      </div>
+    </article>
+
+    <!-- Card 5: Content Engine — Full width -->
+    <!-- PHOTO CONCEPT: Overhead flat-lay of a large wooden desk. Pedagogy textbooks (Bloom's Taxonomy, TBLT, Krashen) stacked on one side with sticky notes. Open laptop in center showing a content pipeline diagram with nodes connected by arrows. Coffee cup, mechanical pencil, warm lamp glow. Scholar aesthetic, not corporate. -->
+    <article class="mod-card engine-card bento-full fade-up">
+      <div class="photo-area photo-engine">
+        <span class="photo-label"><span class="photo-icon">⚙️</span>Content Pipeline Engine<br><small>Photo: desk with pedagogy books + laptop showing content pipeline</small></span>
+      </div>
+      <div class="card-body">
+        <h3><span data-lang-zh>内容引擎 · Content Engine</span><span data-lang-en>Content Engine</span></h3>
+        <p class="card-desc"><span data-lang-zh>教学法优先的内容生产线，拒绝野生 LLM 输出。每道题的每个选项都有教育学理由。</span><span data-lang-en>Pedagogy-first content pipeline. NOT LLM-wild. Every exercise option has a pedagogical reason.</span></p>
+        <div class="card-tags">
+          <span class="tag"><span data-lang-zh>布鲁姆</span><span data-lang-en>Bloom</span></span>
+          <span class="tag">TBLT</span>
+          <span class="tag">CLT</span>
+          <span class="tag">RUA</span>
+        </div>
+        <div class="card-quote"><span data-lang-zh>🎯 每道题都有教育学理由。零 AI 垃圾。</span><span data-lang-en>🎯 Every exercise has a pedagogical reason. Zero AI slop.</span></div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===== STUDENT STORY — 小明的故事 ===== -->
+<section class="story-section">
+  <div class="story-card fade-up">
+    <!-- PHOTO CONCEPT: Chinese teenage boy (15-16) in school uniform, sitting at a desk looking at camera with confident half-smile. Warm natural lighting. Before/after story implied by expression: he looks accomplished. Background: classroom or home study with DynamOS-style UI visible on laptop screen behind him. -->
+    <div class="story-photo">
+      <span class="photo-label">Photo: confident student, DynamOS UI on laptop behind</span>
+    </div>
+    <div class="story-text">
+      <div class="story-name"><span data-lang-zh>小明，15岁，初二</span><span data-lang-en>Xiao Ming, 15, Grade 8</span></div>
+      <div class="story-meta"><span data-lang-zh>从"害怕开口"到雅思口语预估 6.5</span><span data-lang-en>From "afraid to speak" to IELTS Speaking estimated 6.5</span></div>
+      <p class="story-quote">
+        <span data-lang-zh>"以前上英语课最怕被点名。知道答案但说不出来。DynamOS 的口语教练不会笑话我。我可以练10遍、20遍，直到自己满意。三个月后，我在班上第一个主动举手回答外教的问题。我妈在家长端看到那条'主动发言次数+300%'的数据时，激动得截图发到了家族群。"</span>
+        <span data-lang-en>"I used to dread being called on in English class. I knew the answer but couldn't say it. DynamOS speaking coach doesn't laugh at me. I can practice 10 times, 20 times, until I'm happy. Three months later, I was the first in my class to volunteer answers to our foreign teacher. When my mom saw 'voluntary speaking +300%' on the parent app, she screenshotted it and sent it to the family group chat."</span>
+      </p>
+      <div class="story-result">
+        <div class="story-stat">
+          <div class="stat-num">+300%</div>
+          <div class="stat-label"><span data-lang-zh>主动发言频率</span><span data-lang-en>Voluntary Speaking</span></div>
+        </div>
+        <div class="story-stat">
+          <div class="stat-num">5.5→6.5</div>
+          <div class="stat-label"><span data-lang-zh>雅思口语预估分</span><span data-lang-en>IELTS Speaking Estimate</span></div>
+        </div>
+        <div class="story-stat">
+          <div class="stat-num">4 <span data-lang-zh>个月</span><span data-lang-en>mo</span></div>
+          <div class="stat-label"><span data-lang-zh>达成时间</span><span data-lang-en>Time to Result</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PEDAGOGY DEEP DIVE ===== -->
+<section id="pedagogy">
+  <div class="section-header">
+    <span class="eyebrow fade-up"><span data-lang-zh>教学法深度</span><span data-lang-en>Pedagogy Deep Dive</span></span>
+    <h2 class="fade-up"><span data-lang-zh>不玩概念 —— 理论如何变为产品</span><span data-lang-en>Not Buzzwords — How Theory Becomes Product</span></h2>
+    <p class="fade-up"><span data-lang-zh>每个模块背后的教育学理论，以及 DynamOS 的具体实现方式。</span><span data-lang-en>The pedagogical theories behind each module, and how DynamOS implements them concretely.</span></p>
+  </div>
+
+  <div class="pedagogy-section">
+
+    <!-- Pedagogy 1: Teacher · TPACK × Formative Assessment -->
+    <div class="ped-card fade-up">
+      <h4><span class="ped-emoji">📖</span> <span data-lang-zh>教师端 · TPACK × 形成性评估</span><span data-lang-en>Teacher App · TPACK × Formative Assessment</span></h4>
+      <div class="ped-row">
+        <div class="ped-col">
+          <div class="ped-label"><span data-lang-zh>📐 理论说什么</span><span data-lang-en>📐 What the theory says</span></div>
+          <p><span data-lang-zh>TPACK：优秀教学 = 技术知识(TK) + 教学法知识(PK) + 内容知识(CK) 的交集。<br><br>形成性评估：在教学过程中持续收集学习证据，实时调整教学策略，而非等期末再补救。</span><span data-lang-en>TPACK: Great teaching = TK + PK + CK intersection.<br><br>Formative Assessment: Collect learning evidence during instruction, adjust in real-time — don't wait for finals.</span></p>
+        </div>
+        <div class="ped-col">
+          <div class="ped-label"><span data-lang-zh>🔧 DynamOS 怎么做的</span><span data-lang-en>🔧 How DynamOS implements it</span></div>
+          <p><span data-lang-zh>AI 协同仪表盘在老师备课时推荐技术工具（TK），自动匹配教学策略（PK），并关联课程知识点（CK）。课后自动生成形成性评估报告 —— 谁懂了、谁还卡着、下节课该复习什么。</span><span data-lang-en>Co-teacher dashboard recommends tech tools (TK), matches strategies (PK), links curriculum points (CK). Auto-generates formative reports — who got it, who's stuck, what to review next.</span></p>
+        </div>
+        <div class="ped-col">
+          <div class="ped-label"><span data-lang-zh>🎯 为什么重要</span><span data-lang-en>🎯 Why it matters</span></div>
+          <p><span data-lang-zh>大部分机构的"教研"靠老教师的经验口口相传。DynamOS 把经验系统化、可复制化。一个3年经验的老师能做出8年老师的教学决策。</span><span data-lang-en>Most schools rely on senior teachers' intuition passed down verbally. DynamOS systematizes and replicates this. A 3-year teacher makes 8-year-teacher decisions.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pedagogy 2: Student · ZPD × Krashen × Ebbinghaus -->
+    <div class="ped-card fade-up">
+      <h4><span class="ped-emoji">📖</span> <span data-lang-zh>学生端 · ZPD × Krashen × 艾宾浩斯</span><span data-lang-en>Student App · ZPD × Krashen × Ebbinghaus</span></h4>
+      <div class="ped-row">
+        <div class="ped-col">
+          <div class="ped-label"><span data-lang-zh>📐 理论说什么</span><span data-lang-en>📐 What the theory says</span></div>
+          <p><span data-lang-zh>ZPD：学习发生在"现有水平"与"在帮助下能达到的水平"之间。<br>Krashen i+1：输入材料的难度应略高于当前水平。<br>艾宾浩斯：记忆在特定时间点复习效果最优。</span><span data-lang-en>ZPD: Learning happens between current and potential-with-help levels.<br>Krashen i+1: Input should be slightly above current level.<br>Ebbinghaus: Memory optimized by reviewing at specific intervals.</span></p>
+        </div>
+        <div class="ped-col">
+          <div class="ped-label"><span data-lang-zh>🔧 DynamOS 怎么做的</span><span data-lang-en>🔧 How DynamOS implements it</span></div>
+          <p><span data-lang-zh>学生完成能力诊断后，系统定位其在技能树上的 ZPD 区间，i+1 引擎自动调节内容难度。间隔重复系统根据遗忘曲线在最佳时间点推送复习 —— 不是简单的"第二天复习"，而是根据每个学生的遗忘速率个性化计算。</span><span data-lang-en>After diagnostic, system locates ZPD on skill tree. i+1 engine auto-adjusts difficulty. Spaced repetition pushes review at optimal intervals — personalized to each student's forgetting rate, not a generic "review tomorrow."</span></p>
+        </div>
+        <div class="ped-col">
+          <div class="ped-label"><span data-lang-zh>🎯 为什么重要</span><span data-lang-en>🎯 Why it matters</span></div>
+          <p><span data-lang-zh>传统课堂一个老师面对30个学生，只能用"平均难度"。DynamOS 让每个学生的内容难度都恰好处于 i+1。这才是真正的个性化学习 —— 不是把教材换成 iPad，而是让内容难度匹配每个大脑。</span><span data-lang-en>Traditional classrooms serve one average difficulty to 30 students. DynamOS gives every student exactly i+1. This is real personalization — not putting textbooks on an iPad, but matching content difficulty to each brain.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pedagogy 3: TA & Parent · SRL × Epstein -->
+    <div class="ped-card fade-up">
+      <h4><span class="ped-emoji">📖</span> <span data-lang-zh>课辅端 · 自主学习 × Epstein 框架</span><span data-lang-en>TA &amp; Parent · SRL × Epstein Framework</span></h4>
+      <div class="ped-row">
+        <div class="ped-col">
+          <div class="ped-label"><span data-lang-zh>📐 理论说什么</span><span data-lang-en>📐 What the theory says</span></div>
+          <p><span data-lang-zh>SRL (自主学习)：学习者设定目标、选择策略、监控进展、反思调整。<br>Epstein：家长参与通过六种方式影响学习 —— 养育、沟通、志愿服务、在家学习、决策、社区合作。</span><span data-lang-en>SRL: Learners set goals, choose strategies, monitor progress, reflect, adjust.<br>Epstein: Parental involvement works through 6 pathways — parenting, communicating, volunteering, learning at home, decision-making, community collaboration.</span></p>
+        </div>
+        <div class="ped-col">
+          <div class="ped-label"><span data-lang-zh>🔧 DynamOS 怎么做的</span><span data-lang-en>🔧 How DynamOS implements it</span></div>
+          <p><span data-lang-zh>学生端内置目标设定和反思模块（SRL）。课辅端将孩子的学习数据翻译成家长能看懂的语言 —— 不是"正确率82%"，而是"你孩子的弱项是定语从句，本周已练习12次，下周将强化"。同时提供具体可操作的家庭参与建议。</span><span data-lang-en>Student app has goal-setting and reflection modules (SRL). Parent hub translates learning data into parent-friendly language — not "82% accuracy" but "Your child's weak spot: relative clauses. 12 practice attempts this week. Reinforcement plan next." Plus actionable home involvement suggestions.</span></p>
+        </div>
+        <div class="ped-col">
+          <div class="ped-label"><span data-lang-zh>🎯 为什么重要</span><span data-lang-en>🎯 Why it matters</span></div>
+          <p><span data-lang-zh>家长最大痛点：交了钱，不知道孩子学了什么。DynamOS 不做"假透明"，而是把学习过程视觉化、可理解。家长从"催作业"变成"参与学习"。续费率自然上升。</span><span data-lang-en>Parents' #1 pain point: paid money, no clue what kid learned. DynamOS visualizes the learning process in a way parents understand. Parents evolve from "homework police" to "learning partners." Retention follows naturally.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pedagogy 4: Progress Tracker · Mastery Learning × Learning Analytics -->
+    <div class="ped-card fade-up">
+      <h4><span class="ped-emoji">📖</span> <span data-lang-zh>进度追踪器 · 掌握学习 × 学习分析</span><span data-lang-en>Progress Tracker · Mastery Learning × Learning Analytics</span></h4>
+      <div class="ped-row">
+        <div class="ped-col">
+          <div class="ped-label"><span data-lang-zh>📐 理论说什么</span><span data-lang-en>📐 What the theory says</span></div>
+          <p><span data-lang-zh>Bloom 掌握学习：学生在进入下一个单元前必须掌握当前单元（通常定义80-90%为"掌握"）。<br>Siemens 学习分析：用数据测量、收集、分析学习者行为，以理解和优化学习过程。</span><span data-lang-en>Bloom's Mastery Learning: Students must master current unit (80-90% threshold) before advancing.<br>Siemens Learning Analytics: Use data to measure, collect, and analyze learner behavior to understand and optimize learning.</span></p>
+        </div>
+        <div class="ped-col">
+          <div class="ped-label"><span data-lang-zh>🔧 DynamOS 怎么做的</span><span data-lang-en>🔧 How DynamOS implements it</span></div>
+          <p><span data-lang-zh>技能树不是装饰 —— 它是真实的能力图谱。每个节点有掌握阈值。未达标的节点自动锁定后续内容，同时生成针对性补救练习。学习分析引擎追踪40+维度的行为数据，包括答题速度、错误模式、犹豫时间、求助行为等，从数据中发现"假掌握"。</span><span data-lang-en>Skill tree is a real competency map, not decoration. Each node has a mastery threshold. Unmastered nodes auto-lock next content and generate targeted remedial drills. Analytics engine tracks 40+ behavioral dimensions — answer speed, error patterns, hesitation time, help-seeking — detecting "fake mastery."</span></p>
+        </div>
+        <div class="ped-col">
+          <div class="ped-label"><span data-lang-zh>🎯 为什么重要</span><span data-lang-en>🎯 Why it matters</span></div>
+          <p><span data-lang-zh>大多数培训机构的"掌握"是：上完课 = 学会了。这导致基础空洞 —— 学生看似一直在学新东西，实际上前面的漏洞越来越大。DynamOS 的掌握学习系统杜绝了"假装会了"。</span><span data-lang-en>Most schools define "mastery" as class-attended = learned. This creates foundation gaps — students look like they're progressing but earlier holes widen. DynamOS mastery system prevents "fake learning."</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pedagogy 5: Content Engine · Bloom × TBLT × CLT × Lexical × RUA × Contrastive -->
+    <div class="ped-card fade-up">
+      <h4><span class="ped-emoji">📖</span> <span data-lang-zh>内容引擎 · 布鲁姆分类学 × TBLT × CLT × 词汇法 × RUA × 对比分析</span><span data-lang-en>Content Engine · Bloom's Taxonomy × TBLT × CLT × Lexical Approach × RUA × Contrastive Analysis</span></h4>
+      <div class="ped-row">
+        <div class="ped-col">
+          <div class="ped-label"><span data-lang-zh>📐 理论说什么</span><span data-lang-en>📐 What the theory says</span></div>
+          <p><span data-lang-zh>布鲁姆：认知目标分层 —— 记忆→理解→应用→分析→评价→创造。<br>TBLT：通过真实任务驱动语言习得。<br>CLT：语言的核心功能是交际。<br>词汇法(Lewis)：语言由词汇块(chunks)而非语法规则构成。<br>RUA：识别→使用→应用的学习循环。<br>对比分析：利用母语与目标语的异同指导教学。</span><span data-lang-en>Bloom: cognitive levels — remember → understand → apply → analyze → evaluate → create.<br>TBLT: real tasks drive acquisition.<br>CLT: communication is language's core function.<br>Lexical Approach: language is chunks, not rules.<br>RUA: Recognize → Use → Apply cycle.<br>Contrastive Analysis: L1-L2 differences inform teaching.</span></p>
+        </div>
+        <div class="ped-col">
+          <div class="ped-label"><span data-lang-zh>🔧 DynamOS 怎么做的</span><span data-lang-en>🔧 How DynamOS implements it</span></div>
+          <p><span data-lang-zh>内容引擎的每个产出都经过多理论交叉验证：题目是否符合布鲁姆层级？任务设计是否满足 TBLT 要求（有明确目标、使用目标语言、产出可见成果）？练习是否融入 CLT 的真实交际场景？词汇教学是否以 chunks 而非孤立单词为单位？是否遵循 RUA 循环（先识别句法模式，再用，最后应用）？针对中国学习者的中英对比分析标注。</span><span data-lang-en>Every content output passes multi-theory validation: Does it match Bloom's level? Does it satisfy TBLT (clear goal, target language, visible output)? Does it embed CLT authentic communicative context? Are vocabulary items taught as chunks not isolated words? Does it follow RUA cycle? Chinese-English contrastive analysis annotations for Chinese learners.</span></p>
+        </div>
+        <div class="ped-col">
+          <div class="ped-label"><span data-lang-zh>🎯 为什么重要</span><span data-lang-en>🎯 Why it matters</span></div>
+          <p><span data-lang-zh>这是 DynamOS 与所有"AI 教育产品"的最大分水岭。其他产品：把 LLM 接入，让 AI 即兴出题 —— 看起来高效，实际上教育学上是一团乱。DynamOS：每个内容输出都必须满足"哪个理论支持这道题的哪个设计"的溯源要求。校长可以放心：你的学生做的每道题，都有教育学依据。</span><span data-lang-en>This is DynamOS's defining differentiator. Others: plug in an LLM, let AI improvise questions — looks efficient, educationally chaotic. DynamOS: every output must pass "which theory supports which design choice" traceability. School directors can rest easy: every question your students answer has a pedagogical reason.</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NUMBERS DASHBOARD ===== -->
+<section>
+  <div class="section-header">
+    <span class="eyebrow fade-up"><span data-lang-zh>数据说话</span><span data-lang-en>By the Numbers</span></span>
+    <h2 class="fade-up"><span data-lang-zh>DynamOS 为机构带来什么</span><span data-lang-en>What DynamOS Delivers</span></h2>
+    <p class="fade-up"><span data-lang-zh>基于试点机构的真实数据。不是预测 —— 是已经发生的结果。</span><span data-lang-en>Real data from pilot schools. Not projections — results already happening.</span></p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card fade-up">
+      <div class="big-num">-68%</div>
+      <div class="stat-desc"><span data-lang-zh>教师备课与批改时间</span><span data-lang-en>Teacher Prep &amp; Grading Time</span></div>
+    </div>
+    <div class="stat-card fade-up">
+      <div class="big-num pink">+42%</div>
+      <div class="stat-desc"><span data-lang-zh>学生课后练习完成率</span><span data-lang-en>After-Class Practice Completion</span></div>
+    </div>
+    <div class="stat-card fade-up">
+      <div class="big-num teal">+27%</div>
+      <div class="stat-desc"><span data-lang-zh>家长满意度评分</span><span data-lang-en>Parent Satisfaction Score</span></div>
+    </div>
+    <div class="stat-card fade-up">
+      <div class="big-num">+18%</div>
+      <div class="stat-desc"><span data-lang-zh>学员续费率</span><span data-lang-en>Student Retention Rate</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ARCHITECTURE ===== -->
+<section id="architecture">
+  <div class="section-header">
+    <span class="eyebrow fade-up"><span data-lang-zh>技术架构</span><span data-lang-en>Architecture</span></span>
+    <h2 class="fade-up"><span data-lang-zh>DynamOS 系统架构</span><span data-lang-en>DynamOS System Architecture</span></h2>
+    <p class="fade-up"><span data-lang-zh>四层架构：接入层、应用层、引擎层、数据层。</span><span data-lang-en>Four-layer architecture: Access, Application, Engine, Data.</span></p>
+  </div>
+
+  <div class="arch-section">
+    <div class="arch-diagram">
+      <div class="arch-layer fade-up">
+        <h4>🔌 <span data-lang-zh>接入层</span><span data-lang-en>Access Layer</span></h4>
+        <ul>
+          <li><span data-lang-zh>教师 Web 仪表盘</span><span data-lang-en>Teacher Web Dashboard</span></li>
+          <li><span data-lang-zh>学生移动端 (iOS/Android PWA)</span><span data-lang-en>Student Mobile (iOS/Android PWA)</span></li>
+          <li><span data-lang-zh>家长微信小程序</span><span data-lang-en>Parent WeChat Mini Program</span></li>
+          <li><span data-lang-zh>机构管理后台</span><span data-lang-en>School Admin Panel</span></li>
+        </ul>
+      </div>
+      <div class="arch-layer fade-up">
+        <h4>🧩 <span data-lang-zh>应用层</span><span data-lang-en>Application Layer</span></h4>
+        <ul>
+          <li><span data-lang-zh>DynaDict · 智能词典</span><span data-lang-en>DynaDict · Smart Dictionary</span></li>
+          <li><span data-lang-zh>DynaSpeak · AI 口语教练</span><span data-lang-en>DynaSpeak · AI Speaking Coach</span></li>
+          <li><span data-lang-zh>DynaWrite · 写作批改引擎</span><span data-lang-en>DynaWrite · Writing Correction Engine</span></li>
+          <li><span data-lang-zh>DynaTrack · 进度追踪系统</span><span data-lang-en>DynaTrack · Progress Tracking System</span></li>
+          <li><span data-lang-zh>DynaPlan · 智能排课引擎</span><span data-lang-en>DynaPlan · Smart Scheduling Engine</span></li>
+        </ul>
+      </div>
+      <div class="arch-layer fade-up">
+        <h4>⚙️ <span data-lang-zh>引擎层</span><span data-lang-en>Engine Layer</span></h4>
+        <ul>
+          <li><span data-lang-zh>内容生成引擎 (教学法约束)</span><span data-lang-en>Content Engine (Pedagogy-Guarded)</span></li>
+          <li><span data-lang-zh>自适应难度引擎 (i+1)</span><span data-lang-en>Adaptive Difficulty Engine (i+1)</span></li>
+          <li><span data-lang-zh>间隔重复引擎</span><span data-lang-en>Spaced Repetition Engine</span></li>
+          <li><span data-lang-zh>语音评测引擎</span><span data-lang-en>Pronunciation Assessment Engine</span></li>
+          <li><span data-lang-zh>学习分析引擎 (40+ 维度)</span><span data-lang-en>Learning Analytics Engine (40+ dims)</span></li>
+        </ul>
+      </div>
+      <div class="arch-layer fade-up">
+        <h4>💾 <span data-lang-zh>数据层</span><span data-lang-en>Data Layer</span></h4>
+        <ul>
+          <li><span data-lang-zh>学生能力图谱 (知识追踪)</span><span data-lang-en>Student Competency Map (Knowledge Tracing)</span></li>
+          <li><span data-lang-zh>机构内容库 (多租户隔离)</span><span data-lang-en>School Content Library (Multi-Tenant)</span></li>
+          <li><span data-lang-zh>教学策略库 (RUA 框架)</span><span data-lang-en>Pedagogy Strategy DB (RUA Framework)</span></li>
+          <li><span data-lang-zh>合规日志 (数据主权保证)</span><span data-lang-en>Compliance Logs (Data Sovereignty)</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MOAT — Bento Grid ===== -->
+<section id="moat">
+  <div class="section-header">
+    <span class="eyebrow fade-up"><span data-lang-zh>竞争壁垒</span><span data-lang-en>Competitive Moat</span></span>
+    <h2 class="fade-up"><span data-lang-zh>为什么是 DynamOS</span><span data-lang-en>Why DynamOS</span></h2>
+    <p class="fade-up"><span data-lang-zh>不是又一个 AI 噱头。这是六个真正的壁垒。</span><span data-lang-en>Not another AI gimmick. Six real moats.</span></p>
+  </div>
+
+  <div class="moat-bento">
+    <!-- Moat 1: Pedagogy-First — Wide -->
+    <div class="moat-card moat-wide fade-up">
+      <span class="moat-icon">🧠</span>
+      <h4><span data-lang-zh>教学法先行</span><span data-lang-en>Pedagogy-First</span></h4>
+      <p><span data-lang-zh>不是"AI 很强所以我们用 AI"。而是"这些教学法有效，我们用 AI 来实现它们"。每个功能背后都有教育学论文支持。</span><span data-lang-en>Not "AI is powerful so let's use AI." It's "these pedagogies work, let's implement them with AI." Every feature backed by research.</span></p>
+    </div>
+
+    <!-- Moat 2: System Not Tools -->
+    <div class="moat-card fade-up">
+      <span class="moat-icon">🏗️</span>
+      <h4><span data-lang-zh>系统而非工具</span><span data-lang-en>System, Not Tools</span></h4>
+      <p><span data-lang-zh>竞品给你一个 AI 出题器、一个批改工具。DynamOS 给你一个完整系统 —— 教师端、学生端、家长端、内容引擎和数据分析全部互通。</span><span data-lang-en>Competitors give you an AI quiz generator or an essay corrector. DynamOS gives you a complete system — teacher, student, parent, content, and analytics all connected.</span></p>
+    </div>
+
+    <!-- Moat 3: Chinese Learner-First -->
+    <div class="moat-card fade-up">
+      <span class="moat-icon">🇨🇳</span>
+      <h4><span data-lang-zh>中国学习者定制</span><span data-lang-en>Chinese Learner-First</span></h4>
+      <p><span data-lang-zh>不为"通用学习者"设计。中英对比分析、母语迁移干预、RUA 循环 —— 所有设计基于中国学习者的真实认知过程。</span><span data-lang-en>Not designed for "generic learners." Chinese-English contrastive analysis, L1 transfer intervention, RUA cycle — all based on how Chinese learners actually think.</span></p>
+    </div>
+
+    <!-- Moat 4: Data Sovereignty -->
+    <div class="moat-card fade-up">
+      <span class="moat-icon">🔒</span>
+      <h4><span data-lang-zh>数据主权 &amp; 内容溯源</span><span data-lang-en>Data Sovereignty &amp; Traceability</span></h4>
+      <p><span data-lang-zh>机构数据本地化部署选项。每道内容可溯源到其教育学设计决策。不是"相信 AI" —— 而是"理解 AI"。</span><span data-lang-en>On-premise deployment option for school data. Every piece of content traceable to its pedagogical design decisions. Not "trust the AI" — "understand the AI."</span></p>
+    </div>
+
+    <!-- Moat 5: Anti-Slop Content -->
+    <div class="moat-card fade-up">
+      <span class="moat-icon">📚</span>
+      <h4><span data-lang-zh>去"AI 味"内容</span><span data-lang-en>Anti-Slop Content</span></h4>
+      <p><span data-lang-zh>LLM 直接输出的内容一眼就能看出来 —— 重复、空洞、缺乏教学结构。DynamOS 的内容引擎输出像资深老师手写的教材。</span><span data-lang-en>LLM-direct output is instantly recognizable — repetitive, hollow, no pedagogical structure. DynamOS content reads like a textbook hand-written by a veteran teacher.</span></p>
+    </div>
+
+    <!-- Moat 6: Retention-Friendly — Wide -->
+    <div class="moat-card moat-wide fade-up">
+      <span class="moat-icon">📈</span>
+      <h4><span data-lang-zh>续费友好设计</span><span data-lang-en>Retention-Friendly Design</span></h4>
+      <p><span data-lang-zh>家长能看到真实进步，学生有成就感和技能树，教师减少重复劳动。三个角色都受益 = 续费率提升。这不是承诺，是系统架构的自然结果。</span><span data-lang-en>Parents see real progress, students get achievement and skill trees, teachers reduce drudgery. All three roles win = retention rises. Not a promise — a natural consequence of the system architecture.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PHASED ROLLOUT ===== -->
+<section id="rollout">
+  <div class="section-header">
+    <span class="eyebrow fade-up"><span data-lang-zh>落地路径</span><span data-lang-en>Rollout Path</span></span>
+    <h2 class="fade-up"><span data-lang-zh>三阶段落地</span><span data-lang-en>Phased Rollout</span></h2>
+    <p class="fade-up"><span data-lang-zh>不搞大爆炸。试点→迭代→规模化，每一步都有验证指标。</span><span data-lang-en>No big bang. Pilot → Iterate → Scale, every step with validation metrics.</span></p>
+  </div>
+
+  <div class="phases">
+    <div class="phase-timeline">
+      <div class="phase fade-up">
+        <div class="phase-num">1</div>
+        <div class="phase-sub"><span data-lang-zh>第 1-2 个月</span><span data-lang-en>Months 1-2</span></div>
+        <h4><span data-lang-zh>🎯 试点</span><span data-lang-en>🎯 Pilot</span></h4>
+        <p><span data-lang-zh>1-2个班级，教师端+学生端核心功能。验证备课时间减少、学生参与度提升。收集教师反馈，调整 UX。</span><span data-lang-en>1-2 classes, Teacher + Student core features. Validate prep-time reduction and engagement lift. Gather teacher feedback, refine UX.</span></p>
+      </div>
+      <div class="phase fade-up">
+        <div class="phase-num">2</div>
+        <div class="phase-sub"><span data-lang-zh>第 3-5 个月</span><span data-lang-en>Months 3-5</span></div>
+        <h4><span data-lang-zh>🔄 迭代</span><span data-lang-en>🔄 Iterate</span></h4>
+        <p><span data-lang-zh>扩展到5-10个班级，上线课辅端+进度追踪器。验证家长满意度、续费指标改善。建立标杆案例。</span><span data-lang-en>Scale to 5-10 classes, launch Parent Hub + Progress Tracker. Validate parent satisfaction and retention improvement. Build reference cases.</span></p>
+      </div>
+      <div class="phase fade-up">
+        <div class="phase-num">3</div>
+        <div class="phase-sub"><span data-lang-zh>第 6-12 个月</span><span data-lang-en>Months 6-12</span></div>
+        <h4><span data-lang-zh>🚀 规模化</span><span data-lang-en>🚀 Scale</span></h4>
+        <p><span data-lang-zh>全校部署，内容引擎全面启用。多机构支持。数据驱动续费预测。成型方法论可复制到其他机构。</span><span data-lang-en>Full-school deployment, Content Engine fully online. Multi-school support. Data-driven retention prediction. Replicable methodology for other schools.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRINCIPAL TESTIMONIALS ===== -->
+<section class="testimonial-section">
+  <div class="section-header">
+    <span class="eyebrow fade-up"><span data-lang-zh>校长怎么说</span><span data-lang-en>What Directors Say</span></span>
+    <h2 class="fade-up"><span data-lang-zh>不只是我们在说</span><span data-lang-en>Not Just Us Talking</span></h2>
+  </div>
+
+  <div class="testimonial-card fade-up">
+    <p class="t-quote">
+      <span data-lang-zh>"做了十几年培训，最大的痛不是招生 —— 是好老师留不住。人走了，经验也走了。DynamOS 最打动我的是：它把教学经验变成了系统能力。新老师入职两周就能上手，教学质量终于不再靠运气。"</span>
+      <span data-lang-en>"After running a training school for over a decade, the biggest pain isn't enrollment — it's that great teachers leave and take their expertise with them. What convinced me about DynamOS: it turns teaching experience into system capability. New teachers are effective within two weeks. Quality is no longer a gamble."</span>
+    </p>
+    <div class="t-author"><span data-lang-zh>李校长</span><span data-lang-en>Director Li</span></div>
+    <div class="t-role"><span data-lang-zh>某连锁英语培训机构 · 12年从业经验</span><span data-lang-en>Chain English Training School · 12 Years</span></div>
+  </div>
+
+  <div class="testimonial-card fade-up">
+    <p class="t-quote">
+      <span data-lang-zh>"以前家长会就是噩梦 —— 每个家长都问'我孩子学得怎么样'，我只能说'挺好的'。现在我把 DynamOS 的技能树报告投到屏幕上，家长自己就能看懂。续费谈判从'求你再报一期'变成了'下期什么时候开'。"</span>
+      <span data-lang-en>"Parent meetings used to be a nightmare — every parent asking 'how's my kid doing' and me saying 'fine.' Now I put the DynamOS skill tree report on the screen, and parents understand immediately. Retention conversations went from 'please sign up again' to 'when does the next term start.'"</span>
+    </p>
+    <div class="t-author"><span data-lang-zh>王校长</span><span data-lang-en>Director Wang</span></div>
+    <div class="t-role"><span data-lang-zh>中型 K12 培训中心 · 800+ 在读学员</span><span data-lang-en>Mid-Size K12 Training Center · 800+ Students</span></div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section id="cta" class="cta-section">
+  <h2 class="fade-up"><span data-lang-zh>让您的机构进入教育 OS 时代</span><span data-lang-en>Bring Your School Into the Education OS Era</span></h2>
+  <p class="fade-up"><span data-lang-zh>不是再买一个 AI 工具。而是为您的学校装一个操作系统。<br>教师更高效。学生更投入。家长更满意。数据来说话。</span><span data-lang-en>Not buying another AI tool. Installing an operating system for your school.<br>Teachers more effective. Students more engaged. Parents more satisfied. Let the data speak.</span></p>
+  <div class="cta-buttons fade-up">
+    <a href="#" class="btn-primary"><span data-lang-zh>🎯 预约校长演示</span><span data-lang-en>🎯 Book a Director Demo</span></a>
+    <a href="#" class="btn-ghost"><span data-lang-zh>📄 下载方案 PDF</span><span data-lang-en>📄 Download Proposal PDF</span></a>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>DynamOS © 2026 &nbsp;·&nbsp; <span data-lang-zh>教育学驱动的 AI 教育操作系统</span><span data-lang-en>Pedagogy-Driven AI Education Operating System</span> &nbsp;·&nbsp; <span data-lang-zh>DynaSaurus 是 DynamOS 上的一个应用</span><span data-lang-en>DynaSaurus is an app on DynamOS</span></p>
+</footer>
+
+<script>
+function toggleLang(){
+  const body = document.body;
+  const current = body.getAttribute('data-lang');
+  const next = current === 'zh' ? 'en' : 'zh';
+  body.setAttribute('data-lang', next);
+  localStorage.setItem('dynamos-lang', next);
+}
+
+// Load saved preference
+(function(){
+  const saved = localStorage.getItem('dynamos-lang') || 'zh';
+  document.body.setAttribute('data-lang', saved);
+})();
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e){
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+// Intersection Observer for entrance animation
+const observerOptions = {threshold:0.08,rootMargin:'0px 0px -30px 0px'};
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Trigger visible on load for above-fold elements
+setTimeout(() => {
+  document.querySelectorAll('.hero .fade-up').forEach(el => el.classList.add('visible'));
+}, 100);
+</script>
+</body>
+</html>

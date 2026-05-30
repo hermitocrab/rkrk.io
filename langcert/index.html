@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LangCert Courseware — Kee Lee</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --card: #13131a;
+      --border: #1e1e2e;
+      --text: #e4e4e4;
+      --muted: #8888a0;
+      --accent: #7c3aed;
+      --green: #10b981;
+      --amber: #f59e0b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--accent), #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .subtitle { color: var(--muted); margin-bottom: 2rem; font-size: 1.1rem; }
+    .section { margin-bottom: 2.5rem; }
+    .section h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 0.75rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card a {
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card h3 { font-size: 1rem; font-weight: 600; }
+    .card .meta { font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem; }
+    .tag {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .tag-b1 { background: rgba(16,185,129,.15); color: var(--green); }
+    .tag-b2 { background: rgba(245,158,11,.15); color: var(--amber); }
+    .tag-c1 { background: rgba(124,58,237,.15); color: var(--accent); }
+    .arrow { color: var(--muted); font-size: 1.2rem; }
+    .footer {
+      text-align: center; color: var(--muted); font-size: 0.85rem;
+      margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎓 LangCert Courseware</h1>
+    <p class="subtitle">LanguageCert International ESOL — Listening & Speaking. Built by Kee Lee with 002 🦄 & 003 🐺</p>
+
+    <div class="section">
+      <h2>🎧 Listening</h2>
+      <div class="card">
+        <a href="/langcert/listening/lesson1">
+          <div>
+            <h3>Lesson 1 — Short Statements & Conversations</h3>
+            <p class="meta">Part 1 & 2 · Discourse markers · Speaker intent</p>
+            <span class="tag tag-b1">B1 Achiever</span>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+      <div class="card">
+        <a href="/langcert/listening/lesson2">
+          <div>
+            <h3>Lesson 2 — Longer Talks & Extended Listening</h3>
+            <p class="meta">Part 3 & 4 · Multi-speaker · Inference</p>
+            <span class="tag tag-b1">B1 Achiever</span>
+            <span class="tag tag-b2">B2 Communicator</span>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🗣️ Speaking</h2>
+      <div class="card">
+        <a href="/langcert/speaking/lesson1">
+          <div>
+            <h3>Lesson 1 — Interview & Situational Role Play</h3>
+            <p class="meta">Part 1 & 2 · Personal Q&A · Scene interaction</p>
+            <span class="tag tag-b2">B2 Communicator</span>
+            <span class="tag tag-c1">C1 Expert</span>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+      <div class="card">
+        <a href="/langcert/speaking/lesson2">
+          <div>
+            <h3>Lesson 2 — Long Turn & Topic Discussion</h3>
+            <p class="meta">Part 3 & 4 · Abstract reasoning · Debate</p>
+            <span class="tag tag-b2">B2 Communicator</span>
+            <span class="tag tag-c1">C1 Expert</span>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+      <div class="card">
+        <a href="/langcert/speaking/question-bank">
+          <div>
+            <h3>Question Bank</h3>
+            <p class="meta">Full question bank for all 4 parts · B2 & C1</p>
+            <span class="tag tag-b2">B2</span>
+            <span class="tag tag-c1">C1</span>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer">
+      rkrk.io/langcert · Built with 🦄🐺 · <a href="/" style="color:var(--accent)">Home</a>
+    </div>
+  </div>
+</body>
+</html>

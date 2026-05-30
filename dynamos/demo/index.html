@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DynamOS — The Education OS | 教育操作系统</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   DYNAMOS v4 — Warm White + Photo Bento + Full Popups
+   VARIANCE 8 | MOTION 6 | DENSITY 3
+   Anti-slop: no AI-purple gradients, no equal cards, no glass
+   ================================================================ */
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:#fafaf9;
+  color:#1a1a2e;
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body.popup-open{overflow:hidden}
+
+h1,h2,h3,h4,.headline{
+  font-family:'Outfit','Noto Sans SC',sans-serif;
+  font-weight:600;
+  letter-spacing:-0.02em;
+}
+
+/* Language toggle */
+[data-lang-en],[data-lang-zh]{display:none}
+body[data-lang="zh"] [data-lang-zh]{display:inline}
+body[data-lang="zh"] [data-lang-zh].block{display:block}
+body[data-lang="zh"] [data-lang-en]{display:none}
+body[data-lang="en"] [data-lang-en]{display:inline}
+body[data-lang="en"] [data-lang-en].block{display:block}
+body[data-lang="en"] [data-lang-zh]{display:none}
+.block{display:block}
+
+/* ================================================================
+   NAV
+   ================================================================ */
+.nav-bar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 32px;
+  background:rgba(250,250,249,0.88);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(0,0,0,0.06);
+}
+.logo{
+  font-family:'Outfit',sans-serif;
+  font-size:1.25rem;font-weight:800;
+  color:#1a1a1a;text-decoration:none;
+  letter-spacing:-0.03em;
+}
+.logo span{color:#e62b1e}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{
+  color:#6b7280;text-decoration:none;
+  font-size:0.8rem;font-weight:500;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:#1a1a2e}
+.lang-btn{
+  background:#f3f4f6;
+  border:1px solid #e5e7eb;
+  color:#374151;padding:7px 18px;border-radius:20px;
+  font-size:0.75rem;font-weight:600;cursor:pointer;
+  transition:all 0.25s;
+}
+.lang-btn:hover{background:#e5e7eb;color:#1a1a2e}
+
+/* ================================================================
+   HERO — full-width hero-banner.jpg
+   ================================================================ */
+.hero{
+  min-height:100dvh;display:flex;align-items:center;
+  position:relative;overflow:hidden;
+  background:#1a1a2e url('img/hero-banner.jpg') center/cover no-repeat;
+  padding:120px 32px;
+}
+/* Hero text background wrapper */
+.hero-text-bg{
+  background:linear-gradient(to right,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 100%);
+  padding:36px 40px;border-radius:16px;
+  width:fit-content;max-width:100%;
+}
+@media(max-width:640px){
+  .hero-text-bg{padding:28px 24px}
+}
+.hero-inner{
+  position:relative;
+  max-width:780px;
+}
+.hero-badge{
+  display:inline-block;padding:6px 20px;
+  background:rgba(255,255,255,0.14);
+  border:1px solid rgba(255,255,255,0.22);
+  border-radius:24px;font-size:0.85rem;
+  font-weight:500;color:rgba(255,255,255,0.95);
+  margin-bottom:0;letter-spacing:0.01em;
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+}
+.hero h1{
+  font-size:clamp(2.5rem,6vw,3.5rem);
+  font-weight:800;line-height:1.08;
+  margin-bottom:24px;
+  color:#fff;
+  letter-spacing:-0.03em;
+}
+.hero h1 em{
+  font-style:normal;
+  color:#c4b5fd;
+}
+.hero-dek{
+  font-size:1.1rem;
+  color:rgba(255,255,255,0.78);max-width:560px;
+  margin-bottom:48px;line-height:1.75;
+}
+.hero-dek strong{color:#fff;font-weight:600}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{
+  background:#7c3aed;
+  color:#fff;padding:15px 36px;border-radius:12px;
+  font-weight:600;font-size:0.95rem;
+  text-decoration:none;border:none;cursor:pointer;
+  transition:all 0.3s;box-shadow:0 4px 24px rgba(124,58,237,0.3);
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(124,58,237,0.45);background:#6d28d9}
+.btn-ghost{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.25);
+  color:#fff;padding:15px 36px;border-radius:12px;
+  font-weight:600;font-size:0.95rem;
+  text-decoration:none;cursor:pointer;
+  transition:all 0.3s;
+}
+.btn-ghost:hover{background:rgba(255,255,255,0.16);border-color:rgba(255,255,255,0.4)}
+
+/* ================================================================
+   SECTION HEADER
+   ================================================================ */
+.section-header{
+  text-align:center;padding:100px 24px 56px;
+}
+.section-header .eyebrow{
+  display:inline-block;font-size:0.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.1em;
+  color:#7c3aed;margin-bottom:16px;
+}
+.section-header h2{
+  font-size:clamp(1.6rem,3.5vw,2.2rem);
+  font-weight:700;color:#1a1a2e;
+  margin-bottom:12px;
+  letter-spacing:-0.02em;
+}
+.section-header p{
+  font-size:1rem;color:#6b7280;
+  max-width:540px;margin:0 auto;
+  line-height:1.7;
+}
+
+/* ================================================================
+   BENTO CARD GRID — VARIANCE 8
+   ================================================================ */
+.module-section{padding:0 24px 100px;max-width:1280px;margin:0 auto}
+
+.module-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  grid-auto-rows:300px;
+  gap:16px;
+}
+@media(max-width:900px){
+  .module-grid{grid-template-columns:1fr 1fr;grid-auto-rows:260px}
+}
+@media(max-width:560px){
+  .module-grid{grid-template-columns:1fr;grid-auto-rows:220px}
+}
+
+.module-card{
+  position:relative;overflow:hidden;
+  border-radius:18px;
+  background-size:cover;background-position:center;
+  cursor:pointer;transition:all 0.3s ease;
+  display:flex;align-items:flex-end;
+  border:none;
+}
+.module-card:hover{
+  transform:scale(1.02);
+  box-shadow:0 24px 56px rgba(0,0,0,0.25);
+  z-index:2;
+}
+.module-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.5) 50%,rgba(0,0,0,0.78) 100%);
+  z-index:1;pointer-events:none;
+  transition:all 0.3s;
+}
+.module-card:hover::before{
+  background:linear-gradient(180deg,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.45) 50%,rgba(0,0,0,0.85) 100%);
+}
+.module-card .card-label{
+  position:relative;z-index:2;
+  padding:28px 24px;width:100%;
+}
+.module-card .card-label h3{
+  font-family:'Outfit','Noto Sans SC',sans-serif;
+  font-size:1.5rem;font-weight:700;
+  color:#fff;margin-bottom:6px;
+  letter-spacing:-0.01em;
+}
+.module-card .card-label .card-tagline{
+  font-size:0.88rem;color:rgba(255,255,255,0.72);
+  line-height:1.5;max-width:440px;
+}
+.module-card .card-label .card-hint{
+  display:inline-block;margin-top:10px;
+  font-size:0.72rem;color:rgba(255,255,255,0.5);
+  border-bottom:1px solid rgba(255,255,255,0.2);
+  padding-bottom:2px;
+}
+
+/* Bento sizing */
+.span-2{grid-column:span 2}
+.span-3{grid-column:1/-1}
+@media(max-width:900px){.span-2{grid-column:span 2}.span-3{grid-column:span 2}}
+@media(max-width:560px){.span-2{grid-column:span 1}.span-3{grid-column:span 1}}
+.cell-tall{grid-row:span 2}
+@media(max-width:560px){.cell-tall{grid-row:span 1}}
+
+/* Parallax on hover */
+.module-card[data-parallax]{
+  background-size:105% auto;
+  transition:all 0.3s ease,background-position 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+/* ================================================================
+   FULLSCREEN POPUP — slideUp + fadeIn
+   ================================================================ */
+.popup-overlay{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(0,0,0,0.78);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;visibility:hidden;
+  transition:opacity 0.4s ease,visibility 0.4s ease;
+}
+.popup-overlay.active{opacity:1;visibility:visible}
+
+.popup-sheet{
+  width:100%;max-width:900px;max-height:92dvh;
+  background:#fafaf9;
+  border-radius:24px 24px 0 0;
+  overflow-y:auto;overflow-x:hidden;
+  position:relative;
+  transform:translateY(60px);
+  transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.popup-overlay.active .popup-sheet{transform:translateY(0)}
+
+.popup-close{
+  position:sticky;top:16px;right:16px;z-index:10;
+  float:right;
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(0,0,0,0.5);
+  border:1px solid rgba(255,255,255,0.2);
+  color:#fff;font-size:1.1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.25s;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  margin-bottom:-60px;
+}
+.popup-close:hover{background:rgba(0,0,0,0.7)}
+
+.popup-header{
+  position:relative;width:100%;
+  height:260px;background-size:cover;background-position:center;
+  display:flex;align-items:flex-end;
+  border-radius:24px 24px 0 0;
+  overflow:hidden;
+}
+@media(max-width:640px){.popup-header{height:200px}}
+.popup-header::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 15%,rgba(0,0,0,0.8) 100%);
+}
+.popup-header h2{
+  position:relative;z-index:2;
+  font-family:'Outfit','Noto Sans SC',sans-serif;
+  font-size:clamp(1.4rem,3vw,2rem);
+  font-weight:700;color:#fff;
+  padding:32px 32px 28px;
+  letter-spacing:-0.02em;
+}
+
+.popup-body{padding:28px 32px 48px}
+@media(max-width:640px){.popup-body{padding:24px 20px 40px}}
+.popup-body .intro-text{
+  font-size:1rem;color:#4b5563;
+  max-width:640px;line-height:1.75;
+  margin-bottom:24px;
+}
+
+.popup-body h3{
+  font-family:'Outfit','Noto Sans SC',sans-serif;
+  font-size:1.1rem;font-weight:700;
+  color:#1a1a2e;margin:32px 0 14px;
+  letter-spacing:-0.01em;
+}
+.popup-body h3:first-of-type{margin-top:0}
+
+/* Popup quote */
+.popup-quote{
+  font-size:0.95rem;font-style:italic;
+  color:#7c3aed;font-weight:500;
+  padding:18px 0;
+  border-top:1px solid #e5e7eb;
+  border-bottom:1px solid #e5e7eb;
+  margin:28px 0;
+  line-height:1.7;
+}
+
+/* Tag row */
+.tag-row{
+  display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 8px;
+}
+.tag{
+  display:inline-block;padding:4px 14px;
+  background:#ede9fe;
+  border:1px solid #ddd6fe;
+  border-radius:14px;font-size:0.75rem;
+  font-weight:500;color:#6d28d9;
+  white-space:nowrap;
+}
+.tag-outline{
+  background:transparent;
+  border:1px solid #d1d5db;
+  color:#6b7280;
+}
+
+/* Detail grid inside popup */
+.detail-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:14px;margin-bottom:20px;
+}
+@media(max-width:768px){.detail-grid{grid-template-columns:1fr}}
+.detail-tile{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:14px;padding:20px;
+  transition:all 0.2s;
+}
+.detail-tile:hover{border-color:#d1d5db;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+.detail-tile .tile-label{
+  font-size:0.7rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.08em;
+  color:#7c3aed;margin-bottom:8px;
+}
+.detail-tile p{
+  font-size:0.84rem;color:#4b5563;
+  line-height:1.65;
+}
+
+/* Highlight box in popup */
+.highlight-box{
+  background:#f5f3ff;
+  border:1px solid #ede9fe;
+  border-radius:14px;padding:20px 22px;
+  margin:20px 0;
+  font-size:0.9rem;color:#6d28d9;
+  line-height:1.7;
+}
+.highlight-box strong{color:#5b21b6}
+
+/* Scenario callout */
+.scenario-callout{
+  background:#fef3c7;
+  border:1px solid #fde68a;
+  border-radius:14px;padding:18px 20px;
+  margin:20px 0;font-size:0.88rem;
+  color:#92400e;line-height:1.7;
+}
+.scenario-callout strong{color:#78350f}
+
+/* ================================================================
+   ARCHITECTURE SECTION
+   ================================================================ */
+.arch-section{
+  padding:0 24px 100px;max-width:1280px;margin:0 auto;
+}
+.arch-hero{
+  position:relative;border-radius:20px;overflow:hidden;
+  margin-bottom:24px;
+  background:url('img/architecture-diagram.jpg') center/cover no-repeat;
+  min-height:400px;display:flex;align-items:center;justify-content:center;
+}
+.arch-hero::before{
+  content:'';position:absolute;inset:0;
+  background:rgba(0,0,0,0.55);
+}
+.arch-hero span{
+  position:relative;z-index:1;
+  font-family:'Outfit',sans-serif;
+  font-size:clamp(1.5rem,3vw,2rem);
+  font-weight:700;color:#fff;
+  letter-spacing:-0.02em;
+}
+.arch-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+@media(max-width:768px){.arch-grid{grid-template-columns:1fr}}
+.arch-card{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:16px;padding:24px;
+  transition:all 0.2s;
+}
+.arch-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.05)}
+.arch-card h4{
+  font-family:'Outfit','Noto Sans SC',sans-serif;
+  font-size:0.95rem;font-weight:700;
+  color:#7c3aed;margin-bottom:12px;
+}
+.arch-card ul{list-style:none;padding:0}
+.arch-card li{
+  font-size:0.84rem;color:#4b5563;
+  padding:6px 0;border-bottom:1px solid #f3f4f6;
+  line-height:1.5;
+}
+.arch-card li:last-child{border-bottom:none}
+.arch-card li::before{
+  content:'▸ ';color:#7c3aed;font-size:0.6rem;
+}
+
+/* ================================================================
+   MOAT SECTION
+   ================================================================ */
+.moat-section{padding:0 24px 100px;max-width:1280px;margin:0 auto}
+.moat-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+@media(max-width:900px){.moat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.moat-grid{grid-template-columns:1fr}}
+.moat-card{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:16px;padding:28px 24px;
+  text-align:center;
+  transition:all 0.25s;
+}
+.moat-card:hover{
+  border-color:#d1d5db;
+  box-shadow:0 4px 20px rgba(0,0,0,0.06);
+}
+.moat-card .moat-icon{font-size:2.2rem;margin-bottom:14px;display:block}
+.moat-card h4{
+  font-family:'Outfit','Noto Sans SC',sans-serif;
+  font-size:1rem;font-weight:700;
+  color:#1a1a2e;margin-bottom:10px;
+}
+.moat-card p{
+  font-size:0.82rem;color:#6b7280;
+  line-height:1.6;
+}
+
+/* ================================================================
+   ROLLOUT SECTION
+   ================================================================ */
+.rollout-section{padding:0 24px 100px;max-width:1000px;margin:0 auto}
+.rollout-timeline{
+  display:flex;gap:16px;
+  position:relative;
+}
+@media(max-width:768px){.rollout-timeline{flex-direction:column}}
+.rollout-timeline::before{
+  content:'';position:absolute;top:36px;left:0;right:0;
+  height:2px;background:linear-gradient(90deg,#7c3aed,rgba(124,58,237,0.3));
+  z-index:0;
+}
+@media(max-width:768px){.rollout-timeline::before{display:none}}
+.phase{
+  flex:1;background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:16px;padding:28px 24px;
+  text-align:center;position:relative;z-index:1;
+  transition:all 0.25s;
+}
+.phase:hover{border-color:#d1d5db;box-shadow:0 4px 20px rgba(0,0,0,0.05)}
+.phase-num{
+  width:52px;height:52px;border-radius:50%;
+  background:#7c3aed;
+  color:#fff;font-weight:700;font-size:1.15rem;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 16px;
+  font-family:'Outfit',sans-serif;
+}
+.phase h4{
+  font-family:'Outfit','Noto Sans SC',sans-serif;
+  font-size:1rem;font-weight:700;
+  color:#1a1a2e;margin-bottom:8px;
+}
+.phase p{
+  font-size:0.82rem;color:#6b7280;
+  line-height:1.6;
+}
+.phase .phase-sub{
+  font-size:0.68rem;color:#7c3aed;
+  font-weight:600;margin-bottom:8px;
+  text-transform:uppercase;letter-spacing:0.05em;
+}
+
+/* ================================================================
+   CTA — single prominent button
+   ================================================================ */
+.cta-section{
+  text-align:center;padding:0 24px 140px;
+}
+.cta-section h2{
+  font-size:clamp(1.7rem,3.5vw,2.3rem);
+  font-weight:700;color:#1a1a2e;
+  margin-bottom:16px;
+  letter-spacing:-0.02em;
+}
+.cta-section p{
+  font-size:1rem;color:#6b7280;
+  max-width:560px;margin:0 auto 36px;
+  line-height:1.75;
+}
+.btn-book-demo{
+  display:inline-block;
+  background:linear-gradient(135deg,#7c3aed 0%,#a855f7 50%,#ec4899 100%);
+  color:#fff;padding:18px 48px;border-radius:14px;
+  font-weight:700;font-size:1.05rem;
+  text-decoration:none;border:none;cursor:pointer;
+  transition:all 0.35s cubic-bezier(0.16,1,0.3,1);
+  box-shadow:0 6px 32px rgba(124,58,237,0.35);
+  letter-spacing:0.01em;
+}
+.btn-book-demo:hover{
+  transform:translateY(-3px) scale(1.02);
+  box-shadow:0 12px 48px rgba(124,58,237,0.5);
+  background:linear-gradient(135deg,#6d28d9 0%,#9333ea 50%,#db2777 100%);
+}
+@media(max-width:640px){
+  .btn-book-demo{padding:16px 36px;font-size:0.95rem;width:90%;max-width:340px}
+}
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+.footer{
+  text-align:center;padding:44px 24px;
+  border-top:1px solid #e5e7eb;
+  font-size:0.78rem;color:#9ca3af;
+  line-height:1.7;
+}
+
+/* ================================================================
+   ENTRANCE ANIMATION — IntersectionObserver
+   ================================================================ */
+.fade-up{
+  opacity:0;transform:translateY(28px);
+  transition:opacity 0.7s ease,transform 0.7s ease;
+}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* ================================================================
+   SWIPE TO CLOSE — mobile
+   ================================================================ */
+@media(hover:none) and (pointer:coarse){
+  .popup-sheet{-webkit-overflow-scrolling:touch}
+}
+.swipe-indicator{
+  display:none;width:40px;height:4px;
+  background:#d1d5db;border-radius:2px;
+  margin:12px auto 0;
+}
+@media(hover:none) and (pointer:coarse){
+  .swipe-indicator{display:block}
+}
+
+/* ================================================================
+   FORM POPUP — centered modal card
+   ================================================================ */
+.form-overlay{
+  position:fixed;inset:0;z-index:300;
+  background:rgba(0,0,0,0.72);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  opacity:0;visibility:hidden;
+  transition:opacity 0.3s ease,visibility 0.3s ease;
+}
+.form-overlay.active{opacity:1;visibility:visible}
+
+.form-card{
+  background:#fff;
+  border-radius:20px;
+  width:100%;max-width:540px;
+  max-height:88dvh;
+  overflow-y:auto;
+  position:relative;
+  padding:36px 32px 32px;
+  box-shadow:0 24px 80px rgba(0,0,0,0.32);
+  transform:translateY(24px);
+  transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+@media(max-width:640px){
+  .form-card{padding:28px 20px 24px;border-radius:18px;max-height:92dvh}
+}
+.form-overlay.active .form-card{transform:translateY(0)}
+
+.form-close{
+  position:absolute;top:14px;right:16px;
+  width:38px;height:38px;border-radius:50%;
+  background:#f3f4f6;border:none;
+  color:#6b7280;font-size:1.15rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;line-height:1;
+}
+.form-close:hover{background:#e5e7eb;color:#1a1a2e}
+
+.form-card h3{
+  font-family:'Outfit','Noto Sans SC',sans-serif;
+  font-size:1.3rem;font-weight:700;
+  color:#1a1a2e;margin-bottom:6px;
+  letter-spacing:-0.02em;
+}
+.form-card .form-subtitle{
+  font-size:0.85rem;color:#6b7280;
+  margin-bottom:24px;line-height:1.6;
+}
+
+.form-group{margin-bottom:18px}
+.form-group label{
+  display:block;font-size:0.82rem;font-weight:600;
+  color:#374151;margin-bottom:5px;
+  line-height:1.5;
+}
+.form-group label em{
+  font-style:normal;color:#9ca3af;font-weight:400;font-size:0.8rem;
+  display:inline;margin-left:6px;
+}
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;padding:11px 14px;
+  border:1.5px solid #e5e7eb;
+  border-radius:10px;
+  font-size:0.88rem;font-family:inherit;
+  color:#1a1a2e;background:#fafaf9;
+  transition:all 0.2s;
+  outline:none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:#a78bfa;
+  box-shadow:0 0 0 3px rgba(167,139,250,0.12);
+  background:#fff;
+}
+.form-group textarea{resize:vertical;min-height:80px}
+.form-group select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236b7280' d='M1.41.59L6 5.17 10.59.59 12 2l-6 6-6-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer}
+
+/* Checkbox group */
+.checkbox-group{display:flex;flex-wrap:wrap;gap:8px}
+.checkbox-group .cb-label{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 14px;border:1.5px solid #e5e7eb;
+  border-radius:10px;font-size:0.82rem;
+  color:#4b5563;cursor:pointer;
+  transition:all 0.2s;user-select:none;
+  background:#fafaf9;
+}
+.checkbox-group .cb-label:hover{border-color:#c4b5fd}
+.checkbox-group input[type="checkbox"]{display:none}
+.checkbox-group input[type="checkbox"]:checked + span{
+  color:#7c3aed;font-weight:600;
+}
+.checkbox-group input[type="checkbox"]:checked ~ .cb-mark{
+  background:#7c3aed;border-color:#7c3aed;
+}
+.cb-mark{
+  width:18px;height:18px;border-radius:5px;
+  border:2px solid #d1d5db;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:all 0.2s;flex-shrink:0;
+}
+.checkbox-group input[type="checkbox"]:checked ~ .cb-mark::after{
+  content:'✓';color:#fff;font-size:0.65rem;font-weight:700;
+}
+
+.btn-submit{
+  width:100%;padding:14px;
+  background:linear-gradient(135deg,#7c3aed 0%,#a855f7 50%,#ec4899 100%);
+  color:#fff;border:none;border-radius:12px;
+  font-weight:700;font-size:0.95rem;cursor:pointer;
+  transition:all 0.3s;
+  box-shadow:0 4px 20px rgba(124,58,237,0.25);
+  letter-spacing:0.01em;
+  margin-top:4px;
+}
+.btn-submit:hover{
+  transform:translateY(-1px);
+  box-shadow:0 8px 32px rgba(124,58,237,0.4);
+}
+.btn-submit:disabled{
+  opacity:0.6;cursor:not-allowed;transform:none;
+  box-shadow:0 2px 8px rgba(124,58,237,0.15);
+}
+.btn-submit .spinner{
+  display:none;width:18px;height:18px;
+  border:2.5px solid rgba(255,255,255,0.3);
+  border-top-color:#fff;border-radius:50%;
+  animation:spin 0.6s linear infinite;
+  margin-right:8px;vertical-align:middle;
+}
+.btn-submit.loading .spinner{display:inline-block}
+.btn-submit.loading .btn-text{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Form success state */
+.form-success{
+  display:none;text-align:center;padding:40px 20px;
+}
+.form-success.active{display:block}
+.form-success .success-icon{
+  font-size:3rem;margin-bottom:16px;
+}
+.form-success h4{
+  font-family:'Outfit','Noto Sans SC',sans-serif;
+  font-size:1.15rem;font-weight:700;
+  color:#1a1a2e;margin-bottom:10px;
+}
+.form-success p{
+  font-size:0.92rem;color:#6b7280;
+  line-height:1.65;
+}
+#form-content.hidden{display:none}
+
+/* ================================================================
+   PRINT
+   ================================================================ */
+@media print{
+  body{background:#fff;color:#111;font-size:11px}
+  .nav-bar{display:none}
+  .hero{min-height:auto;padding:40px 24px;background:none}
+  .hero h1,.hero-dek{color:#111}
+  .hero h1 em{color:#7c3aed}
+  .hero::after{display:none}
+  .hero-badge{background:#f3f4f6;border-color:#e5e7eb;color:#374151}
+  .btn-primary,.btn-ghost{border:1px solid #333;color:#111;background:#eee}
+  .popup-overlay{display:none}
+  .module-grid{grid-template-columns:1fr 1fr}
+  .moat-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body data-lang="zh">
+
+<!-- ===== NAV ===== -->
+<nav class="nav-bar">
+  <a href="https://rkrk.io" class="logo"><span>rkrk</span>.io</a>
+  <div class="nav-links">
+    <a href="#modules"><span data-lang-zh>模块</span><span data-lang-en>Modules</span></a>
+    <a href="#architecture"><span data-lang-zh>架构</span><span data-lang-en>Arch</span></a>
+    <a href="#moat"><span data-lang-zh>优势</span><span data-lang-en>Moat</span></a>
+    <a href="#rollout"><span data-lang-zh>落地</span><span data-lang-en>Rollout</span></a>
+    <a href="#cta"><span data-lang-zh>联系</span><span data-lang-en>Contact</span></a>
+    <button class="lang-btn" onclick="toggleLang()" aria-label="Switch language">
+      <span data-lang-zh>EN</span><span data-lang-en>中文</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text-bg">
+    <div class="hero-badge fade-up"><span data-lang-zh>🎓 面向教育机构的AI操作系统</span><span data-lang-en>🎓 AI Operating System for Schools</span></div>
+    <h1 class="fade-up">Dynam<em>OS</em></h1>
+    <p class="hero-dek fade-up">
+      <span data-lang-zh class="block">
+        不是另一个AI工具。<br>
+        而是教育机构的<strong>操作系统</strong>——从教师到学生，从课堂到家庭，从内容到数据，端到端打通。
+      </span>
+      <span data-lang-en class="block">
+        Not another AI tool.<br>
+        The <strong>operating system</strong> for education — from teachers to students, classroom to home, content to data, end-to-end.
+      </span>
+    </p>
+    <div class="hero-cta fade-up">
+      <a href="#modules" class="btn-primary"><span data-lang-zh>探索 DynamOS</span><span data-lang-en>Explore DynamOS</span></a>
+      <a href="#cta" class="btn-ghost"><span data-lang-zh>预约演示</span><span data-lang-en>Book a Demo</span></a>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE BENTO CARDS ===== -->
+<section id="modules" class="module-section">
+  <div class="section-header">
+    <span class="eyebrow fade-up"><span data-lang-zh>五大模块</span><span data-lang-en>Five Modules</span></span>
+    <h2 class="fade-up"><span data-lang-zh>DynamOS 核心模块</span><span data-lang-en>DynamOS Core Modules</span></h2>
+    <p class="fade-up"><span data-lang-zh>五个相互联动的子系统，覆盖教学全链路。点击卡片查看详情。</span><span data-lang-en>Five interconnected subsystems covering the full teaching chain. Tap a card for details.</span></p>
+  </div>
+
+  <div class="module-grid">
+    <!-- 1. Teacher AI — wide (span 2) -->
+    <article class="module-card span-2 fade-up" data-parallax
+             style="background:#1a1a2e url('img/teacher-ai.jpg') center/cover no-repeat"
+             onclick="openPopup('teacher')">
+      <div class="card-label">
+        <h3><span data-lang-zh>教师端</span><span data-lang-en>Teacher AI App</span></h3>
+        <p class="card-tagline"><span data-lang-zh>AI协同教学仪表盘 — 把备课时间砍掉70%</span><span data-lang-en>AI co-teacher dashboard — cut prep time 70%</span></p>
+        <span class="card-hint"><span data-lang-zh>点击查看详情 →</span><span data-lang-en>Tap for details →</span></span>
+      </div>
+    </article>
+
+    <!-- 2. Student AI — tall (span 1, row 2) -->
+    <article class="module-card cell-tall fade-up" data-parallax
+             style="background:#1a1a2e url('img/student-ai.jpg') center/cover no-repeat"
+             onclick="openPopup('student')">
+      <div class="card-label">
+        <h3><span data-lang-zh>学生端</span><span data-lang-en>Student AI App</span></h3>
+        <p class="card-tagline"><span data-lang-zh>24/7私人导师 — 个性化学习路径</span><span data-lang-en>24/7 private tutor — personalized learning</span></p>
+        <span class="card-hint"><span data-lang-zh>点击查看详情 →</span><span data-lang-en>Tap for details →</span></span>
+      </div>
+    </article>
+
+    <!-- 3. TA & Parent -->
+    <article class="module-card fade-up" data-parallax
+             style="background:#1a1a2e url('img/parent-ai.jpg') center/cover no-repeat"
+             onclick="openPopup('parent')">
+      <div class="card-label">
+        <h3><span data-lang-zh>课辅端</span><span data-lang-en>TA & Parent</span></h3>
+        <p class="card-tagline"><span data-lang-zh>家校沟通 — 家长看到真实进步</span><span data-lang-en>Home-school bridge — real progress visible</span></p>
+        <span class="card-hint"><span data-lang-zh>点击查看详情 →</span><span data-lang-en>Tap for details →</span></span>
+      </div>
+    </article>
+
+    <!-- 4. Content Engine -->
+    <article class="module-card fade-up" data-parallax
+             style="background:#1a1a2e url('img/content-engine.jpg') center/cover no-repeat"
+             onclick="openPopup('engine')">
+      <div class="card-label">
+        <h3><span data-lang-zh>内容引擎</span><span data-lang-en>Content Engine</span></h3>
+        <p class="card-tagline"><span data-lang-zh>教学法优先 — 每道题都有教育学理由</span><span data-lang-en>Pedagogy-first — every question reasoned</span></p>
+        <span class="card-hint"><span data-lang-zh>点击查看详情 →</span><span data-lang-en>Tap for details →</span></span>
+      </div>
+    </article>
+
+    <!-- 5. Progress Tracker — wide (span 3) -->
+    <article class="module-card span-3 fade-up" data-parallax
+             style="background:#1a1a2e url('img/progress-tracker.jpg') center/cover no-repeat"
+             onclick="openPopup('tracker')">
+      <div class="card-label">
+        <h3><span data-lang-zh>进度追踪器</span><span data-lang-en>Progress Tracker</span></h3>
+        <p class="card-tagline"><span data-lang-zh>技能树 — 不是冰冷分数，而是人人都能看懂的能力地图</span><span data-lang-en>Skill trees — not cold scores, skill maps everyone understands</span></p>
+        <span class="card-hint"><span data-lang-zh>点击查看详情 →</span><span data-lang-en>Tap for details →</span></span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== POPUPS ===== -->
+
+<!-- Popup: Teacher AI -->
+<div class="popup-overlay" id="popup-teacher">
+  <div class="popup-sheet" id="sheet-teacher">
+    <div class="swipe-indicator"></div>
+    <button class="popup-close" onclick="closePopup()" aria-label="Close">&times;</button>
+    <div class="popup-header" style="background:#1a1a2e url('img/teacher-ai.jpg') center/cover no-repeat">
+      <h2><span data-lang-zh>教师端 · Teacher AI</span><span data-lang-en>Teacher AI App</span></h2>
+    </div>
+    <div class="popup-body">
+      <p class="intro-text"><span data-lang-zh>AI协同教学仪表盘：自动生成教案、学生学情分析、发音反馈、课堂数据可视化。</span><span data-lang-en>AI co-teacher dashboard: auto lesson plans, student analytics, pronunciation feedback, classroom data visualization.</span></p>
+      <div class="tag-row">
+        <span class="tag">TPACK</span>
+        <span class="tag"><span data-lang-zh>形成性评估</span><span data-lang-en>Formative Assessment</span></span>
+      </div>
+
+      <h3><span data-lang-zh>📖 教学法深度 · TPACK × 形成性评估</span><span data-lang-en>📖 Pedagogy · TPACK × Formative Assessment</span></h3>
+      <div class="detail-grid">
+        <div class="detail-tile">
+          <div class="tile-label"><span data-lang-zh>📐 理论说什么</span><span data-lang-en>📐 What the theory says</span></div>
+          <p><span data-lang-zh>TPACK：优秀教学 = 技术知识(TK) + 教学法知识(PK) + 内容知识(CK) 的交集。<br><br>形成性评估：在教学过程中持续收集学习证据，实时调整教学策略，而非等期末再补救。</span><span data-lang-en>TPACK: Great teaching = TK + PK + CK intersection.<br><br>Formative Assessment: Collect learning evidence during instruction, adjust in real-time — don't wait for finals.</span></p>
+        </div>
+        <div class="detail-tile">
+          <div class="tile-label"><span data-lang-zh>🔧 DynamOS怎么做的</span><span data-lang-en>🔧 How DynamOS implements it</span></div>
+          <p><span data-lang-zh>AI协同仪表盘在老师备课时推荐技术工具（TK），自动匹配教学策略（PK），并关联课程知识点（CK）。课后自动生成形成性评估报告——谁懂了、谁还卡着、下节课该复习什么。</span><span data-lang-en>Co-teacher dashboard recommends tech tools (TK), matches strategies (PK), links curriculum points (CK). Auto-generates formative reports — who got it, who's stuck, what to review next.</span></p>
+        </div>
+        <div class="detail-tile">
+          <div class="tile-label"><span data-lang-zh>🎯 为什么重要</span><span data-lang-en>🎯 Why it matters</span></div>
+          <p><span data-lang-zh>大部分机构的"教研"靠老教师的经验口口相传。DynamOS把经验系统化、可复制化。一个3年经验的老师能做出8年老师的教学决策。</span><span data-lang-en>Most schools rely on senior teachers' intuition passed down verbally. DynamOS systematizes and replicates this. A 3-year teacher makes 8-year-teacher decisions.</span></p>
+        </div>
+      </div>
+
+      <p class="popup-quote"><span data-lang-zh>🎯 把备课时间砍掉70%。让每个老师成为超级教师。</span><span data-lang-en>🎯 Cut prep time 70%. Make every teacher a super-teacher.</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- Popup: Student AI -->
+<div class="popup-overlay" id="popup-student">
+  <div class="popup-sheet" id="sheet-student">
+    <div class="swipe-indicator"></div>
+    <button class="popup-close" onclick="closePopup()" aria-label="Close">&times;</button>
+    <div class="popup-header" style="background:#1a1a2e url('img/student-ai.jpg') center/cover no-repeat">
+      <h2><span data-lang-zh>学生端 · Student AI</span><span data-lang-en>Student AI App</span></h2>
+    </div>
+    <div class="popup-body">
+      <p class="intro-text"><span data-lang-zh>个性化学习路径、AI口语教练、智能词典、间隔重复记忆系统。每个学生获得专属学习体验。</span><span data-lang-en>Personalized learning path, AI speaking coach, smart dictionary, spaced repetition. Every student gets a tailored experience.</span></p>
+      <div class="tag-row">
+        <span class="tag"><span data-lang-zh>最近发展区</span><span data-lang-en>ZPD</span></span>
+        <span class="tag">Krashen i+1</span>
+        <span class="tag"><span data-lang-zh>艾宾浩斯</span><span data-lang-en>Ebbinghaus</span></span>
+      </div>
+
+      <h3><span data-lang-zh>📖 教学法深度 · ZPD × Krashen × 艾宾浩斯</span><span data-lang-en>📖 Pedagogy · ZPD × Krashen × Ebbinghaus</span></h3>
+      <div class="detail-grid">
+        <div class="detail-tile">
+          <div class="tile-label"><span data-lang-zh>📐 理论说什么</span><span data-lang-en>📐 What the theory says</span></div>
+          <p><span data-lang-zh>ZPD：学习发生在"现有水平"与"在帮助下能达到的水平"之间。<br>Krashen i+1：输入材料的难度应略高于当前水平。<br>艾宾浩斯：记忆在特定时间点复习效果最优。</span><span data-lang-en>ZPD: Learning happens between current and potential-with-help levels.<br>Krashen i+1: Input should be slightly above current level.<br>Ebbinghaus: Memory optimized by reviewing at specific intervals.</span></p>
+        </div>
+        <div class="detail-tile">
+          <div class="tile-label"><span data-lang-zh>🔧 DynamOS怎么做的</span><span data-lang-en>🔧 How DynamOS implements it</span></div>
+          <p><span data-lang-zh>学生完成能力诊断后，系统定位其在技能树上的ZPD区间，i+1引擎自动调节内容难度。间隔重复系统根据遗忘曲线在最佳时间点推送复习——不是简单的"第二天复习"，而是根据每个学生的遗忘速率个性化计算。</span><span data-lang-en>After diagnostic, system locates ZPD on skill tree. i+1 engine auto-adjusts difficulty. Spaced repetition pushes review at optimal intervals — personalized to each student's forgetting rate, not a generic "review tomorrow."</span></p>
+        </div>
+        <div class="detail-tile">
+          <div class="tile-label"><span data-lang-zh>🎯 为什么重要</span><span data-lang-en>🎯 Why it matters</span></div>
+          <p><span data-lang-zh>传统课堂一个老师面对30个学生，只能用"平均难度"。DynamOS让每个学生的内容难度都恰好处于i+1。这才是真正的个性化学习——不是把教材换成iPad，而是让内容难度匹配每个大脑。</span><span data-lang-en>Traditional classrooms serve one average difficulty to 30 students. DynamOS gives every student exactly i+1. This is real personalization — not putting textbooks on an iPad, but matching content difficulty to each brain.</span></p>
+        </div>
+      </div>
+
+      <p class="popup-quote"><span data-lang-zh>🎯 每个学生24/7拥有私人导师。</span><span data-lang-en>🎯 Every student gets a private tutor, 24/7.</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- Popup: TA & Parent -->
+<div class="popup-overlay" id="popup-parent">
+  <div class="popup-sheet" id="sheet-parent">
+    <div class="swipe-indicator"></div>
+    <button class="popup-close" onclick="closePopup()" aria-label="Close">&times;</button>
+    <div class="popup-header" style="background:#1a1a2e url('img/parent-ai.jpg') center/cover no-repeat">
+      <h2><span data-lang-zh>课辅端 · TA & Parent</span><span data-lang-en>TA & Parent Assistant</span></h2>
+    </div>
+    <div class="popup-body">
+      <p class="intro-text"><span data-lang-zh>作业监控、家长更新、课后练习、进度预警。打通家校沟通的最后一公里。</span><span data-lang-en>Homework monitoring, parent updates, after-class practice, progress alerts. Closing the home-school communication gap.</span></p>
+      <div class="tag-row">
+        <span class="tag"><span data-lang-zh>自主学习</span><span data-lang-en>SRL</span></span>
+        <span class="tag"><span data-lang-zh>家长参与</span><span data-lang-en>Epstein</span></span>
+      </div>
+
+      <h3><span data-lang-zh>📖 教学法深度 · 自主学习 × Epstein框架</span><span data-lang-en>📖 Pedagogy · SRL × Epstein Framework</span></h3>
+      <div class="detail-grid">
+        <div class="detail-tile">
+          <div class="tile-label"><span data-lang-zh>📐 理论说什么</span><span data-lang-en>📐 What the theory says</span></div>
+          <p><span data-lang-zh>SRL (自主学习)：学习者设定目标、选择策略、监控进展、反思调整。<br>Epstein：家长参与通过六种方式影响学习——养育、沟通、志愿服务、在家学习、决策、社区合作。</span><span data-lang-en>SRL: Learners set goals, choose strategies, monitor progress, reflect, adjust.<br>Epstein: Parental involvement works through 6 pathways — parenting, communicating, volunteering, learning at home, decision-making, community collaboration.</span></p>
+        </div>
+        <div class="detail-tile">
+          <div class="tile-label"><span data-lang-zh>🔧 DynamOS怎么做的</span><span data-lang-en>🔧 How DynamOS implements it</span></div>
+          <p><span data-lang-zh>学生端内置目标设定和反思模块（SRL）。课辅端将孩子的学习数据翻译成家长能看懂的语言——不是"正确率82%"，而是"你孩子的弱项是定语从句，本周已练习12次，下周将强化"。同时提供具体可操作的家庭参与建议。</span><span data-lang-en>Student app has goal-setting and reflection modules (SRL). Parent hub translates learning data into parent-friendly language — not "82% accuracy" but "Your child's weak spot: relative clauses. 12 practice attempts this week. Reinforcement plan next." Plus actionable home involvement suggestions.</span></p>
+        </div>
+        <div class="detail-tile">
+          <div class="tile-label"><span data-lang-zh>🎯 为什么重要</span><span data-lang-en>🎯 Why it matters</span></div>
+          <p><span data-lang-zh>家长最大痛点：交了钱，不知道孩子学了什么。DynamOS不做"假透明"，而是把学习过程视觉化、可理解。家长从"催作业"变成"参与学习"。续费率自然上升。</span><span data-lang-en>Parents' #1 pain point: paid money, no clue what kid learned. DynamOS visualizes the learning process in a way parents understand. Parents evolve from "homework police" to "learning partners." Retention follows naturally.</span></p>
+        </div>
+      </div>
+
+      <p class="popup-quote"><span data-lang-zh>🎯 打破家校信息墙。家长看到真实进步。</span><span data-lang-en>🎯 Close the home-school gap. Parents see real progress.</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- Popup: Progress Tracker -->
+<div class="popup-overlay" id="popup-tracker">
+  <div class="popup-sheet" id="sheet-tracker">
+    <div class="swipe-indicator"></div>
+    <button class="popup-close" onclick="closePopup()" aria-label="Close">&times;</button>
+    <div class="popup-header" style="background:#1a1a2e url('img/progress-tracker.jpg') center/cover no-repeat">
+      <h2><span data-lang-zh>进度追踪器 · Progress Tracker</span><span data-lang-en>Progress Tracker</span></h2>
+    </div>
+    <div class="popup-body">
+      <p class="intro-text"><span data-lang-zh>技能树、里程碑徽章、薄弱点自动检测、雅思/托福/PTE分数预测。不只是分数——是人人都能看懂的能力地图。</span><span data-lang-en>Skill trees, milestone badges, weak-point detection, IELTS/TOEFL/PTE prediction. Not just scores — skill maps everyone understands.</span></p>
+      <div class="tag-row">
+        <span class="tag"><span data-lang-zh>掌握学习</span><span data-lang-en>Bloom</span></span>
+        <span class="tag"><span data-lang-zh>学习分析</span><span data-lang-en>Siemens</span></span>
+      </div>
+
+      <h3><span data-lang-zh>📖 教学法深度 · 掌握学习 × 学习分析</span><span data-lang-en>📖 Pedagogy · Mastery Learning × Learning Analytics</span></h3>
+      <div class="detail-grid">
+        <div class="detail-tile">
+          <div class="tile-label"><span data-lang-zh>📐 理论说什么</span><span data-lang-en>📐 What the theory says</span></div>
+          <p><span data-lang-zh>Bloom掌握学习：学生在进入下一个单元前必须掌握当前单元（通常定义80-90%为"掌握"）。<br>Siemens学习分析：用数据测量、收集、分析学习者行为，以理解和优化学习过程。</span><span data-lang-en>Bloom's Mastery Learning: Students must master current unit (80-90% threshold) before advancing.<br>Siemens Learning Analytics: Use data to measure, collect, and analyze learner behavior to understand and optimize learning.</span></p>
+        </div>
+        <div class="detail-tile">
+          <div class="tile-label"><span data-lang-zh>🔧 DynamOS怎么做的</span><span data-lang-en>🔧 How DynamOS implements it</span></div>
+          <p><span data-lang-zh>技能树不是装饰——它是真实的能力图谱。每个节点有掌握阈值。未达标的节点自动锁定后续内容，同时生成针对性补救练习。学习分析引擎追踪40+维度的行为数据，包括答题速度、错误模式、犹豫时间、求助行为等，从数据中发现"假掌握"。</span><span data-lang-en>Skill tree is a real competency map, not decoration. Each node has a mastery threshold. Unmastered nodes auto-lock next content and generate targeted remedial drills. Analytics engine tracks 40+ behavioral dimensions — answer speed, error patterns, hesitation time, help-seeking — detecting "fake mastery."</span></p>
+        </div>
+        <div class="detail-tile">
+          <div class="tile-label"><span data-lang-zh>🎯 为什么重要</span><span data-lang-en>🎯 Why it matters</span></div>
+          <p><span data-lang-zh>大多数培训机构的"掌握"是：上完课 = 学会了。这导致基础空洞——学生看似一直在学新东西，实际上前面的漏洞越来越大。DynamOS的掌握学习系统杜绝了"假装会了"。</span><span data-lang-en>Most schools define "mastery" as class-attended = learned. This creates foundation gaps — students look like they're progressing but earlier holes widen. DynamOS mastery system prevents "fake learning."</span></p>
+        </div>
+      </div>
+
+      <p class="popup-quote"><span data-lang-zh>🎯 不再是冰冷分数——而是每个人都能理解的技能地图。</span><span data-lang-en>🎯 Not just scores — skill maps everyone understands.</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- Popup: Content Engine -->
+<div class="popup-overlay" id="popup-engine">
+  <div class="popup-sheet" id="sheet-engine">
+    <div class="swipe-indicator"></div>
+    <button class="popup-close" onclick="closePopup()" aria-label="Close">&times;</button>
+    <div class="popup-header" style="background:#1a1a2e url('img/content-engine.jpg') center/cover no-repeat">
+      <h2><span data-lang-zh>内容引擎 · Content Engine</span><span data-lang-en>Content Engine</span></h2>
+    </div>
+    <div class="popup-body">
+      <p class="intro-text"><span data-lang-zh>教学法优先的内容生产线，拒绝野生LLM输出。每道题的每个选项都有教育学理由。</span><span data-lang-en>Pedagogy-first content pipeline. NOT LLM-wild. Every exercise option has a pedagogical reason.</span></p>
+      <div class="tag-row">
+        <span class="tag"><span data-lang-zh>布鲁姆</span><span data-lang-en>Bloom</span></span>
+        <span class="tag">TBLT</span>
+        <span class="tag">CLT</span>
+        <span class="tag">RUA</span>
+      </div>
+
+      <h3><span data-lang-zh>📖 教学法深度 · 布鲁姆分类学 × TBLT × CLT × 词汇法 × RUA × 对比分析</span><span data-lang-en>📖 Pedagogy · Bloom's Taxonomy × TBLT × CLT × Lexical Approach × RUA × Contrastive Analysis</span></h3>
+      <div class="detail-grid">
+        <div class="detail-tile">
+          <div class="tile-label"><span data-lang-zh>📐 理论说什么</span><span data-lang-en>📐 What the theory says</span></div>
+          <p><span data-lang-zh>布鲁姆：认知目标分层——记忆→理解→应用→分析→评价→创造。<br>TBLT：通过真实任务驱动语言习得。<br>CLT：语言的核心功能是交际。<br>词汇法(Lewis)：语言由词汇块(chunks)而非语法规则构成。<br>RUA：识别→使用→应用的学习循环。<br>对比分析：利用母语与目标语的异同指导教学。</span><span data-lang-en>Bloom: cognitive levels — remember → understand → apply → analyze → evaluate → create.<br>TBLT: real tasks drive acquisition.<br>CLT: communication is language's core function.<br>Lexical Approach: language is chunks, not rules.<br>RUA: Recognize → Use → Apply cycle.<br>Contrastive Analysis: L1-L2 differences inform teaching.</span></p>
+        </div>
+        <div class="detail-tile">
+          <div class="tile-label"><span data-lang-zh>🔧 DynamOS怎么做的</span><span data-lang-en>🔧 How DynamOS implements it</span></div>
+          <p><span data-lang-zh>内容引擎的每个产出都经过多理论交叉验证：题目是否符合布鲁姆层级？任务设计是否满足TBLT要求（有明确目标、使用目标语言、产出可见成果）？练习是否融入CLT的真实交际场景？词汇教学是否以chunks而非孤立单词为单位？是否遵循RUA循环（先识别句法模式，再用，最后应用）？针对中国学习者的中英对比分析标注。</span><span data-lang-en>Every content output passes multi-theory validation: Does it match Bloom's level? Does it satisfy TBLT (clear goal, target language, visible output)? Does it embed CLT authentic communicative context? Are vocabulary items taught as chunks not isolated words? Does it follow RUA cycle? Chinese-English contrastive analysis annotations for Chinese learners.</span></p>
+        </div>
+        <div class="detail-tile">
+          <div class="tile-label"><span data-lang-zh>🎯 为什么重要</span><span data-lang-en>🎯 Why it matters</span></div>
+          <p><span data-lang-zh>这是DynamOS与所有"AI教育产品"的最大分水岭。其他产品：把LLM接入，让AI即兴出题——看起来高效，实际上教育学上是一团乱。DynamOS：每个内容输出都必须满足"哪个理论支持这道题的哪个设计"的溯源要求。校长可以放心：你的学生做的每道题，都有教育学依据。</span><span data-lang-en>This is DynamOS's defining differentiator. Others: plug in an LLM, let AI improvise questions — looks efficient, educationally chaotic. DynamOS: every output must pass "which theory supports which design choice" traceability. School directors can rest easy: every question your students answer has a pedagogical reason.</span></p>
+        </div>
+      </div>
+
+      <p class="popup-quote"><span data-lang-zh>🎯 每道题都有教育学理由。零AI垃圾。</span><span data-lang-en>🎯 Every exercise has a pedagogical reason. Zero AI slop.</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FORM POPUP — Book Demo ===== -->
+<div class="form-overlay" id="form-overlay">
+  <div class="form-card">
+    <button class="form-close" onclick="closeFormPopup()" aria-label="Close">&times;</button>
+    <div id="form-content">
+      <h3><span data-lang-zh>预约演示</span><span data-lang-en>Book a Demo</span></h3>
+      <p class="form-subtitle"><span data-lang-zh>填写以下信息，我们会尽快与您联系</span><span data-lang-en>Fill in your details and we'll be in touch soon</span></p>
+
+      <form id="demo-form" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label><span data-lang-zh>校长姓名</span><span data-lang-en>Principal's Name</span> <em>*</em></label>
+          <input type="text" name="principal_name" required>
+        </div>
+        <div class="form-group">
+          <label><span data-lang-zh>学校名称</span><span data-lang-en>School Name</span> <em>*</em></label>
+          <input type="text" name="school_name" required>
+        </div>
+        <div class="form-group">
+          <label><span data-lang-zh>学校类型</span><span data-lang-en>School Type</span> <em>*</em></label>
+          <select name="school_type" required>
+            <option value=""><span data-lang-zh>请选择</span><span data-lang-en>Select</span></option>
+            <option value="training"><span data-lang-zh>培训机构</span><span data-lang-en>Training Center</span></option>
+            <option value="international"><span data-lang-zh>国际学校</span><span data-lang-en>International School</span></option>
+            <option value="public"><span data-lang-zh>公立学校</span><span data-lang-en>Public School</span></option>
+            <option value="private"><span data-lang-zh>私立学校</span><span data-lang-en>Private School</span></option>
+            <option value="other"><span data-lang-zh>其他</span><span data-lang-en>Other</span></option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label><span data-lang-zh>学校规模</span><span data-lang-en>School Size</span> <em>*</em></label>
+          <select name="school_size" required>
+            <option value=""><span data-lang-zh>请选择</span><span data-lang-en>Select</span></option>
+            <option value="<100">&lt;100<span data-lang-zh>人</span></option>
+            <option value="100-500">100-500<span data-lang-zh>人</span></option>
+            <option value="500-2000">500-2000<span data-lang-zh>人</span></option>
+            <option value="2000+">2000+<span data-lang-zh>人</span></option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label><span data-lang-zh>目前使用的教学工具</span><span data-lang-en>Current Teaching Tools</span></label>
+          <input type="text" name="current_tools" placeholder="如 / e.g. Zoom, ClassIn, 自研系统">
+        </div>
+        <div class="form-group">
+          <label><span data-lang-zh>最感兴趣的功能</span><span data-lang-en>Most Interested Feature</span></label>
+          <div class="checkbox-group" data-name="interested_features">
+            <label class="cb-label">
+              <input type="checkbox" value="teacher_ai">
+              <span class="cb-mark"></span>
+              <span data-lang-zh>教师端AI</span><span data-lang-en>Teacher AI</span>
+            </label>
+            <label class="cb-label">
+              <input type="checkbox" value="student_ai">
+              <span class="cb-mark"></span>
+              <span data-lang-zh>学生端AI</span><span data-lang-en>Student AI</span>
+            </label>
+            <label class="cb-label">
+              <input type="checkbox" value="ta_ai">
+              <span class="cb-mark"></span>
+              <span data-lang-zh>课辅端AI</span><span data-lang-en>TA Assistant</span>
+            </label>
+            <label class="cb-label">
+              <input type="checkbox" value="progress_tracker">
+              <span class="cb-mark"></span>
+              <span data-lang-zh>进度追踪</span><span data-lang-en>Progress Tracker</span>
+            </label>
+            <label class="cb-label">
+              <input type="checkbox" value="content_engine">
+              <span class="cb-mark"></span>
+              <span data-lang-zh>内容引擎</span><span data-lang-en>Content Engine</span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label><span data-lang-zh>联系电话</span><span data-lang-en>Phone Number</span></label>
+          <input type="tel" name="phone">
+        </div>
+        <div class="form-group">
+          <label><span data-lang-zh>微信 / 邮箱</span><span data-lang-en>WeChat or Email</span> <em>*</em></label>
+          <input type="text" name="contact" required placeholder="微信号 或 email@example.com">
+        </div>
+        <div class="form-group">
+          <label><span data-lang-zh>其他需求</span><span data-lang-en>Additional Notes</span></label>
+          <textarea name="notes" rows="3" placeholder=""></textarea>
+        </div>
+        <button type="submit" class="btn-submit" id="submit-btn">
+          <span class="spinner"></span>
+          <span class="btn-text"><span data-lang-zh>提交预约</span><span data-lang-en>Submit</span></span>
+        </button>
+      </form>
+    </div>
+    <div class="form-success" id="form-success">
+      <div class="success-icon">✅</div>
+      <h4><span data-lang-zh>感谢您的关注 🙏</span><span data-lang-en>Thank you for reaching out 🙏</span></h4>
+      <p><span data-lang-zh>Kee 会亲自在 1–2 个工作日内回复您，期待与您的学校合作。</span><span data-lang-en>Kee will personally get back to you within 1–2 business days. Looking forward to working with your school.</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ARCHITECTURE SECTION ===== -->
+<section id="architecture">
+  <div class="section-header">
+    <span class="eyebrow fade-up"><span data-lang-zh>技术架构</span><span data-lang-en>Architecture</span></span>
+    <h2 class="fade-up"><span data-lang-zh>DynamOS 系统架构</span><span data-lang-en>DynamOS System Architecture</span></h2>
+    <p class="fade-up"><span data-lang-zh>四层架构：接入层、应用层、引擎层、数据层。</span><span data-lang-en>Four-layer architecture: Access, Application, Engine, Data.</span></p>
+  </div>
+
+  <div class="arch-section">
+    <div class="arch-hero fade-up">
+      <span><span data-lang-zh>DynamOS 四层架构</span><span data-lang-en>DynamOS Four-Layer Architecture</span></span>
+    </div>
+    <div class="arch-grid">
+      <div class="arch-card fade-up">
+        <h4>🔌 <span data-lang-zh>接入层</span><span data-lang-en>Access Layer</span></h4>
+        <ul>
+          <li><span data-lang-zh>教师Web仪表盘</span><span data-lang-en>Teacher Web Dashboard</span></li>
+          <li><span data-lang-zh>学生移动端 (iOS/Android PWA)</span><span data-lang-en>Student Mobile (iOS/Android PWA)</span></li>
+          <li><span data-lang-zh>家长微信小程序</span><span data-lang-en>Parent WeChat Mini Program</span></li>
+          <li><span data-lang-zh>机构管理后台</span><span data-lang-en>School Admin Panel</span></li>
+        </ul>
+      </div>
+      <div class="arch-card fade-up">
+        <h4>🧩 <span data-lang-zh>应用层</span><span data-lang-en>Application Layer</span></h4>
+        <ul>
+          <li><span data-lang-zh>DynaDict · 智能词典</span><span data-lang-en>DynaDict · Smart Dictionary</span></li>
+          <li><span data-lang-zh>DynaSpeak · AI口语教练</span><span data-lang-en>DynaSpeak · AI Speaking Coach</span></li>
+          <li><span data-lang-zh>DynaWrite · 写作批改引擎</span><span data-lang-en>DynaWrite · Writing Correction Engine</span></li>
+          <li><span data-lang-zh>DynaTrack · 进度追踪系统</span><span data-lang-en>DynaTrack · Progress Tracking System</span></li>
+          <li><span data-lang-zh>DynaPlan · 智能排课引擎</span><span data-lang-en>DynaPlan · Smart Scheduling Engine</span></li>
+        </ul>
+      </div>
+      <div class="arch-card fade-up">
+        <h4>⚙️ <span data-lang-zh>引擎层</span><span data-lang-en>Engine Layer</span></h4>
+        <ul>
+          <li><span data-lang-zh>内容生成引擎 (教学法约束)</span><span data-lang-en>Content Engine (Pedagogy-Guarded)</span></li>
+          <li><span data-lang-zh>自适应难度引擎 (i+1)</span><span data-lang-en>Adaptive Difficulty Engine (i+1)</span></li>
+          <li><span data-lang-zh>间隔重复引擎</span><span data-lang-en>Spaced Repetition Engine</span></li>
+          <li><span data-lang-zh>语音评测引擎</span><span data-lang-en>Pronunciation Assessment Engine</span></li>
+          <li><span data-lang-zh>学习分析引擎 (40+维度)</span><span data-lang-en>Learning Analytics Engine (40+ dims)</span></li>
+        </ul>
+      </div>
+      <div class="arch-card fade-up">
+        <h4>💾 <span data-lang-zh>数据层</span><span data-lang-en>Data Layer</span></h4>
+        <ul>
+          <li><span data-lang-zh>学生能力图谱 (知识追踪)</span><span data-lang-en>Student Competency Map (Knowledge Tracing)</span></li>
+          <li><span data-lang-zh>机构内容库 (多租户隔离)</span><span data-lang-en>School Content Library (Multi-Tenant)</span></li>
+          <li><span data-lang-zh>教学策略库 (RUA框架)</span><span data-lang-en>Pedagogy Strategy DB (RUA Framework)</span></li>
+          <li><span data-lang-zh>合规日志 (数据主权保证)</span><span data-lang-en>Compliance Logs (Data Sovereignty)</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MOAT SECTION ===== -->
+<section id="moat">
+  <div class="section-header">
+    <span class="eyebrow fade-up"><span data-lang-zh>竞争壁垒</span><span data-lang-en>Competitive Moat</span></span>
+    <h2 class="fade-up"><span data-lang-zh>为什么是 DynamOS</span><span data-lang-en>Why DynamOS</span></h2>
+    <p class="fade-up"><span data-lang-zh>不是又一个AI噱头。这是四个真正的壁垒。</span><span data-lang-en>Not another AI gimmick. Four real moats.</span></p>
+  </div>
+
+  <div class="moat-section">
+    <div class="moat-grid">
+      <div class="moat-card fade-up">
+        <span class="moat-icon">🧠</span>
+        <h4><span data-lang-zh>教学法先行</span><span data-lang-en>Pedagogy-First</span></h4>
+        <p><span data-lang-zh>不是"AI很强所以我们用AI"。而是"这些教学法有效，我们用AI来实现它们"。每个功能背后都有教育学论文支持。</span><span data-lang-en>Not "AI is powerful so let's use AI." It's "these pedagogies work, let's implement them with AI." Every feature backed by research.</span></p>
+      </div>
+      <div class="moat-card fade-up">
+        <span class="moat-icon">🏗️</span>
+        <h4><span data-lang-zh>系统而非工具</span><span data-lang-en>System, Not Tools</span></h4>
+        <p><span data-lang-zh>竞品给你一个AI出题器、一个批改工具。DynamOS给你一个完整系统——教师端、学生端、家长端、内容引擎和数据分析全部互通。</span><span data-lang-en>Competitors give you an AI quiz generator or an essay corrector. DynamOS gives you a complete system — teacher, student, parent, content, and analytics all connected.</span></p>
+      </div>
+      <div class="moat-card fade-up">
+        <span class="moat-icon">🇨🇳</span>
+        <h4><span data-lang-zh>中国学习者定制</span><span data-lang-en>Chinese Learner-First</span></h4>
+        <p><span data-lang-zh>不为"通用学习者"设计。中英对比分析、母语迁移干预、RUA循环——所有设计基于中国学习者的真实认知过程。</span><span data-lang-en>Not designed for "generic learners." Chinese-English contrastive analysis, L1 transfer intervention, RUA cycle — all based on how Chinese learners actually think.</span></p>
+      </div>
+      <div class="moat-card fade-up">
+        <span class="moat-icon">🔒</span>
+        <h4><span data-lang-zh>数据主权 & 内容溯源</span><span data-lang-en>Data Sovereignty &amp; Traceability</span></h4>
+        <p><span data-lang-zh>机构数据本地化部署选项。每道内容可溯源到其教育学设计决策。不是"相信AI"——而是"理解AI"。</span><span data-lang-en>On-premise deployment option for school data. Every piece of content traceable to its pedagogical design decisions. Not "trust the AI" — "understand the AI."</span></p>
+      </div>
+      <div class="moat-card fade-up">
+        <span class="moat-icon">📚</span>
+        <h4><span data-lang-zh>去"AI味"内容</span><span data-lang-en>Anti-Slop Content</span></h4>
+        <p><span data-lang-zh>LLM直接输出的内容一眼就能看出来——重复、空洞、缺乏教学结构。DynamOS的内容引擎输出像资深老师手写的教材。</span><span data-lang-en>LLM-direct output is instantly recognizable — repetitive, hollow, no pedagogical structure. DynamOS content reads like a textbook hand-written by a veteran teacher.</span></p>
+      </div>
+      <div class="moat-card fade-up">
+        <span class="moat-icon">📈</span>
+        <h4><span data-lang-zh>续费友好设计</span><span data-lang-en>Retention-Friendly Design</span></h4>
+        <p><span data-lang-zh>家长能看到真实进步，学生有成就感和技能树，教师减少重复劳动。三个角色都受益 = 续费率提升。这不是承诺，是系统架构的自然结果。</span><span data-lang-en>Parents see real progress, students get achievement and skill trees, teachers reduce drudgery. All three roles win = retention rises. Not a promise — a natural consequence of the system architecture.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ROLLOUT SECTION ===== -->
+<section id="rollout">
+  <div class="section-header">
+    <span class="eyebrow fade-up"><span data-lang-zh>落地路径</span><span data-lang-en>Rollout Path</span></span>
+    <h2 class="fade-up"><span data-lang-zh>三阶段落地</span><span data-lang-en>Phased Rollout</span></h2>
+    <p class="fade-up"><span data-lang-zh>不搞大爆炸。试点→迭代→规模化，每一步都有验证指标。</span><span data-lang-en>No big bang. Pilot → Iterate → Scale, every step with validation metrics.</span></p>
+  </div>
+
+  <div class="rollout-section">
+    <div class="rollout-timeline">
+      <div class="phase fade-up">
+        <div class="phase-num">1</div>
+        <div class="phase-sub"><span data-lang-zh>第 1-2 个月</span><span data-lang-en>Months 1-2</span></div>
+        <h4><span data-lang-zh>🎯 试点</span><span data-lang-en>🎯 Pilot</span></h4>
+        <p><span data-lang-zh>1-2个班级，教师端+学生端核心功能。验证备课时间减少、学生参与度提升。收集教师反馈，调整UX。</span><span data-lang-en>1-2 classes, Teacher + Student core features. Validate prep-time reduction and engagement lift. Gather teacher feedback, refine UX.</span></p>
+      </div>
+      <div class="phase fade-up">
+        <div class="phase-num">2</div>
+        <div class="phase-sub"><span data-lang-zh>第 3-5 个月</span><span data-lang-en>Months 3-5</span></div>
+        <h4><span data-lang-zh>🔄 迭代</span><span data-lang-en>🔄 Iterate</span></h4>
+        <p><span data-lang-zh>扩展到5-10个班级，上线课辅端+进度追踪器。验证家长满意度、续费指标改善。建立标杆案例。</span><span data-lang-en>Scale to 5-10 classes, launch Parent Hub + Progress Tracker. Validate parent satisfaction and retention improvement. Build reference cases.</span></p>
+      </div>
+      <div class="phase fade-up">
+        <div class="phase-num">3</div>
+        <div class="phase-sub"><span data-lang-zh>第 6-12 个月</span><span data-lang-en>Months 6-12</span></div>
+        <h4><span data-lang-zh>🚀 规模化</span><span data-lang-en>🚀 Scale</span></h4>
+        <p><span data-lang-zh>全校部署，内容引擎全面启用。多机构支持。数据驱动续费预测。成型方法论可复制到其他机构。</span><span data-lang-en>Full-school deployment, Content Engine fully online. Multi-school support. Data-driven retention prediction. Replicable methodology for other schools.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section id="cta" class="cta-section">
+  <h2 class="fade-up"><span data-lang-zh>让您的机构进入教育OS时代</span><span data-lang-en>Bring Your School Into the Education OS Era</span></h2>
+  <p class="fade-up"><span data-lang-zh>不是再买一个AI工具。而是为您的学校装一个操作系统。<br>教师更高效。学生更投入。家长更满意。数据来说话。</span><span data-lang-en>Not buying another AI tool. Installing an operating system for your school.<br>Teachers more effective. Students more engaged. Parents more satisfied. Let the data speak.</span></p>
+  <button class="btn-book-demo fade-up" onclick="openFormPopup()">
+    <span data-lang-zh>🎯 预约演示</span><span data-lang-en>🎯 Book a Demo</span>
+  </button>
+</section>
+
+<footer class="footer">
+  <p>DynamOS &copy; 2026 &nbsp;·&nbsp; <span data-lang-zh>教育学驱动的AI教育操作系统</span><span data-lang-en>Pedagogy-Driven AI Education Operating System</span> &nbsp;·&nbsp; <span data-lang-zh>DynaSaurus 是 DynamOS 上的一个应用</span><span data-lang-en>DynaSaurus is an app on DynamOS</span></p>
+</footer>
+
+<script>
+document.body.classList.add('js-ready');
+/* ================================================================
+   LANGUAGE TOGGLE
+   ================================================================ */
+function toggleLang(){
+  const body = document.body;
+  const current = body.getAttribute('data-lang');
+  const next = current === 'zh' ? 'en' : 'zh';
+  body.setAttribute('data-lang', next);
+  localStorage.setItem('dynamos-lang', next);
+}
+(function(){
+  const saved = localStorage.getItem('dynamos-lang') || 'zh';
+  document.body.setAttribute('data-lang', saved);
+})();
+
+/* ================================================================
+   SMOOTH SCROLL
+   ================================================================ */
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e){
+    const target = document.querySelector(this.getAttribute('href'));
+    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+
+/* ================================================================
+   POPUP SYSTEM — slideUp + fadeIn, click-outside, Escape
+   ================================================================ */
+let activePopupId = null;
+let touchStartY = 0;
+let touchCurrentY = 0;
+let sheetStartY = 0;
+
+function openPopup(id){
+  const popup = document.getElementById('popup-'+id);
+  if(!popup) return;
+  activePopupId = id;
+  document.body.classList.add('popup-open');
+  popup.classList.add('active');
+  const sheet = popup.querySelector('.popup-sheet');
+  if(sheet) sheet.scrollTop = 0;
+}
+function closePopup(){
+  activePopupId = null;
+  document.body.classList.remove('popup-open');
+  document.querySelectorAll('.popup-overlay').forEach(p => {
+    p.classList.remove('active');
+  });
+}
+
+// Click outside to close
+document.querySelectorAll('.popup-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e){
+    if(e.target === overlay) closePopup();
+  });
+});
+
+// Keyboard: Escape
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closePopup();
+});
+
+// Mobile swipe to close
+document.querySelectorAll('.popup-sheet').forEach(sheet => {
+  sheet.addEventListener('touchstart', function(e){
+    if(sheet.scrollTop > 0) return; // only when at top
+    touchStartY = e.touches[0].clientY;
+    sheet.style.transition = 'none';
+  }, {passive:false});
+
+  sheet.addEventListener('touchmove', function(e){
+    if(sheet.scrollTop > 0) return;
+    touchCurrentY = e.touches[0].clientY;
+    const delta = touchCurrentY - touchStartY;
+    if(delta > 0){
+      sheet.style.transform = `translateY(${delta}px)`;
+    }
+  }, {passive:false});
+
+  sheet.addEventListener('touchend', function(){
+    sheet.style.transition = 'transform 0.4s cubic-bezier(0.16,1,0.3,1)';
+    const delta = touchCurrentY - touchStartY;
+    if(delta > 100){
+      closePopup();
+    }
+    sheet.style.transform = '';
+    touchStartY = 0;
+    touchCurrentY = 0;
+  });
+});
+
+/* ================================================================
+   INTERSECTION OBSERVER — scroll reveal
+   ================================================================ */
+const observerOptions = {threshold:0.08,rootMargin:'0px 0px -30px 0px'};
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, observerOptions);
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Hero fade-ups fire immediately
+setTimeout(() => {
+  document.querySelectorAll('.hero .fade-up').forEach(el => el.classList.add('visible'));
+}, 100);
+
+/* ================================================================
+   PARALLAX ON HOVER — photo cards
+   ================================================================ */
+document.querySelectorAll('.module-card[data-parallax]').forEach(card => {
+  card.addEventListener('mousemove', function(e){
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    const moveX = (x - 0.5) * 8;
+    const moveY = (y - 0.5) * 8;
+    card.style.backgroundPosition = `${50 + moveX}% ${50 + moveY}%`;
+  });
+  card.addEventListener('mouseleave', function(){
+    card.style.backgroundPosition = 'center';
+  });
+});
+
+/* ================================================================
+   FORM POPUP LOGIC
+   ================================================================ */
+// --- Config (fill these in!) ---
+const SUPABASE_URL = 'https://jingjvvmupqxwlzeyirk.supabase.co';
+const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+
+function openFormPopup(){
+  const overlay = document.getElementById('form-overlay');
+  document.body.classList.add('popup-open');
+  overlay.classList.add('active');
+  document.getElementById('form-content').classList.remove('hidden');
+  document.getElementById('form-success').classList.remove('active');
+  document.getElementById('demo-form').reset();
+}
+
+function closeFormPopup(){
+  document.body.classList.remove('popup-open');
+  document.getElementById('form-overlay').classList.remove('active');
+}
+
+// Click outside to close form
+document.getElementById('form-overlay').addEventListener('click', function(e){
+  if(e.target === this) closeFormPopup();
+});
+
+// Escape key closes form
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    const formOverlay = document.getElementById('form-overlay');
+    if(formOverlay.classList.contains('active')){
+      closeFormPopup();
+    }
+  }
+});
+
+async function handleSubmit(e){
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  // Collect form data
+  const form = document.getElementById('demo-form');
+  const fd = new FormData(form);
+  const data = {};
+  for(const [k,v] of fd.entries()) data[k] = v;
+
+  // Collect checkboxes
+  const checkboxes = document.querySelectorAll('.checkbox-group[data-name="interested_features"] input[type="checkbox"]:checked');
+  data.interested_features = Array.from(checkboxes).map(cb => cb.value);
+
+  const json = JSON.stringify(data);
+  let success = false;
+
+  // Try Supabase
+  if(SUPABASE_URL !== 'YOUR_SUPABASE_URL' && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY'){
+    try{
+      const resp = await fetch(`${SUPABASE_URL}/rest/v1/demo_requests`, {
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+          'apikey':SUPABASE_ANON_KEY,
+          'Authorization':`Bearer ${SUPABASE_ANON_KEY}`,
+          'Prefer':'return=minimal'
+        },
+        body:json
+      });
+      if(resp.ok || resp.status === 201) success = true;
+    }catch(err){
+      console.warn('Supabase submit failed, falling back:', err);
+    }
+  }
+
+  // Fallback: save to localStorage
+  const backups = JSON.parse(localStorage.getItem('dynamos_demo_backups') || '[]');
+  backups.push({data, timestamp: new Date().toISOString()});
+  localStorage.setItem('dynamos_demo_backups', JSON.stringify(backups));
+
+  // Also try mailto as last resort (opens email client)
+  if(!success){
+    const subject = encodeURIComponent('[DynamOS Demo Request] ' + (data.school_name || 'New Lead'));
+    const body = encodeURIComponent(JSON.stringify(data, null, 2));
+    const mailto = `mailto:hello@rkrk.io?subject=${subject}&body=${body}`;
+    // Only open mailto if Supabase wasn't configured or failed
+    // (commented out by default — uncomment to enable)
+    // window.open(mailto, '_blank');
+  }
+
+  // Show success
+  btn.classList.remove('loading');
+  btn.disabled = false;
+  document.getElementById('form-content').classList.add('hidden');
+  document.getElementById('form-success').classList.add('active');
+
+  // Auto-close after 2s
+  setTimeout(() => {
+    closeFormPopup();
+    // Reset form for next open
+    document.getElementById('form-content').classList.remove('hidden');
+    document.getElementById('form-success').classList.remove('active');
+    form.reset();
+  }, 2000);
+}
+</script>
+</body>
+</html>
