@@ -418,7 +418,8 @@ async function sendBot(){
         var res=await fetch('https://dynasaurus.rkrk.io/api/kee-bot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,lang:currentLang})});
         var data=await res.json();
         msgs.lastChild.innerHTML=renderMd(data.reply||'Sorry, try again.');
-    }catch(e){msgs.lastChild.innerHTML=renderMd('Connection lost. WhatsApp Kee: +44 7440 622158');}
+    }catch(e){msgs.lastChild.innerHTML=renderMd('🦕 **DynaSaurus is taking a nap.** The big dinosaur ran out of steam.  
+Good news: [**miniSaurus**](https://dynasaurus.rkrk.io/mini) is still awake — same dictionary, zero downtime.');}
     msgs.scrollTop=msgs.scrollHeight;botLoading=false;
 }
 function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
