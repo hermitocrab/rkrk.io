@@ -417,11 +417,12 @@ async function sendBot(){
     try{
         var res=await fetch('https://dynasaurus.rkrk.io/api/kee-bot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,lang:currentLang})});
         var data=await res.json();
-        msgs.lastChild.textContent=data.reply||'Sorry, try again.';
-    }catch(e){msgs.lastChild.textContent='Connection lost. WhatsApp Kee: +44 7440 622158';}
+        msgs.lastChild.innerHTML=renderMd(data.reply||'Sorry, try again.');
+    }catch(e){msgs.lastChild.innerHTML=renderMd('Connection lost. WhatsApp Kee: +44 7440 622158');}
     msgs.scrollTop=msgs.scrollHeight;botLoading=false;
 }
 function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function renderMd(text){var h=esc(text);h=h.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>').replace(/`(.+?)`/g,'<code>$1</code>').replace(/\[(.+?)\]\((.+?)\)/g,'<a href="$2" target="_blank">$1</a>').replace(/\n/g,'<br>');h=h.replace(/(<br>)?([*-] .+?)(?=<br>)/g,function(m,br,item){return (br||'')+'<li>'+item.substring(2)+'</li>';});h=h.replace(/((?:<li>[^<]*<\/li><br>)+)/g,function(m){return '<ul>'+m.replace(/<br>/g,'')+'</ul>';});return h;}
 function copyWechat(){navigator.clipboard.writeText('keedahooman').then(function(){window.location.href='weixin://';});}
 document.querySelectorAll('.flip-card').forEach(function(c){c.addEventListener('click',function(){this.classList.toggle('flipped');});});
 
