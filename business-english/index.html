@@ -26,7 +26,6 @@ section { padding:80px 0; position:relative; overflow:hidden; border-bottom:1px 
 section::after { content:''; position:absolute; bottom:0; left:10%; right:10%; height:1px; background:linear-gradient(90deg,transparent,rgba(0,0,0,0.05),transparent); }
 section:last-of-type::after { display:none; }
 
-/* NAV */
 nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(250,250,250,0.78); backdrop-filter:blur(24px); border-bottom:1px solid rgba(0,0,0,0.06); padding:14px 0; }
 nav .container { display:flex; align-items:center; justify-content:space-between; }
 .logo { font-family:'Inter',sans-serif; font-size:1.05rem; font-weight:800; color:var(--black); text-decoration:none; letter-spacing:-0.03em; }
@@ -34,7 +33,6 @@ nav .container { display:flex; align-items:center; justify-content:space-between
 .nav-cta { padding:7px 16px; font-size:0.7rem; font-weight:600; background:var(--red); color:#fff; border-radius:6px; text-decoration:none; transition:background 0.2s; font-family:'Inter',sans-serif; }
 .nav-cta:hover { background:#c62828; }
 
-/* HERO */
 #hero { padding:160px 0 80px; position:relative; }
 #hero .container { position:relative; z-index:1; }
 #hero::after { content:''; position:absolute; top:-200px; right:-80px; width:600px; height:600px; background:radial-gradient(circle,rgba(159,68,211,0.05) 0%,rgba(255,36,66,0.03) 30%,transparent 70%); pointer-events:none; }
@@ -44,18 +42,15 @@ nav .container { display:flex; align-items:center; justify-content:space-between
 .hero-name em { font-style:normal; color:var(--red); }
 .hero-sub { font-size:1.15rem; font-weight:300; color:var(--gray-600); max-width:600px; line-height:1.6; margin-bottom:32px; }
 
-/* STATS */
 .stats-row { display:flex; justify-content:flex-start; gap:36px; flex-wrap:wrap; }
 .stat-item { text-align:center; }
 .stat-number { display:block; font-family:'Inter',sans-serif; font-size:2.2rem; font-weight:800; color:var(--purple); line-height:1; }
 .stat-label { display:block; font-size:0.72rem; font-weight:600; color:var(--gray-400); text-transform:uppercase; letter-spacing:0.08em; margin-top:4px; }
 
-/* SECTION */
 .section-title { text-align:center; font-size:2rem; font-weight:700; margin-bottom:4px; color:var(--black); }
 .section-subtitle { text-align:center; font-size:0.95rem; color:var(--gray-600); margin-bottom:48px; font-family:'Inter',sans-serif; }
 .module-label { font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--red); margin-bottom:4px; display:block; text-align:center; }
 
-/* LESSON TABLE */
 .lesson-table { max-width:900px; margin:0 auto; border-collapse:collapse; width:100%; }
 .lesson-table tr { border-bottom:1px solid var(--gray-200); transition:background 0.15s; }
 .lesson-table tr:hover { background:rgba(159,68,211,0.02); }
@@ -64,7 +59,18 @@ nav .container { display:flex; align-items:center; justify-content:space-between
 .lesson-table td:nth-child(2) { width:180px; font-weight:600; font-size:0.95rem; color:var(--black); font-family:'Inter',sans-serif; }
 .lesson-table td:last-child { font-size:0.85rem; color:var(--gray-600); line-height:1.6; }
 
-/* CTA */
+.ef-levels { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:10px; max-width:900px; margin:0 auto 48px; }
+.ef-level { padding:12px 16px; background:var(--white); border:1px solid var(--gray-200); border-radius:10px; text-align:center; font-family:'Inter',sans-serif; }
+.ef-level .level-name { font-weight:700; font-size:0.85rem; color:var(--black); }
+.ef-level .level-cefr { font-size:0.7rem; color:var(--gray-400); margin-top:2px; }
+
+.career-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:16px; max-width:900px; margin:0 auto 48px; }
+.career-card { padding:20px 24px; background:var(--white); border:2px solid var(--gray-200); border-radius:14px; transition:all 0.2s; }
+.career-card:hover { border-color:var(--purple); box-shadow:var(--shadow-md); transform:translateY(-1px); }
+.career-card .cc-icon { font-size:1.5rem; margin-bottom:8px; }
+.career-card h4 { font-family:'Inter',sans-serif; font-size:0.95rem; font-weight:700; color:var(--black); margin-bottom:4px; }
+.career-card p { font-size:0.78rem; color:var(--gray-600); line-height:1.5; }
+
 .cta-section { background:var(--white); text-align:center; padding:80px 20px; border-top:1px solid var(--gray-200); }
 .cta-section h2 { margin-bottom:12px; }
 .cta-buttons { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:28px; }
@@ -74,12 +80,10 @@ nav .container { display:flex; align-items:center; justify-content:space-between
 .btn-outline { border:2px solid var(--gray-200); color:var(--black); }
 .btn-outline:hover { border-color:var(--purple); color:var(--purple); }
 
-/* FOOTER */
 footer { padding:40px 20px; text-align:center; color:var(--gray-400); font-size:0.85rem; font-family:'Inter',sans-serif; }
 footer a { color:var(--purple); text-decoration:none; }
 footer a:hover { color:var(--red); }
 
-/* MOBILE */
 @media (max-width: 768px) {
   .container { padding:0 20px; }
   section { padding:60px 0; }
@@ -90,6 +94,7 @@ footer a:hover { color:var(--red); }
   .lesson-table td:last-child { font-size:0.75rem; }
   .stats-row { gap:20px; }
   .stat-number { font-size:1.6rem; }
+  .ef-levels { grid-template-columns:repeat(auto-fit, minmax(120px, 1fr)); }
 }
 </style>
 </head>
@@ -107,11 +112,11 @@ footer a:hover { color:var(--red); }
     <span class="hero-emoji">🦄</span>
     <p class="hero-greeting">with Kee Lee</p>
     <h1 class="hero-name">Business English<br><em>Syllabus</em></h1>
-    <p class="hero-sub">从发音到语法，从商务实战到日常表达——专为成人设计的全模块英语课程。B1-C1全覆盖，46课时系统进阶。</p>
+    <p class="hero-sub">从发音到商务实战，从EF体系到定制课程——专为成人设计的全模块英语课程。融合英孚Career Advancement架构，11年一线教学沉淀。</p>
     <div class="stats-row">
-      <div class="stat-item"><span class="stat-number">46</span><span class="stat-label">Total Lessons</span></div>
       <div class="stat-item"><span class="stat-number">4</span><span class="stat-label">Modules</span></div>
-      <div class="stat-item"><span class="stat-number">B1-C1</span><span class="stat-label">CEFR Level</span></div>
+      <div class="stat-item"><span class="stat-number">60+</span><span class="stat-label">Total Lessons</span></div>
+      <div class="stat-item"><span class="stat-number">A1–C2</span><span class="stat-label">CEFR Range</span></div>
       <div class="stat-item"><span class="stat-number">Adults</span><span class="stat-label">Target</span></div>
     </div>
   </div>
@@ -140,26 +145,75 @@ footer a:hover { color:var(--red); }
   </div>
 </section>
 
-<!-- MODULE 2: GRAMMAR -->
+<!-- MODULE 2: EF CAREER ADVANCEMENT -->
 <section>
   <div class="container">
     <span class="module-label">Module 2</span>
-    <h2 class="section-title">📝 语法模块</h2>
-    <p class="section-subtitle">Grammar Module — 12 Lessons</p>
+    <h2 class="section-title">🏢 EF Career Advancement</h2>
+    <p class="section-subtitle">英孚职业进阶体系 — 16 Levels · A1–C2 · Kee曾任英孚Lead Trainer</p>
+
+    <h3 style="text-align:center;margin-bottom:20px;font-family:'Inter',sans-serif;font-size:1rem;color:var(--gray-600);">📊 CEFR 分级体系</h3>
+    <div class="ef-levels">
+      <div class="ef-level"><span class="level-name">Level 1–3</span><span class="level-cefr">Beginner A1</span></div>
+      <div class="ef-level"><span class="level-name">Level 4–6</span><span class="level-cefr">Elementary A2</span></div>
+      <div class="ef-level"><span class="level-name">Level 7–9</span><span class="level-cefr">Intermediate B1</span></div>
+      <div class="ef-level"><span class="level-name">Level 10–12</span><span class="level-cefr">Upper-Int B2</span></div>
+      <div class="ef-level"><span class="level-name">Level 13–15</span><span class="level-cefr">Advanced C1</span></div>
+      <div class="ef-level"><span class="level-name">Level 16</span><span class="level-cefr">Proficiency C2</span></div>
+    </div>
+
+    <h3 style="text-align:center;margin-bottom:20px;font-family:'Inter',sans-serif;font-size:1rem;color:var(--gray-600);">🎯 6大核心模块（Level 6+ Business English准入）</h3>
     <table class="lesson-table">
-      <tr><td>1</td><td>时态·现在时</td><td>一般现在时、现在进行时、现在完成时、常见错误分析</td></tr>
-      <tr><td>2</td><td>时态·过去时</td><td>一般过去时、过去进行时、过去完成时、时间状语的运用</td></tr>
-      <tr><td>3</td><td>时态·将来时</td><td>一般将来时、将来进行时、将来完成时、表达将来计划和预测</td></tr>
-      <tr><td>4</td><td>被动语态</td><td>被动语态的构成、不同时态的被动语态、被动语态的用法</td></tr>
-      <tr><td>5</td><td>非谓语动词</td><td>不定式、动名词、分词、非谓语动词的逻辑主语</td></tr>
-      <tr><td>6</td><td>情态动词</td><td>can/could/may/might/must/should/will/would、情态动词的推测用法</td></tr>
-      <tr><td>7</td><td>虚拟语气</td><td>If条件句、其他虚拟语气用法（wish/as if/would rather）及应用场景</td></tr>
-      <tr><td>8</td><td>名词性从句</td><td>主语从句、宾语从句、表语从句、同位语从句、连接词运用、语序</td></tr>
-      <tr><td>9</td><td>定语从句</td><td>关系代词和关系副词运用、限制性与非限制性定语从句、定语从句简化</td></tr>
-      <tr><td>10</td><td>状语从句</td><td>时间、地点、原因等状语从句、连接词运用、状语从句的省略</td></tr>
-      <tr><td>11</td><td>句子成分分析</td><td>主谓宾补定状、句子结构分析、长难句分析技巧</td></tr>
-      <tr><td>12</td><td>常见语法错误</td><td>中式英语的常见错误、语法错误分析及纠正、提高语法准确性的方法</td></tr>
+      <tr><td>1</td><td>Sounds of English</td><td>英语发音基础巩固、元音辅音系统训练、语音识别练习</td></tr>
+      <tr><td>2</td><td>Stress & Intonation</td><td>单词重音与句重音、语调模式、情感表达训练、role-play</td></tr>
+      <tr><td>3</td><td>Situational Dialogues</td><td>真实场景对话、商务社交、电话沟通、冲突处理、即兴表达</td></tr>
+      <tr><td>4</td><td>Oral Presentations</td><td>演讲结构设计、肢体语言、视觉辅助、即兴演讲、Q&A应答</td></tr>
+      <tr><td>5</td><td>Etiquette</td><td>国际商务礼仪、跨文化沟通、用餐礼仪、邮件礼仪、会议礼仪</td></tr>
+      <tr><td>6</td><td>Interview Skills</td><td>英文面试全流程、自我介绍、STAR法则、薪资谈判、模拟面试</td></tr>
     </table>
+
+    <h3 style="text-align:center;margin:40px 0 20px;font-family:'Inter',sans-serif;font-size:1rem;color:var(--gray-600);">🏅 Career Skills Certificate 专题认证</h3>
+    <div class="career-grid">
+      <div class="career-card">
+        <div class="cc-icon">🎤</div>
+        <h4>Personal Branding & Public Speaking</h4>
+        <p>个人品牌打造、公开演讲、LinkedIn优化、电梯演讲</p>
+      </div>
+      <div class="career-card">
+        <div class="cc-icon">📱</div>
+        <h4>Social Media Marketing</h4>
+        <p>社交媒体营销策略、内容创作、数据分析、品牌传播</p>
+      </div>
+      <div class="career-card">
+        <div class="cc-icon">🚀</div>
+        <h4>Entrepreneurship</h4>
+        <p>创业思维、商业模型、市场验证、pitch deck、融资基础</p>
+      </div>
+      <div class="career-card">
+        <div class="cc-icon">🤝</div>
+        <h4>Business Meetings & Negotiations</h4>
+        <p>会议主持、谈判技巧、决策框架、冲突调解、合同条款</p>
+      </div>
+      <div class="career-card">
+        <div class="cc-icon">✍️</div>
+        <h4>Business Writing Skills</h4>
+        <p>商务邮件、报告撰写、提案写作、会议纪要、说服性文案</p>
+      </div>
+      <div class="career-card">
+        <div class="cc-icon">📊</div>
+        <h4>Presentation Skills</h4>
+        <p>演示设计、storytelling、数据可视化、观众互动、线上演示</p>
+      </div>
+      <div class="career-card">
+        <div class="cc-icon">🌍</div>
+        <h4>Cross-Cultural Communication</h4>
+        <p>跨文化沟通理论、文化维度、全球化团队、文化冲突处理</p>
+      </div>
+    </div>
+
+    <p style="text-align:center;font-size:0.82rem;color:var(--gray-400);font-family:'Inter',sans-serif;margin-top:16px;">
+      ※ 基于EF Education First Career Advancement 体系 · Kee 2017–2022 EF Lead Trainer 实战经验
+    </p>
   </div>
 </section>
 
