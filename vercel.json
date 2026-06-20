@@ -1,5 +1,15 @@
 {
-  "rewrites": [
-    { "source": "/class", "destination": "/class/index.html" }
+  "cleanUrls": true,
+  "routes": [
+    { "src": "/dynamos", "dest": "/dynamos/index.html" },
+    { "src": "/dynamos/(.*)", "dest": "/dynamos/$1" },
+    { "src": "/business-english", "dest": "/business-english/index.html" },
+    { "src": "/class", "dest": "/class/index.html" },
+    { "src": "/hairuis", "dest": "/hairuis/index.html" },
+    { "src": "/resume", "dest": "/resume.html" },
+    { "src": "/speech", "dest": "/speech.html" },
+    { "src": "/speech-clickcues", "dest": "/speech-clickcues.html" },
+    { "src": "/programmer-english", "dest": "/programmer-english/index.html" },
+    { "src": "/programmer-english/module/(.*)", "dest": "/programmer-english/module/$1.html" }
   ]
 }
