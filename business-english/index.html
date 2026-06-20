@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business English with Kee — 成人英语课程大纲 🦄</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafafa; --white: #fff; --black: #1a1a1a;
+  --red: #e62b1e; --purple: #9F44D3; --pink: #FF2442;
+  --gray-100: #f5f5f5; --gray-200: #e0e0e0; --gray-400: #999; --gray-600: #666; --gray-900: #1a1a1a;
+  --radius: 20px; --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+  --max: 1200px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Source Serif 4', 'Inter', Georgia, serif;
+  font-size:16px; line-height:1.75; color:var(--black); background:var(--bg);
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+h2 { font-family:'Playfair Display',Georgia,serif; font-weight:700; letter-spacing:-0.02em; line-height:1.12; font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:8px; }
+h3 { font-family:'Playfair Display',Georgia,serif; font-size:1.15rem; font-weight:700; }
+.container { max-width:var(--max); width:100%; margin:0 auto; padding:0 36px; }
+section { padding:80px 0; position:relative; overflow:hidden; border-bottom:1px solid transparent; }
+section::after { content:''; position:absolute; bottom:0; left:10%; right:10%; height:1px; background:linear-gradient(90deg,transparent,rgba(0,0,0,0.05),transparent); }
+section:last-of-type::after { display:none; }
+
+/* NAV */
+nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(250,250,250,0.78); backdrop-filter:blur(24px); border-bottom:1px solid rgba(0,0,0,0.06); padding:14px 0; }
+nav .container { display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'Inter',sans-serif; font-size:1.05rem; font-weight:800; color:var(--black); text-decoration:none; letter-spacing:-0.03em; }
+.logo span { color:var(--red); }
+.nav-cta { padding:7px 16px; font-size:0.7rem; font-weight:600; background:var(--red); color:#fff; border-radius:6px; text-decoration:none; transition:background 0.2s; font-family:'Inter',sans-serif; }
+.nav-cta:hover { background:#c62828; }
+
+/* HERO */
+#hero { padding:160px 0 80px; position:relative; }
+#hero .container { position:relative; z-index:1; }
+#hero::after { content:''; position:absolute; top:-200px; right:-80px; width:600px; height:600px; background:radial-gradient(circle,rgba(159,68,211,0.05) 0%,rgba(255,36,66,0.03) 30%,transparent 70%); pointer-events:none; }
+.hero-emoji { font-size:3.5rem; display:block; margin-bottom:8px; text-decoration:none; }
+.hero-greeting { font-size:1rem; font-weight:300; color:var(--gray-600); letter-spacing:-0.02em; margin-bottom:4px; font-family:'Inter',sans-serif; }
+.hero-name { font-family:'Inter',sans-serif; font-size:clamp(2.5rem,6vw,4.5rem); font-weight:900; letter-spacing:-0.04em; line-height:1; margin-bottom:8px; }
+.hero-name em { font-style:normal; color:var(--red); }
+.hero-sub { font-size:1.15rem; font-weight:300; color:var(--gray-600); max-width:600px; line-height:1.6; margin-bottom:32px; }
+
+/* STATS */
+.stats-row { display:flex; justify-content:flex-start; gap:36px; flex-wrap:wrap; }
+.stat-item { text-align:center; }
+.stat-number { display:block; font-family:'Inter',sans-serif; font-size:2.2rem; font-weight:800; color:var(--purple); line-height:1; }
+.stat-label { display:block; font-size:0.72rem; font-weight:600; color:var(--gray-400); text-transform:uppercase; letter-spacing:0.08em; margin-top:4px; }
+
+/* SECTION */
+.section-title { text-align:center; font-size:2rem; font-weight:700; margin-bottom:4px; color:var(--black); }
+.section-subtitle { text-align:center; font-size:0.95rem; color:var(--gray-600); margin-bottom:48px; font-family:'Inter',sans-serif; }
+.module-label { font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--red); margin-bottom:4px; display:block; text-align:center; }
+
+/* LESSON TABLE */
+.lesson-table { max-width:900px; margin:0 auto; border-collapse:collapse; width:100%; }
+.lesson-table tr { border-bottom:1px solid var(--gray-200); transition:background 0.15s; }
+.lesson-table tr:hover { background:rgba(159,68,211,0.02); }
+.lesson-table td { padding:14px 16px; vertical-align:top; }
+.lesson-table td:first-child { width:70px; font-family:'Inter',sans-serif; font-weight:700; color:var(--purple); font-size:0.9rem; text-align:right; padding-right:20px; white-space:nowrap; }
+.lesson-table td:nth-child(2) { width:180px; font-weight:600; font-size:0.95rem; color:var(--black); font-family:'Inter',sans-serif; }
+.lesson-table td:last-child { font-size:0.85rem; color:var(--gray-600); line-height:1.6; }
+
+/* CTA */
+.cta-section { background:var(--white); text-align:center; padding:80px 20px; border-top:1px solid var(--gray-200); }
+.cta-section h2 { margin-bottom:12px; }
+.cta-buttons { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:28px; }
+.btn { display:inline-flex; align-items:center; gap:6px; padding:14px 28px; border-radius:12px; font-family:'Inter',sans-serif; font-size:0.95rem; font-weight:600; text-decoration:none; transition:all 0.2s; }
+.btn-primary { background:var(--red); color:#fff; }
+.btn-primary:hover { background:#c62828; transform:translateY(-1px); box-shadow:0 6px 20px rgba(230,43,30,0.2); }
+.btn-outline { border:2px solid var(--gray-200); color:var(--black); }
+.btn-outline:hover { border-color:var(--purple); color:var(--purple); }
+
+/* FOOTER */
+footer { padding:40px 20px; text-align:center; color:var(--gray-400); font-size:0.85rem; font-family:'Inter',sans-serif; }
+footer a { color:var(--purple); text-decoration:none; }
+footer a:hover { color:var(--red); }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .container { padding:0 20px; }
+  section { padding:60px 0; }
+  #hero { padding:130px 0 50px; }
+  .hero-name { font-size:2.2rem; }
+  .lesson-table td:first-child { width:45px; font-size:0.75rem; padding-right:12px; }
+  .lesson-table td:nth-child(2) { width:110px; font-size:0.8rem; }
+  .lesson-table td:last-child { font-size:0.75rem; }
+  .stats-row { gap:20px; }
+  .stat-number { font-size:1.6rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="https://rkrk.io" class="logo">🦄 <span>Kee</span> Language Lab</a>
+    <a href="#contact" class="nav-cta">Book Demo</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="container">
+    <span class="hero-emoji">🦄</span>
+    <p class="hero-greeting">with Kee Lee</p>
+    <h1 class="hero-name">Business English<br><em>Syllabus</em></h1>
+    <p class="hero-sub">从发音到语法，从商务实战到日常表达——专为成人设计的全模块英语课程。B1-C1全覆盖，46课时系统进阶。</p>
+    <div class="stats-row">
+      <div class="stat-item"><span class="stat-number">46</span><span class="stat-label">Total Lessons</span></div>
+      <div class="stat-item"><span class="stat-number">4</span><span class="stat-label">Modules</span></div>
+      <div class="stat-item"><span class="stat-number">B1-C1</span><span class="stat-label">CEFR Level</span></div>
+      <div class="stat-item"><span class="stat-number">Adults</span><span class="stat-label">Target</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 1: PRONUNCIATION -->
+<section>
+  <div class="container">
+    <span class="module-label">Module 1</span>
+    <h2 class="section-title">🗣 发音模块</h2>
+    <p class="section-subtitle">Pronunciation Module — 12 Lessons</p>
+    <table class="lesson-table">
+      <tr><td>1</td><td>音标体系·单元音</td><td>国际音标IPA介绍、单元音发音规则及练习、常见发音错误纠正</td></tr>
+      <tr><td>2</td><td>双元音</td><td>双元音发音规则及练习、单元音和双元音对比</td></tr>
+      <tr><td>3</td><td>辅音</td><td>辅音发音规则及练习、清辅音和浊辅音的区分、常见辅音发音错误</td></tr>
+      <tr><td>4</td><td>常见自然拼读</td><td>自然拼读规则讲解、元音字母组合发音、辅音字母组合发音</td></tr>
+      <tr><td>5</td><td>音节与重弱读</td><td>音节划分规则、单词重音规则</td></tr>
+      <tr><td>6</td><td>基础音变·连读与连缀</td><td>连读规则及练习、连缀规则及练习、语流中的音变现象</td></tr>
+      <tr><td>7</td><td>内容词与功能词</td><td>词性讲解（名词、动词、形容词等）、功能词的作用（介词、冠词等）、词语搭配</td></tr>
+      <tr><td>8</td><td>意群断句与语块表达</td><td>意群的概念、断句技巧、语块积累与运用</td></tr>
+      <tr><td>9</td><td>语句节奏及句中重弱读</td><td>英文节奏的特点、句中重读与弱读的规律、语调与情感表达</td></tr>
+      <tr><td>10</td><td>基础语调与选择</td><td>升调、降调、平调、不同语调的应用场景、语调练习</td></tr>
+      <tr><td>11</td><td>进阶音变·爆破</td><td>爆破音规则及练习、不完全爆破、鼻腔爆破、边音爆破、杀手音n</td></tr>
+      <tr><td>12</td><td>进阶音变·同化浊化缩读</td><td>同化规则及练习、浊化规则及练习、缩读规则及练习</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- MODULE 2: GRAMMAR -->
+<section>
+  <div class="container">
+    <span class="module-label">Module 2</span>
+    <h2 class="section-title">📝 语法模块</h2>
+    <p class="section-subtitle">Grammar Module — 12 Lessons</p>
+    <table class="lesson-table">
+      <tr><td>1</td><td>时态·现在时</td><td>一般现在时、现在进行时、现在完成时、常见错误分析</td></tr>
+      <tr><td>2</td><td>时态·过去时</td><td>一般过去时、过去进行时、过去完成时、时间状语的运用</td></tr>
+      <tr><td>3</td><td>时态·将来时</td><td>一般将来时、将来进行时、将来完成时、表达将来计划和预测</td></tr>
+      <tr><td>4</td><td>被动语态</td><td>被动语态的构成、不同时态的被动语态、被动语态的用法</td></tr>
+      <tr><td>5</td><td>非谓语动词</td><td>不定式、动名词、分词、非谓语动词的逻辑主语</td></tr>
+      <tr><td>6</td><td>情态动词</td><td>can/could/may/might/must/should/will/would、情态动词的推测用法</td></tr>
+      <tr><td>7</td><td>虚拟语气</td><td>If条件句、其他虚拟语气用法（wish/as if/would rather）及应用场景</td></tr>
+      <tr><td>8</td><td>名词性从句</td><td>主语从句、宾语从句、表语从句、同位语从句、连接词运用、语序</td></tr>
+      <tr><td>9</td><td>定语从句</td><td>关系代词和关系副词运用、限制性与非限制性定语从句、定语从句简化</td></tr>
+      <tr><td>10</td><td>状语从句</td><td>时间、地点、原因等状语从句、连接词运用、状语从句的省略</td></tr>
+      <tr><td>11</td><td>句子成分分析</td><td>主谓宾补定状、句子结构分析、长难句分析技巧</td></tr>
+      <tr><td>12</td><td>常见语法错误</td><td>中式英语的常见错误、语法错误分析及纠正、提高语法准确性的方法</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- MODULE 3: BUSINESS ENGLISH -->
+<section>
+  <div class="container">
+    <span class="module-label">Module 3</span>
+    <h2 class="section-title">💼 商务英语模块</h2>
+    <p class="section-subtitle">Business English Module — 24 Lessons (12 Units)</p>
+    <table class="lesson-table">
+      <tr><td>1–2</td><td>商务英语概述</td><td>商务英语的特点、应用场景、学习资源</td></tr>
+      <tr><td>3–4</td><td>商务沟通</td><td>商务沟通技巧、跨文化沟通、有效沟通策略</td></tr>
+      <tr><td>5–6</td><td>商务写作</td><td>E-mail写作、报告写作、商务提案写作</td></tr>
+      <tr><td>7–8</td><td>商务会议</td><td>会议类型（formal/informal）、会议流程、会议礼仪</td></tr>
+      <tr><td>9–10</td><td>商务谈判</td><td>谈判技巧（active listening/questioning/bargaining）、谈判策略、文化差异</td></tr>
+      <tr><td>11–12</td><td>商务演讲</td><td>演讲技巧（structure/delivery/body language）、演讲准备、常见演讲话题</td></tr>
+      <tr><td>13–14</td><td>商务礼仪</td><td>商务社交礼仪、国际商务礼仪、商务用餐礼仪</td></tr>
+      <tr><td>15–16</td><td>商务英语词汇</td><td>常用商务词汇、商业术语、行业专有名词</td></tr>
+      <tr><td>17–18</td><td>商务阅读</td><td>商业新闻阅读、商务报告阅读、经济学人文章阅读</td></tr>
+      <tr><td>19–20</td><td>商务听力</td><td>商务会议听力、电话会议听力、商业演讲听力</td></tr>
+      <tr><td>21–22</td><td>商务口语</td><td>流利表达技巧、口语正式表达练习、演讲语调练习</td></tr>
+      <tr><td>23–24</td><td>商务综合能力</td><td>模拟情境（项目合作讨论/商务报告展示）、讨论与展示成果反馈</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- MODULE 4: GENERAL ENGLISH -->
+<section>
+  <div class="container">
+    <span class="module-label">Module 4</span>
+    <h2 class="section-title">🌐 通用英语模块</h2>
+    <p class="section-subtitle">General English Module — 24 Lessons (12 Units)</p>
+    <table class="lesson-table">
+      <tr><td>1–2</td><td>Greetings</td><td>口语评价指标及注意事项、常见学习误区分析、开场白/寒暄语/结束语、积极倾听技巧、非语言沟通</td></tr>
+      <tr><td>3–4</td><td>Making Small Talks</td><td>如何用英语闲聊、闲聊的话题选择、话题转换的方法</td></tr>
+      <tr><td>5–6</td><td>Talking about Your Hobbies</td><td>兴趣的表达、使用动词词组、了解词汇搭配</td></tr>
+      <tr><td>7–8</td><td>Describing an Old Photo</td><td>叙事结构（开头、中间、结尾）、时态运用（过去时、现在完成时）、描述细节技巧</td></tr>
+      <tr><td>7–8</td><td>Introducing Your Friends</td><td>外貌描述、性格描述、物品描述、形容词和副词修饰、比较级和最高级</td></tr>
+      <tr><td>9–10</td><td>Watching a Film</td><td>表达观点的常用句型、支持观点的论据、反驳观点的技巧</td></tr>
+      <tr><td>11–12</td><td>Ordering a Meal</td><td>直接请求、委婉请求、礼貌请求、拒绝请求的技巧</td></tr>
+      <tr><td>13–14</td><td>Giving Advice</td><td>劝说的技巧（提供理由、情感诉求）、应对劝说的技巧、妥协与让步</td></tr>
+      <tr><td>15–16</td><td>Visiting a Friend in a Hospital</td><td>表达喜怒哀乐、同情/安慰/鼓励、礼貌表达感谢和歉意</td></tr>
+      <tr><td>17–18</td><td>Hosting a Meeting</td><td>问题分析技巧、解决方案提出、决策技巧</td></tr>
+      <tr><td>19–20</td><td>Having an Interview</td><td>自我介绍技巧（个人信息、兴趣爱好、职业目标）、面试技巧（回答问题、提问技巧）、礼仪规范</td></tr>
+      <tr><td>23–24</td><td>Test and Feedback</td><td>即兴演讲/辩论赛、演讲和辩论成果反馈</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <h2>📚 Book a Demo Class</h2>
+  <p style="color:var(--gray-600);font-family:'Inter',sans-serif;font-size:1rem;max-width:500px;margin:0 auto;">
+    对课程感兴趣？获取免费 15 分钟诊断课，一起定制你的学习路径
+  </p>
+  <div class="cta-buttons">
+    <a href="https://wa.me/447440622158" class="btn btn-primary">💬 WhatsApp Kee</a>
+    <a href="https://ielts.rkrk.io" class="btn btn-outline">🦄 IELTS with Kee</a>
+  </div>
+  <p style="margin-top:20px;font-size:0.85rem;color:var(--gray-600);font-family:'Inter',sans-serif;">
+    💡 WeChat: <strong>keedahooman</strong> &nbsp;|&nbsp; WhatsApp: <strong>+44 7440 622158</strong>
+  </p>
+</section>
+
+<footer>
+  <p>🦄 <strong>Business English with Kee</strong> — Built with ⚡ RUA energy</p>
+  <p style="margin-top:4px;font-size:0.75rem;">© 2026 Kee Lee • <a href="https://rkrk.io">rkrk.io</a> • <a href="https://ielts.rkrk.io">IELTS with Kee</a></p>
+</footer>
+
+</body>
+</html>
