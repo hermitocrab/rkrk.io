@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>成人英语定制课程 — 艺术文化方向</title>
+  <title>艺术文化英语 · Art & Culture English — rkrk.io × 托朴教育</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
@@ -373,6 +373,16 @@
       font-weight: 700; color: var(--accent); letter-spacing: 0.06em;
       text-transform: uppercase;
     }
+
+    /* ==== PHASE SECTION BACKGROUNDS ==== */
+    .phase-section-wrapper { position: relative; }
+    .phase-section-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(180deg, rgba(10,10,11,0.82) 0%, rgba(10,10,11,0.72) 40%, rgba(10,10,11,0.88) 100%);
+    }
+    .hero {
+      background: linear-gradient(180deg, rgba(10,10,11,0.75) 0%, var(--bg-base) 100%), url('assets/phase1.jpg') center/cover no-repeat;
+    }
   </style>
 </head>
 <body>
@@ -381,7 +391,7 @@
 <nav class="site-nav">
   <div class="nav-inner">
     <a href="#" class="nav-brand">
-      <span class="brand-emoji">🎨</span> 成人英语定制课
+      <span class="brand-emoji">🦄</span> rkrk.io <span style="color:var(--text-muted);font-weight:400;margin:0 6px">×</span> <span style="font-weight:600">托朴教育</span>
     </a>
     <div class="nav-phase-tabs">
       <a href="#framework" class="nav-phase-tab">概览</a>
@@ -399,10 +409,11 @@
 <section class="hero">
   <div class="hero-content">
     <span class="hero-emoji">🎨</span>
-    <h1>跟外国朋友<span class="hero-accent">丝滑交流不卡壳</span></h1>
-    <p class="hero-subtitle">
-      24节定制课程 · 艺术文化方向 · 从零基础到自信表达<br>
-      每节课融合发音、语法、场景实战，围绕统一主题螺旋上升
+    <h1>让你的英语<span class="hero-accent">自带审美</span></h1>
+    <p class="hero-subtitle" style="font-size:1.05rem;color:var(--text-secondary);margin-bottom:6px">English with Taste</p>
+    <p class="hero-subtitle" style="margin-top:0">
+      不止说英语 — 聊艺术、电影、音乐、设计的深度<br>
+      24节定制课程 · 发音 × 语法 × 场景实战 · 螺旋进阶
     </p>
     <div class="hero-stats">
       <div class="hero-stat">
@@ -960,11 +971,16 @@ function renderPhase(phase) {
   const phaseSessions = sessions.filter(s => s.phase === phase);
   const badge = phaseBadges[phase];
 
+  const bgImage = `assets/phase${phase}.jpg`;
   let html = `
+    <div class="phase-section-wrapper" style="background-image:url('${bgImage}');background-size:cover;background-position:center;border-radius:var(--radius);overflow:hidden;margin-bottom:32px;position:relative;">
+    <div class="phase-section-overlay"></div>
+    <div style="position:relative;z-index:2;padding:40px 28px;">
     <div class="phase-divider">${phaseNames[phase]}</div>
-    <div style="text-align:center;margin-bottom:24px;font-size:0.8rem;color:var(--text-muted);display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
+    <div style="text-align:center;margin-bottom:24px;font-size:0.8rem;color:var(--text-secondary);display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
       <span>CEFR: <span style="color:var(--accent);font-weight:600;">${badge.cefr}</span></span>
-      <span>${badge.keywords}</span>
+      <span style="color:var(--text-muted);">${badge.keywords}</span>
+    </div>
     </div>
   `;
 
@@ -1004,6 +1020,7 @@ function renderPhase(phase) {
     </div>`;
   });
 
+  html += `</div>`;
   container.innerHTML = html;
 
   // Reset animation
