@@ -390,9 +390,14 @@
 <!-- NAVIGATION -->
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="#" class="nav-brand">
-      <span class="brand-emoji">🦄</span> rkrk.io <span style="color:var(--text-muted);font-weight:400;margin:0 6px">×</span> <span style="font-weight:600">托朴教育</span>
-    </a>
+    <div class="nav-brand">
+      <a href="https://rkrk.io" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit;">
+        <span class="brand-emoji">🦄</span> rkrk.io
+      </a>
+      <span style="color:var(--text-muted);font-weight:400;margin:0 6px">×</span>
+      <img src="assets/top-education-logo.jpg" alt="托朴教育" style="height:28px;width:auto;border-radius:4px;">
+      <span style="font-weight:600">托朴教育</span>
+    </div>
     <div class="nav-phase-tabs">
       <a href="#framework" class="nav-phase-tab">概览</a>
       <button class="nav-phase-tab active" onclick="switchPhase(1, this)">阶段一</button>
@@ -746,7 +751,7 @@
 <footer class="site-footer">
   <p>🎨 <span class="footer-accent">成人英语定制课程</span> — 艺术文化方向 · 整合版</p>
   <p style="margin-top:4px;">设计理念：每一节课都是发音+语法+场景实战的微缩全貌 · 螺旋上升 · 真实梯度</p>
-  <p style="margin-top:8px;">Built by <span class="footer-accent">Master Kee</span> <span class="footer-emoji">🦄</span> · 2026</p>
+  <p style="margin-top:8px;">Built by <span class="footer-accent">Kee Lee</span> <span class="footer-emoji">🦄</span> · 2026</p>
 </footer>
 
 <script>
@@ -754,199 +759,367 @@
 const sessions = [
   // PHASE 1: Foundation (1-6)
   {
-    phase:1, num:1, title:"初次印象", theme:"通过你所爱之物介绍自己",
+    phase:1, num:1,
+    title:"初次印象", title_en:"First Impressions",
+    theme:"通过你所爱之物介绍自己", theme_en:"Introduce yourself through what you love",
     pronunciation:"/iː/ 与 /ɪ/ 的区别 — sheep/ship, feel/fill。中国学习者最明显的发音特征",
+    pronunciation_en:"/iː/ vs /ɪ/ — sheep/ship, feel/fill. The most noticeable giveaway for Chinese speakers",
     grammar:"一般现在时表示事实和习惯 — \"I love..., I live in..., I work as...\"",
+    grammar_en:"Simple Present for facts & habits — \"I love..., I live in..., I work as...\"",
     conversation:"做一个1分钟自我介绍，听起来自然不做作",
+    conversation_en:"Give a 1-minute self-introduction that sounds natural, not recited",
     art:"说出3位塑造了你的艺术家、电影或书籍——每样用一句话说明原因",
-    homework:"录制30秒语音自我介绍。回听。重新录制改进版"
+    art_en:"Name 3 artists, films, or books that shaped you — and say why in one sentence each",
+    homework:"录制30秒语音自我介绍。回听。重新录制改进版",
+    homework_en:"Record 30s voice intro. Listen back. Re-record it better"
   },
   {
-    phase:1, num:2, title:"我生命中的人", theme:"描述你身边的人",
+    phase:1, num:2,
+    title:"我生命中的人", title_en:"People in My Life",
+    theme:"描述你身边的人", theme_en:"Describing the people around you",
     pronunciation:"/æ/ 与 /e/ (man/men, bad/bed) + 弱元音 /ə/ — 让英语听起来像英语的\"懒元音\"",
+    pronunciation_en:"/æ/ vs /e/ (man/men, bad/bed) + schwa /ə/ — the lazy vowel that makes English sound English",
     grammar:"现在进行时表示当前 — \"I'm learning..., She's working on...\"",
+    grammar_en:"Present Continuous for right now — \"I'm learning..., She's working on...\"",
     conversation:"描述一位朋友：性格、职业、你为什么喜欢他们",
+    conversation_en:"Describe a friend: their personality, what they do, why you like them",
     art:"如果你最好的朋友是一件艺术品，他们会是什么？为什么？",
-    homework:"用3句话描述一个人。录音。标注你使用弱元音的地方"
+    art_en:"If your best friend was a piece of art, what would they be and why?",
+    homework:"用3句话描述一个人。录音。标注你使用弱元音的地方",
+    homework_en:"Describe someone in 3 sentences. Record it. Mark where you used schwa"
   },
   {
-    phase:1, num:3, title:"我反复回归的事物", theme:"谈论习惯、爱好和痴迷",
+    phase:1, num:3,
+    title:"我反复回归的事物", title_en:"The Things I Keep Coming Back To",
+    theme:"谈论习惯、爱好和痴迷", theme_en:"Talking about habits, hobbies, and obsessions",
     pronunciation:"/θ/ 和 /ð/ — 中国学习者害怕的\"th\"音。think, this, theatre, that。实用舌位训练",
+    pronunciation_en:"/θ/ and /ð/ — the \"th\" that Chinese speakers fear. Think, this, theatre, that. Practical tongue placement",
     grammar:"频率副词 + 好恶表达 — always, sometimes, never // I enjoy, I'm into, I can't stand",
+    grammar_en:"Frequency adverbs + likes/dislikes — always, sometimes, never // I enjoy, I'm into, I can't stand",
     conversation:"谈论一个文化习惯——你反复重看的电影类型、循环播放的音乐、常去的画廊",
+    conversation_en:"Talk about a cultural habit — film genre you rewatch, music you play on repeat, gallery you visit often",
     art:"\"你总是回归什么？\"——那些经得起重复的艺术",
-    homework:"用4句话解释你最喜欢的可反复观看的电影。使用2个频率词"
+    art_en:"\"What do you always come back to?\" — the art that rewards repetition",
+    homework:"用4句话解释你最喜欢的可反复观看的电影。使用2个频率词",
+    homework_en:"Explain your favorite rewatchable film in 4 sentences. Use 2 frequency words"
   },
   {
-    phase:1, num:4, title:"重要的场所", theme:"描述空间与地点",
+    phase:1, num:4,
+    title:"重要的场所", title_en:"Places That Matter",
+    theme:"描述空间与地点", theme_en:"Describing spaces and places",
     pronunciation:"双元音链 /eɪ/ /aɪ/ /ɔɪ/ — place, space, light, design, choice, voice。口腔移动意识",
+    pronunciation_en:"Diphthong chain /eɪ/ /aɪ/ /ɔɪ/ — place, space, light, design, choice, voice. Mouth movement awareness",
     grammar:"There is / There are + 方位介词 — \"There's a..., In the center..., Along the wall...\"",
+    grammar_en:"There is / There are + prepositions of place — \"There's a..., In the center..., Along the wall...\"",
     conversation:"描述一个你喜欢的房间、画廊或公共空间。让听者仿佛亲眼看见",
+    conversation_en:"Describe a room, gallery, or public space you love. Make the listener see it",
     art:"描述Tate Modern的涡轮大厅、北京胡同庭院或你最喜欢的咖啡馆。聚焦空间语言",
-    homework:"语音录制1分钟空间描述。最少使用3个方位介词"
+    art_en:"Describe the Tate Modern's Turbine Hall, a Beijing hutong courtyard, or your favorite café. Focus on spatial language",
+    homework:"语音录制1分钟空间描述。最少使用3个方位介词",
+    homework_en:"Voice-record a 1-min description of a space. Use 3 prepositions of place minimum"
   },
   {
-    phase:1, num:5, title:"我喜欢什么及为什么（上）", theme:"表达偏好——超越\"I like\"",
+    phase:1, num:5,
+    title:"我喜欢什么及为什么（上）", title_en:"What I Like & Why (Part 1)",
+    theme:"表达偏好——超越\"I like\"", theme_en:"Expressing preferences — moving beyond \"I like\"",
     pronunciation:"辅音群 — /sts/ (artists), /sks/ (asks), /kts/ (facts)。中国学习者容易丢辅音",
+    pronunciation_en:"Consonant clusters — /sts/ (artists), /sks/ (asks), /kts/ (facts). Chinese speakers tend to drop consonants",
     grammar:"比较级 — better than, more interesting than, not as...as, the most...",
+    grammar_en:"Comparatives — better than, more interesting than, not as...as, the most...",
     conversation:"比较两件艺术品、电影或歌曲。说出你更偏好哪一个及原因——用结构化句子",
+    conversation_en:"Compare two artworks, films, or songs. Say which you prefer and why — in structured sentences",
     art:"带两张图片/链接。课堂上实时比较。教师先示范",
-    homework:"写作+录音：\"X is more Y than Z because...\""
+    art_en:"Bring two images/links. Compare them live in class. Teacher models first",
+    homework:"写作+录音：\"X is more Y than Z because...\"",
+    homework_en:"Write + record: \"X is more Y than Z because...\""
   },
   {
-    phase:1, num:6, title:"我喜欢什么及为什么（下）", theme:"深入品味——你的偏好揭示了什么",
+    phase:1, num:6,
+    title:"我喜欢什么及为什么（下）", title_en:"What I Like & Why (Part 2)",
+    theme:"深入品味——你的偏好揭示了什么", theme_en:"Going deeper on taste — what your preferences reveal",
     pronunciation:"多音节词重音 — PHOtograph → phoTOGraphy → photoGRAPHic。重音转移模式",
+    pronunciation_en:"Word stress in multisyllabic words — PHOtograph → phoTOGraphy → photoGRAPHic. The stress shift pattern",
     grammar:"Because / because of + 原因从句 — \"I prefer X because...\"",
+    grammar_en:"Because / because of + reason clauses — \"I prefer X because...\"",
     conversation:"在90秒内解释一个强烈的偏好——包含原因、例子和对比",
+    conversation_en:"Explain a strong preference in 90 seconds — with a reason, an example, and a contrast",
     art:"\"我不喜欢的艺术比喜欢的艺术告诉我更多关于自己的事。\" 讨论",
-    homework:"录制90秒\"我在[艺术/音乐/电影]上的品味及其对我的说明\""
+    art_en:"\"The art I don't like teaches me more about myself than the art I love.\" Discuss",
+    homework:"录制90秒\"我在[艺术/音乐/电影]上的品味及其对我的说明\"",
+    homework_en:"Record 90s on \"My taste in [art/music/film] and what it says about me\""
   },
   // PHASE 2: Building (7-12)
   {
-    phase:2, num:7, title:"重要的一天", theme:"讲述一个有意义的日子",
+    phase:2, num:7,
+    title:"重要的一天", title_en:"A Day That Mattered",
+    theme:"讲述一个有意义的日子", theme_en:"Telling a story about a significant day",
     pronunciation:"-ed 词尾 — /t/ (watched), /d/ (loved), /ɪd/ (wanted)。中国学习者容易全部读成/ɪd/",
+    pronunciation_en:"-ed endings — /t/ (watched), /d/ (loved), /ɪd/ (wanted). Chinese speakers default to /ɪd/ for everything",
     grammar:"一般过去时 — 规则与不规则动词。时间标记词：last week, in 2019, when I was...",
+    grammar_en:"Simple Past — regular & irregular verbs. Time markers: last week, in 2019, when I was...",
     conversation:"讲一个简短的亲身故事，有清晰的开头、中间和结尾",
+    conversation_en:"Tell a short personal story with a clear beginning, middle, and end",
     art:"\"我第一次看到[一幅画/一部电影/一场表演]的那天，它改变了我看事物的方式\"",
-    homework:"录制2分钟故事。标注每一个-ed结尾并检查发音"
+    art_en:"\"The day I first saw [a painting / film / performance] that changed how I see things\"",
+    homework:"录制2分钟故事。标注每一个-ed结尾并检查发音",
+    homework_en:"Record a 2-minute story. Mark every -ed ending and check your pronunciation"
   },
   {
-    phase:2, num:8, title:"铺设场景", theme:"故事中的背景与氛围",
+    phase:2, num:8,
+    title:"铺设场景", title_en:"Setting the Scene",
+    theme:"故事中的背景与氛围", theme_en:"Background and atmosphere in storytelling",
     pronunciation:"连读 — 辅音到元音。\"It was_an amazing_exhibition.\" 词间不留空隙",
+    pronunciation_en:"Linking — consonant to vowel. \"It was_an amazing_exhibition.\" No gaps between words",
     grammar:"过去进行时表示背景 — \"I was walking through the gallery when I noticed...\"",
+    grammar_en:"Past Continuous for background — \"I was walking through the gallery when I noticed...\"",
     conversation:"讲故事带背景（正在发生什么）+ 事件（发生了什么）",
+    conversation_en:"Tell a story with BACKGROUND (what was happening) + EVENT (what happened)",
     art:"描述一个文化活动的氛围——音乐会、开幕之夜、节日。铺设场景",
-    homework:"用2句过去进行时+2句一般过去时录制一个故事。连读你的词语"
+    art_en:"Describe the atmosphere of a cultural event — concert, opening night, festival. Set the scene",
+    homework:"用2句过去进行时+2句一般过去时录制一个故事。连读你的词语",
+    homework_en:"Record a story with 2 Past Continuous + 2 Simple Past sentences. Link your words"
   },
   {
-    phase:2, num:9, title:"更大的画面", theme:"故事中的顺序与语境",
+    phase:2, num:9,
+    title:"更大的画面", title_en:"The Bigger Picture",
+    theme:"故事中的顺序与语境", theme_en:"Sequencing and context in storytelling",
     pronunciation:"功能词的弱读 — was → /wəz/, for → /fə/, to → /tə/, can → /kən/",
+    pronunciation_en:"Weak forms of function words — was → /wəz/, for → /fə/, to → /tə/, can → /kən/",
     grammar:"过去完成时表示前情 — \"I had never seen anything like it before...\"",
+    grammar_en:"Past Perfect for backstory — \"I had never seen anything like it before...\"",
     conversation:"讲述完整故事弧线：背景 → 铺垫 → 关键时刻 → 反思",
+    conversation_en:"Tell a full story arc: background → buildup → key moment → reflection",
     art:"\"一个花了时间才影响我的艺术体验。\" 慢热型",
-    homework:"3分钟语音故事。至少用一次过去完成时。弱化你的功能词"
+    art_en:"\"An artistic experience that took time to affect me.\" The slow burn",
+    homework:"3分钟语音故事。至少用一次过去完成时。弱化你的功能词",
+    homework_en:"3-min voice story. Use past perfect at least once. Reduce your function words"
   },
   {
-    phase:2, num:10, title:"即将来临", theme:"计划、预测与可能性",
+    phase:2, num:10,
+    title:"即将来临", title_en:"What's Coming Up",
+    theme:"计划、预测与可能性", theme_en:"Plans, predictions, and possibilities",
     pronunciation:"/ʊ/ 与 /uː/ — good vs food, could vs cooled, look vs loop。唇形圆展区别",
+    pronunciation_en:"/ʊ/ vs /uː/ — good vs food, could vs cooled, look vs loop. Lip rounding difference",
     grammar:"将来时形式 — will, going to, 现在进行时表计划",
+    grammar_en:"Future forms — will, going to, Present Continuous for plans",
     conversation:"谈论你期待的即将到来的文化活动",
+    conversation_en:"Talk about upcoming cultural events you're excited about",
     art:"\"如果下个月你可以去看世界上任何展览，你会选哪个？为什么？\"",
-    homework:"描述3件你计划的事。使用3种不同的将来时形式"
+    art_en:"\"If you could see any exhibition in the world next month, what would it be and why?\"",
+    homework:"描述3件你计划的事。使用3种不同的将来时形式",
+    homework_en:"Describe 3 things you're planning. Use 3 different future forms"
   },
   {
-    phase:2, num:11, title:"如果...", theme:"假设性思维——深层对话的入口",
+    phase:2, num:11,
+    title:"如果...", title_en:"What If",
+    theme:"假设性思维——深层对话的入口", theme_en:"Hypothetical thinking — the gateway to deeper conversation",
     pronunciation:"口语中的缩略 — I'd, you'd, it'd, wouldn't, couldn't。它们不是可选的",
+    pronunciation_en:"Contractions in speech — I'd, you'd, it'd, wouldn't, couldn't. They're not optional",
     grammar:"第二条件句 — \"If I could..., I would...\"; \"If I had more time, I'd...\"",
+    grammar_en:"Second Conditional — \"If I could..., I would...\"; \"If I had more time, I'd...\"",
     conversation:"关于艺术和生活的假设场景对话",
+    conversation_en:"Play with hypothetical scenarios about art and life",
     art:"\"如果你可以偷一件艺术品并把它永远放在家里...\" / \"如果你可以和任何在世或已故的艺术家共进晚餐...\"",
-    homework:"录制5句\"If I could... I would...\"句子。全部缩略"
+    art_en:"\"If you could steal one artwork and keep it in your home forever...\" / \"If you could have dinner with any artist, living or dead...\"",
+    homework:"录制5句\"If I could... I would...\"句子。全部缩略",
+    homework_en:"Record 5 \"If I could... I would...\" sentences. Contract everything"
   },
   {
-    phase:2, num:12, title:"今昔对比", theme:"时间中的变化——个人与文化",
+    phase:2, num:12,
+    title:"今昔对比", title_en:"Before & After",
+    theme:"时间中的变化——个人与文化", theme_en:"Change over time — personal and cultural",
     pronunciation:"句重音 — 实义词占节拍，功能词缩弱。感受节奏",
+    pronunciation_en:"Sentence stress — content words get the beat, function words shrink. Tap the rhythm",
     grammar:"Used to / didn't use to — \"I used to think..., but now I...\"",
+    grammar_en:"Used to / didn't use to — \"I used to think..., but now I...\"",
     conversation:"描述你的品味或观点如何变化",
+    conversation_en:"Describe how your taste or perspective has changed",
     art:"\"你曾经喜欢现在已经不再喜欢的音乐/艺术/电影？什么取代了它们？\"",
-    homework:"录制90秒\"我的品味如何改变\"。至少3次使用used to。感受节奏"
+    art_en:"\"What music / art / films did you use to love that you've outgrown? What replaced them?\"",
+    homework:"录制90秒\"我的品味如何改变\"。至少3次使用used to。感受节奏",
+    homework_en:"Record 90s on \"How my taste has changed.\" Use used to at least 3 times. Feel the rhythm"
   },
   // PHASE 3: Expanding (13-18)
   {
-    phase:3, num:13, title:"我有观点", theme:"陈述和支持你的观点",
+    phase:3, num:13,
+    title:"我有观点", title_en:"Having an Opinion",
+    theme:"陈述和支持你的观点", theme_en:"Stating and supporting your view",
     pronunciation:"升调与降调 — \"I think it's interesting↘\" vs \"Do you think it's interesting↗\" — 意义在于旋律中",
+    pronunciation_en:"Rising vs falling intonation — \"I think it's interesting↘\" vs \"Do you think it's interesting↗\" — meaning lives in the melody",
     grammar:"观点结构 — \"I think..., In my opinion..., It seems to me that..., I find it...\"",
+    grammar_en:"Opinion structures — \"I think..., In my opinion..., It seems to me that..., I find it...\"",
     conversation:"就一件艺术品陈述观点并用2个理由支持",
+    conversation_en:"State an opinion about a piece of art and support it with 2 reasons",
     art:"带一张图片。学生给出观点。教师温和挑战。为之辩护",
-    homework:"录制60秒对任何艺术品的观点。1个论点+2个理由。变换语调"
+    art_en:"Bring an image. Student gives opinion. Teacher challenges gently. Defend it",
+    homework:"录制60秒对任何艺术品的观点。1个论点+2个理由。变换语调",
+    homework_en:"Record 60s opinion on any artwork. 1 claim + 2 reasons. Vary your intonation"
   },
   {
-    phase:3, num:14, title:"同意与不同意", theme:"优雅地处理不同观点",
+    phase:3, num:14,
+    title:"同意与不同意", title_en:"Agreeing & Disagreeing",
+    theme:"优雅地处理不同观点", theme_en:"Navigating different views gracefully",
     pronunciation:"礼貌语调模式 — 降升调软化分歧。\"I see what you mean↘↗ but...\"",
+    pronunciation_en:"Polite intonation patterns — the fall-rise softens disagreement. \"I see what you mean↘↗ but...\"",
     grammar:"让步结构 — \"Although..., Even though..., While I agree that..., I still think...\"",
+    grammar_en:"Concession structures — \"Although..., Even though..., While I agree that..., I still think...\"",
     conversation:"有礼貌地不同意某人并在其观点之上构建",
+    conversation_en:"Disagree with someone respectfully and build on their point",
     art:"\"AI艺术是真正的艺术吗？\" 结构化辩论。必须先承认对方最佳论点",
-    homework:"录制90秒\"Yes, but...\"关于任何文化话题的论证"
+    art_en:"\"Is AI art real art?\" Debate with structured turns. Must acknowledge opponent's best point first",
+    homework:"录制90秒\"Yes, but...\"关于任何文化话题的论证",
+    homework_en:"Record a 90s \"Yes, but...\" argument about any cultural topic"
   },
   {
-    phase:3, num:15, title:"推荐与说服", theme:"说服别人体验某事物",
+    phase:3, num:15,
+    title:"推荐与说服", title_en:"Recommending & Persuading",
+    theme:"说服别人体验某事物", theme_en:"Convincing someone to experience something",
     pronunciation:"通过音高强调 — 加重关键词来说服。\"You HAVE to see this.\"",
+    pronunciation_en:"Emphasis through pitch — stressing key words to persuade. \"You HAVE to see this\"",
     grammar:"祈使句 + 强形容词 — \"Don't miss..., You absolutely must..., It's breathtaking / stunning / essential\"",
+    grammar_en:"Imperatives + strong adjectives — \"Don't miss..., You absolutely must..., It's breathtaking / stunning / essential\"",
     conversation:"推荐一个文化体验，说服力强到让对方想去",
+    conversation_en:"Recommend a cultural experience so compellingly the listener wants to go",
     art:"\"说服我去看/去/听一个我从没听说过的东西\"",
-    homework:"录制60秒推荐。使用2个祈使句+3个强形容词。把它卖出去"
+    art_en:"\"Convince me to watch / visit / listen to something I've never heard of\"",
+    homework:"录制60秒推荐。使用2个祈使句+3个强形容词。把它卖出去",
+    homework_en:"Record a 60s recommendation. Use 2 imperatives + 3 strong adjectives. Sell it"
   },
   {
-    phase:3, num:16, title:"解释想法", theme:"让抽象概念易于理解",
+    phase:3, num:16,
+    title:"解释想法", title_en:"Explaining Ideas",
+    theme:"让抽象概念易于理解", theme_en:"Making abstract concepts accessible",
     pronunciation:"停顿与分块 — 你在哪里呼吸改变你如何被理解。意群",
+    pronunciation_en:"Pausing and chunking — where you breathe changes how you're understood. Thought groups",
     grammar:"限定性关系从句 — \"X is a [概念] that..., An artist who...\"",
+    grammar_en:"Defining relative clauses — \"X is a [concept] that..., An artist who...\"",
     conversation:"向完全不了解的人解释一个艺术/文化概念",
+    conversation_en:"Explain a concept from art/culture to someone who knows nothing about it",
     art:"\"向你的奶奶解释什么是'侘寂'/'印象派'/'后摇'\"",
-    homework:"录制90秒对任何文化概念的解释。在意群之间停顿"
+    art_en:"\"Explain what 'wabi-sabi' / 'impressionism' / 'post-rock' means — to your grandma\"",
+    homework:"录制90秒对任何文化概念的解释。在意群之间停顿",
+    homework_en:"Record a 90s explanation of any cultural concept. Pause between thought groups"
   },
   {
-    phase:3, num:17, title:"文化对比（上）", theme:"跨文化的相似与差异",
+    phase:3, num:17,
+    title:"文化对比（上）", title_en:"Comparing Cultures (Part 1)",
+    theme:"跨文化的相似与差异", theme_en:"Similarities and differences across cultures",
     pronunciation:"/l/ 与 /r/ — 经典难点。light/right, collect/correct, gallery/glory。舌位锁定",
+    pronunciation_en:"/l/ vs /r/ — the classic. light/right, collect/correct, gallery/glory. Tongue position lock",
     grammar:"对比结构 — \"In China..., whereas in the West...; Both cultures value..., but they express it differently\"",
+    grammar_en:"Comparative structures — \"In China..., whereas in the West...; Both cultures value..., but they express it differently\"",
     conversation:"将中国的一个文化实践与西方对等物比较——不带评判",
+    conversation_en:"Compare a Chinese cultural practice with a Western equivalent — without judgment",
     art:"中国水墨画 vs 西方油画。每种传统重视什么？",
-    homework:"录制2分钟文化对比。使用3种对比结构。锁定/l/和/r/音"
+    art_en:"Chinese ink painting vs Western oil painting. What does each tradition value?",
+    homework:"录制2分钟文化对比。使用3种对比结构。锁定/l/和/r/音",
+    homework_en:"Record a 2-min cultural comparison. Use 3 contrast structures. Lock those /l/ and /r/ sounds"
   },
   {
-    phase:3, num:18, title:"文化对比（下）", theme:"我们从差异中学到什么",
+    phase:3, num:18,
+    title:"文化对比（下）", title_en:"Comparing Cultures (Part 2)",
+    theme:"我们从差异中学到什么", theme_en:"What we can learn from difference",
     pronunciation:"列举和对比的语调 — \"Not only...↗ but also...↘\"",
+    pronunciation_en:"Intonation for lists and contrasts — \"Not only...↗ but also...↘\"",
     grammar:"Not only... but also... / Neither... nor... / Either... or...",
+    grammar_en:"Not only... but also... / Neither... nor... / Either... or...",
     conversation:"讨论中国和西方艺术传统可以互相学习什么",
+    conversation_en:"Discuss what Chinese and Western art traditions can learn from each other",
     art:"\"[中国传统]和[西方传统]的融合会是什么样子？\"",
-    homework:"自由写作5分钟关于文化交流。然后录制你最好的90秒"
+    art_en:"\"What would a fusion of [Chinese tradition] and [Western tradition] look like?\"",
+    homework:"自由写作5分钟关于文化交流。然后录制你最好的90秒",
+    homework_en:"Free-write for 5 minutes on cultural exchange. Then record your best 90 seconds"
   },
   // PHASE 4: Mastering (19-24)
   {
-    phase:4, num:19, title:"读懂言外之意", theme:"解读艺术中的含义",
+    phase:4, num:19,
+    title:"读懂言外之意", title_en:"Reading Between the Lines",
+    theme:"解读艺术中的含义", theme_en:"Interpreting meaning in art",
     pronunciation:"表现性音域 — 扩展你的旋律范围以增强吸引力。单调=不在状态",
+    pronunciation_en:"Expressive pitch range — widening your melodic range for engagement. Monotone = disengaged",
     grammar:"推测性情态动词 — \"It might represent..., The artist could be saying..., This may reflect...\"",
+    grammar_en:"Modals for speculation — \"It might represent..., The artist could be saying..., This may reflect...\"",
     conversation:"解读一件艺术品——不是描述你看到什么，而是它意味着什么",
+    conversation_en:"Interpret an artwork — not describe what you see, but what it MEANS",
     art:"带一件含义模糊的艺术品。学生解读。教师提供备选解读。讨论",
-    homework:"录制对同一件艺术品的2种解读。每种使用不同的情态动词"
+    art_en:"Bring an ambiguous artwork. Student interprets. Teacher offers alternative reading. Discuss",
+    homework:"录制对同一件艺术品的2种解读。每种使用不同的情态动词",
+    homework_en:"Record 2 interpretations of the same artwork. Use different modals for each"
   },
   {
-    phase:4, num:20, title:"艺术背后的故事", theme:"语境与背景——艺术不是凭空存在的",
+    phase:4, num:20,
+    title:"艺术背后的故事", title_en:"The Story Behind the Art",
+    theme:"语境与背景——艺术不是凭空存在的", theme_en:"Context and backstory — art doesn't exist in a vacuum",
     pronunciation:"/ʒ/ 和 /dʒ/ — pleasure, measure, vision, decision vs judge, bridge, gesture。稀有但在艺术词汇中很重要",
+    pronunciation_en:"/ʒ/ and /dʒ/ — pleasure, measure, vision, decision vs judge, bridge, gesture. Rare but important in art vocab",
     grammar:"非限定性关系从句 — \"Picasso, who revolutionized modern art, was influenced by..., Guernica, which depicts the bombing of..., remains...\"",
+    grammar_en:"Non-defining relative clauses — \"Picasso, who revolutionized modern art, was influenced by..., Guernica, which depicts the bombing of..., remains...\"",
     conversation:"讲述一件艺术品背后的故事——艺术家的语境、时代、影响",
+    conversation_en:"Tell the story behind an artwork — the artist's context, the era, the impact",
     art:"选一件你喜欢的艺术品。研究它的背景。在课堂上做3分钟叙事展示",
-    homework:"录制你的艺术品叙事。至少使用2个非限定性关系从句"
+    art_en:"Pick an artwork you love. Research its context. Present it in class as a 3-min narrative",
+    homework:"录制你的艺术品叙事。至少使用2个非限定性关系从句",
+    homework_en:"Record your artwork narrative. Use at least 2 non-defining relative clauses"
   },
   {
-    phase:4, num:21, title:"个人品味与身份", theme:"你的文化偏好揭示了你是谁",
+    phase:4, num:21,
+    title:"个人品味与身份", title_en:"Personal Taste & Identity",
+    theme:"你的文化偏好揭示了你是谁", theme_en:"What your cultural preferences reveal about who you are",
     pronunciation:"连读总复习 — 连读、省略、同化、弱读。全速自然表达",
+    pronunciation_en:"Connected speech review — linking, elision, assimilation, weak forms. Full-speed natural delivery",
     grammar:"强调分裂句 — \"What I love about X is..., The reason I'm drawn to Y is..., It's the [质量] that matters to me\"",
+    grammar_en:"Cleft sentences for emphasis — \"What I love about X is..., The reason I'm drawn to Y is..., It's the [quality] that matters to me\"",
     conversation:"通过你的品味表达你的文化身份——你消费什么以及为什么适合你",
+    conversation_en:"Articulate your cultural identity through your taste — what you consume and why it fits you",
     art:"\"我的文化饮食。\" 你看什么、听什么、读什么、参观什么——以及这说明了你的价值观",
-    homework:"录制3分钟\"文化自画像\"。使用3个分裂句。以自然语速说话"
+    art_en:"\"My cultural diet.\" What you watch, listen to, read, visit — and what that says about your values",
+    homework:"录制3分钟\"文化自画像\"。使用3个分裂句。以自然语速说话",
+    homework_en:"Record a 3-min \"cultural self-portrait.\" Use 3 cleft sentences. Speak at natural speed"
   },
   {
-    phase:4, num:22, title:"挑战性的艺术", theme:"困难的艺术，不舒服的想法",
+    phase:4, num:22,
+    title:"挑战性的艺术", title_en:"Art That Challenges",
+    theme:"困难的艺术，不舒服的想法", theme_en:"Difficult art, uncomfortable ideas",
     pronunciation:"节奏控制 — 放慢以加重，加速以表达兴奋。节奏即表达",
+    pronunciation_en:"Pacing for impact — slowing down for weight, speeding up for excitement. Pacing as expression",
     grammar:"虚拟语气/深层假设 — \"I wish artists would..., If only more people..., It's time we...\"",
+    grammar_en:"Subjunctive / hypothetical depth — \"I wish artists would..., If only more people..., It's time we...\"",
     conversation:"讨论令你不舒服的艺术——以及为什么这很有价值",
+    conversation_en:"Discuss art that makes you uncomfortable — and why that's valuable",
     art:"\"有什么电影/艺术品/书籍让你感到不安或挑战？艺术应该让人舒服吗？\"",
-    homework:"录制2分钟关于挑战性艺术的反思。使用2个虚拟语气结构。变化你的节奏"
+    art_en:"\"What's a film / artwork / book that disturbed or challenged you? Should art be comfortable?\"",
+    homework:"录制2分钟关于挑战性艺术的反思。使用2个虚拟语气结构。变化你的节奏",
+    homework_en:"Record a 2-min reflection on challenging art. Use 2 subjunctive structures. Vary your pace"
   },
   {
-    phase:4, num:23, title:"对话继续", theme:"保持深度对话——追问的艺术",
+    phase:4, num:23,
+    title:"对话继续", title_en:"The Conversation Continues",
+    theme:"保持深度对话——追问的艺术", theme_en:"Keeping deep conversations alive — the art of the follow-up",
     pronunciation:"反馈音 — mm-hmm, uh-huh, oh really?, right, I see, wow。这些让你听起来像真人",
+    pronunciation_en:"Backchanneling sounds — mm-hmm, uh-huh, oh really?, right, I see, wow. These make you sound human",
     grammar:"提问技巧精通 — 开放问题、追问问题、澄清问题、假设问题",
+    grammar_en:"Question formation mastery — open questions, follow-up questions, clarifying questions, hypothetical questions",
     conversation:"持续15分钟无剧本关于艺术/文化的对话不冷场",
+    conversation_en:"Sustain a 15-min unscripted conversation on art/culture without stalling",
     art:"教师提供一个挑衅性的艺术相关陈述。学生主导对话——提问、回应、转换话题",
-    homework:"录制自己就一个话题问10个追问问题。不允许任何是非问句"
+    art_en:"Teacher provides a provocative art-related statement. Student runs the conversation — asking, responding, pivoting",
+    homework:"录制自己就一个话题问10个追问问题。不允许任何是非问句",
+    homework_en:"Record yourself asking 10 follow-up questions on a single topic. No yes/no questions allowed"
   },
   {
-    phase:4, num:24, title:"毕业之作 — 晚宴", theme:"全部，同时进行",
+    phase:4, num:24,
+    title:"毕业之作 — 晚宴", title_en:"Capstone — The Dinner Party",
+    theme:"全部，同时进行", theme_en:"Everything, all at once",
     pronunciation:"最终回顾 — 庆祝学生最显著的3个发音进步。设定最后一个目标",
+    pronunciation_en:"Final review — student's top 3 pronunciation improvements celebrated. One last target set",
     grammar:"最终回顾 — 现在感觉自然的结构。最后一个要征服的模式",
+    grammar_en:"Final review — structures that now feel natural. One last pattern to conquer",
     conversation:"25分钟自由对话。教师现在是\"晚宴上的外国朋友\"。自然、无剧本、流畅",
+    conversation_en:"25-min free conversation. Teacher is now a \"foreign friend at a dinner party.\" Natural, unscripted, flowing",
     art:"\"如果你可以策划一场与4位艺术家（在世或已故）的晚宴，你会邀请谁？你会问他们什么？\"",
-    homework:"个性化\"独立学习路线图\"。建议消费什么、如何独自练习、哪里找对话伙伴"
+    art_en:"\"If you could curate a dinner party with 4 artists (living or dead), who would you invite and what would you ask them?\"",
+    homework:"个性化\"独立学习路线图\"。建议消费什么、如何独自练习、哪里找对话伙伴",
+    homework_en:"Personalized \"independent learning roadmap.\" What to consume, how to practice solo, where to find conversation partners"
   }
 ];
 
@@ -989,31 +1162,31 @@ function renderPhase(phase) {
     <div class="session-card fade-in" style="margin-bottom:10px;animation-delay:${i * 0.04}s;">
       <div class="session-card-header" onclick="toggleSession(this)">
         <span class="session-number">第${s.num}节</span>
-        <span class="session-title">${s.title}</span>
-        <span class="session-theme">${s.theme}</span>
+        <span class="session-title">${s.title}<br><span style="color:var(--text-muted);font-weight:400;font-size:0.78rem;">${s.title_en}</span></span>
+        <span class="session-theme">${s.theme}<br><span style="color:var(--text-muted);font-weight:400;font-size:0.72rem;">${s.theme_en}</span></span>
         <span class="session-toggle">▾</span>
       </div>
       <div class="session-card-body">
         <div class="session-detail-grid">
           <div class="session-detail-item">
-            <div class="session-detail-label">🔊 发音重点</div>
-            <div class="session-detail-value">${s.pronunciation}</div>
+            <div class="session-detail-label">🔊 发音重点 · Pronunciation</div>
+            <div class="session-detail-value">${s.pronunciation}<br><span style="color:var(--text-muted);font-size:0.78rem;display:block;margin-top:4px;line-height:1.5;">${s.pronunciation_en}</span></div>
           </div>
           <div class="session-detail-item">
-            <div class="session-detail-label">📐 语法重点</div>
-            <div class="session-detail-value">${s.grammar}</div>
+            <div class="session-detail-label">📐 语法重点 · Grammar</div>
+            <div class="session-detail-value">${s.grammar}<br><span style="color:var(--text-muted);font-size:0.78rem;display:block;margin-top:4px;line-height:1.5;">${s.grammar_en}</span></div>
           </div>
           <div class="session-detail-item">
-            <div class="session-detail-label">🗣️ 会话目标</div>
-            <div class="session-detail-value">${s.conversation}</div>
+            <div class="session-detail-label">🗣️ 会话目标 · Conversation Goal</div>
+            <div class="session-detail-value">${s.conversation}<br><span style="color:var(--text-muted);font-size:0.78rem;display:block;margin-top:4px;line-height:1.5;">${s.conversation_en}</span></div>
           </div>
           <div class="session-detail-item">
-            <div class="session-detail-label">🎨 艺术角度</div>
-            <div class="session-detail-value">${s.art}</div>
+            <div class="session-detail-label">🎨 艺术角度 · Art Angle</div>
+            <div class="session-detail-value">${s.art}<br><span style="color:var(--text-muted);font-size:0.78rem;display:block;margin-top:4px;line-height:1.5;">${s.art_en}</span></div>
           </div>
           <div class="session-detail-item session-detail-full">
-            <div class="session-detail-label">📝 作业</div>
-            <div class="session-detail-value">${s.homework}</div>
+            <div class="session-detail-label">📝 作业 · Homework</div>
+            <div class="session-detail-value">${s.homework}<br><span style="color:var(--text-muted);font-size:0.78rem;display:block;margin-top:4px;line-height:1.5;">${s.homework_en}</span></div>
           </div>
         </div>
       </div>
