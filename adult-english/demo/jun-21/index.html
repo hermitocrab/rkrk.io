@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>成人英语定制课程 — 艺术文化方向</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"DM Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            accent: {
+              DEFAULT: '#d4a047',
+              light: '#e8c46e',
+              dark: '#b8892e',
+              glow: 'rgba(212,160,71,0.15)',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --bg-base: #0a0a0b;
+      --bg-card: #141415;
+      --bg-card-hover: #1a1a1c;
+      --bg-surface: #1c1c1e;
+      --border: #2a2a2d;
+      --border-hover: #3a3a3d;
+      --text-primary: #f0f0f0;
+      --text-secondary: #999;
+      --text-muted: #666;
+      --accent: #d4a047;
+      --accent-light: #e8c46e;
+      --accent-dark: #b8892e;
+      --accent-glow: rgba(212,160,71,0.12);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.4);
+      --shadow-hover: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.7;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ==== NAVIGATION ==== */
+    .site-nav {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(10,10,11,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .site-nav .nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 20px;
+      height: 60px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 1.1rem; font-weight: 700; color: var(--text-primary);
+      text-decoration: none;
+    }
+    .nav-brand .brand-emoji { font-size: 1.3rem; }
+    .nav-phase-tabs {
+      display: flex; gap: 2px; align-items: center;
+    }
+    .nav-phase-tab {
+      padding: 7px 14px; border-radius: 8px;
+      font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);
+      cursor: pointer; transition: all 0.2s; border: none; background: none;
+      text-decoration: none; white-space: nowrap;
+    }
+    .nav-phase-tab:hover { color: var(--text-primary); background: var(--bg-surface); }
+    .nav-phase-tab.active { color: var(--accent); background: var(--accent-glow); }
+
+    @media (max-width: 768px) {
+      .nav-phase-tabs { gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+      .nav-phase-tab { padding: 6px 10px; font-size: 0.72rem; flex-shrink: 0; }
+      .site-nav .nav-inner { height: auto; padding: 8px 12px; flex-direction: column; gap: 6px; }
+      .nav-brand { width: 100%; justify-content: center; }
+    }
+
+    /* ==== HERO ==== */
+    .hero {
+      background: linear-gradient(180deg, #111114 0%, var(--bg-base) 100%);
+      padding: 80px 20px 60px; text-align: center;
+      position: relative; overflow: hidden; border-bottom: 1px solid var(--border);
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -120px; right: -80px;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -100px; left: -60px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,160,71,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-emoji { font-size: 3.5rem; margin-bottom: 8px; display: block; }
+    .hero h1 {
+      font-size: 2.8rem; font-weight: 800; color: var(--text-primary);
+      margin-bottom: 8px; letter-spacing: -0.5px; line-height: 1.2;
+    }
+    .hero .hero-accent { color: var(--accent); }
+    .hero .hero-subtitle {
+      font-size: 1.15rem; color: var(--text-secondary);
+      max-width: 550px; margin: 12px auto 0; line-height: 1.7;
+    }
+    .hero-stats {
+      display: flex; justify-content: center; gap: 36px; margin-top: 32px; flex-wrap: wrap;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-number { display: block; font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; }
+    .hero-stat-label { display: block; font-size: 0.78rem; color: var(--text-muted); margin-top: 6px; }
+
+    @media (max-width: 768px) {
+      .hero { padding: 50px 16px 40px; }
+      .hero h1 { font-size: 1.8rem; }
+      .hero-emoji { font-size: 2.5rem; }
+      .hero-stats { gap: 20px; }
+      .hero-stat-number { font-size: 1.5rem; }
+    }
+
+    /* ==== SECTION ==== */
+    .section { max-width: 1100px; margin: 0 auto; padding: 64px 20px; }
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-emoji { font-size: 2.5rem; margin-bottom: 8px; display: block; }
+    .section-title {
+      font-size: 1.75rem; font-weight: 700; color: var(--text-primary);
+      margin-bottom: 6px; letter-spacing: -0.3px;
+    }
+    .section-subtitle { font-size: 0.95rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .section { padding: 48px 16px; }
+      .section-title { font-size: 1.35rem; }
+    }
+
+    /* ==== STUDENT PROFILE CARD ==== */
+    .profile-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px 28px 24px;
+      max-width: 700px; margin: -28px auto 0;
+      position: relative; z-index: 2;
+    }
+    .profile-card h3 {
+      font-size: 0.8rem; font-weight: 600; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px;
+    }
+    .profile-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+    .profile-item { display: flex; gap: 10px; align-items: flex-start; }
+    .profile-item-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+    .profile-item-label { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .profile-item-value { font-size: 0.88rem; color: var(--text-primary); font-weight: 500; }
+
+    @media (max-width: 768px) {
+      .profile-card { margin: -16px 12px 0; padding: 20px; }
+    }
+
+    /* ==== FRAMEWORK CARDS ==== */
+    .phase-cards {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+    .phase-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 20px;
+      transition: all 0.25s; position: relative; overflow: hidden;
+      cursor: pointer;
+    }
+    .phase-card:hover {
+      border-color: var(--accent);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+    .phase-card .phase-badge {
+      display: inline-block; padding: 3px 10px; border-radius: 999px;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;
+      margin-bottom: 10px; background: var(--accent-glow); color: var(--accent);
+    }
+    .phase-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; color: var(--text-primary); }
+    .phase-card .phase-cefr { font-size: 0.78rem; color: var(--accent); margin-bottom: 8px; font-weight: 600; }
+    .phase-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px; }
+    .phase-card .phase-keywords {
+      display: flex; flex-wrap: wrap; gap: 4px;
+    }
+    .phase-card .phase-keyword {
+      font-size: 0.68rem; padding: 2px 8px; border-radius: 6px;
+      background: rgba(255,255,255,0.04); color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .phase-cards { grid-template-columns: 1fr; }
+    }
+
+    /* ==== STRUCTURE DIAGRAM ==== */
+    .structure-flow {
+      display: flex; gap: 0; align-items: stretch; overflow-x: auto;
+      -webkit-overflow-scrolling: touch; padding: 8px 0;
+    }
+    .structure-step {
+      flex: 1; min-width: 160px; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 20px 16px; text-align: center; position: relative;
+    }
+    .structure-step + .structure-step { margin-left: -1px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+    .structure-step:first-child { border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+    .structure-step:last-child { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+    .structure-step .step-emoji { font-size: 1.4rem; margin-bottom: 6px; display: block; }
+    .structure-step .step-name { font-size: 0.78rem; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+    .structure-step .step-time { font-size: 0.7rem; color: var(--accent); font-weight: 500; margin-bottom: 2px; }
+    .structure-step .step-desc { font-size: 0.7rem; color: var(--text-muted); line-height: 1.4; }
+    .structure-step.zoom { background: rgba(212,160,71,0.06); border-color: rgba(212,160,71,0.2); }
+
+    @media (max-width: 768px) {
+      .structure-flow { flex-direction: column; }
+      .structure-step { min-width: auto; border-radius: var(--radius-sm) !important; }
+      .structure-step + .structure-step { margin-left: 0; margin-top: -1px; }
+    }
+
+    /* ==== SESSION CARDS ==== */
+    .session-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      transition: all 0.25s;
+    }
+    .session-card:hover { border-color: var(--border-hover); }
+    .session-card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 22px; cursor: pointer; user-select: none;
+      transition: background 0.2s; gap: 12px;
+    }
+    .session-card-header:hover { background: var(--bg-card-hover); }
+    .session-card-header .session-number {
+      font-size: 0.68rem; font-weight: 700; color: var(--accent);
+      min-width: 60px; letter-spacing: 0.04em;
+    }
+    .session-card-header .session-title {
+      flex: 1; font-size: 0.95rem; font-weight: 600; color: var(--text-primary);
+    }
+    .session-card-header .session-theme {
+      font-size: 0.72rem; color: var(--text-muted); text-align: right; line-height: 1.3;
+      max-width: 200px;
+    }
+    .session-card-header .session-toggle {
+      font-size: 1.2rem; color: var(--text-muted); transition: transform 0.25s;
+      flex-shrink: 0;
+    }
+    .session-card.open .session-card-header .session-toggle { transform: rotate(180deg); color: var(--accent); }
+    .session-card-body {
+      display: none; padding: 0 22px 22px; border-top: 1px solid var(--border);
+    }
+    .session-card.open .session-card-body { display: block; }
+    .session-detail-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px 20px; padding-top: 18px;
+    }
+    .session-detail-item { }
+    .session-detail-label {
+      font-size: 0.66rem; font-weight: 700; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;
+    }
+    .session-detail-value { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+    .session-detail-full { grid-column: 1 / -1; }
+
+    @media (max-width: 768px) {
+      .session-card-header { padding: 14px 16px; flex-wrap: wrap; }
+      .session-card-header .session-theme { max-width: none; text-align: left; width: 100%; padding-left: 60px; }
+      .session-detail-grid { grid-template-columns: 1fr; }
+      .session-card-body { padding: 0 16px 16px; }
+    }
+
+    /* ==== DIFFICULTY GRADIENT ==== */
+    .gradient-chart { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .gradient-row {
+      display: flex; align-items: center; margin-bottom: 14px; font-size: 0.78rem;
+    }
+    .gradient-label {
+      min-width: 160px; color: var(--text-secondary); flex-shrink: 0;
+      padding-right: 12px; font-weight: 500;
+    }
+    .gradient-bar-wrap { flex: 1; height: 22px; background: rgba(255,255,255,0.03); border-radius: 11px; position: relative; overflow: hidden; }
+    .gradient-bar {
+      position: absolute; height: 100%; border-radius: 11px;
+      background: linear-gradient(90deg, var(--accent-dark), var(--accent-light));
+      opacity: 0.9;
+    }
+    .gradient-bar.alt {
+      background: linear-gradient(90deg, #8a9ba8, #bcc8d4); opacity: 0.7;
+    }
+
+    @media (max-width: 768px) {
+      .gradient-label { min-width: 120px; font-size: 0.7rem; }
+    }
+
+    /* ==== HOMEWORK TABLE ==== */
+    .hw-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; overflow-x: auto; display: block; }
+    .hw-table th {
+      text-align: left; padding: 12px 14px; border-bottom: 2px solid var(--border);
+      font-size: 0.72rem; font-weight: 700; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .hw-table td {
+      padding: 12px 14px; border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    .hw-table tr:hover td { background: rgba(212,160,71,0.03); }
+    .hw-table .hw-icon { font-size: 1rem; }
+
+    /* ==== TOPIC BANK ==== */
+    .topic-bank {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    .topic-category {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+    }
+    .topic-category h4 {
+      font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .topic-category h4 .tc-icon { font-size: 1.1rem; }
+    .topic-item {
+      font-size: 0.78rem; color: var(--text-secondary); padding: 3px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .topic-item:last-child { border-bottom: none; }
+
+    @media (max-width: 768px) {
+      .topic-bank { grid-template-columns: 1fr; }
+    }
+
+    /* ==== FOOTER ==== */
+    .site-footer {
+      background: #080809; border-top: 1px solid var(--border);
+      text-align: center; padding: 28px 20px;
+    }
+    .site-footer p { font-size: 0.78rem; color: var(--text-muted); }
+    .site-footer .footer-accent { color: var(--accent); font-weight: 600; }
+    .site-footer .footer-emoji { font-size: 1rem; }
+
+    /* ==== UTILITY ==== */
+    .fade-in { animation: fadeIn 0.5s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    #phase-sessions { min-height: 200px; }
+    .phase-divider {
+      text-align: center; padding: 20px 0 8px; font-size: 0.72rem;
+      font-weight: 700; color: var(--accent); letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <span class="brand-emoji">🎨</span> 成人英语定制课
+    </a>
+    <div class="nav-phase-tabs">
+      <a href="#framework" class="nav-phase-tab">概览</a>
+      <button class="nav-phase-tab active" onclick="switchPhase(1, this)">阶段一</button>
+      <button class="nav-phase-tab" onclick="switchPhase(2, this)">阶段二</button>
+      <button class="nav-phase-tab" onclick="switchPhase(3, this)">阶段三</button>
+      <button class="nav-phase-tab" onclick="switchPhase(4, this)">阶段四</button>
+      <a href="#homework" class="nav-phase-tab">作业</a>
+      <a href="#topics" class="nav-phase-tab">话题库</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-emoji">🎨</span>
+    <h1>跟外国朋友<span class="hero-accent">丝滑交流不卡壳</span></h1>
+    <p class="hero-subtitle">
+      24节定制课程 · 艺术文化方向 · 从零基础到自信表达<br>
+      每节课融合发音、语法、场景实战，围绕统一主题螺旋上升
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-number">24</span>
+        <span class="hero-stat-label">定制课时</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-number">120<span style="font-size:0.7em">min</span></span>
+        <span class="hero-stat-label">每节时长</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-number">4</span>
+        <span class="hero-stat-label">学习阶段</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-number">A1→B2</span>
+        <span class="hero-stat-label">CEFR 进阶</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STUDENT PROFILE -->
+<div class="profile-card">
+  <h3>📋 学员档案</h3>
+  <div class="profile-grid">
+    <div class="profile-item">
+      <span class="profile-item-icon">🎯</span>
+      <div>
+        <div class="profile-item-label">核心目标</div>
+        <div class="profile-item-value">跟外国朋友基础交流丝滑不卡壳</div>
+      </div>
+    </div>
+    <div class="profile-item">
+      <span class="profile-item-icon">🎨</span>
+      <div>
+        <div class="profile-item-label">兴趣方向</div>
+        <div class="profile-item-value">艺术文化</div>
+      </div>
+    </div>
+    <div class="profile-item">
+      <span class="profile-item-icon">⏰</span>
+      <div>
+        <div class="profile-item-label">上课时间</div>
+        <div class="profile-item-value">19:30–21:30 · 每周2–3次</div>
+      </div>
+    </div>
+    <div class="profile-item">
+      <span class="profile-item-icon">📐</span>
+      <div>
+        <div class="profile-item-label">教学理念</div>
+        <div class="profile-item-value">螺旋课程 · 每一节都是发音+语法+实战的微缩全貌</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PEDAGOGICAL FRAMEWORK -->
+<section class="section" id="framework">
+  <div class="section-header">
+    <span class="section-emoji">📐</span>
+    <h2 class="section-title">教学框架</h2>
+    <p class="section-subtitle">CEFR锚定：从A1起步 → 以自信B1/初阶B2毕业。每阶段循环复用前期技能，复杂度螺旋上升。</p>
+  </div>
+
+  <div class="phase-cards">
+    <div class="phase-card" onclick="switchPhase(1)">
+      <span class="phase-badge">阶段 1</span>
+      <h4>基础 Foundation</h4>
+      <div class="phase-cefr">A1 → A2</div>
+      <p>生存对话 · 一般现在时 · 核心音素</p>
+      <div class="phase-keywords">
+        <span class="phase-keyword">自我表达</span>
+        <span class="phase-keyword">身份</span>
+        <span class="phase-keyword">偏好</span>
+      </div>
+    </div>
+    <div class="phase-card" onclick="switchPhase(2)">
+      <span class="phase-badge">阶段 2</span>
+      <h4>构建 Building</h4>
+      <div class="phase-cefr">A2 → B1</div>
+      <p>叙事 · 过去与将来时态 · 连读</p>
+      <div class="phase-keywords">
+        <span class="phase-keyword">讲故事</span>
+        <span class="phase-keyword">描述</span>
+        <span class="phase-keyword">变化</span>
+      </div>
+    </div>
+    <div class="phase-card" onclick="switchPhase(3)">
+      <span class="phase-badge">阶段 3</span>
+      <h4>拓展 Expanding</h4>
+      <div class="phase-cefr">B1 → B1+</div>
+      <p>观点与论证 · 复杂句式 · 表现性语调</p>
+      <div class="phase-keywords">
+        <span class="phase-keyword">意见</span>
+        <span class="phase-keyword">辩论</span>
+        <span class="phase-keyword">文化对比</span>
+      </div>
+    </div>
+    <div class="phase-card" onclick="switchPhase(4)">
+      <span class="phase-badge">阶段 4</span>
+      <h4>精通 Mastering</h4>
+      <div class="phase-cefr">B1+ → B2 Light</div>
+      <p>抽象讨论 · 风格选择 · 文化流利度</p>
+      <div class="phase-keywords">
+        <span class="phase-keyword">深度</span>
+        <span class="phase-keyword">细微差别</span>
+        <span class="phase-keyword">独立表达</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SESSION STRUCTURE -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-emoji">🏗️</span>
+    <h2 class="section-title">每节课结构 (120分钟)</h2>
+    <p class="section-subtitle">每一节都是发音+语法+场景实战的微缩全貌，围绕统一主题展开</p>
+  </div>
+  <div class="structure-flow">
+    <div class="structure-step">
+      <span class="step-emoji">🎧</span>
+      <div class="step-name">Listen &amp; Notice</div>
+      <div class="step-time">20分钟</div>
+      <div class="step-desc">音频输入：在真实对话中感受语法和词汇，发音重点从听力中自然浮现</div>
+    </div>
+    <div class="structure-step zoom">
+      <span class="step-emoji">🔤</span>
+      <div class="step-name">Zoom In</div>
+      <div class="step-time">25分钟</div>
+      <div class="step-desc">当日语法点，通过主题教学。发音练习嵌入语法例句中</div>
+    </div>
+    <div class="structure-step">
+      <span class="step-emoji">🗣️</span>
+      <div class="step-name">Controlled Practice</div>
+      <div class="step-time">25分钟</div>
+      <div class="step-desc">结构化口语：句型框架、替换练习、对话搭建。准确度优先于速度</div>
+    </div>
+    <div class="structure-step">
+      <span class="step-emoji">☕</span>
+      <div class="step-name">Free Flow</div>
+      <div class="step-time">10分钟</div>
+      <div class="step-desc">轻松对话休息。学生主导。教师默默记录错误</div>
+    </div>
+    <div class="structure-step zoom">
+      <span class="step-emoji">🎨</span>
+      <div class="step-name">Theme Deep-Dive</div>
+      <div class="step-time">25分钟</div>
+      <div class="step-desc">当日艺术/文化话题。在实际讨论中应用语法+发音。流利度优先于准确度</div>
+    </div>
+    <div class="structure-step">
+      <span class="step-emoji">📝</span>
+      <div class="step-name">Cool-Down &amp; Homework</div>
+      <div class="step-time">15分钟</div>
+      <div class="step-desc">要点总结。发音录音作业。下次主题预告</div>
+    </div>
+  </div>
+</section>
+
+<!-- SESSIONS BY PHASE -->
+<section class="section" id="sessions">
+  <div class="section-header">
+    <span class="section-emoji">📋</span>
+    <h2 class="section-title">课程大纲</h2>
+    <p class="section-subtitle">24节课 · 4个阶段 · 点击卡片查看详情</p>
+  </div>
+
+  <div id="phase-sessions">
+    <!-- Filled by JS -->
+  </div>
+</section>
+
+<!-- DIFFICULTY GRADIENT -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-emoji">📊</span>
+    <h2 class="section-title">难度梯度</h2>
+    <p class="section-subtitle">技能分布与话题/语法/口语复杂度随课程推进的演变</p>
+  </div>
+  <div class="gradient-chart">
+    <div class="gradient-row">
+      <div class="gradient-label">发音重点</div>
+      <div class="gradient-bar-wrap"><div class="gradient-bar" style="left:0%;width:65%"></div></div>
+    </div>
+    <div class="gradient-row">
+      <div class="gradient-label">语法构建</div>
+      <div class="gradient-bar-wrap"><div class="gradient-bar alt" style="left:0%;width:83%"></div></div>
+    </div>
+    <div class="gradient-row">
+      <div class="gradient-label">风格掌握</div>
+      <div class="gradient-bar-wrap"><div class="gradient-bar" style="left:60%;width:40%"></div></div>
+    </div>
+    <div class="gradient-row">
+      <div class="gradient-label">自我表达</div>
+      <div class="gradient-bar-wrap"><div class="gradient-bar" style="left:0%;width:25%"></div></div>
+    </div>
+    <div class="gradient-row">
+      <div class="gradient-label">讲故事</div>
+      <div class="gradient-bar-wrap"><div class="gradient-bar alt" style="left:24%;width:28%"></div></div>
+    </div>
+    <div class="gradient-row">
+      <div class="gradient-label">观点与论证</div>
+      <div class="gradient-bar-wrap"><div class="gradient-bar" style="left:50%;width:28%"></div></div>
+    </div>
+    <div class="gradient-row">
+      <div class="gradient-label">抽象与文化深度</div>
+      <div class="gradient-bar-wrap"><div class="gradient-bar alt" style="left:72%;width:28%"></div></div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:var(--text-muted);padding:4px 0 0 160px;">
+    <span>第1节</span><span>第6节</span><span>第12节</span><span>第18节</span><span>第24节</span>
+  </div>
+  <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:20px;justify-content:center;font-size:0.78rem;color:var(--text-muted);">
+    <span>话题复杂度：<span style="color:var(--accent)">自我</span> → <span style="color:var(--accent-light)">艺术对象</span> → <span style="color:var(--accent-light)">艺术观点</span> → <span style="color:var(--accent)">文化分析</span></span>
+    <span>语法复杂度：<span style="color:var(--accent)">A1</span> → <span style="color:var(--accent-light)">A2</span> → <span style="color:var(--accent-light)">B1</span> → <span style="color:var(--accent-light)">B1+</span> → <span style="color:var(--accent)">B2 Light</span></span>
+    <span>口语自然度：<span style="color:var(--accent)">控制型</span> → <span style="color:var(--accent-light)">引导型</span> → <span style="color:var(--accent-light)">独立型</span> → <span style="color:var(--accent)">自发型</span></span>
+  </div>
+</section>
+
+<!-- HOMEWORK TABLE -->
+<section class="section" id="homework">
+  <div class="section-header">
+    <span class="section-emoji">🏠</span>
+    <h2 class="section-title">作业设计（全阶段）</h2>
+    <p class="section-subtitle">四个阶段的作业类型与进阶梯度</p>
+  </div>
+  <div style="overflow-x:auto;">
+    <table class="hw-table">
+      <thead>
+        <tr>
+          <th>类型</th><th>阶段一</th><th>阶段二</th><th>阶段三</th><th>阶段四</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="hw-icon">🎙️</span> 语音录音</td>
+          <td>30–60秒结构化练习</td>
+          <td>90秒–2分钟叙事</td>
+          <td>2分钟观点表达</td>
+          <td>3分钟自由反思</td>
+        </tr>
+        <tr>
+          <td><span class="hw-icon">📖</span> 阅读</td>
+          <td>1段话 + 标注单词</td>
+          <td>短文亮点提炼</td>
+          <td>文章 + 观点</td>
+          <td>短文 + 批判性回应</td>
+        </tr>
+        <tr>
+          <td><span class="hw-icon">🎬</span> 听力</td>
+          <td>观看 + 记录3个词</td>
+          <td>观看 + 3句话总结</td>
+          <td>观看 + 形成观点</td>
+          <td>观看 + 准备讨论要点</td>
+        </tr>
+        <tr>
+          <td><span class="hw-icon">💬</span> 短语收集</td>
+          <td>写3个想要的短语</td>
+          <td>短语 + 语境句</td>
+          <td>短语 + 变体</td>
+          <td>短语 + 文化注释</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ART & CULTURE TOPIC BANK -->
+<section class="section" id="topics">
+  <div class="section-header">
+    <span class="section-emoji">🎨</span>
+    <h2 class="section-title">艺术与文化话题库</h2>
+    <p class="section-subtitle">根据学生精力和兴趣轮换注入每节课主题</p>
+  </div>
+  <div class="topic-bank">
+    <div class="topic-category">
+      <h4><span class="tc-icon">🖼️</span> 视觉艺术</h4>
+      <div class="topic-item">文艺复兴透视法 / 印象派光影</div>
+      <div class="topic-item">中国水墨画哲学 / 当代装置艺术</div>
+      <div class="topic-item">街头艺术即民主 / 策展即叙事</div>
+    </div>
+    <div class="topic-category">
+      <h4><span class="tc-icon">🏛️</span> 建筑与空间</h4>
+      <div class="topic-item">哥特式垂直性 / 包豪斯功能主义</div>
+      <div class="topic-item">中国园林哲学 / 博物馆建筑体验</div>
+      <div class="topic-item">城市设计与日常生活</div>
+    </div>
+    <div class="topic-category">
+      <h4><span class="tc-icon">🎬</span> 电影</h4>
+      <div class="topic-item">王家卫的色彩与时间</div>
+      <div class="topic-item">吉卜力的环保主义 / 纪录片伦理</div>
+      <div class="topic-item">无声电影的表达 / 动画即高级艺术</div>
+    </div>
+    <div class="topic-category">
+      <h4><span class="tc-icon">🎵</span> 音乐</h4>
+      <div class="topic-item">爵士即兴即对话</div>
+      <div class="topic-item">古典音乐的情感词汇</div>
+      <div class="topic-item">流行制作与品味 / 世界音乐与真实性</div>
+      <div class="topic-item">专辑即叙事形式</div>
+    </div>
+    <div class="topic-category">
+      <h4><span class="tc-icon">📚</span> 文学</h4>
+      <div class="topic-item">魔幻现实主义的政治性</div>
+      <div class="topic-item">短篇小说即精准 / 诗歌翻译中遗失了什么</div>
+      <div class="topic-item">回忆录与真实 / 图像小说即文学</div>
+    </div>
+    <div class="topic-category">
+      <h4><span class="tc-icon">💡</span> 设计与器物</h4>
+      <div class="topic-item">Dieter Rams 十大原则</div>
+      <div class="topic-item">时尚与身份 / 字体排印即隐形艺术</div>
+      <div class="topic-item">日常物品与美 / 日本工艺哲学</div>
+    </div>
+    <div class="topic-category">
+      <h4><span class="tc-icon">🍵</span> 饮食与仪式</h4>
+      <div class="topic-item">食物即文化记忆 / 餐饮人类学</div>
+      <div class="topic-item">茶道即表演艺术</div>
+      <div class="topic-item">街头美食与城市身份</div>
+    </div>
+    <div class="topic-category">
+      <h4><span class="tc-icon">💻</span> 数字与当代</h4>
+      <div class="topic-item">AI艺术是艺术吗 / 梗即民间文化</div>
+      <div class="topic-item">电子游戏即叙事 / 社交媒体美学</div>
+      <div class="topic-item">混音文化与原创性</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p>🎨 <span class="footer-accent">成人英语定制课程</span> — 艺术文化方向 · 整合版</p>
+  <p style="margin-top:4px;">设计理念：每一节课都是发音+语法+场景实战的微缩全貌 · 螺旋上升 · 真实梯度</p>
+  <p style="margin-top:8px;">Built by <span class="footer-accent">Master Kee</span> <span class="footer-emoji">🦄</span> · 2026</p>
+</footer>
+
+<script>
+// ===== SESSION DATA =====
+const sessions = [
+  // PHASE 1: Foundation (1-6)
+  {
+    phase:1, num:1, title:"初次印象", theme:"通过你所爱之物介绍自己",
+    pronunciation:"/iː/ 与 /ɪ/ 的区别 — sheep/ship, feel/fill。中国学习者最明显的发音特征",
+    grammar:"一般现在时表示事实和习惯 — \"I love..., I live in..., I work as...\"",
+    conversation:"做一个1分钟自我介绍，听起来自然不做作",
+    art:"说出3位塑造了你的艺术家、电影或书籍——每样用一句话说明原因",
+    homework:"录制30秒语音自我介绍。回听。重新录制改进版"
+  },
+  {
+    phase:1, num:2, title:"我生命中的人", theme:"描述你身边的人",
+    pronunciation:"/æ/ 与 /e/ (man/men, bad/bed) + 弱元音 /ə/ — 让英语听起来像英语的\"懒元音\"",
+    grammar:"现在进行时表示当前 — \"I'm learning..., She's working on...\"",
+    conversation:"描述一位朋友：性格、职业、你为什么喜欢他们",
+    art:"如果你最好的朋友是一件艺术品，他们会是什么？为什么？",
+    homework:"用3句话描述一个人。录音。标注你使用弱元音的地方"
+  },
+  {
+    phase:1, num:3, title:"我反复回归的事物", theme:"谈论习惯、爱好和痴迷",
+    pronunciation:"/θ/ 和 /ð/ — 中国学习者害怕的\"th\"音。think, this, theatre, that。实用舌位训练",
+    grammar:"频率副词 + 好恶表达 — always, sometimes, never // I enjoy, I'm into, I can't stand",
+    conversation:"谈论一个文化习惯——你反复重看的电影类型、循环播放的音乐、常去的画廊",
+    art:"\"你总是回归什么？\"——那些经得起重复的艺术",
+    homework:"用4句话解释你最喜欢的可反复观看的电影。使用2个频率词"
+  },
+  {
+    phase:1, num:4, title:"重要的场所", theme:"描述空间与地点",
+    pronunciation:"双元音链 /eɪ/ /aɪ/ /ɔɪ/ — place, space, light, design, choice, voice。口腔移动意识",
+    grammar:"There is / There are + 方位介词 — \"There's a..., In the center..., Along the wall...\"",
+    conversation:"描述一个你喜欢的房间、画廊或公共空间。让听者仿佛亲眼看见",
+    art:"描述Tate Modern的涡轮大厅、北京胡同庭院或你最喜欢的咖啡馆。聚焦空间语言",
+    homework:"语音录制1分钟空间描述。最少使用3个方位介词"
+  },
+  {
+    phase:1, num:5, title:"我喜欢什么及为什么（上）", theme:"表达偏好——超越\"I like\"",
+    pronunciation:"辅音群 — /sts/ (artists), /sks/ (asks), /kts/ (facts)。中国学习者容易丢辅音",
+    grammar:"比较级 — better than, more interesting than, not as...as, the most...",
+    conversation:"比较两件艺术品、电影或歌曲。说出你更偏好哪一个及原因——用结构化句子",
+    art:"带两张图片/链接。课堂上实时比较。教师先示范",
+    homework:"写作+录音：\"X is more Y than Z because...\""
+  },
+  {
+    phase:1, num:6, title:"我喜欢什么及为什么（下）", theme:"深入品味——你的偏好揭示了什么",
+    pronunciation:"多音节词重音 — PHOtograph → phoTOGraphy → photoGRAPHic。重音转移模式",
+    grammar:"Because / because of + 原因从句 — \"I prefer X because...\"",
+    conversation:"在90秒内解释一个强烈的偏好——包含原因、例子和对比",
+    art:"\"我不喜欢的艺术比喜欢的艺术告诉我更多关于自己的事。\" 讨论",
+    homework:"录制90秒\"我在[艺术/音乐/电影]上的品味及其对我的说明\""
+  },
+  // PHASE 2: Building (7-12)
+  {
+    phase:2, num:7, title:"重要的一天", theme:"讲述一个有意义的日子",
+    pronunciation:"-ed 词尾 — /t/ (watched), /d/ (loved), /ɪd/ (wanted)。中国学习者容易全部读成/ɪd/",
+    grammar:"一般过去时 — 规则与不规则动词。时间标记词：last week, in 2019, when I was...",
+    conversation:"讲一个简短的亲身故事，有清晰的开头、中间和结尾",
+    art:"\"我第一次看到[一幅画/一部电影/一场表演]的那天，它改变了我看事物的方式\"",
+    homework:"录制2分钟故事。标注每一个-ed结尾并检查发音"
+  },
+  {
+    phase:2, num:8, title:"铺设场景", theme:"故事中的背景与氛围",
+    pronunciation:"连读 — 辅音到元音。\"It was_an amazing_exhibition.\" 词间不留空隙",
+    grammar:"过去进行时表示背景 — \"I was walking through the gallery when I noticed...\"",
+    conversation:"讲故事带背景（正在发生什么）+ 事件（发生了什么）",
+    art:"描述一个文化活动的氛围——音乐会、开幕之夜、节日。铺设场景",
+    homework:"用2句过去进行时+2句一般过去时录制一个故事。连读你的词语"
+  },
+  {
+    phase:2, num:9, title:"更大的画面", theme:"故事中的顺序与语境",
+    pronunciation:"功能词的弱读 — was → /wəz/, for → /fə/, to → /tə/, can → /kən/",
+    grammar:"过去完成时表示前情 — \"I had never seen anything like it before...\"",
+    conversation:"讲述完整故事弧线：背景 → 铺垫 → 关键时刻 → 反思",
+    art:"\"一个花了时间才影响我的艺术体验。\" 慢热型",
+    homework:"3分钟语音故事。至少用一次过去完成时。弱化你的功能词"
+  },
+  {
+    phase:2, num:10, title:"即将来临", theme:"计划、预测与可能性",
+    pronunciation:"/ʊ/ 与 /uː/ — good vs food, could vs cooled, look vs loop。唇形圆展区别",
+    grammar:"将来时形式 — will, going to, 现在进行时表计划",
+    conversation:"谈论你期待的即将到来的文化活动",
+    art:"\"如果下个月你可以去看世界上任何展览，你会选哪个？为什么？\"",
+    homework:"描述3件你计划的事。使用3种不同的将来时形式"
+  },
+  {
+    phase:2, num:11, title:"如果...", theme:"假设性思维——深层对话的入口",
+    pronunciation:"口语中的缩略 — I'd, you'd, it'd, wouldn't, couldn't。它们不是可选的",
+    grammar:"第二条件句 — \"If I could..., I would...\"; \"If I had more time, I'd...\"",
+    conversation:"关于艺术和生活的假设场景对话",
+    art:"\"如果你可以偷一件艺术品并把它永远放在家里...\" / \"如果你可以和任何在世或已故的艺术家共进晚餐...\"",
+    homework:"录制5句\"If I could... I would...\"句子。全部缩略"
+  },
+  {
+    phase:2, num:12, title:"今昔对比", theme:"时间中的变化——个人与文化",
+    pronunciation:"句重音 — 实义词占节拍，功能词缩弱。感受节奏",
+    grammar:"Used to / didn't use to — \"I used to think..., but now I...\"",
+    conversation:"描述你的品味或观点如何变化",
+    art:"\"你曾经喜欢现在已经不再喜欢的音乐/艺术/电影？什么取代了它们？\"",
+    homework:"录制90秒\"我的品味如何改变\"。至少3次使用used to。感受节奏"
+  },
+  // PHASE 3: Expanding (13-18)
+  {
+    phase:3, num:13, title:"我有观点", theme:"陈述和支持你的观点",
+    pronunciation:"升调与降调 — \"I think it's interesting↘\" vs \"Do you think it's interesting↗\" — 意义在于旋律中",
+    grammar:"观点结构 — \"I think..., In my opinion..., It seems to me that..., I find it...\"",
+    conversation:"就一件艺术品陈述观点并用2个理由支持",
+    art:"带一张图片。学生给出观点。教师温和挑战。为之辩护",
+    homework:"录制60秒对任何艺术品的观点。1个论点+2个理由。变换语调"
+  },
+  {
+    phase:3, num:14, title:"同意与不同意", theme:"优雅地处理不同观点",
+    pronunciation:"礼貌语调模式 — 降升调软化分歧。\"I see what you mean↘↗ but...\"",
+    grammar:"让步结构 — \"Although..., Even though..., While I agree that..., I still think...\"",
+    conversation:"有礼貌地不同意某人并在其观点之上构建",
+    art:"\"AI艺术是真正的艺术吗？\" 结构化辩论。必须先承认对方最佳论点",
+    homework:"录制90秒\"Yes, but...\"关于任何文化话题的论证"
+  },
+  {
+    phase:3, num:15, title:"推荐与说服", theme:"说服别人体验某事物",
+    pronunciation:"通过音高强调 — 加重关键词来说服。\"You HAVE to see this.\"",
+    grammar:"祈使句 + 强形容词 — \"Don't miss..., You absolutely must..., It's breathtaking / stunning / essential\"",
+    conversation:"推荐一个文化体验，说服力强到让对方想去",
+    art:"\"说服我去看/去/听一个我从没听说过的东西\"",
+    homework:"录制60秒推荐。使用2个祈使句+3个强形容词。把它卖出去"
+  },
+  {
+    phase:3, num:16, title:"解释想法", theme:"让抽象概念易于理解",
+    pronunciation:"停顿与分块 — 你在哪里呼吸改变你如何被理解。意群",
+    grammar:"限定性关系从句 — \"X is a [概念] that..., An artist who...\"",
+    conversation:"向完全不了解的人解释一个艺术/文化概念",
+    art:"\"向你的奶奶解释什么是'侘寂'/'印象派'/'后摇'\"",
+    homework:"录制90秒对任何文化概念的解释。在意群之间停顿"
+  },
+  {
+    phase:3, num:17, title:"文化对比（上）", theme:"跨文化的相似与差异",
+    pronunciation:"/l/ 与 /r/ — 经典难点。light/right, collect/correct, gallery/glory。舌位锁定",
+    grammar:"对比结构 — \"In China..., whereas in the West...; Both cultures value..., but they express it differently\"",
+    conversation:"将中国的一个文化实践与西方对等物比较——不带评判",
+    art:"中国水墨画 vs 西方油画。每种传统重视什么？",
+    homework:"录制2分钟文化对比。使用3种对比结构。锁定/l/和/r/音"
+  },
+  {
+    phase:3, num:18, title:"文化对比（下）", theme:"我们从差异中学到什么",
+    pronunciation:"列举和对比的语调 — \"Not only...↗ but also...↘\"",
+    grammar:"Not only... but also... / Neither... nor... / Either... or...",
+    conversation:"讨论中国和西方艺术传统可以互相学习什么",
+    art:"\"[中国传统]和[西方传统]的融合会是什么样子？\"",
+    homework:"自由写作5分钟关于文化交流。然后录制你最好的90秒"
+  },
+  // PHASE 4: Mastering (19-24)
+  {
+    phase:4, num:19, title:"读懂言外之意", theme:"解读艺术中的含义",
+    pronunciation:"表现性音域 — 扩展你的旋律范围以增强吸引力。单调=不在状态",
+    grammar:"推测性情态动词 — \"It might represent..., The artist could be saying..., This may reflect...\"",
+    conversation:"解读一件艺术品——不是描述你看到什么，而是它意味着什么",
+    art:"带一件含义模糊的艺术品。学生解读。教师提供备选解读。讨论",
+    homework:"录制对同一件艺术品的2种解读。每种使用不同的情态动词"
+  },
+  {
+    phase:4, num:20, title:"艺术背后的故事", theme:"语境与背景——艺术不是凭空存在的",
+    pronunciation:"/ʒ/ 和 /dʒ/ — pleasure, measure, vision, decision vs judge, bridge, gesture。稀有但在艺术词汇中很重要",
+    grammar:"非限定性关系从句 — \"Picasso, who revolutionized modern art, was influenced by..., Guernica, which depicts the bombing of..., remains...\"",
+    conversation:"讲述一件艺术品背后的故事——艺术家的语境、时代、影响",
+    art:"选一件你喜欢的艺术品。研究它的背景。在课堂上做3分钟叙事展示",
+    homework:"录制你的艺术品叙事。至少使用2个非限定性关系从句"
+  },
+  {
+    phase:4, num:21, title:"个人品味与身份", theme:"你的文化偏好揭示了你是谁",
+    pronunciation:"连读总复习 — 连读、省略、同化、弱读。全速自然表达",
+    grammar:"强调分裂句 — \"What I love about X is..., The reason I'm drawn to Y is..., It's the [质量] that matters to me\"",
+    conversation:"通过你的品味表达你的文化身份——你消费什么以及为什么适合你",
+    art:"\"我的文化饮食。\" 你看什么、听什么、读什么、参观什么——以及这说明了你的价值观",
+    homework:"录制3分钟\"文化自画像\"。使用3个分裂句。以自然语速说话"
+  },
+  {
+    phase:4, num:22, title:"挑战性的艺术", theme:"困难的艺术，不舒服的想法",
+    pronunciation:"节奏控制 — 放慢以加重，加速以表达兴奋。节奏即表达",
+    grammar:"虚拟语气/深层假设 — \"I wish artists would..., If only more people..., It's time we...\"",
+    conversation:"讨论令你不舒服的艺术——以及为什么这很有价值",
+    art:"\"有什么电影/艺术品/书籍让你感到不安或挑战？艺术应该让人舒服吗？\"",
+    homework:"录制2分钟关于挑战性艺术的反思。使用2个虚拟语气结构。变化你的节奏"
+  },
+  {
+    phase:4, num:23, title:"对话继续", theme:"保持深度对话——追问的艺术",
+    pronunciation:"反馈音 — mm-hmm, uh-huh, oh really?, right, I see, wow。这些让你听起来像真人",
+    grammar:"提问技巧精通 — 开放问题、追问问题、澄清问题、假设问题",
+    conversation:"持续15分钟无剧本关于艺术/文化的对话不冷场",
+    art:"教师提供一个挑衅性的艺术相关陈述。学生主导对话——提问、回应、转换话题",
+    homework:"录制自己就一个话题问10个追问问题。不允许任何是非问句"
+  },
+  {
+    phase:4, num:24, title:"毕业之作 — 晚宴", theme:"全部，同时进行",
+    pronunciation:"最终回顾 — 庆祝学生最显著的3个发音进步。设定最后一个目标",
+    grammar:"最终回顾 — 现在感觉自然的结构。最后一个要征服的模式",
+    conversation:"25分钟自由对话。教师现在是\"晚宴上的外国朋友\"。自然、无剧本、流畅",
+    art:"\"如果你可以策划一场与4位艺术家（在世或已故）的晚宴，你会邀请谁？你会问他们什么？\"",
+    homework:"个性化\"独立学习路线图\"。建议消费什么、如何独自练习、哪里找对话伙伴"
+  }
+];
+
+const phaseNames = {
+  1: '阶段一：基础 Foundation — "Who Am I & What Do I Love?"',
+  2: '阶段二：构建 Building — "Stories & Experiences"',
+  3: '阶段三：拓展 Expanding — "Opinions & Perspectives"',
+  4: '阶段四：精通 Mastering — "Depth & Nuance"'
+};
+
+const phaseBadges = {
+  1: { cefr: 'A1 → A2', keywords: '生存对话 · 一般现在时 · 核心音素' },
+  2: { cefr: 'A2 → B1', keywords: '叙事 · 过去与将来时态 · 连读' },
+  3: { cefr: 'B1 → B1+', keywords: '观点与论证 · 复杂句式 · 表现性语调' },
+  4: { cefr: 'B1+ → B2 Light', keywords: '抽象讨论 · 风格选择 · 文化流利度' }
+};
+
+let currentPhase = 1;
+
+function renderPhase(phase) {
+  const container = document.getElementById('phase-sessions');
+  const phaseSessions = sessions.filter(s => s.phase === phase);
+  const badge = phaseBadges[phase];
+
+  let html = `
+    <div class="phase-divider">${phaseNames[phase]}</div>
+    <div style="text-align:center;margin-bottom:24px;font-size:0.8rem;color:var(--text-muted);display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
+      <span>CEFR: <span style="color:var(--accent);font-weight:600;">${badge.cefr}</span></span>
+      <span>${badge.keywords}</span>
+    </div>
+  `;
+
+  phaseSessions.forEach((s, i) => {
+    html += `
+    <div class="session-card fade-in" style="margin-bottom:10px;animation-delay:${i * 0.04}s;">
+      <div class="session-card-header" onclick="toggleSession(this)">
+        <span class="session-number">第${s.num}节</span>
+        <span class="session-title">${s.title}</span>
+        <span class="session-theme">${s.theme}</span>
+        <span class="session-toggle">▾</span>
+      </div>
+      <div class="session-card-body">
+        <div class="session-detail-grid">
+          <div class="session-detail-item">
+            <div class="session-detail-label">🔊 发音重点</div>
+            <div class="session-detail-value">${s.pronunciation}</div>
+          </div>
+          <div class="session-detail-item">
+            <div class="session-detail-label">📐 语法重点</div>
+            <div class="session-detail-value">${s.grammar}</div>
+          </div>
+          <div class="session-detail-item">
+            <div class="session-detail-label">🗣️ 会话目标</div>
+            <div class="session-detail-value">${s.conversation}</div>
+          </div>
+          <div class="session-detail-item">
+            <div class="session-detail-label">🎨 艺术角度</div>
+            <div class="session-detail-value">${s.art}</div>
+          </div>
+          <div class="session-detail-item session-detail-full">
+            <div class="session-detail-label">📝 作业</div>
+            <div class="session-detail-value">${s.homework}</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  });
+
+  container.innerHTML = html;
+
+  // Reset animation
+  setTimeout(() => {
+    document.querySelectorAll('.fade-in').forEach(el => {
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = '';
+    });
+  }, 10);
+}
+
+function switchPhase(phase, btn) {
+  currentPhase = phase;
+  renderPhase(phase);
+
+  // Update active tab
+  document.querySelectorAll('.nav-phase-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  else {
+    // Find the matching phase tab
+    const tabs = document.querySelectorAll('.nav-phase-tab');
+    tabs.forEach(t => {
+      if (t.textContent.includes('阶段' + ['','一','二','三','四'][phase]) && t.onclick) {
+        t.classList.add('active');
+      }
+    });
+  }
+
+  // Scroll to sessions
+  document.getElementById('sessions').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function toggleSession(header) {
+  const card = header.parentElement;
+  card.classList.toggle('open');
+}
+
+// Init
+renderPhase(1);
+</script>
+
+</body>
+</html>
