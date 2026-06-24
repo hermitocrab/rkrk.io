@@ -9,9 +9,13 @@
     { "src": "/resume", "dest": "/resume.html" },
     { "src": "/speech", "dest": "/speech.html" },
     { "src": "/speech-clickcues", "dest": "/speech-clickcues.html" },
-    { "src": "/adult-english", "dest": "/adult-english/demo/jun-21/index.html" },
-    { "src": "/adult-english/(.*)", "dest": "/adult-english/demo/jun-21/$1" },
+    { "src": "/adult-english/demo/jun-22", "dest": "/adult-english/demo/jun-22/index.html" },
+    { "src": "/adult-english/demo/jun-22/(.*)", "dest": "/adult-english/demo/jun-22/$1" },
+    { "src": "/adult-english/demo/jun-21", "dest": "/adult-english/demo/jun-21/index.html" },
+    { "src": "/adult-english/demo/jun-21/(.*)", "dest": "/adult-english/demo/jun-21/$1" },
+    { "src": "/workflow", "dest": "/workflow/index.html" },
     { "src": "/programmer-english", "dest": "/programmer-english/index.html" },
-    { "src": "/programmer-english/module/(.*)", "dest": "/programmer-english/module/$1.html" }
+    { "src": "/programmer-english/module/(.*)", "dest": "/programmer-english/module/$1.html" },
+    { "src": "/student-reports/(.*)", "dest": "/student-reports/$1.html" }
   ]
 }
