@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Allison · Student Report [TEST] — rkrk.io</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf9; --card: #ffffff; --text: #1a1a2e; --sub: #6b7280;
+  --accent: #e07a5f; --accent2: #3d405b; --gold: #f2cc8f;
+  --green: #059669; --amber: #d97706; --red: #dc2626;
+  --border: #e5e7eb; --radius: 16px;
+  --sidebar-w: 260px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter','Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Outfit','Noto Sans SC',sans-serif}
+
+/* Sidebar */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;background:var(--card);border-right:1px solid var(--border);overflow-y:auto;z-index:100;padding:20px 0;box-shadow:1px 0 8px rgba(0,0,0,0.03)}
+.sidebar-header{padding:0 20px 16px;border-bottom:1px solid var(--border);margin-bottom:8px}
+.sidebar-header h3{font-size:14px;font-weight:700;color:var(--accent2);margin-bottom:4px}
+.sidebar-header .count{font-size:11px;color:var(--sub)}
+.sidebar-nav{list-style:none}
+.sidebar-nav li{}
+.sidebar-nav a{display:block;padding:8px 20px;font-size:13px;color:var(--text);text-decoration:none;border-left:3px solid transparent;transition:all 0.15s;position:relative}
+.sidebar-nav a:hover{background:#f9fafb;border-left-color:var(--accent)}
+.sidebar-nav a .date{font-weight:600;font-size:13px}
+.sidebar-nav a .topic{font-size:11px;color:var(--sub);display:block;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar-nav a.current{background:#fdf2f0;border-left-color:var(--accent);font-weight:700}
+.sidebar-nav .divider{padding:8px 20px 4px;font-size:10px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:0.1em}
+.sidebar-nav .special a{border-left-color:transparent;font-style:italic;color:var(--accent)}
+
+/* Mobile sidebar toggle */
+.sidebar-toggle{display:none;position:fixed;top:12px;left:12px;z-index:200;width:40px;height:40px;border-radius:10px;background:var(--card);border:1px solid var(--border);font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,0.08)}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:99}
+
+/* Main content */
+.main-content{margin-left:var(--sidebar-w);min-height:100vh}
+.container{max-width:720px;margin:0 auto;padding:24px 20px 60px}
+
+header{text-align:center;padding:40px 0 32px}
+.logo{font-size:13px;text-transform:uppercase;letter-spacing:0.15em;color:var(--sub);margin-bottom:8px}
+header h1{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:800;letter-spacing:-0.03em;line-height:1.15;margin-bottom:8px}
+header .sub{font-size:15px;color:var(--sub)}
+.test-badge{display:inline-block;padding:3px 10px;background:var(--amber);color:#fff;border-radius:10px;font-size:10px;font-weight:700;text-transform:uppercase;margin-left:8px;vertical-align:middle}
+
+/* Score Banner */
+.score-banner{background:linear-gradient(135deg,var(--accent2),#2d2f4a);border-radius:var(--radius);padding:24px;margin-bottom:24px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.score-item{text-align:center;min-width:120px}
+.score-item .label{font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.6);margin-bottom:4px}
+.score-item .value{font-family:'Outfit',sans-serif;font-size:2.4rem;font-weight:800;color:#fff;line-height:1.1}
+.score-item .change{font-size:12px;margin-top:2px;font-weight:600}
+.change-up{color:#6ee7b7}
+.change-warn{color:#fcd34d}
+.score-divider{width:1px;background:rgba(255,255,255,0.15)}
+
+/* Badges */
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;margin:0 4px}
+.badge-speaking{background:#fce7f3;color:#9d174d}
+.badge-listening{background:#fef3c7;color:#92400e}
+.badge-period{background:#e0e7ff;color:#3730a3}
+
+/* Section cards */
+.section-card{background:var(--card);border-radius:var(--radius);padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.section-card .emoji{font-size:24px;margin-bottom:8px}
+.section-card h2{font-size:18px;font-weight:700;margin-bottom:4px}
+.section-card .meta{font-size:13px;color:var(--sub);margin-bottom:12px}
+
+/* Success points */
+.success-list{list-style:none;margin:12px 0}
+.success-list li{padding:12px 0;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start}
+.success-list li:last-child{border-bottom:none}
+.success-list .num{min-width:28px;height:28px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;font-family:'Outfit',sans-serif}
+.success-list .content{flex:1}
+.success-list .title{font-weight:700;font-size:15px;color:var(--text);margin-bottom:2px}
+.success-list .desc{font-size:13px;color:var(--sub);line-height:1.55}
+
+/* Failure analysis */
+.fail-list{list-style:none;margin:12px 0}
+.fail-list li{padding:12px 0;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start}
+.fail-list li:last-child{border-bottom:none}
+.fail-list .num{min-width:28px;height:28px;background:#fef2f2;color:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;font-family:'Outfit',sans-serif}
+.fail-list .content{flex:1}
+.fail-list .title{font-weight:700;font-size:15px;color:var(--text);margin-bottom:2px}
+.fail-list .desc{font-size:13px;color:var(--sub);line-height:1.55}
+
+/* Action priority cards */
+.priority-card{background:#fafafa;border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:12px}
+.priority-card .priority-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.priority-card .priority-badge{padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif}
+.priority-card h3{font-size:15px;font-weight:700}
+.priority-card .priority-badge.p1{background:var(--accent);color:#fff}
+.priority-card .priority-badge.p2{background:#fef3c7;color:#92400e}
+.priority-card .priority-badge.p3{background:#e0e7ff;color:#3730a3}
+.priority-card .fix-block{background:#fff;border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.priority-card .fix-block h4{font-size:13px;font-weight:700;color:var(--accent2);margin-bottom:4px}
+.priority-card .fix-block p{font-size:13px;color:var(--text);line-height:1.55}
+
+/* Tracking table */
+.track-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+.track-table th{background:var(--accent2);color:#fff;padding:8px 12px;text-align:left;font-weight:600;font-size:12px}
+.track-table td{padding:8px 12px;border-bottom:1px solid var(--border)}
+.track-table tr:nth-child(even){background:#f9fafb}
+.track-table .target-cell{font-weight:700;color:var(--accent)}
+
+/* Why succeed */
+.why-succeed{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-radius:var(--radius);padding:24px;margin:16px 0}
+.why-succeed h3{color:#065f46;font-size:16px;margin-bottom:12px}
+.why-succeed li{font-size:14px;color:#064e3b;margin:6px 0;padding-left:4px}
+.why-succeed li strong{color:#047857}
+
+/* Chunk highlight */
+.chunk{background:#fef3c7;padding:1px 6px;border-radius:4px;font-size:13px;font-family:'Inter','Noto Sans SC',sans-serif;word-break:break-word;overflow-wrap:break-word}
+
+/* Vocab showcase */
+.vocab-showcase{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.vocab-tag{background:linear-gradient(135deg,#fce7f3,#fdf2f8);border:1px solid #f9a8d4;border-radius:20px;padding:6px 14px;font-size:12px;color:#831843;font-weight:500}
+
+/* Footer */
+footer{text-align:center;padding:32px 0;color:var(--sub);font-size:12px;border-top:1px solid var(--border);margin-top:40px}
+footer .brand{font-weight:700;color:var(--text)}
+
+/* Scroll marker for current session in sidebar */
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:0.4}}
+.sidebar-nav a .live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-left:4px;animation:pulse-dot 2s infinite;vertical-align:middle}
+
+@media(max-width:900px){
+  .sidebar{transform:translateX(-100%);transition:transform 0.25s ease}
+  .sidebar.open{transform:translateX(0)}
+  .sidebar-toggle{display:flex}
+  .sidebar-overlay{display:block;pointer-events:none;opacity:0;transition:opacity 0.25s}
+  .sidebar-overlay.open{pointer-events:auto;opacity:1}
+  .main-content{margin-left:0}
+  .container{padding:16px 16px 40px}
+  header{padding:28px 0 24px;padding-top:52px}
+}
+@media(max-width:480px){
+  .score-banner{gap:12px}
+  .score-item .value{font-size:1.8rem}
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile toggle -->
+<button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Toggle sidebar">📋</button>
+<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h3>📚 课程笔记</h3>
+    <div class="count">50 sessions · 2026.3–6</div>
+  </div>
+  <ul class="sidebar-nav">
+    <!-- June 2026 -->
+    <li class="divider">Jun 2026</li>
+    <li><a href="#jun14"><span class="date">6月14日</span><span class="topic">口语 Part 2&3 综合训练</span></a></li>
+    <li><a href="#jun12"><span class="date">6月12日</span><span class="topic">听力 Section 4 学术讲座</span></a></li>
+    <li><a href="#jun10"><span class="date">6月10日</span><span class="topic">RUA 专属词典 + AI 提示词</span></a></li>
+    <li><a href="#jun8"><span class="date">6月8日</span><span class="topic">听力模考复盘 + 口语进阶</span></a></li>
+    <li><a href="#jun7"><span class="date">6月7日</span><span class="topic">Part 2 结构 · 高级风景词汇</span></a></li>
+
+    <!-- May 2026 -->
+    <li class="divider">May 2026</li>
+    <li><a href="#may31"><span class="date">5月31日</span><span class="topic">听力 + 口语综合训练</span></a></li>
+    <li><a href="#may29"><span class="date">5月29日</span><span class="topic">听力填空策略</span></a></li>
+    <li><a href="#may28"><span class="date">5月28日</span><span class="topic">口语流利度强化</span></a></li>
+    <li><a href="#may25"><span class="date">5月25日</span><span class="topic">听力 Section 3 训练</span></a></li>
+    <li><a href="#may24"><span class="date">5月24日</span><span class="topic">口语 Part 2 故事构建</span></a></li>
+    <li><a href="#may23"><span class="date">5月23日</span><span class="topic">听力错题分析</span></a></li>
+    <li><a href="#may15"><span class="date">5月15日</span><span class="topic">BEEF 框架深化 · Part 3 入门</span></a></li>
+    <li><a href="#may12"><span class="date">5月12日</span><span class="topic">听力地图题 · 口语素材库</span></a></li>
+    <li><a href="#may11"><span class="date">5月11日</span><span class="topic">Part 1 高频话题 · 纠音训练</span></a></li>
+    <li><a href="#may10"><span class="date">5月10日</span><span class="topic">RUA 词汇法 · 听力 Section 1 错题</span></a></li>
+    <li><a href="#may7"><span class="date">5月7日</span><span class="topic">连读训练 · 口语话题演练</span></a></li>
+    <li><a href="#may6"><span class="date">5月6日</span><span class="topic">听力精听 · 口语时态纠错</span></a></li>
+
+    <!-- April 2026 -->
+    <li class="divider">Apr 2026</li>
+    <li><a href="#apr27"><span class="date">4月27日</span><span class="topic">听力 Part 2 · BEEF 叙事</span></a></li>
+    <li><a href="#apr26"><span class="date">4月26日</span><span class="topic">口语流利度 · A+D 深化</span></a></li>
+    <li><a href="#apr20"><span class="date">4月20日</span><span class="topic">听力 Section 1-2 模考</span></a></li>
+    <li><a href="#apr19"><span class="date">4月19日</span><span class="topic">Part 2 串题技巧</span></a></li>
+    <li><a href="#apr17"><span class="date">4月17日</span><span class="topic">同义替换 · 语块复习</span></a></li>
+    <li><a href="#apr16"><span class="date">4月16日</span><span class="topic">听力预判 · Part 1 话题</span></a></li>
+    <li><a href="#apr14"><span class="date">4月14日</span><span class="topic">口语 Part 1 所有话题覆盖</span></a></li>
+    <li><a href="#apr13"><span class="date">4月13日</span><span class="topic">听力数字/日期专项</span></a></li>
+    <li><a href="#apr12"><span class="date">4月12日</span><span class="topic">BEEF + 语块综合输出</span></a></li>
+    <li><a href="#apr9"><span class="date">4月9日</span><span class="topic">Part 2 素材积累</span></a></li>
+    <li><a href="#apr8"><span class="date">4月8日</span><span class="topic">听力地图题 · 方位词</span></a></li>
+    <li><a href="#apr7"><span class="date">4月7日</span><span class="topic">RUA 深水区 · 3C 法则</span></a></li>
+    <li><a href="#apr2"><span class="date">4月2日</span><span class="topic">口语时态 · 过去式训练</span></a></li>
+    <li><a href="#apr1"><span class="date">4月1日</span><span class="topic">听力 Section 2 · 选择题</span></a></li>
+
+    <!-- March 2026 -->
+    <li class="divider">Mar 2026</li>
+    <li><a href="#mar31"><span class="date">3月31日</span><span class="topic">Part 1 全部话题 · 自然度</span></a></li>
+    <li><a href="#mar29"><span class="date">3月29日</span><span class="topic">听力精听 · 音变分析</span></a></li>
+    <li><a href="#mar26"><span class="date">3月26日</span><span class="topic">精听四步法 · 音变现象</span></a></li>
+    <li class="special"><a href="#test326"><span class="date">📋 3月26日 · 口语测试</span><span class="topic">预估 5.0-5.5 / 发音 6.0</span></a></li>
+    <li><a href="#mar24"><span class="date">3月24日</span><span class="topic">听力填空 · 词汇拓展</span></a></li>
+    <li><a href="#mar23"><span class="date">3月23日</span><span class="topic">口语 Part 2 初讲</span></a></li>
+    <li><a href="#mar22"><span class="date">3月22日</span><span class="topic">听力 Part 1 · 场景词汇</span></a></li>
+    <li><a href="#mar21"><span class="date">3月21日</span><span class="topic">A+D 强化 · 过去时组合</span></a></li>
+    <li><a href="#mar20"><span class="date">3月20日</span><span class="topic">语块复习 · Part 1 拓展</span></a></li>
+    <li><a href="#mar19"><span class="date">3月19日</span><span class="topic">听力预判技巧</span></a></li>
+    <li><a href="#mar16"><span class="date">3月16日</span><span class="topic">口语话题 · 爱好拓展</span></a></li>
+    <li><a href="#mar15"><span class="date">3月15日</span><span class="topic">听力 Section 1 · 拼写</span></a></li>
+    <li><a href="#mar12"><span class="date">3月12日</span><span class="topic">BEEF 框架 · Part 2 训练</span></a></li>
+    <li><a href="#mar10"><span class="date">3月10日</span><span class="topic">RUA 词汇 · 听力定位</span></a></li>
+    <li><a href="#mar9"><span class="date">3月9日</span><span class="topic">口语拓展 · 语法纠正</span></a></li>
+    <li><a href="#mar8"><span class="date">3月8日</span><span class="topic">过去时组合 · BEEF 引入</span></a></li>
+    <li class="special"><a href="#speech7"><span class="date">📝 3月7日 · Speech</span><span class="topic">逐句修改 · 语法纠正</span></a></li>
+    <li><a href="#mar5"><span class="date">3月5日</span><span class="topic">RUA 词汇法 · 发音迷宫</span></a></li>
+    <li><a href="#mar4"><span class="date">3月4日</span><span class="topic">听力场景 · 口语入门</span></a></li>
+    <li><a href="#mar3"><span class="date">3月3日</span><span class="topic">口语核心思维 · A+D · 语块</span></a></li>
+    <li class="special"><a href="#curriculum"><span class="date">📐 Curriculum</span><span class="topic">三阶段课程规划</span></a></li>
+  </ul>
+</aside>
+
+<!-- Main Content -->
+<div class="main-content">
+<div class="container">
+
+<header>
+  <div class="logo">rkrk.io · Student Progress Report <span class="test-badge">TEST</span></div>
+  <h1>Allison <span style="font-weight:400;font-size:1.2rem;color:var(--sub)">卿城</span></h1>
+  <p class="sub">IELTS Progress Report · June 2026</p>
+  <div style="margin-top:12px">
+    <span class="badge badge-speaking">Speaking 6.0</span>
+    <span class="badge badge-listening">Listening 5.0</span>
+    <span class="badge badge-period">Mar–Jun 2026 · 50 Sessions</span>
+  </div>
+</header>
+
+<!-- Score Banner -->
+<div class="score-banner">
+  <div class="score-item">
+    <div class="label">Speaking</div>
+    <div class="value">6.0</div>
+    <div class="change change-up">↑ from 4.5 (+1.5)</div>
+  </div>
+  <div class="score-divider"></div>
+  <div class="score-item">
+    <div class="label">Listening</div>
+    <div class="value">5.0</div>
+    <div class="change change-warn">⚠ Needs Focus</div>
+  </div>
+</div>
+
+<!-- Section 1: Overview -->
+<div class="section-card">
+  <div class="emoji">📊</div>
+  <h2>Overview · 成绩总览</h2>
+  <div class="meta">March–June 2026 · 50 one-on-one sessions</div>
+  <p style="font-size:14px;color:var(--sub);line-height:1.7">
+    Allison 在过去四个月中实现了 1.5 分的口语飞跃。真实考试成绩从 4.5 提升至 <strong style="color:var(--accent)">6.0</strong>。上一次考试 4.5 的原因是没有任何答题技巧、无法与考官进行即兴互动回答；本次 6.0 实现了质的突破，表达技巧全面提升。听力目前为 <strong style="color:var(--amber)">5.0</strong>，主要瓶颈是拼写能力和语音识别。本报告详细拆解了她的优势、短板及下一阶段行动计划。
+  </p>
+</div>
+
+<!-- Section 2: Speaking Success -->
+<div class="section-card">
+  <div class="emoji">🎤</div>
+  <h2>Speaking · 从 4.5 到 6.0 的提分路径 (+1.5)</h2>
+  <div class="meta">上一次考试 4.5（无技巧、无法即兴回答）→ 本次考试 6.0（表达技巧全面提升）</div>
+
+  <ul class="success-list">
+    <li>
+      <span class="num">1</span>
+      <div class="content">
+        <div class="title">🎤 发音清晰 — 与生俱来的优势（3月26日诊断：发音 6.0）</div>
+        <div class="desc">3月26日口语诊断评估明确指出：<em>"你的英语发音清晰，基础交流较为顺畅"</em>、<em>"考官能毫不费力地听懂你的意思"</em>——发音单项已稳定在 6.0 水平（诊断报告：<strong>Pronunciation 6.0</strong>）。清晰的发音给考官留下立竿见影的正面印象，这是 Allison 最稳定的得分项，也是她从第一节课就具备的核心武器。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">2</span>
+      <div class="content">
+        <div class="title">🧩 B2 语块运用 — 从第一节课就开始积累（始于 3月3日）</div>
+        <div class="desc">3月3日首次课程即引入 B2 级语块训练，包括 <span class="chunk">"I'm not an expert in this topic"</span>（遇到难题的完美铺垫）、<span class="chunk">"Actually I'm not sure, cuz you know, I've never been there"</span>（真实回应替代瞎编）。持续积累至 6月，已掌握大量地道表达：<span class="chunk">"how should I put it"</span>、<span class="chunk">"please allow me a few seconds to gather my thoughts"</span>。语块让思考间隙听起来仍然流利，这是 4.5 → 6.0 的关键跃升要素。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">3</span>
+      <div class="content">
+        <div class="title">📐 BEEF 逻辑框架 — 告别无结构回答（3月8日引入）</div>
+        <div class="desc"><strong>B</strong>ackground（背景）→ <strong>E</strong>vent/Evidence（事件/证据）→ <strong>E</strong>xplanation（解释）→ <strong>F</strong>eedback（总结）。3月8日课后笔记已出现叙事框架训练。自此以后，回答不再是一堆零散的句子拼凑，而是有开头、有展开、有收尾的完整叙述。3月26日诊断时流利度仅 5.0-5.5，到 6月考试已构建出结构化的即兴回答能力。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">4</span>
+      <div class="content">
+        <div class="title">🔄 Answer + Detail 肌肉记忆 — 不再蹦单词（3月3日确立规则）</div>
+        <div class="desc">3月3日首课笔记明确写入<em>"回答结构：Answer + Detail，像喝 AD 钙奶一样，有主干回答（入口甘甜）还要有延展（有营养）"</em>。这一核心规则贯穿全部 50 节课。Allison 从最初容易中翻英导致卡顿（Curriculum 诊断：<em>"学生极度缺乏词汇储备，容易在脑海里先中翻英再输出，导致严重卡顿和结巴"</em>），到如今每个回答都自然附带细节和原因。这一习惯转变是质的突破。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">5</span>
+      <div class="content">
+        <div class="title">🤝 自然的对话感 — 考官听到的是"人"不是"考生"（6月7日已成熟）</div>
+        <div class="desc">6月7日课程笔记显示她已能自如使用话语标记词：<span class="chunk">"First of all, let me tell you more about..."</span>、<span class="chunk">"When it comes to..."</span>、<span class="chunk">"In terms of..."</span>。生动的叙事结构（<span class="chunk">"And I was like..."</span>）展现了自然的对话节奏。考官感受到的是和一个真实的人在聊天，不是面对一个背模板的考生——这是 4.5 分考生最缺乏的临场交流感。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">6</span>
+      <div class="content">
+        <div class="title">📝 四步复习法 — 学习习惯的系统化（3月建立）</div>
+        <div class="desc"><strong>Compose（创作）→ Polish（打磨，借助 DynaSaurus AI）→ Record（录音）→ Analyse/Rinse（分析/重来）。</strong> 3月课程体系建立后，每次作业都遵循这套闭环。她不只是"学习"——她输出、打磨、录音、改进。每一次循环都在建立口腔肌肉记忆。RUA 词汇学习法（Recognize → Understand → Apply，3月5日课程引入）则确保了词汇从"死记硬背"变为"能听懂、能说出的真词汇"。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">7</span>
+      <div class="content">
+        <div class="title">🆘 拖延与缓冲技巧 — 用优雅替代沉默（3月3日即开始训练）</div>
+        <div class="desc">3月3日首课即引入"救命拖延词 (Stalling)"：<span class="chunk">"Well, actually..."</span>、<span class="chunk">"You know..."</span>。3月26日诊断报告提供了完整的"救场技巧"章节：<span class="chunk">"Well, let me think about that for a second..."</span>、<span class="chunk">"How should I put this..."</span>、<span class="chunk">"The name is on the tip of my tongue"</span>。这些技巧让 Allison 在突然卡壳时不再尴尬沉默，而是用自然的英语填充思考间隙。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">8</span>
+      <div class="content">
+        <div class="title">📊 词汇量质的飞跃 — 从基础 4.5 级到 B2+ 词汇（3月→6月对比）</div>
+        <div class="desc">3月诊断词汇单项仅 5.0，且课程规划指出<em>"学生极度缺乏词汇储备"</em>。6月课程中已能使用以下高级表达：</div>
+        <div class="vocab-showcase" style="margin-top:6px">
+          <span class="vocab-tag">breathtaking / spectacular / picturesque</span>
+          <span class="vocab-tag">a tranquil / an idyllic place</span>
+          <span class="vocab-tag">detox from city life</span>
+          <span class="vocab-tag">immersed in nature</span>
+          <span class="vocab-tag">burning the candle at both ends</span>
+          <span class="vocab-tag">heated discussion / make a scene</span>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Section 3: Listening Issues -->
+<div class="section-card">
+  <div class="emoji">🔍</div>
+  <h2>Listening · 听力 5 分原因分析</h2>
+  <div class="meta">3月课程规划 (Curriculum) 已有预判 · 5月10日课后反馈确认 · 需要正视的短板</div>
+
+  <ul class="fail-list">
+    <li>
+      <span class="num">1</span>
+      <div class="content">
+        <div class="title">🔤 拼写能力极弱 — 最根本的失分原因（3月 Curriculum 明确指出）</div>
+        <div class="desc">课程规划中明确诊断：<em>"学生基础拼写能力极弱"</em>。5月10日课后反馈进一步证实：<em>"在拼写输出环节，明显暴露出'发音与拼写脱节'的现象，例如将 stream 的元音组合错拼，以及未能识别出 data 的英式发音"</em>。她可以听出单词却不能正确拼写。在 Section 1-4 的填空题中 <strong>拼写必须精确</strong>，IELTS 对拼写零容忍——一个字母错误即零分。这不是听力问题，而是<em>拼写输出能力</em>拖累了听力分数。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">2</span>
+      <div class="content">
+        <div class="title">🔗 连读盲区 — 只在教科书上见过英语（3月 Curriculum 预判）</div>
+        <div class="desc">课程规划中早已识别：<em>"对单词的连读（如 consonant-vowel linking）毫无概念，容易因听不懂而走神"</em>。自然语速中单词会连读合并，如 <span class="chunk">"Good afternoon"</span> 实际听感是 <span class="chunk">"Goo-dafternoon"</span>。3月26日笔记详细收录了音变分析：同类音消失、极弱读与鼻腔爆破（如 and 在 "a hundred and seventy" 中弱读至极）。她预期的是教科书式的独立发音，而真实英语并非如此。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">3</span>
+      <div class="content">
+        <div class="title">📖 听力词汇远小于阅读词汇 — 耳朵跟不上眼睛（RUA 词汇法的核心洞察）</div>
+        <div class="desc">3月5日课程引入 RUA 词汇学习法（Recognize → Understand → Apply），核心原理是<em>"建立音、形、义的快速神经反射"</em>。3月26日课上进一步强调：<em>"听不懂并不是因为词汇生僻，有时是因为发音融合导致大脑无法按字面拼写去识别"</em>。她的阅读词汇量远大于听力词汇量。需要在"耳-脑"之间建立直接连接——认识一个词却无法在自然语速中听出来，这个词就是无效词汇。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">4</span>
+      <div class="content">
+        <div class="title">🏛️ Section 4 学术讲座崩溃 — 30秒后失去方向（课程规划第三阶段目标）</div>
+        <div class="desc">Curriculum 第三阶段（6月中旬启动）目标专门针对此问题：<em>"Part 3 & 4 学术场景突破（教育、环保、科技等讲座）"</em>，并明确预测了难点：<em>"面对语速极快、生词密集的学术讲座时，容易心态崩溃导致连环漏题"</em>。缺乏预测能力（审题预判），在开始 30 秒后就迷失方向。不知道什么样的信息即将出现，就像在大海中游泳却没有指南针。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">5</span>
+      <div class="content">
+        <div class="title">🔄 同义替换识别不足 — 只听原词，不听意思（5月10日错题分析确认）</div>
+        <div class="desc">5月10日课程实战错题复盘揭示：听力原文中的 <span class="chunk">"visitor"</span> 对应卷面上的 <span class="chunk">"tourist"</span>，这种基础同义替换未能迅速反应。IELTS 听力极少使用题目原文中的精确词汇。她习惯于听具体的词而非<strong>理解含义</strong>。例如：在等 <span class="chunk">"disaster"</span> 这个词时，说话者说的是 <span class="chunk">"catastrophe"</span>。需要训练以意义为单位的听力，而非以单词为单位的匹配。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">6</span>
+      <div class="content">
+        <div class="title">📝 边听边写的错误习惯 — 注意力分裂（3月26日精听四步法试图纠正）</div>
+        <div class="desc">3月26日课程引入精听四步法——盲听 → 比对 → 音变分析 → 影子跟读，旨在训练集中注意力抓取关键信息而非试图记录一切。她仍倾向于试图写下所有内容，而非专注于抓取<strong>关键路标词</strong>，如 <span class="chunk">"however"</span>、<span class="chunk">"the main reason is..."</span>、<span class="chunk">"let me turn to..."</span>。听力中写字会分散注意力。解决之道：少写，多听，抓住路标。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">7</span>
+      <div class="content">
+        <div class="title">⏱️ Section 3 多人对话混乱 — 无法追踪谁说了什么</div>
+        <div class="desc">面对 2-3 个说话者时，无法追踪每个人的观点归属。匹配题——需要将观点归因给特定说话者——尤其困难。需要训练通过音高、语速、口音线索进行<strong>说话者识别</strong>的能力。</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Section 4: Action Plan -->
+<div class="section-card">
+  <div class="emoji">🎯</div>
+  <h2>Next Steps · 行动计划</h2>
+  <div class="meta">Priority-ranked · 下一阶段（6月中旬–8月）</div>
+
+  <div class="priority-card" style="margin-top:16px">
+    <div class="priority-header">
+      <span class="priority-badge p1">P1</span>
+      <h3>听力拼写每日训练</h3>
+    </div>
+    <div class="fix-block">
+      <h4>🎯 目标：消除拼写错误</h4>
+      <p>每天 807 词汇听写 + 错词本。做到音形一一对应——听到即拼对。</p>
+    </div>
+  </div>
+
+  <div class="priority-card">
+    <div class="priority-header">
+      <span class="priority-badge p1">P1</span>
+      <h3>连读 + 弱读专项突破</h3>
+    </div>
+    <div class="fix-block">
+      <h4>🎯 目标：听出连读合并的单词</h4>
+      <p>影子跟读 + 音变分析，直到自然语速下的连读不再造成理解盲区。</p>
+    </div>
+  </div>
+
+  <div class="priority-card">
+    <div class="priority-header">
+      <span class="priority-badge p2">P2</span>
+      <h3>Section 4 学术讲座预判训练</h3>
+    </div>
+    <div class="fix-block">
+      <h4>🎯 目标：30秒内建立内容地图</h4>
+      <p>利用审题黄金时间预判空格词性、场景走向。不再迷失在学术语流中。</p>
+    </div>
+  </div>
+
+  <div class="priority-card">
+    <div class="priority-header">
+      <span class="priority-badge p2">P2</span>
+      <h3>同义替换条件反射</h3>
+    </div>
+    <div class="fix-block">
+      <h4>🎯 目标：听意义而非听单词</h4>
+      <p>训练以 meaning 为单位的听力理解，建立常见的同义替换映射表。</p>
+    </div>
+  </div>
+
+  <div class="priority-card">
+    <div class="priority-header">
+      <span class="priority-badge p3">P3</span>
+      <h3>口语 6.5 冲刺 — Part 3 深度思辨</h3>
+    </div>
+    <div class="fix-block">
+      <h4>🎯 目标：6.0 → 6.5</h4>
+      <p>Part 3 对比分析、预测未来、优缺点讨论。PRE 论证结构 + 复杂从句的自然植入。</p>
+    </div>
+  </div>
+</div>
+
+<!-- Why She Can Succeed -->
+<div class="why-succeed">
+  <h3>💪 为什么她能做到</h3>
+  <ul>
+    <li><strong>📈</strong> 口语从 4.5 到 6.0（+1.5 分）的成功证明了她<em>可以</em>大幅进步</li>
+    <li><strong>🎯</strong> 听力是她通往总分 6.0 的最后一道关卡 — 攻克它，她就赢了</li>
+  </ul>
+  <p style="font-size:13px;color:#047857;margin-top:12px;font-style:italic">
+    听力从 5.0 到 6.0 的差距不靠天赋，不靠智商，靠的是<strong>精准的刻意练习</strong>。Allison 已经用口语 +1.5 分的成绩证明了她具备刻意练习的能力。同样的方法、同样的自律、同样的 4 个月时间，用在听力上，加上针对性的方法，她一定能到达 6.0。
+  </p>
+</div>
+
+<footer>
+  <p><span class="brand">Kee Lee</span> · IELTS Coach · rkrk.io</p>
+  <p style="margin-top:4px">Report generated June 2026 · Based on 50 one-on-one sessions</p>
+</footer>
+
+</div>
+</div>
+
+<script>
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+// Close sidebar when a link is clicked (mobile)
+document.querySelectorAll('.sidebar-nav a').forEach(a => {
+  a.addEventListener('click', () => {
+    if(window.innerWidth <= 900){
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('overlay').classList.remove('open');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
