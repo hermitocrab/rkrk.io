@@ -16,6 +16,6 @@
     { "src": "/workflow", "dest": "/workflow/index.html" },
     { "src": "/programmer-english", "dest": "/programmer-english/index.html" },
     { "src": "/programmer-english/module/(.*)", "dest": "/programmer-english/module/$1.html" },
-    { "src": "/student-reports/(.*)", "dest": "/student-reports/$1.html" }
+    { "src": "/student-reports/([^.]*)$", "dest": "/student-reports/$1.html" }
   ]
 }
