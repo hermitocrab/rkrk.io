@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Allison (卿城) Student Progress Report — Speaking 6.0 · Listening 5.0 · rkrk.io">
+<meta property="og:title" content="Allison Student Report — rkrk.io">
+<meta property="og:description" content="Speaking 6.0 ↑ · Listening 5.0 · March–June 2026 · 40+ Sessions">
+<meta name="robots" content="noindex">
+<title>Allison · Student Report — rkrk.io</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf9; --card: #ffffff; --text: #1a1a2e; --sub: #6b7280;
+  --accent: #e07a5f; --accent2: #3d405b; --gold: #f2cc8f;
+  --green: #059669; --amber: #d97706; --red: #dc2626;
+  --border: #e5e7eb; --radius: 16px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter','Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Outfit','Noto Sans SC',sans-serif}
+.container{max-width:720px;margin:0 auto;padding:24px 20px 60px}
+
+header{text-align:center;padding:40px 0 32px}
+.logo{font-size:13px;text-transform:uppercase;letter-spacing:0.15em;color:var(--sub);margin-bottom:8px}
+header h1{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:800;letter-spacing:-0.03em;line-height:1.15;margin-bottom:8px}
+header .sub{font-size:15px;color:var(--sub)}
+
+/* Score Banner */
+.score-banner{background:linear-gradient(135deg,var(--accent2),#2d2f4a);border-radius:var(--radius);padding:24px;margin-bottom:24px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.score-item{text-align:center;min-width:120px}
+.score-item .label{font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.6);margin-bottom:4px}
+.score-item .value{font-family:'Outfit',sans-serif;font-size:2.4rem;font-weight:800;color:#fff;line-height:1.1}
+.score-item .change{font-size:12px;margin-top:2px;font-weight:600}
+.change-up{color:#6ee7b7}
+.change-warn{color:#fcd34d}
+.score-divider{width:1px;background:rgba(255,255,255,0.15)}
+
+/* Badges */
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;margin:0 4px}
+.badge-speaking{background:#fce7f3;color:#9d174d}
+.badge-listening{background:#fef3c7;color:#92400e}
+.badge-period{background:#e0e7ff;color:#3730a3}
+
+/* Section cards */
+.section-card{background:var(--card);border-radius:var(--radius);padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.section-card .emoji{font-size:24px;margin-bottom:8px}
+.section-card h2{font-size:18px;font-weight:700;margin-bottom:4px}
+.section-card .meta{font-size:13px;color:var(--sub);margin-bottom:12px}
+
+/* Success points */
+.success-list{list-style:none;margin:12px 0}
+.success-list li{padding:12px 0;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start}
+.success-list li:last-child{border-bottom:none}
+.success-list .num{min-width:28px;height:28px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;font-family:'Outfit',sans-serif}
+.success-list .content{flex:1}
+.success-list .title{font-weight:700;font-size:15px;color:var(--text);margin-bottom:2px}
+.success-list .desc{font-size:13px;color:var(--sub);line-height:1.55}
+
+/* Failure analysis */
+.fail-list{list-style:none;margin:12px 0}
+.fail-list li{padding:12px 0;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start}
+.fail-list li:last-child{border-bottom:none}
+.fail-list .num{min-width:28px;height:28px;background:#fef2f2;color:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;font-family:'Outfit',sans-serif}
+.fail-list .content{flex:1}
+.fail-list .title{font-weight:700;font-size:15px;color:var(--text);margin-bottom:2px}
+.fail-list .desc{font-size:13px;color:var(--sub);line-height:1.55}
+
+/* Action priority cards */
+.priority-card{background:#fafafa;border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:12px}
+.priority-card .priority-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.priority-card .priority-badge{padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif}
+.priority-card h3{font-size:15px;font-weight:700}
+.priority-card .priority-badge.p1{background:var(--accent);color:#fff}
+.priority-card .priority-badge.p2{background:#fef3c7;color:#92400e}
+.priority-card .priority-badge.p3{background:#e0e7ff;color:#3730a3}
+.priority-card .fix-block{background:#fff;border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.priority-card .fix-block h4{font-size:13px;font-weight:700;color:var(--accent2);margin-bottom:4px}
+.priority-card .fix-block p{font-size:13px;color:var(--text);line-height:1.55}
+
+/* Tracking table */
+.track-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+.track-table th{background:var(--accent2);color:#fff;padding:8px 12px;text-align:left;font-weight:600;font-size:12px}
+.track-table td{padding:8px 12px;border-bottom:1px solid var(--border)}
+.track-table tr:nth-child(even){background:#f9fafb}
+.track-table .target-cell{font-weight:700;color:var(--accent)}
+
+/* Why succeed */
+.why-succeed{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-radius:var(--radius);padding:24px;margin:16px 0}
+.why-succeed h3{color:#065f46;font-size:16px;margin-bottom:12px}
+.why-succeed li{font-size:14px;color:#064e3b;margin:6px 0;padding-left:4px}
+.why-succeed li strong{color:#047857}
+
+/* Chunk highlight */
+.chunk{background:#fef3c7;padding:1px 6px;border-radius:4px;font-size:13px;font-family:'Inter','Noto Sans SC',sans-serif;word-break:break-word;overflow-wrap:break-word}
+
+/* Vocab showcase */
+.vocab-showcase{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.vocab-tag{background:linear-gradient(135deg,#fce7f3,#fdf2f8);border:1px solid #f9a8d4;border-radius:20px;padding:6px 14px;font-size:12px;color:#831843;font-weight:500}
+
+/* Footer */
+footer{text-align:center;padding:32px 0;color:var(--sub);font-size:12px;border-top:1px solid var(--border);margin-top:40px}
+footer .brand{font-weight:700;color:var(--text)}
+
+@media(max-width:480px){
+  .score-banner{gap:12px}
+  .score-item .value{font-size:1.8rem}
+  .container{padding:16px 16px 40px}
+  header{padding:28px 0 24px}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <div class="logo">rkrk.io · Student Progress Report</div>
+  <h1>Allison <span style="font-weight:400;font-size:1.2rem;color:var(--sub)">卿城</span></h1>
+  <p class="sub">IELTS Progress Report · June 2026</p>
+  <div style="margin-top:12px">
+    <span class="badge badge-speaking">Speaking 6.0</span>
+    <span class="badge badge-listening">Listening 5.0</span>
+    <span class="badge badge-period">Mar–Jun 2026 · 40+ Sessions</span>
+  </div>
+</header>
+
+<!-- Score Banner -->
+<div class="score-banner">
+  <div class="score-item">
+    <div class="label">Speaking</div>
+    <div class="value">6.0</div>
+    <div class="change change-up">↑ from 4.5 (+1.5)</div>
+  </div>
+  <div class="score-divider"></div>
+  <div class="score-item">
+    <div class="label">Listening</div>
+    <div class="value">5.0</div>
+    <div class="change change-warn">⚠ Needs Focus</div>
+  </div>
+</div>
+
+<!-- Section 1: Overview -->
+<div class="section-card">
+  <div class="emoji">📊</div>
+  <h2>Overview · 成绩总览</h2>
+  <div class="meta">March–June 2026 · 40+ one-on-one sessions</div>
+  <p style="font-size:14px;color:var(--sub);line-height:1.7">
+    Allison 在过去四个月中实现了 1.5 分的口语飞跃。真实考试成绩从 4.5 提升至 <strong style="color:var(--accent)">6.0</strong>。上一次考试 4.5 的原因是没有任何答题技巧、无法与考官进行即兴互动回答；本次 6.0 实现了质的突破，表达技巧全面提升。听力目前为 <strong style="color:var(--amber)">5.0</strong>，主要瓶颈是拼写能力和语音识别。本报告详细拆解了她的优势、短板及下一阶段行动计划。
+  </p>
+</div>
+
+<!-- Section 2: Speaking Success -->
+<div class="section-card">
+  <div class="emoji">🎤</div>
+  <h2>Speaking · 从 4.5 到 6.0 的提分路径 (+1.5)</h2>
+  <div class="meta">上一次考试 4.5（无技巧、无法即兴回答）→ 本次考试 6.0（表达技巧全面提升）</div>
+
+  <ul class="success-list">
+    <li>
+      <span class="num">1</span>
+      <div class="content">
+        <div class="title">🎤 发音清晰 — 与生俱来的优势（3月26日诊断：发音 6.0）</div>
+        <div class="desc">3月26日口语诊断评估明确指出：<em>"你的英语发音清晰，基础交流较为顺畅"</em>、<em>"考官能毫不费力地听懂你的意思"</em>——发音单项已稳定在 6.0 水平（诊断报告：<strong>Pronunciation 6.0</strong>）。清晰的发音给考官留下立竿见影的正面印象，这是 Allison 最稳定的得分项，也是她从第一节课就具备的核心武器。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">2</span>
+      <div class="content">
+        <div class="title">🧩 B2 语块运用 — 从第一节课就开始积累（始于 3月3日）</div>
+        <div class="desc">3月3日首次课程即引入 B2 级语块训练，包括 <span class="chunk">"I'm not an expert in this topic"</span>（遇到难题的完美铺垫）、<span class="chunk">"Actually I'm not sure, cuz you know, I've never been there"</span>（真实回应替代瞎编）。持续积累至 6月，已掌握大量地道表达：<span class="chunk">"how should I put it"</span>、<span class="chunk">"please allow me a few seconds to gather my thoughts"</span>。语块让思考间隙听起来仍然流利，这是 4.5 → 6.0 的关键跃升要素。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">3</span>
+      <div class="content">
+        <div class="title">📐 BEEF 逻辑框架 — 告别无结构回答（3月8日引入）</div>
+        <div class="desc"><strong>B</strong>ackground（背景）→ <strong>E</strong>vent/Evidence（事件/证据）→ <strong>E</strong>xplanation（解释）→ <strong>F</strong>eedback（总结）。3月8日课后笔记已出现叙事框架训练。自此以后，回答不再是一堆零散的句子拼凑，而是有开头、有展开、有收尾的完整叙述。3月26日诊断时流利度仅 5.0-5.5，到 6月考试已构建出结构化的即兴回答能力。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">4</span>
+      <div class="content">
+        <div class="title">🔄 Answer + Detail 肌肉记忆 — 不再蹦单词（3月3日确立规则）</div>
+        <div class="desc">3月3日首课笔记明确写入<em>"回答结构：Answer + Detail，像喝 AD 钙奶一样，有主干回答（入口甘甜）还要有延展（有营养）"</em>。这一核心规则贯穿全部 40+ 节课。Allison 从最初容易中翻英导致卡顿（Curriculum 诊断：<em>"学生极度缺乏词汇储备，容易在脑海里先中翻英再输出，导致严重卡顿和结巴"</em>），到如今每个回答都自然附带细节和原因。这一习惯转变是质的突破。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">5</span>
+      <div class="content">
+        <div class="title">🤝 自然的对话感 — 考官听到的是"人"不是"考生"（6月7日已成熟）</div>
+        <div class="desc">6月7日课程笔记显示她已能自如使用话语标记词：<span class="chunk">"First of all, let me tell you more about..."</span>、<span class="chunk">"When it comes to..."</span>、<span class="chunk">"In terms of..."</span>。生动的叙事结构（<span class="chunk">"And I was like..."</span>）展现了自然的对话节奏。考官感受到的是和一个真实的人在聊天，不是面对一个背模板的考生——这是 4.5 分考生最缺乏的临场交流感。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">6</span>
+      <div class="content">
+        <div class="title">📝 四步复习法 — 学习习惯的系统化（3月建立）</div>
+        <div class="desc"><strong>Compose（创作）→ Polish（打磨，借助 DynaSaurus AI）→ Record（录音）→ Analyse/Rinse（分析/重来）。</strong> 3月课程体系建立后，每次作业都遵循这套闭环。她不只是"学习"——她输出、打磨、录音、改进。每一次循环都在建立口腔肌肉记忆。RUA 词汇学习法（Recognize → Understand → Apply，3月5日课程引入）则确保了词汇从"死记硬背"变为"能听懂、能说出的真词汇"。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">7</span>
+      <div class="content">
+        <div class="title">🆘 拖延与缓冲技巧 — 用优雅替代沉默（3月3日即开始训练）</div>
+        <div class="desc">3月3日首课即引入"救命拖延词 (Stalling)"：<span class="chunk">"Well, actually..."</span>、<span class="chunk">"You know..."</span>。3月26日诊断报告提供了完整的"救场技巧"章节：<span class="chunk">"Well, let me think about that for a second..."</span>、<span class="chunk">"How should I put this..."</span>、<span class="chunk">"The name is on the tip of my tongue"</span>。这些技巧让 Allison 在突然卡壳时不再尴尬沉默，而是用自然的英语填充思考间隙。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">8</span>
+      <div class="content">
+        <div class="title">📊 词汇量质的飞跃 — 从基础 4.5 级到 B2+ 词汇（3月→6月对比）</div>
+        <div class="desc">3月诊断词汇单项仅 5.0，且课程规划指出<em>"学生极度缺乏词汇储备"</em>。6月课程中已能使用以下高级表达：</div>
+        <div class="vocab-showcase" style="margin-top:6px">
+          <span class="vocab-tag">breathtaking / spectacular / picturesque</span>
+          <span class="vocab-tag">a tranquil / an idyllic place</span>
+          <span class="vocab-tag">detox from city life</span>
+          <span class="vocab-tag">immersed in nature</span>
+          <span class="vocab-tag">burning the candle at both ends</span>
+          <span class="vocab-tag">heated discussion / make a scene</span>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Section 3: Listening Issues -->
+<div class="section-card">
+  <div class="emoji">🔍</div>
+  <h2>Listening · 听力 5 分原因分析</h2>
+  <div class="meta">3月课程规划 (Curriculum) 已有预判 · 5月10日课后反馈确认 · 需要正视的短板</div>
+
+  <ul class="fail-list">
+    <li>
+      <span class="num">1</span>
+      <div class="content">
+        <div class="title">🔤 拼写能力极弱 — 最根本的失分原因（3月 Curriculum 明确指出）</div>
+        <div class="desc">课程规划中明确诊断：<em>"学生基础拼写能力极弱"</em>。5月10日课后反馈进一步证实：<em>"在拼写输出环节，明显暴露出'发音与拼写脱节'的现象，例如将 stream 的元音组合错拼，以及未能识别出 data 的英式发音"</em>。她可以听出单词却不能正确拼写。在 Section 1-4 的填空题中 <strong>拼写必须精确</strong>，IELTS 对拼写零容忍——一个字母错误即零分。这不是听力问题，而是<em>拼写输出能力</em>拖累了听力分数。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">2</span>
+      <div class="content">
+        <div class="title">🔗 连读盲区 — 只在教科书上见过英语（3月 Curriculum 预判）</div>
+        <div class="desc">课程规划中早已识别：<em>"对单词的连读（如 consonant-vowel linking）毫无概念，容易因听不懂而走神"</em>。自然语速中单词会连读合并，如 <span class="chunk">"Good afternoon"</span> 实际听感是 <span class="chunk">"Goo-dafternoon"</span>。3月26日笔记详细收录了音变分析：同类音消失、极弱读与鼻腔爆破（如 and 在 "a hundred and seventy" 中弱读至极）。她预期的是教科书式的独立发音，而真实英语并非如此。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">3</span>
+      <div class="content">
+        <div class="title">📖 听力词汇远小于阅读词汇 — 耳朵跟不上眼睛（RUA 词汇法的核心洞察）</div>
+        <div class="desc">3月5日课程引入 RUA 词汇学习法（Recognize → Understand → Apply），核心原理是<em>"建立音、形、义的快速神经反射"</em>。3月26日课上进一步强调：<em>"听不懂并不是因为词汇生僻，有时是因为发音融合导致大脑无法按字面拼写去识别"</em>。她的阅读词汇量远大于听力词汇量。需要在"耳-脑"之间建立直接连接——认识一个词却无法在自然语速中听出来，这个词就是无效词汇。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">4</span>
+      <div class="content">
+        <div class="title">🏛️ Section 4 学术讲座崩溃 — 30秒后失去方向（课程规划第三阶段目标）</div>
+        <div class="desc">Curriculum 第三阶段（6月中旬启动）目标专门针对此问题：<em>"Part 3 & 4 学术场景突破（教育、环保、科技等讲座）"</em>，并明确预测了难点：<em>"面对语速极快、生词密集的学术讲座时，容易心态崩溃导致连环漏题"</em>。缺乏预测能力（审题预判），在开始 30 秒后就迷失方向。不知道什么样的信息即将出现，就像在大海中游泳却没有指南针。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">5</span>
+      <div class="content">
+        <div class="title">🔄 同义替换识别不足 — 只听原词，不听意思（5月10日错题分析确认）</div>
+        <div class="desc">5月10日课程实战错题复盘揭示：听力原文中的 <span class="chunk">"visitor"</span> 对应卷面上的 <span class="chunk">"tourist"</span>，这种基础同义替换未能迅速反应。IELTS 听力极少使用题目原文中的精确词汇。她习惯于听具体的词而非<strong>理解含义</strong>。例如：在等 <span class="chunk">"disaster"</span> 这个词时，说话者说的是 <span class="chunk">"catastrophe"</span>。需要训练以意义为单位的听力，而非以单词为单位的匹配。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">6</span>
+      <div class="content">
+        <div class="title">📝 边听边写的错误习惯 — 注意力分裂（3月26日精听四步法试图纠正）</div>
+        <div class="desc">3月26日课程引入精听四步法——盲听 → 比对 → 音变分析 → 影子跟读，旨在训练集中注意力抓取关键信息而非试图记录一切。她仍倾向于试图写下所有内容，而非专注于抓取<strong>关键路标词</strong>，如 <span class="chunk">"however"</span>、<span class="chunk">"the main reason is..."</span>、<span class="chunk">"let me turn to..."</span>。听力中写字会分散注意力。解决之道：少写，多听，抓住路标。</div>
+      </div>
+    </li>
+    <li>
+      <span class="num">7</span>
+      <div class="content">
+        <div class="title">⏱️ Section 3 多人对话混乱 — 无法追踪谁说了什么</div>
+        <div class="desc">面对 2-3 个说话者时，无法追踪每个人的观点归属。匹配题——需要将观点归因给特定说话者——尤其困难。需要训练通过音高、语速、口音线索进行<strong>说话者识别</strong>的能力。你越早意识到说话者是谁，你的答题就越精准。</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Section 4: Action Plan -->
+<div class="section-card">
+  <div class="emoji">🎯</div>
+  <h2>Action Plan · 听力 5 → 6 行动计划</h2>
+  <div class="meta">6 priorities · Daily practice · Target: 6.0 within 6 weeks</div>
+
+  <!-- Priority 1 -->
+  <div class="priority-card">
+    <div class="priority-header">
+      <span class="priority-badge p1">Priority 1</span>
+      <h3>🔤 Spelling Boot Camp · 拼写集训</h3>
+      <span style="font-size:12px;color:var(--sub);margin-left:auto">Daily · 15 min</span>
+    </div>
+    <div class="fix-block">
+      <h4>The Problem</h4>
+      <p>能听懂但拼不对。IELTS 听力对拼写零容忍 — 一个字母错误即零分。</p>
+    </div>
+    <div class="fix-block">
+      <h4>The Fix</h4>
+      <p>
+        • 使用 <strong>807 IELTS Listening Vocabulary</strong> 词表（已在教学资源库中）<br>
+        • 训练方法：听 → 写 → 检查 → 错词重写 5 遍<br>
+        • 重点攻克高频拼写陷阱词：<em>accommodation, committee, environment, February, Wednesday, necessary, government, definitely, separate, opportunity</em><br>
+        • <strong>每日听写 App：</strong>Quizlet 或 Anki，正面放音频，背面放拼写。每天 20 个词<br>
+        • <strong>每周拼写测试：</strong>每周日测试本周 50 个词，目标正确率 90%+
+      </p>
+    </div>
+  </div>
+
+  <!-- Priority 2 -->
+  <div class="priority-card">
+    <div class="priority-header">
+      <span class="priority-badge p2">Priority 2</span>
+      <h3>🔗 Connected Speech Training · 连读训练</h3>
+      <span style="font-size:12px;color:var(--sub);margin-left:auto">Daily · 10 min</span>
+    </div>
+    <div class="fix-block">
+      <h4>The Problem</h4>
+      <p>单词在自然语速中连读合并，变成无法识别的"新词"。</p>
+    </div>
+    <div class="fix-block">
+      <h4>The Fix</h4>
+      <p>
+        • <strong>影子跟读 + 文本对照：</strong>用 Cambridge IELTS 音频 0.75x 速度播放，同步阅读 transcript，标记连读处：<span class="chunk">"a lot‿of"</span>, <span class="chunk">"kind‿of"</span>, <span class="chunk">"there‿is"</span><br>
+        • <strong>连读短语听写：</strong>听 2 句短音频，精确写出每个单词（含连读部分）。使用 BBC 6 Minute English 播客（免费提供 transcript）<br>
+        • <strong>最小对立体训练：</strong>bit/beat, ship/sheep, full/fool — 这些细微音差是听力精确度的关键<br>
+        • <strong>推荐资源：</strong>BBC Learning English <em>"The Sounds of English"</em> + <em>"Tim's Pronunciation Workshop"</em>（全部免费）
+      </p>
+    </div>
+  </div>
+
+  <!-- Priority 3 -->
+  <div class="priority-card">
+    <div class="priority-header">
+      <span class="priority-badge p3">Priority 3</span>
+      <h3>📖 Listening Vocabulary Activation · 听力词汇激活</h3>
+      <span style="font-size:12px;color:var(--sub);margin-left:auto">Daily · 15 min</span>
+    </div>
+    <div class="fix-block">
+      <h4>The Problem</h4>
+      <p>眼睛认识的词汇远远多于耳朵认识的词汇。"识字"不等于"识音"。</p>
+    </div>
+    <div class="fix-block">
+      <h4>The Fix</h4>
+      <p>
+        • <strong>AUDIO-FIRST 原则：</strong>永远不要先看再听。先听 3 遍 → 再看到拼写 → 再跟读 → 再听例句 → 最后自己造句<br>
+        • <strong>按话题分组学词：</strong>Accommodation, Travel, Education, Work, Environment, Health。每周 1 个话题<br>
+        • <strong>Active Listening Journal：</strong>每次练习中漏听的词，记录在日志中（含上下文原句）。每周复习一次
+      </p>
+    </div>
+  </div>
+
+  <!-- Priority 4 -->
+  <div class="priority-card">
+    <div class="priority-header">
+      <span class="priority-badge p2">Priority 4</span>
+      <h3>🏛️ Section 4 Strategy · 学术讲座策略</h3>
+      <span style="font-size:12px;color:var(--sub);margin-left:auto">2x / week</span>
+    </div>
+    <div class="fix-block">
+      <h4>The Problem</h4>
+      <p>Section 4 学术讲座 30 秒后就迷路，缺乏预测和结构意识。</p>
+    </div>
+    <div class="fix-block">
+      <h4>The Fix</h4>
+      <p>
+        • <strong>Pre-Listening Prediction：</strong>播放前 30–45 秒阅读所有题目，划出关键词，预判每个空需要什么类型的词（名词？数字？形容词？地名？）<br>
+        • <strong>BEEF 结构识别：</strong>前 30 秒永远是 Background（别急着找答案 — 先理解上下文）。然后逐步进入 Evidence → Explanation → Feedback<br>
+        • <strong>信号词训练：</strong>训练耳朵识别：<span class="chunk">"I'll start by..."</span>, <span class="chunk">"Let me turn to..."</span>, <span class="chunk">"However..."</span>, <span class="chunk">"The main reason is..."</span>, <span class="chunk">"For example..."</span>, <span class="chunk">"In conclusion..."</span><br>
+        • <strong>练习流程：</strong>每周 2 篇 Section 4。第一遍：正常做题。第二遍：读 transcript，标出所有信号词。第三遍：再听，在信号词处暂停确认
+      </p>
+    </div>
+  </div>
+
+  <!-- Priority 5 -->
+  <div class="priority-card">
+    <div class="priority-header">
+      <span class="priority-badge p3">Priority 5</span>
+      <h3>📝 Note-Taking Reform · 笔记方式改革</h3>
+      <span style="font-size:12px;color:var(--sub);margin-left:auto">Weekly</span>
+    </div>
+    <div class="fix-block">
+      <h4>The Problem</h4>
+      <p>试图在听力过程中写下完整单词和句子，分散注意力。</p>
+    </div>
+    <div class="fix-block">
+      <h4>The Fix</h4>
+      <p>
+        • <strong>全部用缩写：</strong>gov't, env't, comm'n, dept, w/, b/c, w/o, &, →, ↑, ↓。发展你自己的速记系统<br>
+        • <strong>只记关键词</strong>，不记完整句子<br>
+        • <strong>利用 30 秒检查时间：</strong>将缩写补全为正确拼写<br>
+        • <strong>用 TED Talks 练习：</strong>选 3–5 分钟片段，边听边记缩写笔记，然后与 transcript 对比
+      </p>
+    </div>
+  </div>
+
+  <!-- Priority 6: Tracking -->
+  <div class="priority-card" style="background:#fff;border-color:var(--accent2)">
+    <div class="priority-header">
+      <span class="priority-badge" style="background:var(--accent2);color:#fff">Priority 6</span>
+      <h3>📊 Weekly Progress Tracking · 进度追踪表</h3>
+    </div>
+    <table class="track-table">
+      <tr><th>Week</th><th>Focus</th><th>Test</th><th>Target</th></tr>
+      <tr><td>1</td><td>Spelling Boot Camp</td><td>50-word dictation</td><td class="target-cell">&gt;80%</td></tr>
+      <tr><td>2</td><td>Connected Speech</td><td>Shadow reading accuracy</td><td class="target-cell">15min non-stop</td></tr>
+      <tr><td>3</td><td>Section 4 Prediction</td><td>2 full Section 4 tests</td><td class="target-cell">&gt;50% correct</td></tr>
+      <tr><td>4</td><td>Combined Review</td><td>Full listening test</td><td class="target-cell">Target 5.5</td></tr>
+      <tr><td>5–6</td><td>Weak Points Fix</td><td>Focused practice</td><td class="target-cell">→ 6.0 🎯</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- Section 5: Why She Will Succeed -->
+<div class="why-succeed">
+  <h3>💪 Why Allison Will Succeed · 为什么她能行</h3>
+  <ul style="list-style:none;padding:0">
+    <li><strong>🎤</strong> 发音优势带来了自信 — 这是很多考生可望不可即的天赋</li>
+    <li><strong>📝</strong> 已经建立了强大的学习习惯（四步复习法）</li>
+    <li><strong>⏰</strong> 40+ 节课的坚持证明了她的承诺和韧性</li>
+    <li><strong>📈</strong> 口语从 4.5 到 6.0（+1.5 分）的成功证明了她<em>可以</em>大幅进步</li>
+    <li><strong>🎯</strong> 听力是她通往总分 6.0 的最后一道关卡 — 攻克它，她就赢了</li>
+  </ul>
+  <p style="font-size:13px;color:#047857;margin-top:12px;font-style:italic">
+    听力从 5.0 到 6.0 的差距不靠天赋，不靠智商，靠的是<strong>精准的刻意练习</strong>。Allison 已经用口语 +1.5 分的成绩证明了她具备刻意练习的能力。同样的方法、同样的自律、同样的 4 个月时间，用在听力上，加上针对性的方法，她一定能到达 6.0。
+  </p>
+</div>
+
+<footer>
+  <p class="brand">rkrk.io Student Report</p>
+  <p>Allison · June 2026 · Kee Lee</p>
+  <p style="margin-top:4px">rkrk@me.com · WeChat: keedahooman</p>
+</footer>
+
+</div>
+</body>
+</html>
