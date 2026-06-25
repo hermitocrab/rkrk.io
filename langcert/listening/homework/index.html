@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>书羽的听力作业 — LangCert Listening</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --font-en:'Inter',-apple-system,sans-serif;
+  --font-cn:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --green:#22c55e;
+  --green-light:#dcfce7;
+  --blue:#3b82f6;
+  --blue-light:#dbeafe;
+  --orange:#f59e0b;
+  --orange-light:#fef3c7;
+  --gray-50:#f9fafb;
+  --gray-100:#f3f4f6;
+  --gray-200:#e5e7eb;
+  --gray-300:#d1d5db;
+  --gray-400:#9ca3af;
+  --gray-600:#4b5563;
+  --gray-700:#374151;
+  --gray-800:#1f2937;
+}
+html{font-size:16px}
+body{
+  font-family:var(--font-cn);
+  background:#fff;
+  color:var(--gray-800);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  min-height:100dvh
+}
+.container{max-width:720px;margin:0 auto;padding:0 20px}
+
+/* Header */
+header{
+  text-align:center;
+  padding:32px 20px 20px;
+  border-bottom:1px solid var(--gray-100)
+}
+header h1{
+  font-size:1.5rem;
+  font-weight:700;
+  color:var(--gray-800);
+  font-family:var(--font-cn)
+}
+header .subtitle{
+  font-size:.95rem;
+  color:var(--gray-400);
+  margin-top:4px;
+  font-family:var(--font-en);
+  font-weight:400
+}
+header .student-name{
+  display:inline-block;
+  background:var(--blue-light);
+  color:var(--blue);
+  padding:4px 16px;
+  border-radius:20px;
+  font-size:.85rem;
+  font-weight:600;
+  margin-top:12px
+}
+
+/* Progress Bar */
+.progress-section{padding:24px 20px 0}
+.progress-label{
+  font-size:.85rem;
+  color:var(--gray-400);
+  margin-bottom:12px;
+  text-align:center
+}
+.progress-bar-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  position:relative
+}
+.progress-bar-container::before{
+  content:'';
+  position:absolute;
+  top:28px;
+  left:0;
+  right:0;
+  height:3px;
+  background:var(--gray-200);
+  z-index:0
+}
+.progress-step{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  z-index:1;
+  flex:1;
+  cursor:pointer;
+  transition:transform .2s
+}
+.progress-step:active{transform:scale(.95)}
+.progress-step .step-icon{
+  width:56px;height:56px;
+  border-radius:50%;
+  background:var(--gray-100);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.5rem;
+  border:3px solid var(--gray-200);
+  transition:all .3s
+}
+.progress-step.completed .step-icon{
+  background:var(--green-light);
+  border-color:var(--green)
+}
+.progress-step.active .step-icon{
+  background:var(--blue-light);
+  border-color:var(--blue);
+  box-shadow:0 0 0 4px rgba(59,130,246,.15)
+}
+.progress-step.locked .step-icon{
+  opacity:.4
+}
+.progress-step .step-label{
+  font-size:.72rem;
+  color:var(--gray-400);
+  text-align:center;
+  font-weight:500
+}
+.progress-step.active .step-label{
+  color:var(--blue);
+  font-weight:700
+}
+.progress-step.completed .step-label{
+  color:var(--green);
+  font-weight:600
+}
+.progress-step .step-num{
+  font-size:.65rem;
+  color:var(--gray-400)
+}
+
+/* Lesson Card */
+.lesson-section{padding:28px 20px}
+.lesson-card{
+  background:#fff;
+  border:1px solid var(--gray-200);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 1px 3px rgba(0,0,0,.04)
+}
+.lesson-header{
+  padding:20px 24px;
+  background:var(--gray-50);
+  border-bottom:1px solid var(--gray-100)
+}
+.lesson-header h2{
+  font-size:1.2rem;
+  font-weight:700;
+  font-family:var(--font-cn)
+}
+.lesson-header .lesson-emoji{font-size:1.5rem;vertical-align:middle}
+
+/* Tab status pills */
+.tab-status{
+  padding:12px 24px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  border-bottom:1px solid var(--gray-100)
+}
+.tab-status .pill{
+  font-size:.78rem;
+  padding:4px 12px;
+  border-radius:12px;
+  font-weight:500;
+  background:var(--gray-100);
+  color:var(--gray-400)
+}
+.tab-status .pill.done{
+  background:var(--green-light);
+  color:var(--green)
+}
+
+/* Tabs */
+.tabs-nav{
+  display:flex;
+  border-bottom:1px solid var(--gray-100)
+}
+.tab-btn{
+  flex:1;
+  padding:14px 8px;
+  border:none;
+  background:none;
+  font-size:.88rem;
+  font-weight:600;
+  font-family:var(--font-cn);
+  color:var(--gray-400);
+  cursor:pointer;
+  transition:all .2s;
+  position:relative;
+  min-height:48px
+}
+.tab-btn.active{
+  color:var(--blue)
+}
+.tab-btn.active::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:20%;right:20%;
+  height:3px;
+  background:var(--blue);
+  border-radius:2px
+}
+.tab-content{display:none;padding:24px}
+.tab-content.active{display:block}
+
+/* === TAB 1: Scene Words === */
+.scene-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px
+}
+@media(max-width:480px){.scene-grid{grid-template-columns:1fr}}
+.flashcard{
+  perspective:600px;
+  height:140px;
+  cursor:pointer;
+  min-height:48px
+}
+.flashcard-inner{
+  position:relative;
+  width:100%;height:100%;
+  transition:transform .4s;
+  transform-style:preserve-3d
+}
+.flashcard.flipped .flashcard-inner{transform:rotateY(180deg)}
+.flashcard-front,.flashcard-back{
+  position:absolute;
+  width:100%;height:100%;
+  backface-visibility:hidden;
+  border-radius:12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  text-align:center
+}
+.flashcard-front{
+  background:var(--blue-light);
+  border:2px solid rgba(59,130,246,.15)
+}
+.flashcard-back{
+  background:var(--green-light);
+  border:2px solid rgba(34,197,94,.15);
+  transform:rotateY(180deg)
+}
+.flashcard .cn-word{
+  font-size:1.1rem;
+  font-weight:700;
+  color:var(--gray-800);
+  font-family:var(--font-cn)
+}
+.flashcard .en-word{
+  font-size:1.2rem;
+  font-weight:700;
+  color:var(--green);
+  font-family:var(--font-en)
+}
+.flashcard .hint{
+  font-size:.72rem;
+  color:var(--gray-400);
+  margin-top:4px
+}
+.flashcard .example{
+  font-size:.78rem;
+  color:var(--gray-600);
+  margin-top:6px;
+  font-family:var(--font-en);
+  font-style:italic
+}
+
+/* === TAB 2: Discourse Markers === */
+.dm-intro{
+  font-size:.9rem;
+  color:var(--gray-600);
+  margin-bottom:16px
+}
+.dm-toggle-btn{
+  display:inline-block;
+  padding:10px 20px;
+  background:var(--orange-light);
+  color:var(--orange);
+  border:2px solid rgba(245,158,11,.2);
+  border-radius:8px;
+  font-size:.9rem;
+  font-weight:600;
+  font-family:var(--font-cn);
+  cursor:pointer;
+  margin-bottom:20px;
+  min-height:48px;
+  transition:all .2s
+}
+.dm-toggle-btn:active{transform:scale(.97)}
+.dm-item{
+  background:var(--gray-50);
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:12px
+}
+.dm-item .dm-word{
+  font-size:1.1rem;
+  font-weight:700;
+  color:var(--orange);
+  font-family:var(--font-en);
+  margin-bottom:4px
+}
+.dm-item .dm-explain{
+  font-size:.85rem;
+  color:var(--gray-600)
+}
+.dialogue-box{
+  background:var(--gray-50);
+  border-radius:12px;
+  padding:20px;
+  margin-top:16px;
+  font-family:var(--font-en);
+  line-height:2
+}
+.dialogue-box .line{
+  padding:6px 0;
+  font-size:1rem
+}
+.dialogue-box .line .speaker{
+  font-weight:700;
+  color:var(--gray-400);
+  margin-right:8px;
+  font-size:.8rem
+}
+.dialogue-box .dm-highlight{
+  background:var(--orange-light);
+  color:var(--orange);
+  padding:1px 6px;
+  border-radius:4px;
+  font-weight:700
+}
+
+/* === TAB 3: Intensive Listening === */
+.il-intro{
+  font-size:.9rem;
+  color:var(--gray-600);
+  margin-bottom:20px;
+  line-height:1.8
+}
+.il-controls{
+  display:flex;
+  gap:12px;
+  margin-bottom:24px;
+  flex-wrap:wrap;
+  align-items:center
+}
+.il-btn{
+  padding:12px 24px;
+  border:none;
+  border-radius:10px;
+  font-size:.95rem;
+  font-weight:600;
+  font-family:var(--font-cn);
+  cursor:pointer;
+  min-height:48px;
+  transition:all .2s;
+  display:flex;
+  align-items:center;
+  gap:8px
+}
+.il-btn:active{transform:scale(.97)}
+.il-btn.primary{
+  background:var(--blue);
+  color:#fff
+}
+.il-btn.secondary{
+  background:var(--gray-100);
+  color:var(--gray-700)
+}
+.speed-toggle{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:.85rem;
+  color:var(--gray-600);
+  cursor:pointer;
+  user-select:none;
+  min-height:48px;
+  padding:8px 12px
+}
+.speed-toggle input{display:none}
+.speed-slider{
+  width:48px;height:28px;
+  background:var(--gray-300);
+  border-radius:14px;
+  position:relative;
+  transition:background .2s
+}
+.speed-slider::after{
+  content:'';
+  position:absolute;
+  top:3px;left:3px;
+  width:22px;height:22px;
+  background:#fff;
+  border-radius:50%;
+  transition:transform .2s
+}
+.speed-toggle input:checked+.speed-slider{
+  background:var(--orange)
+}
+.speed-toggle input:checked+.speed-slider::after{
+  transform:translateX(20px)
+}
+.il-line{
+  background:var(--gray-50);
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:12px;
+  transition:background .2s
+}
+.il-line.done{background:var(--green-light)}
+.il-line-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px
+}
+.il-line-num{
+  font-size:.75rem;
+  color:var(--gray-400);
+  font-weight:600;
+  min-width:28px
+}
+.il-play-btn{
+  width:44px;height:44px;
+  border-radius:50%;
+  border:2px solid var(--gray-300);
+  background:#fff;
+  cursor:pointer;
+  font-size:1rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:all .2s;
+  min-height:44px
+}
+.il-play-btn:hover{border-color:var(--blue);background:var(--blue-light)}
+.il-play-btn.playing{border-color:var(--blue);background:var(--blue);color:#fff}
+.il-line .il-text-input{
+  width:100%;
+  padding:12px 16px;
+  border:2px solid var(--gray-200);
+  border-radius:10px;
+  font-size:1rem;
+  font-family:var(--font-en);
+  margin-bottom:10px;
+  transition:border-color .2s;
+  min-height:48px
+}
+.il-line .il-text-input:focus{
+  outline:none;
+  border-color:var(--blue)
+}
+.il-line .il-reveal-btn{
+  padding:8px 16px;
+  border:1px solid var(--gray-300);
+  background:#fff;
+  border-radius:8px;
+  font-size:.85rem;
+  font-family:var(--font-cn);
+  cursor:pointer;
+  color:var(--gray-600);
+  min-height:44px;
+  transition:all .2s
+}
+.il-line .il-reveal-btn:active{transform:scale(.97)}
+.il-line .il-answer{
+  margin-top:10px;
+  padding:12px 16px;
+  background:#fff;
+  border:1px solid var(--green);
+  border-radius:10px;
+  font-size:1rem;
+  font-family:var(--font-en);
+  color:var(--green);
+  font-weight:500
+}
+.il-line .il-speaker{
+  font-size:.75rem;
+  color:var(--gray-400);
+  font-weight:600;
+  margin-left:auto
+}
+
+/* Unlock */
+.unlock-msg{
+  text-align:center;
+  padding:32px 24px
+}
+.unlock-msg .unlock-emoji{font-size:3rem}
+.unlock-msg h3{
+  font-size:1.2rem;
+  margin:12px 0 8px;
+  font-family:var(--font-cn)
+}
+.unlock-msg p{
+  font-size:.9rem;
+  color:var(--gray-400)
+}
+
+/* Locked Lesson */
+.lesson-locked{
+  text-align:center;
+  padding:40px 24px;
+  color:var(--gray-400)
+}
+.lesson-locked .lock-icon{font-size:2.5rem}
+.lesson-locked p{font-size:.95rem;margin-top:8px}
+
+/* Footer */
+footer{
+  text-align:center;
+  padding:40px 20px;
+  color:var(--gray-400);
+  font-size:.8rem;
+  border-top:1px solid var(--gray-100);
+  margin-top:20px
+}
+
+/* Print */
+@media print{
+  .il-controls,.il-play-btn,.il-reveal-btn,.il-text-input,.tabs-nav,.tab-btn,
+  .dm-toggle-btn,.progress-section,.tab-status,footer,header,.flashcard{display:none!important}
+  .il-answer{display:block!important}
+  .tab-content{display:block!important;break-inside:avoid}
+  .lesson-card{border:none!important;box-shadow:none!important}
+  body{font-size:14px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>书羽的听力作业</h1>
+  <div class="subtitle">LangCert Listening Homework</div>
+  <div class="student-name">📚 A2 → B1 阶梯训练</div>
+</header>
+
+<div class="progress-section">
+  <div class="progress-label">点击圆圈跳转到对应课程</div>
+  <div class="progress-bar-container" id="progressBar">
+    <div class="progress-step active" data-lesson="1">
+      <div class="step-icon">☀️</div>
+      <div class="step-label">第1课</div>
+      <div class="step-num">L1</div>
+    </div>
+    <div class="progress-step locked" data-lesson="2">
+      <div class="step-icon">🎬</div>
+      <div class="step-label">第2课</div>
+      <div class="step-num">L2</div>
+    </div>
+    <div class="progress-step locked" data-lesson="3">
+      <div class="step-icon">🍕</div>
+      <div class="step-label">第3课</div>
+      <div class="step-num">L3</div>
+    </div>
+    <div class="progress-step locked" data-lesson="4">
+      <div class="step-icon">🗺️</div>
+      <div class="step-label">第4课</div>
+      <div class="step-num">L4</div>
+    </div>
+    <div class="progress-step locked" data-lesson="5">
+      <div class="step-icon">🎮</div>
+      <div class="step-label">第5课</div>
+      <div class="step-num">L5</div>
+    </div>
+  </div>
+</div>
+
+<div class="lesson-section" id="lessonSection"></div>
+
+<footer>
+  Made for 书羽 · 一步一步来，你能行的 💪
+</footer>
+
+</div>
+
+<script>
+// ===== DATA =====
+const LESSONS = {
+  1: {
+    title: 'Morning Routine',
+    emoji: '☀️',
+    cnTitle: '早晨日常',
+    sceneWords: [
+      {cn:'醒来',en:'wake up',ex:'I think I wake up at seven.'},
+      {cn:'早餐',en:'breakfast',ex:'I think breakfast is important.'},
+      {cn:'茶',en:'tea',ex:'I think I like tea.'},
+      {cn:'早上',en:'morning',ex:'I think the morning is nice.'},
+      {cn:'淋浴',en:'shower',ex:'I think I take a shower every day.'},
+      {cn:'学校',en:'school',ex:'I think school is not far.'},
+      {cn:'离开',en:'leave',ex:'I think I leave at eight.'},
+      {cn:'早的',en:'early',ex:'I think it is too early.'},
+    ],
+    markers: [
+      {word:'but',explain:'表示"但是"，引出不同的情况。比如 "I like tea, but I don\'t like coffee."（我喜欢茶，但是我不喜欢咖啡。）'},
+      {word:'so',explain:'表示"所以"，说明结果。比如 "I am hungry, so I eat."（我饿了，所以我吃东西。）'},
+    ],
+    lines: [
+      {speaker:'Jenny',text:'Good morning! Did you sleep well?'},
+      {speaker:'Guy',text:'Yes, I did. I woke up at seven.'},
+      {speaker:'Jenny',text:'That\'s early. Do you eat breakfast?'},
+      {speaker:'Guy',text:'Yes, I have tea and bread.'},
+      {speaker:'Jenny',text:'I just have coffee. Then I take a shower.'},
+      {speaker:'Guy',text:'Me too. Then I go to school.'},
+      {speaker:'Jenny',text:'What time do you leave?'},
+      {speaker:'Guy',text:'I leave at eight.'},
+    ],
+    highlightedText: [
+      'Good morning! Did you sleep well?',
+      'Yes, I did. I woke up at seven.',
+      'That\'s early. Do you eat breakfast?',
+      'Yes, I have tea and bread.',
+      'I just have coffee. Then I take a shower.',
+      'Me too. Then I go to school.',
+      'What time do you leave?',
+      'I leave at eight.',
+    ]
+  },
+  2: {
+    title: 'Weekend Plans',
+    emoji: '🎬',
+    cnTitle: '周末计划',
+    sceneWords: [
+      {cn:'周末',en:'weekend',ex:'I think the weekend is fun.'},
+      {cn:'电影',en:'movie',ex:'I think this movie is good.'},
+      {cn:'午餐',en:'lunch',ex:'I think we can have lunch.'},
+      {cn:'空闲的',en:'free',ex:'I think I am free today.'},
+      {cn:'忙碌的',en:'busy',ex:'I think she is busy now.'},
+      {cn:'公园',en:'park',ex:'I think the park is beautiful.'},
+      {cn:'见面',en:'meet',ex:'I think we can meet at twelve.'},
+      {cn:'天气',en:'weather',ex:'I think the weather is good.'},
+    ],
+    markers: [
+      {word:'actually',explain:'表示"其实、实际上"。用来纠正或补充信息。比如 "I don\'t like tea. Actually, I like coffee."（我不喜欢茶。其实，我喜欢咖啡。）'},
+      {word:'maybe',explain:'表示"也许、可能"。用来提出建议。比如 "Maybe we can go to the park."（也许我们可以去公园。）'},
+      {word:'so',explain:'表示"所以"，连接原因和结果。'},
+    ],
+    lines: [
+      {speaker:'Jenny',text:'Are you free this weekend?'},
+      {speaker:'Guy',text:'Yes, I am. What do you want to do?'},
+      {speaker:'Jenny',text:'Maybe we can watch a movie?'},
+      {speaker:'Guy',text:'Actually, I want to go to the park.'},
+      {speaker:'Jenny',text:'The park? That sounds nice.'},
+      {speaker:'Guy',text:'The weather is good. We can have lunch there.'},
+      {speaker:'Jenny',text:'Good idea. What time should we meet?'},
+      {speaker:'Guy',text:'How about twelve o\'clock?'},
+      {speaker:'Jenny',text:'Okay. See you at the park at twelve.'},
+      {speaker:'Guy',text:'See you then!'},
+    ],
+    highlightedText: [
+      'Are you free this weekend?',
+      'Yes, I am. What do you want to do?',
+      '<span class="dm-highlight">Maybe</span> we can watch a movie?',
+      '<span class="dm-highlight">Actually</span>, I want to go to the park.',
+      'The park? That sounds nice.',
+      'The weather is good. We can have lunch there.',
+      'Good idea. What time should we meet?',
+      'How about twelve o\'clock?',
+      'Okay. See you at the park at twelve.',
+      'See you then!',
+    ]
+  },
+  3: {
+    title: 'At a Restaurant',
+    emoji: '🍕',
+    cnTitle: '在餐厅',
+    sceneWords: [
+      {cn:'菜单',en:'menu',ex:'I think the menu is on the table.'},
+      {cn:'点菜',en:'order',ex:'I think I will order chicken.'},
+      {cn:'鸡肉',en:'chicken',ex:'I think chicken is good.'},
+      {cn:'米饭',en:'rice',ex:'I think I like rice.'},
+      {cn:'饮料',en:'drink',ex:'I think I want a drink.'},
+      {cn:'水',en:'water',ex:'I think water is the best.'},
+      {cn:'账单',en:'bill',ex:'I think we need the bill.'},
+      {cn:'肉',en:'meat',ex:'I think I don\'t eat meat.'},
+    ],
+    markers: [
+      {word:'but',explain:'表示"但是"，对比两种情况。比如 "I like chicken, but I don\'t eat meat."（我喜欢鸡肉，但是我不吃肉。）'},
+      {word:'actually',explain:'表示"其实"，提供新的信息。'},
+      {word:'also',explain:'表示"也"，补充额外信息。比如 "They also have fish."（他们还有鱼。）'},
+    ],
+    lines: [
+      {speaker:'Guy',text:'Here is the menu. What do you want?'},
+      {speaker:'Jenny',text:'I\'m not sure. What looks good?'},
+      {speaker:'Guy',text:'I want the chicken and rice.'},
+      {speaker:'Jenny',text:'That sounds nice, but I don\'t eat meat.'},
+      {speaker:'Guy',text:'Actually, they also have fish.'},
+      {speaker:'Jenny',text:'Okay, I will have the fish.'},
+      {speaker:'Guy',text:'What do you want to drink?'},
+      {speaker:'Jenny',text:'Just water, please.'},
+      {speaker:'Guy',text:'Me too. Can we have the bill after?'},
+      {speaker:'Jenny',text:'Yes, of course.'},
+      {speaker:'Guy',text:'Excuse me, can we have the bill?'},
+      {speaker:'Jenny',text:'Thank you. The food was good.'},
+    ],
+    highlightedText: [
+      'Here is the menu. What do you want?',
+      'I\'m not sure. What looks good?',
+      'I want the chicken and rice.',
+      'That sounds nice, <span class="dm-highlight">but</span> I don\'t eat meat.',
+      '<span class="dm-highlight">Actually</span>, they <span class="dm-highlight">also</span> have fish.',
+      'Okay, I will have the fish.',
+      'What do you want to drink?',
+      'Just water, please.',
+      'Me too. Can we have the bill after?',
+      'Yes, of course.',
+      'Excuse me, can we have the bill?',
+      'Thank you. The food was good.',
+    ]
+  },
+  4: {
+    title: 'Asking for Directions',
+    emoji: '🗺️',
+    cnTitle: '问路',
+    sceneWords: [
+      {cn:'车站',en:'station',ex:'I think the station is near.'},
+      {cn:'左边',en:'left',ex:'I think you turn left here.'},
+      {cn:'右边',en:'right',ex:'I think it is on the right.'},
+      {cn:'直走',en:'straight',ex:'I think you go straight.'},
+      {cn:'附近',en:'near',ex:'I think it is near the park.'},
+      {cn:'超市',en:'supermarket',ex:'I think the supermarket is big.'},
+      {cn:'公交车',en:'bus',ex:'I think I will take a bus.'},
+      {cn:'教堂',en:'church',ex:'I think the church is old.'},
+    ],
+    markers: [
+      {word:'so',explain:'表示"所以"，总结前面说的。比如 "So I go straight and turn left."（所以我直走然后左转。）'},
+      {word:'then',explain:'表示"然后"，说明下一步动作。比如 "Go straight, then turn left."（直走，然后左转。）'},
+      {word:'actually',explain:'表示"其实"，补充说清楚。'},
+    ],
+    lines: [
+      {speaker:'Jenny',text:'Excuse me, where is the train station?'},
+      {speaker:'Guy',text:'It is not far. Go straight down this road.'},
+      {speaker:'Jenny',text:'Straight down this road?'},
+      {speaker:'Guy',text:'Yes. Then turn left at the supermarket.'},
+      {speaker:'Jenny',text:'Left at the supermarket. Okay.'},
+      {speaker:'Guy',text:'After that, you will see a big church.'},
+      {speaker:'Jenny',text:'Is the station near the church?'},
+      {speaker:'Guy',text:'Yes, it is. Actually, it is behind the church.'},
+      {speaker:'Jenny',text:'So I go straight, turn left, and it is behind the church?'},
+      {speaker:'Guy',text:'That\'s right. You can also take a bus.'},
+      {speaker:'Jenny',text:'I think I will walk. Thank you.'},
+      {speaker:'Guy',text:'You\'re welcome. Have a nice day.'},
+      {speaker:'Jenny',text:'Thanks, you too.'},
+      {speaker:'Guy',text:'Bye!'},
+    ],
+    highlightedText: [
+      'Excuse me, where is the train station?',
+      'It is not far. Go straight down this road.',
+      'Straight down this road?',
+      'Yes. <span class="dm-highlight">Then</span> turn left at the supermarket.',
+      'Left at the supermarket. Okay.',
+      'After that, you will see a big church.',
+      'Is the station near the church?',
+      'Yes, it is. <span class="dm-highlight">Actually</span>, it is behind the church.',
+      '<span class="dm-highlight">So</span> I go straight, turn left, and it is behind the church?',
+      'That\'s right. You can also take a bus.',
+      'I think I will walk. Thank you.',
+      'You\'re welcome. Have a nice day.',
+      'Thanks, you too.',
+      'Bye!',
+    ]
+  },
+  5: {
+    title: 'Talking About Hobbies',
+    emoji: '🎮',
+    cnTitle: '聊聊爱好',
+    sceneWords: [
+      {cn:'爱好',en:'hobby',ex:'I think my hobby is reading.'},
+      {cn:'吉他',en:'guitar',ex:'I think the guitar is hard to learn.'},
+      {cn:'音乐',en:'music',ex:'I think music makes me happy.'},
+      {cn:'电子游戏',en:'video games',ex:'I think video games are exciting.'},
+      {cn:'阅读',en:'reading',ex:'I think reading is fun.'},
+      {cn:'有趣的',en:'fun',ex:'I think this is very fun.'},
+      {cn:'学习',en:'learn',ex:'I think I want to learn English.'},
+      {cn:'练习',en:'practice',ex:'I think practice is important.'},
+    ],
+    markers: [
+      {word:'actually',explain:'表示"其实"。用来纠正或强调真实想法。比如 "I prefer video games, actually."（其实我更喜欢电子游戏。）'},
+      {word:'because',explain:'表示"因为"，解释原因。比如 "I like it because it is fun."（我喜欢它因为它很有趣。）'},
+      {word:'but',explain:'表示"但是"，转折。'},
+      {word:'so',explain:'表示"所以"，引出结果。'},
+    ],
+    lines: [
+      {speaker:'Guy',text:'What do you do in your free time?'},
+      {speaker:'Jenny',text:'I like to play the guitar. Do you play?'},
+      {speaker:'Guy',text:'No, but I want to learn. Is it hard?'},
+      {speaker:'Jenny',text:'It is hard at first, but you get better.'},
+      {speaker:'Guy',text:'How long have you played?'},
+      {speaker:'Jenny',text:'About two years. I practice every day.'},
+      {speaker:'Guy',text:'That is a lot. What else do you like?'},
+      {speaker:'Jenny',text:'I also like reading. Books are fun.'},
+      {speaker:'Guy',text:'I prefer video games, actually.'},
+      {speaker:'Jenny',text:'Because they are more exciting?'},
+      {speaker:'Guy',text:'Yes, and I can play with my friends.'},
+      {speaker:'Jenny',text:'That makes sense. Maybe I should try.'},
+      {speaker:'Guy',text:'You should! I can show you some games.'},
+      {speaker:'Jenny',text:'Okay, that sounds fun.'},
+      {speaker:'Guy',text:'Great! Let\'s play this weekend.'},
+      {speaker:'Jenny',text:'I\'m looking forward to it.'},
+    ],
+    highlightedText: [
+      'What do you do in your free time?',
+      'I like to play the guitar. Do you play?',
+      'No, <span class="dm-highlight">but</span> I want to learn. Is it hard?',
+      'It is hard at first, <span class="dm-highlight">but</span> you get better.',
+      'How long have you played?',
+      'About two years. I practice every day.',
+      'That is a lot. What else do you like?',
+      'I also like reading. Books are fun.',
+      'I prefer video games, <span class="dm-highlight">actually</span>.',
+      '<span class="dm-highlight">Because</span> they are more exciting?',
+      'Yes, and I can play with my friends.',
+      'That makes sense. <span class="dm-highlight">Maybe</span> I should try.',
+      'You should! I can show you some games.',
+      'Okay, that sounds fun.',
+      'Great! Let\'s play this weekend.',
+      'I\'m looking forward to it.',
+    ]
+  }
+};
+
+// ===== STATE =====
+let currentLesson = 1;
+let currentTab = 'scene';
+let dmHighlighted = false;
+let speed75 = false;
+let speed = 1.0;
+let activeAudio = null;
+
+// Progress: {1:{scene:true,markers:true,listening:true}, ...}
+let progress = loadProgress();
+
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem('langcert_listening_progress');
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  // Default: lesson 1 all false, rest locked
+  const p = {};
+  for (let i=1;i<=5;i++) p[i] = {scene:false,markers:false,listening:false};
+  return p;
+}
+
+function saveProgress() {
+  localStorage.setItem('langcert_listening_progress', JSON.stringify(progress));
+}
+
+function isLessonComplete(n) {
+  return progress[n] && progress[n].scene && progress[n].markers && progress[n].listening;
+}
+
+function isLessonUnlocked(n) {
+  if (n === 1) return true;
+  return isLessonComplete(n-1);
+}
+
+// ===== RENDER =====
+function renderAll() {
+  renderProgressBar();
+  renderLesson();
+}
+
+function renderProgressBar() {
+  const bar = document.getElementById('progressBar');
+  const steps = bar.querySelectorAll('.progress-step');
+  steps.forEach(step => {
+    const n = parseInt(step.dataset.lesson);
+    step.className = 'progress-step';
+    if (n === currentLesson) step.classList.add('active');
+    if (isLessonComplete(n)) step.classList.add('completed');
+    if (!isLessonUnlocked(n)) step.classList.add('locked');
+  });
+}
+
+function renderLesson() {
+  const section = document.getElementById('lessonSection');
+  if (!isLessonUnlocked(currentLesson)) {
+    section.innerHTML = `<div class="lesson-locked"><div class="lock-icon">🔒</div><p>完成前一课的所有练习才能解锁这一课哦</p><p style="font-size:.85rem;margin-top:4px">Finish all 3 sections of the previous lesson first</p></div>`;
+    return;
+  }
+
+  const L = LESSONS[currentLesson];
+  const pg = progress[currentLesson];
+  const allDone = isLessonComplete(currentLesson);
+
+  let html = `<div class="lesson-card">`;
+  html += `<div class="lesson-header"><h2><span class="lesson-emoji">${L.emoji}</span> 第${currentLesson}课：${L.cnTitle} <span style="font-family:var(--font-en);font-weight:400;font-size:.95rem;color:var(--gray-400)">— ${L.title}</span></h2></div>`;
+  html += `<div class="tab-status">`;
+  html += `<span class="pill${pg.scene?' done':''}">${pg.scene?'✅':'⬜'} 场景词</span>`;
+  html += `<span class="pill${pg.markers?' done':''}">${pg.markers?'✅':'⬜'} 逻辑词</span>`;
+  html += `<span class="pill${pg.listening?' done':''}">${pg.listening?'✅':'⬜'} 精听</span>`;
+  html += `</div>`;
+
+  // Tabs nav
+  html += `<div class="tabs-nav">`;
+  html += `<button class="tab-btn${currentTab==='scene'?' active':''}" onclick="switchTab('scene')">📖 场景词</button>`;
+  html += `<button class="tab-btn${currentTab==='markers'?' active':''}" onclick="switchTab('markers')">🔗 逻辑词</button>`;
+  html += `<button class="tab-btn${currentTab==='listening'?' active':''}" onclick="switchTab('listening')">🎧 精听</button>`;
+  html += `</div>`;
+
+  // Tab 1: Scene Words
+  html += `<div class="tab-content${currentTab==='scene'?' active':''}" id="tab-scene">`;
+  html += `<p style="font-size:.9rem;color:var(--gray-600);margin-bottom:16px">👆 <strong>点击卡片</strong>查看英文意思。先看中文，想一下英文怎么说，再点开看看。</p>`;
+  html += `<div class="scene-grid">`;
+  L.sceneWords.forEach((w,i) => {
+    html += `<div class="flashcard" onclick="this.classList.toggle('flipped')" id="fc-${currentLesson}-${i}">`;
+    html += `<div class="flashcard-inner">`;
+    html += `<div class="flashcard-front"><span class="cn-word">${w.cn}</span><span class="hint">点击查看英文</span></div>`;
+    html += `<div class="flashcard-back"><span class="en-word">${w.en}</span><span class="example">${w.example}</span></div>`;
+    html += `</div></div>`;
+  });
+  html += `</div>`;
+  html += `<button class="dm-toggle-btn" style="margin-top:20px;width:100%" onclick="markTabDone('scene')">✅ 我学会了！继续下一部分</button>`;
+  html += `</div>`;
+
+  // Tab 2: Discourse Markers
+  html += `<div class="tab-content${currentTab==='markers'?' active':''}" id="tab-markers">`;
+  html += `<p class="dm-intro">💡 英语里有些小词叫"<strong>逻辑连接词</strong>"，它们告诉你说话的人想怎么连接两个句子。</p>`;
+  L.markers.forEach(m => {
+    html += `<div class="dm-item"><div class="dm-word">${m.word}</div><div class="dm-explain">${m.explain}</div></div>`;
+  });
+  html += `<button class="dm-toggle-btn" onclick="toggleDMMarkers()">${dmHighlighted ? '🔽 隐藏高亮' : '🔍 在对话中显示高亮'}</button>`;
+  html += `<div class="dialogue-box">`;
+  const texts = dmHighlighted ? L.highlightedText : L.lines.map(l => l.text);
+  L.lines.forEach((line,i) => {
+    html += `<div class="line"><span class="speaker">${line.speaker}:</span>${texts[i]}</div>`;
+  });
+  html += `</div>`;
+  html += `<button class="dm-toggle-btn" style="margin-top:20px;width:100%" onclick="markTabDone('markers')">✅ 我学会了！继续下一部分</button>`;
+  html += `</div>`;
+
+  // Tab 3: Intensive Listening
+  html += `<div class="tab-content${currentTab==='listening'?' active':''}" id="tab-listening">`;
+  html += `<div class="il-intro">`;
+  html += `<p>🎯 <strong>精听练习</strong>：这是最重要的部分！</p>`;
+  html += `<p style="margin-top:8px">① 先点 <strong>"先听一遍"</strong>，把整段对话听一次。</p>`;
+  html += `<p>② 然后<strong>一句一句听</strong>，把你听到的写下来。</p>`;
+  html += `<p>③ 写完后点 <strong>"查看答案"</strong> 对照检查。</p>`;
+  html += `<p>④ 可以打开 <strong>0.75倍慢速</strong>，听得更清楚。</p>`;
+  html += `</div>`;
+  html += `<div class="il-controls">`;
+  html += `<button class="il-btn primary" onclick="playFullAudio(${currentLesson})">▶️ 先听一遍</button>`;
+  html += `<label class="speed-toggle" onclick="toggleSpeed()">`;
+  html += `<input type="checkbox" id="speedCheck" ${speed75?'checked':''}>`;
+  html += `<div class="speed-slider"></div>`;
+  html += `<span>0.75x 慢速</span>`;
+  html += `</label>`;
+  html += `</div>`;
+  L.lines.forEach((line,i) => {
+    html += `<div class="il-line" id="il-line-${i}">`;
+    html += `<div class="il-line-header">`;
+    html += `<span class="il-line-num">#${i+1}</span>`;
+    html += `<button class="il-play-btn" onclick="playLine(${currentLesson},${i})" id="play-btn-${i}">▶</button>`;
+    html += `<span class="il-speaker">${line.speaker}</span>`;
+    html += `</div>`;
+    html += `<input type="text" class="il-text-input" placeholder="把你听到的写在这里..." id="input-${i}" oninput="checkAllLinesDone()">`;
+    html += `<button class="il-reveal-btn" onclick="revealAnswer(${i},'${escapeHtml(line.text)}')">👁️ 查看答案</button>`;
+    html += `<div class="il-answer" style="display:none" id="answer-${i}">${escapeHtml(line.text)}</div>`;
+    html += `</div>`;
+  });
+  if (allDone) {
+    html += `<div class="unlock-msg"><div class="unlock-emoji">🎉</div><h3>太棒了！你完成了第${currentLesson}课！</h3><p>All 3 sections complete — next lesson unlocked!</p></div>`;
+  }
+  html += `<button class="dm-toggle-btn" style="margin-top:20px;width:100%" onclick="markTabDone('listening')">✅ 完成精听练习</button>`;
+  html += `</div>`;
+
+  html += `</div>`; // lesson-card
+
+  // Next/prev nav
+  html += `<div style="display:flex;justify-content:space-between;margin-top:16px;gap:12px">`;
+  if (currentLesson > 1) {
+    html += `<button class="il-btn secondary" onclick="goToLesson(${currentLesson-1})">← 上一课</button>`;
+  } else {
+    html += `<div></div>`;
+  }
+  if (currentLesson < 5 && isLessonUnlocked(currentLesson+1)) {
+    html += `<button class="il-btn primary" onclick="goToLesson(${currentLesson+1})">下一课 →</button>`;
+  } else if (currentLesson < 5 && !isLessonUnlocked(currentLesson+1)) {
+    html += `<button class="il-btn secondary" disabled style="opacity:.5">🔒 下一课</button>`;
+  } else {
+    html += `<div></div>`;
+  }
+  html += `</div>`;
+
+  section.innerHTML = html;
+
+  // Restore line input/answer states
+  setTimeout(restoreLineStates, 100);
+}
+
+function escapeHtml(text) {
+  const d = document.createElement('div');
+  d.textContent = text;
+  return d.innerHTML;
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  renderLesson();
+  window.scrollTo({top:document.querySelector('.lesson-card').offsetTop-20,behavior:'smooth'});
+}
+
+function toggleDMMarkers() {
+  dmHighlighted = !dmHighlighted;
+  renderLesson();
+}
+
+function toggleSpeed() {
+  speed75 = !speed75;
+  speed = speed75 ? 0.75 : 1.0;
+  if (activeAudio) {
+    activeAudio.playbackRate = speed;
+  }
+  const cb = document.getElementById('speedCheck');
+  if (cb) cb.checked = speed75;
+}
+
+function getAudioPath(lesson, lineIdx) {
+  return `audio/l${lesson}_line${lineIdx+1}.mp3`;
+}
+
+function getFullAudioPath(lesson) {
+  return `audio/l${lesson}_full.mp3`;
+}
+
+let lineAudioStates = {}; // {`l${n}_l${i}`: {played:bool, revealed:bool, inputText:str}}
+
+function loadLineStates() {
+  try {
+    const raw = localStorage.getItem('langcert_line_states');
+    if (raw) lineAudioStates = JSON.parse(raw);
+  } catch(e) { lineAudioStates = {}; }
+}
+
+function saveLineStates() {
+  localStorage.setItem('langcert_line_states', JSON.stringify(lineAudioStates));
+}
+
+function restoreLineStates() {
+  for (let i=0;i<LESSONS[currentLesson].lines.length;i++) {
+    const key = `l${currentLesson}_l${i}`;
+    const state = lineAudioStates[key];
+    if (state) {
+      const input = document.getElementById(`input-${i}`);
+      const answer = document.getElementById(`answer-${i}`);
+      const line = document.getElementById(`il-line-${i}`);
+      if (state.inputText && input) input.value = state.inputText;
+      if (state.revealed && answer) {
+        answer.style.display = 'block';
+        if (line) line.classList.add('done');
+      }
+    }
+  }
+  updateListeningProgress();
+}
+
+function playFullAudio(lesson) {
+  if (activeAudio) { activeAudio.pause(); activeAudio = null; }
+  const audio = new Audio(getFullAudioPath(lesson));
+  audio.playbackRate = speed;
+  activeAudio = audio;
+  audio.play();
+  audio.onended = () => { activeAudio = null; };
+}
+
+function playLine(lesson, idx) {
+  if (activeAudio) { activeAudio.pause(); activeAudio = null; }
+  const btn = document.getElementById(`play-btn-${idx}`);
+  const audio = new Audio(getAudioPath(lesson, idx));
+  audio.playbackRate = speed;
+  activeAudio = audio;
+
+  if (btn) btn.classList.add('playing');
+  audio.play();
+  audio.onended = () => {
+    activeAudio = null;
+    if (btn) btn.classList.remove('playing');
+  };
+}
+
+function revealAnswer(idx, correctText) {
+  const answer = document.getElementById(`answer-${idx}`);
+  const line = document.getElementById(`il-line-${idx}`);
+  if (answer) {
+    answer.style.display = 'block';
+    answer.textContent = correctText;
+  }
+  if (line) line.classList.add('done');
+
+  const key = `l${currentLesson}_l${idx}`;
+  if (!lineAudioStates[key]) lineAudioStates[key] = {};
+  lineAudioStates[key].revealed = true;
+  saveLineStates();
+
+  updateListeningProgress();
+}
+
+function checkAllLinesDone() {
+  saveLineInputs();
+  updateListeningProgress();
+}
+
+function saveLineInputs() {
+  const L = LESSONS[currentLesson];
+  for (let i=0;i<L.lines.length;i++) {
+    const input = document.getElementById(`input-${i}`);
+    if (input) {
+      const key = `l${currentLesson}_l${i}`;
+      if (!lineAudioStates[key]) lineAudioStates[key] = {};
+      lineAudioStates[key].inputText = input.value;
+    }
+  }
+  saveLineStates();
+}
+
+function updateListeningProgress() {
+  const L = LESSONS[currentLesson];
+  let allDone = L.lines.length > 0;
+  for (let i=0;i<L.lines.length;i++) {
+    const key = `l${currentLesson}_l${i}`;
+    const state = lineAudioStates[key];
+    if (!state || !state.revealed) { allDone = false; break; }
+  }
+  if (allDone) {
+    progress[currentLesson].listening = true;
+    saveProgress();
+    renderProgressBar();
+    // Update status pills
+    const pills = document.querySelectorAll('.tab-status .pill');
+    if (pills[2]) pills[2].classList.add('done');
+  }
+}
+
+function markTabDone(tab) {
+  progress[currentLesson][tab] = true;
+  saveProgress();
+  renderAll();
+
+  // Auto-advance tab
+  const nextTab = {scene:'markers',markers:'listening',listening:null}[tab];
+  if (nextTab && !progress[currentLesson][nextTab]) {
+    currentTab = nextTab;
+    renderLesson();
+  } else if (tab === 'listening') {
+    renderLesson();
+  }
+
+  window.scrollTo({top:document.querySelector('.lesson-card')?.offsetTop-20||0,behavior:'smooth'});
+}
+
+function goToLesson(n) {
+  if (!isLessonUnlocked(n)) return;
+  // Save current inputs before switching
+  saveLineInputs();
+  currentLesson = n;
+  currentTab = 'scene';
+  dmHighlighted = false;
+  renderAll();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Progress bar click
+document.getElementById('progressBar').addEventListener('click', (e) => {
+  const step = e.target.closest('.progress-step');
+  if (!step) return;
+  const n = parseInt(step.dataset.lesson);
+  if (isLessonUnlocked(n)) goToLesson(n);
+});
+
+// Init
+loadLineStates();
+renderAll();
+</script>
+</body>
+</html>

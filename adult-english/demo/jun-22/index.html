@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why British Food is Like That — Demo Class | rkrk.io × 托朴教育</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf9; --card: #ffffff; --text: #1a1a2e; --sub: #6b7280;
+  --accent: #e07a5f; --accent2: #3d405b; --gold: #f2cc8f;
+  --border: #e5e7eb; --radius: 16px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter','Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+h1,h2,h3{font-family:'Outfit','Noto Sans SC',sans-serif}
+.container{max-width:720px;margin:0 auto;padding:24px 20px 60px}
+
+header{text-align:center;padding:40px 0 32px}
+.logo{font-size:13px;text-transform:uppercase;letter-spacing:0.15em;color:var(--sub);margin-bottom:8px}
+header h1{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:800;letter-spacing:-0.03em;line-height:1.15;margin-bottom:8px}
+header .sub{font-size:15px;color:var(--sub)}
+
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;margin:0 4px}
+.badge-demo{background:#fef3c7;color:#92400e}
+.badge-level{background:#e0e7ff;color:#3730a3}
+.badge-time{background:#fce7f3;color:#9d174d}
+
+/* TikTok section */
+.tiktok-box{background:linear-gradient(135deg,#000,#1a1a2e);border-radius:var(--radius);padding:20px;margin:24px 0;text-align:center}
+.tiktok-box h3{color:#fff;font-size:14px;margin-bottom:12px;font-weight:500}
+.tiktok-links{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.tiktok-link{display:flex;align-items:center;gap:6px;background:#fe2c55;color:#fff;padding:10px 18px;border-radius:24px;text-decoration:none;font-size:14px;font-weight:600;transition:transform 0.2s}
+.tiktok-link:hover{transform:scale(1.04)}
+.tiktok-link svg{width:18px;height:18px}
+
+/* Section cards */
+.section-card{background:var(--card);border-radius:var(--radius);padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.section-card .emoji{font-size:24px;margin-bottom:8px}
+.section-card h2{font-size:18px;font-weight:700;margin-bottom:4px}
+.section-card .meta{font-size:13px;color:var(--sub);margin-bottom:12px}
+
+/* Audio player */
+.audio-box{margin:12px 0;padding:12px 16px;background:#f3f4f6;border-radius:12px}
+.audio-box audio{width:100%;margin-top:6px}
+.audio-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--sub)}
+
+/* Vocabulary grid */
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:12px 0}
+.vocab-card{background:#fafafa;border:1px solid var(--border);border-radius:12px;padding:14px}
+.vocab-card .word{font-weight:700;font-size:15px;color:var(--accent)}
+.vocab-card .def{font-size:13px;color:var(--sub);margin-top:2px}
+
+/* Pie cards */
+.pie-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:480px){.pie-grid{grid-template-columns:1fr}}
+.pie-card{border:2px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;transition:border-color 0.2s}
+.pie-card:hover{border-color:var(--accent)}
+.pie-card .pie-emoji{font-size:40px;margin-bottom:6px}
+.pie-card h4{font-size:15px;font-weight:700;margin-bottom:4px}
+.pie-card p{font-size:12px;color:var(--sub);line-height:1.5}
+
+/* Comparison table */
+.compare-table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0}
+.compare-table th{background:var(--accent2);color:#fff;padding:10px 14px;text-align:left;font-weight:600;font-size:13px}
+.compare-table td{padding:10px 14px;border-bottom:1px solid var(--border)}
+.compare-table tr:nth-child(even){background:#f9fafb}
+
+/* Practice frame */
+.practice-frame{background:#fef3c7;border:2px dashed #f59e0b;border-radius:var(--radius);padding:20px;margin:16px 0}
+.practice-frame .frame-text{font-family:'Courier New',monospace;font-size:14px;line-height:2;color:#78350f}
+.practice-frame .frame-gap{display:inline-block;min-width:60px;border-bottom:2px solid #f59e0b;margin:0 8px}
+
+/* Cool-down */
+.cool-down{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-radius:var(--radius);padding:24px;margin:16px 0}
+.cool-down h3{color:#065f46;font-size:16px;margin-bottom:8px}
+.cool-down li{font-size:14px;color:#064e3b;margin:4px 0}
+
+/* Footer */
+footer{text-align:center;padding:32px 0;color:var(--sub);font-size:12px;border-top:1px solid var(--border);margin-top:40px}
+footer .brand{font-weight:700;color:var(--text)}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <div class="logo">rkrk.io × 托朴教育</div>
+  <h1>Why British Food<br>Is... Like That 🍽️</h1>
+  <p class="sub">Demo Class — Art & Culture English</p>
+  <div style="margin-top:12px">
+    <span class="badge badge-demo">Demo Class</span>
+    <span class="badge badge-level">A2–B1</span>
+    <span class="badge badge-time">60 min</span>
+  </div>
+</header>
+
+<!-- TikTok Videos -->
+<div class="tiktok-box">
+  <h3>📱 Watch first — British Food Culture on TikTok</h3>
+  <div class="tiktok-links">
+    <a href="https://www.tiktok.com/search?q=british+food+culture+funny" target="_blank" class="tiktok-link">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.89a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+      British Food Culture
+    </a>
+    <a href="https://www.tiktok.com/search?q=british+vs+chinese+food" target="_blank" class="tiktok-link">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.89a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+      British vs Chinese Food 🇨🇳
+    </a>
+    <a href="https://www.tiktok.com/search?q=british+pies+tradition" target="_blank" class="tiktok-link">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.89a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+      British Pies 🥧
+    </a>
+  </div>
+</div>
+
+<!-- Part 1: Listen & Notice -->
+<div class="section-card">
+  <div class="emoji">🎧</div>
+  <h2>Part 1 — Listen & Notice</h2>
+  <div class="meta">8 minutes · Audio input · Ear warm-up</div>
+  <p style="font-size:14px;color:var(--sub);margin-bottom:12px">
+    Listen to someone who moved from China to London talking about the food. What words do they use to describe British food? What about Chinese food?
+  </p>
+  <div class="audio-box">
+    <div class="audio-label">🎤 A Chengdu local in London</div>
+    <audio controls preload="metadata" src="audio/listen-notice.mp3"></audio>
+  </div>
+  <p style="font-size:13px;color:var(--sub);margin-top:8px">
+    <b>Listen for:</b> food adjectives (delicious, bland, rich...) · comparison words · emotional reaction
+  </p>
+</div>
+
+<!-- Part 2: Zoom In -->
+<div class="section-card">
+  <div class="emoji">🔤</div>
+  <h2>Part 2 — Zoom In: Food Vocabulary</h2>
+  <div class="meta">15 minutes · Grammar + Vocab · Present Perfect & Comparatives</div>
+  
+  <div class="vocab-grid">
+    <div class="vocab-card"><div class="word">bland</div><div class="def">平淡无味 — lacking strong flavour</div></div>
+    <div class="vocab-card"><div class="word">savoury</div><div class="def">咸香的 — salty/spicy, not sweet</div></div>
+    <div class="vocab-card"><div class="word">hearty</div><div class="def">丰盛的 — warm, filling, satisfying</div></div>
+    <div class="vocab-card"><div class="word">stodgy</div><div class="def">厚实腻的 — heavy, dense, filling</div></div>
+    <div class="vocab-card"><div class="word">comforting</div><div class="def">治愈的 — makes you feel good</div></div>
+    <div class="vocab-card"><div class="word">fragrant</div><div class="def">芳香的 — pleasant, aromatic smell</div></div>
+    <div class="vocab-card"><div class="word">umami</div><div class="def">鲜味 — the fifth taste, savoury depth</div></div>
+    <div class="vocab-card"><div class="word">rich</div><div class="def">浓郁的 — full of flavour, heavy</div></div>
+  </div>
+
+  <h3 style="font-size:15px;margin-top:16px;color:var(--accent2)">📐 Grammar Frame</h3>
+  <div class="practice-frame">
+    <div class="frame-text">
+      "Compared to <span class="frame-gap">Chinese</span> food, British food is much more <span class="frame-gap">subtle</span>."<br><br>
+      "Whereas <span class="frame-gap">Sichuan</span> cuisine is <span class="frame-gap">bold and spicy</span>, British food tends to be <span class="frame-gap">mild and comforting</span>."<br><br>
+      "I've never tried <span class="frame-gap">steak and kidney pie</span> before. Have you?"<br><br>
+      "It's one of the most <span class="frame-gap">hearty</span> meals I've <span class="frame-gap">ever</span> had."
+    </div>
+  </div>
+
+  <!-- Cultural Note -->
+  <div style="background:#fff7ed;border:1px solid #fdba74;border-radius:12px;padding:16px;margin-top:16px">
+    <h4 style="font-size:14px;color:#9a3412;margin-bottom:6px">📖 Cultural Note: Why is British food "bland"?</h4>
+    <p style="font-size:13px;color:#7c2d12;line-height:1.6">
+      It's not that British people don't like flavour. It's <b>history</b>. During the <b>Industrial Revolution</b> (1760–1840), millions moved to cities and lost access to fresh ingredients. Then came <b>wartime rationing</b> (1939–1954) — an entire generation grew up without spices, olive oil, or garlic. British cuisine isn't "bad." It's a cuisine <b>shaped by scarcity</b>. Today, modern British food is actually quite diverse — but the reputation stuck.
+    </p>
+    <div class="audio-box" style="margin-top:10px">
+      <div class="audio-label">🎤 Listen: The historical explanation</div>
+      <audio controls preload="metadata" src="audio/cultural-note.mp3"></audio>
+    </div>
+  </div>
+</div>
+
+<!-- Part 3: The Pie Section -->
+<div class="section-card">
+  <div class="emoji">🥧</div>
+  <h2>Part 3 — The Great British Pie</h2>
+  <div class="meta">12 minutes · Cultural immersion · Vocabulary in context</div>
+
+  <div class="audio-box">
+    <div class="audio-label">🎤 Conversation: What's your favourite pie?</div>
+    <audio controls preload="metadata" src="audio/pie-conversation.mp3"></audio>
+  </div>
+
+  <div class="pie-grid">
+    <div class="pie-card">
+      <div class="pie-emoji">🥩</div>
+      <h4>Steak & Kidney Pie</h4>
+      <p>Rich beef and kidney in thick gravy, wrapped in golden pastry. An acquired taste — the kidney gives it a distinctive, earthy flavour.</p>
+    </div>
+    <div class="pie-card">
+      <div class="pie-emoji">⛏️</div>
+      <h4>Cornish Pasty</h4>
+      <p>The miner's lunch. Thick crimped crust — meant to be held with dirty hands and thrown away. Beef, potato, swede inside. Portable, hearty, brilliant.</p>
+    </div>
+    <div class="pie-card">
+      <div class="pie-emoji">🐑</div>
+      <h4>Shepherd's Pie</h4>
+      <p>Not actually a pie! No pastry bottom — minced lamb in gravy topped with fluffy mashed potato. Baked until golden. Pure comfort food.</p>
+    </div>
+    <div class="pie-card">
+      <div class="pie-emoji">❄️</div>
+      <h4>Pork Pie</h4>
+      <p>Eaten cold. Seasoned pork surrounded by jelly in a hot water crust pastry. Sounds weird. Tastes amazing. A picnic essential.</p>
+    </div>
+  </div>
+
+  <p style="font-size:13px;color:var(--sub);margin-top:12px">
+    <b>🎯 Student task:</b> Pick one pie. Describe it in 3 sentences using today's vocabulary. Teacher helps with pronunciation.
+  </p>
+</div>
+
+<!-- Part 4: Controlled Practice -->
+<div class="section-card">
+  <div class="emoji">🗣️</div>
+  <h2>Part 4 — Compare Your Cuisines</h2>
+  <div class="meta">15 minutes · Structured speaking · Accuracy first</div>
+
+  <table class="compare-table">
+    <tr><th>🇨🇳 Chinese Dish</th><th>🇬🇧 British Dish</th></tr>
+    <tr><td><b>豆浆油条</b> — light, crispy, savoury breakfast</td><td><b>Full English Breakfast</b> — heavy, fried, protein-packed</td></tr>
+    <tr><td><b>红烧肉</b> — soy-braised, melt-in-your-mouth</td><td><b>Sunday Roast</b> — oven-roasted, carved at the table</td></tr>
+    <tr><td><b>火锅</b> — communal, spicy, interactive</td><td><b>Fish & Chips</b> — individual, wrapped in paper, eaten outdoors</td></tr>
+    <tr><td><b>小笼包</b> — delicate, soup inside, technical</td><td><b>Cornish Pasty</b> — rugged, hand-held, working-class</td></tr>
+  </table>
+
+  <div class="practice-frame">
+    <p style="font-size:13px;color:#78350f;font-weight:600;margin-bottom:8px">🗣️ Speaking Frame</p>
+    <div class="frame-text">
+      "In China, we have <span class="frame-gap">小笼包</span>, which is very <span class="frame-gap">delicate and technical</span>.<br>
+      British <span class="frame-gap">Cornish pasties</span> are quite <span class="frame-gap">rugged</span> in comparison.<br>
+      I've never tried one, but it sounds <span class="frame-gap">hearty and filling</span>."
+    </div>
+  </div>
+
+  <p style="font-size:13px;color:var(--sub)">
+    <b>Teacher:</b> Pick 2 pairs. Student describes differences using the frame. 5–6 sentences. Accuracy over speed.
+  </p>
+</div>
+
+<!-- Part 5: Cool-Down -->
+<div class="cool-down">
+  <h3>📝 Part 5 — Cool-Down & Homework</h3>
+  <p style="font-size:14px;color:#065f46;margin-bottom:12px"><b>10 minutes · Recap · Next steps</b></p>
+  <ul>
+    <li><b>✅ What you nailed today:</b> [Teacher fills in — specific praise for pronunciation, vocabulary use, etc.]</li>
+    <li><b>🔧 One thing to work on:</b> [Teacher fills in — one focused improvement point]</li>
+    <li><b>📚 Key takeaways:</b> 8 food adjectives, comparison structure "Whereas X is ___, Y tends to be ___", 4 classic British pies, the history behind British food's reputation</li>
+  </ul>
+  <div style="background:#fff;border-radius:12px;padding:16px;margin-top:12px">
+    <h4 style="font-size:14px;color:var(--accent2);margin-bottom:8px">📝 Homework</h4>
+    <p style="font-size:14px;line-height:1.8">
+      1. Find a British recipe online (BBC Good Food is a great source)<br>
+      2. Describe it in 4 sentences using today's vocabulary words<br>
+      3. <b>Bonus:</b> Try cooking it and send a photo!<br>
+      4. Record yourself describing the dish — send the audio to your teacher
+    </p>
+  </div>
+</div>
+
+<footer>
+  <p class="brand">rkrk.io × 托朴教育</p>
+  <p>Art & Culture English · Demo Class Jun 22 · A2–B1</p>
+  <p style="margin-top:4px">Built by Kee Lee · WeChat: keedahooman · WhatsApp: +44 7440 622158</p>
+</footer>
+
+</div>
+</body>
+</html>

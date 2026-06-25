@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SrKeeda's Iron Log — June 11, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --bg: #08090b;
+    --surface: #121318;
+    --surface-elevated: #1a1c23;
+    --surface-glow: #1f212a;
+    --text: #ede8df;
+    --text-muted: #8b8d94;
+    --text-dim: #5c5e66;
+    --accent: #f0a332;
+    --accent-glow: rgba(240, 163, 50, 0.18);
+    --accent-strong: #d97706;
+    --divider: rgba(255,255,255,0.06);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* Hero */
+  .hero {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 70%;
+    height: 140%;
+    background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .hero-headline {
+    font-family: var(--font-display);
+    font-size: clamp(64px, 12vw, 140px);
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    max-width: 900px;
+  }
+  .hero-headline span { color: var(--accent); }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin-top: 28px;
+  }
+
+  /* Stats strip */
+  .stats-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--divider);
+    border-bottom: 1px solid var(--divider);
+    padding: 40px 0;
+    margin: 60px 0;
+  }
+  .stat-item {
+    text-align: center;
+    padding: 0 20px;
+    border-right: 1px solid var(--divider);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 80px);
+    line-height: 1;
+    color: var(--text);
+  }
+  .stat-number.accent { color: var(--accent); }
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+
+  /* Section headers */
+  .section-header {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 7vw, 72px);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    margin-bottom: 48px;
+  }
+  .section { padding: 80px 0; }
+
+  /* Exercise bento */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    grid-auto-flow: dense;
+  }
+  .bento-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 28px;
+    border: 1px solid var(--divider);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .bento-card:hover {
+    background: var(--surface-elevated);
+    border-color: rgba(255,255,255,0.12);
+    transform: translateY(-2px);
+  }
+  .bento-card.col-2 { grid-column: span 2; }
+  .bento-card.row-2 { grid-row: span 2; }
+  .bento-card.accent-border { border-left: 3px solid var(--accent); }
+  .bento-card.accent-glow {
+    background: var(--surface-glow);
+    border-color: rgba(240, 163, 50, 0.15);
+  }
+  .card-number {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .card-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .card-stat-row {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--divider);
+  }
+  .card-stat {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  .card-stat strong {
+    display: block;
+    font-size: 18px;
+    color: var(--text);
+    font-weight: 400;
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+  }
+  .muscle-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .muscle-tag {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: rgba(240, 163, 50, 0.1);
+    color: var(--accent);
+  }
+
+  /* Highlight card */
+  .highlight-card {
+    background: var(--surface-glow);
+    border-radius: var(--radius);
+    padding: 48px;
+    border: 1px solid rgba(240, 163, 50, 0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .highlight-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--divider);
+  }
+  .timeline-item {
+    position: relative;
+    padding-bottom: 40px;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-dot {
+    position: absolute;
+    left: -26px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--accent);
+  }
+  .timeline-dot.filled { background: var(--accent); }
+  .timeline-time {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .timeline-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .timeline-detail {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  /* Kcal flow */
+  .kcal-flow {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 48px 0;
+  }
+  .kcal-block {
+    flex: 1;
+    text-align: center;
+    padding: 32px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--divider);
+  }
+  .kcal-big {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 8vw, 80px);
+    line-height: 1;
+  }
+  .kcal-big.burn { color: #ef4444; }
+  .kcal-big.eat { color: #22c55e; }
+  .kcal-arrow {
+    font-family: var(--font-display);
+    font-size: 36px;
+    color: var(--text-dim);
+  }
+  .kcal-math {
+    flex: 1;
+    text-align: center;
+    padding: 32px;
+    background: var(--surface-glow);
+    border-radius: var(--radius);
+    border: 1px solid rgba(240, 163, 50, 0.15);
+  }
+  .kcal-math-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+  }
+  .kcal-math-value {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 48px);
+    color: var(--text);
+    line-height: 1;
+    margin-top: 8px;
+  }
+
+  /* Meal card */
+  .meal-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--divider);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .meal-image {
+    background: linear-gradient(135deg, #1a1208 0%, #2d1f0e 50%, #1a1208 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    min-height: 280px;
+  }
+  .meal-info {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .meal-title {
+    font-family: var(--font-display);
+    font-size: 36px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .meal-macros {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .macro-item {
+    text-align: center;
+    padding: 14px;
+    background: var(--surface-elevated);
+    border-radius: var(--radius-sm);
+  }
+  .macro-value {
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 1;
+    color: var(--accent);
+  }
+  .macro-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  /* Trainer quote */
+  .quote-block {
+    text-align: center;
+    padding: 80px 0;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .quote-text {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+  .quote-text span { color: var(--accent); }
+  .quote-attribution {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    margin-top: 20px;
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--divider);
+    padding: 40px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .bento { grid-template-columns: repeat(2, 1fr); }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    .stats-strip .stat-item:nth-child(2) { border-right: none; }
+    .kcal-flow { flex-direction: column; }
+    .meal-card { grid-template-columns: 1fr; }
+    .meal-image { min-height: 200px; }
+  }
+  @media (max-width: 640px) {
+    .bento { grid-template-columns: 1fr; }
+    .bento-card.col-2, .bento-card.row-2 { grid-column: span 1; grid-row: span 1; }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); padding: 24px 0; }
+    .stat-item { padding: 12px; }
+    .hero-headline { font-size: clamp(48px, 14vw, 72px); }
+    .section { padding: 48px 0; }
+    .highlight-card { padding: 28px; }
+    .meal-info { padding: 24px; }
+    .quote-text { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">Session 1 - June 11, 2026 - Chengdu</div>
+    <h1 class="hero-headline">THE <span>IRON</span><br>LOG</h1>
+    <p class="hero-sub">8 exercises. 2 hours. 30+ sets. One athlete. SrKeeda's first tracked session - back, arms, shoulders, legs, and cardio. A complete blueprint.</p>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<section class="container">
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="stat-number">8</div>
+      <div class="stat-label">Exercises</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number accent">30+</div>
+      <div class="stat-label">Working Sets</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">630</div>
+      <div class="stat-label">Kcal Burned</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number accent">52g</div>
+      <div class="stat-label">Protein Refuel</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXERCISE BENTO -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-header">THE WORK</h2>
+    <div class="bento">
+
+      <!-- 1: Seated Row -->
+      <div class="bento-card col-2 accent-border">
+        <div class="card-number">01 - Back</div>
+        <div class="card-title">SEATED CABLE ROW</div>
+        <div class="card-subtitle">DHN Cable Station</div>
+        <div class="card-stat-row">
+          <div class="card-stat"><strong>4x12</strong>Sets x Reps</div>
+          <div class="card-stat"><strong>32kg</strong>Weight</div>
+        </div>
+        <div class="muscle-tags">
+          <span class="muscle-tag">Rhomboids</span>
+          <span class="muscle-tag">Mid-traps</span>
+          <span class="muscle-tag">Lats</span>
+          <span class="muscle-tag">Biceps</span>
+        </div>
+      </div>
+
+      <!-- 2: LAT Pulldown -->
+      <div class="bento-card col-2">
+        <div class="card-number">02 - Back</div>
+        <div class="card-title">LAT PULLDOWN</div>
+        <div class="card-subtitle">Dual-function cable machine</div>
+        <div class="card-stat-row">
+          <div class="card-stat"><strong>4x12</strong>Sets x Reps</div>
+          <div class="card-stat"><strong>32 / 28kg</strong>Weight</div>
+        </div>
+        <div class="muscle-tags">
+          <span class="muscle-tag">Lats</span>
+          <span class="muscle-tag">Teres Major</span>
+          <span class="muscle-tag">Biceps</span>
+          <span class="muscle-tag">Posterior Delts</span>
+        </div>
+      </div>
+
+      <!-- 3: Iso-Lateral Row - HIGHLIGHT -->
+      <div class="bento-card col-2 row-2 accent-glow">
+        <div class="card-number">03 - Back - Spotlight</div>
+        <div class="card-title">ISO-LATERAL ROW</div>
+        <div class="card-subtitle">Hammer Force - independent arm tracks</div>
+        <div class="card-stat-row">
+          <div class="card-stat"><strong>4x12</strong>Sets x Reps</div>
+          <div class="card-stat"><strong>30 / 15kg</strong>Each side</div>
+        </div>
+        <div style="margin-top:16px; padding:16px; background:rgba(240,163,50,0.08); border-radius:10px; font-size:13px; color:var(--text-muted); line-height:1.6;">
+          <strong style="color:var(--accent); font-weight:500;">The breakthrough moment.</strong> Dropped from 30kg to 15kg mid-session to dial in mind-muscle connection. Chest glued to pad, elbows driven back like cracking a nut between shoulder blades. Smart, not weak.
+        </div>
+        <div class="muscle-tags">
+          <span class="muscle-tag">Lats</span>
+          <span class="muscle-tag">Rhomboids</span>
+          <span class="muscle-tag">Mid/Lower Traps</span>
+          <span class="muscle-tag">Posterior Delts</span>
+        </div>
+      </div>
+
+      <!-- 4: Shoulder Press -->
+      <div class="bento-card">
+        <div class="card-number">04 - Shoulders</div>
+        <div class="card-title">ISO-LATERAL SHOULDER PRESS</div>
+        <div class="card-subtitle">Hammer Force</div>
+        <div class="card-stat-row" style="flex-direction:column; gap:8px;">
+          <div class="card-stat"><strong>4x12</strong>Sets x Reps</div>
+        </div>
+        <div class="muscle-tags">
+          <span class="muscle-tag">Deltoids</span>
+          <span class="muscle-tag">Triceps</span>
+          <span class="muscle-tag">Upper Traps</span>
+        </div>
+      </div>
+
+      <!-- 5: Abductor -->
+      <div class="bento-card">
+        <div class="card-number">05 - Glutes</div>
+        <div class="card-title">HIP ABDUCTOR</div>
+        <div class="card-stat-row" style="flex-direction:column; gap:8px;">
+          <div class="card-stat"><strong>4x18</strong>Sets x Reps</div>
+          <div class="card-stat"><strong>70kg</strong>Weight</div>
+        </div>
+        <div class="muscle-tags">
+          <span class="muscle-tag">Glute Medius</span>
+          <span class="muscle-tag">Glute Max</span>
+        </div>
+      </div>
+
+      <!-- 6: Adductor -->
+      <div class="bento-card">
+        <div class="card-number">06 - Inner Thigh</div>
+        <div class="card-title">HIP ADDUCTOR</div>
+        <div class="card-stat-row" style="flex-direction:column; gap:8px;">
+          <div class="card-stat"><strong>3x10</strong>Sets x Reps</div>
+          <div class="card-stat"><strong>35kg</strong>Weight</div>
+        </div>
+        <div class="muscle-tags">
+          <span class="muscle-tag">Adductors</span>
+          <span class="muscle-tag">Inner Thigh</span>
+        </div>
+      </div>
+
+      <!-- 7: Rope Tricep Pushdown -->
+      <div class="bento-card col-2">
+        <div class="card-number">07 - Arms</div>
+        <div class="card-title">ROPE TRICEP PUSHDOWN</div>
+        <div class="card-subtitle">Cable machine - rope attachment</div>
+        <div class="card-stat-row">
+          <div class="card-stat"><strong>4x12</strong>Sets x Reps</div>
+          <div class="card-stat"><strong>~15kg</strong>Weight</div>
+        </div>
+        <div style="margin-top:12px; font-size:12px; color:var(--text-dim);">Rope attachment chosen for greater ROM, neutral wrist position, and that final outward twist for full horseshoe activation.</div>
+        <div class="muscle-tags">
+          <span class="muscle-tag">Triceps Brachii</span>
+          <span class="muscle-tag">All 3 Heads</span>
+        </div>
+      </div>
+
+      <!-- 8: Treadmill - FULL WIDTH HIGHLIGHT -->
+      <div class="bento-card col-2 accent-border" style="border-left:3px solid #ef4444;">
+        <div class="card-number" style="color:#ef4444;">08 - Cardio Finisher</div>
+        <div class="card-title">INCLINE TREADMILL WALK</div>
+        <div class="card-subtitle">30 minutes of sustained incline work</div>
+        <div class="card-stat-row">
+          <div class="card-stat"><strong>15%</strong>Incline</div>
+          <div class="card-stat"><strong>6 km/h</strong>Speed</div>
+          <div class="card-stat"><strong>30:00</strong>Duration</div>
+          <div class="card-stat"><strong style="color:#ef4444;">630</strong>Kcal</div>
+        </div>
+        <div style="margin-top:12px; font-size:12px; color:var(--text-dim);">15% incline at 6km/h is no leisurely stroll. Glute activation, posterior chain burn, cardiovascular conditioning. The perfect finisher after 7 weight exercises. Joint-friendly, fat-burning zone. Asked to push for an hour. Trainer said no. Smart call.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- KCAL FLOW -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-header">ENERGY BALANCE</h2>
+    <div class="kcal-flow">
+      <div class="kcal-block">
+        <div class="kcal-big burn">630</div>
+        <div class="stat-label">Kcal Burned</div>
+        <div style="font-size:12px; color:var(--text-dim); margin-top:8px;">30min incline walk</div>
+      </div>
+      <div class="kcal-arrow">-</div>
+      <div class="kcal-block">
+        <div class="kcal-big eat">700</div>
+        <div class="stat-label">Kcal Refueled</div>
+        <div style="font-size:12px; color:var(--text-dim); margin-top:8px;">FOODBOWL salmon bowl</div>
+      </div>
+      <div class="kcal-arrow">=</div>
+      <div class="kcal-math">
+        <div class="kcal-math-label">Net Effect</div>
+        <div class="kcal-math-value">Near Perfect</div>
+        <div style="font-size:13px; color:var(--text-muted); margin-top:8px;">Clean fuel replacing clean burn.<br>52g protein for muscle repair.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POST-WORKOUT MEAL -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="meal-card">
+      <div class="meal-image">🥩🍣🥦</div>
+      <div class="meal-info">
+        <div style="font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);margin-bottom:8px;">Post-Workout Refuel</div>
+        <div class="meal-title">FOODBOWL<br>Raffles City</div>
+        <div style="font-size:14px;color:var(--text-muted);margin-top:8px;">Beef & Mushroom Bowl + Extra Salmon</div>
+        <div class="meal-macros">
+          <div class="macro-item">
+            <div class="macro-value">52g</div>
+            <div class="macro-label">Protein</div>
+          </div>
+          <div class="macro-item">
+            <div class="macro-value">60g</div>
+            <div class="macro-label">Carbs</div>
+          </div>
+          <div class="macro-item">
+            <div class="macro-value">~700</div>
+            <div class="macro-label">Calories</div>
+          </div>
+        </div>
+        <div style="margin-top:16px;font-size:12px;color:var(--text-dim);">Quinoa, rice, corn, broccoli, mushrooms, apple. Salmon omega-3s for inflammation recovery. Complete protein profile.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-header">THE SESSION<br>UNFOLDED</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot filled"></div>
+        <div class="timeline-time">16:46 - Start</div>
+        <div class="timeline-title">First gym pic sent</div>
+        <div class="timeline-detail">DHN Cable Station. @iron agent born mid-session.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot filled"></div>
+        <div class="timeline-time">16:53 - Exercise 1</div>
+        <div class="timeline-title">Seated Cable Row</div>
+        <div class="timeline-detail">4x12 at 32kg. Back day begins.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot filled"></div>
+        <div class="timeline-time">17:05 - Exercise 2</div>
+        <div class="timeline-title">LAT Pulldown</div>
+        <div class="timeline-detail">4x12 at 32 then 28kg. Smart weight adjustment.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot filled"></div>
+        <div class="timeline-time">17:30 - Exercise 3</div>
+        <div class="timeline-title">Iso-Lateral Row</div>
+        <div class="timeline-detail">The breakthrough. 30kg down to 15kg for mind-muscle connection. "I don't feel my lat burning" / solved mid-set with elbow-drive cue.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot filled"></div>
+        <div class="timeline-time">17:45 - Exercise 4</div>
+        <div class="timeline-title">Iso-Lateral Shoulder Press</div>
+        <div class="timeline-detail">4x12. Shoulders and triceps. "What does iso-lateral mean?" / learned it mid-set.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot filled"></div>
+        <div class="timeline-time">18:00 - Exercise 5 & 6</div>
+        <div class="timeline-title">Abductor + Adductor</div>
+        <div class="timeline-detail">4x18 at 70kg / 3x10 at 35kg. "Is the equipment broken?" / no, abductors are just naturally stronger.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot filled"></div>
+        <div class="timeline-time">18:15 - Exercise 7</div>
+        <div class="timeline-title">Rope Tricep Pushdown</div>
+        <div class="timeline-detail">4x12 at ~15kg. Rope chosen for full ROM and medial head squeeze.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot filled"></div>
+        <div class="timeline-time">18:35 - Exercise 8</div>
+        <div class="timeline-title">Incline Treadmill Walk</div>
+        <div class="timeline-detail">30 minutes, 15% incline, 6 km/h. 630 kcal burned. Asked to push for an hour. The trainer said: "sometimes the strongest move is stepping off."</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">19:55 - Refuel</div>
+        <div class="timeline-title">FOODBOWL at Raffles City</div>
+        <div class="timeline-detail">Beef, mushroom, extra salmon, quinoa, rice, broccoli. ~700 kcal, 52g protein. The perfect close.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINER QUOTE -->
+<section class="quote-block">
+  <div class="quote-text">"You're not just building muscle. You're forging the <span>complete athlete</span>, a true masterpiece of strength and stamina."</div>
+  <div class="quote-attribution">- Iron, Your Personal Trainer</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer container">
+  <span>Iron Log - Session 1 - June 11, 2026</span>
+  <span>SrKeeda - 185cm / 88kg - Hypertrophy</span>
+</footer>
+
+</body>
+</html>

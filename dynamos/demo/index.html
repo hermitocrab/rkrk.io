@@ -1435,8 +1435,8 @@ document.querySelectorAll('.module-card[data-parallax]').forEach(card => {
    FORM POPUP LOGIC
    ================================================================ */
 // --- Config (fill these in!) ---
-const SUPABASE_URL = 'https://jingjvvmupqxwlzeyirk.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const SUPABASE_URL = 'https://qflaflwkzdxuhqekhxos.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbG…vBGk';
 
 function openFormPopup(){
   const overlay = document.getElementById('form-overlay');
@@ -1487,7 +1487,7 @@ async function handleSubmit(e){
   let success = false;
 
   // Try Supabase
-  if(SUPABASE_URL !== 'YOUR_SUPABASE_URL' && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY'){
+  if(SUPABASE_URL && SUPABASE_ANON_KEY){
     try{
       const resp = await fetch(`${SUPABASE_URL}/rest/v1/demo_requests`, {
         method:'POST',

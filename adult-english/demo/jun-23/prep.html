@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre-Class Materials — Greetings & Professional Introductions | rkrk.io × 托朴教育</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf9; --card: #ffffff; --text: #1a1a2e; --sub: #6b7280;
+  --accent: #e07a5f; --accent2: #3d405b; --gold: #f2cc8f;
+  --border: #e5e7eb; --radius: 16px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter','Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+h1,h2,h3{font-family:'Outfit','Noto Sans SC',sans-serif}
+.container{max-width:720px;margin:0 auto;padding:24px 20px 60px}
+
+header{text-align:center;padding:40px 0 32px}
+.logo{font-size:13px;text-transform:uppercase;letter-spacing:0.15em;color:var(--sub);margin-bottom:8px}
+header h1{font-size:clamp(1.6rem,3.5vw,2rem);font-weight:800;letter-spacing:-0.03em;line-height:1.15;margin-bottom:8px}
+header .sub{font-size:15px;color:var(--sub)}
+
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;margin:0 4px}
+.badge-demo{background:#fef3c7;color:#92400e}
+.badge-level{background:#e0e7ff;color:#3730a3}
+.badge-time{background:#fce7f3;color:#9d174d}
+
+/* Section cards */
+.section-card{background:var(--card);border-radius:var(--radius);padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.section-card .emoji{font-size:24px;margin-bottom:8px}
+.section-card h2{font-size:18px;font-weight:700;margin-bottom:4px}
+.section-card .meta{font-size:13px;color:var(--sub);margin-bottom:12px}
+
+/* Reading passage */
+.reading-passage{font-size:15px;line-height:1.85;color:var(--text)}
+.reading-passage p{margin-bottom:14px}
+.reading-passage .drop-cap{float:left;font-family:'Outfit',serif;font-size:64px;line-height:1;font-weight:800;color:var(--accent);margin-right:8px;margin-top:2px}
+.en-line { color: var(--text); }
+.cn-line { color: var(--sub); font-size: 0.92em; }
+
+/* Lexicon table */
+.lexicon-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+.lexicon-table th{background:var(--accent2);color:#fff;padding:8px 10px;text-align:left;font-weight:600;font-size:12px;letter-spacing:0.04em}
+.lexicon-table td{padding:10px;border-bottom:1px solid var(--border);vertical-align:top}
+.lexicon-table tr:nth-child(even){background:#f9fafb}
+.lexicon-table .source-tag{display:inline-block;padding:1px 7px;border-radius:8px;font-size:10px;font-weight:600}
+.source-reading{background:#fef3c7;color:#92400e}
+.source-video{background:#e0e7ff;color:#3730a3}
+.source-both{background:#fce7f3;color:#9d174d}
+.phonetic{font-family:'Courier New',monospace;font-size:11px;color:var(--accent)}
+.example-cell{font-size:12px;color:var(--sub);font-style:italic}
+
+/* Matching exercise */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;font-size:13px}
+@media(max-width:500px){.match-grid{grid-template-columns:1fr}}
+.match-item{display:flex;align-items:flex-start;gap:8px;padding:8px 12px;background:#f9fafb;border-radius:10px;border:1px solid var(--border)}
+.match-num{font-weight:700;color:var(--accent);min-width:20px;flex-shrink:0}
+.match-select{font-size:12px;padding:2px 6px;border:1px solid var(--border);border-radius:6px;background:#fff;font-family:'Inter',sans-serif}
+
+/* MCQ */
+.mcq-item{margin:12px 0;padding:12px 16px;background:#f9fafb;border-radius:10px;border:1px solid var(--border)}
+.mcq-item .question{font-size:14px;font-weight:600;margin-bottom:8px;color:var(--text)}
+.mcq-option{display:block;padding:6px 0;font-size:13px;cursor:pointer}
+.mcq-option input{margin-right:8px;accent-color:var(--accent)}
+
+/* Answers section */
+.answers-toggle{display:inline-block;margin:12px 0;padding:8px 16px;background:var(--accent);color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;transition:transform 0.2s}
+.answers-toggle:hover{transform:scale(1.04)}
+.answers-content{display:none;background:#f9fafb;border:1px solid var(--border);border-radius:12px;padding:20px;margin:12px 0;font-size:13px;line-height:1.8}
+.answers-content.visible{display:block}
+.answers-content .correct{color:#16a34a;font-weight:600}
+
+/* Download section */
+.download-box{background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:var(--radius);padding:24px;text-align:center;margin:12px 0}
+.download-box h3{font-size:17px;font-weight:700;color:#92400e;margin-bottom:8px}
+.download-box p{font-size:13px;color:#78350f;margin-bottom:16px}
+.btn{display:inline-block;padding:12px 24px;background:var(--accent);color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:600;transition:transform 0.2s}
+.btn:hover{transform:scale(1.04)}
+
+/* Video link */
+.video-note{background:#eef2ff;border:1px solid #c7d2fe;border-radius:12px;padding:16px;margin:12px 0;font-size:13px;color:#3730a3;line-height:1.7}
+
+/* Footer */
+footer{text-align:center;padding:32px 0;color:var(--sub);font-size:12px;border-top:1px solid var(--border);margin-top:40px}
+footer .brand{font-weight:700;color:var(--text)}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <div class="logo">rkrk.io × 托朴教育</div>
+  <h1>Pre-Class Materials 📚</h1>
+  <p class="sub">Greetings & Professional Introductions — Business English Lesson 1</p>
+  <div style="margin-top:12px">
+    <span class="badge badge-demo">Pre-Class</span>
+    <span class="badge badge-level">A2–B1+</span>
+    <span class="badge badge-time">~25 min</span>
+  </div>
+</header>
+
+<!--============================================
+  PRE-CLASS READING
+  ============================================-->
+<div class="section-card">
+  <div class="emoji">📖</div>
+  <h2>Pre-Class Reading: The Art of Professional Introductions</h2>
+  <div class="meta">Read carefully · 5 minutes · Take notes</div>
+
+  <div class="reading-passage">
+    <p style="font-size:13px;color:var(--accent);margin-bottom:16px;cursor:pointer;user-select:none" onclick="var cn=document.querySelectorAll('.cn-line');cn.forEach(function(el){el.style.display=el.style.display==='none'?'inline':'none'});this.textContent=this.textContent.includes('显示')?'🌐 隐藏中文翻译':'🌐 显示中文翻译'">🌐 显示中文翻译</p>
+    <p><span class="drop-cap">W</span><span class="en-line">hen you meet someone for the first time in a <b>professional</b> setting, you have approximately seven seconds to make a first <b>impression</b>.</span><br><span class="cn-line" style="display:none;">当你在职业场合第一次见到某人时，你大约有七秒钟的时间来留下第一印象。</span></p>
+    <p><span class="en-line">That's it. Seven seconds.</span><br><span class="cn-line" style="display:none;">就这些。七秒。</span></p>
+    <p><span class="en-line">Before you even finish your first sentence, the person in front of you has already formed an opinion — about your confidence, your competence, and whether they want to work with you.</span><br><span class="cn-line" style="display:none;">在你还没说完第一句话之前，对方已经对你形成了判断——关于你的自信、你的能力、以及他们是否想与你共事。</span></p>
+    <p><span class="en-line">This is known as the <b>7-second rule</b>, and it's why mastering the art of professional introductions is one of the most valuable skills in business English.</span><br><span class="cn-line" style="display:none;">这就是所谓的<b>七秒法则</b>，这也是为什么掌握职业自我介绍的艺术是商务英语中最有价值的技能之一。</span></p>
+
+    <p><span class="en-line">A strong professional introduction follows a simple three-step structure: <b>Present → Past → Future</b>.</span><br><span class="cn-line" style="display:none;">一个有力的职业自我介绍遵循简单的三步结构：<b>现在 → 过去 → 未来</b>。</span></p>
+    <p><span class="en-line">First, you state who you are right now — your name, your role, your current position. "Good morning, everyone. My name is Sarah Chen. I'm a marketing director at GlobalTech."</span><br><span class="cn-line" style="display:none;">第一步，说出你现在的身份——你的名字、职位、当前角色。"大家早上好，我是Sarah Chen，GlobalTech的市场总监。"</span></p>
+    <p><span class="en-line">This grounds the listener. It gives them the essential facts.</span><br><span class="cn-line" style="display:none;">这让听众有了基本认知，给了他们关键信息。</span></p>
+    <p><span class="en-line">Second, you share your <b>background</b> and <b>experience</b> — where you've been, what you've done, what you've learned. "I've been leading the Asia-Pacific team for three years. Previously, I built a marketing department from scratch at a startup in Shanghai."</span><br><span class="cn-line" style="display:none;">第二步，分享你的<b>背景</b>和<b>经验</b>——你去过哪里、做过什么、学到了什么。"过去三年我一直在领导亚太团队，在此之前我在上海一家创业公司从零开始搭建了市场部。"</span></p>
+    <p><span class="en-line">This establishes credibility.</span><br><span class="cn-line" style="display:none;">这建立了你的可信度。</span></p>
+    <p><span class="en-line">Third, you look forward — why you're here, what you hope to achieve, what comes next. "I'm here today to learn more about B2B marketing trends and to meet potential collaborators. I'm <b>looking forward to</b> the discussions ahead."</span><br><span class="cn-line" style="display:none;">第三步，展望未来——你为什么在这里、你想达成什么、接下来会发生什么。"我今天来这里是想了解B2B营销趋势并结识潜在的合作者。我很期待接下来的讨论。"</span></p>
+    <p><span class="en-line">This shows purpose and creates an <b>opportunity</b> for connection.</span><br><span class="cn-line" style="display:none;">这展示了你的目的，创造了连接的机会。</span></p>
+
+    <p><span class="en-line">However, <b>cultural differences</b> play a significant role in how introductions are received.</span><br><span class="cn-line" style="display:none;">然而，<b>文化差异</b>在自我介绍如何被接受方面起着重要作用。</span></p>
+    <p><span class="en-line">In many Western business cultures, a firm <b>handshake</b> and direct eye contact convey confidence and trustworthiness.</span><br><span class="cn-line" style="display:none;">在许多西方商业文化中，有力的<b>握手</b>和直接的眼神交流传达出自信和可信度。</span></p>
+    <p><span class="en-line">A weak handshake or avoiding eye contact can be interpreted as nervousness or dishonesty.</span><br><span class="cn-line" style="display:none;">软弱无力的握手或回避眼神交流可能被解读为紧张或不诚实。</span></p>
+    <p><span class="en-line">In East Asian cultures, a slight bow or a gentler handshake may be more appropriate, and sustained eye contact can sometimes feel confrontational.</span><br><span class="cn-line" style="display:none;">在东亚文化中，轻微鞠躬或较轻柔的握手可能更合适，持续的眼神交流有时会让人感到压迫。</span></p>
+    <p><span class="en-line">The key is adaptability — read the room, observe what others are doing, and adjust accordingly.</span><br><span class="cn-line" style="display:none;">关键是适应性——观察环境、注意他人在做什么、并相应调整。</span></p>
+    <p><span class="en-line"><b>Confident</b> body language is universal: stand tall, keep your shoulders back, and avoid <b>glancing</b> at your phone.</span><br><span class="cn-line" style="display:none;"><b>自信</b>的肢体语言是通用的：挺直站立、肩膀向后、避免<b>看</b>手机。</span></p>
+
+    <p><span class="en-line">There are also common mistakes to avoid.</span><br><span class="cn-line" style="display:none;">还有一些常见错误需要避免。</span></p>
+    <p><span class="en-line">Never begin with "Myself [Name]" — this is a direct translation error from several languages including Hindi, but in English it sounds awkward and ungrammatical.</span><br><span class="cn-line" style="display:none;">千万不要用"Myself [名字]"开头——这是包括印地语在内的几种语言的直译错误，但在英语中听起来尴尬且语法不对。</span></p>
+    <p><span class="en-line">Don't speak too fast — nerves can make you rush, but a measured pace signals control.</span><br><span class="cn-line" style="display:none;">不要说得太快——紧张会让你加速，但稳重的节奏表现出掌控力。</span></p>
+    <p><span class="en-line">Don't recite your entire CV — a professional introduction is not a biography. It's an <b>elevator pitch</b>: 30 seconds that tell someone who you are, why you matter, and why they should care.</span><br><span class="cn-line" style="display:none;">不要背诵你整份简历——职业自我介绍不是传记。这是一个<b>电梯演讲</b>：用30秒告诉别人你是谁、你为什么重要、以及他们为什么应该在意。</span></p>
+    <p><span class="en-line">Keep it concise, keep it relevant, and always end with warmth. "It's a pleasure to meet you" or "Thank you" is far better than trailing off or saying "that's it."</span><br><span class="cn-line" style="display:none;">保持简洁、保持相关、永远以温暖结束。"很高兴认识你"或"谢谢"远比声音渐弱或说"就这样"好得多。</span></p>
+
+    <p><span class="en-line">Finally, remember that introductions are the beginning of a conversation, not the end of one.</span><br><span class="cn-line" style="display:none;">最后，记住自我介绍是对话的开始，而不是结束。</span></p>
+    <p><span class="en-line">The goal is not to impress — it's to <b>connect</b>. Building <b>rapport</b> is more important than sounding impressive.</span><br><span class="cn-line" style="display:none;">目标不是让人印象深刻——而是<b>建立连接</b>。建立<b>融洽关系</b>比听起来厉害更重要。</span></p>
+    <p><span class="en-line">Ask questions. Show genuine interest in the other person.</span><br><span class="cn-line" style="display:none;">提问。对对方表现出真诚的兴趣。</span></p>
+    <p><span class="en-line">At a <b>networking</b> event, the person who listens well is often remembered more fondly than the person who talks the most.</span><br><span class="cn-line" style="display:none;">在<b>社交</b>活动中，善于倾听的人往往比说得最多的人更令人难忘。</span></p>
+    <p><span class="en-line">A good introduction opens the door. A good conversation walks through it.</span><br><span class="cn-line" style="display:none;">一个好的介绍打开了一扇门。一段好的对话走了进去。</span></p>
+  </div>
+
+  <div style="margin-top:20px;">
+    <b>📱 Pre-Class Video:</b> <em>How to Introduce Yourself Professionally</em> (4 minutes)
+    <div style="margin-top:12px;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+      <video controls preload="metadata" style="width:100%;display:block;" poster="">
+        <source src="media/how-to-introduce-yourself.mp4" type="video/mp4">
+        <track kind="subtitles" src="media/bilingual.vtt" srclang="zh" label="中文 (Chinese)" default>
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <p style="font-size:12px;color:#6b7280;margin-top:6px;">🎬 Present → Past → Future formula · Examples from Jennifer, Joe, and Maria · 3-step professional introduction framework</p>
+  </div>
+</div>
+
+<!--============================================
+  PRE-CLASS LEXICON
+  ============================================-->
+<div class="section-card">
+  <div class="emoji">📝</div>
+  <h2>Pre-Class Lexicon — Key Vocabulary · 课前词汇表</h2>
+  <div class="meta">Study these words before class · 16 items · 课前预习 · From both the reading and the video</div>
+
+  <table class="lexicon-table">
+    <thead>
+      <tr>
+        <th>Word / Phrase</th>
+        <th>Phonetic</th>
+        <th>中文</th>
+        <th>Source</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>greeting</b></td>
+        <td class="phonetic">/ˈɡriːtɪŋ/</td>
+        <td>问候</td>
+        <td><span class="source-tag source-reading">Reading</span></td>
+        <td class="example-cell">"A proper greeting sets the tone."</td>
+      </tr>
+      <tr>
+        <td><b>impression</b></td>
+        <td class="phonetic">/ɪmˈpreʃən/</td>
+        <td>印象</td>
+        <td><span class="source-tag source-reading">Reading</span></td>
+        <td class="example-cell">"You have 7 seconds to make a first impression."</td>
+      </tr>
+      <tr>
+        <td><b>introduce</b></td>
+        <td class="phonetic">/ˌɪntrəˈdjuːs/</td>
+        <td>介绍</td>
+        <td><span class="source-tag source-video">Video</span></td>
+        <td class="example-cell">"Let me introduce myself."</td>
+      </tr>
+      <tr>
+        <td><b>professional</b></td>
+        <td class="phonetic">/prəˈfeʃənəl/</td>
+        <td>职业的；专业的</td>
+        <td><span class="source-tag source-reading">Reading</span></td>
+        <td class="example-cell">"A professional introduction follows a structure."</td>
+      </tr>
+      <tr>
+        <td><b>colleague</b></td>
+        <td class="phonetic">/ˈkɒliːɡ/</td>
+        <td>同事</td>
+        <td><span class="source-tag source-video">Video</span></td>
+        <td class="example-cell">"I look forward to working with my new colleagues."</td>
+      </tr>
+      <tr>
+        <td><b>background</b></td>
+        <td class="phonetic">/ˈbækɡraʊnd/</td>
+        <td>背景</td>
+        <td><span class="source-tag source-video">Video</span></td>
+        <td class="example-cell">"Let me give you some background."</td>
+      </tr>
+      <tr>
+        <td><b>experience</b></td>
+        <td class="phonetic">/ɪkˈspɪəriəns/</td>
+        <td>经验</td>
+        <td><span class="source-tag source-both">Both</span></td>
+        <td class="example-cell">"I've been working in this field for over eight years."</td>
+      </tr>
+      <tr>
+        <td><b>credibility</b></td>
+        <td class="phonetic">/ˌkredəˈbɪləti/</td>
+        <td>可信度；专业信誉</td>
+        <td><span class="source-tag source-video">Video</span></td>
+        <td class="example-cell">"Something that establishes your credibility."</td>
+      </tr>
+      <tr>
+        <td><b>opportunity</b></td>
+        <td class="phonetic">/ˌɒpəˈtjuːnəti/</td>
+        <td>机会</td>
+        <td><span class="source-tag source-reading">Reading</span></td>
+        <td class="example-cell">"This is a great opportunity to connect."</td>
+      </tr>
+      <tr>
+        <td><b>networking</b></td>
+        <td class="phonetic">/ˈnetwɜːkɪŋ/</td>
+        <td>社交；建立人脉</td>
+        <td><span class="source-tag source-reading">Reading</span></td>
+        <td class="example-cell">"At a networking event, listening matters more than talking."</td>
+      </tr>
+      <tr>
+        <td><b>handshake</b></td>
+        <td class="phonetic">/ˈhændʃeɪk/</td>
+        <td>握手</td>
+        <td><span class="source-tag source-reading">Reading</span></td>
+        <td class="example-cell">"A firm handshake conveys confidence."</td>
+      </tr>
+      <tr>
+        <td><b>elevator pitch</b></td>
+        <td class="phonetic">/ˈelɪveɪtə pɪtʃ/</td>
+        <td>电梯演讲</td>
+        <td><span class="source-tag source-reading">Reading</span></td>
+        <td class="example-cell">"Your elevator pitch should be 30 seconds."</td>
+      </tr>
+      <tr>
+        <td><b>rapport</b></td>
+        <td class="phonetic">/ræˈpɔː/</td>
+        <td>融洽关系</td>
+        <td><span class="source-tag source-reading">Reading</span></td>
+        <td class="example-cell">"Building rapport is more important than sounding impressive."</td>
+      </tr>
+      <tr>
+        <td><b>confident</b></td>
+        <td class="phonetic">/ˈkɒnfɪdənt/</td>
+        <td>自信的</td>
+        <td><span class="source-tag source-both">Both</span></td>
+        <td class="example-cell">"Sound confident but not arrogant."</td>
+      </tr>
+      <tr>
+        <td><b>glance</b></td>
+        <td class="phonetic">/ɡlɑːns/</td>
+        <td>一瞥；扫视</td>
+        <td><span class="source-tag source-reading">Reading</span></td>
+        <td class="example-cell">"Avoid glancing at your phone during introductions."</td>
+      </tr>
+      <tr>
+        <td><b>enthusiasm</b></td>
+        <td class="phonetic">/ɪnˈθjuːziæzəm/</td>
+        <td>热情；热忱</td>
+        <td><span class="source-tag source-video">Video</span></td>
+        <td class="example-cell">"Show some enthusiasm for the topic at hand."</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="font-size:12px;color:var(--sub);margin-top:8px">
+    <b>📋 How to use this lexicon:</b> ① Read each word aloud. ② Check the phonetic and stress. ③ Read the example sentence. ④ Cover the Chinese column and test yourself. ⑤ Mark any words you find difficult — we'll focus on those in class.
+  </div>
+</div>
+
+<!--============================================
+  READING COMPREHENSION
+  ============================================-->
+<div class="section-card">
+  <div class="emoji">✓</div>
+  <h2>Check Your Understanding</h2>
+  <div class="meta">Complete before class · Self-check with the answer key</div>
+
+  <!-- Section A: Matching -->
+  <h3 style="font-size:15px;color:var(--accent2);margin-top:12px;margin-bottom:8px">Section A: Matching · 配对题 (8 items)</h3>
+  <p style="font-size:13px;color:#6b7280;margin-bottom:12px;">Match each phrase with its correct meaning. 将每个短语与正确的含义配对。</p>
+  <p style="font-size:13px;color:var(--sub);margin-bottom:8px">Match each phrase (1–8) with its correct meaning (a–h).</p>
+
+  <div class="match-grid">
+    <div class="match-item">
+      <span class="match-num">1.</span>
+      <span>"Good morning, everyone"</span>
+      <select class="match-select"><option>?</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option><option>g</option><option>h</option></select>
+    </div>
+    <div class="match-item">
+      <span class="match-num">2.</span>
+      <span>"keep it short and sweet"</span>
+      <select class="match-select"><option>?</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option><option>g</option><option>h</option></select>
+    </div>
+    <div class="match-item">
+      <span class="match-num">3.</span>
+      <span>"I'm looking forward to"</span>
+      <select class="match-select"><option>?</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option><option>g</option><option>h</option></select>
+    </div>
+    <div class="match-item">
+      <span class="match-num">4.</span>
+      <span>"Please feel free to"</span>
+      <select class="match-select"><option>?</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option><option>g</option><option>h</option></select>
+    </div>
+    <div class="match-item">
+      <span class="match-num">5.</span>
+      <span>"I've heard great things about"</span>
+      <select class="match-select"><option>?</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option><option>g</option><option>h</option></select>
+    </div>
+    <div class="match-item">
+      <span class="match-num">6.</span>
+      <span>"Previously, I worked at"</span>
+      <select class="match-select"><option>?</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option><option>g</option><option>h</option></select>
+    </div>
+    <div class="match-item">
+      <span class="match-num">7.</span>
+      <span>"It's a pleasure to meet you"</span>
+      <select class="match-select"><option>?</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option><option>g</option><option>h</option></select>
+    </div>
+    <div class="match-item">
+      <span class="match-num">8.</span>
+      <span>"I'm responsible for"</span>
+      <select class="match-select"><option>?</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option><option>g</option><option>h</option></select>
+    </div>
+  </div>
+
+  <div style="font-size:13px;color:var(--sub);margin-top:8px;line-height:1.8">
+    <b>Meanings to choose from:</b><br>
+    a) A formal greeting for a group<br>
+    b) Keep it brief and concise<br>
+    c) I am excited about (a future event)<br>
+    d) You are welcome to...<br>
+    e) People have told me positive things about...<br>
+    f) In the past, my job was at...<br>
+    g) A polite and warm closing statement<br>
+    h) My duties include...
+  </div>
+
+  <!-- Section B: Multiple Choice -->
+  <h3 style="font-size:15px;color:var(--accent2);margin-top:20px;margin-bottom:8px">Section B: Multiple Choice · 选择题 (5 items)</h3>
+  <p style="font-size:13px;color:#6b7280;margin-bottom:12px;">Choose the best answer for each question. 为每道题选择最佳答案。</p>
+  <p style="font-size:13px;color:var(--sub);margin-bottom:8px">Choose the best answer based on the reading passage and the pre-class video.</p>
+
+  <div class="mcq-item">
+    <p class="question">1. According to the reading, how long do you have to make a first impression?</p>
+    <label class="mcq-option"><input type="radio" name="q1" value="a"> a) 30 seconds</label>
+    <label class="mcq-option"><input type="radio" name="q1" value="b"> b) 7 seconds</label>
+    <label class="mcq-option"><input type="radio" name="q1" value="c"> c) 1 minute</label>
+    <label class="mcq-option"><input type="radio" name="q1" value="d"> d) 5 seconds</label>
+  </div>
+
+  <div class="mcq-item">
+    <p class="question">2. What is the correct order of the 3-step introduction formula?</p>
+    <label class="mcq-option"><input type="radio" name="q2" value="a"> a) Past → Future → Present</label>
+    <label class="mcq-option"><input type="radio" name="q2" value="b"> b) Future → Present → Past</label>
+    <label class="mcq-option"><input type="radio" name="q2" value="c"> c) Present → Past → Future</label>
+    <label class="mcq-option"><input type="radio" name="q2" value="d"> d) Past → Present → Future</label>
+  </div>
+
+  <div class="mcq-item">
+    <p class="question">3. Why is body language important in professional introductions?</p>
+    <label class="mcq-option"><input type="radio" name="q3" value="a"> a) It replaces the need for words</label>
+    <label class="mcq-option"><input type="radio" name="q3" value="b"> b) It conveys confidence and approachability</label>
+    <label class="mcq-option"><input type="radio" name="q3" value="c"> c) It is not important if you speak well</label>
+    <label class="mcq-option"><input type="radio" name="q3" value="d"> d) Only in Asian cultures</label>
+  </div>
+
+  <div class="mcq-item">
+    <p class="question">4. What is a common mistake in professional introductions?</p>
+    <label class="mcq-option"><input type="radio" name="q4" value="a"> a) Speaking too clearly</label>
+    <label class="mcq-option"><input type="radio" name="q4" value="b"> b) Making eye contact</label>
+    <label class="mcq-option"><input type="radio" name="q4" value="c"> c) Using a firm handshake</label>
+    <label class="mcq-option"><input type="radio" name="q4" value="d"> d) Saying "Myself [Name]"</label>
+  </div>
+
+  <div class="mcq-item">
+    <p class="question">5. Which phrase is best for ending a professional introduction?</p>
+    <label class="mcq-option"><input type="radio" name="q5" value="a"> a) "That's it."</label>
+    <label class="mcq-option"><input type="radio" name="q5" value="b"> b) "I'm done."</label>
+    <label class="mcq-option"><input type="radio" name="q5" value="c"> c) "Thank you."</label>
+    <label class="mcq-option"><input type="radio" name="q5" value="d"> d) "Bye."</label>
+  </div>
+
+  <!-- Answer Key -->
+  <button class="answers-toggle" onclick="toggleAnswers()">🔑 Show Answer Key · 显示答案</button>
+  <div class="answers-content" id="answersContent">
+    <h4 style="color:var(--accent2);margin-bottom:8px">Section A: Matching Answers</h4>
+    <p>1. <span class="correct">a</span> — "Good morning, everyone" is a formal greeting for a group.</p>
+    <p>2. <span class="correct">b</span> — "keep it short and sweet" means keep it brief and concise (from the video).</p>
+    <p>3. <span class="correct">c</span> — "I'm looking forward to" expresses excitement about a future event.</p>
+    <p>4. <span class="correct">d</span> — "Please feel free to" is a polite way of saying "you are welcome to."</p>
+    <p>5. <span class="correct">e</span> — "I've heard great things about" means people have told you positive things.</p>
+    <p>6. <span class="correct">f</span> — "Previously, I worked at" refers to a past job.</p>
+    <p>7. <span class="correct">g</span> — "It's a pleasure to meet you" is a polite and warm closing statement.</p>
+    <p>8. <span class="correct">h</span> — "I'm responsible for" means "my duties include."</p>
+
+    <h4 style="color:var(--accent2);margin-top:16px;margin-bottom:8px">Section B: Multiple Choice Answers</h4>
+    <p>1. <span class="correct">b) 7 seconds</span> — The reading explicitly states the 7-second rule: "you have approximately seven seconds to make a first impression."</p>
+    <p>2. <span class="correct">c) Present → Past → Future</span> — First state who you are now (Present), then your background (Past), then why you're here (Future).</p>
+    <p>3. <span class="correct">b) It conveys confidence and approachability</span> — Body language doesn't replace words, but it reinforces your message. A firm handshake, eye contact, and good posture signal confidence across cultures.</p>
+    <p>4. <span class="correct">d) Saying "Myself [Name]"</span> — This is a direct translation error from several languages. In English, say "My name is [Name]" or "I'm [Name]."</p>
+    <p>5. <span class="correct">c) "Thank you."</span> — A warm, professional close. "That's it" and "I'm done" sound abrupt and unconfident. "Bye" is too casual for a professional setting.</p>
+  </div>
+</div>
+
+<!--============================================
+  PDF DOWNLOAD
+  ============================================-->
+<div class="section-card">
+  <div class="emoji">📄</div>
+  <h2>Download Pre-Class Materials · 下载预习材料</h2>
+  <div class="meta">Printable PDF · 可打印PDF · All materials in one document</div>
+
+  <div class="download-box">
+    <h3>📥 Pre-Class Materials PDF · 预习材料PDF</h3>
+    <p>Includes: Reading passage · Complete lexicon · Matching exercise · Multiple choice questions · Answer key with explanations<br>包含：阅读文章 · 完整词汇表 · 配对题 · 选择题 · 答案解析</p>
+    <a href="media/pre-class-materials.pdf" class="btn" download>📄 Download / Print PDF · 下载/打印</a>
+    <p style="font-size:11px;color:#92400e;margin-top:10px">Opens a print-friendly page. Use Ctrl+P (Cmd+P) → Save as PDF to download.<br>打开打印页面，使用 Ctrl+P (Cmd+P) → 另存为PDF下载。</p>
+  </div>
+</div>
+
+<footer>
+  <p class="brand">rkrk.io × 托朴教育</p>
+  <p>Pre-Class Materials · Business English Lesson 1 · Demo Class Jun 23</p>
+  <p style="margin-top:4px">rkrk@me.com</p>
+</footer>
+
+</div>
+
+<script>
+function toggleAnswers() {
+  const content = document.getElementById('answersContent');
+  const btn = document.querySelector('.answers-toggle');
+  content.classList.toggle('visible');
+  btn.textContent = content.classList.contains('visible') ? '🔒 Hide Answer Key · 隐藏答案' : '🔑 Show Answer Key · 显示答案';
+}
+</script>
+
+</body>
+</html>

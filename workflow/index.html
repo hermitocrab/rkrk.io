@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7天AI提分工作流 · 英语教师专用</title>
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --card: #141414;
+    --text: #e6e1d8;
+    --muted: #7a7a7a;
+    --accent: #f0a030;
+    --accent2: #5badf5;
+    --border: #222;
+    --green: #4caf88;
+    --code-bg: #0a0a0a;
+    --badge: #1c1c1c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* ── HERO ── */
+  .hero {
+    text-align: center;
+    padding: 90px 24px 64px;
+    background: linear-gradient(180deg, #181818 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero h1 { 
+    font-size: 2.6rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 10px;
+    background: linear-gradient(135deg, var(--text) 0%, #c0b898 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .sub { font-size: 1.05rem; color: var(--muted); font-weight: 400; }
+  .hero .tag {
+    margin-top: 24px; display: inline-flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+  }
+  .hero .tag span {
+    background: var(--badge); border: 1px solid var(--border); padding: 5px 14px;
+    border-radius: 20px; font-size: 0.8rem; color: var(--muted); letter-spacing: 0.02em;
+  }
+  
+  /* ── CONTAINER ── */
+  .container { max-width: 720px; margin: 0 auto; padding: 0 20px 100px; }
+  
+  /* ── GUIDE ── */
+  .guide {
+    margin: 56px 0; padding: 40px 36px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 16px;
+  }
+  .guide h2 { font-size: 1.25rem; margin-bottom: 24px; color: var(--accent2); font-weight: 700; }
+  .guide h3 { font-size: 0.95rem; margin: 24px 0 10px; font-weight: 600; }
+  .guide p, .guide li { color: var(--muted); font-size: 0.9rem; margin-bottom: 8px; }
+  .guide ol, .guide ul { padding-left: 22px; margin-bottom: 16px; }
+  .guide .highlight { 
+    background: var(--badge); border: 1px solid var(--border); border-radius: 12px; 
+    padding: 24px; margin: 18px 0; 
+  }
+  .guide .highlight p { color: var(--text); font-size: 0.95rem; margin: 0; line-height: 1.8; }
+  .guide .tip { color: var(--muted); font-size: 0.82rem; margin-top: 18px; line-height: 1.7; }
+  .guide .tip a { color: var(--accent2); }
+  
+  /* ── DAY CARD ── */
+  .day-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 44px 40px; margin-bottom: 20px; position: relative;
+    transition: border-color 0.2s;
+  }
+  .day-card:hover { border-color: #333; }
+  .day-card .day-num {
+    position: absolute; top: -15px; left: 24px;
+    background: var(--accent); color: #0a0a0a; padding: 5px 16px;
+    border-radius: 10px; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em;
+  }
+  .day-card h2 { font-size: 1.35rem; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.01em; }
+  .day-card .purpose { color: var(--accent2); font-weight: 600; margin-bottom: 8px; font-size: 0.92rem; }
+  
+  .day-card .io {
+    display: flex; gap: 20px; flex-wrap: wrap; margin: 14px 0;
+    padding: 14px 18px; background: var(--code-bg); border-radius: 10px; border: 1px solid var(--border);
+  }
+  .day-card .io div { flex: 1; min-width: 130px; }
+  .day-card .io strong { 
+    display: block; font-size: 0.72rem; color: var(--accent); text-transform: uppercase; 
+    letter-spacing: 0.06em; margin-bottom: 4px; 
+  }
+  .day-card .io span { font-size: 0.85rem; color: var(--muted); }
+  
+  .day-card .flow {
+    display: flex; flex-wrap: wrap; gap: 5px; align-items: center; margin: 16px 0;
+  }
+  .day-card .flow .step {
+    background: var(--badge); border: 1px solid var(--border); padding: 3px 10px;
+    border-radius: 6px; font-size: 0.78rem; color: var(--muted);
+  }
+  .day-card .flow .arr { color: var(--accent); font-weight: 700; font-size: 0.78rem; }
+  .day-card .output-doc {
+    font-size: 0.82rem; color: var(--green); margin: 10px 0 22px; font-weight: 600;
+  }
+  
+  /* ── PROMPT BLOCK ── */
+  .prompt-block { position: relative; margin-top: 6px; }
+  .prompt-block pre {
+    background: var(--code-bg); color: #bbb;
+    padding: 28px 24px; border-radius: 12px;
+    font-size: 0.8rem; line-height: 1.7;
+    border: 1px solid var(--border);
+    font-family: 'SF Mono', 'Menlo', 'Cascadia Code', 'Consolas', monospace;
+    white-space: pre-wrap; word-break: break-word; overflow-wrap: break-word;
+    max-height: 460px; overflow-y: auto; overflow-x: hidden;
+  }
+  .copy-btn {
+    position: absolute; top: 10px; right: 10px;
+    background: var(--accent); color: #0a0a0a; border: none;
+    padding: 6px 14px; border-radius: 8px; font-size: 0.78rem; font-weight: 700;
+    cursor: pointer; transition: all 0.15s; font-family: inherit;
+    z-index: 2;
+  }
+  .copy-btn:hover { filter: brightness(1.1); }
+  .copy-btn.copied { background: var(--green); color: #fff; }
+  
+  /* ── SETUP ── */
+  .agent-setup {
+    margin: 56px 0; padding: 40px 36px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 16px;
+  }
+  .agent-setup h2 { font-size: 1.25rem; margin-bottom: 24px; color: var(--accent); font-weight: 700; }
+  .agent-setup ol, .agent-setup ul { padding-left: 22px; }
+  .agent-setup li { margin-bottom: 14px; color: var(--muted); font-size: 0.9rem; }
+  
+  .table-wrap { 
+    overflow-x: auto; margin: 24px 0; 
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border); border-radius: 10px;
+  }
+  table { 
+    width: 100%; border-collapse: collapse; font-size: 0.84rem; min-width: 560px;
+  }
+  th { 
+    text-align: left; padding: 11px 14px; border-bottom: 2px solid var(--border); 
+    color: var(--accent); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--muted); }
+  
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; margin-top: 64px; padding: 36px 0;
+    border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem;
+  }
+  
+  /* ── SCROLLBAR ── */
+  .prompt-block pre::-webkit-scrollbar { width: 4px; }
+  .prompt-block pre::-webkit-scrollbar-track { background: transparent; }
+  .prompt-block pre::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+  
+  /* ── MOBILE ── */
+  @media (max-width: 600px) {
+    .hero { padding: 56px 16px 40px; }
+    .hero h1 { font-size: 1.7rem; }
+    .hero .sub { font-size: 0.9rem; }
+    .container { padding: 0 12px 60px; }
+    .guide { padding: 28px 20px; margin: 36px 0; }
+    .day-card { padding: 32px 18px 28px; }
+    .day-card h2 { font-size: 1.15rem; }
+    .day-card .io { flex-direction: column; gap: 10px; }
+    .prompt-block pre { padding: 20px 16px; font-size: 0.74rem; max-height: 360px; }
+    .copy-btn { top: 8px; right: 8px; font-size: 0.72rem; padding: 5px 12px; }
+    .agent-setup { padding: 28px 18px; }
+    table { font-size: 0.76rem; }
+    th, td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>7天AI提分工作流</h1>
+  <p class="sub">英语教师专用 · 复制粘贴就能用</p>
+  <div class="tag">
+    <span>聚焦考试提分</span>
+    <span>诊断→训练→路径规划</span>
+    <span>零技术门槛</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- GUIDE -->
+<div class="guide">
+  <h2>📖 三步上手</h2>
+  <div class="highlight">
+    <p>① 往下翻，找到你今天要用的一天<br>
+    ② 点「复制」，把文字复制下来<br>
+    ③ 打开 ChatGPT / DeepSeek / Kimi / 豆包 / 任何 AI 工具，粘贴进去<br>
+    <span style="color:var(--muted);">把方括号【】里的提示词替换成你的真实数据就行</span></p>
+  </div>
+  <p class="tip">💡 不需要一次用全部 7 天。用到哪天复制哪天。每天独立。<br>
+  🔗 如果你用 OpenClaw，可以设成 7 个常驻助手 → <a href="#setup">看这里</a></p>
+</div>
+
+<!-- DAY 1 -->
+<div class="day-card">
+  <div class="day-num">DAY 1</div>
+  <h2>试卷五维解码</h2>
+  <p class="purpose">看清一张卷子到底考什么</p>
+  <div class="io">
+    <div><strong>📥 你给它</strong><span>一份试卷的内容（拍照、打字、OCR 都行）</span></div>
+    <div><strong>📤 它给你</strong><span>《试卷五维解码表》</span></div>
+  </div>
+  <div class="flow">
+    <span class="step">试卷导入</span><span class="arr">→</span><span class="step">题目拆解</span><span class="arr">→</span><span class="step">考点标注</span><span class="arr">→</span><span class="step">五维归类</span>
+  </div>
+  <div class="prompt-block">
+    <button class="copy-btn" onclick="copyPrompt(this, 'p1')">📋 复制</button>
+    <pre id="p1">你是一位专业的英语试卷分析专家。请从五个维度分析这份试卷：
+
+1. 知识点维度 — 列出每道题考查的语法点和词汇点，标注题号
+2. 认知层级维度 — 每道题属于：识记 / 理解 / 应用 / 分析
+3. 题型维度 — 归类：选择题 / 填空题 / 匹配题 / 判断题 / 简答题 / 作文
+4. 难度维度 — 每道题评：简单 / 中等 / 困难，简要说明理由
+5. 分值分布维度 — 按听说读写语法词汇六大板块归类，统计各板块分值占比
+
+分析完成后，请指出：
+- 哪些考点权重过大（远高于真实考试的比例）
+- 哪些考点缺失（试卷没考到但考试会考的）
+- 这对教学优先级的启示
+
+最后输出一份《试卷五维解码表》，包含以上五个维度的完整分析，以及一个总览框：总题数、总分值、各技能覆盖率、最重要的一条发现。
+
+试卷内容如下：
+【在这里粘贴试卷内容】</pre>
+  </div>
+</div>
+
+<!-- DAY 2 -->
+<div class="day-card">
+  <div class="day-num">DAY 2</div>
+  <h2>班级学情筛查</h2>
+  <p class="purpose">看清班级共性漏洞</p>
+  <div class="io">
+    <div><strong>📥 你给它</strong><span>每个学生每道小题的得分</span></div>
+    <div><strong>📤 它给你</strong><span>《班级漏洞筛子图》</span></div>
+  </div>
+  <div class="flow">
+    <span class="step">小题得分</span><span class="arr">→</span><span class="step">维度统计</span><span class="arr">→</span><span class="step">筛子图定位</span><span class="arr">→</span><span class="step">问题排序</span>
+  </div>
+  <div class="prompt-block">
+    <button class="copy-btn" onclick="copyPrompt(this, 'p2')">📋 复制</button>
+    <pre id="p2">你是一位数据驱动的英语教学分析师。我会给你每个学生每道小题的得分，请帮我做以下分析：
+
+1. 维度统计 — 按听力、阅读、写作、语法、词汇等技能板块，统计每个板块的班级平均分、最低分、分差
+
+2. 筛子图定位 — 把错题分成三类：
+   · 大洞——全班 80% 以上都错了，共性漏洞，优先解决
+   · 中漏——50%–80% 错了，常见薄弱点
+   · 小滴——不到 50% 错了，个别问题
+
+3. 问题排序 — 综合考虑三个因素排出优先级：
+   · 丢分多少（影响面大的排前面）
+   · 好不好改（短期内能快速提升的排前面）
+   · 前置条件（有些问题必须先解决，才能解决其他问题）
+
+4. 用文字描述一张热力图：
+   · 红色区域：紧急，全班性问题
+   · 黄色区域：中等，超过一半学生有问题
+   · 绿色区域：良好，大多数学生已掌握
+
+输出一份《班级漏洞筛子图》。
+
+学生得分数据如下：
+【在这里粘贴得分数据】</pre>
+  </div>
+</div>
+
+<!-- DAY 3 -->
+<div class="day-card">
+  <div class="day-num">DAY 3</div>
+  <h2>学生错因归类</h2>
+  <p class="purpose">看清每个学生为什么错</p>
+  <div class="io">
+    <div><strong>📥 你给它</strong><span>学生姓名 + 错题 + 学生答案 + 正确答案</span></div>
+    <div><strong>📤 它给你</strong><span>《学生错因画像表》</span></div>
+  </div>
+  <div class="flow">
+    <span class="step">错题导入</span><span class="arr">→</span><span class="step">AI诊断</span><span class="arr">→</span><span class="step">五维标签</span><span class="arr">→</span><span class="step">个体画像</span>
+  </div>
+  <div class="prompt-block">
+    <button class="copy-btn" onclick="copyPrompt(this, 'p3')">📋 复制</button>
+    <pre id="p3">你是一位诊断型英语教学专家。请分析每个学生的错题，找出错误背后的真正原因——不只是"哪题错了"，而是"为什么错"。
+
+诊断时使用以下五类标签：
+
+1. 知识缺失 — 根本没学过这个知识点
+2. 理解偏差 — 学过但用错了（母语干扰、过度类推等）
+3. 粗心失误 — 压力下注意力不集中导致的失误
+4. 策略错误 — 用了错误的解题方法
+5. 心理因素 — 紧张、不自信导致的失分（纠结、改答案等）
+
+为每个学生画一份错因画像：
+- 他 / 她最主要的错误类型是什么？（看整体规律）
+- 什么情况下最容易出错？（时间压力？特定题型？）
+- 有没有明显的母语（中文→英文）迁移痕迹？
+- 针对他 / 她的错误类型，应该用什么方式干预？给具体建议
+
+输出一份《学生错因画像表》，每个学生一个区块。
+
+学生错题如下：
+【粘贴：学生姓名 + 错题原文 + 学生答案 + 正确答案】</pre>
+  </div>
+</div>
+
+<!-- DAY 4 -->
+<div class="day-card">
+  <div class="day-num">DAY 4</div>
+  <h2>ABC分层任务</h2>
+  <p class="purpose">同一个考点，不同学生走不同的路</p>
+  <div class="io">
+    <div><strong>📥 你给它</strong><span>一个知识点 + 学生分层情况</span></div>
+    <div><strong>📤 它给你</strong><span>《ABC分层任务单》</span></div>
+  </div>
+  <div class="flow">
+    <span class="step">学情分层</span><span class="arr">→</span><span class="step">A/B/C任务设计</span><span class="arr">→</span><span class="step">难度路径生成</span>
+  </div>
+  <div class="prompt-block">
+    <button class="copy-btn" onclick="copyPrompt(this, 'p4')">📋 复制</button>
+    <pre id="p4">你是一位分层教学设计专家。针对同一个知识点，请设计三套不同难度层次的学习任务。
+
+知识点：【比如：现在完成时 vs 一般过去时】
+
+A 层 · 基础层（60 分以下的学生）
+- 用中文辅助解释这个语法点的核心概念
+- 设计辨认型练习（在句子中认出这个时态）
+- 提供带词库的填空题
+- 达标标准：能 80% 准确地辨认该时态
+
+B 层 · 应用层（60–80 分的学生）
+- 设计情境选择题（根据时间状语判断用哪个时态）
+- 句子改写练习（一般过去时→现在完成时）
+- 改错练习，每题附解释
+- 达标标准：能在控制练习中正确使用两个时态
+
+C 层 · 拓展层（80 分以上的学生）
+- 开放式写作（写一段话，自然切换两个时态）
+- 用自己的话讲清楚每个时态为什么用在这里
+- 实战改错（修改一篇中国学生写的、时态混用的作文）
+- 达标标准：能自我纠错并解释原因
+
+每层都要包含：
+- 3 个阶梯式练习，附答案
+- 中国学生容易踩的坑（针对这个知识点的母语干扰提醒）
+- 做完后自查是否达标的检查点
+
+输出一份《ABC分层任务单》，一层一个板块。</pre>
+  </div>
+</div>
+
+<!-- DAY 5 -->
+<div class="day-card">
+  <div class="day-num">DAY 5</div>
+  <h2>精准补偿训练</h2>
+  <p class="purpose">哪里不会，就练哪里</p>
+  <div class="io">
+    <div><strong>📥 你给它</strong><span>一个具体薄弱点 + 学生当前水平</span></div>
+    <div><strong>📤 它给你</strong><span>《个人补偿训练包》</span></div>
+  </div>
+  <div class="flow">
+    <span class="step">薄弱点</span><span class="arr">→</span><span class="step">题型匹配</span><span class="arr">→</span><span class="step">变式训练</span><span class="arr">→</span><span class="step">答案解析</span>
+  </div>
+  <div class="prompt-block">
+    <button class="copy-btn" onclick="copyPrompt(this, 'p5')">📋 复制</button>
+    <pre id="p5">你是一位精准补救训练设计师。针对一个具体薄弱点，帮我出一套训练材料。
+
+1. 先确认问题：这个薄弱点到底是什么？用一句话说清楚。
+
+2. 出 3 道诊断题——直接暴露这个薄弱点的题目，题型要和真实考试一致。
+
+3. 出 10 道变式训练题，同一个知识点，换不同题型和角度来练：
+   填空 → 选择 → 改错 → 句子改写 → 自由表达
+   难度从低到高：先建立信心，再逐步加难度，最后达到考试水平
+
+4. 每道题的错误选项都要附解析：
+   - 不只说"答案选 B"，要解释为什么有人会选 A / C / D，选了说明什么理解偏差
+   - 特别标注：中国学生在这个知识点上最容易犯什么错
+
+输出一份《个人补偿训练包》，包含完整题目和答案详解。
+
+学生的薄弱点：【具体描述，最好附上他之前的错题】
+学生当前水平：【比如初一 / 高一 / 雅思 5.5】</pre>
+  </div>
+</div>
+
+<!-- DAY 6 -->
+<div class="day-card">
+  <div class="day-num">DAY 6</div>
+  <h2>错题复现过关</h2>
+  <p class="purpose">用间隔复现确认学生真的学会了</p>
+  <div class="io">
+    <div><strong>📥 你给它</strong><span>学生错题记录（题目 + 日期 + 错误类型）</span></div>
+    <div><strong>📤 它给你</strong><span>《错题复现与二次过关表》</span></div>
+  </div>
+  <div class="flow">
+    <span class="step">错题本</span><span class="arr">→</span><span class="step">第1/3/7天复现</span><span class="arr">→</span><span class="step">二次检测</span><span class="arr">→</span><span class="step">过关标记</span>
+  </div>
+  <div class="prompt-block">
+    <button class="copy-btn" onclick="copyPrompt(this, 'p6')">📋 复制</button>
+    <pre id="p6">你是一位间隔复习与掌握度验证设计师。用"1-3-7 复现法"帮学生确认他们真的掌握了错题。
+
+第 1 天检测——确认听懂了。出 3 道完全同类型的题
+第 3 天检测——确认记住了。出 3 道同知识点但换形式的题
+第 7 天检测——确认内化了。出 2 道混合在综合练习里的题
+
+针对错题本里的每一道错题，生成三套检测题。
+
+评分规则：
+- 通过：3 对 2（第 7 天 2 对 1 即可）
+- 不通过 → 生成一份 3 分钟的微型重教稿，针对这个错误点再讲一遍
+- 通过 → 标记已过关，放入复习维持队列
+
+输出一份《错题复现与二次过关表》，列清楚每道错题的三轮检测题、通过 / 未通过栏，以及未通过的补救方案。
+
+错题记录如下：
+【在这里粘贴学生的错题，附日期】</pre>
+  </div>
+</div>
+
+<!-- DAY 7 -->
+<div class="day-card">
+  <div class="day-num">DAY 7</div>
+  <h2>个人提分路径</h2>
+  <p class="purpose">综合所有信息，画出下一步的路线图</p>
+  <div class="io">
+    <div><strong>📥 你给它</strong><span>前 6 天所有输出 + 学生目标 + 兴趣爱好</span></div>
+    <div><strong>📤 它给你</strong><span>《学生个人提分路径卡》</span></div>
+  </div>
+  <div class="flow">
+    <span class="step">诊断结果</span><span class="arr">→</span><span class="step">训练记录</span><span class="arr">→</span><span class="step">AI推荐</span><span class="arr">→</span><span class="step">下一步计划</span>
+  </div>
+  <div class="prompt-block">
+    <button class="copy-btn" onclick="copyPrompt(this, 'p7')">📋 复制</button>
+    <pre id="p7">你是一位英语学习路径规划师。综合之前所有的诊断和训练数据，为这个学生画一条清晰的提分路线。
+
+1. 当前画像——用三句话概括：最强的是什么？最弱的是什么？最主要的错误类型是什么？经过前几天的补救训练，有哪些已经改善了？
+
+2. 最大杠杆点——在最短时间内，做哪一件事能让分数提升最明显？基于前面的差距分析来回答。
+
+3. 四周路线图：
+   第 1–2 周：优先补最高的短板。每天一个微习惯 + 每周一次检测
+   第 3–4 周：巩固离下一个分数段最近的技能。每天一个微习惯 + 每周一次检测
+
+4. 今天就做——给一个具体任务，30 分钟内能完成。不能说"多练听力"，要说"做剑桥 10 Test2 Section1，做完对照原文标出所有没听清的地方"
+
+5. 别浪费时间在——列出哪些对这个学生不重要、可以暂时放一放的事情
+
+6. 动力钩子——把这份计划和学生的兴趣、个人目标挂钩。如果他喜欢篮球，用篮球打比方
+
+7. 成功信号——这个学生怎么知道自己可以进入下一阶段了？给一个可测量的标准
+
+检查一下：Day 4–6 的补救训练有没有改变学生的薄弱点？如果有变化，路线要相应调整。别推荐学生去练一个已经补好的弱项。
+
+输出一页《学生个人提分路径卡》，包含：
+📊 当前画像 ｜ 🎯 下一个目标 ｜ 🗺️ 四周路线 ｜ ⚡ 今天就做 ｜ ⚠️ 别浪费时间 ｜ 🏆 成功信号
+
+前 6 天的所有输出摘要如下：
+【在这里粘贴前 6 天的诊断和训练结果】
+
+学生的目标分数和时间：
+【比如：雅思 6.5，3 个月后考试】
+
+学生的兴趣爱好：
+【比如：篮球、K-pop、烘焙】</pre>
+  </div>
+</div>
+
+<!-- SETUP -->
+<div class="agent-setup" id="setup">
+  <h2>🔧 进阶：设成常驻 AI 教学助手</h2>
+  <p style="color:var(--muted);font-size:0.9rem;margin-bottom:24px;">如果你用的是 OpenClaw，可以把这 7 天设成 7 个常驻助手，不用每次重新粘贴。对着 OpenClaw 说下面这段话就行：</p>
+
+  <div class="highlight">
+    <p>帮我创建 7 个 AI 教学助手：<br><br>
+    1. Day1 试卷五维解码——我把试卷发给你，你从知识点、认知层级、题型、难度、分值五个维度分析，输出解码表<br>
+    2. Day2 班级学情筛查——我把学生小题得分发给你，你筛查班级整体漏洞，输出热力图<br>
+    3. Day3 学生错因归类——我把错题发给你，你诊断每个学生的错因并画个体画像<br>
+    4. Day4 ABC分层任务——告诉我一个知识点，你按 A/B/C 三层设计不同的练习题<br>
+    5. Day5 精准补偿训练——告诉我薄弱点和学生水平，你出一套变式训练题<br>
+    6. Day6 错题复现过关——把错题本给你，你生成第 1/3/7 天的复现检测题<br>
+    7. Day7 个人提分路径——把前面所有结果汇总给你，你规划每个学生的下一步路线图</p>
+  </div>
+
+  <p style="color:var(--muted);font-size:0.85rem;margin-top:20px;">创建好后，把上面每个 Day 对应的话发给对应的助手，它会自动记住自己的工作方式。之后直接发数据就行。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>助手名称</th><th>对应 Day</th><th>你给它什么</th><th>它返回什么</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Day1 试卷五维解码</td><td>五维解码</td><td>试卷内容</td><td>试卷五维解码表</td></tr>
+        <tr><td>Day2 班级学情筛查</td><td>学情筛查</td><td>小题得分数据</td><td>班级漏洞筛子图</td></tr>
+        <tr><td>Day3 学生错因归类</td><td>错因归类</td><td>学生错题列表</td><td>学生错因画像表</td></tr>
+        <tr><td>Day4 ABC分层任务</td><td>ABC分层</td><td>知识点 + 分层情况</td><td>ABC分层任务单</td></tr>
+        <tr><td>Day5 精准补偿训练</td><td>补偿训练</td><td>薄弱点 + 学生水平</td><td>个人补偿训练包</td></tr>
+        <tr><td>Day6 错题复现过关</td><td>错题复现</td><td>错题日志</td><td>错题复现与二次过关表</td></tr>
+        <tr><td>Day7 个人提分路径</td><td>提分路径</td><td>前 6 天全部输出</td><td>学生个人提分路径卡</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<footer>复制 · 粘贴 · 出结果。就这么简单。</footer>
+
+</div>
+
+<script>
+function copyPrompt(btn, id) {
+  const pre = document.getElementById(id);
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    btn.textContent = '✅ 已复制';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '📋 复制';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>

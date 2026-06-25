@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Test</title>
+<style>body{font-family:system-ui;padding:20px;background:#fff}img{border:2px solid red;margin:10px 0;display:block}</style>
+</head>
+<body>
+<h1>Image Loading Test</h1>
+<p>Test 1 - JPEG (absolute path):</p>
+<img src="/langcert/writing/_test.jpg" width="400" height="200" alt="test jpg">
+<p>Test 2 - PNG (absolute path):</p>
+<img src="/langcert/writing/_test.png" width="400" height="200" alt="test png">
+<p>Test 3 - SVG inline:</p>
+<svg width="200" height="100"><rect width="200" height="100" fill="navy"/><text x="20" y="55" fill="white" font-size="16">SVG Test - Should See This</text></svg>
+<p>Test 4 - JPEG from root:</p>
+<img src="/test-img.jpg" width="400" height="566" alt="root test">
+<p style="color:red;font-weight:bold">If you see NO images above, the problem is server/deployment. If you see SVG but not JPEG/PNG, the problem is image files.</p>
+</body>
+</html>

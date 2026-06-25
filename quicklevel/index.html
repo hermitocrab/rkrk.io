@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickLevel - 15-Minute English Proficiency Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Design Read: QuickLevel */
+        /* VARIANCE: 8, MOTION: 7, DENSITY: 3 */
+        body {
+            font-family: 'Satoshi', sans-serif;
+        }
+        .question-card {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .option-btn:active { transform: scale(0.98); }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-zinc-900 text-gray-900 dark:text-gray-100 min-h-screen flex items-start md:items-center justify-center">
+    <div id="test-container" class="w-full max-w-xl mx-auto p-4 pt-8 md:pt-4">
+        <div id="start-screen" class="text-center pt-12 md:pt-0">
+            <div class="mb-6 inline-block">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-14 h-14 md:w-16 md:h-16 mx-auto">
+                    <defs>
+                        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#00f3ff"/>
+                            <stop offset="100%" stop-color="#ff0055"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="32" height="32" rx="6" fill="#030305"/>
+                    <text x="16" y="24" font-size="22" text-anchor="middle" fill="url(#g)" font-family="system-ui">&#129412;</text>
+                </svg>
+                <p class="text-xs text-gray-500 mt-1 tracking-widest uppercase">rkrk.io</p>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-bold tracking-tighter">QuickLevel</h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-2 text-sm md:text-base">15-Minute English Proficiency Test</p>
+            <button id="start-btn" class="mt-8 bg-blue-600 text-white px-8 py-3 rounded-full font-bold hover:bg-blue-700 transition-colors text-base">Start Test</button>
+        </div>
+        <div id="question-screen" class="hidden">
+            <div class="flex justify-between items-center mb-3">
+                <div class="text-sm text-gray-500">Question <span id="question-number">1</span> / 20</div>
+                <div id="cefr-badge" class="px-2 py-0.5 bg-gray-200 dark:bg-zinc-700 text-xs font-bold rounded"></div>
+            </div>
+            <div class="bg-white dark:bg-zinc-800 p-5 md:p-8 rounded-xl shadow-lg question-card">
+                <h2 id="question-text" class="text-lg md:text-2xl font-bold mb-5 leading-snug"></h2>
+                <div id="audio-player" class="mb-5"></div>
+                <div id="options-container" class="flex flex-col gap-3"></div>
+            </div>
+            <div class="mt-4 h-2 bg-gray-200 dark:bg-zinc-700 rounded-full">
+                <div id="progress-bar" class="h-2 bg-blue-600 rounded-full" style="width: 5%;"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const startBtn = document.getElementById('start-btn');
+        const startScreen = document.getElementById('start-screen');
+        const questionScreen = document.getElementById('question-screen');
+        const questionNumber = document.getElementById('question-number');
+        const cefrBadge = document.getElementById('cefr-badge');
+        const questionText = document.getElementById('question-text');
+        const audioPlayer = document.getElementById('audio-player');
+        const optionsContainer = document.getElementById('options-container');
+        const progressBar = document.getElementById('progress-bar');
+        
+        let sessionId = null;
+        let currentQuestion = null;
+        let questionCount = 0;
+
+        startBtn.addEventListener('click', async () => {
+            const response = await fetch('/quicklevel/api/start', { method: 'POST' });
+            const data = await response.json();
+            sessionId = data.sessionId;
+            currentQuestion = data.question;
+            startScreen.classList.add('hidden');
+            questionScreen.classList.remove('hidden');
+            displayQuestion();
+        });
+
+        let audioPlayed = false;
+
+        function displayQuestion() {
+            questionCount++;
+            questionNumber.innerText = questionCount;
+            progressBar.style.width = `${questionCount * 5}%`;
+            questionText.innerText = currentQuestion.question;
+            cefrBadge.innerText = currentQuestion.cefr;
+            optionsContainer.innerHTML = '';
+            audioPlayed = false;
+
+            if (currentQuestion.type === 'listening') {
+                audioPlayer.innerHTML = `
+                    <button id="play-btn" onclick="playOnce('${currentQuestion.audio}', this)" 
+                        class="w-full max-w-xs mx-auto flex items-center justify-center gap-2 px-5 py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors text-sm">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        播放听力
+                    </button>
+                    <audio id="hidden-audio" src="${currentQuestion.audio}" style="display:none"></audio>
+                `;
+            } else {
+                audioPlayer.innerHTML = '';
+            }
+
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement('button');
+                button.innerText = option;
+                button.classList.add('p-3', 'md:p-4', 'border', 'rounded-lg', 'text-left', 'text-sm', 'md:text-base', 'hover:bg-gray-100', 'dark:hover:bg-zinc-700', 'transition-colors', 'w-full');
+                button.addEventListener('click', () => handleAnswer(option));
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function playOnce(src, btn) {
+            if (audioPlayed) return;
+            audioPlayed = true;
+            const audio = document.getElementById('hidden-audio');
+            btn.innerHTML = '<svg class="w-5 h-5 animate-pulse" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg> 播放中...';
+            btn.classList.add('opacity-50', 'pointer-events-none');
+            audio.play();
+            audio.onended = () => {
+                btn.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg> 已播放';
+                btn.classList.add('bg-green-600');
+            };
+        }
+        
+        async function handleAnswer(answer) {
+            const response = await fetch('/quicklevel/api/answer', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    sessionId,
+                    questionId: currentQuestion.id,
+                    answer
+                })
+            });
+            const data = await response.json();
+            if (data.finished) {
+                window.location.href = `/quicklevel/api/report/${sessionId}`;
+            } else {
+                currentQuestion = data.nextQuestion;
+                displayQuestion();
+            }
+        }
+    </script>
+</body>
+</html>

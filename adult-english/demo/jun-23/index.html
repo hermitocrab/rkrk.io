@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greetings & Professional Introductions — Business English Lesson 1 | rkrk.io × 托朴教育</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf9; --card: #ffffff; --text: #1a1a2e; --sub: #6b7280;
+  --accent: #e07a5f; --accent2: #3d405b; --gold: #f2cc8f;
+  --border: #e5e7eb; --radius: 16px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter','Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+h1,h2,h3{font-family:'Outfit','Noto Sans SC',sans-serif}
+.container{max-width:720px;margin:0 auto;padding:24px 20px 60px}
+
+header{text-align:center;padding:40px 0 32px}
+.logo{font-size:13px;text-transform:uppercase;letter-spacing:0.15em;color:var(--sub);margin-bottom:8px}
+header h1{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:800;letter-spacing:-0.03em;line-height:1.15;margin-bottom:8px}
+header .sub{font-size:15px;color:var(--sub)}
+
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;margin:0 4px}
+.badge-demo{background:#fef3c7;color:#92400e}
+.badge-level{background:#e0e7ff;color:#3730a3}
+.badge-time{background:#fce7f3;color:#9d174d}
+
+/* Section cards */
+.section-card{background:var(--card);border-radius:var(--radius);padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.section-card .emoji{font-size:24px;margin-bottom:8px}
+.section-card h2{font-size:18px;font-weight:700;margin-bottom:4px}
+.section-card .meta{font-size:13px;color:var(--sub);margin-bottom:12px}
+
+/* Video section */
+.video-wrapper{position:relative;width:100%;padding-bottom:56.25%;margin:12px 0;border-radius:var(--radius);overflow:hidden;background:#1a1a2e}
+.video-wrapper iframe,.video-wrapper video{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+
+/* Script timeline */
+.timeline{margin:16px 0}
+.timeline-entry{display:flex;align-items:baseline;gap:10px;padding:6px 0;font-size:13px;border-bottom:1px solid #f3f4f6;cursor:pointer;transition:background 0.2s}
+.timeline-entry:hover{background:#fef3c7}
+.timeline-time{font-family:'Courier New',monospace;font-size:12px;font-weight:700;color:var(--accent);min-width:38px;flex-shrink:0}
+.timeline-text{color:var(--text)}
+.timeline-note{font-size:13px;color:var(--sub);background:#fef3c7;border-radius:10px;padding:10px 14px;margin:12px 0}
+
+/* Video + Timeline two-column layout */
+.video-timeline-layout{display:flex;gap:20px;margin:12px 0;align-items:flex-start}
+.video-timeline-layout .video-wrapper{flex:0 0 60%;padding-bottom:33.75%;margin:0}
+.video-timeline-layout .script-timeline{flex:0 0 calc(40% - 20px);max-height:440px;overflow-y:auto;margin:0;padding:0 4px;border-left:1px solid var(--border);padding-left:12px}
+.video-timeline-layout .script-timeline .timeline-entry{font-size:12px;gap:6px}
+.video-timeline-layout .script-timeline .timeline-time{font-size:11px;min-width:32px}
+@media(max-width:768px){
+  .video-timeline-layout{flex-direction:column;gap:12px}
+  .video-timeline-layout .video-wrapper{flex:0 0 auto;padding-bottom:56.25%}
+  .video-timeline-layout .script-timeline{flex:0 0 auto;max-height:none;border-left:none;padding-left:0}
+  .video-timeline-layout .script-timeline .timeline-entry{font-size:13px;gap:10px}
+  .video-timeline-layout .script-timeline .timeline-time{font-size:12px;min-width:38px}
+}
+
+/* Overflow safety */
+blockquote{overflow-wrap:break-word;word-wrap:break-word;hyphens:auto;max-width:100%}
+.practice-frame .frame-text{word-wrap:break-word;overflow-wrap:break-word;max-width:100%}
+
+/* Pronunciation table */
+.pron-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+.pron-table th{background:var(--accent2);color:#fff;padding:8px 10px;text-align:left;font-weight:600;font-size:12px;letter-spacing:0.04em}
+.pron-table td{padding:10px;border-bottom:1px solid var(--border);vertical-align:top}
+.pron-table tr:nth-child(even){background:#f9fafb}
+.phonetic{font-family:'Courier New',monospace;font-size:12px;color:var(--accent)}
+.stress{font-family:'Courier New',monospace;font-size:12px;letter-spacing:0.1em}
+.drill-tag{display:inline-block;background:#e0e7ff;color:#3730a3;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+
+.teacher-note{background:#fff7ed;border:1px solid #fdba74;border-radius:12px;padding:16px;margin-top:16px;font-size:13px;color:#7c2d12;line-height:1.7}
+.teacher-note b{color:#9a3412}
+
+/* Connected speech patterns */
+.cs-pattern{background:#f9fafb;border:1px solid var(--border);border-radius:12px;padding:16px;margin:12px 0}
+.cs-pattern h4{font-size:14px;font-weight:700;color:var(--accent2);margin-bottom:8px}
+.cs-pattern .cs-row{display:flex;gap:12px;align-items:baseline;padding:6px 0;font-size:13px;flex-wrap:wrap}
+.cs-isolated{color:var(--sub);font-size:12px;min-width:140px}
+.cs-connected{font-family:'Courier New',monospace;font-size:13px;color:var(--text);font-weight:600}
+.cs-pattern .subtitle{font-size:12px;color:var(--sub);margin-bottom:8px}
+
+/* Audio placeholder */
+.audio-placeholder{display:flex;align-items:center;gap:8px;background:#f3f4f6;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:12px;color:var(--sub)}
+.audio-placeholder .play-btn{width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;border:none;flex-shrink:0}
+
+/* Practice frame */
+.practice-frame{background:#fef3c7;border:2px dashed #f59e0b;border-radius:var(--radius);padding:20px;margin:16px 0}
+.practice-frame .frame-label{font-size:12px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}
+.practice-frame .frame-text{font-family:'Courier New',monospace;font-size:14px;line-height:2;color:#78350f}
+.practice-frame .frame-gap{display:inline-block;min-width:60px;border-bottom:2px solid #f59e0b;margin:0 8px;text-align:center;color:var(--accent);font-weight:600}
+
+/* Grammar section */
+.grammar-block{margin:12px 0;padding:12px 16px;background:#f9fafb;border-left:3px solid var(--accent);border-radius:0 8px 8px 0}
+.grammar-block h4{font-size:14px;font-weight:700;color:var(--accent2);margin-bottom:4px}
+.grammar-block p{font-size:13px;color:var(--sub);margin-bottom:4px}
+.grammar-block .example{font-size:14px;font-family:'Georgia',serif;font-style:italic;color:var(--text);word-wrap:break-word;overflow-wrap:break-word;max-width:100%}
+
+/* Role-play examples */
+.rp-example{background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;padding:16px;margin:12px 0}
+.rp-example h4{font-size:14px;font-weight:700;color:#0369a1;margin-bottom:8px}
+.rp-example blockquote{font-size:14px;line-height:1.8;color:#0c4a6e;margin:0;padding:0;font-style:italic;word-wrap:break-word;overflow-wrap:break-word;hyphens:auto;max-width:100%}
+
+/* Scenario cards — A2/B2 labels */
+.sc-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;margin-bottom:4px;letter-spacing:0.05em}
+.sc-badge-a2{background:#dcfce7;color:#166534}
+.sc-badge-b2{background:#dbeafe;color:#1e40af}
+
+/* Scenario cards */
+.scenario-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:480px){.scenario-grid{grid-template-columns:1fr}}
+.scenario-card{border:2px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;transition:border-color 0.2s;background:var(--card)}
+.scenario-card:hover{border-color:var(--accent)}
+.scenario-card .sc-emoji{font-size:36px;margin-bottom:6px}
+.scenario-card h4{font-size:15px;font-weight:700;margin-bottom:4px}
+.scenario-card p{font-size:12px;color:var(--sub);line-height:1.5}
+
+/* Feedback checklist */
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+@media(max-width:480px){.checklist{grid-template-columns:1fr}}
+.check-item{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#f9fafb;border-radius:10px;font-size:13px}
+.check-item input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent)}
+
+/* Culture comparison table */
+.culture-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+.culture-table th{background:var(--accent2);color:#fff;padding:10px 12px;text-align:left;font-weight:600;font-size:12px;letter-spacing:0.04em}
+.culture-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+.culture-table tr:nth-child(even){background:#f9fafb}
+.culture-table .flag{font-size:18px;margin-right:4px}
+
+/* Match exercise mini */
+.match-mini{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.match-mini .match-card{border:2px solid var(--border);border-radius:12px;padding:12px 16px;text-align:center;min-width:100px;flex:1;font-size:13px;background:#f9fafb;transition:border-color 0.2s}
+.match-mini .match-card:hover{border-color:var(--accent);background:#fff7ed}
+.match-mini .match-card .country-name{font-weight:700;margin-bottom:4px;color:var(--accent2)}
+.match-mini .match-card .greeting-style{font-size:12px;color:var(--sub)}
+
+/* Discussion prompt */
+.discussion-prompt{background:#eef2ff;border:1px solid #c7d2fe;border-radius:12px;padding:16px;margin:12px 0}
+.discussion-prompt h4{font-size:14px;color:#3730a3;margin-bottom:8px}
+.discussion-prompt p{font-size:13px;color:#4338ca;line-height:1.7}
+.discussion-prompt .vocab-tag{display:inline-block;background:#c7d2fe;color:#3730a3;padding:1px 8px;border-radius:10px;font-size:11px;margin:2px}
+
+/* Cool-down */
+.cool-down{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-radius:var(--radius);padding:24px;margin:16px 0}
+.cool-down h3{color:#065f46;font-size:16px;margin-bottom:8px}
+.cool-down li{font-size:14px;color:#064e3b;margin:4px 0}
+.cool-down .hw-box{background:#fff;border-radius:12px;padding:16px;margin-top:12px}
+.cool-down .hw-box h4{font-size:14px;color:var(--accent2);margin-bottom:8px}
+
+/* Expandable answers */
+.answers-toggle{display:inline-block;margin:12px 0;padding:8px 16px;background:var(--accent);color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer}
+
+/* Footer */
+footer{text-align:center;padding:32px 0;color:var(--sub);font-size:12px;border-top:1px solid var(--border);margin-top:40px}
+footer .brand{font-weight:700;color:var(--text)}
+
+/* CTA button */
+.btn{display:inline-block;padding:10px 20px;background:var(--accent);color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:600;transition:transform 0.2s}
+.btn:hover{transform:scale(1.04)}
+.btn-outline{background:transparent;color:var(--accent);border:2px solid var(--accent)}
+
+/* Vocab pulse — highlight prep words in sections */
+.vocab-highlight{background:linear-gradient(180deg,transparent 60%,#fde68a 60%);padding:0 2px;font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <div class="logo">rkrk.io × 托朴教育</div>
+  <h1>Greetings & Professional<br>Introductions 🤝</h1>
+  <p class="sub">Flipped Classroom · Business English · Lesson 1</p>
+  <div style="margin-top:12px">
+    <span class="badge badge-demo">Demo Class</span>
+    <span class="badge badge-level">A2–B1+</span>
+    <span class="badge badge-time">60 min</span>
+  </div>
+</header>
+
+<!--============================================
+  PRE-CLASS VIDEO SECTION (UNCHANGED)
+  ============================================-->
+<div class="section-card">
+  <div class="emoji">📱</div>
+  <h2>Pre-Class — Watch Before the Lesson</h2>
+  <div class="meta">Flipped classroom · Watch at home · 4 minutes</div>
+
+  <!-- Clash proxy: 127.0.0.1:7897, yt-dlp: --cookies-from-browser chrome --extractor-args "youtube:player_client=android_vr" -->
+  <div class="video-timeline-layout">
+  <div class="video-wrapper" id="videoContainer">
+    <video
+      id="localVideo"
+      controls
+      preload="metadata"
+      poster=""
+      style="display:block"
+    >
+      <source src="media/how-to-introduce-yourself.mp4" type="video/mp4">
+      <track kind="subtitles" src="media/bilingual.vtt" srclang="zh" label="中文 (Chinese)" default>
+      Your browser does not support the video tag.
+    </video>
+    <iframe
+      id="ytFrame"
+      src="https://www.youtube-nocookie.com/embed/Pj1S6yL535k?rel=0&modestbranding=1"
+      title="Professional Introductions — Pre-Class Video"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+      allowfullscreen
+      style="display:none"
+    ></iframe>
+  </div>
+
+  <div class="timeline script-timeline">
+    <div class="timeline-entry" data-time="0" title="Seek to 0:00">
+      <span class="timeline-time">0:00</span>
+      <span class="timeline-text">"How do you feel when you hear these words? Let's go around and <em>introduce ourselves</em>."</span>
+    </div>
+    <div class="timeline-entry" data-time="21" title="Seek to 0:21">
+      <span class="timeline-time">0:21</span>
+      <span class="timeline-text">"A super simple <em>three-step formula</em> to introduce yourself professionally <em>with ease and confidence</em>."</span>
+    </div>
+    <div class="timeline-entry" data-time="36" title="Seek to 0:36">
+      <span class="timeline-time">0:36</span>
+      <span class="timeline-text">"Keep your introduction <em>short and sweet</em>. No longer than about 20 seconds."</span>
+    </div>
+    <div class="timeline-entry" data-time="43" title="Seek to 0:43">
+      <span class="timeline-time">0:43</span>
+      <span class="timeline-text">Step 1 PRESENT — "Hello everyone, I'm Jennifer Smith. I'm a software development manager at ABC Company."</span>
+    </div>
+    <div class="timeline-entry" data-time="75" title="Seek to 1:15">
+      <span class="timeline-time">1:15</span>
+      <span class="timeline-text">Informal: "Hi all, I'm Joe. I'm part of the North America Marketing team. I'll be <em>looking after generation of new leads</em>."</span>
+    </div>
+    <div class="timeline-entry" data-time="94" title="Seek to 1:34">
+      <span class="timeline-time">1:34</span>
+      <span class="timeline-text">Tip: "Don't mention <em>personal details</em> like age, marital status, or hobbies. Keep it professional."</span>
+    </div>
+    <div class="timeline-entry" data-time="112" title="Seek to 1:52">
+      <span class="timeline-time">1:52</span>
+      <span class="timeline-text">Step 2 PAST — "Mention something brief about your background that <em>establishes your credibility</em>."</span>
+    </div>
+    <div class="timeline-entry" data-time="143" title="Seek to 2:23">
+      <span class="timeline-time">2:23</span>
+      <span class="timeline-text">"My background is in computer science. Before this role, I worked with big data for financial services clients."</span>
+    </div>
+    <div class="timeline-entry" data-time="175" title="Seek to 2:55">
+      <span class="timeline-time">2:55</span>
+      <span class="timeline-text">Step 3 FUTURE — "End on <em>a positive note</em>. <em>Show enthusiasm</em> and <em>good energy</em>."</span>
+    </div>
+    <div class="timeline-entry" data-time="191" title="Seek to 3:11">
+      <span class="timeline-time">3:11</span>
+      <span class="timeline-text">"<em>It's a pleasure to be here</em> with you all today. I'm <em>looking forward to</em> working with you."</span>
+    </div>
+    <div class="timeline-entry" data-time="207" title="Seek to 3:27">
+      <span class="timeline-time">3:27</span>
+      <span class="timeline-text">FULL EXAMPLE — Maria Sheeran: Present → Past → Future in 3 sentences</span>
+    </div>
+    <div class="timeline-entry" data-time="233" title="Seek to 3:53">
+      <span class="timeline-time">3:53</span>
+      <span class="timeline-text">Summary — "Just remember: present, past, future. Pretty easy, right?"</span>
+    </div>
+  </div>
+  </div><!-- /video-timeline-layout -->
+
+  <div class="timeline-note">
+    📝 <b>While watching:</b> Notice the <em>three-step formula</em> (Present → Past → Future). Write down 3 phrases you could use in YOUR introduction. Bring them to class.
+  </div>
+</div>
+
+<!--============================================
+  SECTION 1 — 🔊 发音重点 · PRONUNCIATION
+  (merged — was Part 1 + Part 2)
+  ============================================-->
+<div class="section-card">
+  <div class="emoji">🔊</div>
+  <h2>发音重点 · Pronunciation</h2>
+  <div class="meta">12 min · Key vocabulary drill · Connected speech</div>
+
+  <p style="font-size:14px;color:var(--sub);margin-bottom:16px">
+    These 5 words from your <b>pre-class lexicon</b> are the building blocks of every professional <span class="vocab-highlight">introduction</span>. We'll drill the pronunciation of each one, then practise how they flow together in connected speech. Throughout this section, you'll also encounter your prep vocabulary: <span class="vocab-highlight">greeting</span>, <span class="vocab-highlight">impression</span>, <span class="vocab-highlight">rapport</span>, <span class="vocab-highlight">confident</span>, <span class="vocab-highlight">handshake</span>, <span class="vocab-highlight">elevator pitch</span>, <span class="vocab-highlight">networking</span>, <span class="vocab-highlight">colleague</span>, <span class="vocab-highlight">background</span>, <span class="vocab-highlight">credibility</span>, and <span class="vocab-highlight">enthusiasm</span>.
+  </p>
+
+  <!-- Pronunciation Table: 5 key phrases from prep lexicon -->
+  <h3 style="font-size:15px;color:var(--accent2);margin-bottom:8px">① Key Vocabulary Drill</h3>
+  <table class="pron-table">
+    <thead>
+      <tr>
+        <th>Word / Phrase</th>
+        <th>Phonetic</th>
+        <th>Stress</th>
+        <th>Drill Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>greeting</b></td>
+        <td class="phonetic">/ˈɡriːtɪŋ/</td>
+        <td class="stress">▀▁</td>
+        <td><span class="drill-tag">repeat ×3</span></td>
+      </tr>
+      <tr>
+        <td><b>impression</b></td>
+        <td class="phonetic">/ɪmˈpreʃən/</td>
+        <td class="stress">▁▀▁</td>
+        <td><span class="drill-tag">back-chaining</span></td>
+      </tr>
+      <tr>
+        <td><b>confident</b></td>
+        <td class="phonetic">/ˈkɒnfɪdənt/</td>
+        <td class="stress">▀▁▁</td>
+        <td><span class="drill-tag">repeat ×3</span></td>
+      </tr>
+      <tr>
+        <td><b>rapport</b></td>
+        <td class="phonetic">/ræˈpɔː/</td>
+        <td class="stress">▁▀</td>
+        <td><span class="drill-tag">whole-class</span></td>
+      </tr>
+      <tr>
+        <td><b>handshake</b></td>
+        <td class="phonetic">/ˈhændʃeɪk/</td>
+        <td class="stress">▀▁</td>
+        <td><span class="drill-tag">chain drill</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="font-size:13px;color:var(--sub);margin-bottom:16px">
+    💡 <b>Notice the stress pattern:</b> <em>GREET-ing</em> (stress on first syllable) vs. <em>im-PRES-sion</em> (stress on second syllable). Misplacing the stress is the #1 reason learners sound unclear — even when every consonant is correct. When you build <span class="vocab-highlight">rapport</span> in a <span class="vocab-highlight">professional</span> setting, correct stress makes you sound <span class="vocab-highlight">confident</span>, not hesitant.
+  </div>
+
+  <!-- Connected Speech Patterns -->
+  <h3 style="font-size:15px;color:var(--accent2);margin-bottom:8px">② Connected Speech: Linking in Professional Introductions</h3>
+  <p style="font-size:13px;color:var(--sub);margin-bottom:12px">
+    When native speakers use a business <span class="vocab-highlight">greeting</span> or deliver an <span class="vocab-highlight">elevator pitch</span>, words blend together. This is <b>连读 (liándú)</b>. Below are 5 key patterns using your prep vocabulary — practise each one to build a natural, <span class="vocab-highlight">confident</span> speaking rhythm.
+  </p>
+
+  <!-- Pattern 1 -->
+  <div class="cs-pattern">
+    <h4>① Consonant → Vowel Linking (C+V)</h4>
+    <div class="subtitle">When a word ends in a consonant and the next starts with a vowel, the consonant "hops over."</div>
+    <div class="cs-row">
+      <span class="cs-isolated">"It's a pleasure to meet‿you"</span>
+      <span>→</span>
+      <span class="cs-connected">/ɪts ə ˈpleʒə tə miː‿tʃuː/</span>
+      <span style="font-size:11px;color:var(--sub)">("meet" + "you" → /miːtʃuː/ — a key phrase in any <span class="vocab-highlight">greeting</span>)</span>
+    </div>
+    <div class="cs-row">
+      <span class="cs-isolated">"I'm‿a marketing manager"</span>
+      <span>→</span>
+      <span class="cs-connected">/aɪ‿mə ˈmɑːkɪtɪŋ ˈmænɪdʒə/</span>
+      <span style="font-size:11px;color:var(--sub)">("I'm" + "a" link — used when you <span class="vocab-highlight">introduce</span> your role)</span>
+    </div>
+  </div>
+
+  <!-- Pattern 2 -->
+  <div class="cs-pattern">
+    <h4>② Consonant Merging (Same Sound)</h4>
+    <div class="subtitle">When two words share the same consonant, the sound is pronounced only once.</div>
+    <div class="cs-row">
+      <span class="cs-isolated">"Good‿afternoon"</span>
+      <span>→</span>
+      <span class="cs-connected">/ɡʊ‿dɑːftəˈnuːn/</span>
+      <span style="font-size:11px;color:var(--sub)">(the /d/ merges — single sound connects both words in a formal <span class="vocab-highlight">greeting</span>)</span>
+    </div>
+    <div class="cs-row">
+      <span class="cs-isolated">"build‿credibility quickly"</span>
+      <span>→</span>
+      <span class="cs-connected">/bɪl‿dˌkredəˈbɪləti ˈkwɪkli/</span>
+      <span style="font-size:11px;color:var(--sub)">(/d/ merges — when you mention your <span class="vocab-highlight">background</span> to establish <span class="vocab-highlight">credibility</span>)</span>
+    </div>
+  </div>
+
+  <!-- Pattern 3 -->
+  <div class="cs-pattern">
+    <h4>③ Intrusive Glides (/j/ /w/ /r/)</h4>
+    <div class="subtitle">English inserts a glide consonant between two vowels to smooth the transition.</div>
+    <div class="cs-row">
+      <span class="cs-isolated">"I‿am a product manager"</span>
+      <span>→</span>
+      <span class="cs-connected">/aɪ‿jæm ə ˈprɒdʌkt ˈmænɪdʒə/</span>
+      <span style="font-size:11px;color:var(--sub)">(/j/ intrudes — notice this when you <span class="vocab-highlight">introduce</span> yourself to a <span class="vocab-highlight">colleague</span>)</span>
+    </div>
+    <div class="cs-row">
+      <span class="cs-isolated">"to‿impress a new client"</span>
+      <span>→</span>
+      <span class="cs-connected">/tə‿wɪmˈpres ə njuː ˈklaɪənt/</span>
+      <span style="font-size:11px;color:var(--sub)">(/w/ bridges "to" and "impress" — making a strong <span class="vocab-highlight">impression</span>)</span>
+    </div>
+  </div>
+
+  <!-- Pattern 4 -->
+  <div class="cs-pattern">
+    <h4>④ Weak Forms — Function Words Reduce</h4>
+    <div class="subtitle">"a", "at", "to", "for", "of" reduce to schwa /ə/. Strong forms sound robotic.</div>
+    <div class="cs-row">
+      <span class="cs-isolated">"I've been‿with the company for five years"</span>
+      <span>→</span>
+      <span class="cs-connected">/aɪv biːn‿wɪð ðə ˈkʌmpəni fə faɪv jɪəz/</span>
+      <span style="font-size:11px;color:var(--sub)">("for" → /fə/ — describing your <span class="vocab-highlight">experience</span> to a new <span class="vocab-highlight">colleague</span>)</span>
+    </div>
+    <div class="cs-row">
+      <span class="cs-isolated">"I look forward‿to working with you"</span>
+      <span>→</span>
+      <span class="cs-connected">/aɪ lʊk ˈfɔːwə‿dtə ˈwɜːkɪŋ wɪð juː/</span>
+      <span style="font-size:11px;color:var(--sub)">("to" → /tə/ — classic closing to build <span class="vocab-highlight">rapport</span> at a <span class="vocab-highlight">networking</span> event)</span>
+    </div>
+  </div>
+
+  <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:14px;margin-top:12px">
+    <p style="font-size:13px;color:#166534;margin:0">
+      <b>💡 Tip:</b> Start with <b>Weak Forms</b> (Pattern ④). When you deliver your <span class="vocab-highlight">elevator pitch</span>, reducing "to" and "for" to /tə/ and /fə/ is the single fastest upgrade to sounding like a <span class="vocab-highlight">confident</span> <span class="vocab-highlight">professional</span>. It's the difference between textbook English and the English spoken at any <span class="vocab-highlight">networking</span> event you'll attend.
+    </p>
+  </div>
+
+  <div class="teacher-note">
+    <b>🧑‍🏫 Teacher's Note:</b> Drill each word first in isolation, then in the connected phrase. For <em>rapport</em> — Chinese speakers often mispronounce this as /ræˈpɔːt/ (adding a final /t/). Correct: the final "t" is silent. The word comes directly from French. Also: <em>handshake</em> uses the <b>silent /d/</b> in rapid speech — /ˈhænʃeɪk/ is what native speakers actually produce. Listen for it.
+  </div>
+
+  <!-- Pronunciation Differentiation: A2 vs B2 -->
+  <div style="margin-top:20px">
+    <h3 style="font-size:15px;color:var(--accent2);margin-bottom:8px">🎯 Differentiation — Same Drill, Two Levels</h3>
+    <p style="font-size:13px;color:var(--sub);margin-bottom:8px">Every phrase below has two versions — pick the one that matches your target level.</p>
+    <table class="pron-table">
+      <thead>
+        <tr>
+          <th>Phrase</th>
+          <th>🟢 A2 Task</th>
+          <th>🔵 B2 Task</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>greeting</b></td>
+          <td>Repeat after teacher ×5, focus on the /ŋ/ sound at the end — make sure it doesn't become /n/</td>
+          <td>Self-record, compare with video audio, identify and note 2 specific improvements</td>
+        </tr>
+        <tr>
+          <td><b>impression</b></td>
+          <td>Clap the syllables: im-PRES-sion. Repeat ×3 — stress must fall on syllable 2</td>
+          <td>Use "make a strong impression" in a complete sentence. Record and self-assess connected speech flow</td>
+        </tr>
+        <tr>
+          <td><b>confident</b></td>
+          <td>Repeat ×5 aloud, check /ˈkɒn/ (not /kən/) on the first syllable</td>
+          <td>Record a sentence containing both "confident" and "professional" in the same breath group; check rhythm</td>
+        </tr>
+        <tr>
+          <td><b>rapport</b></td>
+          <td>Repeat after teacher ×3 — silent final 't', /ræˈpɔː/ not /ræˈpɔːt/</td>
+          <td>Explain what "build rapport" means to a partner, then record a full sentence demonstrating meaning and natural pronunciation</td>
+        </tr>
+        <tr>
+          <td><b>handshake</b></td>
+          <td>Repeat ×3, notice the silent /d/ in fast speech: /ˈhænʃeɪk/</td>
+          <td>Chain drill: "handshake" → "a firm handshake" → "offer a firm handshake" at natural connected-speech speed</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!--============================================
+  SECTION 2 — 📐 语法重点 · GRAMMAR
+  ============================================-->
+<div class="section-card">
+  <div class="emoji">📐</div>
+  <h2>语法重点 · Grammar</h2>
+  <div class="meta">12 min · Tense control in professional introductions</div>
+
+  <p style="font-size:14px;color:var(--sub);margin-bottom:16px">
+    A <span class="vocab-highlight">professional</span> introduction isn't a list of facts — it's a story with a timeline. Using the right tense at the right moment makes you sound polished, <span class="vocab-highlight">confident</span>, and in control. Below, we'll build the grammar frame using vocabulary you already know from your prep: <span class="vocab-highlight">introduce</span>, <span class="vocab-highlight">experience</span>, <span class="vocab-highlight">background</span>, <span class="vocab-highlight">credibility</span>, <span class="vocab-highlight">opportunity</span>, <span class="vocab-highlight">networking</span>, <span class="vocab-highlight">colleague</span>, <span class="vocab-highlight">professional</span>, and <span class="vocab-highlight">rapport</span>.
+  </p>
+
+  <!-- Tense blocks using prep vocabulary -->
+  <div class="grammar-block">
+    <h4>Present Simple — Your Current Role</h4>
+    <p>Use for your name, job title, and permanent facts. Every <span class="vocab-highlight">greeting</span> starts here.</p>
+    <p class="example">"I <b>am</b> a marketing director at GlobalTech." / "I <b>introduce</b> new clients to our platform every day." / "My primary role <b>is</b> building <span class="vocab-highlight">rapport</span> with key accounts."</p>
+  </div>
+
+  <div class="grammar-block">
+    <h4>Present Perfect — Experience Connecting Past to Now</h4>
+    <p>Use for <span class="vocab-highlight">experience</span> that started in the past and continues. This is how you establish <span class="vocab-highlight">credibility</span>.</p>
+    <p class="example">"I<b>'ve been</b> with the company for five years." / "I<b>'ve built</b> a strong <span class="vocab-highlight">professional</span> network across three continents." / "I<b>'ve gained</b> valuable <span class="vocab-highlight">experience</span> leading cross-functional teams."</p>
+  </div>
+
+  <div class="grammar-block">
+    <h4>Present Continuous — What You're Doing Right Now</h4>
+    <p>Use for current projects, temporary roles, and in-progress work that creates an <span class="vocab-highlight">opportunity</span> for follow-up conversation.</p>
+    <p class="example">"I<b>'m currently working</b> on a new product launch." / "I<b>'m leading</b> a team of five engineers." / "I<b>'m looking</b> to expand our <span class="vocab-highlight">networking</span> reach in Southeast Asia."</p>
+  </div>
+
+  <div class="grammar-block">
+    <h4>Past Simple — Your Completed Background</h4>
+    <p>Use for finished jobs, education, and achievements. This is your <span class="vocab-highlight">background</span> chapter — the foundation of your <span class="vocab-highlight">credibility</span>.</p>
+    <p class="example">"I previously <b>worked</b> at a startup in Shanghai." / "I <b>graduated</b> from Fudan University." / "Before this, I <b>was</b> a <span class="vocab-highlight">colleague</span> of Sarah's at Bain & Company."</p>
+  </div>
+
+  <div class="grammar-block">
+    <h4>Future Forms — What Comes Next</h4>
+    <p>Use for your purpose, your goals, and what you're excited about. This closes your <span class="vocab-highlight">elevator pitch</span> with <span class="vocab-highlight">enthusiasm</span>.</p>
+    <p class="example">"I<b>'m going to present</b> our Q3 results." / "I<b>'ll be responsible</b> for the Asia-Pacific region." / "I<b>'m looking forward to</b> building strong <span class="vocab-highlight">rapport</span> with the new team."</p>
+  </div>
+
+  <!-- Grammar Frame -->
+  <div style="margin-top:20px">
+    <h3 style="font-size:15px;color:var(--accent2);margin-bottom:12px">🧩 Grammar Frame: Present → Past → Future with Prep Vocabulary</h3>
+    <div class="practice-frame">
+      <div class="frame-label">Speaking Frame</div>
+      <div class="frame-text">
+        <b style="color:#b45309">PRESENT</b> — who I am, what I <span class="vocab-highlight">introduce</span>, how I build <span class="vocab-highlight">rapport</span>:<br>
+        "I'm <span class="frame-gap">___</span>. I'm a <span class="frame-gap">___</span> at <span class="frame-gap">___</span>, where I'm responsible for <span class="frame-gap">___</span>."<br><br>
+        <b style="color:#b45309">PAST</b> — my <span class="vocab-highlight">background</span> and <span class="vocab-highlight">experience</span>, what gives me <span class="vocab-highlight">credibility</span>:<br>
+        "My <span class="vocab-highlight">background</span> is in <span class="frame-gap">___</span>. Previously, I <span class="frame-gap">___</span> at <span class="frame-gap">___</span>, where I built a <span class="vocab-highlight">professional</span> network across <span class="frame-gap">___</span>."<br><br>
+        <b style="color:#b45309">FUTURE</b> — the <span class="vocab-highlight">opportunity</span> ahead, why I'm excited:<br>
+        "I see this as a great <span class="vocab-highlight">opportunity</span> to <span class="frame-gap">___</span>. I'm looking forward to <span class="frame-gap">___</span> with all of you."
+      </div>
+    </div>
+  </div>
+
+  <!-- Tense Substitution Exercise -->
+  <div style="background:#eef2ff;border:1px solid #c7d2fe;border-radius:12px;padding:16px;margin-top:16px">
+    <h4 style="font-size:14px;color:#3730a3;margin-bottom:10px">✏️ Tense Substitution Exercise — Using Prep Vocabulary</h4>
+    <p style="font-size:13px;color:var(--sub);margin-bottom:8px">Fill in the blanks with the correct tense. Every sentence uses a word from your prep lexicon.</p>
+    <table style="width:100%;font-size:13px;line-height:2.2">
+      <tr>
+        <td style="padding-right:12px">1. I __________ (introduce) myself to a new <span class="vocab-highlight">colleague</span> right now.</td>
+        <td style="color:var(--accent);font-weight:600">'m introducing</td>
+      </tr>
+      <tr>
+        <td style="padding-right:12px">2. I __________ (build) strong <span class="vocab-highlight">rapport</span> with clients for over a decade.</td>
+        <td style="color:var(--accent);font-weight:600">'ve been building / have built</td>
+      </tr>
+      <tr>
+        <td style="padding-right:12px">3. Previously, I __________ (network) at industry events across Europe.</td>
+        <td style="color:var(--accent);font-weight:600">networked</td>
+      </tr>
+      <tr>
+        <td style="padding-right:12px">4. My <span class="vocab-highlight">background</span> __________ (give) me the <span class="vocab-highlight">credibility</span> to lead this project.</td>
+        <td style="color:var(--accent);font-weight:600">gives</td>
+      </tr>
+      <tr>
+        <td style="padding-right:12px">5. I __________ (look) forward to this <span class="vocab-highlight">opportunity</span> to collaborate.</td>
+        <td style="color:var(--accent);font-weight:600">'m looking</td>
+      </tr>
+      <tr>
+        <td style="padding-right:12px">6. A firm <span class="vocab-highlight">handshake</span> __________ (convey) <span class="vocab-highlight">confidence</span> — that's why we practise it.</td>
+        <td style="color:var(--accent);font-weight:600">conveys</td>
+      </tr>
+    </table>
+    <p style="font-size:12px;color:var(--accent);margin-top:8px">💡 Answers shown — cover the right column and self-check.</p>
+  </div>
+
+  <div class="teacher-note" style="margin-top:16px">
+    <b>🧑‍🏫 Teacher's Note:</b> The most common error: students mix Present Perfect and Past Simple. Rule: if a specific past time is mentioned (<i>in 2019, last year, when I joined</i>), use Past Simple. If it connects to now (<i>ever, never, since, for three years</i>), use Present Perfect. Draw a timeline on the board with your own <span class="vocab-highlight">background</span> as the example — it makes the rule stick.
+  </div>
+
+  <!-- Grammar Differentiation: A2 vs B2 -->
+  <div style="margin-top:20px">
+    <h3 style="font-size:15px;color:var(--accent2);margin-bottom:8px">🎯 Differentiation — Grammar by Level</h3>
+    <p style="font-size:13px;color:var(--sub);margin-bottom:8px">Same grammar concept, different depth. Choose your level.</p>
+    <table class="pron-table">
+      <thead>
+        <tr>
+          <th>Concept</th>
+          <th>🟢 A2 Focus</th>
+          <th>🔵 B2 Extension</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Present Simple</b></td>
+          <td>Fill in the blank: "I __________ (be) a teacher." / "She __________ (work) at a bank."</td>
+          <td>Write 3 original sentences describing a hypothetical professional role (e.g., "If I were a CEO, I would...")</td>
+        </tr>
+        <tr>
+          <td><b>Present Perfect</b></td>
+          <td>Complete the sentence: "I have __________ (work) here for 2 years." / "She has __________ (visit) three countries."</td>
+          <td>Write a short paragraph about your career journey — use Present Perfect for ongoing experience AND Past Simple for completed events, clearly separating them</td>
+        </tr>
+        <tr>
+          <td><b>Present Continuous</b></td>
+          <td>Describe the picture: "He is __________ (talk) to a client." / "They are __________ (have) a meeting."</td>
+          <td>Write 3 original sentences about current projects — each one must include a reason WHY the project matters (because / so that / in order to)</td>
+        </tr>
+        <tr>
+          <td><b>Past Simple</b></td>
+          <td>Complete: "Last year, I __________ (start) my first job." / "I __________ (graduate) in 2020."</td>
+          <td>Write 4 sentences about your professional background — use at least 2 irregular verbs and connect two sentences with "before that" or "after which"</td>
+        </tr>
+        <tr>
+          <td><b>Future Forms</b></td>
+          <td>Choose the correct form: "I (will / am going to) visit the new office next week." — explain why</td>
+          <td>Write 3 original sentences about future career goals — use will for predictions, going to for plans, and Present Continuous for fixed arrangements. Label each.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!--============================================
+  SECTION 3 — 🗣️ 商务会话 · BUSINESS CONVERSATION
+  ============================================-->
+<div class="section-card">
+  <div class="emoji">🗣️</div>
+  <h2>商务会话 · Business Conversation</h2>
+  <div class="meta">15 min · Real introductions · Pairs practice</div>
+
+  <p style="font-size:14px;color:var(--sub);margin-bottom:12px">
+    Now we put everything together — pronunciation, connected speech, grammar, and vocabulary — into real business introductions. Every example below uses your prep words: <span class="vocab-highlight">greeting</span>, <span class="vocab-highlight">professional</span>, <span class="vocab-highlight">colleague</span>, <span class="vocab-highlight">rapport</span>, <span class="vocab-highlight">handshake</span>, <span class="vocab-highlight">elevator pitch</span>, <span class="vocab-highlight">networking</span>, <span class="vocab-highlight">introduce</span>, <span class="vocab-highlight">background</span>, <span class="vocab-highlight">experience</span>, <span class="vocab-highlight">credibility</span>, <span class="vocab-highlight">opportunity</span>, <span class="vocab-highlight">confident</span>, and <span class="vocab-highlight">enthusiasm</span>.
+  </p>
+
+  <!-- Teacher Demo -->
+  <div style="background:#fff7ed;border:1px solid #fdba74;border-radius:12px;padding:16px;margin-bottom:16px">
+    <h4 style="font-size:14px;color:#9a3412;margin-bottom:10px">🎤 Teacher Demonstration — Listen and Notice</h4>
+    <p style="font-size:12px;color:var(--sub);margin-bottom:8px">The teacher reads all three examples aloud. Listen for the Present → Past → Future structure, connected speech, and prep vocabulary.</p>
+
+    <!-- Example 1: Formal Conference -->
+    <div class="rp-example">
+      <h4>Example 1 — Formal Industry Conference</h4>
+      <blockquote>
+        "<b>Good morning, everyone.</b> My name is David Chen, and I'm a senior product manager at TechVision. I'm responsible for our <span class="vocab-highlight">professional</span> SaaS platform serving over 200 enterprise clients. My <span class="vocab-highlight">background</span> is in software engineering — before this role, I spent six years at Alibaba Cloud, where I gained deep <span class="vocab-highlight">experience</span> in B2B product development. That <span class="vocab-highlight">background</span> gives me strong <span class="vocab-highlight">credibility</span> when working with technical clients. It's a pleasure to be here today. I'm really looking forward to <span class="vocab-highlight">networking</span> with all of you and exploring <span class="vocab-highlight">opportunities</span> for collaboration. <b>Thank you.</b>"
+      </blockquote>
+      <p style="font-size:11px;color:#0369a1;margin-top:6px">📋 Uses: greeting · professional · background · experience · credibility · networking · opportunity</p>
+    </div>
+
+    <!-- Example 2: First Day at New Job -->
+    <div class="rp-example">
+      <h4>Example 2 — First Day Meeting a New Team</h4>
+      <blockquote>
+        "<b>Hi, everyone!</b> I'm Sarah Lim, and it's great to finally meet you all in person. I've just joined the Business Development team, and I'll be looking after our Southeast Asia partnerships. Previously, I worked at Grab in Singapore, where I built <span class="vocab-highlight">rapport</span> with over 50 regional partners. I learned a lot from my <span class="vocab-highlight">colleagues</span> there about cross-cultural <span class="vocab-highlight">professional</span> communication — different markets require different <span class="vocab-highlight">handshake</span> styles, literally and figuratively! I'm excited to bring that <span class="vocab-highlight">experience</span> here and to learn from each of you. <b>I'm looking forward to working together.</b>"
+      </blockquote>
+      <p style="font-size:11px;color:#0369a1;margin-top:6px">📋 Uses: rapport · colleague · professional · handshake · experience · introduce (implied) · confident</p>
+    </div>
+
+    <!-- Example 3: Client Meeting -->
+    <div class="rp-example">
+      <h4>Example 3 — First Client Meeting</h4>
+      <blockquote>
+        "<b>It's a pleasure to meet you, Ms. Nakamura.</b> I'm James Wu, the account director here at Meridian Consulting. Let me give you a quick <span class="vocab-highlight">elevator pitch</span> — we <span class="vocab-highlight">specialise</span> in market entry strategy for European brands entering China, and I've personally led 14 such launches over the past eight years. My <span class="vocab-highlight">experience</span> spans retail, luxury goods, and fintech — so I'm <span class="vocab-highlight">confident</span> we have the right <span class="vocab-highlight">background</span> for your project. I see this as a fantastic <span class="vocab-highlight">opportunity</span> to build a long-term partnership. <b>Shall we begin?</b>"
+      </blockquote>
+      <p style="font-size:11px;color:#0369a1;margin-top:6px">📋 Uses: elevator pitch · experience · confident · background · opportunity · professional · rapport (implied in tone)</p>
+    </div>
+  </div>
+
+  <!-- Practice Scenarios -->
+  <h3 style="font-size:15px;color:var(--accent2);margin-bottom:12px">🎯 Your Turn — 4 Practice Scenarios</h3>
+  <div class="scenario-grid">
+    <div class="scenario-card">
+      <div class="sc-emoji">🏢</div>
+      <h4><span class="sc-badge sc-badge-b2">B2</span> Scenario 1: Industry Conference</h4>
+      <p>You're at a <span class="vocab-highlight">professional</span> conference. A <span class="vocab-highlight">colleague</span> introduces you to a potential partner. Deliver your full <span class="vocab-highlight">elevator pitch</span> — Present, Past, Future. Use a firm <span class="vocab-highlight">handshake</span>.</p>
+    </div>
+    <div class="scenario-card">
+      <div class="sc-emoji">💼</div>
+      <h4><span class="sc-badge sc-badge-a2">A2</span> Scenario 2: New Job Day One</h4>
+      <p>It's your first day. The team is gathered for morning stand-up. <span class="vocab-highlight">Introduce</span> yourself warmly — share your <span class="vocab-highlight">background</span>, your <span class="vocab-highlight">experience</span>, and build <span class="vocab-highlight">rapport</span>.</p>
+    </div>
+    <div class="scenario-card">
+      <div class="sc-emoji">🤝</div>
+      <h4><span class="sc-badge sc-badge-b2">B2</span> Scenario 3: Client Pitch</h4>
+      <p>You're meeting a key client for the first time. Your <span class="vocab-highlight">greeting</span> must establish <span class="vocab-highlight">credibility</span> in under 30 seconds. Sound <span class="vocab-highlight">confident</span>, not arrogant.</p>
+    </div>
+    <div class="scenario-card">
+      <div class="sc-emoji">🍸</div>
+      <h4><span class="sc-badge sc-badge-a2">A2</span> Scenario 4: Networking Evening</h4>
+      <p>You're at a <span class="vocab-highlight">networking</span> event. The goal is to make a strong first <span class="vocab-highlight">impression</span> and find an <span class="vocab-highlight">opportunity</span> to connect. Show <span class="vocab-highlight">enthusiasm</span> and end with warmth.</p>
+    </div>
+  </div>
+
+  <!-- Speaking Templates — Differentiated -->
+  <div style="margin-top:16px">
+    <h3 style="font-size:15px;color:var(--accent2);margin-bottom:12px">🗣️ Speaking Templates — Choose Your Level</h3>
+    
+    <!-- A2 Template -->
+    <div class="practice-frame" style="border-color:#22c55e;margin-bottom:12px">
+      <div class="frame-label" style="color:#166534">🟢 A2 — Guided Frame (Fill in the Blanks)</div>
+      <div class="frame-text">
+        "Hello, my name is <span class="frame-gap">___</span>. I'm a <span class="frame-gap">___</span> at <span class="frame-gap">___</span>. I'm responsible for <span class="frame-gap">___</span>.<br>
+        Before this, I worked at <span class="frame-gap">___</span>. I studied <span class="frame-gap">___</span>.<br>
+        I'm happy to be here. I'm looking forward to <span class="frame-gap">___</span>. Thank you."
+      </div>
+    </div>
+
+    <!-- B2 Template -->
+    <div class="practice-frame" style="border-color:#3b82f6;border-style:solid">
+      <div class="frame-label" style="color:#1e40af">🔵 B2 — Open Frame (Fewer Prompts, More Ownership)</div>
+      <div class="frame-text">
+        <b style="color:#b45309">PRESENT</b> — who you are + what you do now:<br>
+        <span class="frame-gap">___</span><br><br>
+        <b style="color:#b45309">PAST</b> — one sentence about your background that establishes credibility:<br>
+        <span class="frame-gap">___</span><br><br>
+        <b style="color:#b45309">FUTURE</b> — one sentence about why you're here, what you bring, or what you're excited about:<br>
+        <span class="frame-gap">___</span><br><br>
+        <b>Sign-off</b>: <span class="frame-gap">___</span><br><br>
+        <span style="font-size:11px;color:var(--sub)">💡 Use all three tenses. Include at least 3 prep vocabulary words. Aim for 20–30 seconds.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Teacher Feedback -->
+  <div style="margin-top:16px">
+    <h4 style="font-size:14px;color:var(--accent2);margin-bottom:8px">✅ Teacher Feedback Checklist — Per Scenario</h4>
+    <div class="checklist">
+      <label class="check-item"><input type="checkbox"> <span class="vocab-highlight">Greeting</span> — Appropriate formality for the scenario?</label>
+      <label class="check-item"><input type="checkbox"> Present Tense — Role stated clearly, <span class="vocab-highlight">confident</span> delivery?</label>
+      <label class="check-item"><input type="checkbox"> <span class="vocab-highlight">Background</span> — Past tense correct, <span class="vocab-highlight">credibility</span> established?</label>
+      <label class="check-item"><input type="checkbox"> Future — Did they express <span class="vocab-highlight">enthusiasm</span> and name an <span class="vocab-highlight">opportunity</span>?</label>
+      <label class="check-item"><input type="checkbox"> Connected Speech — Natural rhythm? Weak forms used? <span class="vocab-highlight">Rapport</span>-building tone?</label>
+      <label class="check-item"><input type="checkbox"> Body Language — <span class="vocab-highlight">Handshake</span>, eye contact, posture — <span class="vocab-highlight">confident</span>?</label>
+      <label class="check-item"><input type="checkbox"> Prep Vocabulary — Used at least 4 words from the lexicon?</label>
+      <label class="check-item"><input type="checkbox"> <span class="vocab-highlight">Elevator Pitch</span> — Under 30 seconds? <span class="vocab-highlight">Professional</span> tone throughout?</label>
+    </div>
+  </div>
+
+  <div class="teacher-note">
+    <b>🧑‍🏫 Teacher's Note:</b> Pair students up. Each pair picks one scenario, prepares for 2 minutes, then delivers to the class. The other students use the checklist to give feedback — name one strength and one growth point. Rotate roles so everyone practises and everyone gives feedback. For stronger students, challenge them to use all 16 prep lexicon words across their introduction — count them as a class!
+  </div>
+</div>
+
+<!--============================================
+  SECTION 4 — 🌍 跨文化洞察 · CROSS-CULTURAL INSIGHT
+  ============================================-->
+<div class="section-card">
+  <div class="emoji">🌍</div>
+  <h2>跨文化洞察 · Cross-Cultural Insight</h2>
+  <div class="meta">10 min · Greeting customs · Adapt your approach</div>
+
+  <p style="font-size:14px;color:var(--sub);margin-bottom:12px">
+    A great <span class="vocab-highlight">greeting</span> in Shanghai might fall flat in São Paulo — or worse, cause offence. The same <span class="vocab-highlight">handshake</span> that builds <span class="vocab-highlight">rapport</span> in London might feel aggressive in Tokyo. Understanding these differences is a <span class="vocab-highlight">professional</span> superpower. Below, we compare 5 major business cultures using vocabulary from your prep: <span class="vocab-highlight">handshake</span>, <span class="vocab-highlight">rapport</span>, <span class="vocab-highlight">impression</span>, <span class="vocab-highlight">professional</span>, <span class="vocab-highlight">confident</span>, <span class="vocab-highlight">greeting</span>, <span class="vocab-highlight">introduce</span>, <span class="vocab-highlight">networking</span>, <span class="vocab-highlight">colleague</span>, <span class="vocab-highlight">background</span>, and <span class="vocab-highlight">credibility</span>.
+  </p>
+
+  <!-- Culture Comparison Table -->
+  <table class="culture-table">
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th><span class="vocab-highlight">Greeting</span> Style</th>
+        <th><span class="vocab-highlight">Handshake</span></th>
+        <th>Eye Contact</th>
+        <th>Key Tip</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="flag">🇬🇧</span> <b>UK / US</b></td>
+        <td>Firm <span class="vocab-highlight">handshake</span> + direct "<b>Good morning, I'm ___</b>"</td>
+        <td><b>Firm</b>, 2–3 pumps, full palm contact</td>
+        <td><b>Direct and sustained</b> — signals <span class="vocab-highlight">confidence</span></td>
+        <td>A weak <span class="vocab-highlight">handshake</span> kills your first <span class="vocab-highlight">impression</span>. Practise until it's natural.</td>
+      </tr>
+      <tr>
+        <td><span class="flag">🇯🇵</span> <b>Japan</b></td>
+        <td>Bow first (<i>ojigi</i>), then light <span class="vocab-highlight">handshake</span> if offered</td>
+        <td><b>Gentle</b>, brief — let the Japanese person initiate</td>
+        <td><b>Intermittent</b> — sustained eye contact can feel confrontational</td>
+        <td>Present business cards with both hands. Build <span class="vocab-highlight">rapport</span> through humility, not boldness.</td>
+      </tr>
+      <tr>
+        <td><span class="flag">🇧🇷</span> <b>Brazil</b></td>
+        <td>Warm <span class="vocab-highlight">handshake</span> + cheek kiss (<i>beijinho</i>) among <span class="vocab-highlight">colleagues</span></td>
+        <td><b>Firm but warm</b>, often with a touch on the arm</td>
+        <td><b>Warm and engaged</b> — looking away signals disinterest</td>
+        <td>Physical warmth builds <span class="vocab-highlight">rapport</span> fast. A distant <span class="vocab-highlight">professional</span> style feels cold here.</td>
+      </tr>
+      <tr>
+        <td><span class="flag">🇩🇪</span> <b>Germany</b></td>
+        <td>Brief, firm <span class="vocab-highlight">handshake</span> + title + surname: "<b>Guten Tag, Herr Müller</b>"</td>
+        <td><b>One firm pump</b>, then release — efficiency is valued</td>
+        <td><b>Direct and brief</b> — signals honesty and <span class="vocab-highlight">credibility</span></td>
+        <td>Use titles (Dr., Prof., Herr/Frau). Your <span class="vocab-highlight">background</span> matters — mention qualifications.</td>
+      </tr>
+      <tr>
+        <td><span class="flag">🇨🇳</span> <b>China</b></td>
+        <td>Light <span class="vocab-highlight">handshake</span> + slight nod + "<b>你好, 我是___</b>" — <span class="vocab-highlight">introduce</span> with surname first</td>
+        <td><b>Gentle and brief</b> — a bone-crushing grip is inappropriate</td>
+        <td><b>Brief, respectful</b> — avoid staring at senior <span class="vocab-highlight">colleagues</span></td>
+        <td>Seniority matters. At <span class="vocab-highlight">networking</span> events, <span class="vocab-highlight">introduce</span> the most senior person first.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Discussion -->
+  <div class="discussion-prompt">
+    <h4>💬 Class Discussion — Adapting Your Introduction</h4>
+    <p>
+      <b>1.</b> You're a Chinese <span class="vocab-highlight">professional</span> attending a <span class="vocab-highlight">networking</span> event in London. How would you adapt your <span class="vocab-highlight">handshake</span> and eye contact to make a stronger first <span class="vocab-highlight">impression</span>?<br><br>
+      <b>2.</b> A Japanese <span class="vocab-highlight">colleague</span> visits your Shanghai office. You extend a firm Western-style <span class="vocab-highlight">handshake</span>. They seem uncomfortable. What might have happened, and how do you repair <span class="vocab-highlight">rapport</span>?<br><br>
+      <b>3.</b> How much of your <span class="vocab-highlight">background</span> should you share in Germany vs. Brazil? Why does <span class="vocab-highlight">credibility</span> get established differently in each culture?
+    </p>
+    <p style="margin-top:12px;font-size:12px">
+      <b>Prep vocabulary in this discussion:</b>
+      <span class="vocab-tag">professional</span>
+      <span class="vocab-tag">networking</span>
+      <span class="vocab-tag">handshake</span>
+      <span class="vocab-tag">impression</span>
+      <span class="vocab-tag">colleague</span>
+      <span class="vocab-tag">rapport</span>
+      <span class="vocab-tag">background</span>
+      <span class="vocab-tag">credibility</span>
+    </p>
+  </div>
+
+  <!-- Mini Exercise: Match Greeting to Country -->
+  <div style="background:#fef9c3;border:1px solid #fde68a;border-radius:12px;padding:16px;margin-top:16px">
+    <h4 style="font-size:14px;color:#854d0e;margin-bottom:8px">🟢 A2 · Match the <span class="vocab-highlight">Greeting</span> to the Country</h4>
+    <p style="font-size:12px;color:var(--sub);margin-bottom:8px">Draw a line from each greeting description to the correct country.</p>
+    <div class="match-mini">
+      <div class="match-card">
+        <div class="greeting-style">"One firm pump, then release. Use titles like Dr. or Prof."</div>
+        <div style="font-size:12px;margin-top:6px;color:var(--accent)">→ ________</div>
+      </div>
+      <div class="match-card">
+        <div class="greeting-style">"Bow first. Let them initiate the <span class="vocab-highlight">handshake</span>. Present cards with both hands."</div>
+        <div style="font-size:12px;margin-top:6px;color:var(--accent)">→ ________</div>
+      </div>
+      <div class="match-card">
+        <div class="greeting-style">"Warm <span class="vocab-highlight">handshake</span> + cheek kiss. Physical warmth builds <span class="vocab-highlight">rapport</span>."</div>
+        <div style="font-size:12px;margin-top:6px;color:var(--accent)">→ ________</div>
+      </div>
+      <div class="match-card">
+        <div class="greeting-style">"Firm <span class="vocab-highlight">handshake</span>, 2–3 pumps, direct eye contact. Weak grip hurts your <span class="vocab-highlight">impression</span>."</div>
+        <div style="font-size:12px;margin-top:6px;color:var(--accent)">→ ________</div>
+      </div>
+      <div class="match-card">
+        <div class="greeting-style">"Gentle grip, brief contact, slight nod. <span class="vocab-highlight">Introduce</span> the most senior person first."</div>
+        <div style="font-size:12px;margin-top:6px;color:var(--accent)">→ ________</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--sub);margin-top:8px">
+      <b>Countries:</b> 🇩🇪 Germany · 🇯🇵 Japan · 🇧🇷 Brazil · 🇬🇧 UK/US · 🇨🇳 China
+    </p>
+    <button class="answers-toggle" onclick="document.getElementById('cultureAnswers').classList.toggle('visible'); this.textContent = document.getElementById('cultureAnswers').classList.contains('visible') ? '🔒 Hide Answers' : '🔑 Show Answers'">🔑 Show Answers</button>
+    <div id="cultureAnswers" style="display:none;background:#f9fafb;border-radius:10px;padding:14px;margin-top:8px;font-size:13px;line-height:1.8">
+      <p>1. "One firm pump, release, use titles" → <b>🇩🇪 Germany</b></p>
+      <p>2. "Bow first, present cards with both hands" → <b>🇯🇵 Japan</b></p>
+      <p>3. "Warm handshake + cheek kiss, physical warmth" → <b>🇧🇷 Brazil</b></p>
+      <p>4. "Firm handshake, 2–3 pumps, direct eye contact" → <b>🇬🇧 UK / US</b></p>
+      <p>5. "Gentle grip, brief contact, slight nod, senior first" → <b>🇨🇳 China</b></p>
+    </div>
+  </div>
+
+  <div style="background:#dbeafe;border:1px solid #93c5fd;border-radius:12px;padding:16px;margin-top:16px">
+    <h4 style="font-size:14px;color:#1e40af;margin-bottom:8px">🔵 B2 · Adaptation Challenge</h4>
+    <p style="font-size:13px;color:#1e3a5f;line-height:1.8">
+      <b>Scenario:</b> You are a Chinese marketing manager attending an international conference in Tokyo. You will introduce yourself to a Japanese delegation of senior executives.<br><br>
+      <b>Task:</b> Write 3 specific changes you would make to your introduction compared to how you would introduce yourself at a similar event in Shanghai. For each change, explain WHY (reference the culture table above).<br><br>
+      <b>Example structure:</b><br>
+      1. <span class="frame-gap">Change: ___</span> → Reason: ___<br>
+      2. <span class="frame-gap">Change: ___</span> → Reason: ___<br>
+      3. <span class="frame-gap">Change: ___</span> → Reason: ___<br><br>
+      <span style="font-size:11px;color:var(--sub)">💡 Use prep vocabulary: handshake, rapport, impression, professional, introduce, greeting</span>
+    </p>
+  </div>
+
+  <div class="teacher-note">
+    <b>🧑‍🏫 Teacher's Note:</b> This section works best as a group discussion. Ask students who have travelled or worked internationally to share their experiences. The goal isn't memorising rules — it's building awareness that <span class="vocab-highlight">professional</span> norms vary, and that adaptability is a skill. If time is short, do the matching exercise as a quick-fire quiz and save the discussion for the cool-down.
+  </div>
+</div>
+
+<!--============================================
+  SECTION 5 — 📝 作业 · HOMEWORK
+  ============================================-->
+<div class="cool-down">
+  <h3>📝 作业 · Homework</h3>
+  <p style="font-size:14px;color:#065f46;margin-bottom:12px"><b>10 minutes · Recap · Next steps</b></p>
+
+  <h4 style="font-size:15px;color:#065f46;margin-top:12px;margin-bottom:8px">✅ Key Takeaways — Today's Prep Vocabulary in Action</h4>
+  <ul style="list-style:none;padding:0">
+    <li style="margin-bottom:6px">🔊 <b>Pronunciation:</b> You drilled 5 lexicon words — <span class="vocab-highlight">greeting</span>, <span class="vocab-highlight">impression</span>, <span class="vocab-highlight">confident</span>, <span class="vocab-highlight">rapport</span>, <span class="vocab-highlight">handshake</span> — and practised 4 connected speech patterns that make them flow naturally.</li>
+    <li style="margin-bottom:6px">📐 <b>Grammar:</b> You built the Present → Past → Future frame using <span class="vocab-highlight">introduce</span>, <span class="vocab-highlight">background</span>, <span class="vocab-highlight">experience</span>, <span class="vocab-highlight">credibility</span>, <span class="vocab-highlight">opportunity</span>, and <span class="vocab-highlight">networking</span>.</li>
+    <li style="margin-bottom:6px">🗣️ <b>Business Conversation:</b> You delivered real introductions in 4 scenarios, using your <span class="vocab-highlight">elevator pitch</span>, building <span class="vocab-highlight">rapport</span> with <span class="vocab-highlight">colleagues</span>, and projecting <span class="vocab-highlight">enthusiasm</span>.</li>
+    <li style="margin-bottom:6px">🌍 <b>Cross-Cultural Insight:</b> You explored how a single <span class="vocab-highlight">greeting</span> changes across 5 cultures — and why adaptability is a <span class="vocab-highlight">professional</span> skill that builds trust and a positive <span class="vocab-highlight">impression</span>.</li>
+    <li style="margin-bottom:6px">📚 <b>All 16 prep words appeared across today's lesson:</b> greeting · impression · introduce · professional · colleague · background · experience · credibility · opportunity · networking · handshake · elevator pitch · rapport · confident · glance · enthusiasm</li>
+  </ul>
+
+  <div class="hw-box" style="border-left:4px solid #22c55e">
+    <h4>🟢 A2 Homework — Guided Practice</h4>
+    <p style="font-size:14px;line-height:1.9;color:var(--text)">
+      <b>1. Record Your Introduction (with sentence frames)</b><br>
+      Use the A2 speaking frame from class. Fill in the blanks with your real information. Record a 15–20 second audio. Sentence frame: "Hello, my name is ___. I'm a ___ at ___. Before this, I worked at ___. I'm happy to be here. I'm looking forward to ___. Thank you."<br><br>
+      <b>2. Vocabulary Match</b><br>
+      Match each prep word to its definition: greeting · impression · confident · rapport · handshake · elevator pitch · networking · colleague · background · credibility · opportunity · professional · introduce · experience · enthusiasm<br>
+      (Definitions provided on prep.html — review if unsure.)<br><br>
+      <b>3. Tense Practice (Fill the Blanks)</b><br>
+      Complete the sentences: a) I __________ (be) a student. b) She __________ (work) in a hospital. c) Last year, I __________ (start) English classes. d) I __________ (look) forward to meeting you.<br><br>
+      <b>4. Culture Matching</b><br>
+      Review the A2 matching exercise from class. Draw lines connecting each greeting description to the correct country. Check your answers with the answer key.
+    </p>
+  </div>
+
+  <div class="hw-box" style="border-left:4px solid #3b82f6;margin-top:12px">
+    <h4>🔵 B2 Homework — Extended Production</h4>
+    <p style="font-size:14px;line-height:1.9;color:var(--text)">
+      <b>1. Record Your Elevator Pitch (original production)</b><br>
+      Using the B2 open frame from class, write and record a 20–30 second <span class="vocab-highlight">professional</span> introduction. Use at least 6 prep vocabulary words. Do NOT read from a script — use notes only. Send the audio to your teacher.<br><br>
+      <b>2. Written Self-Analysis</b><br>
+      Write out your introduction in full. Mark the tense of each sentence (Present Simple / Present Perfect / Past Simple / Future). Highlight every connected speech pattern you used (C+V linking, consonant merging, weak forms, intrusive glides). Note where your <span class="vocab-highlight">elevator pitch</span> establishes <span class="vocab-highlight">credibility</span>.<br><br>
+      <b>3. Cross-Cultural Reflection</b><br>
+      Choose one country from the culture table (not China). Write 3 sentences explaining how you would adapt your introduction — <span class="vocab-highlight">greeting</span>, <span class="vocab-highlight">handshake</span>, and body language — to make a strong <span class="vocab-highlight">impression</span> in that culture. Use the prep words <span class="vocab-highlight">rapport</span>, <span class="vocab-highlight">professional</span>, and <span class="vocab-highlight">confident</span> in your explanation.<br><br>
+      <b>4. Real-World Practice + Reflection</b><br>
+      <span class="vocab-highlight">Introduce</span> yourself to someone new in English this week — at work, at a <span class="vocab-highlight">networking</span> event, or online. Use the Present → Past → Future formula. Afterward, write a short reflection (4–5 sentences): What went well? What would you improve? Which prep words did you use naturally?<br><br>
+      <b>5. Review Prep Materials</b><br>
+      If you haven't completed the pre-class reading, lexicon study, and comprehension exercises, finish them now. All 16 words will appear in future lessons — strong recall now means stronger performance later.
+    </p>
+  </div>
+
+  <div style="margin-top:16px">
+    <a href="prep.html" class="btn" style="background:#065f46">📖 Open Prep Homework</a>
+  </div>
+</div>
+
+<footer>
+  <p class="brand">rkrk.io × 托朴教育</p>
+  <p>Business English · Lesson 1 · Demo Class Jun 23 · A2–B1+</p>
+  <p style="margin-top:4px">rkrk@me.com</p>
+</footer>
+
+</div>
+
+<script>
+// Video seek: click timeline entries to seek local video
+const localVideo = document.getElementById('localVideo');
+const ytFrame = document.getElementById('ytFrame');
+
+document.querySelectorAll('.timeline-entry').forEach(entry => {
+  entry.addEventListener('click', function() {
+    const seconds = parseInt(this.dataset.time);
+    // Seek local video first (primary)
+    if (localVideo && localVideo.style.display !== 'none') {
+      localVideo.currentTime = seconds;
+      localVideo.play();
+    }
+    // Fallback: seek YouTube iframe
+    if (ytFrame && ytFrame.style.display !== 'none') {
+      const src = ytFrame.src.replace(/&start=\d+/, '');
+      ytFrame.src = src + '&start=' + seconds + '&autoplay=1';
+    }
+  });
+});
+
+// Local video primary — YouTube as fallback
+(function() {
+  if (!localVideo || !ytFrame) return;
+
+  // Try loading the local video — if it fails, show YouTube
+  localVideo.addEventListener('error', function() {
+    localVideo.style.display = 'none';
+    ytFrame.style.display = 'block';
+  }, { once: true });
+
+  // If metadata loads successfully, keep local video visible
+  localVideo.addEventListener('loadedmetadata', function() {
+    // local video is already display:block by default — do nothing
+  }, { once: true });
+})();
+</script>
+
+</body>
+</html>

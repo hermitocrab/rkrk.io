@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Native EdTech for IELTS Teachers | rkrk.io</title>
+<meta name="description" content="Learn to build high-quality IELTS courseware with AI tools. A practical program for IELTS teachers with zero IT background.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAFA;
+    --card: #FFFFFF;
+    --text: #1A1A1A;
+    --text-secondary: #666;
+    --text-muted: #999;
+    --accent: #E62B1E;
+    --accent-hover: #C4201A;
+    --gold: #D97706;
+    --gold-dark: #C2410C;
+    --border: #E0E0E0;
+    --gray-light: #F5F5F5;
+    --gray-border: #E0E0E0;
+    --radius: 6px;
+    --max-width: 1100px;
+    --nav-height: 68px;
+    --section-pad: 80px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; letter-spacing: -0.02em; font-weight: 600; }
+  h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; color: var(--text); }
+  h2 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); line-height: 1.25; color: var(--text); }
+  h3 { font-size: 1.05rem; line-height: 1.35; }
+  p { max-width: 65ch; }
+  a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+  a:hover { color: var(--accent-hover); }
+
+  /* Nav */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--nav-height);
+    background: rgba(250,250,250,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: var(--max-width); margin: 0 auto;
+    padding: 0 32px; height: 100%;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.25rem; font-weight: 700; color: var(--text);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .nav-logo-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent); display: inline-block;
+    margin-right: 2px;
+  }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--text-secondary); }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--accent); color: #fff !important;
+    padding: 9px 20px; border-radius: var(--radius);
+    font-weight: 600; font-size: 0.875rem;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--accent-hover); }
+
+  /* Sections */
+  .section { padding: var(--section-pad) 32px; }
+  .section-inner { max-width: var(--max-width); margin: 0 auto; }
+  .section + .section { border-top: 1px solid var(--border); }
+  .section-label {
+    font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .section-header { margin-bottom: 48px; }
+  .section-header h2 { margin-bottom: 12px; }
+  .section-header p { color: var(--text-secondary); font-size: 1rem; }
+
+  /* Hero */
+  .hero { padding-top: calc(var(--nav-height) + 64px); padding-bottom: 64px; }
+  .hero-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 32px; }
+  .hero h1 { max-width: 18ch; margin-bottom: 20px; }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--text-secondary);
+    max-width: 48ch; line-height: 1.65; margin-bottom: 32px;
+  }
+  .hero-cta-row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 28px; border-radius: var(--radius);
+    font-family: 'Inter', sans-serif; font-size: 0.95rem;
+    font-weight: 600; cursor: pointer; border: none;
+    transition: all 0.2s;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--text); }
+
+  /* Stats Bar */
+  .stats-bar { padding: 48px 32px; border-top: 1px solid var(--border); }
+  .stats-inner {
+    max-width: var(--max-width); margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  }
+  .stat-value {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.2rem; font-weight: 700; color: var(--text);
+    line-height: 1.1;
+  }
+  .stat-label { font-size: 0.875rem; color: var(--text-secondary); margin-top: 6px; }
+
+  /* Persona Cards */
+  .persona-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .persona-card {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 28px; border-radius: var(--radius);
+  }
+  .persona-icon {
+    font-size: 1.6rem; margin-bottom: 14px; display: block;
+  }
+  .persona-card h3 { margin-bottom: 8px; font-size: 1rem; }
+  .persona-card p { font-size: 0.9rem; color: var(--text-secondary); }
+
+  /* Module Cards — Expandable */
+  .module-grid {
+    display: grid; grid-template-columns: 1fr; gap: 20px;
+  }
+  .module-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+  }
+  .module-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .module-card-header {
+    display: grid; grid-template-columns: 120px 1fr auto auto;
+    gap: 24px; align-items: start; padding: 28px;
+    user-select: none;
+  }
+  .module-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.6rem; font-weight: 700; color: var(--accent);
+    line-height: 1;
+  }
+  .module-body h3 { margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+  .module-body p { font-size: 0.9rem; color: var(--text-secondary); max-width: 52ch; }
+  .module-tag {
+    font-size: 0.75rem; font-weight: 500; color: var(--gold);
+    background: #FFF7ED; padding: 4px 12px; border-radius: 20px;
+    white-space: nowrap; align-self: start;
+  }
+  .module-expand-icon {
+    font-size: 0.9rem; color: var(--text-muted);
+    transition: transform 0.3s ease;
+    align-self: start; padding-top: 4px;
+  }
+  .module-card.expanded .module-expand-icon {
+    transform: rotate(180deg);
+    color: var(--accent);
+  }
+
+  /* Module Detail (expandable content) */
+  .module-detail {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    background: var(--gray-light);
+    border-top: 0px solid var(--border);
+  }
+  .module-card.expanded .module-detail {
+    max-height: 800px;
+    border-top: 1px solid var(--border);
+  }
+  .module-detail-inner {
+    padding: 0 28px 0 28px;
+  }
+  .module-card.expanded .module-detail-inner {
+    padding: 24px 28px;
+  }
+  .module-detail h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--accent); margin: 16px 0 8px;
+  }
+  .module-detail h4:first-child { margin-top: 0; }
+  .module-detail ul {
+    list-style: none; padding: 0;
+    display: grid; gap: 6px;
+  }
+  .module-detail ul li {
+    font-size: 0.88rem; color: var(--text-secondary);
+    padding: 6px 0 6px 16px;
+    position: relative; line-height: 1.6;
+  }
+  .module-detail ul li::before {
+    content: '·'; position: absolute; left: 0;
+    font-weight: 700; color: var(--accent);
+  }
+  .module-detail .detail-tools {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;
+  }
+  .module-detail .detail-tool-pill {
+    font-size: 0.75rem; font-weight: 500;
+    padding: 3px 10px; border-radius: 12px;
+    background: #fff; border: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+
+  /* Tool Grid */
+  .tool-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  }
+  .tool-card {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 24px; border-radius: var(--radius); text-align: center;
+  }
+  .tool-card h4 { font-size: 0.95rem; margin-bottom: 4px; }
+  .tool-card .tool-cat {
+    font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* CTA Section */
+  .cta-section { text-align: center; }
+  .cta-section h2 { margin-bottom: 16px; }
+  .cta-section p { color: var(--text-secondary); margin: 0 auto 28px; }
+
+  /* Footer */
+  .site-footer {
+    border-top: 1px solid var(--border); padding: 40px 32px;
+    text-align: center; font-size: 0.85rem; color: var(--text-muted);
+  }
+  .site-footer a { color: var(--text-secondary); }
+  .site-footer a:hover { color: var(--text); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    :root { --section-pad: 48px; }
+    .nav-links { gap: 16px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .hero { padding-top: calc(var(--nav-height) + 48px); padding-bottom: 48px; }
+    .stats-inner { grid-template-columns: 1fr; gap: 24px; }
+    .persona-grid { grid-template-columns: 1fr; }
+    .module-card-header { grid-template-columns: 1fr; gap: 12px; }
+    .module-tag { justify-self: start; }
+    .module-expand-icon { position: absolute; top: 28px; right: 28px; }
+    .tool-grid { grid-template-columns: repeat(2, 1fr); }
+    .section { padding: 48px 20px; }
+    .hero-inner { padding: 0 20px; }
+  }
+  @media (max-width: 480px) {
+    .tool-grid { grid-template-columns: 1fr; }
+    .hero-cta-row { flex-direction: column; }
+    .btn { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-dot"></span>rkrk.io
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Syllabus</a>
+      <a href="coop.html">Co-branded</a>
+      <a href="demo.html">Live Demo</a>
+      <a href="mailto:rkrk@me.com" class="nav-cta">Contact Kee</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <h1>AI-native courseware design for IELTS teachers</h1>
+    <p class="hero-sub">A practical program that teaches you to build high-quality IELTS listening, reading, writing, and speaking materials using AI tools. No IT background required.</p>
+    <div class="hero-cta-row">
+      <a href="mailto:rkrk@me.com" class="btn btn-primary">Enquire about the program</a>
+      <a href="demo.html" class="btn btn-outline">View a live demo lesson</a>
+    </div>
+  </div>
+</section>
+
+<section class="stats-bar">
+  <div class="stats-inner">
+    <div><div class="stat-value">8</div><div class="stat-label">Course modules covering all four IELTS skills</div></div>
+    <div><div class="stat-value">12+</div><div class="stat-label">AI tools and platforms taught in depth</div></div>
+    <div><div class="stat-value">1</div><div class="stat-label">Complete courseware suite built by every teacher</div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">Who is this for</div>
+      <h2>Built for IELTS teachers who want AI to do the heavy lifting</h2>
+      <p>No prior experience with AI or coding expected. If you can write a lesson plan, you can learn this.</p>
+    </div>
+    <div class="persona-grid">
+      <div class="persona-card"><span class="persona-icon">🎓</span><h3>Novice IELTS Teachers</h3><p>You have started teaching IELTS but lack high-quality courseware. Learn to create professional materials in hours instead of weeks.</p></div>
+      <div class="persona-card"><span class="persona-icon">📚</span><h3>Experienced Teachers Ready for AI</h3><p>You have years of teaching experience and strong intuition about what works. Now add AI tools to scale your materials without losing quality.</p></div>
+      <div class="persona-card"><span class="persona-icon">🏫</span><h3>Training Centre Owners</h3><p>You run a centre and need consistent, branded courseware across multiple teachers. Build a system that produces uniform quality at scale.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">Course modules</div>
+      <h2>8 modules from AI thinking to complete courseware</h2>
+      <p>Each module combines theory, hands-on practice, and a deliverable. Click to expand syllabus details.</p>
+    </div>
+    <div class="module-grid">
+
+      <!-- Module 1 -->
+      <div class="module-card" onclick="toggleModule(this)">
+        <div class="module-card-header">
+          <div class="module-num">01</div>
+          <div class="module-body">
+            <h3>AI Mindset and Prompt Engineering</h3>
+            <p>Build the AI thinking framework. Learn to structure prompts for consistent, high-quality output across all four IELTS skills.</p>
+          </div>
+          <span class="module-tag">Foundation</span>
+          <span class="module-expand-icon">▾</span>
+        </div>
+        <div class="module-detail">
+          <div class="module-detail-inner">
+            <h4>Weekly Breakdown</h4>
+            <ul>
+              <li>Week 1: What AI can and cannot do for IELTS teaching — realistic expectations, tool landscape</li>
+              <li>Week 2: Prompt architecture — system prompts, chain-of-thought, few-shot, role-based, iterative refinement</li>
+              <li>Week 3: Prompt library building — reusable templates for listening, reading, writing, speaking courseware</li>
+            </ul>
+            <h4>Tools Covered</h4>
+            <div class="detail-tools">
+              <span class="detail-tool-pill">ChatGPT</span><span class="detail-tool-pill">Claude</span><span class="detail-tool-pill">DeepSeek</span>
+            </div>
+            <h4>Key Deliverable</h4>
+            <p style="font-size:0.88rem;color:var(--text-secondary);">A personalised prompt library with 20+ reusable templates for your IELTS teaching needs.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 2 -->
+      <div class="module-card" onclick="toggleModule(this)">
+        <div class="module-card-header">
+          <div class="module-num">02</div>
+          <div class="module-body">
+            <h3>AI-Assisted Listening Courseware</h3>
+            <p>Generate natural-sounding audio for IELTS listening practice. Create dictation, gap-fill, MCQ, and map-labelling tasks.</p>
+          </div>
+          <span class="module-tag">Listening</span>
+          <span class="module-expand-icon">▾</span>
+        </div>
+        <div class="module-detail">
+          <div class="module-detail-inner">
+            <h4>Weekly Breakdown</h4>
+            <ul>
+              <li>Week 1: Audio generation — TTS tools, voice selection, speed control, accent options</li>
+              <li>Week 2: Script-to-exercise — building dictation scripts, gap-fill, multiple-choice from transcripts</li>
+              <li>Week 3: Map-labelling and section-specific tasks — creating authentic Section 1–4 materials</li>
+            </ul>
+            <h4>Tools Covered</h4>
+            <div class="detail-tools">
+              <span class="detail-tool-pill">ElevenLabs</span><span class="detail-tool-pill">OpenAI TTS</span><span class="detail-tool-pill">Edge TTS</span><span class="detail-tool-pill">Descript</span>
+            </div>
+            <h4>Key Deliverable</h4>
+            <p style="font-size:0.88rem;color:var(--text-secondary);">A complete IELTS listening practice set with AI-generated audio, question booklet, and answer key.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 3 -->
+      <div class="module-card" onclick="toggleModule(this)">
+        <div class="module-card-header">
+          <div class="module-num">03</div>
+          <div class="module-body">
+            <h3>AI-Assisted Reading Courseware</h3>
+            <p>Adapt authentic passages to IELTS levels. Generate True/False/NG, matching headings, sentence completion, and vocabulary tasks.</p>
+          </div>
+          <span class="module-tag">Reading</span>
+          <span class="module-expand-icon">▾</span>
+        </div>
+        <div class="module-detail">
+          <div class="module-detail-inner">
+            <h4>Weekly Breakdown</h4>
+            <ul>
+              <li>Week 1: Passage adaptation — simplifying authentic texts to B1-B2-C1 levels with AI</li>
+              <li>Week 2: Question generation — T/F/NG, matching headings, sentence completion, summary tasks</li>
+              <li>Week 3: Vocabulary extraction — academic word lists, frequency analysis, contextual glossaries</li>
+            </ul>
+            <h4>Tools Covered</h4>
+            <div class="detail-tools">
+              <span class="detail-tool-pill">Claude</span><span class="detail-tool-pill">ChatGPT</span><span class="detail-tool-pill">NotebookLM</span>
+            </div>
+            <h4>Key Deliverable</h4>
+            <p style="font-size:0.88rem;color:var(--text-secondary);">A full IELTS reading passage with 13 questions across 3 task types plus a vocabulary glossary.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 4 -->
+      <div class="module-card" onclick="toggleModule(this)">
+        <div class="module-card-header">
+          <div class="module-num">04</div>
+          <div class="module-body">
+            <h3>AI-Assisted Writing Courseware</h3>
+            <p>Design Task 1 and Task 2 prompts with model answers at multiple band levels. Set up rubric-based automated feedback.</p>
+          </div>
+          <span class="module-tag">Writing</span>
+          <span class="module-expand-icon">▾</span>
+        </div>
+        <div class="module-detail">
+          <div class="module-detail-inner">
+            <h4>Weekly Breakdown</h4>
+            <ul>
+              <li>Week 1: Task 1 automation — graph description prompts, data interpretation, model answers at Band 5.5–8.0</li>
+              <li>Week 2: Task 2 essay generation — opinion, discussion, problem-solution prompts with sample structures</li>
+              <li>Week 3: AI feedback systems — rubric-based scoring (TR/CC/LR/GRA), personalised comments, revision suggestions</li>
+            </ul>
+            <h4>Tools Covered</h4>
+            <div class="detail-tools">
+              <span class="detail-tool-pill">Claude</span><span class="detail-tool-pill">ChatGPT</span><span class="detail-tool-pill">Custom GPTs</span>
+            </div>
+            <h4>Key Deliverable</h4>
+            <p style="font-size:0.88rem;color:var(--text-secondary);">A Task 2 essay bundle: prompt, 3 model answers at different bands, scoring rubric, and topic vocabulary bank.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 5 -->
+      <div class="module-card" onclick="toggleModule(this)">
+        <div class="module-card-header">
+          <div class="module-num">05</div>
+          <div class="module-body">
+            <h3>AI-Assisted Speaking Courseware</h3>
+            <p>Build Part 2 cue card generators. Design Part 3 logic chains. Create pronunciation drills with phonetic markup.</p>
+          </div>
+          <span class="module-tag">Speaking</span>
+          <span class="module-expand-icon">▾</span>
+        </div>
+        <div class="module-detail">
+          <div class="module-detail-inner">
+            <h4>Weekly Breakdown</h4>
+            <ul>
+              <li>Week 1: Part 2 cue cards — topic-based generators, follow-up questions, vocabulary scaffolds</li>
+              <li>Week 2: Part 3 logic chains — abstract reasoning exercises, opinion development, discourse markers</li>
+              <li>Week 3: Pronunciation — phonetic transcription, shadowing scripts, stress and intonation drills</li>
+            </ul>
+            <h4>Tools Covered</h4>
+            <div class="detail-tools">
+              <span class="detail-tool-pill">ChatGPT</span><span class="detail-tool-pill">ElevenLabs</span><span class="detail-tool-pill">toPhonetics</span>
+            </div>
+            <h4>Key Deliverable</h4>
+            <p style="font-size:0.88rem;color:var(--text-secondary);">A complete speaking module: 5 Part 2 cue cards with follow-ups, 3 Part 3 logic chain exercises, pronunciation drill sheet.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 6 -->
+      <div class="module-card" onclick="toggleModule(this)">
+        <div class="module-card-header">
+          <div class="module-num">06</div>
+          <div class="module-body">
+            <h3>OpenClaw Agent Setup</h3>
+            <p>Build your own AI teaching assistant. Configure prompts, skills, and workflows. Delegate courseware production to your agent.</p>
+          </div>
+          <span class="module-tag">Automation</span>
+          <span class="module-expand-icon">▾</span>
+        </div>
+        <div class="module-detail">
+          <div class="module-detail-inner">
+            <h4>Weekly Breakdown</h4>
+            <ul>
+              <li>Week 1: OpenClaw installation and configuration — agent setup, skill loading, workspace organisation</li>
+              <li>Week 2: Agent skills development — building custom skills for IELTS courseware generation</li>
+              <li>Week 3: Workflow automation — batch courseware production, quality checking, deployment pipelines</li>
+            </ul>
+            <h4>Tools Covered</h4>
+            <div class="detail-tools">
+              <span class="detail-tool-pill">OpenClaw</span><span class="detail-tool-pill">Node.js</span><span class="detail-tool-pill">Git</span><span class="detail-tool-pill">Vercel</span>
+            </div>
+            <h4>Key Deliverable</h4>
+            <p style="font-size:0.88rem;color:var(--text-secondary);">A working OpenClaw agent with 2 custom skills that can generate courseware on command.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 7 -->
+      <div class="module-card" onclick="toggleModule(this)">
+        <div class="module-card-header">
+          <div class="module-num">07</div>
+          <div class="module-body">
+            <h3>Video and Image Generation</h3>
+            <p>Create courseware visuals, explainer images, and short instructional videos with consistent branded style.</p>
+          </div>
+          <span class="module-tag">Visual</span>
+          <span class="module-expand-icon">▾</span>
+        </div>
+        <div class="module-detail">
+          <div class="module-detail-inner">
+            <h4>Weekly Breakdown</h4>
+            <ul>
+              <li>Week 1: Image generation — prompt design for courseware visuals, style consistency, branding</li>
+              <li>Week 2: Video creation — short explainer clips, pronunciation videos, cue card walkthroughs</li>
+              <li>Week 3: Asset management — organising, versioning, and integrating visuals into your courseware</li>
+            </ul>
+            <h4>Tools Covered</h4>
+            <div class="detail-tools">
+              <span class="detail-tool-pill">Midjourney</span><span class="detail-tool-pill">DALL-E</span><span class="detail-tool-pill">HeyGen</span><span class="detail-tool-pill">Runway</span>
+            </div>
+            <h4>Key Deliverable</h4>
+            <p style="font-size:0.88rem;color:var(--text-secondary);">A branded visual asset pack: 10 courseware images + 1 short instructional video for your chosen IELTS topic.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 8 -->
+      <div class="module-card" onclick="toggleModule(this)">
+        <div class="module-card-header">
+          <div class="module-num">08</div>
+          <div class="module-body">
+            <h3>Interactive Web Courseware</h3>
+            <p>Build single-file HTML courseware demos. Apply the RUA framework to create self-contained interactive lessons.</p>
+          </div>
+          <span class="module-tag">Web</span>
+          <span class="module-expand-icon">▾</span>
+        </div>
+        <div class="module-detail">
+          <div class="module-detail-inner">
+            <h4>Weekly Breakdown</h4>
+            <ul>
+              <li>Week 1: HTML courseware basics — single-file structure, embedded CSS, responsive design principles</li>
+              <li>Week 2: RUA framework implementation — Recognise/Understand/Apply tabs, vocabulary cards, audio players</li>
+              <li>Week 3: Capstone project — build and deploy your own complete courseware page to rkrk.io</li>
+            </ul>
+            <h4>Tools Covered</h4>
+            <div class="detail-tools">
+              <span class="detail-tool-pill">VS Code</span><span class="detail-tool-pill">ChatGPT</span><span class="detail-tool-pill">GitHub Pages</span><span class="detail-tool-pill">Vercel</span>
+            </div>
+            <h4>Key Deliverable</h4>
+            <p style="font-size:0.88rem;color:var(--text-secondary);">A live, student-facing interactive courseware page on a real IELTS topic, deployed and shareable via URL.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">Tool stack</div>
+      <h2>The tools you will learn to use</h2>
+      <p>Practical, accessible tools chosen for education workflows. No enterprise software, no coding required.</p>
+    </div>
+    <div class="tool-grid">
+      <div class="tool-card"><h4>ChatGPT / Claude</h4><span class="tool-cat">Text Generation</span></div>
+      <div class="tool-card"><h4>OpenAI TTS / ElevenLabs</h4><span class="tool-cat">Audio Generation</span></div>
+      <div class="tool-card"><h4>Midjourney / DALL-E</h4><span class="tool-cat">Image Generation</span></div>
+      <div class="tool-card"><h4>HeyGen / Runway</h4><span class="tool-cat">Video Creation</span></div>
+      <div class="tool-card"><h4>OpenClaw Agent</h4><span class="tool-cat">AI Assistant</span></div>
+      <div class="tool-card"><h4>NotebookLM</h4><span class="tool-cat">Research &#38; Notes</span></div>
+      <div class="tool-card"><h4>Canva AI / Figma</h4><span class="tool-cat">Visual Design</span></div>
+      <div class="tool-card"><h4>GitHub / Vercel</h4><span class="tool-cat">Publishing</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section cta-section">
+  <div class="section-inner">
+    <h2>Ready to build your AI courseware toolkit?</h2>
+    <p>This program is designed for small cohorts with hands-on guidance. Each teacher leaves with a complete, classroom-ready courseware suite.</p>
+    <a href="mailto:rkrk@me.com" class="btn btn-primary" style="font-size:1rem; padding:14px 36px;">Contact Kee about the program</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="section-inner">
+    <p><strong>rkrk.io</strong> &middot; AI-native EdTech for IELTS teachers &middot; rkrk@me.com</p>
+    <p style="margin-top:4px;"><a href="index.html">Syllabus</a> &middot; <a href="coop.html">Co-branded Program</a> &middot; <a href="demo.html">Live Demo</a></p>
+  </div>
+</footer>
+
+<script>
+function toggleModule(moduleCard) {
+  var wasExpanded = moduleCard.classList.contains('expanded');
+  // Close all
+  document.querySelectorAll('.module-card.expanded').forEach(function(card) {
+    card.classList.remove('expanded');
+  });
+  // Toggle clicked (close if was open, open if was closed)
+  if (!wasExpanded) {
+    moduleCard.classList.add('expanded');
+  }
+}
+</script>
+
+</body>
+</html>

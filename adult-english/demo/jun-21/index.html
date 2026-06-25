@@ -7,26 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"DM Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
-          },
-          colors: {
-            accent: {
-              DEFAULT: '#d4a047',
-              light: '#e8c46e',
-              dark: '#b8892e',
-              glow: 'rgba(212,160,71,0.15)',
-            }
-          }
-        }
-      }
-    }
-  </script>
   <style>
     :root {
       --bg-base: #0a0a0b;
@@ -241,19 +221,23 @@
       .structure-step + .structure-step { margin-left: 0; margin-top: -1px; }
     }
 
-    /* ==== SESSION CARDS ==== */
-    .session-card {
+    /* ==== SESSION CARDS (native details/summary) ==== */
+    details.session-card {
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: var(--radius); overflow: hidden;
       transition: all 0.25s;
+      position: relative; z-index: 2;
     }
-    .session-card:hover { border-color: var(--border-hover); }
-    .session-card-header {
+    details.session-card:hover { border-color: var(--border-hover); }
+    details.session-card[open] { border-color: var(--accent); }
+    summary.session-card-header {
       display: flex; align-items: center; justify-content: space-between;
       padding: 18px 22px; cursor: pointer; user-select: none;
       transition: background 0.2s; gap: 12px;
+      list-style: none;
     }
-    .session-card-header:hover { background: var(--bg-card-hover); }
+    summary.session-card-header::-webkit-details-marker { display: none; }
+    summary.session-card-header:hover { background: var(--bg-card-hover); }
     .session-card-header .session-number {
       font-size: 0.68rem; font-weight: 700; color: var(--accent);
       min-width: 60px; letter-spacing: 0.04em;
@@ -269,11 +253,10 @@
       font-size: 1.2rem; color: var(--text-muted); transition: transform 0.25s;
       flex-shrink: 0;
     }
-    .session-card.open .session-card-header .session-toggle { transform: rotate(180deg); color: var(--accent); }
+    details.session-card[open] .session-toggle { transform: rotate(180deg); color: var(--accent); }
     .session-card-body {
-      display: none; padding: 0 22px 22px; border-top: 1px solid var(--border);
+      padding: 0 22px 22px; border-top: 1px solid var(--border);
     }
-    .session-card.open .session-card-body { display: block; }
     .session-detail-grid {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 12px 20px; padding-top: 18px;
@@ -377,8 +360,8 @@
     /* ==== PHASE SECTION BACKGROUNDS ==== */
     .phase-section-wrapper { position: relative; }
     .phase-section-overlay {
-      position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(180deg, rgba(10,10,11,0.82) 0%, rgba(10,10,11,0.72) 40%, rgba(10,10,11,0.88) 100%);
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(180deg, rgba(10,10,11,0.45) 0%, rgba(10,10,11,0.35) 40%, rgba(10,10,11,0.55) 100%);
     }
     .hero {
       background: linear-gradient(180deg, rgba(10,10,11,0.75) 0%, var(--bg-base) 100%), url('assets/phase1.jpg') center/cover no-repeat;
@@ -1159,13 +1142,13 @@ function renderPhase(phase) {
 
   phaseSessions.forEach((s, i) => {
     html += `
-    <div class="session-card fade-in" style="margin-bottom:10px;animation-delay:${i * 0.04}s;">
-      <div class="session-card-header" onclick="toggleSession(this)">
+    <details class="session-card fade-in" style="margin-bottom:10px;animation-delay:${i * 0.04}s;">
+      <summary class="session-card-header">
         <span class="session-number">第${s.num}节</span>
         <span class="session-title">${s.title}<br><span style="color:var(--text-muted);font-weight:400;font-size:0.78rem;">${s.title_en}</span></span>
         <span class="session-theme">${s.theme}<br><span style="color:var(--text-muted);font-weight:400;font-size:0.72rem;">${s.theme_en}</span></span>
         <span class="session-toggle">▾</span>
-      </div>
+      </summary>
       <div class="session-card-body">
         <div class="session-detail-grid">
           <div class="session-detail-item">
@@ -1190,7 +1173,7 @@ function renderPhase(phase) {
           </div>
         </div>
       </div>
-    </div>`;
+    </details>`;
   });
 
   html += `</div>`;

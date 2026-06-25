@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>朗思学术阅读 · 第2课 · 句子解码：上下文推断</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafbfc;
+  --text: #1a1a1a;
+  --text-secondary: #6b7280;
+  --accent: #1a2a6c;
+  --accent-light: #e8ecf4;
+  --border: #e5e7eb;
+  --correct-bg: #f0fdf4;
+  --correct-border: #86efac;
+  --correct-text: #166534;
+  --wrong-bg: #fef2f2;
+  --wrong-border: #fca5a5;
+  --wrong-text: #991b1b;
+  --font-heading: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', 'PingFang SC', 'PingFang HK', system-ui, -apple-system, sans-serif;
+  --radius: 8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.7;
+  padding-bottom: 6rem;
+}
+
+/* ── Progress Bar ── */
+.progress-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 251, 252, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.progress-bar .segments {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.progress-segment {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  transition: background 0.3s ease;
+}
+.progress-segment.active { background: var(--accent); }
+.progress-label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  min-width: 52px;
+  text-align: right;
+}
+
+/* ── Container ── */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Header ── */
+.header {
+  padding: 3rem 0 2rem;
+  text-align: center;
+}
+.header .eyebrow {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+.header h1 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+.header .subtitle {
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+.header .meta {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+.header .meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+/* ── Sections ── */
+section {
+  margin-bottom: 3.5rem;
+  scroll-margin-top: 60px;
+}
+.section-flag {
+  font-family: var(--font-heading);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+section h2 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.375rem;
+}
+section .section-sub {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+/* ── Cards ── */
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.card p, .card li {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+/* ── Step cards ── */
+.step-number {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.375rem;
+}
+
+/* ── Highlight box ── */
+.highlight-box {
+  background: var(--accent-light);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+.highlight-box p {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+/* ── Cloze grid ── */
+.cloze-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 1.25rem;
+}
+.signal-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  transition: all 0.15s ease;
+}
+.signal-card:hover { border-color: var(--accent); }
+.signal-card .sig-word {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.signal-card .sig-type {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.signal-card .sig-meaning {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.signal-card .sig-example {
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--text);
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid #f3f4f6;
+}
+
+/* ── Quiz ── */
+.quiz-question {
+  margin-bottom: 1.5rem;
+}
+.quiz-question .sentence {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+}
+.quiz-options {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.quiz-option {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  padding: 8px 18px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+.quiz-option:hover { border-color: var(--accent); background: var(--accent-light); }
+.quiz-option.selected-correct {
+  border-color: var(--correct-border);
+  background: var(--correct-bg);
+  color: var(--correct-text);
+  cursor: default;
+}
+.quiz-option.selected-wrong {
+  border-color: var(--wrong-border);
+  background: var(--wrong-bg);
+  color: var(--wrong-text);
+  cursor: default;
+}
+.quiz-option.disabled { pointer-events: none; opacity: 0.6; }
+.quiz-option.show-correct {
+  border-color: var(--correct-border);
+  background: var(--correct-bg);
+}
+.quiz-feedback {
+  font-size: 0.8125rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0;
+  color: var(--text-secondary);
+  display: none;
+}
+.quiz-feedback.visible { display: block; }
+.quiz-feedback.correct { color: var(--correct-text); }
+.quiz-feedback.wrong { color: var(--wrong-text); }
+
+/* ── Toggle link ── */
+.toggle-link {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px 0;
+  display: inline-block;
+  margin-bottom: 1rem;
+  transition: color 0.15s ease;
+}
+.toggle-link:hover { color: #0f1d4e; }
+
+/* ── Matching game ── */
+.matching-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 1rem;
+}
+.matching-column h4 {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+.matching-item {
+  font-size: 0.875rem;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-bottom: 6px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  position: relative;
+}
+.matching-item:hover { border-color: var(--accent); background: var(--accent-light); }
+.matching-item.selected {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  box-shadow: 0 0 0 2px var(--accent-light);
+}
+.matching-item.connected {
+  border-color: var(--accent);
+  background: #eef1f8;
+}
+.matching-item.connected .conn-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.625rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  flex-shrink: 0;
+}
+.matching-item.conn-correct {
+  border-color: var(--correct-border) !important;
+  background: var(--correct-bg) !important;
+}
+.matching-item.conn-correct .conn-badge {
+  background: #16a34a !important;
+}
+.matching-item.conn-wrong {
+  border-color: var(--wrong-border) !important;
+  background: var(--wrong-bg) !important;
+}
+.matching-item.conn-wrong .conn-badge {
+  background: #dc2626 !important;
+}
+.matching-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.matching-svg line {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+  transition: stroke 0.3s ease;
+}
+.matching-svg line.correct { stroke: #16a34a; stroke-dasharray: none; stroke-width: 2; }
+.matching-svg line.wrong { stroke: #dc2626; stroke-dasharray: none; stroke-width: 2; }
+
+/* ── Buttons ── */
+.btn {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 8px 20px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 44px;
+}
+.btn:hover { border-color: var(--accent); background: var(--accent-light); }
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.btn-primary:hover { background: #0f1d4e; }
+.btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 0.75rem; }
+
+/* ── Score ── */
+.match-score {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 8px 0;
+}
+
+/* ── Passage styling for Part 2 ── */
+.passage-text {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.85;
+}
+.passage-text .gap {
+  display: inline-block;
+  min-width: 80px;
+  border-bottom: 2px dashed var(--accent);
+  margin: 0 4px;
+  padding: 0 8px;
+  color: var(--accent);
+  font-weight: 500;
+  text-align: center;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .header h1 { font-size: 1.5rem; }
+  .header .subtitle { font-size: 1rem; }
+  section h2 { font-size: 1.25rem; }
+  .matching-container { grid-template-columns: 1fr; gap: 12px; }
+  .matching-svg { display: none; }
+  .cloze-grid { grid-template-columns: 1fr; }
+  .quiz-options { flex-direction: column; }
+  .quiz-option { width: 100%; justify-content: center; }
+  .container { padding: 0 16px; }
+}
+
+/* ── Print ── */
+@media print {
+  .progress-bar, .btn, .toggle-link, .matching-svg { display: none !important; }
+  .quiz-option { pointer-events: none; }
+  .quiz-option.show-correct, .quiz-option.selected-correct { background: none; border-color: #000; font-weight: 600; }
+  .quiz-feedback { display: block !important; color: #333 !important; }
+  .card { break-inside: avoid; border-color: #ccc; }
+  body { font-size: 12pt; color: #000; background: #fff; }
+  .matching-item { border-color: #ccc; }
+  .container { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ PROGRESS BAR ═══ -->
+<nav class="progress-bar">
+  <div class="segments">
+    <div class="progress-segment" data-section="s1"></div>
+    <div class="progress-segment" data-section="s2"></div>
+    <div class="progress-segment" data-section="s3"></div>
+    <div class="progress-segment" data-section="s4"></div>
+    <div class="progress-segment" data-section="s5"></div>
+    <div class="progress-segment" data-section="s6"></div>
+  </div>
+  <span class="progress-label" id="progressLabel">1/6</span>
+</nav>
+
+<div class="container">
+
+<!-- ═══ HEADER ═══ -->
+<header class="header">
+  <div class="eyebrow">LanguageCert Academic Reading</div>
+  <h1>朗思学术阅读</h1>
+  <p class="subtitle">第2课 · 句子解码：上下文推断</p>
+  <div class="meta">
+    <span>📊 B1–B2</span>
+    <span>📝 30 Questions</span>
+    <span>⏱ 50 Minutes</span>
+    <span>📚 H2 of 6</span>
+  </div>
+</header>
+
+<!-- ═══ SECTION 1: FROM WORDS TO SENTENCES ═══ -->
+<section id="s1">
+  <div class="section-flag">Section 1</div>
+  <h2>从词到句：上节课的连接</h2>
+  <p class="section-sub">Bridging from single words to sentence-level reading</p>
+
+  <div class="card">
+    <h3>第1课回顾 · What We Built</h3>
+    <p>In Lesson 1, we mastered the <strong>synonym substitution</strong> skill — the core of Part 1a. You learned the 3-step method (read context → check part of speech → substitute and feel), studied tone and register matching, and practiced with 15 core synonym pairs.</p>
+    <p style="margin-top:0.75rem;">Now we take the next step: from <strong>single words</strong> to <strong>full sentences</strong>. The exam doesn't test words in isolation — they live inside sentences, paragraphs, and passages. This lesson builds your sentence-level radar.</p>
+  </div>
+
+  <div class="card">
+    <h3>第2课路线图 · What We'll Cover</h3>
+    <ul style="list-style:none;padding:0;">
+      <li style="padding:8px 0;border-bottom:1px solid #f3f4f6;display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-family:var(--font-heading);font-weight:700;color:var(--accent);min-width:24px;">①</span>
+        <span><strong>语法信号词</strong> — tense, pronouns, and conjunctions as your reading compass</span>
+      </li>
+      <li style="padding:8px 0;border-bottom:1px solid #f3f4f6;display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-family:var(--font-heading);font-weight:700;color:var(--accent);min-width:24px;">②</span>
+        <span><strong>上下文推断</strong> — guessing unknown words without a dictionary</span>
+      </li>
+      <li style="padding:8px 0;border-bottom:1px solid #f3f4f6;display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-family:var(--font-heading);font-weight:700;color:var(--accent);min-width:24px;">③</span>
+        <span><strong>信号词词汇库</strong> — contrast, cause/effect, addition, exemplification</span>
+      </li>
+      <li style="padding:8px 0;border-bottom:1px solid #f3f4f6;display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-family:var(--font-heading);font-weight:700;color:var(--accent);min-width:24px;">④</span>
+        <span><strong>Part 1b 真题实战</strong> — cloze with grammar + context strategies</span>
+      </li>
+      <li style="padding:8px 0;display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-family:var(--font-heading);font-weight:700;color:var(--accent);min-width:24px;">⑤</span>
+        <span><strong>Part 2 初体验</strong> — sentence insertion and paragraph logic</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ SECTION 2: GRAMMAR SIGNALS ═══ -->
+<section id="s2">
+  <div class="section-flag">Section 2</div>
+  <h2>语法信号词：句子的指南针</h2>
+  <p class="section-sub">Grammar Signals — how tense, pronouns, and conjunctions guide your reading</p>
+
+  <div class="card">
+    <h3>Why Grammar Is a Reading Tool</h3>
+    <p>Many students treat grammar as something you <em>produce</em> — for writing and speaking. But in reading, grammar is your <strong>fastest navigation system</strong>. A single pronoun tells you who did what. A contrast marker warns you the next idea will flip. A tense shift signals a time jump.</p>
+    <p style="margin-top:0.75rem;"><strong>Rule:</strong> If you see a grammar signal, slow down for one second. It's telling you how to read the next part.</p>
+  </div>
+
+  <div class="card">
+    <div class="step-number">Signal Type 1</div>
+    <h3>代词追踪 · Pronoun Tracking</h3>
+    <p>Pronouns (<em>it, they, this, these, those, which</em>) always refer to something earlier in the text. In cloze and sentence-insertion questions, tracking pronouns backwards is often the fastest way to find the right answer.</p>
+    <div class="highlight-box" style="margin-top:0.75rem;">
+      <p><em>"The study revealed significant gender gaps in STEM participation. <strong style="color:var(--accent);">These</strong> were most pronounced in computer science, where female enrolment stood at just 18%."</em></p>
+      <p style="margin-top:0.5rem;font-size:0.8125rem;color:var(--text-secondary);">"These" refers back to "gender gaps" — not "STEM participation" or "computer science." Follow the pronoun upstream.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="step-number">Signal Type 2</div>
+    <h3>连词预判 · Conjunction Prediction</h3>
+    <p>Conjunctions don't just connect — they <strong>predict</strong> what comes next. When you see <em>however</em>, you know a counter-argument is coming. When you see <em>therefore</em>, a conclusion follows. When you see <em>furthermore</em>, more evidence is added to the same point.</p>
+    <div class="highlight-box" style="margin-top:0.75rem;">
+      <p><em>"Critics argued that remote work reduces productivity. <strong style="color:var(--accent);">However</strong>, a 2024 study of 10,000 employees found that output increased by 13% when workers shifted to hybrid schedules."</em></p>
+      <p style="margin-top:0.5rem;font-size:0.8125rem;color:var(--text-secondary);">"However" tells you the second sentence <strong>directly contradicts</strong> the first. Predict the contrast before you even read it.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="step-number">Signal Type 3</div>
+    <h3>时态跳转 · Tense Shifts</h3>
+    <p>A sudden change in tense is a signpost. Past → present signals ongoing relevance. Present → future signals prediction or implication. Present perfect → past signals a specific historical example.</p>
+  </div>
+
+  <h3 style="margin-top:2rem;margin-bottom:1rem;">信号词识别 · Quick Check</h3>
+
+  <div class="quiz-question" id="gq1">
+    <div class="sentence">1. The policy was widely unpopular. <b>Nevertheless</b>, the government pushed it through.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) addition (adds more)</button>
+      <button class="quiz-option" data-idx="1">b) contrast (opposes)</button>
+      <button class="quiz-option" data-idx="2">c) cause (explains why)</button>
+    </div>
+    <div class="quiz-feedback" data-answer="1">"Nevertheless" always signals contrast — the second idea goes against what you'd expect from the first.</div>
+  </div>
+
+  <div class="quiz-question" id="gq2">
+    <div class="sentence">2. Air pollution levels in urban areas have risen sharply. <b>Consequently</b>, hospitals have reported a 15% increase in respiratory admissions.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) contrast (opposes)</button>
+      <button class="quiz-option" data-idx="1">b) cause/effect (explains result)</button>
+      <button class="quiz-option" data-idx="2">c) example (gives instance)</button>
+    </div>
+    <div class="quiz-feedback" data-answer="1">"Consequently" = as a result. It signals a cause→effect relationship.</div>
+  </div>
+
+  <div class="quiz-question" id="gq3">
+    <div class="sentence">3. The company invested heavily in employee training. <b>Furthermore</b>, it introduced flexible working hours.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) addition (adds similar info)</button>
+      <button class="quiz-option" data-idx="1">b) contrast (opposes)</button>
+      <button class="quiz-option" data-idx="2">c) conclusion (summarizes)</button>
+    </div>
+    <div class="quiz-feedback" data-answer="0">"Furthermore" = in addition. It adds another supporting point to the same argument.</div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 3: CONTEXT CLUES ═══ -->
+<section id="s3">
+  <div class="section-flag">Section 3</div>
+  <h2>上下文推断：不查字典也能懂</h2>
+  <p class="section-sub">Context Clues — how to decode unknown words from surrounding text</p>
+
+  <div class="card">
+    <h3>The 4 Types of Context Clues</h3>
+    <p>Academic texts are full of unfamiliar vocabulary. The exam <strong>expects</strong> you to encounter words you don't know. Your job isn't to know every word — it's to use the text around it to figure out the meaning.</p>
+  </div>
+
+  <div class="card">
+    <div class="step-number">Clue Type 1</div>
+    <h3>定义信号 · Definition Signals</h3>
+    <p>The text explicitly tells you what the word means — using phrases like <em>that is, in other words, which means, i.e., or</em>.</p>
+    <div class="highlight-box" style="margin-top:0.75rem;">
+      <p><em>"The treatment showed significant <strong style="color:var(--accent);">efficacy</strong> — that is, it produced the desired therapeutic effect in over 80% of patients."</em></p>
+      <p style="margin-top:0.5rem;font-size:0.8125rem;color:var(--text-secondary);">"That is" gives you the definition: efficacy = producing the desired effect.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="step-number">Clue Type 2</div>
+    <h3>对比信号 · Contrast Signals</h3>
+    <p>The text tells you what the word is NOT. If X is <em>unlike</em> Y, and you know Y is "generous," then X is probably "stingy." Look for <em>unlike, whereas, while, in contrast to, rather than, instead of</em>.</p>
+    <div class="highlight-box" style="margin-top:0.75rem;">
+      <p><em>"Unlike her <strong style="color:var(--accent);">gregarious</strong> sister, who chatted with everyone at the party, Maria sat quietly in the corner reading a book."</em></p>
+      <p style="margin-top:0.5rem;font-size:0.8125rem;color:var(--text-secondary);">"Unlike" contrasts the sisters. The sister chats with everyone → gregarious = sociable, outgoing. Maria is the opposite.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="step-number">Clue Type 3</div>
+    <h3>举例信号 · Example Signals</h3>
+    <p>Examples clarify abstract terms. <em>Such as, for instance, for example, including, like</em> — the list that follows tells you what category the word belongs to.</p>
+    <div class="highlight-box" style="margin-top:0.75rem;">
+      <p><em>"<strong style="color:var(--accent);">Anthropogenic</strong> factors — such as deforestation, industrial emissions, and urban expansion — are the primary drivers of climate change."</em></p>
+      <p style="margin-top:0.5rem;font-size:0.8125rem;color:var(--text-secondary);">The examples (deforestation, emissions, urban expansion) all describe human activities → anthropogenic = caused by humans.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="step-number">Clue Type 4</div>
+    <h3>因果信号 · Cause/Effect Signals</h3>
+    <p>If the text tells you what caused something, or what effect it had, you can infer the word's meaning from the chain of events.</p>
+    <div class="highlight-box" style="margin-top:0.75rem;">
+      <p><em>"The prolonged drought led to widespread <strong style="color:var(--accent);">desertification</strong>, turning once-fertile farmland into barren dust."</em></p>
+      <p style="margin-top:0.5rem;font-size:0.8125rem;color:var(--text-secondary);">The cause (drought) and the description (fertile→barren dust) tell you: desertification = the process of land becoming desert.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:2rem;margin-bottom:1rem;">上下文推断 · Practice</h3>
+  <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:1.25rem;">Use context clues to guess the meaning of each bolded word.</p>
+
+  <div class="quiz-question" id="ctx1">
+    <div class="sentence">1. Unlike the <b>EPHEMERAL</b> beauty of cherry blossoms, which fade within days, the oak tree stands for centuries.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) permanent</button>
+      <button class="quiz-option" data-idx="1">b) short-lived</button>
+      <button class="quiz-option" data-idx="2">c) colourful</button>
+    </div>
+    <div class="quiz-feedback" data-answer="1">Contrast clue: "Unlike" + "fade within days" + opposite of oak tree (centuries) → ephemeral = lasting only a short time.</div>
+  </div>
+
+  <div class="quiz-question" id="ctx2">
+    <div class="sentence">2. The new policy was <b>UNEQUIVOCAL</b> — that is, it left no room for doubt or alternative interpretation.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) confusing</button>
+      <button class="quiz-option" data-idx="1">b) unclear</button>
+      <button class="quiz-option" data-idx="2">c) unambiguous</button>
+    </div>
+    <div class="quiz-feedback" data-answer="2">Definition clue: "that is" + "no room for doubt" → unequivocal = clear and unambiguous.</div>
+  </div>
+
+  <div class="quiz-question" id="ctx3">
+    <div class="sentence">3. The body's <b>HOMEOSTATIC</b> mechanisms — such as temperature regulation, blood sugar control, and water balance — keep internal conditions stable.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) self-regulating</button>
+      <button class="quiz-option" data-idx="1">b) destructive</button>
+      <button class="quiz-option" data-idx="2">c) external</button>
+    </div>
+    <div class="quiz-feedback" data-answer="0">Example clue: "such as" + temperature regulation, blood sugar control, water balance + "keep internal conditions stable" → homeostatic = self-regulating to maintain stability.</div>
+  </div>
+
+  <div class="quiz-question" id="ctx4">
+    <div class="sentence">4. The heavy rainfall <b>EXACERBATED</b> the flooding, making an already serious situation far worse.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) improved</button>
+      <button class="quiz-option" data-idx="1">b) worsened</button>
+      <button class="quiz-option" data-idx="2">c) prevented</button>
+    </div>
+    <div class="quiz-feedback" data-answer="1">Cause/effect clue: heavy rain → "making an already serious situation far worse" → exacerbated = made worse.</div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 4: SIGNAL WORD BANK ═══ -->
+<section id="s4">
+  <div class="section-flag">Section 4</div>
+  <h2>信号词词汇库</h2>
+  <p class="section-sub">Signal Word Bank — the 16 words you must recognise instantly</p>
+
+  <div class="card">
+    <h3>4 Categories, 4 Words Each</h3>
+    <p>These 16 signal words appear constantly in academic texts. If you can categorise them instantly, you'll read 2× faster because you'll always know what direction the argument is heading.</p>
+  </div>
+
+  <div class="cloze-grid">
+    <div class="signal-card">
+      <div class="sig-word">however</div>
+      <div class="sig-type">↔ Contrast</div>
+      <div class="sig-meaning">Introduces opposition</div>
+      <div class="sig-example">"The plan was bold. <em>However</em>, it failed."</div>
+    </div>
+    <div class="signal-card">
+      <div class="sig-word">therefore</div>
+      <div class="sig-type">→ Effect</div>
+      <div class="sig-meaning">As a result / consequently</div>
+      <div class="sig-example">"Costs rose. <em>Therefore</em>, prices increased."</div>
+    </div>
+    <div class="signal-card">
+      <div class="sig-word">furthermore</div>
+      <div class="sig-type">＋ Addition</div>
+      <div class="sig-meaning">Adds more evidence</div>
+      <div class="sig-example">"It's cheap. <em>Furthermore</em>, it's durable."</div>
+    </div>
+    <div class="signal-card">
+      <div class="sig-word">for instance</div>
+      <div class="sig-type">📋 Example</div>
+      <div class="sig-meaning">Gives a specific case</div>
+      <div class="sig-example">"Many species adapt. <em>For instance</em>, polar bears..."</div>
+    </div>
+    <div class="signal-card">
+      <div class="sig-word">although</div>
+      <div class="sig-type">↔ Contrast</div>
+      <div class="sig-meaning">Despite / even though</div>
+      <div class="sig-example">"<em>Although</em> it rained, we went out."</div>
+    </div>
+    <div class="signal-card">
+      <div class="sig-word">consequently</div>
+      <div class="sig-type">→ Effect</div>
+      <div class="sig-meaning">As a logical result</div>
+      <div class="sig-example">"Demand fell. <em>Consequently</em>, jobs were cut."</div>
+    </div>
+    <div class="signal-card">
+      <div class="sig-word">moreover</div>
+      <div class="sig-type">＋ Addition</div>
+      <div class="sig-meaning">In addition / also</div>
+      <div class="sig-example">"It saves time. <em>Moreover</em>, it saves money."</div>
+    </div>
+    <div class="signal-card">
+      <div class="sig-word">such as</div>
+      <div class="sig-type">📋 Example</div>
+      <div class="sig-meaning">Introduces examples</div>
+      <div class="sig-example">"Renewables, <em>such as</em> solar and wind..."</div>
+    </div>
+    <div class="signal-card">
+      <div class="sig-word">whereas</div>
+      <div class="sig-type">↔ Contrast</div>
+      <div class="sig-meaning">While / in contrast to</div>
+      <div class="sig-example">"Boys scored 72%, <em>whereas</em> girls scored 85%."</div>
+    </div>
+    <div class="signal-card">
+      <div class="sig-word">thus</div>
+      <div class="sig-type">→ Effect</div>
+      <div class="sig-meaning">In this way / therefore</div>
+      <div class="sig-example">"The evidence was clear. <em>Thus</em>, they agreed."</div>
+    </div>
+    <div class="signal-card">
+      <div class="sig-word">additionally</div>
+      <div class="sig-type">＋ Addition</div>
+      <div class="sig-meaning">Also / on top of that</div>
+      <div class="sig-example">"It's fast. <em>Additionally</em>, it's reliable."</div>
+    </div>
+    <div class="signal-card">
+      <div class="sig-word">namely</div>
+      <div class="sig-type">📋 Example</div>
+      <div class="sig-meaning">Specifically / that is</div>
+      <div class="sig-example">"Two factors, <em>namely</em> cost and time..."</div>
+    </div>
+    <div class="signal-card">
+      <div class="sig-word">nevertheless</div>
+      <div class="sig-type">↔ Contrast</div>
+      <div class="sig-meaning">Despite that / even so</div>
+      <div class="sig-example">"It was risky. <em>Nevertheless</em>, they tried."</div>
+    </div>
+    <div class="signal-card">
+      <div class="sig-word">as a result</div>
+      <div class="sig-type">→ Effect</div>
+      <div class="sig-meaning">Because of this</div>
+      <div class="sig-example">"Sales dropped. <em>As a result</em>, staff left."</div>
+    </div>
+    <div class="signal-card">
+      <div class="sig-word">in addition</div>
+      <div class="sig-type">＋ Addition</div>
+      <div class="sig-meaning">On top of that</div>
+      <div class="sig-example">"It's free. <em>In addition</em>, it's open source."</div>
+    </div>
+    <div class="signal-card">
+      <div class="sig-word">for example</div>
+      <div class="sig-type">📋 Example</div>
+      <div class="sig-meaning">As an illustration</div>
+      <div class="sig-example">"Some countries, <em>for example</em> Japan..."</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:2rem;margin-bottom:1rem;">Signal Category Matching</h3>
+  <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:0.75rem;">Match each signal word to the relationship it expresses.</p>
+
+  <div class="matching-container" id="sigMatch" style="position:relative;">
+    <svg class="matching-svg" id="sigMatchSvg"></svg>
+    <div class="matching-column" id="sigMatchLeft">
+      <h4>Words</h4>
+    </div>
+    <div class="matching-column" id="sigMatchRight">
+      <h4>Relationships</h4>
+    </div>
+  </div>
+  <div class="match-score" id="sigScore" style="display:none;"></div>
+  <div class="btn-group">
+    <button class="btn btn-primary" id="sigCheck">✓ Check Answers</button>
+    <button class="btn" id="sigReset">↺ Reset</button>
+  </div>
+</section>
+
+<!-- ═══ SECTION 5: PART 1B PRACTICE ═══ -->
+<section id="s5">
+  <div class="section-flag">Section 5</div>
+  <h2>Part 1b 真题实战</h2>
+  <p class="section-sub">Cloze Practice · 6 gap-fill questions using grammar + context strategies</p>
+
+  <div class="card">
+    <h3>How Part 1b Works</h3>
+    <p>Part 1b gives you a passage with <strong>gaps</strong>. You choose the correct word for each gap from a set of options. Unlike Part 1a (synonyms), Part 1b tests <strong>grammar + collocation + context</strong>. You need all three to get it right.</p>
+    <p style="margin-top:0.75rem;"><strong>Strategy:</strong> ① Read the full sentence → ② Check the grammar slot (noun? verb? adjective?) → ③ Check the meaning in context → ④ Eliminate by collocation.</p>
+  </div>
+
+  <button class="toggle-link" id="toggleAllS5">Show All Answers</button>
+
+  <div class="quiz-question" id="cl1">
+    <div class="sentence">1. The research team <b>________</b> the experiment three times to ensure accuracy.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) conducted</button>
+      <button class="quiz-option" data-idx="1">b) displayed</button>
+      <button class="quiz-option" data-idx="2">c) occurred</button>
+      <button class="quiz-option" data-idx="3">d) regarded</button>
+    </div>
+    <div class="quiz-feedback" data-answer="0">Grammar: need a transitive verb (takes an object: "the experiment"). "Occurred" is intransitive. "Displayed" and "regarded" don't collocate with "experiment." "Conducted an experiment" is a standard collocation.</div>
+  </div>
+
+  <div class="quiz-question" id="cl2">
+    <div class="sentence">2. A <b>________</b> number of students are choosing to study abroad, according to recent data.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) growing</button>
+      <button class="quiz-option" data-idx="1">b) raising</button>
+      <button class="quiz-option" data-idx="2">c) extending</button>
+      <button class="quiz-option" data-idx="3">d) expanding</button>
+    </div>
+    <div class="quiz-feedback" data-answer="0">"Growing number" is a fixed collocation. "Raising" needs an object. "Extending" = making longer. "Expanding" is possible but "growing" is the most natural with "number."</div>
+  </div>
+
+  <div class="quiz-question" id="cl3">
+    <div class="sentence">3. The medication <b>________</b> side effects in approximately 5% of patients.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) causes</button>
+      <button class="quiz-option" data-idx="1">b) makes</button>
+      <button class="quiz-option" data-idx="2">c) creates</button>
+      <button class="quiz-option" data-idx="3">d) does</button>
+    </div>
+    <div class="quiz-feedback" data-answer="0">"Causes side effects" is the standard medical collocation. "Makes side effects" is ungrammatical. "Creates" is too deliberate. "Does" doesn't work with this noun.</div>
+  </div>
+
+  <div class="quiz-question" id="cl4">
+    <div class="sentence">4. <b>________</b> the challenges, the project was completed on schedule and within budget.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) Despite</button>
+      <button class="quiz-option" data-idx="1">b) Although</button>
+      <button class="quiz-option" data-idx="2">c) Because</button>
+      <button class="quiz-option" data-idx="3">d) Since</button>
+    </div>
+    <div class="quiz-feedback" data-answer="0">Context clue: "challenges" but project still succeeded → need a contrast signal. "Despite" + noun phrase. "Although" needs a full clause. "Because" and "Since" are cause signals (wrong logic).</div>
+  </div>
+
+  <div class="quiz-question" id="cl5">
+    <div class="sentence">5. The author <b>________</b> that climate change is the defining issue of our time.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) argues</button>
+      <button class="quiz-option" data-idx="1">b) discusses</button>
+      <button class="quiz-option" data-idx="2">c) speaks</button>
+      <button class="quiz-option" data-idx="3">d) tells</button>
+    </div>
+    <div class="quiz-feedback" data-answer="0">Grammar: need a verb that can take a "that" clause. "Argues that..." ✓. "Discusses" can't take "that" + clause directly. "Speaks" and "tells" don't fit this structure.</div>
+  </div>
+
+  <div class="quiz-question" id="cl6">
+    <div class="sentence">6. The survey <b>________</b> that 72% of respondents preferred online learning.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) revealed</button>
+      <button class="quiz-option" data-idx="1">b) appeared</button>
+      <button class="quiz-option" data-idx="2">c) seemed</button>
+      <button class="quiz-option" data-idx="3">d) looked</button>
+    </div>
+    <div class="quiz-feedback" data-answer="0">Grammar: need a transitive verb that takes a "that" clause. "Revealed that..." ✓. "Appeared," "seemed," and "looked" are intransitive/linking verbs — they describe the subject, not what the subject did to data.</div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 6: PART 2 PREVIEW ═══ -->
+<section id="s6">
+  <div class="section-flag">Section 6</div>
+  <h2>Part 2 初体验：句子配对</h2>
+  <p class="section-sub">Sentence Insertion Preview · putting sentences back where they belong</p>
+
+  <div class="card">
+    <h3>What is Part 2?</h3>
+    <p>Part 2 gives you a passage with <strong>removed sentences</strong>. Your job is to put them back in the right gaps. Each sentence fits logically into exactly one gap. This tests your understanding of <strong>paragraph structure and logical flow</strong> — the exact skills we've been building in this lesson.</p>
+  </div>
+
+  <div class="card">
+    <h3>Part 2 Strategy · 3-Step Method</h3>
+    <div class="highlight-box">
+      <p><strong>Step 1:</strong> Read the sentence to be inserted. Identify its topic and any <strong>pronouns</strong> (they, this, these, it) — they must refer to something before the gap.</p>
+      <p style="margin-top:0.5rem;"><strong>Step 2:</strong> Read the paragraph around each gap. Look at the sentences <strong>before and after</strong> the gap. The inserted sentence must bridge them.</p>
+      <p style="margin-top:0.5rem;"><strong>Step 3:</strong> The inserted sentence usually either: (a) gives an example of the previous point, (b) introduces a counter-argument, or (c) explains a cause or effect. Match the logic.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:2rem;margin-bottom:1rem;">Practice: Where Does This Sentence Go?</h3>
+
+  <div class="card" style="margin-bottom:1.5rem;">
+    <p style="font-size:0.9375rem;line-height:1.7;padding:0.5rem 0;"><strong>Sentence to insert:</strong> <em style="color:var(--accent);">"This shift has fundamentally changed how companies recruit new talent."</em></p>
+  </div>
+
+  <div class="passage-text">
+    <p>Over the past decade, remote work has transitioned from a niche perk to a mainstream expectation. [GAP 1]  Where once employers could only hire from within commuting distance of their offices, they can now access talent pools spanning multiple countries and time zones. [GAP 2]  However, managing distributed teams presents its own challenges, from communication barriers to differences in labour law.</p>
+  </div>
+
+  <div class="quiz-question" id="part2q1">
+    <div class="sentence" style="border-left-color:var(--text-secondary);">Where should the sentence be inserted?</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">GAP 1</button>
+      <button class="quiz-option" data-idx="1">GAP 2</button>
+    </div>
+    <div class="quiz-feedback" data-answer="0">"This shift" refers to "remote work transitioning from niche to mainstream" — the sentence that comes right before GAP 1. At GAP 2, the topic has moved on to "talent pools," so "this shift" would have no clear reference. Pronouns must point backwards to something specific.</div>
+  </div>
+
+  <div class="card" style="margin-top:2rem;margin-bottom:1.5rem;">
+    <p style="font-size:0.9375rem;line-height:1.7;padding:0.5rem 0;"><strong>Sentence to insert:</strong> <em style="color:var(--accent);">"For example, a 2023 study found that students who slept 8+ hours before exams scored 15% higher on average."</em></p>
+  </div>
+
+  <div class="passage-text">
+    <p>Sleep plays a critical role in memory consolidation and academic performance. [GAP 1]  However, surveys indicate that over 60% of university students regularly get less than 7 hours of sleep per night. [GAP 2]  This chronic sleep deprivation may partly explain declining academic outcomes in tertiary education.</p>
+  </div>
+
+  <div class="quiz-question" id="part2q2">
+    <div class="sentence" style="border-left-color:var(--text-secondary);">Where should the sentence be inserted?</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">GAP 1</button>
+      <button class="quiz-option" data-idx="1">GAP 2</button>
+    </div>
+    <div class="quiz-feedback" data-answer="0">The insert sentence starts with "For example" — it's providing evidence for the claim that "sleep plays a critical role in memory." This must go right after that claim, at GAP 1. At GAP 2, the text has shifted to a contrast ("However, surveys indicate..."), so inserting a supporting example there would break the logical flow.</div>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<script>
+/* ═══════════════════════════════════════════
+   LANG CERT READING · LESSON 2
+   Sentences: Context & Signal Words
+   ═══════════════════════════════════════════ */
+
+// ── Progress Tracker ──
+(function() {
+  const sections = document.querySelectorAll('section[id]');
+  const segments = document.querySelectorAll('.progress-segment');
+  const label = document.getElementById('progressLabel');
+  const sectionIds = Array.from(sections).map(s => s.id);
+
+  function updateProgress() {
+    let currentIdx = 0;
+    const scrollTop = window.scrollY + 80;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      if (sections[i].offsetTop <= scrollTop) {
+        currentIdx = i;
+        break;
+      }
+    }
+    segments.forEach((seg, i) => {
+      seg.classList.toggle('active', i <= currentIdx);
+    });
+    label.textContent = `${currentIdx + 1}/${sections.length}`;
+  }
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+})();
+
+// ── Quiz System ──
+function initQuiz(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const options = container.querySelectorAll('.quiz-option');
+  const feedback = container.querySelector('.quiz-feedback');
+  const correctIdx = parseInt(feedback.dataset.answer);
+  let answered = false;
+
+  options.forEach(opt => {
+    opt.addEventListener('click', () => {
+      if (answered) return;
+      answered = true;
+      const chosen = parseInt(opt.dataset.idx);
+      options.forEach(o => o.classList.add('disabled'));
+
+      if (chosen === correctIdx) {
+        opt.classList.add('selected-correct');
+        feedback.classList.add('visible', 'correct');
+        feedback.innerHTML = '✓ Correct! ' + feedback.textContent.trim();
+      } else {
+        opt.classList.add('selected-wrong');
+        feedback.classList.add('visible', 'wrong');
+        feedback.innerHTML = '✗ Incorrect. ' + feedback.textContent.trim();
+        options[correctIdx].classList.add('show-correct');
+      }
+    });
+  });
+
+  return {
+    showAnswer: () => {
+      if (answered) return;
+      answered = true;
+      options.forEach(o => o.classList.add('disabled'));
+      options[correctIdx].classList.add('show-correct');
+      feedback.classList.add('visible', 'correct');
+      feedback.innerHTML = 'Answer: ' + feedback.textContent.trim().substring(0, 120) + '...';
+    },
+    reset: () => {
+      answered = false;
+      options.forEach(o => {
+        o.classList.remove('disabled', 'selected-correct', 'selected-wrong', 'show-correct');
+      });
+      feedback.classList.remove('visible', 'correct', 'wrong');
+    }
+  };
+}
+
+// Init grammar signal quizzes
+['gq1', 'gq2', 'gq3'].map(id => initQuiz(id));
+
+// Init context clue quizzes
+const contextQs = ['ctx1', 'ctx2', 'ctx3', 'ctx4'].map(id => initQuiz(id));
+
+// Init cloze practice
+const clozeQs = ['cl1', 'cl2', 'cl3', 'cl4', 'cl5', 'cl6'].map(id => initQuiz(id));
+
+// Init Part 2 quizzes
+const part2Qs = ['part2q1', 'part2q2'].map(id => initQuiz(id));
+
+// ── Toggle All Answers (Section 5) ──
+(function() {
+  const toggleBtn = document.getElementById('toggleAllS5');
+  let showing = false;
+
+  toggleBtn.addEventListener('click', () => {
+    if (showing) {
+      clozeQs.forEach(q => q.reset());
+      toggleBtn.textContent = 'Show All Answers';
+    } else {
+      clozeQs.forEach(q => q.showAnswer());
+      toggleBtn.textContent = 'Hide All Answers';
+    }
+    showing = !showing;
+  });
+})();
+
+// ── Matching Game Engine ──
+class MatchingGame {
+  constructor(options) {
+    this.container = options.container;
+    this.leftContainer = this.container.querySelector(options.leftSel);
+    this.rightContainer = this.container.querySelector(options.rightSel);
+    this.pairs = options.pairs;
+    this.useLines = options.useLines || false;
+    this.svgEl = options.svgSel ? this.container.querySelector(options.svgSel) : null;
+    this.scoreEl = options.scoreSel ? document.querySelector(options.scoreSel) : null;
+    this.checkBtn = document.getElementById(options.checkBtnId);
+    this.resetBtn = document.getElementById(options.resetBtnId);
+
+    this.correctMap = {};
+    this.pairs.forEach(([l, r]) => { this.correctMap[l] = r; });
+
+    this.selectedLeft = null;
+    this.connections = {};
+    this.checked = false;
+
+    if (options.leftItems && options.rightItems) {
+      this.leftIds = this.shuffle([...options.leftItems]);
+      this.rightIds = this.shuffle([...options.rightItems]);
+      this.buildItems();
+    }
+
+    this.leftItems = this.leftContainer.querySelectorAll('.matching-item');
+    this.rightItems = this.rightContainer.querySelectorAll('.matching-item');
+
+    this.attachEvents();
+    if (this.checkBtn) this.checkBtn.addEventListener('click', () => this.check());
+    if (this.resetBtn) this.resetBtn.addEventListener('click', () => this.reset());
+
+    if (this.useLines) {
+      window.addEventListener('resize', () => this.drawLines());
+      window.addEventListener('scroll', () => this.drawLines(), { passive: true });
+    }
+  }
+
+  shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  buildItems() {
+    const leftLabel = this.leftContainer.querySelector('h4');
+    const rightLabel = this.rightContainer.querySelector('h4');
+    const leftLabelHTML = leftLabel ? leftLabel.outerHTML : '';
+    const rightLabelHTML = rightLabel ? rightLabel.outerHTML : '';
+    this.leftContainer.innerHTML = leftLabelHTML;
+    this.rightContainer.innerHTML = rightLabelHTML;
+    this.leftIds.forEach(id => {
+      const el = document.createElement('div');
+      el.className = 'matching-item';
+      el.dataset.id = id;
+      el.textContent = id;
+      this.leftContainer.appendChild(el);
+    });
+    this.rightIds.forEach(id => {
+      const el = document.createElement('div');
+      el.className = 'matching-item';
+      el.dataset.id = id;
+      el.textContent = id;
+      this.rightContainer.appendChild(el);
+    });
+  }
+
+  addBadge(el, num) {
+    const existing = el.querySelector('.conn-badge');
+    if (existing) existing.remove();
+    const badge = document.createElement('span');
+    badge.className = 'conn-badge';
+    badge.textContent = num;
+    el.appendChild(badge);
+  }
+
+  attachEvents() {
+    this.leftItems.forEach(item => {
+      item.addEventListener('click', () => {
+        if (this.checked) return;
+        this.selectLeft(item.dataset.id);
+      });
+    });
+    this.rightItems.forEach(item => {
+      item.addEventListener('click', () => {
+        if (this.checked) return;
+        this.selectRight(item.dataset.id);
+      });
+    });
+  }
+
+  selectLeft(id) {
+    this.leftItems.forEach(el => el.classList.remove('selected'));
+    this.selectedLeft = id;
+    const el = this.leftContainer.querySelector(`[data-id="${id}"]`);
+    if (el) el.classList.add('selected');
+  }
+
+  selectRight(rightId) {
+    if (!this.selectedLeft) return;
+    for (const [lId, rId] of Object.entries(this.connections)) {
+      if (rId === rightId) {
+        delete this.connections[lId];
+        break;
+      }
+    }
+    this.connections[this.selectedLeft] = rightId;
+    this.selectedLeft = null;
+    this.leftItems.forEach(el => el.classList.remove('selected'));
+    this.updateConnections();
+  }
+
+  updateConnections() {
+    [...this.leftItems, ...this.rightItems].forEach(el => {
+      el.classList.remove('connected', 'conn-correct', 'conn-wrong');
+      const badge = el.querySelector('.conn-badge');
+      if (badge) badge.remove();
+    });
+
+    let num = 1;
+    for (const [lId, rId] of Object.entries(this.connections)) {
+      const lEl = this.leftContainer.querySelector(`[data-id="${lId}"]`);
+      const rEl = this.rightContainer.querySelector(`[data-id="${rId}"]`);
+      if (lEl && rEl) {
+        lEl.classList.add('connected');
+        rEl.classList.add('connected');
+        this.addBadge(lEl, num);
+        this.addBadge(rEl, num);
+        num++;
+      }
+    }
+    if (this.useLines) this.drawLines();
+  }
+
+  check() {
+    if (this.checked) return;
+    this.checked = true;
+    let correct = 0;
+    const total = this.pairs.length;
+    let num = 1;
+
+    [...this.leftItems, ...this.rightItems].forEach(el => {
+      el.classList.remove('connected', 'conn-correct', 'conn-wrong');
+      const badge = el.querySelector('.conn-badge');
+      if (badge) badge.remove();
+    });
+
+    for (const [lId, rId] of Object.entries(this.connections)) {
+      const lEl = this.leftContainer.querySelector(`[data-id="${lId}"]`);
+      const rEl = this.rightContainer.querySelector(`[data-id="${rId}"]`);
+      if (!lEl || !rEl) continue;
+
+      const isCorrect = this.correctMap[lId] === rId;
+      if (isCorrect) {
+        correct++;
+        lEl.classList.add('conn-correct');
+        rEl.classList.add('conn-correct');
+      } else {
+        lEl.classList.add('conn-wrong');
+        rEl.classList.add('conn-wrong');
+      }
+      this.addBadge(lEl, num);
+      this.addBadge(rEl, num);
+      num++;
+    }
+
+    const connectedLefts = new Set(Object.keys(this.connections));
+    const connectedRights = new Set(Object.values(this.connections));
+    this.leftItems.forEach(el => {
+      if (!connectedLefts.has(el.dataset.id)) el.classList.add('conn-wrong');
+    });
+    this.rightItems.forEach(el => {
+      if (!connectedRights.has(el.dataset.id)) el.classList.add('conn-wrong');
+    });
+
+    if (this.scoreEl) {
+      this.scoreEl.style.display = 'block';
+      this.scoreEl.innerHTML = `Score: ${correct}/${total} correct`;
+      this.scoreEl.style.color = correct === total ? 'var(--correct-text)' : 'var(--wrong-text)';
+    }
+    if (this.useLines) this.drawLines();
+  }
+
+  reset() {
+    this.checked = false;
+    this.selectedLeft = null;
+    this.connections = {};
+    [...this.leftItems, ...this.rightItems].forEach(el => {
+      el.classList.remove('selected', 'connected', 'conn-correct', 'conn-wrong');
+      const badge = el.querySelector('.conn-badge');
+      if (badge) badge.remove();
+    });
+    if (this.scoreEl) this.scoreEl.style.display = 'none';
+    if (this.useLines && this.svgEl) this.svgEl.innerHTML = '';
+  }
+
+  drawLines() {
+    if (!this.svgEl) return;
+    this.svgEl.innerHTML = '';
+
+    const containerRect = this.container.getBoundingClientRect();
+    const svgRect = this.svgEl.getBoundingClientRect();
+    const offsetX = svgRect.left - containerRect.left;
+    const offsetY = svgRect.top - containerRect.top;
+
+    for (const [lId, rId] of Object.entries(this.connections)) {
+      const lEl = this.leftContainer.querySelector(`[data-id="${lId}"]`);
+      const rEl = this.rightContainer.querySelector(`[data-id="${rId}"]`);
+      if (!lEl || !rEl) continue;
+
+      const lRect = lEl.getBoundingClientRect();
+      const rRect = rEl.getBoundingClientRect();
+
+      const x1 = lRect.right - containerRect.left - offsetX;
+      const y1 = lRect.top + lRect.height / 2 - containerRect.top - offsetY;
+      const x2 = rRect.left - containerRect.left - offsetX;
+      const y2 = rRect.top + rRect.height / 2 - containerRect.top - offsetY;
+
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', x1);
+      line.setAttribute('y1', y1);
+      line.setAttribute('x2', x2);
+      line.setAttribute('y2', y2);
+
+      if (this.checked) {
+        line.classList.add(this.correctMap[lId] === rId ? 'correct' : 'wrong');
+      }
+      this.svgEl.appendChild(line);
+    }
+  }
+}
+
+// ── Init Signal Category Matching ──
+const sigPairs = [
+  ['however', '↔ Contrast'],
+  ['therefore', '→ Cause/Effect'],
+  ['furthermore', '＋ Addition'],
+  ['for instance', '📋 Example'],
+  ['although', '↔ Contrast'],
+  ['consequently', '→ Cause/Effect'],
+  ['moreover', '＋ Addition'],
+  ['such as', '📋 Example'],
+  ['whereas', '↔ Contrast'],
+  ['nevertheless', '↔ Contrast'],
+  ['thus', '→ Cause/Effect'],
+  ['additionally', '＋ Addition'],
+  ['namely', '📋 Example'],
+  ['as a result', '→ Cause/Effect'],
+  ['in addition', '＋ Addition'],
+  ['for example', '📋 Example']
+];
+
+const sigLeftItems = sigPairs.map(p => p[0]);
+const sigRightItems = [...new Set(sigPairs.map(p => p[1]))]; // 4 categories only
+
+// Each of the 4 categories gets matched to multiple words — but for the matching game
+// we'll use a simplified 8-pair version
+const sigPairs8 = [
+  ['however', '↔ Contrast'],
+  ['therefore', '→ Cause/Effect'],
+  ['furthermore', '＋ Addition'],
+  ['for instance', '📋 Example'],
+  ['whereas', '↔ Contrast'],
+  ['consequently', '→ Cause/Effect'],
+  ['moreover', '＋ Addition'],
+  ['such as', '📋 Example']
+];
+
+const sigLeft8 = sigPairs8.map(p => p[0]);
+const sigRight8 = sigPairs8.map(p => p[1]);
+
+const sigMatch = new MatchingGame({
+  container: document.getElementById('sigMatch'),
+  leftSel: '#sigMatchLeft',
+  rightSel: '#sigMatchRight',
+  pairs: sigPairs8,
+  useLines: true,
+  svgSel: '#sigMatchSvg',
+  scoreSel: '#sigScore',
+  checkBtnId: 'sigCheck',
+  resetBtnId: 'sigReset',
+  leftItems: sigLeft8,
+  rightItems: sigRight8
+});
+
+// ── Draw matching lines after load ──
+window.addEventListener('load', () => {
+  sigMatch.drawLines();
+});
+
+console.log('LangCert Reading · Lesson 2 ready ✓');
+</script>
+
+</body>
+</html>

@@ -143,6 +143,256 @@
       .builder-row { flex-direction: column; }
       .btn-build { width: 100%; }
     }
+
+    /* ─── CHAT INTERFACE ─── */
+    .chat-container {
+      display: flex; flex-direction: column; height: calc(100vh - 140px);
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      overflow: hidden; margin-bottom: 20px;
+    }
+    .chat-messages {
+      flex: 1; overflow-y: auto; padding: 24px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .chat-messages::-webkit-scrollbar { width: 6px; }
+    .chat-messages::-webkit-scrollbar-track { background: transparent; }
+    .chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    .chat-welcome { text-align: center; padding: 40px 20px; }
+    .welcome-icon { font-size: 3rem; margin-bottom: 12px; }
+    .chat-welcome h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+    .chat-welcome p { font-size: 0.85rem; color: var(--text2); line-height: 1.7; max-width: 480px; margin: 0 auto 24px; }
+    .welcome-chips { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+    .welcome-chip {
+      font-size: 0.78rem; padding: 8px 16px; border-radius: 999px;
+      background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .welcome-chip:hover { border-color: var(--accent); color: var(--accent2); background: rgba(124,58,237,0.1); }
+
+    .chat-bubble {
+      max-width: 85%; padding: 14px 18px; border-radius: 16px;
+      font-size: 0.85rem; line-height: 1.7; word-wrap: break-word;
+      animation: bubbleIn 0.3s ease-out;
+    }
+    @keyframes bubbleIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .chat-bubble.user {
+      align-self: flex-end; background: var(--accent); color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-bubble.ai {
+      align-self: flex-start; background: var(--surface2); border: 1px solid var(--border);
+      border-bottom-left-radius: 4px; color: var(--text);
+    }
+
+    .chat-bubble.ai.streaming { border-color: var(--accent); }
+
+    .streaming-cursor {
+      display: inline-block; width: 7px; height: 15px; background: var(--accent2);
+      margin-left: 2px; vertical-align: text-bottom;
+      animation: blink 0.8s infinite;
+    }
+    @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+
+    .typing-indicator {
+      align-self: flex-start; display: flex; gap: 4px; padding: 14px 18px;
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 16px;
+      border-bottom-left-radius: 4px;
+    }
+    .typing-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--accent2);
+      animation: typingBounce 1.2s infinite;
+    }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce { 0%, 60%, 100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-6px); opacity: 1; } }
+
+    .chat-input-row {
+      display: flex; gap: 10px; padding: 14px 20px; border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .chat-input {
+      flex: 1; padding: 12px 16px; font-size: 0.9rem; font-family: inherit;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+      color: var(--text); outline: none; transition: border-color 0.2s;
+    }
+    .chat-input:focus { border-color: var(--accent); }
+    .chat-input::placeholder { color: var(--text2); opacity: 0.5; }
+    .chat-input:disabled { opacity: 0.5; cursor: not-allowed; }
+    .chat-send {
+      width: 44px; height: 44px; font-size: 1rem; border: none; border-radius: 10px;
+      background: var(--accent); color: #fff; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .chat-send:hover { background: #8b5cf6; transform: scale(1.05); }
+    .chat-send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    .chat-phase-bar {
+      padding: 8px 20px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 8px; color: var(--text2);
+    }
+    .phase-dot { width: 6px; height: 6px; border-radius: 50%; }
+    .phase-dot.idle { background: var(--text2); }
+    .phase-dot.intake { background: var(--amber); animation: pulse 2s infinite; }
+    .phase-dot.strategy { background: var(--accent2); animation: pulse 2s infinite; }
+    .phase-dot.compiling { background: var(--green); animation: pulse 1s infinite; }
+    .phase-dot.done { background: var(--green); }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    /* ─── DYNAPP PREVIEW ─── */
+    .dynapp-preview {
+      display: none; margin-top: 20px;
+      background: var(--surface); border: 2px solid var(--accent); border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .dynapp-preview.active { display: block; }
+    .preview-toolbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 20px; background: var(--surface2); border-bottom: 1px solid var(--border);
+    }
+    .preview-label { font-size: 0.8rem; font-weight: 700; color: var(--accent2); }
+    .preview-actions { display: flex; gap: 8px; }
+    .preview-btn {
+      padding: 6px 14px; font-size: 0.72rem; font-weight: 600; border-radius: 6px;
+      background: var(--bg); border: 1px solid var(--border); color: var(--text2);
+      cursor: pointer; transition: all 0.2s; font-family: inherit;
+    }
+    .preview-btn:hover { border-color: var(--accent); color: var(--accent2); }
+    .dynapp-frame { width: 100%; height: 600px; border: none; background: #fff; }
+
+    .chat-btn-reset {
+      padding: 6px 14px; font-size: 0.72rem; font-weight: 600; border-radius: 6px;
+      background: transparent; border: 1px solid var(--border); color: var(--text2);
+      cursor: pointer; transition: all 0.2s; font-family: inherit; white-space: nowrap;
+    }
+    .chat-btn-reset:hover { border-color: var(--pink); color: var(--pink); }
+
+    /* ─── MY APPS SIDEBAR LIST ─── */
+    .my-apps-list { display: flex; flex-direction: column; gap: 2px; max-height: 240px; overflow-y: auto; }
+    .my-apps-list::-webkit-scrollbar { width: 4px; }
+    .my-apps-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    .my-app-item {
+      padding: 8px 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--text2);
+      position: relative;
+    }
+    .my-app-item:hover { background: var(--surface2); color: var(--text); }
+    .my-app-item .app-item-icon { font-size: 0.85rem; flex-shrink: 0; }
+    .my-app-item .app-item-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .my-app-item .app-item-del {
+      display: none; width: 20px; height: 20px; border-radius: 50%;
+      background: transparent; border: none; color: var(--text2); cursor: pointer;
+      font-size: 0.7rem; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .my-app-item:hover .app-item-del { display: flex; }
+    .my-app-item .app-item-del:hover { background: rgba(248,113,113,0.15); color: var(--pink); }
+    .my-apps-empty { font-size: 0.7rem; color: var(--text2); padding: 8px 12px; font-style: italic; }
+
+    /* ─── LANG TOGGLE ─── */
+    .lang-toggle {
+      padding: 4px 10px; font-size: 0.65rem; font-weight: 700; border-radius: 6px;
+      background: var(--surface2); border: 1px solid var(--border); color: var(--text2);
+      cursor: pointer; transition: all 0.2s; font-family: inherit;
+      letter-spacing: 0.04em;
+    }
+    .lang-toggle:hover { border-color: var(--accent); color: var(--accent2); }
+    .lang-toggle.active { background: rgba(124,58,237,0.15); border-color: var(--accent); color: var(--accent2); }
+    .footer-lang-row { display: flex; align-items: center; gap: 8px; margin-top: 4px; justify-content: center; }
+
+    /* ─── ENHANCED MARKDOWN IN CHAT ─── */
+    .chat-bubble h2 { font-family: 'Space Grotesk',sans-serif; font-size: 1.2rem; margin: 12px 0 6px; color: var(--text); }
+    .chat-bubble h3 { font-family: 'Space Grotesk',sans-serif; font-size: 1rem; margin: 10px 0 4px; color: var(--accent2); }
+    .chat-bubble h4 { font-size: 0.85rem; margin: 8px 0 4px; color: var(--text); font-weight: 700; }
+    .chat-bubble ul, .chat-bubble ol { margin: 6px 0; padding-left: 20px; }
+    .chat-bubble li { margin: 2px 0; line-height: 1.6; }
+    .chat-bubble blockquote { margin: 8px 0; padding: 8px 14px; border-left: 3px solid var(--accent); background: rgba(124,58,237,0.08); border-radius: 0 6px 6px 0; color: var(--text2); }
+    .chat-bubble a { color: var(--accent2); text-decoration: underline; }
+    .chat-bubble a:hover { color: #c4b5fd; }
+    .chat-bubble hr { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
+    .chat-bubble em { color: var(--amber); font-style: italic; }
+    .chat-bubble strong { color: var(--text); font-weight: 700; }
+    .chat-bubble code { background: var(--bg); padding: 2px 6px; border-radius: 4px; font-size: 0.82em; font-family: 'SF Mono', 'Fira Code', monospace; }
+    .chat-bubble pre { background: var(--bg); border-radius: 8px; padding: 12px; overflow-x: auto; font-size: 0.75rem; margin: 8px 0; border: 1px solid var(--border); }
+    .chat-bubble pre code { background: none; padding: 0; font-size: inherit; }
+
+    /* ─── PREVIEW PANEL (Intake Forms + DynApps) ─── */
+    .preview-container {
+      display: none;
+      margin-top: 16px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .preview-container.active { display: block; }
+    .preview-container.has-form { border-color: var(--accent); border-width: 2px; }
+    .preview-container.has-dynapp { border-color: var(--green); border-width: 2px; }
+    .preview-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 20px; background: var(--surface2); border-bottom: 1px solid var(--border);
+    }
+    .preview-header-label { font-size: 0.8rem; font-weight: 700; color: var(--accent2); display: flex; align-items: center; gap: 8px; }
+    .preview-header-actions { display: flex; gap: 8px; }
+    .preview-action-btn {
+      padding: 6px 14px; font-size: 0.72rem; font-weight: 600; border-radius: 6px;
+      background: var(--bg); border: 1px solid var(--border); color: var(--text2);
+      cursor: pointer; transition: all 0.2s; font-family: inherit;
+    }
+    .preview-action-btn:hover { border-color: var(--accent); color: var(--accent2); }
+    .preview-action-btn.danger:hover { border-color: var(--pink); color: var(--pink); }
+    .preview-body { padding: 20px; max-height: 500px; overflow-y: auto; }
+    .preview-body.no-pad { padding: 0; max-height: none; }
+
+    /* ─── INTAKE FORM STYLES ─── */
+    .intake-form { display: flex; flex-direction: column; gap: 20px; }
+    .intake-form .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .intake-form label {
+      font-size: 0.78rem; font-weight: 700; color: var(--accent2);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .intake-form label .q-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--accent); color: #fff; font-size: 0.65rem; font-weight: 800;
+    }
+    .intake-form select, .intake-form input[type="text"], .intake-form textarea {
+      padding: 12px 14px; font-size: 0.88rem; font-family: inherit;
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+      color: var(--text); outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .intake-form select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239090b0' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+    .intake-form select:focus, .intake-form input:focus, .intake-form textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(124,58,237,0.15); }
+    .intake-form textarea { min-height: 80px; resize: vertical; }
+    .intake-form .form-hint { font-size: 0.7rem; color: var(--text2); }
+    .intake-form .form-submit-row { display: flex; gap: 10px; align-items: center; margin-top: 4px; }
+    .intake-form .btn-submit {
+      padding: 14px 28px; font-size: 0.9rem; font-weight: 700; font-family: 'Space Grotesk', sans-serif;
+      background: var(--accent); color: #fff; border: none; border-radius: 10px;
+      cursor: pointer; transition: all 0.2s; letter-spacing: -0.01em;
+    }
+    .intake-form .btn-submit:hover { background: #8b5cf6; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(124,58,237,0.3); }
+    .intake-form .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* ─── GENERATING INDICATOR ─── */
+    .generating-container { text-align: center; padding: 50px 20px; }
+    .generating-emoji { font-size: 3.5rem; margin-bottom: 16px; animation: genPulse 1.5s infinite; }
+    @keyframes genPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+    .generating-msg { color: var(--accent2); font-weight: 700; font-size: 1rem; margin-bottom: 8px; transition: opacity 0.4s; }
+    .generating-dots { display: flex; gap: 6px; justify-content: center; margin-top: 16px; }
+    .generating-progress { width: 200px; height: 4px; background: var(--border); border-radius: 2px; margin: 20px auto 0; overflow: hidden; }
+    .generating-progress-bar { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2), var(--pink)); border-radius: 2px; animation: progressSlide 3s infinite; }
+    @keyframes progressSlide { 0% { width: 0%; transform: translateX(0); } 50% { width: 60%; transform: translateX(0); } 100% { width: 0%; transform: translateX(200px); } }
+
+    /* ─── RESPONSIVE CHAT ─── */
+    @media (max-width: 768px) {
+      .chat-container { height: auto; min-height: 60vh; }
+      .chat-bubble { max-width: 92%; }
+      .dynapp-frame { height: 400px; }
+      .chat-input-row { padding: 12px; }
+      .preview-body { max-height: 400px; }
+    }
   </style>
 </head>
 <body>
@@ -155,64 +405,68 @@
       <span class="logo-text">Dynam<span>OS</span></span>
     </div>
     <div class="nav-group">
-      <div class="nav-label">Create</div>
-      <a class="nav-item active" href="#"><span class="nav-icon">✨</span> Builder</a>
-      <a class="nav-item" href="#"><span class="nav-icon">📋</span> My Apps</a>
-      <a class="nav-item" href="#"><span class="nav-icon">🎨</span> Templates</a>
+      <div class="nav-label" data-key="create">Create</div>
+      <a class="nav-item active" href="#"><span class="nav-icon">✨</span> <span data-key="builder">Builder</span></a>
+      <div class="nav-label" style="margin-top:4px" data-key="my_apps">📋 My Apps</div>
+      <div class="my-apps-list" id="myAppsList">
+        <div class="my-apps-empty" data-key="no_apps">No saved apps yet</div>
+      </div>
     </div>
     <div class="nav-group">
-      <div class="nav-label">Discover</div>
-      <a class="nav-item" href="#"><span class="nav-icon">🏪</span> Marketplace</a>
-      <a class="nav-item" href="#"><span class="nav-icon">👥</span> Community</a>
+      <div class="nav-label" data-key="discover">Discover</div>
+      <a class="nav-item" href="#"><span class="nav-icon">🏪</span> <span data-key="marketplace">Marketplace</span></a>
+      <a class="nav-item" href="#"><span class="nav-icon">👥</span> <span data-key="community">Community</span></a>
     </div>
     <div class="nav-group">
-      <div class="nav-label">Learn</div>
-      <a class="nav-item" href="/dynamos/intro"><span class="nav-icon">📖</span> What is DynamOS?</a>
-      <a class="nav-item" href="/dynamos/bp"><span class="nav-icon">📄</span> Business Plan</a>
+      <div class="nav-label" data-key="learn">Learn</div>
+      <a class="nav-item" href="/dynamos/intro"><span class="nav-icon">📖</span> <span data-key="what_is">What is DynamOS?</span></a>
+      <a class="nav-item" href="/dynamos/bp"><span class="nav-icon">📄</span> <span data-key="business_plan">Business Plan</span></a>
     </div>
   </aside>
 
   <!-- ═══════ MAIN ═══════ -->
   <main class="main">
-    <!-- BUILDER -->
-    <div class="builder-box">
-      <div class="builder-label">✨ What do you want to teach today?</div>
-      <div class="builder-row">
-        <input class="builder-input" id="intentInput" placeholder="e.g. I want to teach IELTS Speaking Part 2 — describing a person, with interactive cue cards and pronunciation drills" value="Create an interactive IELTS Speaking Part 2 lesson about describing a memorable person. Include cue card prompts, sentence frames, a pronunciation drill, and a 2-minute timer.">
-        <button class="btn-build" onclick="showPreview()">🚀 Generate App</button>
+    <!-- BUILDER — CHAT INTERFACE -->
+    <div class="chat-container" id="chatContainer">
+      <div class="chat-phase-bar" id="phaseBar">
+        <span class="phase-dot idle"></span> Ready — describe your lesson idea
       </div>
-      <div class="prompt-chips">
-        <span class="chip" onclick="setIntent('Create a phonics lesson teaching the /θ/ and /ð/ sounds with interactive mouth position diagrams and minimal pair exercises')">🔤 Phonics Lesson</span>
-        <span class="chip" onclick="setIntent('Build a vocabulary builder for academic IELTS — collocations, example sentences, and a quiz game with 20 target words')">📚 Vocab Builder</span>
-        <span class="chip" onclick="setIntent('Make a grammar exercise for conditionals — type 1, 2, and 3 — with gap-fill exercises and instant feedback')">📝 Grammar Drills</span>
-        <span class="chip" onclick="setIntent('Create a whiteboard-based brainstorming tool for IELTS Writing Task 2 — essay structure, thesis builder, and paragraph planner')">🎨 Essay Planner</span>
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-welcome">
+          <div class="welcome-icon">🦄</div>
+          <h3>dynamOS App Architect</h3>
+          <p>Tell me what you want to teach, and I'll build you an interactive DynApp — live, in your browser.</p>
+          <div class="welcome-chips">
+            <span class="welcome-chip" onclick="sendPreset('IELTS Speaking Part 2 — describing a memorable person, with cue cards, sentence frames, pronunciation drills, and a 2-minute timer')">🎤 IELTS Speaking</span>
+            <span class="welcome-chip" onclick="sendPreset('Phonics lesson teaching /θ/ and /ð/ sounds with mouth position diagrams and minimal pair exercises')">🔤 Phonics</span>
+            <span class="welcome-chip" onclick="sendPreset('Academic IELTS vocabulary builder with 20 collocations, example sentences, and a quiz game')">📚 Vocabulary</span>
+            <span class="welcome-chip" onclick="sendPreset('English conditionals — Type 1, 2, and 3 — with gap-fill exercises and instant feedback')">📝 Grammar</span>
+          </div>
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <input class="chat-input" id="chatInput" placeholder="e.g. I want to teach IELTS Speaking Part 2 with interactive cue cards and pronunciation drills…" />
+        <button class="chat-send" id="chatSend" title="Send">🚀</button>
+        <button class="chat-btn-reset" id="chatReset" title="New App" onclick="resetChat()">↺ New</button>
       </div>
     </div>
 
-    <!-- PREVIEW -->
-    <div class="preview-area" id="previewArea">
-      <div class="preview-card">
-        <div class="preview-header">
-          <span class="preview-title">🎯 Your App Preview</span>
-          <button class="btn-export-preview" onclick="window.print()">📋 Export</button>
-        </div>
-        <p style="color:var(--text2);font-size:0.85rem;margin-bottom:20px" id="previewDesc"></p>
-        
-        <div id="cueCards" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px"></div>
-        <div id="sentenceFrames" style="margin-bottom:20px"></div>
-        
-        <div style="background:var(--surface2);border-radius:var(--radius);padding:20px;margin-bottom:16px">
-          <h4 style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text2);margin-bottom:12px">🎤 Pronunciation Drill</h4>
-          <div id="pronDrill" style="font-size:1.5rem;font-family:'Space Grotesk',sans-serif;margin-bottom:12px;color:var(--amber)"></div>
-          <p style="font-size:0.82rem;color:var(--text2)" id="pronNote"></p>
-        </div>
-
-        <div style="display:flex;gap:12px;align-items:center">
-          <div style="font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;color:var(--green)" id="timerDisplay">2:00</div>
-          <p style="font-size:0.78rem;color:var(--text2)">⏱ 2-minute speaking timer</p>
+    <!-- DYNAPP PREVIEW -->
+    <div class="preview-container" id="previewContainer">
+      <div class="preview-header">
+        <span class="preview-header-label" id="previewLabel">🦄 Preview</span>
+        <div class="preview-header-actions" id="previewActions">
+          <button class="preview-action-btn" id="btnFullscreen">⛶ Fullscreen</button>
+          <button class="preview-action-btn" id="btnDownload">⬇ Download</button>
+          <button class="preview-action-btn danger" id="btnClose">✕ Close</button>
         </div>
       </div>
+      <div class="preview-body" id="previewBody">
+        <p style="text-align:center;color:var(--text2);padding:40px">🦄 Your intake form or DynApp will appear here</p>
+      </div>
+      <iframe class="dynapp-frame" id="dynappFrame" sandbox="allow-scripts allow-same-origin allow-forms allow-modals" style="display:none"></iframe>
     </div>
+
 
     <!-- DYN-APPS MARKETPLACE -->
     <div class="section-title" style="margin-top:40px">🧩 Example DynApps (Built on DynamOS)</div>
@@ -280,185 +534,881 @@
 
     <!-- FOOTER -->
     <p style="text-align:center;margin-top:48px;font-size:0.75rem;color:var(--text2)">
-      🦕 DynamOS — The Roblox for Education · Built by <strong>Kee Lee</strong>
-      &nbsp;|&nbsp; <a href="/dynamos/intro" style="color:var(--accent2)">About</a>
-      &nbsp;|&nbsp; <a href="/dynamos/bp" style="color:var(--accent2)">Business Plan</a>
+      🦕 <span data-key="footer">DynamOS — The Roblox for Education · Built by</span> <strong>Kee Lee</strong>
+      &nbsp;|&nbsp; <a href="/dynamos/intro" style="color:var(--accent2)"><span data-key="what_is">About</span></a>
+      &nbsp;|&nbsp; <a href="/dynamos/bp" style="color:var(--accent2)"><span data-key="business_plan">Business Plan</span></a>
     </p>
+    <div class="footer-lang-row">
+      <button class="lang-toggle active" id="langEn" onclick="setLanguage('en')">EN</button>
+      <button class="lang-toggle" id="langZh" onclick="setLanguage('zh')">中文</button>
+    </div>
   </main>
 </div>
 
+<script type="text/x-template" id="systemPrompt">
+🦄 System Instructions: dynamOS Liquid Architect (Educator Co-Pilot)
+Precise Role &amp; Persona
+You are the &quot;dynamOS App Architect,&quot; a Generative UI (GenUI) &amp; Content Engine designed to empower all educators.
+Identity: You are an advanced co-pilot on the dynamOS platform. You do not write static, boring lesson plans; you help educators transform their raw thoughts into bespoke, interactive, single-page web applications (SPAs), dynamic courseware, and class activities in real-time.
+Voice: You are the &quot;EdTech Unicorn.&quot; High-energy, empathetic, and scientifically precise. You use vibrant emojis (🦄, 🌈, ⚡️, 🧠, 🚀, 💅, 🧊, 🌊) to create an engaging experience for both the educator and their end-users.
+Philosophy: You adhere to &quot;Liquid Design&quot;: Interfaces and content must fluidly adapt to the learner&apos;s profile. Your core pedagogical foundation is the RUA Methodology (Recognise - Understand - Apply).
+
+Instructional Hierarchy (Order of Operations)
+You MUST follow this sequence strictly. Never jump to generating the final code upon the first prompt.
+
+#### Phase 1: The &quot;Educator Intake&quot; (INTERACTIVE HTML FORM — NOT simulated text)
+When an educator inputs a raw thought or request, you MUST return a REAL interactive HTML form inside a code block labeled &quot;intake-form&quot;:
+
+```intake-form
+&lt;form class=&quot;intake-form&quot; id=&quot;dynapp-intake&quot;&gt;
+  ... REAL form elements ...
+&lt;/form&gt;
+```
+
+CRITICAL: Use REAL HTML elements, NEVER simulated text dropdowns.
+- &lt;select&gt; with &lt;option&gt; children for choices
+- &lt;input type=&quot;text&quot;&gt; for text fields
+- &lt;textarea&gt; for longer responses
+- Every field MUST have a &lt;label&gt; with clear text
+- Every field MUST have a name=&quot;...&quot; attribute
+- Include &lt;button type=&quot;submit&quot;&gt;🦄 Lock In Parameters&lt;/button&gt;
+- Style inline to look modern using CSS variables (--bg, --surface, --surface2, --border, --text, --text2, --accent, --accent2)
+
+These 4 questions are REQUIRED in every intake form:
+1. Target Learner Profile: &lt;select name=&quot;learner_profile&quot;&gt; (K-12 / University Students / Corporate Adults / Language Learners) + &lt;input type=&quot;text&quot; name=&quot;learner_other&quot; placeholder=&quot;Other...&quot;&gt;
+2. Primary RUA Focus: &lt;select name=&quot;rua_focus&quot;&gt; (Full R-U-A Cycle / Heavy on Recognise / Heavy on Apply)
+3. UI / Vibe Preference: &lt;select name=&quot;ui_vibe&quot;&gt; (Gamified &amp; Fast-paced / High-Scaffolding Safe Space / Professional &amp; Minimalist)
+4. Custom Content: &lt;textarea name=&quot;custom_content&quot; placeholder=&quot;Paste any specific text, vocabulary, or formulas...&quot;&gt;&lt;/textarea&gt;
+
+After the closing ```, briefly tell the educator to fill in the form below. Do NOT proceed to Phase 2 until the form is submitted.
+
+Phase 2: The &quot;Strategy Brief&quot; (Visible Output)
+Once the educator answers the Intake Form, output a cool, emoji-rich Strategy Brief BEFORE writing the code:
+🦄 dynamOS Strategy Brief Locked!
+🎯 Course/App Target: [Subject/Topic] for [Learner Profile]
+🏗 UI Architecture: [e.g., Gamified Narrative Flow with Low Scaffolding]
+🧪 Pedagogical Core: R-U-A Framework deployed
+🚀 Compiling your Liquid SPA now...
+
+Phase 3: The Liquid App Compilation (The Code)
+Generate the full index.html code based on the approved strategy.
+
+Core Engine 1: GenUI &amp; Multimodal Design (The Visuals)
+You must apply Fluid Interface Design with the following strict UI/UX constraints:
+Global Navigation:
+Top Navbar: Must feature the design and text: 🦄 dynamOS ｜ [Educator&apos;s App/Course Name] ｜ [Current Module]. Text must be perfectly centered and beautifully styled.
+Sidebar: Include a functional navigation menu on the left side linking to the R-U-A sections.
+Typography &amp; Readability: Establish a strict, beautiful size hierarchy. Fonts must be perfectly legible and never too small.
+Dynamic Backgrounds: Pull stock photos relevant to the specific subject to use as backgrounds.
+The background image must transition seamlessly as the user scrolls to a new section.
+Do not apply a Gaussian blur to the background image itself. Instead, place text inside containers with a liquid glassmorphism effect (using CSS variables --glass-bg, --accent-purple, etc.) to ensure clarity.
+Adaptive Scaffolding (Interactive Text):
+Allow educators to have built-in &quot;Hints&quot;. Important terms/formulas should be clickable to toggle hide/show. Hovering over them must reveal simpler explanations, translations, or hints.
+End-of-Class Confetti: Provide a button at the very end of the course/app (e.g., &quot;Complete Mission&quot;). Clicking it triggers a browser alert with a warm, encouraging message, followed by a 10-second continuous, full-screen random drop of contextual emojis (acting as confetti).
+
+Core Engine 2: GenContent &amp; Pedagogy (The &quot;RUA Protocols&quot;)
+All generated content MUST follow the Recognise, Understand, Apply framework. Do not use generic AI filler; structure the learning logically.
+Protocol R: Recognise (Context &amp; Activation)
+Goal: Hook the learner and activate prior knowledge.
+UI Execution: Use &quot;Pop-in&quot; openers, visual cards, or relatable real-world scenarios. Never start with a dry definition. Ask a compelling opening question.
+Protocol U: Understand (Mechanics &amp; Logic)
+Goal: Break down the core concepts.
+UI Execution: Use the &quot;Dashboard Layout&quot; or &quot;Narrative Flow&quot;. Include interactive toggle buttons for deep dives. Break complex ideas into a &quot;5W1H&quot; (Who, What, When, Where, Why, How) structure or systematic logic chains. Include bilingual translations here only if the target learner profile dictates it.
+Protocol A: Apply (The Challenge)
+Goal: Test the knowledge actively.
+UI Execution: Build interactive exercises. If it&apos;s a &quot;Gamified&quot; profile, inject Challenge Mode elements (e.g., Countdown Timers ⏳, &quot;Forbidden Word/Method&quot; constraints 🚫). Provide immediate, automated &quot;Sandwich Method&quot; feedback (Compliment -&gt; Critique -&gt; Encouragement).
+
+Specific Output Format &amp; Tech Stack
+Format: A single file containing &lt;html&gt;, &lt;style&gt;, and &lt;script&gt;.
+Tech Constraints: Zero Dependencies (Vanilla CSS Flexbox/Grid and Vanilla JS only). No external CSS/JS frameworks. No external images aside from dynamic stock photo backgrounds. Use CSS Gradients, Glassmorphism, and Emojis heavily.
+Micro-Interactions: Implement hover effects (transform: scale(1.02)), click ripples, and Toast notifications (e.g., &quot;✅ Knowledge Unlocked!&quot;).
+
+Negative Constraints (Strict Guardrails)
+DO NOT generate code immediately upon the first prompt. You MUST execute Phase 1 (The Intake Form) first.
+DO NOT break the aesthetic. The glassmorphism and modern UI feel are mandatory.
+DO NOT render tiny, unreadable fonts. Keep readability top-of-mind for diverse learners.
+
+CODE FORMATTING RULES (CRITICAL):
+- When you reach Phase 3, wrap your COMPLETE HTML code in a markdown code block: ```html ... ```
+- The code block MUST contain the ENTIRE document from &lt;!DOCTYPE html&gt; to &lt;/html&gt;
+- Include ALL &lt;style&gt; and &lt;script&gt; tags within the HTML document
+- After the closing ```, output nothing else. The conversation ends after code delivery.
+</script>
+
 <script>
-function setIntent(text) {
-  document.getElementById('intentInput').value = text;
-  showPreview();
-}
+(function() {
+'use strict';
 
-function showPreview() {
-  var intent = document.getElementById('intentInput').value.trim();
-  if (!intent) return;
-  var area = document.getElementById('previewArea');
-  area.style.display = 'block';
+// ─── Config ───
+var SYSTEM_PROMPT = document.getElementById('systemPrompt').textContent.trim();
+var API_KEY = 'sk-6f9dca926db34f8394b95a233d6f876d';
+var API_URL = 'https://api.deepseek.com/v1/chat/completions';
 
-  var lower = intent.toLowerCase();
-  var isPerson = lower.includes('person') || lower.includes('people') || lower.includes('memorable');
-  var isPhonics = lower.includes('phonics') || lower.includes('pronunciation') || lower.includes('θ') || lower.includes('ð');
-  var isVocab = lower.includes('vocabulary') || lower.includes('collocation') || lower.includes('words');
-  var isGrammar = lower.includes('grammar') || lower.includes('conditional');
-  var isEssay = lower.includes('essay') || lower.includes('writing') || lower.includes('brainstorm');
-
-  if (isPerson) {
-    buildPersonLesson();
-  } else if (isPhonics) {
-    buildPhonicsLesson();
-  } else if (isVocab) {
-    buildVocabLesson();
-  } else if (isGrammar) {
-    buildGrammarLesson();
-  } else if (isEssay) {
-    buildEssayLesson();
-  } else {
-    buildGenericLesson();
+// ─── Translations ───
+var T = {
+  en: {
+    ready: 'Ready — describe your lesson idea',
+    intake: 'Phase 1: Fill in the form below ↓',
+    compiling: '🦄 Brewing your DynApp — stand by for magic…',
+    done: 'Phase 3: DynApp Ready ✨',
+    welcome_title: 'dynamOS App Architect',
+    welcome_text: 'Tell me what you want to teach, and I\'ll build you an interactive DynApp — live, in your browser.',
+    placeholder: 'e.g. I want to teach IELTS Speaking Part 2 with interactive cue cards and pronunciation drills…',
+    no_apps: 'No saved apps yet',
+    gen_fallback: 'Your intake form or DynApp will appear here',
+    gen_failed: 'Generation failed. Please try again.',
+    gen_nocode: 'Hmm, the code got lost in the æther. Let me try again — just hit send.',
+    gen_fizzle: 'Generation fizzled. Try again — the RUA spirits are fickle tonight.',
+    api_error: 'Connection to AI failed. Please check your internet and try again.',
+    compiling_msg: 'Compiling your DynApp… The RUA engine is brewing something special — no peeking!',
+    save_app: 'Save',
+    form_title: 'Educator Intake Form',
+    dynapp_title: 'Your DynApp',
+    brewing_title: 'Brewing Your DynApp…',
+    preview_label: 'Preview',
+    fill_field: 'Please fill in at least one field before submitting.',
+    form_submitted: '📋 Form submitted:'
+  },
+  zh: {
+    ready: '准备就绪 — 描述你的课程想法',
+    intake: '第一阶段：填写下方的表单 ↓',
+    compiling: '🦄 正在酿造你的 DynApp — 魔法即将降临…',
+    done: '第三阶段：DynApp 已生成 ✨',
+    welcome_title: 'dynamOS 应用架构师',
+    welcome_text: '告诉我你想教什么，我会在浏览器中为你实时构建一个交互式 DynApp。',
+    placeholder: '例如：创建雅思口语 Part 2 课程，包含交互式提示卡和发音练习…',
+    no_apps: '暂无保存的应用',
+    gen_fallback: '你的表单或 DynApp 将在此处显示',
+    gen_failed: '生成失败，请重试。',
+    gen_nocode: '嗯，代码在以太中丢失了。再试一次 — 直接点发送。',
+    gen_fizzle: '生成失败了。再试一次 — RUA 精灵今晚有点任性。',
+    api_error: '连接 AI 失败。请检查网络后重试。',
+    compiling_msg: '正在编译你的 DynApp… RUA 引擎正在精心酿造 — 不许偷看！',
+    save_app: '保存',
+    form_title: '教育者信息采集表',
+    dynapp_title: '你的 DynApp',
+    brewing_title: '酿造中…',
+    preview_label: '预览',
+    fill_field: '请至少填写一个字段后再提交。',
+    form_submitted: '📋 表单已提交：'
   }
-  area.scrollIntoView({ behavior: 'smooth' });
+};
+var currentLang = 'en';
+
+function t(key) {
+  return (T[currentLang] && T[currentLang][key]) || (T.en[key]) || key;
 }
 
-function buildPersonLesson() {
-  document.getElementById('previewDesc').textContent = 'IELTS Speaking Part 2 — Describing a Memorable Person · AI-generated interactive lesson';
-  document.getElementById('cueCards').innerHTML = `
-    <div style="flex:1;min-width:140px;background:var(--surface2);border-radius:var(--radius);padding:16px">
-      <h5 style="font-size:0.7rem;color:var(--amber);margin-bottom:8px">🎯 Cue Card 1</h5>
-      <p style="font-size:0.82rem;line-height:1.6">Describe a person who has had a <strong>significant influence</strong> on your life.</p>
-      <p style="font-size:0.7rem;color:var(--text2);margin-top:8px">You should say: who this person is · how you know them · what they did · and explain why they influenced you</p>
-    </div>
-    <div style="flex:1;min-width:140px;background:var(--surface2);border-radius:var(--radius);padding:16px">
-      <h5 style="font-size:0.7rem;color:var(--amber);margin-bottom:8px">🎯 Cue Card 2</h5>
-      <p style="font-size:0.82rem;line-height:1.6">Describe a <strong>famous person</strong> you would like to meet.</p>
-      <p style="font-size:0.7rem;color:var(--text2);margin-top:8px">You should say: who they are · what they're known for · why you admire them · and what you would ask them</p>
-    </div>
-    <div style="flex:1;min-width:140px;background:var(--surface2);border-radius:var(--radius);padding:16px">
-      <h5 style="font-size:0.7rem;color:var(--amber);margin-bottom:8px">🎯 Cue Card 3</h5>
-      <p style="font-size:0.82rem;line-height:1.6">Describe a <strong>teacher or mentor</strong> who changed your perspective.</p>
-      <p style="font-size:0.7rem;color:var(--text2);margin-top:8px">You should say: who they taught · what subject · how they taught differently · and the impact on you</p>
-    </div>
-  `;
-  document.getElementById('sentenceFrames').innerHTML = `
-    <h4 style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text2);margin-bottom:12px">📝 Sentence Frames</h4>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <span style="background:var(--surface2);padding:8px 14px;border-radius:8px;font-size:0.8rem">The person I'd like to talk about is <strong style="color:var(--accent2)">_____</strong> who...</span>
-      <span style="background:var(--surface2);padding:8px 14px;border-radius:8px;font-size:0.8rem">I first met <strong style="color:var(--accent2)">_____</strong> when...</span>
-      <span style="background:var(--surface2);padding:8px 14px;border-radius:8px;font-size:0.8rem">What makes <strong style="color:var(--accent2)">_____</strong> so memorable is...</span>
-      <span style="background:var(--surface2);padding:8px 14px;border-radius:8px;font-size:0.8rem">Looking back, I realize that <strong style="color:var(--accent2)">_____</strong> taught me...</span>
-      <span style="background:var(--surface2);padding:8px 14px;border-radius:8px;font-size:0.8rem">One specific example that comes to mind is when <strong style="color:var(--accent2)">_____</strong></span>
-    </div>
-  `;
-  document.getElementById('pronDrill').textContent = 'in-flu-ence · sig-ni-fi-cant · mem-or-a-ble · per-spec-tive';
-  document.getElementById('pronNote').textContent = 'Focus on word stress. The bold syllables get the emphasis. Practice saying each word 3x before using it in your answer.';
+function setLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('dynamos_lang', lang);
+  document.getElementById('langEn').classList.toggle('active', lang === 'en');
+  document.getElementById('langZh').classList.toggle('active', lang === 'zh');
+  // Update all data-key elements
+  var els = document.querySelectorAll('[data-key]');
+  for (var i = 0; i < els.length; i++) {
+    var key = els[i].getAttribute('data-key');
+    if (T[lang] && T[lang][key]) els[i].textContent = T[lang][key];
+  }
+  // Update dynamic elements
+  updatePhase(currentPhase);
+  if (chatInput) chatInput.placeholder = t('placeholder');
+  renderAppLibrary();
+  // Update preview label if idle
+  if (!previewContainer.classList.contains('active')) {
+    previewLabel.textContent = '🦄 ' + t('preview_label');
+  }
 }
 
-function buildPhonicsLesson() {
-  document.getElementById('previewDesc').textContent = 'Phonics — /θ/ and /ð/ Sounds · AI-generated interactive lesson';
-  document.getElementById('cueCards').innerHTML = `
-    <div style="flex:1;background:var(--surface2);border-radius:var(--radius);padding:16px">
-      <h5 style="font-size:0.7rem;color:var(--pink);margin-bottom:8px">👄 /θ/ (voiceless)</h5>
-      <p style="font-size:0.82rem">Tongue between teeth. Blow air. <em>Think, three, through, bath, earth.</em></p>
-    </div>
-    <div style="flex:1;background:var(--surface2);border-radius:var(--radius);padding:16px">
-      <h5 style="font-size:0.7rem;color:var(--pink);margin-bottom:8px">👄 /ð/ (voiced)</h5>
-      <p style="font-size:0.82rem">Same position. Add voice. <em>This, that, these, those, mother, father.</em></p>
-    </div>
-  `;
-  document.getElementById('sentenceFrames').innerHTML = `
-    <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <div style="background:var(--surface2);padding:12px 16px;border-radius:8px"><strong>/θ/</strong> vs <strong>/ð/</strong></div>
-      <div style="background:var(--surface2);padding:12px 16px;border-radius:8px">thigh ↔ thy</div>
-      <div style="background:var(--surface2);padding:12px 16px;border-radius:8px">ether ↔ either</div>
-      <div style="background:var(--surface2);padding:12px 16px;border-radius:8px">thistle ↔ this'll</div>
-      <div style="background:var(--surface2);padding:12px 16px;border-radius:8px">teeth ↔ teethe</div>
-    </div>
-  `;
-  document.getElementById('pronDrill').textContent = 'θ θ θ · ð ð ð · θ-ð-θ-ð';
-  document.getElementById('pronNote').textContent = 'Alternate between voiceless /θ/ and voiced /ð/. Place a finger on your throat — you should feel vibration only on /ð/.';
+// ─── App Library ───
+var LIBRARY_KEY = 'dynamos_library';
+
+function saveAppToLibrary(name, html) {
+  if (!html || !name) return;
+  try {
+    var apps = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]');
+    var cleanName = name.replace(/^[🎤🔤📝📐✍️🎯🎨📚]\s*/, '').substring(0, 60);
+    apps.unshift({
+      id: 'app_' + Date.now(),
+      name: cleanName,
+      html: html,
+      createdAt: new Date().toISOString()
+    });
+    if (apps.length > 50) apps = apps.slice(0, 50);
+    localStorage.setItem(LIBRARY_KEY, JSON.stringify(apps));
+    renderAppLibrary();
+  } catch (e) { console.warn('App library save failed:', e); }
 }
 
-function buildVocabLesson() {
-  document.getElementById('previewDesc').textContent = 'Academic IELTS Vocabulary Builder · AI-generated with 20 target collocations';
-  document.getElementById('cueCards').innerHTML = `
-    <div style="flex:1;background:var(--surface2);border-radius:var(--radius);padding:16px">
-      <span style="font-size:0.65rem;color:var(--green);background:rgba(74,222,128,0.1);padding:2px 8px;border-radius:4px">Collocation</span>
-      <h5 style="font-size:0.9rem;margin-top:8px">pose a threat</h5>
-      <p style="font-size:0.78rem;color:var(--text2);margin-top:4px">Climate change <strong>poses a threat</strong> to coastal communities worldwide.</p>
-    </div>
-    <div style="flex:1;background:var(--surface2);border-radius:var(--radius);padding:16px">
-      <span style="font-size:0.65rem;color:var(--green);background:rgba(74,222,128,0.1);padding:2px 8px;border-radius:4px">Collocation</span>
-      <h5 style="font-size:0.9rem;margin-top:8px">play a pivotal role</h5>
-      <p style="font-size:0.78rem;color:var(--text2);margin-top:4px">Education <strong>plays a pivotal role</strong> in reducing inequality.</p>
-    </div>
-    <div style="flex:1;background:var(--surface2);border-radius:var(--radius);padding:16px">
-      <span style="font-size:0.65rem;color:var(--green);background:rgba(74,222,128,0.1);padding:2px 8px;border-radius:4px">Collocation</span>
-      <h5 style="font-size:0.9rem;margin-top:8px">mitigate the effects</h5>
-      <p style="font-size:0.78rem;color:var(--text2);margin-top:4px">Governments must take action to <strong>mitigate the effects</strong> of inflation.</p>
-    </div>
-  `;
-  document.getElementById('sentenceFrames').innerHTML = '';
-  document.getElementById('pronDrill').textContent = 'Quiz Mode: Ready';
-  document.getElementById('pronNote').textContent = '20 target collocations · Fill-in-the-blank quiz · Instant AI feedback on accuracy and register';
+function loadAppFromLibrary(id) {
+  try {
+    var apps = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]');
+    for (var i = 0; i < apps.length; i++) {
+      if (apps[i].id === id) {
+        generatedCode = apps[i].html;
+        updatePhase('DONE');
+        renderDynApp(generatedCode);
+        return;
+      }
+    }
+  } catch (e) { console.warn('App library load failed:', e); }
 }
 
-function buildGrammarLesson() {
-  document.getElementById('previewDesc').textContent = 'Grammar — Conditionals Type 1, 2, and 3 · AI-generated exercises';
-  document.getElementById('cueCards').innerHTML = `
-    <div style="flex:1;background:var(--surface2);border-radius:var(--radius);padding:16px">
-      <h5 style="font-size:0.7rem;color:var(--green);margin-bottom:8px">Type 1 — Real Future</h5>
-      <p style="font-size:0.82rem;line-height:1.6">If it <strong>rains</strong> tomorrow, I <strong>will stay</strong> home.</p>
-      <p style="font-size:0.7rem;color:var(--text2);margin-top:4px">If + present → will + base</p>
-    </div>
-    <div style="flex:1;background:var(--surface2);border-radius:var(--radius);padding:16px">
-      <h5 style="font-size:0.7rem;color:var(--amber);margin-bottom:8px">Type 2 — Unreal Present</h5>
-      <p style="font-size:0.82rem;line-height:1.6">If I <strong>had</strong> a million dollars, I <strong>would travel</strong> the world.</p>
-      <p style="font-size:0.7rem;color:var(--text2);margin-top:4px">If + past → would + base</p>
-    </div>
-    <div style="flex:1;background:var(--surface2);border-radius:var(--radius);padding:16px">
-      <h5 style="font-size:0.7rem;color:var(--pink);margin-bottom:8px">Type 3 — Unreal Past</h5>
-      <p style="font-size:0.82rem;line-height:1.6">If I <strong>had studied</strong> harder, I <strong>would have passed</strong>.</p>
-      <p style="font-size:0.7rem;color:var(--text2);margin-top:4px">If + past perfect → would have + past participle</p>
-    </div>
-  `;
-  document.getElementById('sentenceFrames').innerHTML = '';
-  document.getElementById('pronDrill').textContent = 'Gap-Fill Exercise';
-  document.getElementById('pronNote').textContent = '10 sentences with instant feedback. AI explains WHY each answer is correct — guided discovery, not rule-dumping.';
+function deleteAppFromLibrary(id, e) {
+  if (e) { e.stopPropagation(); e.preventDefault(); }
+  try {
+    var apps = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]');
+    apps = apps.filter(function(a) { return a.id !== id; });
+    localStorage.setItem(LIBRARY_KEY, JSON.stringify(apps));
+    renderAppLibrary();
+  } catch (err) {}
 }
 
-function buildEssayLesson() {
-  document.getElementById('previewDesc').textContent = 'IELTS Writing Task 2 — Essay Planner · AI-generated brainstorming tool';
-  document.getElementById('cueCards').innerHTML = `
-    <div style="background:var(--surface2);border-radius:var(--radius);padding:20px;width:100%">
-      <h5 style="font-size:0.8rem;margin-bottom:12px">📋 Essay Structure Builder</h5>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="display:flex;align-items:center;gap:8px"><span style="color:var(--accent2);font-weight:700">1.</span><strong>Introduction</strong> — Paraphrase + thesis statement</div>
-        <div style="display:flex;align-items:center;gap:8px"><span style="color:var(--accent2);font-weight:700">2.</span><strong>Body 1</strong> — Main argument + example + explanation</div>
-        <div style="display:flex;align-items:center;gap:8px"><span style="color:var(--accent2);font-weight:700">3.</span><strong>Body 2</strong> — Counter-argument or second point</div>
-        <div style="display:flex;align-items:center;gap:8px"><span style="color:var(--accent2);font-weight:700">4.</span><strong>Conclusion</strong> — Summarize + restate position</div>
-      </div>
-    </div>
-  `;
-  document.getElementById('sentenceFrames').innerHTML = '';
-  document.getElementById('pronDrill').textContent = 'Whiteboard-Ready';
-  document.getElementById('pronNote').textContent = 'Drag, resize, connect ideas on the canvas. Export as structured outline or full essay draft.';
+function renderAppLibrary() {
+  var list = document.getElementById('myAppsList');
+  if (!list) return;
+  try {
+    var apps = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]');
+    if (apps.length === 0) {
+      list.innerHTML = '<div class="my-apps-empty" data-key="no_apps">' + t('no_apps') + '</div>';
+      return;
+    }
+    var html = '';
+    for (var i = 0; i < Math.min(apps.length, 15); i++) {
+      var a = apps[i];
+      var icon = '📄';
+      var n = a.name.toLowerCase();
+      if (/speak|口语/i.test(n)) icon = '🎤';
+      else if (/phonic|发音/i.test(n)) icon = '🔤';
+      else if (/vocab|词汇/i.test(n)) icon = '📝';
+      else if (/grammar|语法/i.test(n)) icon = '📐';
+      else if (/writing|写作/i.test(n)) icon = '✍️';
+      else if (/ielts|雅思/i.test(n)) icon = '🎯';
+      var date = new Date(a.createdAt);
+      var dateStr = date.toLocaleDateString(currentLang === 'zh' ? 'zh-CN' : 'en-US', { month: 'short', day: 'numeric' });
+      html += '<div class="my-app-item" onclick="loadAppFromLibrary(\'' + a.id + '\')" title="' + a.name + ' · ' + dateStr + '"><span class="app-item-icon">' + icon + '</span><span class="app-item-name">' + a.name + '</span><button class="app-item-del" onclick="deleteAppFromLibrary(\'' + a.id + '\',event)">×</button></div>';
+    }
+    list.innerHTML = html;
+  } catch (e) {}
 }
 
-function buildGenericLesson() {
-  document.getElementById('previewDesc').textContent = 'Custom AI-Generated Lesson · DynamOS Builder v1';
-  document.getElementById('cueCards').innerHTML = `
-    <div style="background:var(--surface2);border-radius:var(--radius);padding:20px;width:100%;text-align:center">
-      <p style="font-size:1.2rem;margin-bottom:8px">🦕</p>
-      <p style="color:var(--text2)">Your app is being generated...</p>
-      <p style="font-size:0.78rem;color:var(--accent2);margin-top:8px">DynamOS would create interactive components, exercises, and evaluation rubrics based on your intent.</p>
-    </div>
-  `;
-  document.getElementById('sentenceFrames').innerHTML = '';
-  document.getElementById('pronDrill').textContent = 'Coming Soon';
-  document.getElementById('pronNote').textContent = 'Full AI generation pipeline in development. The Push Engine demo at /dynamos/intro shows the concept in action.';
+// ─── State ───
+var conversationHistory = [];
+var currentPhase = 'IDLE';
+var streamingBubble = null;
+var isStreaming = false;
+var generatedCode = null;
+var activeIntakeForm = null;
+var sessionId = null;
+var sessionName = 'Untitled';
+
+// ─── Session Storage ───
+var STORAGE_KEY = 'dynamos_sessions';
+var CURRENT_KEY = 'dynamos_current';
+
+function autoName(text) {
+  var clean = text.replace(/create an interactive lesson about /i, '').replace(/build |make |generate |for my students\.?/gi, '').trim();
+  var name = clean.substring(0, 55);
+  if (clean.length > 55) name += '…';
+  var emoji = '📚';
+  if (/speaking|pronunciation|speak/i.test(clean)) emoji = '🎤';
+  if (/phonics|pronounce|phoneme/i.test(clean)) emoji = '🔤';
+  if (/vocab|word|collocation/i.test(clean)) emoji = '📝';
+  if (/grammar|conditional|tense/i.test(clean)) emoji = '📐';
+  if (/writing|essay|paragraph/i.test(clean)) emoji = '✍️';
+  if (/ielts/i.test(clean)) emoji = '🎯';
+  if (/whiteboard|brainstorm/i.test(clean)) emoji = '🎨';
+  return emoji + ' ' + name;
 }
+
+function saveSession() {
+  if (conversationHistory.length === 0) return;
+  var session = {
+    id: sessionId || ('sess_' + Date.now()),
+    name: sessionName,
+    createdAt: new Date().toISOString(),
+    messages: conversationHistory.slice(),
+    generatedCode: generatedCode,
+    phase: currentPhase
+  };
+  if (!sessionId) sessionId = session.id;
+  try {
+    localStorage.setItem(CURRENT_KEY, JSON.stringify(session));
+    var sessions = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    var existing = -1;
+    for (var i = 0; i < sessions.length; i++) {
+      if (sessions[i].id === session.id) { existing = i; break; }
+    }
+    var summary = { id: session.id, name: session.name, createdAt: session.createdAt, phase: session.phase };
+    if (existing >= 0) sessions[existing] = summary;
+    else sessions.unshift(summary);
+    if (sessions.length > 30) sessions = sessions.slice(0, 30);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(sessions));
+  } catch (e) { console.warn('localStorage save failed:', e); }
+}
+
+function restoreLastSession() {
+  try {
+    var raw = localStorage.getItem(CURRENT_KEY);
+    if (!raw) return false;
+    var s = JSON.parse(raw);
+    var age = Date.now() - new Date(s.createdAt).getTime();
+    if (age > 8 * 60 * 60 * 1000) { localStorage.removeItem(CURRENT_KEY); return false; }
+    sessionId = s.id;
+    sessionName = s.name;
+    conversationHistory = s.messages || [];
+    generatedCode = s.generatedCode || null;
+    var welcome = chatMessages.querySelector('.chat-welcome');
+    if (welcome) welcome.remove();
+    for (var i = 0; i < conversationHistory.length; i++) {
+      var msg = conversationHistory[i];
+      if (msg.role === 'user' || msg.role === 'assistant') {
+        addMessageBubble(msg.role, msg.content);
+      }
+    }
+    if (s.phase === 'DONE' && generatedCode) {
+      updatePhase('DONE');
+      renderDynApp(generatedCode);
+    } else if (s.phase === 'INTAKE') {
+      updatePhase('INTAKE');
+    }
+    return true;
+  } catch (e) { return false; }
+}
+
+// ─── DOM ───
+var chatMessages = document.getElementById('chatMessages');
+var chatInput = document.getElementById('chatInput');
+var chatSend = document.getElementById('chatSend');
+var previewContainer = document.getElementById('previewContainer');
+var previewBody = document.getElementById('previewBody');
+var previewLabel = document.getElementById('previewLabel');
+var previewActions = document.getElementById('previewActions');
+var dynappFrame = document.getElementById('dynappFrame');
+var phaseBar = document.getElementById('phaseBar');
+
+// ─── Init ───
+chatInput.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+chatSend.addEventListener('click', sendMessage);
+
+document.getElementById('btnFullscreen').addEventListener('click', function() {
+  if (dynappFrame.requestFullscreen) dynappFrame.requestFullscreen();
+});
+document.getElementById('btnDownload').addEventListener('click', function() {
+  if (!generatedCode) return;
+  var blob = new Blob([generatedCode], { type: 'text/html' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = 'dynapp.html'; a.click();
+  URL.revokeObjectURL(url);
+});
+document.getElementById('btnClose').addEventListener('click', function() {
+  closePreview();
+});
+
+// ─── Send ───
+window.sendPreset = function(topic) {
+  chatInput.value = 'Create an interactive lesson about ' + topic + ' for my students.';
+  sendMessage();
+};
+
+window.resetChat = function() {
+  conversationHistory = [];
+  currentPhase = 'IDLE';
+  generatedCode = null;
+  streamingBubble = null;
+  isStreaming = false;
+  activeIntakeForm = null;
+  sessionId = null;
+  sessionName = 'Untitled';
+  try { localStorage.removeItem(CURRENT_KEY); } catch (e) {}
+  chatMessages.innerHTML = '<div class="chat-welcome"><div class="welcome-icon">🦄</div><h3>' + t('welcome_title') + '</h3><p>' + t('welcome_text') + '</p><div class="welcome-chips"><span class="welcome-chip" onclick="sendPreset(\'IELTS Speaking Part 2 — describing a memorable person, with cue cards, sentence frames, pronunciation drills, and a 2-minute timer\')">🎤 IELTS Speaking</span><span class="welcome-chip" onclick="sendPreset(\'Phonics lesson teaching /θ/ and /ð/ sounds with mouth position diagrams and minimal pair exercises\')">🔤 Phonics</span><span class="welcome-chip" onclick="sendPreset(\'Academic IELTS vocabulary builder with 20 collocations, example sentences, and a quiz game\')">📚 Vocabulary</span><span class="welcome-chip" onclick="sendPreset(\'English conditionals — Type 1, 2, and 3 — with gap-fill exercises and instant feedback\')">📝 Grammar</span></div></div>';
+  closePreview();
+  updatePhase('IDLE');
+  chatInput.disabled = false;
+  chatSend.disabled = false;
+  chatInput.focus();
+};
+
+function sendMessage() {
+  if (isStreaming) return;
+  var text = chatInput.value.trim();
+  if (!text) return;
+
+  // Auto-name on first real message
+  if (conversationHistory.length === 0) {
+    sessionName = autoName(text);
+    sessionId = 'sess_' + Date.now();
+  }
+
+  chatInput.value = '';
+  chatInput.disabled = true;
+  chatSend.disabled = true;
+
+  var welcome = chatMessages.querySelector('.chat-welcome');
+  if (welcome) welcome.remove();
+
+  addMessageBubble('user', text);
+  conversationHistory.push({ role: 'user', content: text });
+  saveSession();
+
+  var messages = [{ role: 'system', content: SYSTEM_PROMPT }].concat(conversationHistory);
+  streamResponse(messages);
+}
+
+// ─── SSE Streaming ───
+function streamResponse(messages) {
+  isStreaming = true;
+  var typingEl = createTypingIndicator();
+
+  fetch(API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + API_KEY
+    },
+    body: JSON.stringify({
+      model: 'deepseek-chat',
+      messages: messages,
+      stream: true,
+      max_tokens: 8000
+    })
+  }).then(function(response) {
+    if (!response.ok) throw new Error('API error: ' + response.status);
+    typingEl.remove();
+    streamingBubble = createStreamingBubble();
+    var fullContent = '';
+
+    var reader = response.body.getReader();
+    var decoder = new TextDecoder();
+    var buffer = '';
+
+    function pump() {
+      return reader.read().then(function(result) {
+        if (result.done) {
+          finalizeStreamingBubble(fullContent);
+          conversationHistory.push({ role: 'assistant', content: fullContent });
+
+          // ─── Phase Detection ───
+          // 1. Check for intake form first (REAL interactive form)
+          var intakeMatch = fullContent.match(/```intake-form\s*([\s\S]*?)```/i);
+          if (intakeMatch) {
+            var formHtml = intakeMatch[1].trim();
+            updatePhase('INTAKE');
+            renderIntakeForm(formHtml);
+          }
+          // 2. Check for DynApp code
+          else {
+            var codeMatch = fullContent.match(/```html\s*([\s\S]*?)```/i);
+            if (codeMatch) {
+              generatedCode = codeMatch[1].trim();
+              updatePhase('DONE');
+              renderDynApp(generatedCode);
+            } else if (fullContent.indexOf('Strategy Brief') !== -1) {
+              updatePhase('STRATEGY');
+            }
+          }
+
+          isStreaming = false;
+          streamingBubble = null;
+          chatInput.disabled = false;
+          chatSend.disabled = false;
+          chatInput.focus();
+          saveSession();
+          return;
+        }
+
+        buffer += decoder.decode(result.value, { stream: true });
+        var lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+
+        for (var i = 0; i < lines.length; i++) {
+          var line = lines[i].trim();
+          if (!line || line.indexOf('data: ') !== 0) continue;
+          var data = line.slice(6);
+          if (data === '[DONE]') break;
+          try {
+            var json = JSON.parse(data);
+            var delta = json.choices && json.choices[0] && json.choices[0].delta && json.choices[0].delta.content;
+            if (delta) {
+              fullContent += delta;
+              appendToStreamingBubble(delta);
+            }
+          } catch (e) {}
+        }
+
+        return pump();
+      });
+    }
+
+    return pump();
+  }).catch(function(error) {
+    typingEl.remove();
+    addMessageBubble('ai', '⚠️ ' + t('api_error') + '\n\n' + error.message);
+    console.error('Stream error:', error);
+    isStreaming = false;
+    streamingBubble = null;
+    chatInput.disabled = false;
+    chatSend.disabled = false;
+    chatInput.focus();
+  });
+}
+
+// ─── Bubbles ───
+function addMessageBubble(role, text) {
+  var bubble = document.createElement('div');
+  bubble.className = 'chat-bubble ' + role;
+  bubble.innerHTML = formatMarkdown(text);
+  chatMessages.appendChild(bubble);
+  scrollToBottom();
+  return bubble;
+}
+
+function createStreamingBubble() {
+  var bubble = document.createElement('div');
+  bubble.className = 'chat-bubble ai streaming';
+  bubble.innerHTML = '<span class="streaming-cursor"></span>';
+  chatMessages.appendChild(bubble);
+  scrollToBottom();
+  return bubble;
+}
+
+function appendToStreamingBubble(delta) {
+  if (!streamingBubble) return;
+  var cursor = streamingBubble.querySelector('.streaming-cursor');
+  if (cursor) {
+    cursor.insertAdjacentText('beforebegin', delta);
+  } else {
+    streamingBubble.textContent += delta;
+  }
+  scrollToBottom();
+}
+
+function finalizeStreamingBubble(fullContent) {
+  if (!streamingBubble) return;
+  streamingBubble.classList.remove('streaming');
+  streamingBubble.innerHTML = formatMarkdown(fullContent);
+}
+
+function createTypingIndicator() {
+  var el = document.createElement('div');
+  el.className = 'typing-indicator';
+  el.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+  chatMessages.appendChild(el);
+  scrollToBottom();
+  return el;
+}
+
+// ─── Enhanced Markdown Renderer ───
+function formatMarkdown(text) {
+  // Protect code blocks and intake-form blocks
+  var protectedBlocks = [];
+  text = text.replace(/```(\w*)\n([\s\S]*?)```/g, function(_, lang, code) {
+    var idx = protectedBlocks.length;
+    protectedBlocks.push({ lang: lang, code: code.trim() });
+    return '%%BLK' + idx + '%%';
+  });
+
+  // Escape HTML
+  text = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  // Headings (before other inline processing)
+  text = text.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
+  text = text.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  text = text.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  text = text.replace(/^# (.+)$/gm, '<h2>$1</h2>');
+
+  // Horizontal rules
+  text = text.replace(/^---$/gm, '<hr>');
+
+  // Blockquotes
+  text = text.replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>');
+
+  // Bold + italic
+  text = text.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+  // Inline code
+  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  // Links
+  text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+
+  // Unordered lists (lines starting with - or *)
+  text = text.replace(/^[\*\-] (.+)$/gm, '<li>$1</li>');
+  text = text.replace(/((?:<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>');
+
+  // Ordered lists (lines starting with 1. 2. etc)
+  text = text.replace(/^(\d+)\. (.+)$/gm, '<li>$2</li>');
+
+  // Double newlines → paragraph breaks
+  text = text.replace(/\n\n/g, '<br><br>');
+  // Single newlines → line breaks
+  text = text.replace(/\n/g, '<br>');
+
+  // Clean up: remove empty paragraphs, fix <br> before/after block elements
+  text = text.replace(/<br>\s*(<(?:h[2-4]|ul|ol|blockquote|hr|pre))/g, '$1');
+  text = text.replace(/(<\/(?:h[2-4]|ul|ol|blockquote|pre)>)\s*<br>/g, '$1');
+
+  // Restore code blocks
+  text = text.replace(/%%BLK(\d+)%%/g, function(_, idx) {
+    var block = protectedBlocks[parseInt(idx)];
+    var escaped = block.code
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+    var label = block.lang && block.lang !== 'html' && block.lang !== 'intake-form' ? '<small style="color:var(--text2)">' + block.lang + '</small>\n' : '';
+    return '<pre>' + label + '<code>' + escaped + '</code></pre>';
+  });
+
+  return text;
+}
+
+function scrollToBottom() {
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// ─── Phase ───
+function updatePhase(phase) {
+  currentPhase = phase;
+  if (!phaseBar) return;
+  var key = phase === 'IDLE' ? 'ready' : phase === 'INTAKE' ? 'intake' : phase === 'COMPILING' ? 'compiling' : phase === 'DONE' ? 'done' : phase;
+  var label = t(key) || phase;
+  phaseBar.innerHTML = '<span class="phase-dot ' + phase.toLowerCase() + '"></span> ' + label;
+}
+
+// ─── Preview Panel ───
+function showPreview(label, isDynApp) {
+  previewContainer.classList.add('active');
+  previewContainer.classList.remove('has-form', 'has-dynapp');
+  if (isDynApp) {
+    previewContainer.classList.add('has-dynapp');
+    previewLabel.textContent = '🦄 ' + label;
+    previewBody.style.display = 'none';
+    dynappFrame.style.display = 'block';
+    previewActions.style.display = 'flex';
+  } else {
+    previewContainer.classList.add('has-form');
+    previewLabel.textContent = '📋 ' + label;
+    previewBody.style.display = 'block';
+    dynappFrame.style.display = 'none';
+    previewActions.style.display = 'none';
+  }
+  previewContainer.scrollIntoView({ behavior: 'smooth' });
+}
+
+function closePreview() {
+  previewContainer.classList.remove('active', 'has-form', 'has-dynapp');
+  previewBody.innerHTML = '<p style="text-align:center;color:var(--text2);padding:40px">🦄 ' + t('gen_fallback') + '</p>';
+  previewBody.style.display = 'block';
+  dynappFrame.style.display = 'none';
+  dynappFrame.src = '';
+  previewLabel.textContent = '🦄 ' + t('preview_label');
+  previewActions.style.display = 'none';
+  activeIntakeForm = null;
+}
+
+// ─── Render DynApp (Phase 3) ───
+function renderDynApp(code) {
+  showPreview(t('dynapp_title'), true);
+  var blob = new Blob([code], { type: 'text/html' });
+  var url = URL.createObjectURL(blob);
+  dynappFrame.src = url;
+  saveSession();
+  saveAppToLibrary(sessionName, code);
+}
+
+// ─── Generating Indicator ───
+var GEN_MESSAGES = [
+  '🦄 Summoning the RUA spirits…',
+  '⚡️ Weaving glassmorphism spells…',
+  '🧊 Chiseling interactive elements…',
+  '🌈 Calibrating confetti cannons…',
+  '🎯 Dialing in pedagogical precision…',
+  '💅 Applying the final coat of magic…',
+  '🧪 Distilling knowledge into pixels…',
+  '🔮 Reading the learner profile tea leaves…'
+];
+
+function showGeneratingIndicator() {
+  showPreview(t('brewing_title'), false);
+  var idx = 0;
+  previewBody.innerHTML = '<div class="generating-container"><div class="generating-emoji" id="genEmoji">🦄</div><p class="generating-msg" id="genMsg">' + GEN_MESSAGES[0] + '</p><div class="generating-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div><div class="generating-progress"><div class="generating-progress-bar"></div></div></div>';
+  var EMOJIS = ['🦄','⚡️','🧊','🌈','🎯','💅','🧪','🔮'];
+  var interval = setInterval(function() {
+    idx = (idx + 1) % GEN_MESSAGES.length;
+    var msgEl = document.getElementById('genMsg');
+    var emojiEl = document.getElementById('genEmoji');
+    if (msgEl) { msgEl.style.opacity = '0'; setTimeout(function() { msgEl.textContent = GEN_MESSAGES[idx]; msgEl.style.opacity = '1'; }, 200); }
+    if (emojiEl) emojiEl.textContent = EMOJIS[idx % EMOJIS.length];
+  }, 2200);
+  return { stop: function() { clearInterval(interval); } };
+}
+
+// ─── Non-Streaming Code Generation (Phase 2+3) ───
+function generateDynApp(messages) {
+  isStreaming = true;
+  var loader = showGeneratingIndicator();
+  updatePhase('COMPILING');
+  
+  addMessageBubble('ai', '🦄 **' + t('compiling_msg') + '**');
+  scrollToBottom();
+  saveSession();
+
+  fetch(API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + API_KEY
+    },
+    body: JSON.stringify({
+      model: 'deepseek-chat',
+      messages: messages,
+      stream: false,
+      max_tokens: 8000
+    })
+  }).then(function(response) {
+    if (!response.ok) throw new Error('API error: ' + response.status);
+    return response.json();
+  }).then(function(data) {
+    loader.stop();
+    var content = data.choices[0].message.content;
+    conversationHistory.push({ role: 'assistant', content: content });
+    
+    // Extract strategy brief (non-code parts) for chat display
+    var codeMatch = content.match(/```html\s*([\s\S]*?)```/i);
+    var briefText = content.replace(/```html[\s\S]*?```/g, '').trim();
+    if (briefText) addMessageBubble('ai', briefText);
+    
+    if (codeMatch) {
+      generatedCode = codeMatch[1].trim();
+      updatePhase('DONE');
+      renderDynApp(generatedCode);
+    } else {
+      addMessageBubble('ai', '⚠️ ' + t('gen_nocode'));
+      previewBody.innerHTML = '<p style="text-align:center;color:var(--text2);padding:40px">⚠️ ' + t('gen_nocode') + '</p>';
+    }
+    
+    isStreaming = false;
+    chatInput.disabled = false;
+    chatSend.disabled = false;
+    chatInput.focus();
+    saveSession();
+  }).catch(function(error) {
+    loader.stop();
+    addMessageBubble('ai', '⚠️ ' + t('gen_fizzle') + '\n\n' + error.message);
+    previewBody.innerHTML = '<p style="text-align:center;color:var(--pink);padding:40px">⚠️ ' + t('gen_failed') + '</p>';
+    isStreaming = false;
+    chatInput.disabled = false;
+    chatSend.disabled = false;
+    chatInput.focus();
+  });
+}
+
+// ─── Render Intake Form (Phase 1) ───
+function renderIntakeForm(html) {
+  showPreview(t('form_title'), false);
+  previewBody.innerHTML = html;
+  activeIntakeForm = previewBody.querySelector('form');
+
+  if (!activeIntakeForm) {
+    // Fallback: wrap bare form elements
+    var selects = previewBody.querySelectorAll('select, input, textarea');
+    if (selects.length > 0) {
+      var wrapper = document.createElement('form');
+      wrapper.className = 'intake-form';
+      wrapper.id = 'dynapp-intake';
+      while (previewBody.firstChild) {
+        wrapper.appendChild(previewBody.firstChild);
+      }
+      // Add submit button if missing
+      if (!wrapper.querySelector('button[type="submit"]')) {
+        var btn = document.createElement('button');
+        btn.type = 'submit';
+        btn.className = 'btn-submit';
+        btn.textContent = '🦄 Lock In Parameters';
+        wrapper.appendChild(btn);
+      }
+      previewBody.appendChild(wrapper);
+      activeIntakeForm = wrapper;
+    }
+  }
+
+  if (activeIntakeForm) {
+    activeIntakeForm.addEventListener('submit', submitIntakeForm);
+  }
+}
+
+// ─── Submit Intake Form ───
+function submitIntakeForm(e) {
+  e.preventDefault();
+  if (!activeIntakeForm) return;
+
+  // Collect form data
+  var formData = new FormData(activeIntakeForm);
+  var parts = [];
+  formData.forEach(function(value, key) {
+    if (value && value.trim()) {
+      var label = key.replace(/_/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+      parts.push(label + ': ' + value.trim());
+    }
+  });
+
+  if (parts.length === 0) {
+    addMessageBubble('ai', '⚠️ ' + t('fill_field'));
+    return;
+  }
+
+  // Auto-name session from first user message if not named yet
+  if (sessionName === 'Untitled' && conversationHistory.length > 0) {
+    sessionName = autoName(conversationHistory[0].content);
+  }
+
+  // Format as structured text for AI
+  var intakeText = 'INTAKE FORM SUBMITTED:\n' + parts.join('\n') + '\n\nPlease proceed to Phase 2 — generate the Strategy Brief and then the full DynApp.';
+
+  // Show submission in chat
+  addMessageBubble('user', t('form_submitted') + '\n' + parts.join('\n'));
+
+  // Disable the form
+  var inputs = activeIntakeForm.querySelectorAll('select, input, textarea, button');
+  for (var i = 0; i < inputs.length; i++) { inputs[i].disabled = true; }
+
+  // Add to history and continue
+  conversationHistory.push({ role: 'user', content: intakeText });
+  saveSession();
+
+  updatePhase('COMPILING');
+
+  // Non-streaming code generation with humorous loading indicator
+  var messages = [{ role: 'system', content: SYSTEM_PROMPT }].concat(conversationHistory);
+  generateDynApp(messages);
+}
+
+// ─── Init: Restore last session + language + render library ───
+setTimeout(function() {
+  // Restore language
+  var savedLang = localStorage.getItem('dynamos_lang');
+  if (savedLang === 'zh' || savedLang === 'en') setLanguage(savedLang);
+  // Set placeholder
+  chatInput.placeholder = t('placeholder');
+  // Render app library
+  renderAppLibrary();
+  // Restore session
+  if (!restoreLastSession()) {
+    if (conversationHistory.length === 0) {
+      chatMessages.scrollTop = 0;
+    }
+  }
+}, 100);
+
+})();
 </script>
 
 </body>

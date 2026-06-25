@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Powered IELTS Courseware Demo — Speaking Part 2 | rkrk.io</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf9; --card: #ffffff; --text: #1a1a2e; --sub: #6b7280;
+  --accent: #e07a5f; --accent2: #3d405b;
+  --border: #e5e7eb; --radius: 16px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter','Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+h1,h2,h3{font-family:'Outfit','Noto Sans SC',sans-serif}
+.container{max-width:720px;margin:0 auto;padding:24px 20px 60px}
+
+header{text-align:center;padding:40px 0 32px}
+.logo{font-size:13px;text-transform:uppercase;letter-spacing:0.15em;color:var(--sub);margin-bottom:8px}
+header h1{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:800;letter-spacing:-0.03em;line-height:1.15;margin-bottom:8px}
+header .sub{font-size:15px;color:var(--sub)}
+
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;margin:0 4px}
+.badge-demo{background:#fef3c7;color:#92400e}
+.badge-focus{background:#e0e7ff;color:#3730a3}
+.badge-time{background:#fce7f3;color:#9d174d}
+
+/* Section cards */
+.section-card{background:var(--card);border-radius:var(--radius);padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.section-card .emoji{font-size:24px;margin-bottom:8px}
+.section-card h2{font-size:18px;font-weight:700;margin-bottom:4px}
+.section-card .meta{font-size:13px;color:var(--sub);margin-bottom:12px}
+
+/* Audio player */
+.audio-box{margin:12px 0;padding:12px 16px;background:#f3f4f6;border-radius:12px}
+.audio-box .audio-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--sub);margin-bottom:6px}
+
+/* Vocabulary grid */
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:12px 0}
+.vocab-card{background:#fafafa;border:1px solid var(--border);border-radius:12px;padding:14px}
+.vocab-card .word{font-weight:700;font-size:15px;color:var(--accent)}
+.vocab-card .ipa{font-size:11px;color:var(--sub);margin-top:1px}
+.vocab-card .def{font-size:12px;color:var(--sub);margin-top:2px}
+
+/* Practice frame */
+.practice-frame{background:#fef3c7;border:2px dashed #f59e0b;border-radius:var(--radius);padding:20px;margin:16px 0}
+.practice-frame .frame-text{font-family:'Courier New',monospace;font-size:14px;line-height:2.2;color:#78350f}
+.practice-frame .frame-gap{display:inline-block;min-width:60px;border-bottom:2px solid #f59e0b;margin:0 8px}
+
+/* AI prompt box */
+.ai-prompt-box{background:#1e1b4b;border-radius:12px;padding:18px;margin:12px 0;overflow-x:auto}
+.ai-prompt-box .prompt-label{font-size:11px;font-weight:700;color:#a5b4fc;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
+.ai-prompt-box .prompt-text{font-family:'Courier New',monospace;font-size:13px;color:#e0e7ff;line-height:1.7;white-space:pre-wrap}
+
+/* Cue card display */
+.cue-card-display{background:#fff7ed;border:2px solid #fdba74;border-radius:var(--radius);padding:20px;margin:12px 0}
+.cue-card-display .cue-label{font-size:12px;font-weight:700;color:#c2410c;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px}
+.cue-card-display .cue-topic{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px}
+.cue-card-display .cue-prompts{font-size:14px;color:var(--text);line-height:1.8;list-style:disc;padding-left:20px}
+.cue-card-display .cue-prompts li{margin:4px 0}
+
+/* Model answer structure */
+.model-structure{margin:12px 0}
+.model-structure .model-para{background:#fafafa;border-left:3px solid var(--accent);padding:12px 16px;margin-bottom:8px;border-radius:0 8px 8px 0;font-size:14px;line-height:1.6}
+.model-structure .model-para .para-label{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px}
+
+/* Cool-down */
+.cool-down{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-radius:var(--radius);padding:24px;margin:16px 0}
+.cool-down h3{color:#065f46;font-size:16px;margin-bottom:12px}
+.cool-down .takeaway-item{margin:6px 0;font-size:14px;color:#064e3b;padding-left:8px}
+
+/* Homework section */
+.homework-section{background:#fff;border-radius:12px;padding:18px;margin-top:14px;border:1px solid #a7f3d0}
+.homework-section h4{font-size:14px;color:var(--accent2);margin-bottom:8px}
+.homework-section ol{font-size:14px;line-height:2;color:var(--text);padding-left:20px}
+
+/* Teacher reflection */
+.teacher-note{background:#e0e7ff;border-radius:12px;padding:14px 16px;margin:12px 0;font-size:13px;color:#3730a3;line-height:1.6}
+
+/* Footer */
+footer{text-align:center;padding:32px 0;color:var(--sub);font-size:12px;border-top:1px solid var(--border);margin-top:40px}
+footer .brand{font-weight:700;color:var(--text)}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <div class="logo">rkrk.io</div>
+  <h1>AI-Powered IELTS<br>Courseware Demo</h1>
+  <p class="sub">Speaking Part 2 — Describe a place affected by pollution</p>
+  <div style="margin-top:12px">
+    <span class="badge badge-demo">Demo Class</span>
+    <span class="badge badge-focus">IELTS</span>
+    <span class="badge badge-time">60 min</span>
+  </div>
+</header>
+
+<!-- Part 1: AI Warm-Up -->
+<div class="section-card">
+  <div class="emoji">🤖</div>
+  <h2>Part 1 — AI Warm-Up: Listen & Notice</h2>
+  <div class="meta">5 minutes · AI Audio Generation</div>
+  <p style="font-size:14px;color:var(--sub);margin-bottom:12px">
+    An AI-generated audio clip introduces the topic. Students listen and note down any pollution-related vocabulary they hear. This replaces the traditional "teacher reads aloud" warm-up with consistent, replayable audio.
+  </p>
+  <div class="audio-box">
+    <div class="audio-label">🎤 AI-Generated: Topic Introduction</div>
+    <p style="font-size:12px;color:var(--sub);margin:6px 0">
+      The audio describes visiting a polluted river in a Chinese city — what it looked like, how it smelled, what caused the pollution, and how the community responded.
+    </p>
+  </div>
+  <div class="teacher-note">
+    <b>🧑‍🏫 Teacher Note:</b> This audio was generated using ElevenLabs. Prompt used: <i>"Create a 60-second warm-up audio about visiting a polluted river in a Chinese city, spoken at B1 level, natural pace. Include sensory details — sight, smell, sound. End with a reflective question."</i>
+  </div>
+</div>
+
+<!-- Part 2: Zoom In -->
+<div class="section-card">
+  <div class="emoji">🔤</div>
+  <h2>Part 2 — Zoom In: Topic Vocabulary</h2>
+  <div class="meta">15 minutes · AI-Assisted Vocabulary Building</div>
+
+  <div class="vocab-grid">
+    <div class="vocab-card">
+      <div class="word">contaminated</div>
+      <div class="ipa">/kənˈtæmɪneɪtɪd/</div>
+      <div class="def">受污染的 — made impure by harmful substances</div>
+    </div>
+    <div class="vocab-card">
+      <div class="word">emissions</div>
+      <div class="ipa">/ɪˈmɪʃənz/</div>
+      <div class="def">排放物 — gases released into the air</div>
+    </div>
+    <div class="vocab-card">
+      <div class="word">deteriorate</div>
+      <div class="ipa">/dɪˈtɪəriəreɪt/</div>
+      <div class="def">恶化 — to become progressively worse</div>
+    </div>
+    <div class="vocab-card">
+      <div class="word">haze</div>
+      <div class="ipa">/heɪz/</div>
+      <div class="def">雾霾 — reduced visibility from pollution</div>
+    </div>
+    <div class="vocab-card">
+      <div class="word">industrial waste</div>
+      <div class="ipa"></div>
+      <div class="def">工业废料 — byproducts from factories</div>
+    </div>
+    <div class="vocab-card">
+      <div class="word">respiratory</div>
+      <div class="ipa">/rɪˈspɪrətəri/</div>
+      <div class="def">呼吸道的 — relating to breathing</div>
+    </div>
+    <div class="vocab-card">
+      <div class="word">smog</div>
+      <div class="ipa">/smɒɡ/</div>
+      <div class="def">烟雾 — smoke + fog, urban air pollution</div>
+    </div>
+    <div class="vocab-card">
+      <div class="word">conservation</div>
+      <div class="ipa">/ˌkɒnsəˈveɪʃən/</div>
+      <div class="def">保护 — protection of natural resources</div>
+    </div>
+    <div class="vocab-card">
+      <div class="word">fumes</div>
+      <div class="ipa">/fjuːmz/</div>
+      <div class="def">废气 — strong-smelling gas or smoke</div>
+    </div>
+    <div class="vocab-card">
+      <div class="word">runoff</div>
+      <div class="ipa">/ˈrʌnɒf/</div>
+      <div class="def">径流 — water that flows over land, carrying pollutants</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;margin-top:20px;color:var(--accent2)">📐 Grammar Frame — Describing Places</h3>
+  <div class="practice-frame">
+    <div class="frame-text">
+      "I remember visiting <span class="frame-gap">a river near my hometown</span> which used to be <span class="frame-gap">crystal clear</span>."<br><br>
+      "The most striking thing was <span class="frame-gap">the thick layer of foam on the surface</span>."<br><br>
+      "It had become <span class="frame-gap">contaminated</span> due to <span class="frame-gap">industrial waste from nearby factories</span>."<br><br>
+      "What really stays with me is <span class="frame-gap">the chemical smell that hung in the air</span>."
+    </div>
+  </div>
+</div>
+
+<!-- Part 3: IELTS Deep Dive -->
+<div class="section-card">
+  <div class="emoji">🎯</div>
+  <h2>Part 3 — IELTS Deep Dive: Cue Card Breakdown</h2>
+  <div class="meta">15 minutes · AI-Assisted Lesson Planning</div>
+
+  <div class="cue-card-display">
+    <div class="cue-label">📋 IELTS Speaking Part 2 Cue Card</div>
+    <div class="cue-topic">Describe a place you visited that was affected by pollution.</div>
+    <ul class="cue-prompts">
+      <li>Where this place is</li>
+      <li>When you visited it</li>
+      <li>What kind of pollution you saw there</li>
+      <li>And explain how this experience made you feel</li>
+    </ul>
+  </div>
+
+  <h3 style="font-size:15px;margin-top:16px;color:var(--accent2)">📝 Model Answer Structure</h3>
+  <div class="model-structure">
+    <div class="model-para">
+      <div class="para-label">Paragraph 1 · Introduction</div>
+      Name the place, set the scene. "I'd like to talk about a river in my hometown that I visited a few years ago. It's called the Qinghe River and it runs through the eastern part of the city."
+    </div>
+    <div class="model-para">
+      <div class="para-label">Paragraph 2 · The Pollution</div>
+      Describe what you saw, heard, smelled. Use sensory vocabulary. "The most striking thing was the colour of the water — it was a murky brown, with patches of foam floating on the surface. The air smelled sharp and chemical."
+    </div>
+    <div class="model-para">
+      <div class="para-label">Paragraph 3 · Cause & Effect</div>
+      Explain the source of pollution. "I later learned that factories upstream had been discharging industrial waste into the river for years. Local residents told me that cases of respiratory problems had increased noticeably."
+    </div>
+    <div class="model-para">
+      <div class="para-label">Paragraph 4 · Personal Reflection</div>
+      How it made you feel + what happened next. "It was genuinely upsetting. But there is a positive side — the local government has since launched a cleanup project, and the water quality is slowly improving."
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;margin-top:16px;color:var(--accent2)">🤖 AI Prompt Used</h3>
+  <div class="ai-prompt-box">
+    <div class="prompt-label">Prompt — ChatGPT / DeepSeek / Claude</div>
+    <div class="prompt-text">You are an IELTS Speaking examiner. Generate a Band 8.0 model answer for Speaking Part 2 on this cue card:
+
+"Describe a place you visited that was affected by pollution."
+
+Structure the answer in 4 clear paragraphs:
+1. Introduction — name the place, set the scene
+2. Sensory description — sight, smell, sound
+3. Cause and effect — what caused the pollution, impact on people
+4. Personal reflection — how it made you feel, what happened next
+
+Use the following vocabulary naturally: contaminated, emissions, deteriorate, haze, industrial waste, respiratory.
+
+Target: 1 minute 45 seconds spoken. Natural, conversational tone. First-person perspective. Include one Chinese city reference for relatability.</div>
+  </div>
+
+  <div class="teacher-note">
+    <b>🧑‍🏫 Teacher Note:</b> This prompt produces a high-quality model answer that demonstrates all target vocabulary in context. You can adjust the band score, length, or vocabulary list for different levels.
+  </div>
+</div>
+
+<!-- Part 4: Controlled Practice -->
+<div class="section-card">
+  <div class="emoji">🗣️</div>
+  <h2>Part 4 — Controlled Practice: Your Turn</h2>
+  <div class="meta">15 minutes · Speaking Practice + AI Feedback</div>
+
+  <h3 style="font-size:15px;margin-top:4px;color:var(--accent2)">🗣️ Speaking Frame — Student Practice</h3>
+  <div class="practice-frame">
+    <div class="frame-text">
+      "I'd like to talk about <span class="frame-gap">a park near my home</span> which I visited <span class="frame-gap">last summer</span>.<br>
+      It's located <span class="frame-gap">in the city centre, beside the main road</span>.<br>
+      The most noticeable problem was <span class="frame-gap">the thick haze from traffic emissions</span>.<br>
+      I could actually <span class="frame-gap">taste the fumes in the air</span>."<br><br>
+      "I believe this happened because <span class="frame-gap">there are too many cars and not enough green space</span>.<br>
+      It made me feel <span class="frame-gap">concerned about the long-term health effects</span>.<br>
+      Since then, I've noticed that <span class="frame-gap">the city has introduced electric buses on that route</span>."
+    </div>
+  </div>
+
+  <div class="teacher-note" style="margin-top:16px">
+    <b>🧑‍🏫 AI Feedback Integration:</b> After students record their practice response, you can use speech-to-text (via an AI tool) to transcribe it, then run a prompt like: <i>"Analyse this IELTS Speaking Part 2 response for vocabulary range, grammatical accuracy, and fluency. Suggest 2 specific improvements."</i> This gives students instant, objective feedback alongside your own observations.
+  </div>
+</div>
+
+<!-- Part 5: Cool-Down & Homework -->
+<div class="cool-down">
+  <h3>📝 Part 5 — Cool-Down & Homework</h3>
+  <p style="font-size:14px;color:#065f46;margin-bottom:12px"><b>10 minutes · Recap · Reflection · Next steps</b></p>
+
+  <h4 style="font-size:14px;color:#065f46;margin-bottom:6px">📌 Key Takeaways</h4>
+  <div class="takeaway-item">10 topic-specific vocabulary items for describing pollution (contaminated, emissions, haze, smog, fumes, runoff, respiratory, deteriorate, industrial waste, conservation)</div>
+  <div class="takeaway-item">4-paragraph model answer structure for IELTS Speaking Part 2 (Introduction → Description → Cause/Effect → Reflection)</div>
+  <div class="takeaway-item">Grammar frame for describing places: "I remember visiting... The most striking thing was... What really stays with me is..."</div>
+  <div class="takeaway-item">How AI tools (ElevenLabs + LLMs) were used to build this lesson — and how teachers can replicate the process</div>
+
+  <div class="homework-section">
+    <h4>📚 Homework</h4>
+    <ol>
+      <li>Write your own model answer for this cue card using at least 6 of the target vocabulary words</li>
+      <li>Record yourself speaking the answer — aim for 1 minute 30 seconds to 2 minutes</li>
+      <li>Use an AI tool (ChatGPT or DeepSeek) to analyse your recording transcript for vocabulary range and grammatical accuracy</li>
+      <li><b>Bonus:</b> Pick a different pollution-related cue card (e.g., air pollution in cities, plastic waste in oceans) and draft a 4-paragraph structure using today's framework</li>
+    </ol>
+  </div>
+
+  <h4 style="font-size:14px;color:#065f46;margin-top:16px;margin-bottom:6px">🔍 Teacher Reflection Prompts</h4>
+  <div class="takeaway-item">Which part of this lesson would you feel confident teaching tomorrow? Which part would you want to practise more?</div>
+  <div class="takeaway-item">How long would it have taken you to prepare this lesson without AI tools? How long with them?</div>
+  <div class="takeaway-item">What's one AI tool from this demo you're most excited to try in your own classroom?</div>
+</div>
+
+<footer>
+  <p class="brand">rkrk.io</p>
+  <p>AI·Native EdTech Demo · Speaking Part 2 · IELTS</p>
+  <p style="margin-top:4px">Contact: rkrk@me.com · WeChat: keedahooman</p>
+</footer>
+
+</div>
+</body>
+</html>

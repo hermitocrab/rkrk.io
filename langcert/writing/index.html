@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>朗思学术写作 · 第1课 · 图表报告 & 议论文</title>
+
+
+
+<style>
+:root {
+  --bg: #fafbfc;
+  --text: #1a1a1a;
+  --text-secondary: #6b7280;
+  --accent: #1a2a6c;
+  --accent-light: #e8ecf4;
+  --border: #e5e7eb;
+  --correct-bg: #f0fdf4;
+  --correct-border: #86efac;
+  --correct-text: #166534;
+  --wrong-bg: #fef2f2;
+  --wrong-border: #fca5a5;
+  --wrong-text: #991b1b;
+  --font-heading: system-ui, -apple-system, 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+  --font-body: system-ui, -apple-system, 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+  --radius: 10px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-body); color: var(--text); background: var(--bg); line-height: 1.7; padding-bottom: 6rem; }
+
+.progress-bar { position: sticky; top: 0; z-index: 100; background: rgba(250,251,252,0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; gap: 6px; align-items: center; }
+.progress-bar .segments { display: flex; gap: 4px; flex: 1; max-width: 720px; margin: 0 auto; }
+.progress-segment { flex: 1; height: 4px; border-radius: 2px; background: var(--border); transition: background 0.3s ease; }
+.progress-segment.active { background: var(--accent); }
+.progress-label { font-family: var(--font-heading); font-size: 0.75rem; font-weight: 500; color: var(--text-secondary); white-space: nowrap; min-width: 52px; text-align: right; }
+
+.container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+.header { padding: 3rem 0 2rem; text-align: center; }
+.header .eyebrow { font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+.header h1 { font-family: var(--font-heading); font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 0.5rem; }
+.header .subtitle { font-size: 1.125rem; font-weight: 400; color: var(--text-secondary); margin-bottom: 1rem; }
+.header .meta { display: flex; justify-content: center; gap: 1.25rem; flex-wrap: wrap; font-size: 0.8125rem; color: var(--text-secondary); }
+.header .meta span { display: inline-flex; align-items: center; gap: 0.375rem; }
+
+section { margin-bottom: 3.5rem; scroll-margin-top: 60px; }
+.section-flag { font-family: var(--font-heading); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+section h2 { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 0.375rem; }
+section .section-sub { font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
+
+.card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; }
+.card h3 { font-family: var(--font-heading); font-size: 1.0625rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
+.card h3 .icon { font-size: 1.25rem; flex-shrink: 0; }
+.card p, .card li { font-size: 0.9375rem; line-height: 1.75; color: var(--text); }
+.card ul, .card ol { padding-left: 1.25rem; margin-bottom: 0.75rem; }
+.card li { margin-bottom: 0.375rem; }
+.card img { max-width: 100%; border-radius: 6px; border: 1px solid var(--border); margin: 0.75rem 0; }
+
+.breakdown { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin-top: 1rem; }
+.breakdown-item { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+.breakdown-item .part { font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+.breakdown-item .desc { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.5; }
+
+.phrase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1rem; }
+.phrase-item { font-size: 0.875rem; padding: 10px 14px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); }
+.phrase-item .en { font-weight: 600; color: var(--accent); }
+.phrase-item .zh { font-size: 0.8125rem; color: var(--text-secondary); margin-top: 2px; }
+
+.template-block { background: var(--accent-light); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; padding: 1rem 1.25rem; margin-bottom: 0.75rem; font-size: 0.875rem; }
+.template-block .label { font-family: var(--font-heading); font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; color: var(--accent); letter-spacing: 0.04em; margin-bottom: 0.375rem; }
+.template-block p { margin-bottom: 0.375rem; }
+.template-block p:last-child { margin-bottom: 0; }
+
+.model-answer { background: #f8faf9; border: 1px solid #d1d5db; border-radius: var(--radius); padding: 1.25rem; margin-top: 1rem; display: none; }
+.model-answer.visible { display: block; }
+.model-answer h4 { font-family: var(--font-heading); font-size: 0.8125rem; color: var(--accent); margin-bottom: 0.75rem; }
+.model-answer p { font-size: 0.875rem; line-height: 1.8; margin-bottom: 0.5rem; }
+
+.toggle-link { font-family: var(--font-heading); font-size: 0.8125rem; font-weight: 500; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; background: none; border: none; padding: 6px 0; display: inline-flex; align-items: center; gap: 4px; margin: 0.5rem 0; transition: color 0.15s; }
+.toggle-link:hover { color: #0f1d4e; }
+
+.quiz-question { margin-bottom: 1.5rem; }
+.quiz-question .sentence { font-size: 1rem; line-height: 1.7; margin-bottom: 0.75rem; padding: 0.75rem 1rem; background: var(--bg); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; }
+.quiz-options { display: flex; gap: 8px; flex-wrap: wrap; }
+.quiz-option { font-family: var(--font-body); font-size: 0.875rem; padding: 8px 18px; border: 1px solid var(--border); border-radius: 6px; background: #fff; cursor: pointer; transition: all 0.15s; min-height: 44px; display: inline-flex; align-items: center; user-select: none; }
+.quiz-option:hover { border-color: var(--accent); background: var(--accent-light); }
+.quiz-option.selected-correct { border-color: var(--correct-border); background: var(--correct-bg); color: var(--correct-text); cursor: default; }
+.quiz-option.selected-wrong { border-color: var(--wrong-border); background: var(--wrong-bg); color: var(--wrong-text); cursor: default; }
+.quiz-option.disabled { pointer-events: none; opacity: 0.6; }
+.quiz-option.show-correct { border-color: var(--correct-border); background: var(--correct-bg); }
+.quiz-feedback { font-size: 0.8125rem; margin-top: 0.5rem; padding: 0.5rem 0; color: var(--text-secondary); display: none; }
+.quiz-feedback.visible { display: block; }
+.quiz-feedback.correct { color: var(--correct-text); font-weight: 500; }
+.quiz-feedback.wrong { color: var(--wrong-text); }
+
+.checklist { list-style: none; padding: 0; }
+.checklist li { display: flex; align-items: center; gap: 10px; font-size: 0.9375rem; padding: 8px 0; border-bottom: 1px solid var(--border); cursor: pointer; min-height: 44px; }
+.checklist li:last-child { border-bottom: none; }
+.checklist .check { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; transition: all 0.15s; flex-shrink: 0; font-weight: 700; color: transparent; }
+.checklist li.checked .check { background: var(--accent); border-color: var(--accent); color: #fff; }
+.checklist li.checked { color: var(--text-secondary); }
+
+.compare-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.875rem; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+.compare-table th { font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; padding: 12px 14px; border-bottom: 2px solid var(--border); text-align: left; color: var(--text-secondary); background: var(--bg); }
+.compare-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table td:first-child { font-weight: 600; color: var(--accent); font-size: 0.8125rem; }
+
+.rating-row { display: flex; gap: 12px; margin-top: 0.75rem; }
+.rating-btn { width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--border); background: #fff; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; }
+.rating-btn:hover { border-color: var(--accent); background: var(--accent-light); }
+.rating-btn.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.annotated-paragraph { padding: 0.75rem 1rem; margin-bottom: 0.5rem; border-left: 3px solid var(--accent); background: var(--accent-light); border-radius: 0 6px 6px 0; font-size: 0.875rem; line-height: 1.8; }
+.annotated-paragraph .tag { display: inline-block; background: var(--accent); color: #fff; font-size: 0.6875rem; font-weight: 600; padding: 2px 8px; border-radius: 3px; margin-right: 6px; margin-bottom: 4px; vertical-align: middle; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1rem; }
+.two-col .col-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; }
+.two-col .col-card h4 { font-family: var(--font-heading); font-size: 0.8125rem; font-weight: 600; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 6px; }
+.two-col .col-card p { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.6; }
+
+.video-card { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; color: #fff; }
+.video-card h3 { color: #fff; font-size: 1rem; }
+.video-card p { color: rgba(255,255,255,0.7); font-size: 0.875rem; }
+.video-card .play-btn { display: inline-flex; align-items: center; gap: 8px; background: #e63946; color: #fff; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 0.875rem; text-decoration: none; margin-top: 0.75rem; transition: background 0.2s; }
+.video-card .play-btn:hover { background: #c1121f; }
+
+.next-card { background: linear-gradient(135deg, var(--accent-light), #dce4fa); border: 2px solid var(--accent); }
+
+.prompt-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 1rem; overflow: hidden; }
+.prompt-card img { display: block; width: 100%; border: none; border-radius: 0; margin: 0; border-bottom: 1px solid var(--border); }
+.prompt-card .prompt-label { font-family: var(--font-heading); font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent); padding: 0.75rem 1rem 0.25rem; }
+
+@media (max-width: 640px) {
+  .header h1 { font-size: 1.5rem; }
+  section h2 { font-size: 1.25rem; }
+  .breakdown { grid-template-columns: repeat(2, 1fr); }
+  .phrase-grid { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; }
+  .compare-table { font-size: 0.8125rem; }
+  .compare-table th, .compare-table td { padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar">
+  <div class="segments">
+    <div class="progress-segment" data-section="s1"></div>
+    <div class="progress-segment" data-section="s2"></div>
+    <div class="progress-segment" data-section="s3"></div>
+    <div class="progress-segment" data-section="s4"></div>
+    <div class="progress-segment" data-section="s5"></div>
+    <div class="progress-segment" data-section="s6"></div>
+  </div>
+  <span class="progress-label">0/6</span>
+</div>
+
+<div class="container">
+<div class="header">
+  <div class="eyebrow">LangCert Academic Writing · Lesson 1</div>
+  <h1>学术写作基础：图表报告 & 议论文</h1>
+  <p class="subtitle">Part 1 Chart Report 40% · Part 2 Argumentative Essay 60% · 模板句体系 + 真题范文拆解</p>
+  <div class="meta">
+    <span>🕐 第1-2小时 / 共8小时</span>
+    <span>⏱ 50分钟考试</span>
+    <span>📊 P1 20min</span>
+    <span>📝 P2 30min</span>
+  </div>
+</div>
+
+<!-- ====== SECTION 1 ====== -->
+<section id="s1">
+  <div class="section-flag">Section 1 · 15 min</div>
+  <h2>📋 考试认知 · 评分标准</h2>
+  <p class="section-sub">Before you write, know what they're scoring. 先懂评分再动笔。</p>
+
+  <div class="card">
+    <h3><span class="icon">🖼️</span> Official Scoring Rubric · 官方评分表</h3>
+    <img src="/langcert/writing/scoring_rubric.jpg?v=2" alt="LangCert Academic Writing Scoring Rubric -- Task Achievement, Grammar, Vocabulary, Organisation" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius)">
+    <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:0.5rem">来源：朗思 A 类写作解析及技巧（iCloud LangCert 文件夹）</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">📊</span> Part 1 · Chart Report 图表报告</h3>
+    <div class="breakdown">
+      <div class="breakdown-item"><div class="part">📝 词数</div><div class="desc">150-200 words<br>不得超过 200 词</div></div>
+      <div class="breakdown-item"><div class="part">⏱ 建议用时</div><div class="desc">20 minutes<br>Part 1 占 40%</div></div>
+      <div class="breakdown-item"><div class="part">📈 图类型</div><div class="desc">Bar chart · Line graph<br>Pie chart + 文字信息</div></div>
+      <div class="breakdown-item"><div class="part">🎯 任务</div><div class="desc">描述趋势 + 分析原因<br>+ 评价预测</div></div>
+    </div>
+    <p style="margin-top:0.75rem;font-size:0.875rem;color:var(--text-secondary)">🚫 Part 1 <strong>不允许</strong>加入个人观点（仅在预测段可评价合理性）</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">📝</span> Part 2 · Argumentative Essay 学术议论文</h3>
+    <div class="breakdown">
+      <div class="breakdown-item"><div class="part">📝 词数</div><div class="desc">~250 words<br>240 词左右最佳</div></div>
+      <div class="breakdown-item"><div class="part">⏱ 建议用时</div><div class="desc">30 minutes<br>Part 2 占 60%</div></div>
+      <div class="breakdown-item"><div class="part">💬 题型</div><div class="desc">观点类 · 讨论类<br>利弊类 · 问题解决类</div></div>
+      <div class="breakdown-item"><div class="part">🎯 要求</div><div class="desc">双边讨论 + 明确立场<br>+ 例证支持</div></div>
+    </div>
+    <p style="margin-top:0.75rem;font-size:0.875rem;color:var(--text-secondary)">✅ Part 2 <strong>必须</strong>有明确个人立场 -- 这是与 Part 1 的最大区别</p>
+  </div>
+
+  </section>
+
+<!-- ====== SECTION 2 ====== -->
+<section id="s2">
+  <div class="section-flag">Section 2 · 20 min</div>
+  <h2>📊 Part 1 · 图表报告四段式</h2>
+  <p class="section-sub">Introduction → Trend Description → Reason Explanation → Prediction & Evaluation</p>
+
+  <div class="card">
+    <h3><span class="icon">🏗️</span> The 4-Part Framework</h3>
+    <div class="two-col">
+      <div class="col-card"><h4>❶ Introduction 开头段</h4><p>简洁说明图表内容与观察时间。不加入数据或个人观点。使用 paraphrase 技巧改写题干。</p></div>
+      <div class="col-card"><h4>❷ Trend Description 趋势描述</h4><p>识别高低点、上升下降、交叉点、反转点。使用趋势动词短语 + 具体数据。</p></div>
+      <div class="col-card"><h4>❸ Reason Explanation 原因分析</h4><p>结合题干背景信息，用因果连接词分析变化原因。引用政策、市场、社会等因素。</p></div>
+      <div class="col-card"><h4>❹ Prediction + Evaluation 预测评价</h4><p>根据已有趋势评论预测是否合理，展现批判性思维。可以说「optimistic」「realistic」「unlikely」。</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">✏️</span> ❶ Introduction 模板句</h3>
+    <div class="template-block">
+      <div class="label">Sentence Patterns</div>
+      <p>"The graph/chart/table <strong>illustrates/shows</strong> the changes in ___ over a period of ___ years."</p>
+      <p>"It <strong>provides information about</strong> ___ between Year X and Year Y in [location]."</p>
+      <p>"This report <strong>outlines the trends</strong> in ___ in the past decade, based on the given data."</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">📈</span> ❷ Trend Vocabulary · 趋势动词库</h3>
+    <div class="phrase-grid">
+      <div class="phrase-item"><div class="en">↗️ rise · increase · grow · climb</div><div class="zh">上升 · 增长</div></div>
+      <div class="phrase-item"><div class="en">↗️↗️ surge · soar · skyrocket</div><div class="zh">飙升 · 急剧上升</div></div>
+      <div class="phrase-item"><div class="en">↘️ fall · decrease · drop · decline · dip</div><div class="zh">下降 · 减少</div></div>
+      <div class="phrase-item"><div class="en">↘️↘️ plunge · plummet · collapse</div><div class="zh">骤降 · 暴跌</div></div>
+      <div class="phrase-item"><div class="en">→ remain stable · stay constant · level off</div><div class="zh">保持稳定 · 趋平</div></div>
+      <div class="phrase-item"><div class="en">↕️ fluctuate · oscillate</div><div class="zh">波动 · 起伏</div></div>
+      <div class="phrase-item"><div class="en">🏔️ reach a peak · hit a high</div><div class="zh">达到峰值</div></div>
+      <div class="phrase-item"><div class="en">⏬ hit a low point · bottom out</div><div class="zh">触底</div></div>
+    </div>
+    <div class="template-block">
+      <div class="label">搭配副词 Adverbs for precision</div>
+      <p><strong>significantly · sharply · dramatically · steadily · gradually · slightly · relatively</strong></p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">🔍</span> ❸ Reason Phrases · 因果连接词</h3>
+    <div class="phrase-grid">
+      <div class="phrase-item"><div class="en">due to · owing to</div><div class="zh">由于</div></div>
+      <div class="phrase-item"><div class="en">as a result of</div><div class="zh">作为......的结果</div></div>
+      <div class="phrase-item"><div class="en">caused by</div><div class="zh">由......引起</div></div>
+      <div class="phrase-item"><div class="en">possibly because</div><div class="zh">可能是因为</div></div>
+      <div class="phrase-item"><div class="en">this may be attributed to</div><div class="zh">这可归因于</div></div>
+      <div class="phrase-item"><div class="en">can be explained by</div><div class="zh">可以用......来解释</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">🔮</span> ❹ Prediction & Evaluation</h3>
+    <div class="template-block">
+      <div class="label">预测句</div>
+      <p>"<strong>If this trend continues</strong>, it is likely that ___ will reach ___ by Year ___."</p>
+      <p>"<strong>It is predicted that</strong>... / <strong>expected to</strong>... / <strong>likely to</strong>..."</p>
+    </div>
+    <div class="template-block">
+      <div class="label">评价句（批判性思维）</div>
+      <p>"However, the forecast <strong>appears overly optimistic</strong> given the current slowdown."</p>
+      <p>"In my opinion, the prediction <strong>is realistic</strong>, especially if ___ continues to ___."</p>
+      <p>"<strong>Nevertheless</strong>, external factors such as ___ might affect the accuracy of this forecast."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SECTION 3 ====== -->
+<section id="s3">
+  <div class="section-flag">Section 3 · 20 min</div>
+  <h2>📝 真题拆解 · Milton-on-Sea 旅游收入</h2>
+  <p class="section-sub">Real Task 1 with annotated Band 7+ model answer from the official PDF</p>
+
+  <div class="card">
+    <h3><span class="icon">🖼️</span> Task Prompt · 真题题干</h3>
+    <img src="/langcert/writing/milton_task.jpg?v=2" alt="Milton-on-Sea tourism bar chart + newspaper article -- 4 sectors, Years 1-12" loading="lazy" style="max-width:100%;border-radius:var(--radius);border:1px solid var(--border)">
+    <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:0.5rem">4 个行业 · 10 年数据 · 新主题公园 + 高铁 + Airbnb 多因素交叉</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">⭐</span> Band 7+ Model Answer · 逐段标注</h3>
+
+    <div class="annotated-paragraph">
+      <span class="tag">Introduction 开头</span><br>
+      As can be seen from the graph, income from international tourism fell in all four sectors from Year 1 to Year 8. Resort hotels in Milton-on-Sea used to receive the largest proportion of the money, but income fell from around £800,000 in Year 1 to around 350,000 in Year 8. Attractions and food outlets experienced the same trend, as did hire cars and taxis.
+    </div>
+
+    <div class="annotated-paragraph">
+      <span class="tag">Trend + Reason 趋势+原因</span><br>
+      However, in Year 9, three of the four sectors saw a large rise in income. Presumably this was <strong>as a result of</strong> the opening of a new theme park and the new high-speed train link with the capital in Year 8. Although in Years 9 and 10, income for resort hotels continued to decline, all other tourist income sectors rose. Presumably many of the tourists coming to Milton-on-Sea because of improved rail transport stayed in private rental rather than resort hotels.
+    </div>
+
+    <div class="annotated-paragraph">
+      <span class="tag">Prediction + Evaluation 预测评价</span><br>
+      <strong>If the trend continues</strong> as the tourist board predicts, total income from all four sectors might increase to well over £1 million by the end of the next two years. And if restrictions on the number of Airbnb rooms are put in place, then the resort hotel's income could well increase too.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">🔑</span> Key Phrases to Steal</h3>
+    <div class="phrase-grid">
+      <div class="phrase-item"><div class="en">As can be seen from the graph</div><div class="zh">图表显示（开头万能句）</div></div>
+      <div class="phrase-item"><div class="en">fell in all four sectors</div><div class="zh">四个行业全面下降</div></div>
+      <div class="phrase-item"><div class="en">used to receive the largest proportion</div><div class="zh">过去占比最大</div></div>
+      <div class="phrase-item"><div class="en">experienced the same trend, as did...</div><div class="zh">经历相同趋势（高级并列句）</div></div>
+      <div class="phrase-item"><div class="en">Presumably this was as a result of</div><div class="zh">推测原因是（委婉因果）</div></div>
+      <div class="phrase-item"><div class="en">could well increase too</div><div class="zh">也很可能会增长（谨慎预测）</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SECTION 4 ====== -->
+<section id="s4">
+  <div class="section-flag">Section 4 · 25 min</div>
+  <h2>✍️ Part 1 实战 · Fizzy Drinks vs Juice</h2>
+  <p class="section-sub">Guided Practice -- sentence frames → self-check → model answer</p>
+
+  <div class="card">
+    <h3><span class="icon">🖼️</span> Task Prompt · 真题</h3>
+    <img src="/langcert/writing/fizzy_drinks_chart.jpg?v=2" alt="Fizzy drinks vs juice -- government price intervention chart" loading="lazy" style="max-width:100%;border-radius:var(--radius);border:1px solid var(--border)">
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">🧩</span> Sentence Frames · 句子骨架</h3>
+    <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:1rem">用以下框架完成你的报告，填空后组合成完整段落----考察：趋势识别 + 政策因果 + 批判性预测</p>
+    <div class="template-block">
+      <div class="label">Introduction</div>
+      <p>As can be seen from the graph, sales of fizzy drinks had __________ while juice sales had __________ before the change in the law at the end of Year 2.</p>
+    </div>
+    <div class="template-block">
+      <div class="label">Reason Analysis</div>
+      <p>It seems that <strong>as a result of</strong> __________, sales of fizzy drinks __________ significantly in Year 3. Sales of juice, meanwhile, more than __________.</p>
+    </div>
+    <div class="template-block">
+      <div class="label">Trend + Policy Response</div>
+      <p>Both of these trends continued in Year 4 but it is clear that __________. At the end of Year 4, a law was passed __________. This seems to have had the desired effect because, in Year 5, __________.</p>
+    </div>
+    <div class="template-block">
+      <div class="label">Prediction + Critical Evaluation</div>
+      <p>If the trends in the sales of both types of cold drink <strong>continues</strong>, in the next 5 years, __________. However, it is likely that the changes will __________ as price is not the only factor in determining cold drink choice.</p>
+    </div>
+  </div>
+
+  <button class="toggle-link" onclick="var el=document.getElementById('model1');el.classList.toggle('visible');this.textContent=el.classList.contains('visible')?'▲ Hide Model Answer':'▼ Show Model Answer 查看范文'">▼ Show Model Answer 查看范文</button>
+  <div class="model-answer" id="model1">
+    <h4>📝 Band 7+ Model Answer (from official PDF)</h4>
+    <p>As can be seen from the graph, sales of fizzy drinks had <strong>risen</strong> while juice sales had <strong>fallen steeply</strong> before the change in the law at the end of Year 2. It seems that <strong>as a result of the reduction in the price of juice</strong>, sales of fizzy drinks fell significantly in Year 3. Sales of juice, meanwhile, <strong>more than doubled</strong>.</p>
+    <p>Both of these trends continued in Year 4 but it is clear that the government did not feel the movement was fast enough. At the end of Year 4, a law was passed <strong>increasing the price of fizzy drinks</strong>. This seems to have had the desired effect because, in Year 5, <strong>sales of juice nearly reached the same level as fizzy drinks</strong>.</p>
+    <p>If the trends in the sales of both types of cold drink continues, in the next 5 years, <strong>sales of juice will far exceed that of fizzy drinks</strong>. However, it is likely that the changes will <strong>flatten out</strong> as price is not the only factor in determining cold drink choice.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">✅</span> Self-Check · 自检清单</h3>
+    <ul class="checklist" id="checklist1">
+      <li onclick="this.classList.toggle('checked')"><span class="check">✓</span> 覆盖了题干所有要点：趋势 + 原因 + 预测</li>
+      <li onclick="this.classList.toggle('checked')"><span class="check">✓</span> 使用了至少 3 个趋势动词（rise / fall / double / exceed）</li>
+      <li onclick="this.classList.toggle('checked')"><span class="check">✓</span> 使用了因果连接词（as a result of / because / seems to have had）</li>
+      <li onclick="this.classList.toggle('checked')"><span class="check">✓</span> 有预测段 + 批判性评价（flatten out / not the only factor）</li>
+      <li onclick="this.classList.toggle('checked')"><span class="check">✓</span> 词数控制在 150-200 之间</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ====== SECTION 5 ====== -->
+<section id="s5">
+  <div class="section-flag">Section 5 · 25 min</div>
+  <h2>📝 Part 2 · 议论文四段式 + 真题题库</h2>
+  <p class="section-sub">Essay Structure -- Introduction → Viewpoint 1 → Viewpoint 2 → Personal Opinion</p>
+
+  <div class="card">
+    <h3><span class="icon">🏗️</span> Essay 4-Part Framework</h3>
+    <div class="two-col">
+      <div class="col-card"><h4>❶ Introduction 引出话题</h4><p>引出话题，简要展示两方观点/问题背景。Paraphrase 题干，不急于表态。</p></div>
+      <div class="col-card"><h4>❷ Viewpoint 1 正方论点</h4><p>主题句 + 原因解释 + 例子说明。客观呈现支持方的论据。</p></div>
+      <div class="col-card"><h4>❸ Viewpoint 2 反方论点</h4><p>同结构，注意逻辑对比。呈现反对方的顾虑与论据。</p></div>
+      <div class="col-card"><h4>❹ Personal Opinion 个人立场</h4><p>明确表态 + 总结理由。可以部分支持/反对，平衡观点更高分。</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">⚖️</span> Part 1 vs Part 2 · 关键对比</h3>
+    <table class="compare-table">
+      <tr><th></th><th>📊 Part 1 图表报告</th><th>📝 Part 2 议论文</th></tr>
+      <tr><td>词数</td><td>150-200 words</td><td>~250 words</td></tr>
+      <tr><td>时间</td><td>20 min</td><td>30 min</td></tr>
+      <tr><td>权重</td><td>40%</td><td>60%</td></tr>
+      <tr><td>文体</td><td>客观报告 · 描述性</td><td>议论 · 论证性</td></tr>
+      <tr><td>个人观点</td><td>🚫 不允许（仅预测段可评价）</td><td>✅ 必须有明确立场</td></tr>
+      <tr><td>关键能力</td><td>趋势识别 · 原因分析 · 批判思维</td><td>双边讨论 · 论证逻辑 · 立场表达</td></tr>
+      <tr><td>结构</td><td>Intro→Trend→Reason→Prediction</td><td>Intro→View1→View2→Opinion</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">✏️</span> Template Sentences by Section</h3>
+    <div class="template-block">
+      <div class="label">❶ Introduction</div>
+      <p>"<strong>There has been considerable debate</strong> over whether..." / "<strong>Some people argue that</strong>..., while others believe that..."</p>
+    </div>
+    <div class="template-block">
+      <div class="label">❷ Viewpoint 1 (Support)</div>
+      <p>"<strong>Supporters of this idea claim that</strong>... <strong>One key advantage is that</strong>... <strong>For example, studies have shown that</strong>..."</p>
+    </div>
+    <div class="template-block">
+      <div class="label">❸ Viewpoint 2 (Oppose)</div>
+      <p>"<strong>On the other hand, critics argue that</strong>... <strong>A major concern is that</strong>... <strong>They believe this might lead to</strong>..."</p>
+    </div>
+    <div class="template-block">
+      <div class="label">❹ Personal Opinion + Conclusion</div>
+      <p>"<strong>In my opinion, while both sides have valid points, I believe that</strong>... <strong>To conclude, a balanced approach may be the most effective.</strong>"</p>
+    </div>
+  </div>
+
+  <!-- Part 2 Task Prompts Gallery -->
+  <div class="card">
+    <h3><span class="icon">🖼️</span> Part 2 真题题库 · 四大主题</h3>
+    <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:1rem">以下均来自 PDF 官方真题 ---- 覆盖教育、科技、科学伦理、能源四大常考主题</p>
+
+    <div class="prompt-card">
+      <img src="/langcert/writing/essay_creative_skills.jpg?v=2" alt="Creative skills & leisure essay prompt" loading="lazy">
+      <div class="prompt-label">📝 Topic 1 · 教育与社会</div>
+    </div>
+    <div class="prompt-card">
+      <img src="/langcert/writing/essay_ai_education.jpg?v=2" alt="AI in education essay prompt" loading="lazy">
+      <div class="prompt-label">📝 Topic 2 · 科技与教育</div>
+    </div>
+    <div class="prompt-card">
+      <img src="/langcert/writing/essay_gm_crops.jpg?v=2" alt="GM crops essay prompt" loading="lazy">
+      <div class="prompt-label">📝 Topic 3 · 科学伦理</div>
+    </div>
+    <div class="prompt-card">
+      <img src="/langcert/writing/plastic_bags_chart.jpg?v=2" alt="Nuclear power essay prompt" loading="lazy">
+      <div class="prompt-label">📝 Topic 4 · 能源与环境</div>
+    </div>
+  </div>
+
+  <!-- AI in Education Model Answer -->
+  <div class="card">
+    <h3><span class="icon">⭐</span> 范文拆解 · AI 在教育中的使用</h3>
+    <button class="toggle-link" onclick="var el=document.getElementById('model2');el.classList.toggle('visible');this.textContent=el.classList.contains('visible')?'▲ Hide Model Answer':'▼ Show Model Answer 查看范文'">▼ Show Model Answer 查看范文</button>
+    <div class="model-answer" id="model2">
+      <h4>📝 Band 7+ Model Answer (from official PDF) ~250 words</h4>
+      <div class="annotated-paragraph">
+        <span class="tag">Introduction 引出话题</span><br>
+        Artificial intelligence (AI) in schools and higher education is being talked about a lot. Some people say it's good because it could help students find information for their studies more quickly. Others disagree, believing that it might make students lazy and stop them from thinking on their own.
+      </div>
+      <div class="annotated-paragraph">
+        <span class="tag">Viewpoint 1 支持方</span><br>
+        The people who like AI in education say it is like a clever helper. They think that, because it is a learning system, it will gradually adjust to the level of each user. It will learn to provide information in the best way to suit the learner.
+      </div>
+      <div class="annotated-paragraph">
+        <span class="tag">Viewpoint 2 反对方</span><br>
+        However, there are people who worry about using too much AI in education. They think if students always use AI, they might forget how to find information themselves and, perhaps even more importantly, how to come up their own ideas. They think AI could stop students from being creative.
+      </div>
+      <div class="annotated-paragraph">
+        <span class="tag">Personal Opinion 个人立场</span><br>
+        In my opinion, it's good to use AI in all levels of education, but not too overuse it. AI can help students learn and find things, but teachers need to teach students how to think and learn on their own in addition. It's important, therefore, to learn how to check if facts are right and whether it is the latest information about a topic.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SECTION 6 ====== -->
+<section id="s6">
+  <div class="section-flag">Section 6 · 15 min</div>
+  <h2>✅ 本课小结 + 诊断测验</h2>
+  <p class="section-sub">Quick Check -- test your understanding of Lesson 1</p>
+
+  <div class="card">
+    <h3><span class="icon">🧠</span> Quick Diagnostic · 3 Questions</h3>
+
+    <div class="quiz-question" id="q1">
+      <p class="sentence"><strong>Q1.</strong> LangCert Academic Writing Part 1 要求你写什么？</p>
+      <div class="quiz-options">
+        <div class="quiz-option" data-idx="0" data-correct="false">一封正式邮件</div>
+        <div class="quiz-option" data-idx="1" data-correct="true">一份基于图表的报告</div>
+        <div class="quiz-option" data-idx="2" data-correct="false">一篇个人故事</div>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-question" id="q2">
+      <p class="sentence"><strong>Q2.</strong> 以下哪个短语属于「趋势描述段」？</p>
+      <div class="quiz-options">
+        <div class="quiz-option" data-idx="0" data-correct="true">There was a noticeable increase in...</div>
+        <div class="quiz-option" data-idx="1" data-correct="false">Some people argue that...</div>
+        <div class="quiz-option" data-idx="2" data-correct="false">In my opinion...</div>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-question" id="q3">
+      <p class="sentence"><strong>Q3.</strong> Part 2 议论文必须包含什么？</p>
+      <div class="quiz-options">
+        <div class="quiz-option" data-idx="0" data-correct="false">图表数据引用</div>
+        <div class="quiz-option" data-idx="1" data-correct="false">纯客观描述</div>
+        <div class="quiz-option" data-idx="2" data-correct="true">明确个人立场 + 双边讨论</div>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">📊</span> Writing Confidence · 信心自评</h3>
+    <p style="margin-bottom:0.75rem">学完本课，你对 Academic Writing 的信心是？（1 = 没把握 → 5 = 很有信心）</p>
+    <div class="rating-row" id="confidence-rating">
+      <button class="rating-btn" data-rating="1">1</button>
+      <button class="rating-btn" data-rating="2">2</button>
+      <button class="rating-btn" data-rating="3">3</button>
+      <button class="rating-btn" data-rating="4">4</button>
+      <button class="rating-btn" data-rating="5">5</button>
+    </div>
+    <p id="rating-feedback" style="font-size:0.875rem;color:var(--accent);margin-top:0.75rem;display:none"></p>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">📋</span> Lesson 1 Checklist</h3>
+    <ul class="checklist">
+      <li onclick="this.classList.toggle('checked')"><span class="check">✓</span> 理解 Academic Writing 考试结构 & 四项评分标准</li>
+      <li onclick="this.classList.toggle('checked')"><span class="check">✓</span> 能说出 Part 1 四段式（Intro→Trend→Reason→Prediction）</li>
+      <li onclick="this.classList.toggle('checked')"><span class="check">✓</span> 能用至少 5 个趋势动词 + 3 个因果连接词</li>
+      <li onclick="this.classList.toggle('checked')"><span class="check">✓</span> 能说出 Part 2 四段式（Intro→View1→View2→Opinion）</li>
+      <li onclick="this.classList.toggle('checked')"><span class="check">✓</span> 理解 Part 1（客观报告）vs Part 2（议论文）关键差异</li>
+      <li onclick="this.classList.toggle('checked')"><span class="check">✓</span> 有信心用模板句完成 150 词图表报告</li>
+    </ul>
+  </div>
+
+  <div class="card next-card">
+    <h3><span class="icon">🔜</span> Next Class · 第3-4小时</h3>
+    <p style="margin-bottom:0.5rem"><strong>Part 2 议论文深化 + Part 1 限时训练：</strong></p>
+    <ul>
+      <li>Electric Cars · Plastic Bags · GM Crops · Nuclear Power 真题实战</li>
+      <li>范文逐句拆解 + 句型模仿</li>
+      <li>四维评分实战反馈（Task · Grammar · Vocab · Organization）</li>
+      <li>限时 20min Part 1 + 30min Part 2 模拟考</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<script>
+(function() {
+  const segments = document.querySelectorAll('.progress-segment');
+  const label = document.querySelector('.progress-label');
+  const sections = document.querySelectorAll('section');
+  function update() {
+    let activeIdx = -1;
+    const scrollY = window.scrollY + 80;
+    sections.forEach((s, i) => { if (s.offsetTop <= scrollY) activeIdx = i; });
+    segments.forEach((seg, i) => seg.classList.toggle('active', i <= activeIdx));
+    label.textContent = (activeIdx + 1) + '/' + segments.length;
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+document.querySelectorAll('.quiz-question').forEach(q => {
+  let answered = false;
+  const options = q.querySelectorAll('.quiz-option');
+  const feedback = q.querySelector('.quiz-feedback');
+  options.forEach(opt => {
+    opt.addEventListener('click', () => {
+      if (answered) return;
+      answered = true;
+      const isCorrect = opt.dataset.correct === 'true';
+      options.forEach(o => o.classList.add('disabled'));
+      if (isCorrect) {
+        opt.classList.add('selected-correct');
+        feedback.textContent = '✅ Correct! 正确！';
+        feedback.classList.add('visible', 'correct');
+      } else {
+        opt.classList.add('selected-wrong');
+        feedback.textContent = '❌ Not quite. 再看看～';
+        feedback.classList.add('visible', 'wrong');
+        options.forEach(o => { if (o.dataset.correct === 'true') o.classList.add('show-correct'); });
+      }
+    });
+  });
+});
+
+document.querySelectorAll('#confidence-rating .rating-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#confidence-rating .rating-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    const r = btn.dataset.rating;
+    const fb = document.getElementById('rating-feedback');
+    fb.style.display = 'block';
+    const msgs = { '1':'💪 没关系！刚开始，多练就好。', '2':'🌱 有方向了！跟着模板继续练。', '3':'👍 基础扎实！下节课实战。', '4':'🔥 很有信心！挑战限时写作。', '5':'🚀 准备起飞！下节课直接模拟考。' };
+    fb.textContent = msgs[r] || '';
+  });
+});
+
+console.log('LangCert Academic Writing · Lesson 1 ready ✓');
+</script>
+</body>
+</html>

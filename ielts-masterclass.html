@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS AI Masterclass — Technology & Social Interaction | rkrk.io</title>
+<style>
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --bg-primary: #0d0f13;
+    --bg-secondary: #141720;
+    --bg-card: #1a1d28;
+    --bg-card-hover: #1f2330;
+    --bg-input: #11131b;
+    --border: #252836;
+    --border-active: #4f5b7a;
+    --text-primary: #e8ebf2;
+    --text-secondary: #949ab5;
+    --text-tertiary: #6b7194;
+    --accent: #6c8aff;
+    --accent-soft: rgba(108, 138, 255, 0.12);
+    --accent-glow: rgba(108, 138, 255, 0.25);
+    --success: #4ade80;
+    --success-soft: rgba(74, 222, 128, 0.12);
+    --warning: #f59e0b;
+    --warning-soft: rgba(245, 158, 11, 0.12);
+    --error: #f87171;
+    --error-soft: rgba(248, 113, 113, 0.12);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    --transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,0.5);
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.65;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ─── NAVBAR ─────────────────────────── */
+  .navbar {
+    width: 100%;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-secondary);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .navbar-brand .logo {
+    width: 32px;
+    height: 32px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: #fff;
+    font-weight: 800;
+  }
+
+  .navbar-badge {
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ─── MAIN CONTAINER ─────────────────── */
+  .main-container {
+    width: 100%;
+    max-width: 820px;
+    padding: 32px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* ─── HERO ───────────────────────────── */
+  .hero {
+    text-align: center;
+    padding: 20px 0 8px;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .hero h1 .accent-word {
+    color: var(--accent);
+  }
+
+  .hero p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .band-pills {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .band-pill {
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .band-pill.from {
+    background: var(--warning-soft);
+    color: var(--warning);
+  }
+
+  .band-pill.arrow {
+    background: transparent;
+    color: var(--text-tertiary);
+    padding: 5px 4px;
+  }
+
+  .band-pill.to {
+    background: var(--success-soft);
+    color: var(--success);
+  }
+
+  /* ─── QUESTION CARD ──────────────────── */
+  .question-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 22px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .question-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .question-card .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .question-card .question-text {
+    font-size: 1.08rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+
+  /* ─── TAB BAR ────────────────────────── */
+  .tab-bar {
+    display: flex;
+    gap: 2px;
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 4px;
+    border: 1px solid var(--border);
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all var(--transition);
+    font-family: var(--font-sans);
+    letter-spacing: -0.01em;
+    position: relative;
+  }
+
+  .tab-btn:hover {
+    color: var(--text-primary);
+  }
+
+  .tab-btn.active {
+    color: var(--text-primary);
+    background: var(--bg-input);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .tab-btn .tab-icon {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 3px;
+  }
+
+  /* ─── TAB CONTENT ────────────────────── */
+  .tab-panel {
+    display: none;
+    animation: fadeSlideIn 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  @keyframes fadeSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ─── SECTION HEADERS ────────────────── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .section-header .stage-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .section-header.recon .stage-badge { background: var(--accent); }
+  .section-header.under .stage-badge { background: #a78bfa; }
+  .section-header.apply .stage-badge { background: var(--success); }
+
+  .section-header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .section-header .subtitle {
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+  }
+
+  /* ─── CARDS ──────────────────────────── */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+
+  .card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .card p, .card li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .card ul {
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .card ul li {
+    padding-left: 2px;
+  }
+
+  .card ul li::marker {
+    color: var(--accent);
+  }
+
+  /* ─── 5.5 ANSWER BLOCK ──────────────── */
+  .answer-block {
+    background: var(--bg-input);
+    border: 1px solid var(--warning);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+    margin: 14px 0;
+    position: relative;
+  }
+
+  .answer-block .band-tag {
+    position: absolute;
+    top: -10px;
+    right: 16px;
+    background: var(--warning);
+    color: #000;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+  }
+
+  .answer-block blockquote {
+    font-style: italic;
+    color: #d4c9a8;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin: 4px 0 0;
+    border: none;
+  }
+
+  /* ─── 8.0 TARGET BLOCK ──────────────── */
+  .target-block {
+    background: var(--success-soft);
+    border: 1px solid rgba(74, 222, 128, 0.25);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+    margin: 14px 0;
+    position: relative;
+  }
+
+  .target-block .band-tag {
+    position: absolute;
+    top: -10px;
+    right: 16px;
+    background: var(--success);
+    color: #000;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+  }
+
+  /* ─── COMPARISON TABLE ──────────────── */
+  .compare-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 6px;
+    margin: 12px 0;
+  }
+
+  .compare-table th {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-tertiary);
+    text-align: left;
+    padding: 8px 12px 4px;
+    font-weight: 700;
+  }
+
+  .compare-table td {
+    padding: 12px 14px;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    border-radius: var(--radius-sm);
+  }
+
+  .compare-table td:first-child {
+    font-weight: 600;
+    color: var(--text-primary);
+    width: 28%;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .compare-table .bad-col {
+    background: var(--error-soft);
+    color: var(--error);
+  }
+
+  .compare-table .good-col {
+    background: var(--success-soft);
+    color: var(--success);
+  }
+
+  /* ─── THINKING SCAFFOLD ─────────────── */
+  .scaffold {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+
+  .scaffold-step {
+    display: flex;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .scaffold-step:last-child {
+    border-bottom: none;
+  }
+
+  .scaffold-step .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.78rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .scaffold-step .step-content h4 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .scaffold-step .step-content p {
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ─── EXERCISE CARDS ────────────────── */
+  .exercise-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 22px 24px;
+    margin-bottom: 18px;
+  }
+
+  .exercise-card .ex-num {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .exercise-card .chinese-sentence {
+    background: var(--bg-input);
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: 12px 0;
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .exercise-card .instruction {
+    font-size: 0.82rem;
+    color: var(--text-tertiary);
+    margin-bottom: 10px;
+  }
+
+  .reveal-btn {
+    padding: 10px 20px;
+    border: 1px solid var(--border-active);
+    border-radius: var(--radius-sm);
+    background: var(--bg-input);
+    color: var(--text-secondary);
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: var(--font-sans);
+    margin-top: 8px;
+  }
+
+  .reveal-btn:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .model-answer {
+    display: none;
+    margin-top: 14px;
+    background: var(--success-soft);
+    border: 1px solid rgba(74, 222, 128, 0.25);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+  }
+
+  .model-answer.visible {
+    display: block;
+    animation: fadeSlideIn 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .model-answer .ma-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--success);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .model-answer .ma-text {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+
+  .model-answer .ma-notes {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+    padding-top: 8px;
+    border-top: 1px solid rgba(74, 222, 128, 0.15);
+  }
+
+  .model-answer .ma-notes strong {
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+
+  /* ─── FOOTER ─────────────────────────── */
+  .footer {
+    text-align: center;
+    padding: 24px 0 8px;
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid var(--border);
+    margin-top: 12px;
+  }
+
+  .footer a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* ─── RESPONSIVE ────────────────────── */
+  @media (max-width: 600px) {
+    .main-container {
+      padding: 20px 14px 40px;
+    }
+
+    .hero h1 {
+      font-size: 1.5rem;
+    }
+
+    .hero p {
+      font-size: 0.85rem;
+    }
+
+    .tab-btn {
+      font-size: 0.78rem;
+      padding: 10px 8px;
+    }
+
+    .tab-btn .tab-icon {
+      font-size: 0.9rem;
+    }
+
+    .card, .exercise-card, .scaffold {
+      padding: 16px;
+    }
+
+    .compare-table td {
+      font-size: 0.76rem;
+      padding: 10px;
+    }
+
+    .answer-block blockquote {
+      font-size: 0.84rem;
+    }
+
+    .question-card .question-text {
+      font-size: 0.95rem;
+    }
+
+    .navbar {
+      padding: 12px 14px;
+    }
+
+    .navbar-brand {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .tab-bar {
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .compare-table {
+      display: block;
+      overflow-x: auto;
+    }
+
+    .band-pills {
+      flex-wrap: wrap;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─────── NAVBAR ─────── -->
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="logo">R</div>
+    rkrk.io
+  </div>
+  <div class="navbar-badge">IELTS AI Masterclass</div>
+</nav>
+
+<!-- ─────── MAIN ─────── -->
+<main class="main-container">
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>IELTS Speaking <span class="accent-word">Part 3</span> Masterclass</h1>
+    <p>Technology's impact on social interaction — a step-by-step pipeline from Band 5.5 to Band 8.0 using the RUA pedagogical framework</p>
+    <div class="band-pills">
+      <span class="band-pill from">Band 5.5</span>
+      <span class="band-pill arrow">→</span>
+      <span class="band-pill to">Band 8.0</span>
+    </div>
+  </section>
+
+  <!-- Question Card -->
+  <div class="question-card">
+    <div class="label">Examiner Question</div>
+    <div class="question-text">"Some people believe that technology has reduced the quality of face-to-face communication. To what extent do you agree?"</div>
+  </div>
+
+  <!-- Tab Bar -->
+  <div class="tab-bar" role="tablist">
+    <button class="tab-btn active" data-tab="recognise" role="tab" aria-selected="true">
+      <span class="tab-icon">🔍</span> Recognise
+    </button>
+    <button class="tab-btn" data-tab="understand" role="tab" aria-selected="false">
+      <span class="tab-icon">🧠</span> Understand
+    </button>
+    <button class="tab-btn" data-tab="apply" role="tab" aria-selected="false">
+      <span class="tab-icon">✏️</span> Apply
+    </button>
+  </div>
+
+  <!-- ─────────── TAB: RECOGNISE ─────────── -->
+  <div class="tab-panel active" id="panel-recognise" role="tabpanel">
+
+    <div class="section-header recon" style="margin-top: 8px;">
+      <div class="stage-badge">R</div>
+      <div>
+        <h2>Recognise the Gap</h2>
+        <div class="subtitle">Identify specific flaws in the Band 5.5 answer</div>
+      </div>
+    </div>
+
+    <!-- Band 5.5 Answer -->
+    <div class="answer-block">
+      <span class="band-tag">BAND 5.5</span>
+      <blockquote>
+        "I think technology is not good for communication. Before, people talk more face to face. Now we just use phone and WeChat. My friends and me, we don't talk much now. We just send message. It's convenient but not so deep. People feel lonely more. I think it's a problem."
+      </blockquote>
+    </div>
+
+    <!-- Flaw Cards -->
+    <div class="card">
+      <h3>Flaw 1 — No Idea Extension</h3>
+      <p>Every sentence is an unsupported claim. "I think technology is not good" — and then it stops. There is no reason, no example, no consequence, no contrast. A Band 8 answer would follow every opinion with at least one of: a reason, a real-world example, a contrast, or a projected outcome. This answer gives the examiner nothing to reward beyond the initial assertion.</p>
+    </div>
+
+    <div class="card">
+      <h3>Flaw 2 — Weak Lexical Resource</h3>
+      <p>Vocabulary is drawn entirely from the 2,000 most common English words. The most specific terms used are "convenient" and "deep." The candidate entirely misses opportunities to use topic-specific language: mediated communication, social presence, non-verbal cues, digital literacy, interpersonal disconnect, asynchronous interaction. In IELTS terms, there is zero evidence of "less common lexical items" — a Band 8 requirement.</p>
+    </div>
+
+    <div class="card">
+      <h3>Flaw 3 — Narrow Personal Frame</h3>
+      <p>The entire answer is anchored in "my friends and me" and "I think." There is zero evidence the candidate can discuss the issue at a societal level. A Part 3 question explicitly requires moving beyond personal experience into abstract, analytical discussion. The candidate never zooms out to trends, demographics, cultural shifts, or generational differences.</p>
+    </div>
+
+    <!-- Descriptor Breakdown -->
+    <div class="card">
+      <h3>Why This Scores Band 5.5 — IELTS Speaking Descriptors</h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Criterion</th>
+            <th>Band 5.5 Evidence</th>
+            <th>Band 8.0 Requirement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>FC</td>
+            <td class="bad-col">Short, disconnected utterances. No discourse markers. No logical progression beyond sentence level.</td>
+            <td class="good-col">Speaks at length with minimal effort. Uses a range of cohesive devices naturally.</td>
+          </tr>
+          <tr>
+            <td>LR</td>
+            <td class="bad-col">Limited to simple vocabulary. Meaning conveyed but without precision. No less common items.</td>
+            <td class="good-col">Uses a wide vocabulary resource readily and flexibly. Skillful use of less common and idiomatic items.</td>
+          </tr>
+          <tr>
+            <td>GRA</td>
+            <td class="bad-col">Basic structures only. Errors present: tense inconsistency, pronoun errors, L1 transfer.</td>
+            <td class="good-col">Wide range of structures. Majority of sentences error-free. Flexible use of complex structures.</td>
+          </tr>
+          <tr>
+            <td>P</td>
+            <td class="bad-col">Assumed adequate for basic communication (not assessed in written mock).</td>
+            <td class="good-col">Uses a full range of pronunciation features with precision. Sustained flexible use.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ─────────── TAB: UNDERSTAND ─────────── -->
+  <div class="tab-panel" id="panel-understand" role="tabpanel">
+
+    <div class="section-header under" style="margin-top: 8px;">
+      <div class="stage-badge">U</div>
+      <div>
+        <h2>Understand the 8.0 Architecture</h2>
+        <div class="subtitle">The thinking scaffold that transforms a 5.5 answer into an 8.0 answer</div>
+      </div>
+    </div>
+
+    <!-- Thinking Scaffold -->
+    <div class="scaffold">
+      <h3 style="margin-bottom: 16px; font-size: 0.95rem; font-weight: 700;">The Band 8.0 Thinking Pattern</h3>
+
+      <div class="scaffold-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Direct Answer with Nuance</h4>
+          <p>Instead of "technology is not good," the 8.0 candidate says: <em>"I partly agree with that proposition, though I think the reality is more nuanced. Technology has undoubtedly altered how we interact, but whether that represents a decline in quality depends on which dimension of communication we examine."</em></p>
+        </div>
+      </div>
+
+      <div class="scaffold-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Claim → Reason → Example → Link Back</h4>
+          <p>Every point follows this chain. For example: <strong>CLAIM</strong> — "Instant messaging has reduced the depth of spontaneous conversation." <strong>REASON</strong> — "Because text-based exchanges lack non-verbal cues that carry so much meaning." <strong>EXAMPLE</strong> — "A friend might type 'I'm fine' when distressed, but without hearing their voice, the subtle tremor that would betray their real emotional state is absent." <strong>LINK BACK</strong> — "So while we communicate more frequently, the quality of each exchange may have diminished."</p>
+        </div>
+      </div>
+
+      <div class="scaffold-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Abstract Generalisation</h4>
+          <p>After making personal observations, zoom out to societal trends: <em>"There is a broader societal trend toward what sociologists call 'ambient awareness' — where continuous, low-effort digital contact replaces deeper, episodic face-to-face engagement."</em> Use impersonal structures: "it could be argued that," "there is a tendency for," "research suggests that."</p>
+        </div>
+      </div>
+
+      <div class="scaffold-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Balanced Conclusion with Forward-Looking Perspective</h4>
+          <p>End with synthesis, not repetition: <em>"Ultimately, I would argue the question is not whether technology has reduced communication quality — it has transformed it. The responsibility lies with individuals and institutions to cultivate digital habits that preserve meaningful human connection."</em></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lexical Upgrade Table -->
+    <div class="card">
+      <h3>Lexical Upgrade — 5.5 Words vs. 8.0 Words</h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Band 5.5</th>
+            <th>Band 8.0</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="bad-col">good / not good</td>
+            <td class="good-col">beneficial / detrimental / inherently neutral</td>
+          </tr>
+          <tr>
+            <td class="bad-col">use phone</td>
+            <td class="good-col">rely on digital platforms / engage through mediated channels</td>
+          </tr>
+          <tr>
+            <td class="bad-col">not so deep</td>
+            <td class="good-col">superficial / lacking genuine intimacy / devoid of nuance</td>
+          </tr>
+          <tr>
+            <td class="bad-col">people feel lonely</td>
+            <td class="good-col">a measurable rise in social isolation / documented erosion of community bonds</td>
+          </tr>
+          <tr>
+            <td class="bad-col">I think it's a problem</td>
+            <td class="good-col">I would contend this represents a significant societal challenge requiring intentional intervention</td>
+          </tr>
+          <tr>
+            <td class="bad-col">convenient</td>
+            <td class="good-col">offers unparalleled accessibility / streamlines communication across geographic barriers</td>
+          </tr>
+          <tr>
+            <td class="bad-col">send message</td>
+            <td class="good-col">engage in asynchronous text-based exchanges</td>
+          </tr>
+          <tr>
+            <td class="bad-col">talk face to face</td>
+            <td class="good-col">participate in spontaneous, unmediated interpersonal dialogue</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Side-by-Side -->
+    <div class="card">
+      <h3>Same Question — Two Versions</h3>
+
+      <div class="answer-block">
+        <span class="band-tag">BAND 5.5</span>
+        <blockquote>
+          "I think technology is not good for communication. Before, people talk more face to face. Now we just use phone and WeChat. My friends and me, we don't talk much now. We just send message. It's convenient but not so deep. People feel lonely more. I think it's a problem."
+        </blockquote>
+      </div>
+
+      <div class="target-block">
+        <span class="band-tag">BAND 8.0</span>
+        <blockquote style="color: #b7dfc5; font-style: normal;">
+          "I partly agree with that proposition, though I believe the reality is considerably more nuanced. Digital communication has undeniably transformed how we interact, but whether this amounts to a decline in quality depends on which dimension of communication we choose to examine. On one hand, text-based messaging has reduced the depth of many exchanges — lacking the non-verbal cues, tonal inflections, and spontaneous energy that face-to-face dialogue provides. On the other hand, for geographically dispersed families or professionals collaborating across time zones, technology has enabled a level of sustained connection that previous generations could not have imagined. I would argue that the issue is not whether technology has diminished communication — it has transformed it. The critical variable is the intentionality with which we deploy these tools."
+        </blockquote>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────── TAB: APPLY ─────────── -->
+  <div class="tab-panel" id="panel-apply" role="tabpanel">
+
+    <div class="section-header apply" style="margin-top: 8px;">
+      <div class="stage-badge">A</div>
+      <div>
+        <h2>Apply the 8.0 Thinking Pattern</h2>
+        <div class="subtitle">Translate Chinese sentences using the 8.0 scaffold. Toggle to reveal model answers.</div>
+      </div>
+    </div>
+
+    <!-- Exercise 1 -->
+    <div class="exercise-card">
+      <div class="ex-num">Exercise 1</div>
+      <h3>Surface-Level Connection vs. Genuine Depth</h3>
+      <div class="chinese-sentence">
+        虽然社交媒体让我们能跟更多人保持联系，但这种联系往往是表面化的，缺少真正的深度。
+      </div>
+      <p class="instruction">Translate into English. Apply the Claim → Reason → Example pattern. Use topic-specific vocabulary. Avoid "good," "bad," "more people," and "talk."</p>
+      <button class="reveal-btn" onclick="toggleAnswer('answer1')">Reveal Model Answer</button>
+      <div class="model-answer" id="answer1">
+        <div class="ma-label">Band 8.0 Model Answer</div>
+        <div class="ma-text">
+          While social media platforms enable us to maintain contact with a far wider network of acquaintances than would otherwise be possible, the connections they foster tend to be superficial — consisting largely of curated highlights and brief reactions rather than the sustained, vulnerable dialogue that builds genuine intimacy.
+        </div>
+        <div class="ma-notes">
+          <strong>Key upgrades:</strong> "enable us to maintain contact" (not "help us talk"), "far wider network" (not "more people"), "curated highlights" (specific term), "sustained, vulnerable dialogue" (precise collocation), "builds genuine intimacy" (not "makes us closer").<br>
+          <strong>Structure:</strong> CLAIM (social media enables broad contact) → QUALIFICATION (but it's superficial) → REASON (curated highlights vs. vulnerable dialogue) → CONSEQUENCE (no genuine intimacy).
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercise 2 -->
+    <div class="exercise-card">
+      <div class="ex-num">Exercise 2</div>
+      <h3>Spontaneous vs. Scheduled Interaction</h3>
+      <div class="chinese-sentence">
+        过去人们见面聊天的时机会自然产生，现在一切都得刻意安排，这让社交变得更有压力。
+      </div>
+      <p class="instruction">Translate into English. Use abstract nouns, a discourse marker ("paradoxically"), and end with a forward-looking consequence.</p>
+      <button class="reveal-btn" onclick="toggleAnswer('answer2')">Reveal Model Answer</button>
+      <div class="model-answer" id="answer2">
+        <div class="ma-label">Band 8.0 Model Answer</div>
+        <div class="ma-text">
+          In previous generations, spontaneous social encounters arose organically from the rhythm of daily life — neighbours crossing paths, colleagues sharing lunch, extended families living in proximity. Today, nearly every interaction requires deliberate scheduling, which paradoxically makes socialising feel like an obligation rather than a source of rejuvenation, and may contribute to the rising prevalence of social fatigue that researchers have documented in digitally saturated populations.
+        </div>
+        <div class="ma-notes">
+          <strong>Key upgrades:</strong> "spontaneous social encounters arose organically" (not "people met naturally"), "the rhythm of daily life" (natural collocation), "paradoxically" (sophisticated discourse marker), "obligation rather than a source of rejuvenation" (contrast pair), "rising prevalence of social fatigue" (topic-specific term), "digitally saturated populations" (not "people who use phones a lot").<br>
+          <strong>Structure:</strong> PAST CONTEXT (organic encounters) → PRESENT SHIFT (deliberate scheduling) → PARADOX (obligation, not rejuvenation) → FORWARD-LOOKING (social fatigue trend).
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercise 3 -->
+    <div class="exercise-card">
+      <div class="ex-num">Exercise 3</div>
+      <h3>Neutral Technology + Intentional Use</h3>
+      <div class="chinese-sentence">
+        我觉得技术本身没有好坏，关键在于我们如何使用它。如果我们有意识地用它来补充而非替代面对面交流，它反而能增强人际关系。
+      </div>
+      <p class="instruction">Translate into English. Use impersonal structures ("I would contend that"), a conditional clause, and a concrete example to support the argument.</p>
+      <button class="reveal-btn" onclick="toggleAnswer('answer3')">Reveal Model Answer</button>
+      <div class="model-answer" id="answer3">
+        <div class="ma-label">Band 8.0 Model Answer</div>
+        <div class="ma-text">
+          I would contend that technology is inherently neutral — it is neither beneficial nor detrimental in isolation — and that the critical variable is the intentionality with which we deploy it. When used deliberately as a supplement to, rather than a substitute for, face-to-face interaction, digital tools can actually strengthen interpersonal bonds. For instance, families separated by international borders can now share daily moments through video calls in ways that were simply unavailable to previous generations, maintaining a sense of shared presence that geography would otherwise erode.
+        </div>
+        <div class="ma-notes">
+          <strong>Key upgrades:</strong> "inherently neutral" (not "not good or bad"), "critical variable" (abstract noun), "intentionality with which we deploy it" (not "how we use it"), "supplement to, rather than a substitute for" (precise contrast), "strengthen interpersonal bonds" (not "help relationships"), "shared presence that geography would otherwise erode" (sophisticated consequence framing).<br>
+          <strong>Structure:</strong> THESIS (technology is neutral) → NUANCE (depends on intentionality) → CONDITIONAL (when used as supplement) → EXAMPLE (separated families, video calls) → LINK BACK (preserving presence).
+        </div>
+      </div>
+    </div>
+
+    <!-- Practice Tips -->
+    <div class="card" style="margin-top: 20px;">
+      <h3>Self-Assessment Checklist</h3>
+      <ul>
+        <li>Did I follow every claim with a reason, example, or consequence?</li>
+        <li>Did I replace basic vocabulary (good, bad, more, talk) with topic-specific terms?</li>
+        <li>Did I use at least one impersonal structure ("it could be argued," "there is a tendency")?</li>
+        <li>Did I zoom out from personal experience to a broader societal perspective?</li>
+        <li>Did I include a discourse marker to show logical flow (however, paradoxically, ultimately)?</li>
+        <li>Did I end with a forward-looking conclusion, not just a restatement?</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Generated by <a href="https://rkrk.io" target="_blank" rel="noopener">rkrk.io</a> IELTS AI Masterclass Engine — Agent Pipeline A→B→C→D</p>
+    <p style="margin-top: 4px;">Topic: Technology's Impact on Social Interaction &nbsp;|&nbsp; Band 5.5 → 8.0 &nbsp;|&nbsp; RUA Pedagogy Framework</p>
+  </div>
+
+</main>
+
+<script>
+(function() {
+  'use strict';
+
+  // ─── TAB SWITCHING ──────────────────
+  var tabButtons = document.querySelectorAll('.tab-btn');
+  var tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabButtons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var targetId = this.getAttribute('data-tab');
+      var targetPanel = document.getElementById('panel-' + targetId);
+
+      // Deactivate all
+      tabButtons.forEach(function(b) {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      tabPanels.forEach(function(p) {
+        p.classList.remove('active');
+      });
+
+      // Activate target
+      this.classList.add('active');
+      this.setAttribute('aria-selected', 'true');
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
+    });
+  });
+
+  // ─── TOGGLE MODEL ANSWERS ───────────
+  window.toggleAnswer = function(answerId) {
+    var el = document.getElementById(answerId);
+    if (!el) return;
+
+    var isVisible = el.classList.contains('visible');
+    var btn = el.previousElementSibling;
+
+    if (isVisible) {
+      el.classList.remove('visible');
+      if (btn && btn.classList.contains('reveal-btn')) {
+        btn.textContent = 'Reveal Model Answer';
+      }
+    } else {
+      el.classList.add('visible');
+      if (btn && btn.classList.contains('reveal-btn')) {
+        btn.textContent = 'Hide Model Answer';
+      }
+      // Smooth scroll to the revealed answer
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  };
+
+  // ─── KEYBOARD NAVIGATION ────────────
+  document.addEventListener('keydown', function(e) {
+    // Only handle when focus is on a tab button
+    var activeTab = document.activeElement;
+    if (!activeTab || !activeTab.classList.contains('tab-btn')) return;
+
+    var tabs = Array.from(tabButtons);
+    var idx = tabs.indexOf(activeTab);
+
+    if (e.key === 'ArrowRight' && idx < tabs.length - 1) {
+      e.preventDefault();
+      tabs[idx + 1].focus();
+      tabs[idx + 1].click();
+    } else if (e.key === 'ArrowLeft' && idx > 0) {
+      e.preventDefault();
+      tabs[idx - 1].focus();
+      tabs[idx - 1].click();
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>

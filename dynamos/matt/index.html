@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matt Thursfield — Educator · Scientist · Entrepreneur</title>
+<meta name="description" content="Matt Thursfield: PhD Aquatic Ecology, published author, 20-year hospitality entrepreneur, educator at Chengdu University of Technology.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0c14;
+  --surface: #161625;
+  --surface2: #1e1e32;
+  --text: #e8e8f0;
+  --text2: #8888a4;
+  --gold: #d4a853;
+  --gold-dim: rgba(212,168,83,0.12);
+  --border: #2a2a3e;
+  --radius: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 15px; line-height: 1.65;
+  background: var(--bg); color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, .serif { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; }
+h1 { font-size: clamp(44px, 6vw, 68px); line-height: 1.06; }
+h2 { font-size: clamp(26px, 3vw, 36px); margin-bottom: 32px; }
+h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+.container { max-width: 880px; margin: 0 auto; padding: 0 28px; }
+.gold { color: var(--gold); }
+.divider { width: 40px; height: 2px; background: var(--gold); margin: 8px 0 24px; }
+
+/* ─── HERO ─── */
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 80px 0; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: linear-gradient(135deg, rgba(212,168,83,0.06), transparent 60%); }
+.hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 380px; gap: 56px; align-items: center; }
+.hero-img { position: relative; }
+.hero-img::after { content: ''; position: absolute; inset: -6px; border: 2px solid var(--gold); border-radius: 50%; opacity: 0.4; }
+.hero-img img { width: 100%; max-width: 380px; height: 380px; object-fit: cover; border-radius: 50%; display: block; position: relative; z-index: 1; border: 3px solid var(--surface2); }
+.hero-copy .pretitle { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); font-weight: 600; margin-bottom: 12px; }
+.hero-copy h1 { margin-bottom: 16px; }
+.hero-copy .tagline { font-size: 18px; color: var(--text2); line-height: 1.6; }
+@media (max-width: 750px) { .hero-inner { grid-template-columns: 1fr; text-align: center; } .hero-img { max-width: 240px; margin: 0 auto; } .divider { margin: 8px auto 24px; } }
+
+/* ─── STAT STRIP ─── */
+.strip { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.strip-inner { display: flex; justify-content: center; gap: 64px; padding: 36px 0; flex-wrap: wrap; max-width: 880px; margin: 0 auto; }
+.strip-val { font-family: 'DM Serif Display', serif; font-size: 42px; color: var(--gold); line-height: 1; }
+.strip-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text2); margin-top: 6px; }
+
+/* ─── SECTIONS ─── */
+section { padding: 80px 0; }
+section + section { border-top: 1px solid var(--border); }
+section p { color: var(--text2); font-size: 15px; line-height: 1.8; margin-bottom: 14px; }
+section p strong { color: var(--text); }
+
+/* ─── CARD GRID ─── */
+.card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; transition: border-color 0.2s; }
+.card:hover { border-color: var(--gold-dim); }
+.card .icon { font-size: 32px; margin-bottom: 16px; }
+.card h3 { margin-bottom: 8px; }
+.card p { font-size: 13px; }
+@media (max-width: 700px) { .card-grid { grid-template-columns: 1fr; } }
+
+/* ─── IMAGE STRIP ─── */
+.img-strip { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; margin-top: 28px; }
+.img-strip img { width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius); }
+@media (max-width: 600px) { .img-strip { grid-template-columns: 1fr; } }
+
+/* ─── TIMELINE ─── */
+.tl { display: flex; flex-direction: column; gap: 0; }
+.tl-item { display: grid; grid-template-columns: 120px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+.tl-item:last-child { border: none; }
+.tl-year { font-size: 12px; font-weight: 600; color: var(--gold); text-align: right; font-family: 'DM Sans', sans-serif; }
+.tl-body h4 { font-size: 15px; margin-bottom: 2px; }
+.tl-body .sub { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
+.tl-body p { font-size: 13px; margin-bottom: 0; }
+@media (max-width: 600px) { .tl-item { grid-template-columns: 1fr; gap: 4px; } .tl-year { text-align: left; } }
+
+/* ─── QUOTE ─── */
+.quote { font-family: 'DM Serif Display', serif; font-size: 28px; font-style: italic; color: var(--gold); line-height: 1.4; padding: 32px; background: var(--surface); border-left: 3px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0; margin: 32px 0; }
+
+/* ─── BOOKS ─── */
+.book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.book { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
+.book .year { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); font-weight: 600; margin-bottom: 6px; }
+.book .title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.book .pub { font-size: 12px; color: var(--text2); }
+
+/* ─── QUAL GRID ─── */
+.quals { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+.qual { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
+.qual .org { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
+.qual .name { font-size: 14px; font-weight: 600; }
+
+/* ─── CONTACT ─── */
+.contact { display: flex; gap: 48px; flex-wrap: wrap; }
+.contact-item .lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text2); margin-bottom: 2px; }
+.contact-item .val { font-size: 17px; font-weight: 500; }
+
+/* ─── FOOTER ─── */
+footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; font-size: 13px; color: var(--text2); }
+footer a { color: var(--gold); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <div class="pretitle">Educator · Scientist · Entrepreneur</div>
+      <h1>Matt<br><span class="gold">Thursfield</span></h1>
+      <div class="divider"></div>
+      <p class="tagline">PhD scientist. 20-year entrepreneur. Published author. Shaping the next generation of educators at Chengdu University of Technology.</p>
+    </div>
+    <div class="hero-img"><img src="img/photo2.jpg" alt="Matt Thursfield" id="heroPic"></div>
+  </div>
+</div>
+
+<!-- ═══ STAT STRIP ═══ -->
+<div class="strip">
+  <div class="container strip-inner">
+    <div><div class="strip-val">9+</div><div class="strip-lbl">Years in China</div></div>
+    <div><div class="strip-val">35+</div><div class="strip-lbl">Businesses Managed</div></div>
+    <div><div class="strip-val">3</div><div class="strip-lbl">EF Centres Opened</div></div>
+    <div><div class="strip-val">4</div><div class="strip-lbl">Published Papers</div></div>
+    <div><div class="strip-val">3×</div><div class="strip-lbl">Star Awards</div></div>
+  </div>
+</div>
+
+<!-- ═══ THREE PILLARS ═══ -->
+<section>
+  <div class="container">
+    <h2>Three Careers,<br><span class="gold">One Educator</span></h2>
+    <div class="card-grid">
+      <div class="card">
+        <div class="icon">🔬</div>
+        <h3>The Scientist</h3>
+        <p>Only person worldwide to graduate with a BSc in Marine Botany in 1986. PhD in Aquatic Ecology. Published 4 papers on lake acidification. Built cross-institutional research network across Britain.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🍺</div>
+        <h3>The Entrepreneur</h3>
+        <p>20 years. 35+ bars, restaurants, hotels. Turned around failing businesses. Led delegation to European Parliament in 1999. Chaired two business associations.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📚</div>
+        <h3>The Educator</h3>
+        <p>From Beijing kindergarten to Senior DoS at EF. Opened 3 centres. Now at Chengdu University of Technology, training the next generation of English teachers. Published author.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ROOTS ═══ -->
+<section>
+  <div class="container">
+    <h2>Birmingham <span class="gold">Roots</span></h2>
+    <p>Born 1965 in Birmingham, UK — a city at the heart of a musical revolution. Educated at <strong>Bishop Vesey's Grammar School</strong>, founded 1523 — one of the oldest and most distinguished schools in Britain. A witness to rock history: from Robert Plant and Bev Bevan to UB40 and The Specials.</p>
+    <div class="quote">"Trouble-shooter. Turnaround specialist. From failing pub to five-figure profit in two years."</div>
+  </div>
+</section>
+
+<!-- ═══ STORY ═══ -->
+<section>
+  <div class="container">
+    <h2>The <span class="gold">Journey</span></h2>
+    <p>At Bangor University, Matt became <strong>the only person in the world</strong> to graduate in Marine Botany in 1986. A PhD followed — but when his supervisor fell ill, he built his own destiny, collaborating across Britain's top institutions on the landmark Lynne Brianne Project.</p>
+    <p>When research funding dried up, he pivoted hard. 1987: a failing hospitality unit → five-figure profit in two years. 1991: first bar. <strong>Twenty years. Thirty-five venues.</strong> At Whitbread (Costa Coffee), his team opened a venue that repaid its investment in <strong>six months</strong> — beating the Dubai flagship.</p>
+    <p>In 2010, he started again. Teaching qualification earned during lunch breaks. Beijing kindergarten. Chongqing primary school. EF in 2012. <strong>Teacher → Senior DoS</strong>. Three centres opened. National initiatives including World University Games volunteer training and the Rural English Teacher Training Program. Star Teacher twice, Star Manager once.</p>
+    <p>Today, Matt teaches at <strong>Chengdu University of Technology (CDUT)</strong>, where he trains future English educators and continues to publish.</p>
+    <div class="img-strip">
+      <img src="img/photo3.jpg" alt="Cityscape">
+      <img src="img/photo4.jpg" alt="Golden Temple">
+      <img src="img/photo2.jpg" alt="Matt">
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BOOKS ═══ -->
+<section>
+  <div class="container">
+    <h2>Published <span class="gold">Books</span></h2>
+    <div class="book-grid">
+      <div class="book"><div class="year">Published Author</div><div class="title">English Language Teaching in China</div><div class="pub">Co-author · Practical guide for EFL educators</div></div>
+      <div class="book"><div class="year">Published Author</div><div class="title">Classroom Management for New Teachers</div><div class="pub">Training resource for early-career educators</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TIMELINE ═══ -->
+<section>
+  <div class="container">
+    <h2>Career <span class="gold">Timeline</span></h2>
+    <div class="tl">
+      <div class="tl-item"><div class="tl-year">1983–1986</div><div class="tl-body"><h4>BSc Marine Botany</h4><div class="sub">Bangor University, North Wales</div><p>Only person worldwide to graduate in this subject in 1986.</p></div></div>
+      <div class="tl-item"><div class="tl-year">1986–1994</div><div class="tl-body"><h4>PhD Aquatic Ecology</h4><div class="sub">Bangor University</div><p>4 publications. Cross-institutional research. Lynne Brianne Project.</p></div></div>
+      <div class="tl-item"><div class="tl-year">1991–2010</div><div class="tl-body"><h4>Hospitality Entrepreneur</h4><div class="sub">35+ venues, UK</div><p>European Parliament delegation, 1999. TV & radio debates. Chairman, 2 associations.</p></div></div>
+      <div class="tl-item"><div class="tl-year">2008–2010</div><div class="tl-body"><h4>Catering Manager & Chef</h4><div class="sub">Whitbread / Costa Coffee</div><p>New venue: investment repaid in 6 months — beat Dubai flagship.</p></div></div>
+      <div class="tl-item"><div class="tl-year">2010</div><div class="tl-body"><h4>Career Reinvention</h4><div class="sub">Teaching qualification → Beijing</div><p>Qualified during lunch breaks. Internship at Beijing kindergarten.</p></div></div>
+      <div class="tl-item"><div class="tl-year">2013–2024</div><div class="tl-body"><h4>Senior Director of Studies</h4><div class="sub">EF Education First, Chengdu</div><p>3 centres. National initiatives. WUG + Rural Teacher Program. Star ×3.</p></div></div>
+      <div class="tl-item"><div class="tl-year">2024–Present</div><div class="tl-body"><h4>Faculty Member</h4><div class="sub">Chengdu University of Technology (CDUT)</div><p>Training future English educators. Published author.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ QUALIFICATIONS ═══ -->
+<section>
+  <div class="container">
+    <h2><span class="gold">Qualifications</span></h2>
+    <div class="quals">
+      <div class="qual"><div class="org">Trinity College London</div><div class="name">CertTESOL</div></div>
+      <div class="qual"><div class="org">Cambridge University</div><div class="name">TKT</div></div>
+      <div class="qual"><div class="org">English UK</div><div class="name">DELTM · Diploma in Language Teaching Management</div></div>
+      <div class="qual"><div class="org">EF Education First</div><div class="name">Management · Training · Motivation</div></div>
+      <div class="qual"><div class="org">Bangor University</div><div class="name">PhD Aquatic Ecology</div></div>
+      <div class="qual"><div class="org">Bangor University</div><div class="name">BSc (Hons) 2:1 Marine Botany</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section>
+  <div class="container">
+    <h2><span class="gold">Contact</span></h2>
+    <div class="contact">
+      <div class="contact-item"><div class="lbl">Phone / WeChat</div><div class="val">131 9855 6716</div></div>
+      <div class="contact-item"><div class="lbl">Email</div><div class="val">Matthew.Thursfield@ef.com</div></div>
+      <div class="contact-item"><div class="lbl">Location</div><div class="val">Chengdu, China 🇨🇳</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>Matt Thursfield · PhD · CertTESOL · DELTM · CDUT Faculty · Published Author</p>
+    <p style="margin-top:8px;">Hosted on <a href="https://rkrk.io">rkrk.io</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

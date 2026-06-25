@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>朗思学术阅读 · 第1课 · 词汇基础：同义词替换</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafbfc;
+  --text: #1a1a1a;
+  --text-secondary: #6b7280;
+  --accent: #1a2a6c;
+  --accent-light: #e8ecf4;
+  --border: #e5e7eb;
+  --correct-bg: #f0fdf4;
+  --correct-border: #86efac;
+  --correct-text: #166534;
+  --wrong-bg: #fef2f2;
+  --wrong-border: #fca5a5;
+  --wrong-text: #991b1b;
+  --font-heading: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', 'PingFang SC', 'PingFang HK', system-ui, -apple-system, sans-serif;
+  --radius: 8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.7;
+  padding-bottom: 6rem;
+}
+
+/* ── Progress Bar ── */
+.progress-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 251, 252, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.progress-bar .segments {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.progress-segment {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  transition: background 0.3s ease;
+}
+.progress-segment.active { background: var(--accent); }
+.progress-label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  min-width: 52px;
+  text-align: right;
+}
+
+/* ── Container ── */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Header ── */
+.header {
+  padding: 3rem 0 2rem;
+  text-align: center;
+}
+.header .eyebrow {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+.header h1 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+.header .subtitle {
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+.header .meta {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+.header .meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+/* ── Sections ── */
+section {
+  margin-bottom: 3.5rem;
+  scroll-margin-top: 60px;
+}
+.section-flag {
+  font-family: var(--font-heading);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+section h2 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.375rem;
+}
+section .section-sub {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+/* ── Cards ── */
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.card p, .card li {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+/* ── Exam breakdown ── */
+.breakdown {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 1rem;
+}
+.breakdown-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+.breakdown-item .part {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+.breakdown-item .desc {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+/* ── Step cards ── */
+.step-number {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.375rem;
+}
+
+/* ── Quiz question ── */
+.quiz-question {
+  margin-bottom: 1.5rem;
+}
+.quiz-question .sentence {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+}
+.quiz-question .sentence b {
+  color: var(--accent);
+  font-weight: 600;
+}
+.quiz-options {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.quiz-option {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  padding: 8px 18px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+.quiz-option:hover { border-color: var(--accent); background: var(--accent-light); }
+.quiz-option.selected-correct {
+  border-color: var(--correct-border);
+  background: var(--correct-bg);
+  color: var(--correct-text);
+  cursor: default;
+}
+.quiz-option.selected-wrong {
+  border-color: var(--wrong-border);
+  background: var(--wrong-bg);
+  color: var(--wrong-text);
+  cursor: default;
+}
+.quiz-option.disabled { pointer-events: none; opacity: 0.6; }
+.quiz-option.show-correct {
+  border-color: var(--correct-border);
+  background: var(--correct-bg);
+}
+.quiz-feedback {
+  font-size: 0.8125rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0;
+  color: var(--text-secondary);
+  display: none;
+}
+.quiz-feedback.visible { display: block; }
+.quiz-feedback.correct { color: var(--correct-text); }
+.quiz-feedback.wrong { color: var(--wrong-text); }
+
+/* ── Toggle link ── */
+.toggle-link {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px 0;
+  display: inline-block;
+  margin-bottom: 1rem;
+  transition: color 0.15s ease;
+}
+.toggle-link:hover { color: #0f1d4e; }
+
+/* ── Tone labels ── */
+.tone-labels {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+.tone-label {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+.tone-label .word {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  margin-bottom: 2px;
+}
+.tone-label .info {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+/* ── Matching game ── */
+.matching-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 1rem;
+}
+.matching-column h4 {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+.matching-item {
+  font-size: 0.875rem;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-bottom: 6px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  position: relative;
+}
+.matching-item:hover { border-color: var(--accent); background: var(--accent-light); }
+.matching-item.selected {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  box-shadow: 0 0 0 2px var(--accent-light);
+}
+.matching-item.connected {
+  border-color: var(--accent);
+  background: #eef1f8;
+}
+.matching-item.connected .conn-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.625rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  flex-shrink: 0;
+}
+.matching-item.conn-correct {
+  border-color: var(--correct-border) !important;
+  background: var(--correct-bg) !important;
+}
+.matching-item.conn-correct .conn-badge {
+  background: #16a34a !important;
+}
+.matching-item.conn-wrong {
+  border-color: var(--wrong-border) !important;
+  background: var(--wrong-bg) !important;
+}
+.matching-item.conn-wrong .conn-badge {
+  background: #dc2626 !important;
+}
+.matching-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.matching-svg line {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+  transition: stroke 0.3s ease;
+}
+.matching-svg line.correct { stroke: #16a34a; stroke-dasharray: none; stroke-width: 2; }
+.matching-svg line.wrong { stroke: #dc2626; stroke-dasharray: none; stroke-width: 2; }
+
+/* ── Buttons ── */
+.btn {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 8px 20px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 44px;
+}
+.btn:hover { border-color: var(--accent); background: var(--accent-light); }
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.btn-primary:hover { background: #0f1d4e; }
+.btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 0.75rem; }
+
+/* ── Score ── */
+.match-score {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 8px 0;
+}
+
+/* ── Synonym table ── */
+.synonym-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+.synonym-grid .sg-header {
+  font-family: var(--font-heading);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 10px 14px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.synonym-row {
+  display: contents;
+}
+.synonym-row .pair-word {
+  padding: 8px 14px;
+  font-size: 0.875rem;
+  border-bottom: 1px solid #f3f4f6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.synonym-row .pair-word .arrow {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+.synonym-row .pair-word .example {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+  font-style: italic;
+}
+.part-of-speech-header {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  padding: 10px 14px;
+  background: var(--accent-light);
+  border-bottom: 1px solid var(--border);
+  grid-column: 1 / -1;
+}
+
+/* ── Part 3 preview ── */
+.passage-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 44px;
+}
+.passage-card:hover { border-color: var(--accent); }
+.passage-card.selected-answer { border-color: var(--accent); background: var(--accent-light); }
+.passage-card.correct-card { border-color: var(--correct-border); background: var(--correct-bg); }
+.passage-card.wrong-card { border-color: var(--wrong-border); background: var(--wrong-bg); }
+.passage-card .passage-label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.375rem;
+}
+.passage-card p { font-size: 0.875rem; }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .header h1 { font-size: 1.5rem; }
+  .header .subtitle { font-size: 1rem; }
+  section h2 { font-size: 1.25rem; }
+  .matching-container { grid-template-columns: 1fr; gap: 12px; }
+  .matching-svg { display: none; }
+  .breakdown { grid-template-columns: 1fr 1fr; }
+  .synonym-grid { font-size: 0.8125rem; }
+  .quiz-options { flex-direction: column; }
+  .quiz-option { width: 100%; justify-content: center; }
+  .container { padding: 0 16px; }
+}
+
+/* ── Print ── */
+@media print {
+  .progress-bar, .btn, .toggle-link, .matching-svg { display: none !important; }
+  .quiz-option { pointer-events: none; }
+  .quiz-option.show-correct, .quiz-option.selected-correct { background: none; border-color: #000; font-weight: 600; }
+  .quiz-feedback { display: block !important; color: #333 !important; }
+  .card { break-inside: avoid; border-color: #ccc; }
+  body { font-size: 12pt; color: #000; background: #fff; }
+  .matching-item { border-color: #ccc; }
+  .container { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ PROGRESS BAR ═══ -->
+<nav class="progress-bar">
+  <div class="segments">
+    <div class="progress-segment" data-section="s1"></div>
+    <div class="progress-segment" data-section="s2"></div>
+    <div class="progress-segment" data-section="s3"></div>
+    <div class="progress-segment" data-section="s4"></div>
+    <div class="progress-segment" data-section="s5"></div>
+    <div class="progress-segment" data-section="s6"></div>
+  </div>
+  <span class="progress-label" id="progressLabel">1/6</span>
+</nav>
+
+<div class="container">
+
+<!-- ═══ HEADER ═══ -->
+<header class="header">
+  <div class="eyebrow">LanguageCert Academic Reading</div>
+  <h1>朗思学术阅读</h1>
+  <p class="subtitle">第1课 · 词汇基础：同义词替换</p>
+  <div class="meta">
+    <span>📊 B1–B2</span>
+    <span>📝 30 Questions</span>
+    <span>⏱ 50 Minutes</span>
+    <span>📚 H1 of 6</span>
+  </div>
+</header>
+
+<!-- ═══ SECTION 1: EXAM OVERVIEW ═══ -->
+<section id="s1">
+  <div class="section-flag">Section 1</div>
+  <h2>考试认知卡片</h2>
+  <p class="section-sub">What to expect · 了解考试结构是第一步</p>
+
+  <div class="card">
+    <h3>朗思阅读考什么？</h3>
+    <p>LanguageCert Academic Reading assesses your ability to understand academic texts across five distinct task types. Each question is worth approximately <strong>3.33 points</strong> (100 ÷ 30).</p>
+
+    <div style="display:flex; gap:24px; flex-wrap:wrap; margin:1rem 0;">
+      <div style="text-align:center; min-width:80px;">
+        <div style="font-family:var(--font-heading); font-size:1.5rem; font-weight:700; color:var(--accent);">70</div>
+        <div style="font-size:0.75rem; color:var(--text-secondary);">~22 题正确</div>
+      </div>
+      <div style="text-align:center; min-width:80px;">
+        <div style="font-family:var(--font-heading); font-size:1.5rem; font-weight:700; color:var(--accent);">60</div>
+        <div style="font-size:0.75rem; color:var(--text-secondary);">~19 题正确</div>
+      </div>
+      <div style="text-align:center; min-width:80px;">
+        <div style="font-family:var(--font-heading); font-size:1.5rem; font-weight:700; color:var(--accent);">50</div>
+        <div style="font-size:0.75rem; color:var(--text-secondary);">~15 题正确</div>
+      </div>
+    </div>
+
+    <div class="breakdown">
+      <div class="breakdown-item">
+        <div class="part">Part 1a</div>
+        <div class="desc">同义词替换 · 选词填空</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="part">Part 1b</div>
+        <div class="desc">完形填空 · 选词</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="part">Part 2</div>
+        <div class="desc">句子配对 · 插入句子</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="part">Part 3</div>
+        <div class="desc">多文本匹配 · 连线题</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="part">Part 4</div>
+        <div class="desc">长篇理解 · 选择题</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 2: 3-STEP METHOD ═══ -->
+<section id="s2">
+  <div class="section-flag">Section 2</div>
+  <h2>同义词三步法</h2>
+  <p class="section-sub">A systematic approach to synonym questions · 告别"凭感觉选"</p>
+
+  <div class="card">
+    <div class="step-number">Step 1</div>
+    <h3>忘了粗体词，先读懂这句话</h3>
+    <p>Ignore the bolded word. Read the full sentence first. Understand its overall meaning and intent before you even look at the options. Context is everything — the bolded word is just one piece of the puzzle.</p>
+  </div>
+
+  <div class="card">
+    <div class="step-number">Step 2</div>
+    <h3>锁定词性 → 词性不对的选项直接划掉</h3>
+    <p>Determine the part of speech of the bolded word (noun, verb, adjective, adverb). Eliminate any options that don't match. This often eliminates 1–2 wrong answers immediately.</p>
+  </div>
+
+  <div class="card">
+    <div class="step-number">Step 3</div>
+    <h3>逐一代入原文 → 找"放进去最自然"的那个</h3>
+    <p>Substitute each remaining option into the sentence. The correct answer should feel natural — it preserves the tone, register, and precise meaning of the original. Don't overthink. The natural choice is usually correct.</p>
+  </div>
+
+  <h3 style="margin-top:2rem;margin-bottom:1rem;">热身练习 · Warm-up</h3>
+  <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:1.25rem;">Apply the 3-step method to each sentence below. Click your answer.</p>
+
+  <div class="quiz-question" id="warmup1">
+    <div class="sentence">1. The experiment <b>YIELDED</b> unexpected results.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) produced</button>
+      <button class="quiz-option" data-idx="1">b) demanded</button>
+      <button class="quiz-option" data-idx="2">c) concealed</button>
+    </div>
+    <div class="quiz-feedback" data-answer="0"></div>
+  </div>
+
+  <div class="quiz-question" id="warmup2">
+    <div class="sentence">2. She was <b>RELUCTANT</b> to accept the offer.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) eager</button>
+      <button class="quiz-option" data-idx="1">b) hesitant</button>
+      <button class="quiz-option" data-idx="2">c) furious</button>
+    </div>
+    <div class="quiz-feedback" data-answer="1"></div>
+  </div>
+
+  <div class="quiz-question" id="warmup3">
+    <div class="sentence">3. The evidence was <b>INSUFFICIENT</b> to draw a conclusion.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) adequate</button>
+      <button class="quiz-option" data-idx="1">b) excessive</button>
+      <button class="quiz-option" data-idx="2">c) inadequate</button>
+    </div>
+    <div class="quiz-feedback" data-answer="2"></div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 3: TONE & REGISTER ═══ -->
+<section id="s3">
+  <div class="section-flag">Section 3</div>
+  <h2>语境色彩</h2>
+  <p class="section-sub">Tone &amp; Register — why the "closest" word isn't always the right one</p>
+
+  <div class="card">
+    <h3>Why Tone Matters in Synonym Questions</h3>
+    <p>Two words can mean nearly the same thing but carry completely different emotional weight. Academic English is especially sensitive to register — choosing the wrong tone can make a correct definition feel out of place in context.</p>
+  </div>
+
+  <div class="tone-labels">
+    <div class="tone-label">
+      <div class="word">apparently</div>
+      <div class="info">🔵 Neutral · 表面看起来</div>
+    </div>
+    <div class="tone-label">
+      <div class="word">supposedly</div>
+      <div class="info">🟡 Skeptical · 据称（隐含怀疑）</div>
+    </div>
+    <div class="tone-label">
+      <div class="word">clearly</div>
+      <div class="info">🟢 Confident · 明确地</div>
+    </div>
+    <div class="tone-label">
+      <div class="word">evidently</div>
+      <div class="info">🔵 Objective · 有证据地，客观</div>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom:1rem;">Tone Matching · 连线练习</h3>
+  <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:0.75rem;">Click a word on the left, then its matching tone description on the right.</p>
+
+  <div class="matching-container" id="toneMatch" style="position:relative;">
+    <svg class="matching-svg" id="toneMatchSvg"></svg>
+    <div class="matching-column" id="toneMatchLeft">
+      <h4>Words</h4>
+      <div class="matching-item" data-id="apparently">apparently</div>
+      <div class="matching-item" data-id="supposedly">supposedly</div>
+      <div class="matching-item" data-id="clearly">clearly</div>
+      <div class="matching-item" data-id="evidently">evidently</div>
+    </div>
+    <div class="matching-column" id="toneMatchRight">
+      <h4>Tone Descriptions</h4>
+      <div class="matching-item" data-id="neutral">Neutral · 表面看起来</div>
+      <div class="matching-item" data-id="skeptical">Skeptical · 据称（怀疑）</div>
+      <div class="matching-item" data-id="confident">Confident · 明确地</div>
+      <div class="matching-item" data-id="objective">Objective · 有证据地</div>
+    </div>
+  </div>
+  <div class="match-score" id="toneScore" style="display:none;"></div>
+  <div class="btn-group">
+    <button class="btn btn-primary" id="toneCheck">✓ Check Answers</button>
+    <button class="btn" id="toneReset">↺ Reset</button>
+  </div>
+</section>
+
+<!-- ═══ SECTION 4: 15 SYNONYM PAIRS ═══ -->
+<section id="s4">
+  <div class="section-flag">Section 4</div>
+  <h2>核心同义词对</h2>
+  <p class="section-sub">15 Essential Synonym Pairs · 按词性分类，每对附例句</p>
+
+  <div class="synonym-grid">
+    <div class="part-of-speech-header">动词 Verbs (6 pairs)</div>
+    <div class="sg-header">Bold Word → Synonym</div>
+    <div class="sg-header">Example in Context</div>
+
+    <div class="synonym-row">
+      <div class="pair-word"><strong>result in</strong> <span class="arrow">→</span> lead to</div>
+      <div class="pair-word"><span class="example">Poor diet can result in serious health problems.</span></div>
+    </div>
+    <div class="synonym-row">
+      <div class="pair-word"><strong>obtain</strong> <span class="arrow">→</span> acquire</div>
+      <div class="pair-word"><span class="example">Researchers obtained the data through surveys.</span></div>
+    </div>
+    <div class="synonym-row">
+      <div class="pair-word"><strong>determine</strong> <span class="arrow">→</span> deduce</div>
+      <div class="pair-word"><span class="example">Scientists determined the cause of the anomaly.</span></div>
+    </div>
+    <div class="synonym-row">
+      <div class="pair-word"><strong>demonstrate</strong> <span class="arrow">→</span> illustrate</div>
+      <div class="pair-word"><span class="example">The graph demonstrates a clear upward trend.</span></div>
+    </div>
+    <div class="synonym-row">
+      <div class="pair-word"><strong>eliminate</strong> <span class="arrow">→</span> remove</div>
+      <div class="pair-word"><span class="example">The new process eliminates unnecessary steps.</span></div>
+    </div>
+    <div class="synonym-row">
+      <div class="pair-word"><strong>propose</strong> <span class="arrow">→</span> suggest</div>
+      <div class="pair-word"><span class="example">The committee proposed several changes.</span></div>
+    </div>
+
+    <div class="part-of-speech-header">名词 Nouns (5 pairs)</div>
+    <div class="sg-header">Bold Word → Synonym</div>
+    <div class="sg-header">Example in Context</div>
+
+    <div class="synonym-row">
+      <div class="pair-word"><strong>precision</strong> <span class="arrow">→</span> accuracy</div>
+      <div class="pair-word"><span class="example">The instrument measures with great precision.</span></div>
+    </div>
+    <div class="synonym-row">
+      <div class="pair-word"><strong>personnel</strong> <span class="arrow">→</span> staff</div>
+      <div class="pair-word"><span class="example">All personnel must complete the training.</span></div>
+    </div>
+    <div class="synonym-row">
+      <div class="pair-word"><strong>consequence</strong> <span class="arrow">→</span> outcome</div>
+      <div class="pair-word"><span class="example">The consequence of the decision was immediate.</span></div>
+    </div>
+    <div class="synonym-row">
+      <div class="pair-word"><strong>objective</strong> <span class="arrow">→</span> goal</div>
+      <div class="pair-word"><span class="example">The primary objective is to reduce emissions.</span></div>
+    </div>
+    <div class="synonym-row">
+      <div class="pair-word"><strong>deficiency</strong> <span class="arrow">→</span> shortage</div>
+      <div class="pair-word"><span class="example">A deficiency of vitamin D is common in winter.</span></div>
+    </div>
+
+    <div class="part-of-speech-header">形容词 Adjectives (4 pairs)</div>
+    <div class="sg-header">Bold Word → Synonym</div>
+    <div class="sg-header">Example in Context</div>
+
+    <div class="synonym-row">
+      <div class="pair-word"><strong>unusual</strong> <span class="arrow">→</span> abnormal</div>
+      <div class="pair-word"><span class="example">The test showed unusual levels of the compound.</span></div>
+    </div>
+    <div class="synonym-row">
+      <div class="pair-word"><strong>significant</strong> <span class="arrow">→</span> considerable</div>
+      <div class="pair-word"><span class="example">There was a significant increase in applications.</span></div>
+    </div>
+    <div class="synonym-row">
+      <div class="pair-word"><strong>precise</strong> <span class="arrow">→</span> accurate</div>
+      <div class="pair-word"><span class="example">We need precise measurements for this experiment.</span></div>
+    </div>
+    <div class="synonym-row">
+      <div class="pair-word"><strong>mandatory</strong> <span class="arrow">→</span> compulsory</div>
+      <div class="pair-word"><span class="example">Attendance is mandatory for all sessions.</span></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:2.5rem;margin-bottom:1rem;">Synonym Matching · 连线配对</h3>
+  <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:0.75rem;">Match each bold word (left) to its synonym (right). Click a word, then click its match.</p>
+
+  <div class="matching-container" id="synMatch">
+    <div class="matching-column" id="synMatchLeft">
+      <h4>Bold Words</h4>
+    </div>
+    <div class="matching-column" id="synMatchRight">
+      <h4>Synonyms</h4>
+    </div>
+  </div>
+  <div class="match-score" id="synScore" style="display:none;"></div>
+  <div class="btn-group">
+    <button class="btn btn-primary" id="synCheck">✓ Check Answers</button>
+    <button class="btn" id="synReset">↺ Reset</button>
+  </div>
+</section>
+
+<!-- ═══ SECTION 5: PRACTICE SET ═══ -->
+<section id="s5">
+  <div class="section-flag">Section 5</div>
+  <h2>Part 1a 真题实战</h2>
+  <p class="section-sub">Practice Set · 6 synonym-in-context questions with instant feedback</p>
+
+  <button class="toggle-link" id="toggleAllS5">Show All Answers</button>
+
+  <div class="quiz-question" id="pq1">
+    <div class="sentence">1. Many people know they <b>OUGHT TO</b> eat healthily, yet still consume junk food.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) could</button>
+      <button class="quiz-option" data-idx="1">b) should</button>
+      <button class="quiz-option" data-idx="2">c) must</button>
+      <button class="quiz-option" data-idx="3">d) might</button>
+    </div>
+    <div class="quiz-feedback" data-answer="1">"Should" matches the advisory tone of "ought to." "Must" is too strong — it implies obligation, not advice. "Could" and "might" are about possibility, not recommendation.</div>
+  </div>
+
+  <div class="quiz-question" id="pq2">
+    <div class="sentence">2. The laboratory demanded <b>PRECISION</b> in every measurement.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) truth</button>
+      <button class="quiz-option" data-idx="1">b) detail</button>
+      <button class="quiz-option" data-idx="2">c) accuracy</button>
+      <button class="quiz-option" data-idx="3">d) reality</button>
+    </div>
+    <div class="quiz-feedback" data-answer="2">"Accuracy" = exactness in measurement. "Truth" is about facts vs. lies. "Detail" means specifics, not precision. "Reality" is the opposite of imagination.</div>
+  </div>
+
+  <div class="quiz-question" id="pq3">
+    <div class="sentence">3. All administrative <b>PERSONNEL</b> must attend the briefing.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) staff</button>
+      <button class="quiz-option" data-idx="1">b) people</button>
+      <button class="quiz-option" data-idx="2">c) crew</button>
+      <button class="quiz-option" data-idx="3">d) team</button>
+    </div>
+    <div class="quiz-feedback" data-answer="0">"Staff" = employees in an organization. "Crew" is for ship/plane/film crews. "Team" emphasizes collaboration. "People" is too general.</div>
+  </div>
+
+  <div class="quiz-question" id="pq4">
+    <div class="sentence">4. The weather conditions were highly <b>ABNORMAL</b> for this time of year.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) rare</button>
+      <button class="quiz-option" data-idx="1">b) unusual</button>
+      <button class="quiz-option" data-idx="2">c) special</button>
+      <button class="quiz-option" data-idx="3">d) isolated</button>
+    </div>
+    <div class="quiz-feedback" data-answer="1">"Unusual" = not normal, not typical. "Rare" means few in number, not necessarily abnormal. "Special" can be positive. "Isolated" = alone, disconnected.</div>
+  </div>
+
+  <div class="quiz-question" id="pq5">
+    <div class="sentence">5. The experiment, <b>SEEMINGLY</b> simple, required months of preparation.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) apparently</button>
+      <button class="quiz-option" data-idx="1">b) clearly</button>
+      <button class="quiz-option" data-idx="2">c) evidently</button>
+      <button class="quiz-option" data-idx="3">d) supposedly</button>
+    </div>
+    <div class="quiz-feedback" data-answer="0">"Apparently" = appears to be (neutral observation). "Supposedly" carries doubt. "Clearly" and "evidently" are too certain — the sentence implies the appearance was deceiving.</div>
+  </div>
+
+  <div class="quiz-question" id="pq6">
+    <div class="sentence">6. Scientists were able to <b>DEDUCE</b> the structure from the data.</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-idx="0">a) conclude</button>
+      <button class="quiz-option" data-idx="1">b) assess</button>
+      <button class="quiz-option" data-idx="2">c) determine</button>
+      <button class="quiz-option" data-idx="3">d) calculate</button>
+    </div>
+    <div class="quiz-feedback" data-answer="2">"Determine" = figure out through reasoning/analysis. "Conclude" suggests end of a process. "Calculate" is math only. "Assess" = evaluate, not figure out.</div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 6: PART 3 PREVIEW ═══ -->
+<section id="s6">
+  <div class="section-flag">Section 6</div>
+  <h2>Part 3 初体验</h2>
+  <p class="section-sub">Multi-Text Matching Preview · 认识多文本匹配题型</p>
+
+  <div class="card">
+    <h3>What is Part 3?</h3>
+    <p>Part 3 presents 4 short texts (A–D) on a related theme. You answer questions by identifying which text contains specific information. Each text may be used more than once — or not at all. This section tests your ability to scan and compare multiple sources quickly.</p>
+  </div>
+
+  <h3 style="margin-top:2rem;margin-bottom:1rem;">Preview: Two Sample Passages</h3>
+
+  <div class="passage-card" id="passageA" data-passage="A">
+    <div class="passage-label">Passage A</div>
+    <p>Paper-making was invented in China during the Han Dynasty around 105 CE. The court official Cai Lun is traditionally credited with refining the process, using mulberry bark, hemp, and rags to create a durable writing surface. This innovation transformed record-keeping and communication across the empire, eventually spreading along the Silk Road to the Islamic world and medieval Europe.</p>
+  </div>
+
+  <div class="passage-card" id="passageB" data-passage="B">
+    <div class="passage-label">Passage B</div>
+    <p>Modern paper recycling faces significant challenges. While recycling reduces the demand for virgin wood pulp, the process requires substantial water and energy. Contamination from inks, adhesives, and food waste further complicates recycling efforts. Environmental scientists estimate that recycled paper still accounts for less than 60% of total paper production globally.</p>
+  </div>
+
+  <div class="quiz-question" id="matchQ1">
+    <div class="sentence" style="border-left-color:var(--text-secondary);">Q1. Which text discusses a <b>historical invention</b>?</div>
+    <div class="quiz-options" style="margin-top:0.5rem;">
+      <button class="quiz-option" data-idx="0">Passage A</button>
+      <button class="quiz-option" data-idx="1">Passage B</button>
+    </div>
+    <div class="quiz-feedback" data-answer="0">Passage A describes the invention of paper-making during the Han Dynasty (c. 105 CE) — a clear historical invention.</div>
+  </div>
+
+  <div class="quiz-question" id="matchQ2">
+    <div class="sentence" style="border-left-color:var(--text-secondary);">Q2. Which text mentions <b>environmental problems</b>?</div>
+    <div class="quiz-options" style="margin-top:0.5rem;">
+      <button class="quiz-option" data-idx="0">Passage A</button>
+      <button class="quiz-option" data-idx="1">Passage B</button>
+    </div>
+    <div class="quiz-feedback" data-answer="1">Passage B discusses recycling challenges, water/energy use, contamination, and environmental impact — clear environmental concerns.</div>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<script>
+/* ═══════════════════════════════════════════
+   LANG CERT READING · LESSON 1
+   Interactive JavaScript
+   ═══════════════════════════════════════════ */
+
+// ── Progress Tracker ──
+(function() {
+  const sections = document.querySelectorAll('section[id]');
+  const segments = document.querySelectorAll('.progress-segment');
+  const label = document.getElementById('progressLabel');
+  const sectionIds = Array.from(sections).map(s => s.id);
+
+  function updateProgress() {
+    let currentIdx = 0;
+    const scrollTop = window.scrollY + 80;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      if (sections[i].offsetTop <= scrollTop) {
+        currentIdx = i;
+        break;
+      }
+    }
+    segments.forEach((seg, i) => {
+      seg.classList.toggle('active', i <= currentIdx);
+    });
+    label.textContent = `${currentIdx + 1}/${sections.length}`;
+  }
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+})();
+
+// ── Quiz System ──
+function initQuiz(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const options = container.querySelectorAll('.quiz-option');
+  const feedback = container.querySelector('.quiz-feedback');
+  const correctIdx = parseInt(feedback.dataset.answer);
+  let answered = false;
+
+  options.forEach(opt => {
+    opt.addEventListener('click', () => {
+      if (answered) return;
+      answered = true;
+      const chosen = parseInt(opt.dataset.idx);
+      options.forEach(o => o.classList.add('disabled'));
+
+      if (chosen === correctIdx) {
+        opt.classList.add('selected-correct');
+        feedback.classList.add('visible', 'correct');
+        feedback.innerHTML = '✓ Correct! ' + feedback.textContent.trim();
+      } else {
+        opt.classList.add('selected-wrong');
+        feedback.classList.add('visible', 'wrong');
+        feedback.innerHTML = '✗ Incorrect. ' + feedback.textContent.trim();
+        // highlight correct answer
+        options[correctIdx].classList.add('show-correct');
+      }
+    });
+  });
+
+  return {
+    showAnswer: () => {
+      if (answered) return;
+      answered = true;
+      options.forEach(o => o.classList.add('disabled'));
+      options[correctIdx].classList.add('show-correct');
+      feedback.classList.add('visible', 'correct');
+      feedback.innerHTML = 'Answer: ' + feedback.textContent.trim().substring(0, 80) + '...';
+    },
+    reset: () => {
+      answered = false;
+      options.forEach(o => {
+        o.classList.remove('disabled', 'selected-correct', 'selected-wrong', 'show-correct');
+      });
+      feedback.classList.remove('visible', 'correct', 'wrong');
+    }
+  };
+}
+
+// Init all warmup quizzes
+const warmups = ['warmup1', 'warmup2', 'warmup3'].map(id => initQuiz(id));
+
+// Init practice quizzes
+const practice = ['pq1', 'pq2', 'pq3', 'pq4', 'pq5', 'pq6'].map(id => initQuiz(id));
+
+// Init Part 3 match quizzes
+const matchQs = ['matchQ1', 'matchQ2'].map(id => initQuiz(id));
+
+// ── Toggle All Answers (Section 5) ──
+(function() {
+  const toggleBtn = document.getElementById('toggleAllS5');
+  let showing = false;
+
+  toggleBtn.addEventListener('click', () => {
+    if (showing) {
+      practice.forEach(q => q.reset());
+      toggleBtn.textContent = 'Show All Answers';
+    } else {
+      practice.forEach(q => q.showAnswer());
+      toggleBtn.textContent = 'Hide All Answers';
+    }
+    showing = !showing;
+  });
+})();
+
+// ── Matching Game Engine ──
+class MatchingGame {
+  constructor(options) {
+    this.container = options.container;
+    this.leftContainer = this.container.querySelector(options.leftSel);
+    this.rightContainer = this.container.querySelector(options.rightSel);
+    this.pairs = options.pairs; // [[leftId, rightId], ...]
+    this.useLines = options.useLines || false;
+    this.svgEl = options.svgSel ? this.container.querySelector(options.svgSel) : null;
+    this.scoreEl = options.scoreSel ? document.querySelector(options.scoreSel) : null;
+    this.checkBtn = document.getElementById(options.checkBtnId);
+    this.resetBtn = document.getElementById(options.resetBtnId);
+    this.onCheck = options.onCheck || null;
+
+    // Build a lookup for correct answers
+    this.correctMap = {};
+    this.pairs.forEach(([l, r]) => { this.correctMap[l] = r; });
+
+    this.selectedLeft = null;
+    this.connections = {}; // {leftId: rightId}
+    this.checked = false;
+
+    // Shuffle if items provided as arrays
+    if (options.leftItems && options.rightItems) {
+      this.leftIds = this.shuffle([...options.leftItems]);
+      this.rightIds = this.shuffle([...options.rightItems]);
+      this.buildItems();
+    }
+
+    this.leftItems = this.leftContainer.querySelectorAll('.matching-item');
+    this.rightItems = this.rightContainer.querySelectorAll('.matching-item');
+
+    this.attachEvents();
+    if (this.checkBtn) this.checkBtn.addEventListener('click', () => this.check());
+    if (this.resetBtn) this.resetBtn.addEventListener('click', () => this.reset());
+
+    if (this.useLines) {
+      window.addEventListener('resize', () => this.drawLines());
+      window.addEventListener('scroll', () => this.drawLines(), { passive: true });
+    }
+  }
+
+  shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  buildItems() {
+    const leftLabel = this.leftContainer.querySelector('h4');
+    const rightLabel = this.rightContainer.querySelector('h4');
+    const leftLabelHTML = leftLabel ? leftLabel.outerHTML : '';
+    const rightLabelHTML = rightLabel ? rightLabel.outerHTML : '';
+    this.leftContainer.innerHTML = leftLabelHTML;
+    this.rightContainer.innerHTML = rightLabelHTML;
+    this.leftIds.forEach(id => {
+      const el = document.createElement('div');
+      el.className = 'matching-item';
+      el.dataset.id = id;
+      el.textContent = id;
+      this.leftContainer.appendChild(el);
+    });
+    this.rightIds.forEach(id => {
+      const el = document.createElement('div');
+      el.className = 'matching-item';
+      el.dataset.id = id;
+      el.textContent = id;
+      this.rightContainer.appendChild(el);
+    });
+  }
+
+  attachEvents() {
+    this.leftItems.forEach(item => {
+      item.addEventListener('click', () => {
+        if (this.checked) return;
+        this.selectLeft(item.dataset.id);
+      });
+    });
+    this.rightItems.forEach(item => {
+      item.addEventListener('click', () => {
+        if (this.checked) return;
+        this.selectRight(item.dataset.id);
+      });
+    });
+  }
+
+  selectLeft(id) {
+    // Deselect previous
+    this.leftItems.forEach(el => el.classList.remove('selected'));
+    this.selectedLeft = id;
+    const el = this.leftContainer.querySelector(`[data-id="${id}"]`);
+    if (el) el.classList.add('selected');
+  }
+
+  selectRight(rightId) {
+    if (!this.selectedLeft) return;
+    // Remove this rightId from any existing connection
+    for (const [lId, rId] of Object.entries(this.connections)) {
+      if (rId === rightId) {
+        delete this.connections[lId];
+        break;
+      }
+    }
+    // If selected left already connected, disconnect old
+    this.connections[this.selectedLeft] = rightId;
+    this.selectedLeft = null;
+    this.leftItems.forEach(el => el.classList.remove('selected'));
+    this.updateConnections();
+  }
+
+  updateConnections() {
+    // Reset all visual states
+    [...this.leftItems, ...this.rightItems].forEach(el => {
+      el.classList.remove('connected', 'conn-correct', 'conn-wrong');
+      const badge = el.querySelector('.conn-badge');
+      if (badge) badge.remove();
+    });
+
+    const connNum = 1;
+    const connectedRightIds = new Set(Object.values(this.connections));
+    let num = 1;
+
+    for (const [lId, rId] of Object.entries(this.connections)) {
+      const lEl = this.leftContainer.querySelector(`[data-id="${lId}"]`);
+      const rEl = this.rightContainer.querySelector(`[data-id="${rId}"]`);
+      if (lEl && rEl) {
+        lEl.classList.add('connected');
+        rEl.classList.add('connected');
+        // Add numbered badge
+        this.addBadge(lEl, num);
+        this.addBadge(rEl, num);
+        num++;
+      }
+    }
+
+    if (this.useLines) this.drawLines();
+  }
+
+  addBadge(el, num) {
+    const existing = el.querySelector('.conn-badge');
+    if (existing) existing.remove();
+    const badge = document.createElement('span');
+    badge.className = 'conn-badge';
+    badge.textContent = num;
+    el.appendChild(badge);
+  }
+
+  check() {
+    if (this.checked) return;
+    this.checked = true;
+    let correct = 0;
+    const total = this.pairs.length;
+    let connNum = 1;
+
+    // First reset visual
+    [...this.leftItems, ...this.rightItems].forEach(el => {
+      el.classList.remove('connected', 'conn-correct', 'conn-wrong');
+      const badge = el.querySelector('.conn-badge');
+      if (badge) badge.remove();
+    });
+
+    for (const [lId, rId] of Object.entries(this.connections)) {
+      const lEl = this.leftContainer.querySelector(`[data-id="${lId}"]`);
+      const rEl = this.rightContainer.querySelector(`[data-id="${rId}"]`);
+      if (!lEl || !rEl) continue;
+
+      const isCorrect = this.correctMap[lId] === rId;
+      if (isCorrect) {
+        correct++;
+        lEl.classList.add('conn-correct');
+        rEl.classList.add('conn-correct');
+      } else {
+        lEl.classList.add('conn-wrong');
+        rEl.classList.add('conn-wrong');
+      }
+      this.addBadge(lEl, connNum);
+      this.addBadge(rEl, connNum);
+      connNum++;
+    }
+
+    // Show unconnected items
+    const connectedLefts = new Set(Object.keys(this.connections));
+    const connectedRights = new Set(Object.values(this.connections));
+    this.leftItems.forEach(el => {
+      if (!connectedLefts.has(el.dataset.id)) el.classList.add('conn-wrong');
+    });
+    this.rightItems.forEach(el => {
+      if (!connectedRights.has(el.dataset.id)) el.classList.add('conn-wrong');
+    });
+
+    if (this.scoreEl) {
+      this.scoreEl.style.display = 'block';
+      this.scoreEl.innerHTML = `Score: ${correct}/${total} correct`;
+      this.scoreEl.style.color = correct === total ? 'var(--correct-text)' : 'var(--wrong-text)';
+    }
+
+    if (this.useLines) this.drawLines();
+    if (this.onCheck) this.onCheck(correct, total);
+  }
+
+  reset() {
+    this.checked = false;
+    this.selectedLeft = null;
+    this.connections = {};
+    [...this.leftItems, ...this.rightItems].forEach(el => {
+      el.classList.remove('selected', 'connected', 'conn-correct', 'conn-wrong');
+      const badge = el.querySelector('.conn-badge');
+      if (badge) badge.remove();
+    });
+    if (this.scoreEl) this.scoreEl.style.display = 'none';
+    if (this.useLines && this.svgEl) this.svgEl.innerHTML = '';
+  }
+
+  drawLines() {
+    if (!this.svgEl) return;
+    this.svgEl.innerHTML = '';
+
+    const containerRect = this.container.getBoundingClientRect();
+    const svgRect = this.svgEl.getBoundingClientRect();
+    const offsetX = svgRect.left - containerRect.left;
+    const offsetY = svgRect.top - containerRect.top;
+
+    let connNum = 1;
+    for (const [lId, rId] of Object.entries(this.connections)) {
+      const lEl = this.leftContainer.querySelector(`[data-id="${lId}"]`);
+      const rEl = this.rightContainer.querySelector(`[data-id="${rId}"]`);
+      if (!lEl || !rEl) continue;
+
+      const lRect = lEl.getBoundingClientRect();
+      const rRect = rEl.getBoundingClientRect();
+
+      const x1 = lRect.right - containerRect.left - offsetX;
+      const y1 = lRect.top + lRect.height / 2 - containerRect.top - offsetY;
+      const x2 = rRect.left - containerRect.left - offsetX;
+      const y2 = rRect.top + rRect.height / 2 - containerRect.top - offsetY;
+
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', x1);
+      line.setAttribute('y1', y1);
+      line.setAttribute('x2', x2);
+      line.setAttribute('y2', y2);
+
+      if (this.checked) {
+        const isCorrect = this.correctMap[lId] === rId;
+        line.classList.add(isCorrect ? 'correct' : 'wrong');
+      }
+
+      this.svgEl.appendChild(line);
+      connNum++;
+    }
+  }
+}
+
+// ── Init Tone Matching (4 pairs, with lines) ──
+const tonePairs = [
+  ['apparently', 'neutral'],
+  ['supposedly', 'skeptical'],
+  ['clearly', 'confident'],
+  ['evidently', 'objective']
+];
+
+const toneMatch = new MatchingGame({
+  container: document.getElementById('toneMatch'),
+  leftSel: '#toneMatchLeft',
+  rightSel: '#toneMatchRight',
+  pairs: tonePairs,
+  useLines: true,
+  svgSel: '#toneMatchSvg',
+  scoreSel: '#toneScore',
+  checkBtnId: 'toneCheck',
+  resetBtnId: 'toneReset'
+});
+
+// ── Init Synonym Matching (15 pairs, no lines) ──
+const synPairs = [
+  ['result in', 'lead to'],
+  ['obtain', 'acquire'],
+  ['determine', 'deduce'],
+  ['demonstrate', 'illustrate'],
+  ['eliminate', 'remove'],
+  ['propose', 'suggest'],
+  ['precision', 'accuracy'],
+  ['personnel', 'staff'],
+  ['consequence', 'outcome'],
+  ['objective', 'goal'],
+  ['deficiency', 'shortage'],
+  ['unusual', 'abnormal'],
+  ['significant', 'considerable'],
+  ['precise', 'accurate'],
+  ['mandatory', 'compulsory']
+];
+
+const synLeftItems = synPairs.map(p => p[0]);
+const synRightItems = synPairs.map(p => p[1]);
+
+const synMatch = new MatchingGame({
+  container: document.getElementById('synMatch'),
+  leftSel: '#synMatchLeft',
+  rightSel: '#synMatchRight',
+  pairs: synPairs,
+  useLines: false,
+  scoreSel: '#synScore',
+  checkBtnId: 'synCheck',
+  resetBtnId: 'synReset',
+  leftItems: synLeftItems,
+  rightItems: synRightItems
+});
+
+// ── Part 3 passage cards ──
+(function() {
+  const passageA = document.getElementById('passageA');
+  const passageB = document.getElementById('passageB');
+
+  // Q1: Click passage A or B to answer
+  const q1 = document.getElementById('matchQ1');
+  if (q1) {
+    let answered1 = false;
+    const q1Options = q1.querySelectorAll('.quiz-option');
+    const q1Feedback = q1.querySelector('.quiz-feedback');
+
+    q1Options.forEach(opt => {
+      opt.addEventListener('click', () => {
+        if (answered1) return;
+        answered1 = true;
+        const chosen = parseInt(opt.dataset.idx);
+        q1Options.forEach(o => o.classList.add('disabled'));
+        if (chosen === 0) {
+          opt.classList.add('selected-correct');
+          passageA.classList.add('correct-card');
+          q1Feedback.classList.add('visible', 'correct');
+        } else {
+          opt.classList.add('selected-wrong');
+          passageB.classList.add('wrong-card');
+          q1Feedback.classList.add('visible', 'wrong');
+          q1Options[0].classList.add('show-correct');
+          passageA.classList.add('correct-card');
+        }
+      });
+    });
+  }
+
+  // Q2
+  const q2 = document.getElementById('matchQ2');
+  if (q2) {
+    let answered2 = false;
+    const q2Options = q2.querySelectorAll('.quiz-option');
+    const q2Feedback = q2.querySelector('.quiz-feedback');
+
+    q2Options.forEach(opt => {
+      opt.addEventListener('click', () => {
+        if (answered2) return;
+        answered2 = true;
+        const chosen = parseInt(opt.dataset.idx);
+        q2Options.forEach(o => o.classList.add('disabled'));
+        if (chosen === 1) {
+          opt.classList.add('selected-correct');
+          passageB.classList.add('correct-card');
+          q2Feedback.classList.add('visible', 'correct');
+        } else {
+          opt.classList.add('selected-wrong');
+          passageA.classList.add('wrong-card');
+          q2Feedback.classList.add('visible', 'wrong');
+          q2Options[1].classList.add('show-correct');
+          passageB.classList.add('correct-card');
+        }
+      });
+    });
+  }
+})();
+
+// ── Draw tone matching lines after load ──
+window.addEventListener('load', () => {
+  toneMatch.drawLines();
+});
+
+console.log('LangCert Reading · Lesson 1 ready ✓');
+</script>
+
+</body>
+</html>

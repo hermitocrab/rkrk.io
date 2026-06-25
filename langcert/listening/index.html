@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>B1 Listening Practice — LangCert</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0a0f; --card: #13131a; --border: #1e1e2e;
-      --text: #e4e4e4; --muted: #8888a0; --accent: #7c3aed;
-      --green: #10b981; --amber: #f59e0b;
+      --bg: #fafbfc; --card: #ffffff; --border: #e5e7eb;
+      --text: #1a1a2e; --muted: #6b7280; --accent: #4f46e5;
+      --green: #059669; --amber: #d97706;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -22,13 +23,13 @@
     h1 {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 2rem; margin: 0.5rem 0;
-      background: linear-gradient(135deg, var(--accent), #a78bfa);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      color: var(--text);
     }
     .subtitle { color: var(--muted); margin-bottom: 2rem; }
     .card {
       background: var(--card); border: 1px solid var(--border);
       border-radius: 14px; padding: 1.5rem; margin-bottom: 1rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
     .card h3 {
       font-family: 'Space Grotesk', sans-serif;
@@ -40,10 +41,9 @@
       border-radius: 5px; font-size: 0.7rem; font-weight: 700;
       margin-left: 0.5rem; vertical-align: middle;
     }
-    .tag-b1 { background: rgba(16,185,129,.12); color: var(--green); }
-    .tag-b2 { background: rgba(245,158,11,.12); color: var(--amber); }
-    audio { width: 100%; margin-top: 0.5rem; border-radius: 8px; height: 44px; }
-    audio::-webkit-media-controls-panel { background: #1a1a25; }
+    .tag-b1 { background: #ecfdf5; color: var(--green); }
+    .tag-b2 { background: #fffbeb; color: var(--amber); }
+    audio { width: 100%; margin-top: 0.5rem; border-radius: 8px; }
     .footer {
       text-align: center; color: var(--muted); font-size: 0.8rem;
       margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
@@ -52,7 +52,7 @@
     .gen-badge {
       display: inline-block; padding: 0.2rem 0.6rem;
       border-radius: 6px; font-size: 0.7rem; font-weight: 600;
-      background: rgba(124,58,237,.1); color: var(--accent);
+      background: #eef2ff; color: var(--accent);
       margin-bottom: 1rem;
     }
     .script-toggle {
@@ -61,7 +61,7 @@
       font-size: 0.8rem; margin-left: 0.5rem;
     }
     .script-toggle:hover { border-color: var(--accent); color: var(--text); }
-    .script { display: none; margin-top: 0.75rem; padding: 0.75rem; background: rgba(255,255,255,0.03); border-radius: 8px; font-size: 0.85rem; line-height: 1.6; color: var(--muted); white-space: pre-wrap; }
+    .script { display: none; margin-top: 0.75rem; padding: 0.75rem; background: #f9fafb; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; line-height: 1.6; color: #374151; white-space: pre-wrap; }
     .script.show { display: block; }
   </style>
 </head>
@@ -70,12 +70,12 @@
     <a href="/langcert" class="back">← LangCert Courseware</a>
     <h1>🎧 B1 Listening Practice</h1>
     <p class="subtitle">Natural conversation audio — generated with Gemini TTS for realistic listening training.</p>
-    <span class="gen-badge">🤖 AI-Generated Audio · Gemini 2.5 Flash TTS</span>
+    <span class="gen-badge">🤖 AI-Generated Audio · Microsoft Edge TTS (Natural Neural Voices)</span>
 
     <div class="card">
       <h3>Daily Routines <span class="tag tag-b1">B1</span></h3>
       <p class="topic">Two friends chat about morning habits — snooze buttons, yoga, and breakfast chaos.</p>
-      <audio controls preload="metadata" style="height:44px"><source src="audio/daily_routine.mp3" type="audio/mpeg"></audio>
+      <audio controls preload="auto" src="/langcert/listening/audio/daily_routine.mp3" type="audio/mpeg"></audio>
       <button class="script-toggle" onclick="this.nextElementSibling.classList.toggle('show')">📝 Show Script</button>
       <div class="script">Sam: So, what's your typical day like, Emma?
 Emma: Well, I usually wake up around seven. I like to start the day with a cup of tea and some quiet time before checking my phone.
@@ -90,7 +90,7 @@ Emma: You should try preparing something the night before. Even just some overni
     <div class="card">
       <h3>Weekend Plans <span class="tag tag-b1">B1</span></h3>
       <p class="topic">Two friends making casual weekend plans — street food, budgeting, and a rain check.</p>
-      <audio controls preload="metadata"><source src="audio/weekend_plans.mp3" type="audio/mpeg"></audio>
+      <audio controls preload="auto" src="/langcert/listening/audio/weekend_plans.mp3" type="audio/mpeg"></audio>
       <button class="script-toggle" onclick="this.nextElementSibling.classList.toggle('show')">📝 Show Script</button>
       <div class="script">Alex: Hey Jamie, any plans for the weekend?
 Jamie: Actually, I was thinking of checking out that new market in town. I heard they have really good street food there.
@@ -107,7 +107,7 @@ Jamie: Definitely. Next time!</div>
     <div class="card">
       <h3>Ordering at a Restaurant <span class="tag tag-b1">B1</span></h3>
       <p class="topic">A restaurant conversation — soup of the day, deciding between salmon and risotto.</p>
-      <audio controls preload="metadata"><source src="audio/ordering_food.mp3" type="audio/mpeg"></audio>
+      <audio controls preload="auto" src="/langcert/listening/audio/ordering_food.mp3" type="audio/mpeg"></audio>
       <button class="script-toggle" onclick="this.nextElementSibling.classList.toggle('show')">📝 Show Script</button>
       <div class="script">Waitress: Good evening! Here are your menus. Can I get you any drinks to start?
 Customer: Hi, yes — I'll have a sparkling water, please. And could you tell me what the soup of the day is?
@@ -123,7 +123,7 @@ Waitress: Perfect. I'll get that started for you right away.</div>
     <div class="card">
       <h3>Giving Directions <span class="tag tag-b1">B1</span></h3>
       <p class="topic">A tourist asking for directions — landmark navigation with a helpful local.</p>
-      <audio controls preload="metadata"><source src="audio/giving_directions.mp3" type="audio/mpeg"></audio>
+      <audio controls preload="auto" src="/langcert/listening/audio/giving_directions.mp3" type="audio/mpeg"></audio>
       <button class="script-toggle" onclick="this.nextElementSibling.classList.toggle('show')">📝 Show Script</button>
       <div class="script">Tourist: Excuse me, I'm a bit lost. Could you tell me how to get to the train station?
 Local: Oh, sure! It's not far from here. You're going to want to go straight down this road for about five minutes.
@@ -140,7 +140,7 @@ Local: No problem at all. Enjoy your trip!</div>
     <div class="card">
       <h3>Job Interview <span class="tag tag-b1">B1</span> <span class="tag tag-b2">B2</span></h3>
       <p class="topic">A professional but warm job interview — marketing role, campaign discussion.</p>
-      <audio controls preload="metadata"><source src="audio/job_interview.mp3" type="audio/mpeg"></audio>
+      <audio controls preload="auto" src="/langcert/listening/audio/job_interview.mp3" type="audio/mpeg"></audio>
       <button class="script-toggle" onclick="this.nextElementSibling.classList.toggle('show')">📝 Show Script</button>
       <div class="script">Interviewer: Thanks for coming in today. Could you start by telling me a bit about yourself?
 Candidate: Of course. Well, I graduated two years ago with a degree in marketing, and since then I've been working at a small agency where I handle social media for about ten different clients.
@@ -153,15 +153,10 @@ Candidate: I thought it was clever how you used real customer stories instead of
     </div>
 
     <div class="footer">
-      🎧 Natural B1 English · AI voices via Gemini TTS · <a href="/langcert">LangCert Courseware</a>
+      🎧 Natural B1 English · Microsoft Edge Neural TTS · <a href="/langcert">LangCert Courseware</a>
     </div>
   </div>
 
-  <script>
-    // Lazy-load audio
-    document.querySelectorAll('audio').forEach(a => {
-      a.setAttribute('preload', 'metadata');
-    });
-  </script>
+
 </body>
 </html>
