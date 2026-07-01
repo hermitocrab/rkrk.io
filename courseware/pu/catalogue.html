@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>教案库 · Power Up Catalogue · Kee's Classroom</title>
+<style>
+  :root {
+    --bg: #fafaf8; --text: #1a1a1c; --text2: #6b6b70; --muted: #9e9ea0;
+    --accent: #e55b4b; --cool: #2ba8a8; --radius: 16px;
+    --mon: #FF6B9D; --tue: #FF8A5C; --wed: #FFD93D; --thu: #6BCB77; --fri: #4D96FF; --sat: #9B59B6; --sun: #FF6B9D;
+    font-family: system-ui, -apple-system, 'PingFang SC', sans-serif;
+    background: var(--bg); color: var(--text);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { max-width: 900px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  .sub { color: var(--muted); font-size: .85rem; margin-bottom: 24px; }
+  .back { font-size: .8rem; color: var(--cool); text-decoration: none; display: inline-block; margin-bottom: 16px; }
+  .back:hover { text-decoration: underline; }
+
+  .week-section { margin-bottom: 32px; }
+  .week-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 12px; padding: 8px 16px; background: linear-gradient(135deg, #FFE0D3, #D4F1F9); border-radius: 100px; display: inline-block; }
+
+  .day-card {
+    border-radius: var(--radius); padding: 18px 20px; margin-bottom: 10px;
+    background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    border-left: 6px solid var(--cool); transition: transform .15s;
+  }
+  .day-card:hover { transform: translateX(4px); }
+  .day-card.done { opacity: 0.85; }
+  .day-card.pending { opacity: 0.45; }
+
+  .day-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+  .day-label { font-size: .8rem; font-weight: 800; padding: 4px 12px; border-radius: 100px; color: #fff; }
+  .l-wed { background: var(--wed); color: #333; }
+  .l-thu { background: var(--thu); }
+  .l-fri { background: var(--fri); }
+  .l-sat { background: var(--sat); }
+  .l-sun { background: var(--sun); }
+  .day-name { font-weight: 800; font-size: 1.05rem; }
+  .day-badge { font-size: .65rem; padding: 2px 8px; border-radius: 100px; font-weight: 700; }
+  .b-ready { background: #6BCB7720; color: #6BCB77; }
+  .b-wip { background: #FFD93D20; color: #C79121; }
+
+  .material-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .mat-link {
+    font-size: .75rem; padding: 4px 12px; border-radius: 100px; text-decoration: none;
+    font-weight: 600; transition: all .15s; background: #f0f0ec; color: var(--text2);
+  }
+  .mat-link:hover { background: var(--accent); color: #fff; }
+  .mat-link.pdf:hover { background: var(--cool); }
+
+  .vocab-preview { font-size: .78rem; color: var(--text2); margin-top: 4px; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<a href="/pu/" class="back">← PU Home</a>
+
+<h1>📚 教案库 · Power Up Catalogue</h1>
+<p class="sub">Kee's Classroom · Cambridge Power Up Book 1 · Summer 2026</p>
+
+<!-- Week of Jun 30 -->
+<div class="week-section">
+  <div class="week-title">📅 Week of Jun 30 — Jul 6</div>
+
+  <!-- Wed -->
+  <div class="day-card done">
+    <div class="day-header">
+      <span class="day-label l-wed">周三</span>
+      <span class="day-name">Unit 7 — Literature</span>
+      <span class="day-badge b-ready">✅ 已完成</span>
+    </div>
+    <div class="vocab-preview">Oliver and the Skateboard · 友谊 · 12词（hold, pond, nearby, difficult, hill, smile, park, skateboard, jump, fall, run, friend）</div>
+    <div class="material-links">
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-7/literature/">📄 课程中心</a>
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-7/literature/reading-video.html">📋 学情+视频</a>
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-7/literature/printables.html">🖨️ Printables</a>
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-7/literature/lesson-plan.html">🎓 教案</a>
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-7/literature/feedback-notes.html">📋 反馈</a>
+    </div>
+  </div>
+
+  <!-- Thu -->
+  <div class="day-card">
+    <div class="day-header">
+      <span class="day-label l-thu">周四</span>
+      <span class="day-name">Unit 8 — Vocab 1 + Grammar 1</span>
+      <span class="day-badge b-ready">✅ 已备好</span>
+    </div>
+    <div class="vocab-preview">My Home · Rooms & Can/Can't · 12词（bath, mirror, bed, bathroom, bedroom, living room, dining room, kitchen, hall, radio, table, cook）</div>
+    <div class="material-links">
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-8/vocab-1-grammar-1/">📄 课程中心</a>
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-8/vocab-1-grammar-1/reading-video.html">📋 学情+视频</a>
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-8/vocab-1-grammar-1/printables.html">🖨️ Printables</a>
+      <a class="mat-link pdf" href="https://rkrk.io/power-up/book-one/unit-8/vocab-1-grammar-1/PU1-U8-V1G1-Printables.pdf">📥 PDF</a>
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-8/vocab-1-grammar-1/lesson-plan.html">🎓 教案</a>
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-8/vocab-1-grammar-1/feedback-notes.html">📋 反馈</a>
+    </div>
+  </div>
+
+  <!-- Fri -->
+  <div class="day-card">
+    <div class="day-header">
+      <span class="day-label l-fri">周五</span>
+      <span class="day-name">Unit 8 — Vocab 2 + Grammar 2</span>
+      <span class="day-badge b-ready">✅ 已备好</span>
+    </div>
+    <div class="vocab-preview">Furniture & Prepositions · 12词（armchair, sofa, lamp, painting, phone, clock, floor, rug, television, photo, window, books）</div>
+    <div class="material-links">
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-8/vocab-2-grammar-2/">📄 课程中心</a>
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-8/vocab-2-grammar-2/reading-video.html">📋 学情+视频</a>
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-8/vocab-2-grammar-2/lesson-plan.html">🎓 教案</a>
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-8/vocab-2-grammar-2/feedback-notes.html">📋 反馈</a>
+    </div>
+  </div>
+
+  <!-- Sat -->
+  <div class="day-card pending">
+    <div class="day-header">
+      <span class="day-label l-sat">周六</span>
+      <span class="day-name">Unit 8 — Cross-Curricular</span>
+      <span class="day-badge b-wip">⚡ 待准备</span>
+    </div>
+    <div class="vocab-preview">PPT: PU1U8-4 跨学科.pptx — 待提取内容</div>
+  </div>
+
+  <!-- Sun -->
+  <div class="day-card">
+    <div class="day-header">
+      <span class="day-label l-sun">周日</span>
+      <span class="day-name">Unit 8 — Literature</span>
+      <span class="day-badge b-ready">✅ 已备好</span>
+    </div>
+    <div class="vocab-preview">Poem: Play Ball · Rob & Sue · 12词（mat, reply, pick up, point, worry, bounce, throw, catch, kick, poem, title, garden）</div>
+    <div class="material-links">
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-8/literature/">📄 课程中心</a>
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-8/literature/reading-video.html">📋 学情+视频</a>
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-8/literature/printables.html">🖨️ Printables</a>
+      <a class="mat-link pdf" href="https://rkrk.io/power-up/book-one/unit-8/literature/PU1-U8-Literature-Printables.pdf">📥 PDF</a>
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-8/literature/lesson-plan.html">🎓 教案</a>
+      <a class="mat-link" href="https://rkrk.io/power-up/book-one/unit-8/literature/feedback-notes.html">📋 反馈</a>
+    </div>
+  </div>
+</div>
+
+<!-- Week of Jul 7 -->
+<div class="week-section">
+  <div class="week-title">📅 Week of Jul 7 — Jul 13</div>
+
+  <div class="day-card pending">
+    <div class="day-header">
+      <span class="day-label" style="background:var(--mon);color:#fff">周一</span>
+      <span class="day-name">Unit 9 — Vocab 1 + Grammar 1</span>
+      <span class="day-badge b-wip">⚡ 待准备</span>
+    </div>
+    <div class="vocab-preview">Calendar: Jul 6 10:30 — 待PPT</div>
+  </div>
+
+  <div class="day-card pending">
+    <div class="day-header">
+      <span class="day-label" style="background:var(--tue);color:#fff">周二</span>
+      <span class="day-name">Unit 9 — Vocab 2 + Grammar 2</span>
+      <span class="day-badge b-wip">⚡ 待准备</span>
+    </div>
+    <div class="vocab-preview">Calendar: Jul 7 10:30 — 待PPT</div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:20px">
+  <a href="/pu/" style="text-decoration:none;color:var(--cool);font-weight:700">🏠 Back to PU Home</a>
+</div>
+
+</body>
+</html>
