@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>课后反馈 · PU1 U8 Literature</title>
+<style>
+:root { --text: #1a1a1c; --text2: #666; --bg: #fafaf7; --radius: 16px; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+.container { max-width: 720px; margin: 0 auto; padding: 24px 16px; }
+h1 { font-size: 1.35rem; text-align: center; margin-bottom: 4px; }
+.meta { text-align: center; font-size: .82rem; color: var(--text2); margin-bottom: 24px; }
+.card { background: #fff; border-radius: var(--radius); padding: 22px 24px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+.card h2 { font-size: 1.05rem; margin-bottom: 12px; }
+.vocab-bar { display: flex; flex-wrap: wrap; gap: 10px 20px; }
+.vocab-bar span { font-size: .92rem; }
+.vocab-bar .en { font-weight: 700; }
+.vocab-bar .zh { color: var(--text2); font-size: .82rem; }
+ol { padding-left: 20px; }
+ol li { margin-bottom: 8px; font-size: .92rem; }
+ol li .cn { color: var(--text2); font-size: .84rem; display: block; }
+
+.btn-row { display: flex; gap: 10px; justify-content: center; margin-top: 24px; }
+.btn { padding: 10px 24px; border-radius: 100px; border: none; font-size: .92rem; cursor: pointer; font-weight: 600; transition: all .2s; }
+.btn-copy { background: #e55b4b; color: #fff; }
+.btn-copy:hover { background: #d44a3b; }
+.btn-print { background: #fff; color: var(--text); border: 2px solid #ddd; }
+.btn-print:hover { background: #f5f5f5; }
+
+.toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 10px 24px; border-radius: 100px; font-size: .88rem; opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 200; }
+.toast.show { opacity: 1; }
+
+@media print {
+  .btn-row { display: none; }
+  .toast { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>【PU1】Unit 8 Literature 课后反馈</h1>
+<p class="meta">2026年7月5日 · Teacher: Kee</p>
+
+<div class="card">
+  <h2>📌 今日学习主题</h2>
+  <p>今天我们一起学习了一首英文诗歌 <strong>Play Ball</strong>。孩子们通过Rob和Sue的故事，学习了12个与玩耍和互动相关的词汇，练习了朗读诗歌和复述故事。通过人物、场景、情节和启示四个模块，全面理解了这首诗歌的结构和寓意：在家里玩球不是个好主意，但好朋友之间可以说"没关系"。</p>
+</div>
+
+<div class="card">
+  <h2>📖 重点词汇 (12)</h2>
+  <div class="vocab-bar">
+    <span><span class="en">🧘 mat</span> <span class="zh">垫子</span></span>
+    <span><span class="en">💬 reply</span> <span class="zh">回复</span></span>
+    <span><span class="en">⬆️ pick up</span> <span class="zh">捡起</span></span>
+    <span><span class="en">👆 point</span> <span class="zh">指向</span></span>
+    <span><span class="en">😟 worry</span> <span class="zh">担心</span></span>
+    <span><span class="en">🏀 bounce</span> <span class="zh">拍（球）</span></span>
+    <span><span class="en">🤾 throw</span> <span class="zh">扔</span></span>
+    <span><span class="en">🙌 catch</span> <span class="zh">接住</span></span>
+    <span><span class="en">⚽ kick</span> <span class="zh">踢</span></span>
+    <span><span class="en">📜 poem</span> <span class="zh">诗歌</span></span>
+    <span><span class="en">📌 title</span> <span class="zh">标题</span></span>
+    <span><span class="en">🌻 garden</span> <span class="zh">花园</span></span>
+  </div>
+</div>
+
+<div class="card">
+  <h2>📝 重点句型</h2>
+  <ol>
+    <li>We are playing a game on the mat.<span class="cn">我们正在垫子上玩游戏。</span></li>
+    <li>Can you reply to my question?<span class="cn">你能回答我的问题吗？</span></li>
+    <li>She points to the clock.<span class="cn">她指向时钟。</span></li>
+    <li>The boy's bouncing his basketball.<span class="cn">男孩在拍他的篮球。</span></li>
+    <li>Rob says, Sue, can we play?<span class="cn">Rob说，Sue，我们能一起玩吗？</span></li>
+  </ol>
+</div>
+
+<div class="card">
+  <h2>📋 课后任务</h2>
+  <ol>
+    <li>Read the poem aloud 3 times. Practice the 12 vocabulary words.<span class="cn">朗读诗歌3遍，练习12个词汇。</span></li>
+    <li>Watch the guided reading videos and follow along.<span class="cn">观看指读视频并跟读。</span></li>
+    <li>Write each vocabulary word 3 times with example sentences.<span class="cn">每个词汇写3遍并造句。</span></li>
+    <li>Retell the story using the story map.<span class="cn">用故事导图复述故事。</span></li>
+  </ol>
+</div>
+
+<div class="btn-row">
+  <button class="btn btn-copy" onclick="copyFeedback()">📋 一键复制（发微信）</button>
+  <button class="btn btn-print" onclick="window.print()">🖨️ 打印</button>
+</div>
+
+<div class="toast" id="toast">✅ 已复制到剪贴板！</div>
+
+</div>
+
+<script>
+function copyFeedback() {
+  const text = `【PU1】Unit 8 Literature 课后反馈
+2026年7月5日 · Teacher: Kee
+
+📌 今日学习主题
+今天我们一起学习了一首英文诗歌 Play Ball。孩子们通过Rob和Sue的故事，学习了12个与玩耍和互动相关的词汇，练习了朗读诗歌和复述故事。
+
+📖 重点词汇 (12)
+🧘 mat 垫子 | 💬 reply 回复 | ⬆️ pick up 捡起 | 👆 point 指向 | 😟 worry 担心 | 🏀 bounce 拍球
+🤾 throw 扔 | 🙌 catch 接住 | ⚽ kick 踢 | 📜 poem 诗歌 | 📌 title 标题 | 🌻 garden 花园
+
+📝 重点句型
+1. We are playing a game on the mat. 我们正在垫子上玩游戏。
+2. Can you reply to my question? 你能回答我的问题吗？
+3. She points to the clock. 她指向时钟。
+4. The boy's bouncing his basketball. 男孩在拍他的篮球。
+5. Rob says, Sue, can we play? Rob说，Sue，我们能一起玩吗？
+
+📋 课后任务
+1. 朗读诗歌3遍，练习12个词汇。
+2. 观看指读视频并跟读。
+3. 每个词汇写3遍并造句。
+4. 用故事导图复述故事。`;
+
+  navigator.clipboard.writeText(text).then(() => {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  });
+}
+</script>
+</body>
+</html>
